@@ -20,4 +20,4 @@ gulp serve.prod
 
 # License
 
-GPL
+MIT
