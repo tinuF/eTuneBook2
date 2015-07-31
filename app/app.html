@@ -1,0 +1,67 @@
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="navbar-header pull-right">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#/info/introduction" title="eTuneBook"><img src="./favicon.ico" class="img-responsive" alt="eTuneBook">
+        </a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <div class="btn-group">
+            <button type="button" ng-class="{ active: bookMenuActive }" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                Book <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li><a (click)="initializeTuneBook()">New</a></li>
+                <li><a (click)="importer.click()">Import TuneBook (Local Drive)</a></li>
+                <li><a (click)="selectFileOnGoogleDrive()">Import TuneBook (Google Drive)</a></li>
+                <li><a (click)="loadBxplTuneBook()">{{systemProperties.EXAMPLE_FILENAME_WITHOUTABC}} - Version {{systemProperties.EXAMPLE_VERSION}}</a></li>
+                <li class="divider"></li>
+                <li><a (click)="editTuneBook()">Edit Book Title</a></li>
+                <li class="divider"></li>
+                <li><a (click)="exportTuneBook()">Export TuneBook</a></li>
+            </ul>
+
+        </div>
+
+        <button class="btn btn-default navbar-btn" ng-class="{ active: playlistsMenuActive }" (click)="showPlaylists()">Playlists</button>
+        <button class="btn btn-default navbar-btn" ng-class="{ active: setsMenuActive }" (click)="showSets()">Sets</button>
+        <button class="btn btn-default navbar-btn" ng-class="{ active: tunesMenuActive }" (click)="showTunes()">Tunes</button>
+
+        <div class="btn-group">
+            <button type="button" ng-class="{ active: infoMenuActive }" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                Info <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li [class]="{'active' : introductionMenuActive}"><a [router-link]="['/introduction']"> Introduction</a></li>
+                <li ng-class="{ active: getStartedMenuActive }"><a href="#/info/getstarted"> Getting Started</a></li>
+                <li ng-class="{ active: manualMenuActive }"><a href="#/info/manual"> Manual</a></li>
+                <li ng-class="{ active: releaseNotesMenuActive }"><a href="#/info/releasenotes"> Release Notes</a></li>
+                <li ng-class="{ active: creditsMenuActive }"><a href="#/info/credits"> Credits</a></li>
+                <li ng-class="{ active: feedbackMenuActive }"><a href="#/info/feedback"> Feedback</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<div class="container">
+    <div class="btn-group pull-right hidden-print">
+        <a href="https://twitter.com/bxplr" target="_blank" title="Martin Fleischmann on Twitter" class="btn btn-xs btn-twitter"><i class="icon-twitter"></i> | News</a>
+        <a href="https://www.facebook.com/pages/e-TuneBook/577631982265183" target="_blank" title="eTuneBook on FaceBook" class="btn btn-xs btn-facebook"><i class="icon-facebook"></i> | eTb</a>
+        <a href="https://www.youtube.com/user/pianoboxplayer" target="_blank" title="Martin Fleischmann on YouTube"class="btn btn-xs btn-youtube"><i class="icon-youtube"></i> | Music</a>
+    </div>
+</div>
+
+
+<div class="container">
+     <!--/book or /playlists or /sets or /tunes or /abc or /info -->
+    <router-outlet></router-outlet>
+</div> <!-- /container -->
+
+<input class="input-file hidden-print" id="fileInput" type="file" (change)="readTuneBookFromLocalDrive($event)" #importer>
