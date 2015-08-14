@@ -3,7 +3,7 @@ import {Website} from './website';
 import {PlayDate} from './playdate';
 import {getAbcValueOfTuneLine, getAbcValue, getSubDirective} from '../util/abc';
 import {calculateFrequencyPlayed} from '../util/date';
-import {getSystemProperties} from '../../common/etunebook-system';
+import {getSystemProperties} from '../../common/system-properties';
 
 export class Tune {
   _systemProperties;

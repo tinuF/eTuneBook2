@@ -4,7 +4,7 @@ import {Router} from 'angular2/router';
 
 import {TuneBookService} from '../../services/tunebook-service';
 import {TuneBook} from '../../business/model/tunebook';
-import {getSystemProperties} from '../../common/etunebook-system';
+import {getSystemProperties} from '../../common/system-properties';
 
 import {TuneBookIdView} from '../../components/book-id/book-id';
 

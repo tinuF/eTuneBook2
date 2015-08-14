@@ -428,29 +428,9 @@
 		border: none;
 	}
 
-	.sampleDotsViewer {
-		display: block;
-		/*overflow: true;*/
-		position: absolute;
-		/*margin: 10px;*/
-		/*padding: 10px;*/
-		margin-top: -115px; /*Auf H�he des Tunes setzen*/
-		left: 420px; 
-		/*padding: 16px 16px 16px 60px;*/
-		/*border: none;*/
-		/*background: rgba(0, 0, 0, 0.02);*/
-		/*z-index: 2;*/
-		/*box-shadow: none;*/
-		
-		/*
-		border: 1px solid #CCC;
-		background: #eee; 
-		background: #99EDEA;
-		
-		padding-bottom: 0px;
-		border-radius: 6px;
-		box-shadow: 0 1px 3px rgba(0,0,0,.25)
-		*/
+	.sampleDotsContainer {
+		margin: 0px;
+        padding: 0px;
 	}
 
      .nav-tabs {
@@ -842,8 +822,53 @@
          background-color: #F8F8F8;
 
      }
+     
+     body {
+        padding-top: 51px;
+    }
 
+    /* this is only to style the sidebar - you can make the sidebar look any way you want */
+    .sidebar {
+        padding: 20px;
+        background-color: #f5f5f5;
+        border-right: 1px solid #eee;
+    }
+    
+    .roundedPanel {
+         display: block;
+         /*width:100%;*/
+         margin: 0px 10px 0px 0px;
+         padding: 10px;
+         border: 1px solid #CCC;
+         background: #99EDEA;
+         border-radius: 6px;
+         box-shadow: 0 1px 3px rgba(0,0,0,.25);
+         min-width: 820px;
+         max-width: 820px;
+     }
  }
+ 
+ @media(max-width:767px) {
+    .navbar .navbar-form {
+        width: 185px;
+        padding-left:0;
+        padding-right:0;
+    }
+}
+@media(min-width:768px) {
+    .navbar .navbar-form {
+        width: 250px;
+    }
+}
+.navbar .navbar-form {
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-right: 0;
+    margin-left: 0;
+    border: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
 
 @media print {
 
@@ -893,7 +918,7 @@
         box-shadow: 0 1px 3px rgba(0,0,0,.25)
     }
 
-    .sampleDotsViewer {
+    .sampleDotsContainer {
         display: block;
         /*overflow: true;*/
         position: absolute;

@@ -1,6 +1,6 @@
 /// <reference path="../../../tsd_typings/tsd.d.ts" />
 
-import {getSystemProperties} from '../../common/etunebook-system';
+import {getSystemProperties} from '../../common/system-properties';
 import {getAbcValue} from '../util/abc';
 import {importTuneSets} from '../converter/tuneset-importer';
 import {importPlaylists, importPlaylistPositions, importTuneSetPositionPlayInfos} from '../converter/playlists-importer';
@@ -13,6 +13,7 @@ import {Playlist} from './playlist';
 import {PlaylistPosition} from './playlistposition';
 import {TuneSetPositionPlayInfo} from './tunesetposition-playinfo';
 import {PartPlayInfo} from './partplayinfo';
+import {AbcExportSettings} from '../../common/settings/abc-export';
 
 
 export class TuneBook {
@@ -165,7 +166,7 @@ export class TuneBook {
       return playlistPositions;
   }
 
-  writeAbc(abcOption){
+  writeAbc(abcExportSettings:AbcExportSettings){
     // Generate Abc
     var tbkAbc, tuneAbc, tunes;
 
@@ -174,7 +175,7 @@ export class TuneBook {
     tbkAbc = "";
 
     // Construct Header
-    tbkAbc = writeAbcHeader(this, abcOption);
+    tbkAbc = writeAbcHeader(this, abcExportSettings);
 
     // Get Tunes
     tunes = this.getTunes();
@@ -185,7 +186,7 @@ export class TuneBook {
     });
 
     for (var i = 0; i < tunes.length; i++) {
-      tuneAbc = writeTuneAbc(tunes[i], this.getTuneSetPositionsByIntTuneId(tunes[i].intTuneId), abcOption);
+      tuneAbc = writeTuneAbc(tunes[i], this.getTuneSetPositionsByIntTuneId(tunes[i].intTuneId), abcExportSettings);
       tbkAbc += tuneAbc;
       tbkAbc += "\n";	//empty line between tunes
     }
@@ -884,6 +885,133 @@ export class TuneBook {
 
 
     return tuneSet;
+  }
+  
+  getTuneTypes():Array<string> {
+    //Extract Types for TypeFilter
+    let types:Array<string> = [];
+    let addToTypeFilter = true;
+
+    for (var i = 0; i < this.tuneSets.length; i++) {
+        for (var c = 0; c < this.tuneSets[i].tuneSetPositions.length; c++) {
+          addToTypeFilter = true;
+
+          for (var z = 0; z < types.length; z++) {
+            if (types[z] == this.tuneSets[i].tuneSetPositions[c].tune.type) {
+              addToTypeFilter = false;
+            }
+          }
+
+          if (addToTypeFilter) {
+            types.push(this.tuneSets[i].tuneSetPositions[c].tune.type);
+          }
+        }
+      }
+
+    types.unshift("All Types");
+    
+    return types;
+  }
+  
+  getKeys(): Array<string> {
+    //Extract Keys for KeyFilter
+    var keys = [];
+    var addToKeyFilter = true;
+
+    for (var i = 0; i < this.tuneSets.length; i++) {
+      for (var c = 0; c < this.tuneSets[i].tuneSetPositions.length; c++) {
+        addToKeyFilter = true;
+
+        for (var z = 0; z < keys.length; z++) {
+          if (keys[z] == this.tuneSets[i].tuneSetPositions[c].tune.key) {
+            addToKeyFilter = false;
+          }
+        }
+
+        if (addToKeyFilter) {
+          keys.push(this.tuneSets[i].tuneSetPositions[c].tune.key);
+        }
+      }
+    }
+
+    keys.unshift("All Keys");
+
+    return keys;
+  }
+  
+  getEvents(): Array<string> {
+    //Extract Events for EventFilter
+    var events = [];
+    var addToEventFilter = true;
+
+    for (var i = 0; i < this.playlists.length; i++) {
+      addToEventFilter = true;
+
+      for (var z = 0; z < events.length; z++) {
+        if (events[z] == this.playlists[i].event) {
+          addToEventFilter = false;
+        }
+      }
+
+      if (this.playlists[i].event != 'undefined' && this.playlists[i].event != '' && addToEventFilter) {
+        events.push(this.playlists[i].event);
+      }
+
+    }
+
+    events.unshift("All Events");
+
+    return events;
+  }
+  
+  getBands(): Array<string> {
+    //Extract Bands for BandFilter
+    var bands = [];
+    var addToBandFilter = true;
+
+    for (var i = 0; i < this.playlists.length; i++) {
+      addToBandFilter = true;
+
+      for (var z = 0; z < bands.length; z++) {
+        if (bands[z] == this.playlists[i].band) {
+          addToBandFilter = false;
+        }
+      }
+
+      if (this.playlists[i].band != 'undefined' && this.playlists[i].band != '' && addToBandFilter) {
+        bands.push(this.playlists[i].band);
+      }
+    }
+
+    bands.unshift("All Bands");
+
+    return bands;
+  }
+  
+  getColors(): Array<string> {
+    //Extract Colors for ColorFilter
+    var colors = [];
+    var addToColorFilter = true;
+
+    for (var i = 0; i < this.tuneSets.length; i++) {
+      for (var c = 0; c < this.tuneSets[i].tuneSetPositions.length; c++) {
+        addToColorFilter = true;
+
+        for (var z = 0; z < colors.length; z++) {
+          if (colors[z] == this.tuneSets[i].tuneSetPositions[c].tune.color) {
+            addToColorFilter = false;
+          }
+        }
+
+        if (addToColorFilter) {
+          colors.push(this.tuneSets[i].tuneSetPositions[c].tune.color);
+        }
+      }
+    }
+
+    colors.unshift("All Colors");
+
+    return colors;
   }
 
   

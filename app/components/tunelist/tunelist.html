@@ -1,21 +1,76 @@
 <br>
 
-<tunebook-id [tunebook]="tuneBook"></tunebook-id>
-
-<!--
-<div class="row hidden-print">
-
-
-    <div class="col-xs-6 col-sm-2 col-md-2 col-lg-2">
-        <input type="text" class="form-control" id="searchForTuneName" placeholder="Search..." ng-model="search">
-    </div>
-
-    <div class="col-xs-3 col-sm-2 col-md-6 col-lg-6" ui-view="filter"></div>
-
+<div class="container">
+  <table class="responsive-table">
+    <!--
+    <caption><tunebook-id [tunebook]="tuneBook"></tunebook-id></caption>
+    -->
+    <thead>
+      <tr>
+        <th scope="col">Tune</th>
+        <th scope="col">Incipit</th>
+        <th scope="col">Type</th>
+        <th scope="col">Key</th>
+        <th scope="col">Played</th>
+        <th scope="col">Frequency</th>
+        <th scope="col">Modified</th>
+      </tr>
+    </thead>
+    <tfoot>
+      <tr>
+        <td colspan="7">Sources: <a href="http://en.wikipedia.org/wiki/List_of_highest-grossing_animated_films" rel="external">Wikipedia</a> &amp; <a href="http://www.boxofficemojo.com/genres/chart/?id=animation.htm" rel="external">Box Office Mojo</a>. Data is current as of June 2, 2014</td>
+      </tr>
+    </tfoot>
+    <tbody>
+      <tr *ng-for="#tune of tunes; #i = index" [style.background-color]="tune.color">
+        <th scope="row">{{tune.title | eliminateThe}}</th>
+        <td data-title="Incipit"><sampledots [tune]="tune"></sampledots></td>
+        <td data-title="Type">{{tune.type}}</td>
+        <td data-title="Key">{{tune.key}}</td>
+        <td data-title="Played"><div><a class='btn btn-xs btn-default' (click)="justPlayedTheTune(tune)" title="Just Played The Tune">Now</a></div>{{tune.lastPlayed | fromNow}}</td>
+        <td data-title="Frequency" data-type="number">{{tune.frequencyPlayed}}</td>
+        <td data-title="Modified">{{tune.lastModified | fromNow}}</td>   
+      </tr>
+    </tbody>
+  </table>
 </div>
 
-
-<div class="tuneListGrid " ng-grid="tuneList"></div>
-
+<!--
 <div class="footer navbar-fixed-bottom"><button class="btn btn-default" ng-click="newTune()" title="New Tune"><i class='glyphicon glyphicon-plus'></i></button></div>
+-->
+<div class="footer navbar-fixed-bottom"><button class="btn btn-default" ng-click="newTune()" title="New Tune">New Tune</button></div>
+
+
+
+
+
+
+
+
+<!--
+<div id="/#top" class="panel panel-default">
+    <div class="panel-heading">
+        <tunelist-filter></tunelist-filter>
+    </div>
+    <div class="Table">
+        <tunelist-header></tunelist-header>
+        <div *ng-for="#tune of tunes; #i = index">
+            <tunelist-row [tune]="tune"></tunelist-row>
+        </div>
+    </div>
+</div>
+-->
+
+
+<!--
+<ul>
+  <li *ng-for="#tune of tunes; #i = index">
+    Title {{i}} of {{tunes.length}}: {{tune.title}}
+    <tunebox [tune]="tune"></tunebox>
+  </li>
+</ul>
+-->
+
+<!--
+<tunebox [tune]="tune" *ng-for="#tune of tunes"></tunebox>
 -->

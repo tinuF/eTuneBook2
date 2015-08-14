@@ -1,19 +1,71 @@
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="navbar-header pull-right">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#/info/introduction" title="eTuneBook"><img src="./favicon.ico" class="img-responsive" alt="eTuneBook">
-        </a>
-    </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <div class="btn-group">
-            <button type="button" ng-class="{ active: bookMenuActive }" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+<!-- Fixed navbar -->
+    <div class="navbar navbar-static navbar-default navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle toggle-left hidden-md hidden-lg" data-toggle="sidebar" data-target=".sidebar-left">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">eTuneBook</a>
+          <form class="navbar-form pull-left" role="search">
+            <div class="input-group">
+               <input type="text" class="form-control" placeholder="Search">
+               <div class="input-group-btn">
+                  <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+               </div>
+            </div>
+         </form>
+        </div>
+        <button type="button" class="navbar-toggle toggle-right" data-toggle="sidebar" data-target=".sidebar-right">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+    </div>
+    <!-- Begin page content -->
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xs-7 col-sm-3 col-md-3 sidebar sidebar-left sidebar-animate sidebar-md-show">
+          
+          <ul class="nav navbar-stacked nav-list">
+            <li ><label>Abc File</label>
+              <ul  class="nav"" role="menu">
+                <li><a  (click)="importer.click()">Import from local Drive</a></li>
+                <li><a (click)="selectFileOnGoogleDrive()">Import from Google Drive</a></li>
+                <li class="divider"></li>
+                <!--
+                <li><a (click)="loadBxplTuneBook()">{{systemProperties.EXAMPLE_FILENAME_WITHOUTABC}} - Version {{systemProperties.EXAMPLE_VERSION}}</a></li>
+                -->
+                
+                <li><a (click)="exportTuneBook()">Export</a></li>
+                <li class="divider"></li>
+                <li><a (click)="loadBxplTuneBook()">Load Example from Server</a></li>
+              </ul>  
+            </li>
+            
+            <!--
+            <li ><label>Book</label>
+              <ul  class="nav"" role="menu">
+                <li><a (click)="initializeTuneBook()">New</a></li>
+                <li><a (click)="editTuneBook()">Edit</a></li>
+              </ul>  
+            </li>
+            -->
+            <li><button class="btn btn-default navbar-btn" [style.active] ="bookMenuActive" (click)="editTuneBook()">Book</button></li>
+            <caption><tunebook-id [tunebook]="tuneBook"></tunebook-id></caption>
+            <li><button class="btn btn-default navbar-btn" [style.active] ="playlistsMenuActive" (click)="showPlaylists()">Playlists</button></li>
+            <li><button class="btn btn-default navbar-btn" [style.active] ="setsMenuActive" (click)="showSets()">Sets</button></li>
+            <li><button class="btn btn-default navbar-btn" [style.active] ="tunesMenuActive" (click)="showTunes()">Tunes</button></li>
+            <li><button class='btn btn-default navbar-btn' [style.active] ="filterActive" (click)="showFilter()" title="Filter">Filter</button></li>
+            <li><filter-text></filter-text></li>
+          </ul>
+          
+          <!--
+          <div class="btn-group">
+            <button type="button" [style.active]="bookMenuActive" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                 Book <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" role="menu">
@@ -28,11 +80,14 @@
             </ul>
 
         </div>
+        <br>
 
         <button class="btn btn-default navbar-btn" ng-class="{ active: playlistsMenuActive }" (click)="showPlaylists()">Playlists</button>
+        <br>
         <button class="btn btn-default navbar-btn" ng-class="{ active: setsMenuActive }" (click)="showSets()">Sets</button>
-        <button class="btn btn-default navbar-btn" ng-class="{ active: tunesMenuActive }" (click)="showTunes()">Tunes</button>
-
+        <br>
+        <button class="btn btn-default navbar-btn" [style.active] ="tunesMenuActive" (click)="showTunes()">Tunes</button>
+<br>
         <div class="btn-group">
             <button type="button" ng-class="{ active: infoMenuActive }" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                 Info <span class="caret"></span>
@@ -46,9 +101,44 @@
                 <li ng-class="{ active: feedbackMenuActive }"><a href="#/info/feedback"> Feedback</a></li>
             </ul>
         </div>
+        -->
     </div>
-</nav>
-
+          <!--
+          <ul class="nav navbar-stacked">
+            <li class="active">
+              <a href="#">Home</a>
+            </li>
+            <li>
+              <a href="#about">About</a>
+            </li>
+            <li>
+              <a href="#contact">Contact</a>
+            </li>
+          </ul>
+          -->
+        </div>
+        <div class="main col-md-9 col-md-offset-3">
+          <div class="container-fluid">
+            <!--/book or /playlists or /sets or /tunes or /abc or /info or /filter -->
+            <router-outlet></router-outlet>
+          </div>  
+        </div>
+        <div class="col-xs-7 col-sm-3 col-md-3 sidebar sidebar-right sidebar-animate">
+          <ul class="nav navbar-stacked">
+            <li class="active">
+              <a href="#">Home</a>
+            </li>
+            <li>
+              <a href="#about">About</a>
+            </li>
+            <li>
+              <a href="#contact">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </body>
 
 <div class="container">
     <div class="btn-group pull-right hidden-print">
@@ -57,11 +147,5 @@
         <a href="https://www.youtube.com/user/pianoboxplayer" target="_blank" title="Martin Fleischmann on YouTube"class="btn btn-xs btn-youtube"><i class="icon-youtube"></i> | Music</a>
     </div>
 </div>
-
-
-<div class="container">
-     <!--/book or /playlists or /sets or /tunes or /abc or /info -->
-    <router-outlet></router-outlet>
-</div> <!-- /container -->
 
 <input class="input-file hidden-print" id="fileInput" type="file" (change)="readTuneBookFromLocalDrive($event)" #importer>

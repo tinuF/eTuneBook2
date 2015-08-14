@@ -1,6 +1,6 @@
 {
   "name": "eTuneBook2",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "eTuneBook 2",
   "repository": "https://github.com/tinuF/eTuneBook2",
   "scripts": {
@@ -33,7 +33,7 @@
     "typescript": "~1.5.3"
   },
   "dependencies": {
-    "angular2": "2.0.0-alpha.32",
+    "angular2": "2.0.0-alpha.33",
     "bootstrap": "^3.3.5",
     "es6-module-loader": "^0.15.0",
     "jquery": "^2.1.4",

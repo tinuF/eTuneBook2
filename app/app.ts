@@ -4,35 +4,42 @@ import {RouteConfig, RouterOutlet, RouterLink, routerInjectables, Router} from '
 
 import {Home} from './components/home/home';
 
-import {getSystemProperties} from './common/etunebook-system';
+import {appPipes} from './pipes/pipes';
+
+import {getSystemProperties} from './common/system-properties';
 import {TuneBookService} from './services/tunebook-service';
 import {TuneBook} from './business/model/tunebook';
+import {FilterSettings} from './common/settings/filter';
 
 import {Book} from './components/book/book';
-import {TuneListView} from './components/tunelist/tunelist'
+import {TuneList} from './components/tunelist/tunelist';
+import {Filter} from './components/filter/filter';
+import {FilterText} from './components/filter-text/filter-text';
 import {Introduction} from './components/introduction/introduction';
 
 
 @Component({
   selector: 'app',
-  viewInjector: [TuneBookService]
+  viewInjector: [TuneBookService, appPipes]
 })
 @RouteConfig([
   { path: '/', component: Home, as: 'home' },
   { path: '/book', component: Book, as: 'book' },
   { path: '/info/introduction', component: Introduction, as: 'introduction' },
-  { path: '/tunelist', component: TuneListView, as: 'tunelist' }
+  { path: '/tunelist', component: TuneList, as: 'tunelist' },
+  { path: '/filter', component: Filter, as: 'filter' }
   //{ path: '/playlists', component: PlaylistList, as: 'playlistlist' },
   //{ path: '/setlist', component: Setlist, as: 'setlist' },
   
 ])
 @View({
   templateUrl: './app.html?v=<%= VERSION %>',
-  directives: [RouterOutlet, RouterLink, CSSClass]
+  directives: [RouterOutlet, RouterLink, CSSClass, FilterText]
 })
 export class App {
   tuneBook: TuneBook;
   systemProperties;
+  filterSettings; FilterSettings;
   
   bookMenuActive: boolean;
   playlistsMenuActive: boolean;
@@ -45,13 +52,14 @@ export class App {
   constructor(public tuneBookService: TuneBookService, public router: Router) {
     this.systemProperties = getSystemProperties();
     this.tuneBook =  this.tuneBookService.getTuneBookFromLocalStorage();
+    this.filterSettings = this.tuneBookService.getCurrentFilterSettings();
 
     if (this.tuneBook != null && this.tuneBook.hasOwnProperty("tuneSets")){
 
     } else {
       // Init TuneBook
       this.tuneBook = this.tuneBookService.initializeTuneBook();
-      router.navigate('introduction');
+      router.navigate('/introduction');
     }
   }
 
@@ -141,6 +149,17 @@ export class App {
     this.tunesMenuActive = true;
     this.router.navigate("/tunelist");
   };
+  
+  showFilter() {
+    this.router.navigate('/filter');
+  };
+  
+  /*
+  filterChange(event) {
+    alert('Filter has changed');
+    this.filterSettings = this.tuneBookService.getCurrentFilterSettings();
+  };
+  */
 
 /*
   mobilecheck() {

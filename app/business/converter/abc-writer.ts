@@ -1,4 +1,4 @@
-import {getSystemProperties} from '../../common/etunebook-system';
+import {getSystemProperties} from '../../common/system-properties';
 import {Tune} from '../model/tune';
 
 var systemProperties = getSystemProperties();

@@ -37,6 +37,7 @@ var PATH = {
     dev: {
       all: 'dist/dev',
       lib: 'dist/dev/lib',
+      fonts: 'dist/dev/fonts',
       ng2: 'dist/dev/lib/angular2.js',
       router: 'dist/dev/lib/router.js'
     },
@@ -58,9 +59,16 @@ var PATH = {
       './node_modules/jquery/dist/jquery.min.js',
       './node_modules/bootstrap/dist/js/bootstrap.min.js',
       './node_modules/bootstrap/dist/css/bootstrap.min.css',
+      './bower_components/bootstrap-sidebar/dist/js/sidebar.js',
+      './bower_components/bootstrap-sidebar/dist/css/sidebar.css',
       './node_modules/moment/moment.js',
-      './lib/abcjs_editor_1.7-min.js',
+      './lib/abcjs_editor_2.1-min.js',
       './lib/jquery.colorPicker.min.js'
+    ],
+    fonts: [
+      './node_modules/bootstrap/fonts/glyphicons-halflings-regular.ttf',
+      './node_modules/bootstrap/fonts/glyphicons-halflings-regular.woff',
+      './node_modules/bootstrap/fonts/glyphicons-halflings-regular.woff2'
     ]
   }
 };
@@ -140,6 +148,13 @@ gulp.task('build.lib.dev', ['build.ng2.dev'], function () {
     .pipe(gulp.dest(PATH.dest.dev.lib));
 });
 
+/*
+gulp.task('build.fonts.dev', ['build.ng2.dev'], function () {
+  return gulp.src(PATH.src.fonts)
+    .pipe(gulp.dest(PATH.dest.dev.fonts));
+});
+*/
+
 gulp.task('build.js.dev', function () {
   var result = gulp.src('./app/**/*ts')
     .pipe(plumber())
@@ -170,6 +185,7 @@ gulp.task('build.app.dev', function (done) {
 });
 
 gulp.task('build.dev', function (done) {
+  //runSequence('clean.dev', 'build.lib.dev', 'build.fonts.dev', 'build.app.dev', done);
   runSequence('clean.dev', 'build.lib.dev', 'build.app.dev', done);
 });
 

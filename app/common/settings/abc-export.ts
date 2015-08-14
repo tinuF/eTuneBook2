@@ -1,5 +1,5 @@
-export class AbcOption {
-  
+export class AbcExportSettings {
+  //eTuneBook Directives
   tuneSet: boolean;
   playDate: boolean;
   color: boolean;
@@ -10,8 +10,18 @@ export class AbcOption {
   //Standard Abc
   fingering: boolean;
   
-  constructor(tuneSetAbcIncl, playDateAbcIncl, skillAbcIncl, colorAbcIncl, annotationAbcIncl, siteAbcIncl, tubeAbcIncl, playlistAbcIncl, fingeringAbcIncl){
-    //eTuneBook Directives
+  constructor(){
+    this.tuneSet = true;
+    this.playDate = true;
+    this.color = true;
+    this.annotation = true;
+    this.website = true;
+    this.video = true;
+    this.playlist = true;
+    this.fingering = true;
+  }
+  
+  update(tuneSetAbcIncl, playDateAbcIncl, skillAbcIncl, colorAbcIncl, annotationAbcIncl, siteAbcIncl, tubeAbcIncl, playlistAbcIncl, fingeringAbcIncl){
     this.tuneSet = tuneSetAbcIncl;
     this.playDate = playDateAbcIncl;
     this.color = colorAbcIncl;
@@ -19,7 +29,6 @@ export class AbcOption {
     this.website = siteAbcIncl;
     this.video = tubeAbcIncl;
     this.playlist = playlistAbcIncl;
-    //Standard Abc
     this.fingering = fingeringAbcIncl;
   }
 
