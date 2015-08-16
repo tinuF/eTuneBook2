@@ -1,8 +1,10 @@
 import {TuneBook} from '../model/tunebook';
 import {TuneSet} from '../model/tuneset';
 import {Tune} from '../model/tune';
+import {FilterSettings} from '../../common/settings/filter';
 
-export function filterTunes(tunes:Array<Tune>, filterOptions):Array<Tune>{
+export function filterTunes(tunes:Array<Tune>, filterSettings:FilterSettings):Array<Tune>{
+    var titleMatch = false;
     var keyMatch = false;
     var typeMatch = false;
     var colorMatch = false;
@@ -13,6 +15,7 @@ export function filterTunes(tunes:Array<Tune>, filterOptions):Array<Tune>{
     var tunesFiltered = [];
 
     for (var i = 0; i < tunes.length; i++) {
+        titleMatch = false;
         keyMatch = false;
         typeMatch = false;
         colorMatch = false;
@@ -20,50 +23,58 @@ export function filterTunes(tunes:Array<Tune>, filterOptions):Array<Tune>{
         freqMatch = false;
         updateMatch = false;
 
-        if (filterOptions.key == "" || filterOptions.key == "All Keys" || filterOptions.key == null) {
+        if (filterSettings.title == "") {
+            titleMatch = true;
+        }
+        
+        if (filterSettings.key == "All Keys") {
             keyMatch = true;
         }
 
-        if (filterOptions.type == "" || filterOptions.type == "All Types" || filterOptions.type == null) {
+        if (filterSettings.type == "All Types") {
             typeMatch = true;
         }
 
-        if (filterOptions.color == "" || filterOptions.color == "All Colors" || filterOptions.color == null) {
+        if (filterSettings.color == "All Colors") {
             colorMatch = true;
         }
 
-        if (filterOptions.plmin == "" || filterOptions.plmin == "05.10.2012" || filterOptions.plmin == null
-            || filterOptions.plmax == "" || filterOptions.plmax == null) {
+        if (filterSettings.plmin == "" || filterSettings.plmin == "05.10.2012" || filterSettings.plmin == null
+            || filterSettings.plmax == "" || filterSettings.plmax == null) {
             playMatch = true;
         } else {
-            playMin = moment(filterOptions.plmin, 'DD.MM.YYYY').startOf('day');
-            playMax = moment(filterOptions.plmax, 'DD.MM.YYYY').endOf('day');
+            playMin = moment(filterSettings.plmin, 'DD.MM.YYYY').startOf('day');
+            playMax = moment(filterSettings.plmax, 'DD.MM.YYYY').endOf('day');
         }
 
-        if (filterOptions.updmin == "" || filterOptions.updmin == "05.10.2012" || filterOptions.updmin == null
-            || filterOptions.updmax == "" || filterOptions.updmax == null) {
+        if (filterSettings.updmin == "" || filterSettings.updmin == "05.10.2012" || filterSettings.updmin == null
+            || filterSettings.updmax == "" || filterSettings.updmax == null) {
             updateMatch = true;
         } else {
-            updateMin = moment(filterOptions.updmin, 'DD.MM.YYYY').startOf('day');
-            updateMax = moment(filterOptions.updmax, 'DD.MM.YYYY').endOf('day');
+            updateMin = moment(filterSettings.updmin, 'DD.MM.YYYY').startOf('day');
+            updateMax = moment(filterSettings.updmax, 'DD.MM.YYYY').endOf('day');
         }
 
-        if (filterOptions.freqcomp == "" || filterOptions.freqcomp == null
-            || filterOptions.freq == "" || filterOptions.freq == null) {
+        if (filterSettings.freqcomp == "" || filterSettings.freqcomp == null
+            || filterSettings.freq == "" || filterSettings.freq == null) {
             freqMatch = true;
         }
 
-        if (!keyMatch || !typeMatch || !colorMatch || !playMatch || !updateMatch || !freqMatch) {
+        if (!keyMatch || !typeMatch || !colorMatch || !playMatch || !updateMatch || !freqMatch || !titleMatch) {
 
-            if (!keyMatch && tunes[i].key == filterOptions.key) {
+            if (!titleMatch && tunes[i].title.toLowerCase().indexOf(filterSettings.title) >= 0) {
+                titleMatch = true;
+            }
+            
+            if (!keyMatch && tunes[i].key == filterSettings.key) {
                 keyMatch = true;
             }
 
-            if (!typeMatch && tunes[i].type == filterOptions.type) {
+            if (!typeMatch && tunes[i].type == filterSettings.type) {
                 typeMatch = true;
             }
 
-            if (!colorMatch && tunes[i].color == filterOptions.color) {
+            if (!colorMatch && tunes[i].color == filterSettings.color) {
                 colorMatch = true;
             }
 
@@ -86,8 +97,8 @@ export function filterTunes(tunes:Array<Tune>, filterOptions):Array<Tune>{
             }
 
             if (!freqMatch) {
-                if ((filterOptions.freqcomp == "LT" && tunes[i].frequencyPlayed < parseInt(filterOptions.freq))
-                    || (filterOptions.freqcomp == "GE" && tunes[i].frequencyPlayed >= parseInt(filterOptions.freq)) )  {
+                if ((filterSettings.freqcomp == "LT" && tunes[i].frequencyPlayed < parseInt(filterSettings.freq))
+                    || (filterSettings.freqcomp == "GE" && tunes[i].frequencyPlayed >= parseInt(filterSettings.freq)) )  {
 
                     freqMatch = true;
                 }
@@ -95,7 +106,7 @@ export function filterTunes(tunes:Array<Tune>, filterOptions):Array<Tune>{
 
         }
 
-        if (keyMatch && typeMatch && colorMatch && playMatch && updateMatch && freqMatch){
+        if (keyMatch && typeMatch && colorMatch && playMatch && updateMatch && freqMatch && titleMatch){
             tunesFiltered.push(tunes[i]);
         }
     }
@@ -103,7 +114,8 @@ export function filterTunes(tunes:Array<Tune>, filterOptions):Array<Tune>{
     return tunesFiltered;
 }
 
-export function filterTuneSets(tuneBook:TuneBook, filterOptions):Array<TuneSet>{
+export function filterTuneSets(tuneBook:TuneBook, filterSettings:FilterSettings):Array<TuneSet>{
+    var titleMatch = false;
     var keyMatch = false;
     var typeMatch = false;
     var colorMatch = false;
@@ -117,6 +129,7 @@ export function filterTuneSets(tuneBook:TuneBook, filterOptions):Array<TuneSet>{
     var playlists;
 
     for (var i = 0; i < tuneBook.tuneSets.length; i++) {
+        titleMatch = false;
         keyMatch = false;
         typeMatch = false;
         colorMatch = false;
@@ -126,50 +139,48 @@ export function filterTuneSets(tuneBook:TuneBook, filterOptions):Array<TuneSet>{
         freqMatch = false;
         updateMatch = false;
 
-        if (filterOptions.key == "" || filterOptions.key == "All Keys" || filterOptions.key == null) {
+        if (filterSettings.title == "") {
+            titleMatch = true;
+        }
+        
+        if (filterSettings.key == "All Keys") {
             keyMatch = true;
         }
 
-        if (filterOptions.type == "" || filterOptions.type == "All Types" || filterOptions.type == null) {
+        if (filterSettings.type == "All Types") {
             typeMatch = true;
         }
 
-        if (filterOptions.color == "" || filterOptions.color == "All Colors" || filterOptions.color == null) {
+        if (filterSettings.color == "All Colors") {
             colorMatch = true;
         }
 
-        if (filterOptions.plmin == "" || filterOptions.plmin == "05.10.2012" || filterOptions.plmin == null
-            || filterOptions.plmax == "" || filterOptions.plmax == null) {
+        if (filterSettings.plmin == "" || filterSettings.plmin == "05.10.2012" || filterSettings.plmin == null
+            || filterSettings.plmax == "" || filterSettings.plmax == null) {
             playMatch = true;
         } else {
-            playMin = moment(filterOptions.plmin, 'DD.MM.YYYY').startOf('day');
-            playMax = moment(filterOptions.plmax, 'DD.MM.YYYY').endOf('day');
+            playMin = moment(filterSettings.plmin, 'DD.MM.YYYY').startOf('day');
+            playMax = moment(filterSettings.plmax, 'DD.MM.YYYY').endOf('day');
         }
 
-        if (filterOptions.updmin == "" || filterOptions.updmin == "05.10.2012" || filterOptions.updmin == null
-            || filterOptions.updmax == "" || filterOptions.updmax == null) {
+        if (filterSettings.updmin == "" || filterSettings.updmin == "05.10.2012" || filterSettings.updmin == null
+            || filterSettings.updmax == "" || filterSettings.updmax == null) {
             updateMatch = true;
         } else {
-            updateMin = moment(filterOptions.updmin, 'DD.MM.YYYY').startOf('day');
-            updateMax = moment(filterOptions.updmax, 'DD.MM.YYYY').endOf('day');
+            updateMin = moment(filterSettings.updmin, 'DD.MM.YYYY').startOf('day');
+            updateMax = moment(filterSettings.updmax, 'DD.MM.YYYY').endOf('day');
         }
 
-        if (filterOptions.freqcomp == "" || filterOptions.freqcomp == null
-            || filterOptions.freq == "" || filterOptions.freq == null) {
+        if (filterSettings.freqcomp == "" || filterSettings.freqcomp == null
+            || filterSettings.freq == "" || filterSettings.freq == null) {
             freqMatch = true;
         }
 
-        if (filterOptions.event == ""
-            || filterOptions.event == "All Events"
-            || filterOptions.event == null) {
-
+        if (filterSettings.event == "All Events") {
             eventMatch = true;
         }
 
-        if (filterOptions.band == ""
-            || filterOptions.band == "All Bands"
-            || filterOptions.band == null) {
-
+        if (filterSettings.band == "All Bands") {
             bandMatch = true;
         }
 
@@ -177,27 +188,33 @@ export function filterTuneSets(tuneBook:TuneBook, filterOptions):Array<TuneSet>{
             playlists = tuneBook.getPlaylistsByTuneSetId(tuneBook.tuneSets[i].tuneSetId);
 
             for (var y = 0; y < playlists.length; y++) {
-                if (filterOptions.event == playlists[y].event) {
+                if (filterSettings.event == playlists[y].event) {
                     eventMatch = true;
                 }
 
-                if (filterOptions.band == playlists[y].band) {
+                if (filterSettings.band == playlists[y].band) {
                     bandMatch = true;
                 }
             }
         }
 
-        if (!keyMatch || !typeMatch || !colorMatch || !playMatch || !updateMatch || !freqMatch) {
+        if (!keyMatch || !typeMatch || !colorMatch || !playMatch || !updateMatch || !freqMatch || !titleMatch) {
+           
             for (var z = 0; z < tuneBook.tuneSets[i].tuneSetPositions.length; z++) {
-                if (!keyMatch && tuneBook.tuneSets[i].tuneSetPositions[z].tune.key == filterOptions.key) {
+                
+                if (!titleMatch && tuneBook.tuneSets[i].tuneSetPositions[z].tune.title.toLowerCase().indexOf(filterSettings.title) >= 0) {
+                    titleMatch = true;
+                }
+                
+                if (!keyMatch && tuneBook.tuneSets[i].tuneSetPositions[z].tune.key == filterSettings.key) {
                     keyMatch = true;
                 }
 
-                if (!typeMatch && tuneBook.tuneSets[i].tuneSetPositions[z].tune.type == filterOptions.type) {
+                if (!typeMatch && tuneBook.tuneSets[i].tuneSetPositions[z].tune.type == filterSettings.type) {
                     typeMatch = true;
                 }
 
-                if (!colorMatch && tuneBook.tuneSets[i].tuneSetPositions[z].tune.color == filterOptions.color) {
+                if (!colorMatch && tuneBook.tuneSets[i].tuneSetPositions[z].tune.color == filterSettings.color) {
                     colorMatch = true;
                 }
 
@@ -220,8 +237,8 @@ export function filterTuneSets(tuneBook:TuneBook, filterOptions):Array<TuneSet>{
                 }
 
                 if (!freqMatch) {
-                    if ((filterOptions.freqcomp == "LT" && tuneBook.tuneSets[i].tuneSetPositions[z].tune.frequencyPlayed < parseInt(filterOptions.freq))
-                        || (filterOptions.freqcomp == "GE" && tuneBook.tuneSets[i].tuneSetPositions[z].tune.frequencyPlayed >= parseInt(filterOptions.freq)) )  {
+                    if ((filterSettings.freqcomp == "LT" && tuneBook.tuneSets[i].tuneSetPositions[z].tune.frequencyPlayed < parseInt(filterSettings.freq))
+                        || (filterSettings.freqcomp == "GE" && tuneBook.tuneSets[i].tuneSetPositions[z].tune.frequencyPlayed >= parseInt(filterSettings.freq)) )  {
 
                         freqMatch = true;
                     }
@@ -229,7 +246,7 @@ export function filterTuneSets(tuneBook:TuneBook, filterOptions):Array<TuneSet>{
             }
         }
 
-        if (keyMatch && typeMatch && colorMatch && eventMatch && bandMatch && playMatch && updateMatch && freqMatch){
+        if (keyMatch && typeMatch && colorMatch && eventMatch && bandMatch && playMatch && updateMatch && freqMatch && titleMatch){
             tuneSetsFiltered.push(tuneBook.tuneSets[i]);
         }
     }

@@ -1,6 +1,7 @@
 /// <reference path="../../tsd_typings/tsd.d.ts" />
 
 import {TuneBook} from '../business/model/tunebook';
+import {Tune} from '../business/model/tune';
 import {TuneSet} from '../business/model/tuneset';
 import {AbcExportSettings} from '../common/settings/abc-export';
 import {FilterSettings} from '../common/settings/filter';
@@ -17,12 +18,14 @@ export class TuneBookService {
   _systemProperties;
   _currentAbcExportSettings: AbcExportSettings;
   _currentFilterSettings: FilterSettings;
+  _tunesFiltered:Array<Tune>;
 
   constructor() {
     this._systemProperties = getSystemProperties();
     this._currentTuneBook = this.getCurrentTuneBook();
     this._currentAbcExportSettings = new AbcExportSettings();
     this._currentFilterSettings = new FilterSettings();
+    this.setTunesFiltered();
   }
 
   getCurrentTuneBook() {
@@ -279,10 +282,18 @@ export class TuneBookService {
     return this.getCurrentTuneBook().getPlaylistPosition(playlistId, position);
   }
 
-  getTunesFiltered() {
+  setTunesFiltered() {
     // filterTuneSets bringt ganze TuneSets, auch wenn nur ein Tune matched.
     // Deshalb nachgelagert die nicht matchenden Tunes erneut rausfiltern.
-    return filterTunes(extractTunes(filterTuneSets(this.getCurrentTuneBook(), this.getCurrentFilterSettings())), this.getCurrentFilterSettings());
+    this._tunesFiltered = filterTunes(extractTunes(filterTuneSets(this.getCurrentTuneBook(), this.getCurrentFilterSettings())), this.getCurrentFilterSettings());
+  }
+  
+  getTunesFiltered() {
+    return this._tunesFiltered;
+  }
+  
+  applyFilter(){
+    this.setTunesFiltered();
   }
 
   getFirstTuneSetPositions() {

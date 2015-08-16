@@ -1,4 +1,5 @@
 export class FilterSettings {
+    title:string;
     key:string;
     type:string;
     color:string;
@@ -20,6 +21,7 @@ export class FilterSettings {
     this.color = "All Colors";
     this.event = "All Events";
     this.band = "All Bands";
+    this.title = "";
     /*TODO
     plmin:string;
     plmax:string;
@@ -53,6 +55,10 @@ export class FilterSettings {
   setBand(band:string){
     this.band = band;
     this.setFilterText();    
+  }
+  
+  setTitle(title:string){
+    this.title = title;
   }
   
   setFilterText() {

@@ -13,7 +13,7 @@ import {TuneBook} from '../../business/model/tunebook';
 @View({
   templateUrl: './components/book-id/book-id.html?v=<%= VERSION %>'
 })
-export class TuneBookIdView {
+export class TuneBookId {
   tuneBook: TuneBook;
   
   constructor(public tuneBookService: TuneBookService){

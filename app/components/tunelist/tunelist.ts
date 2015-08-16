@@ -7,17 +7,16 @@ import {TuneBook} from '../../business/model/tunebook';
 import {Tune} from '../../business/model/tune';
 import {getSystemProperties} from '../../common/system-properties';
 
-import {TuneBookIdView} from '../../components/book-id/book-id';
 import {SampleDots} from '../../components/sample-dots/sample-dots';
 
 
 @Component({
   selector: 'tunelist',
-  lifecycle: [LifecycleEvent.onInit]
+  lifecycle: [LifecycleEvent.onCheck]
 })
 @View({
   templateUrl: './components/tunelist/tunelist.html?v=<%= VERSION %>',
-  directives: [NgFor, TuneBookIdView, SampleDots],
+  directives: [NgFor, SampleDots],
   styleUrls: ['./tunelist.css?v=<%= VERSION %>']
 })
 export class TuneList {
@@ -28,13 +27,12 @@ export class TuneList {
   constructor(public tuneBookService: TuneBookService, public router: Router) {
     this.systemProperties = getSystemProperties();
     this.tuneBook =  this.tuneBookService.getCurrentTuneBook();
+    this.tunes = this.tuneBookService.getTunesFiltered();
   }
   
-  onInit() {
-    //getTunesFiltered() depends on FilterSettings, which might have been modified under /filter
-    //TODO: Liste eventuell nur neu laden, wenn in den FilterSettings was geändert hat. 
+  onCheck(){
     this.tunes = this.tuneBookService.getTunesFiltered();
-  };
+  }
 }
 
 

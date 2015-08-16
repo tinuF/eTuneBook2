@@ -16,6 +16,7 @@ import {TuneList} from './components/tunelist/tunelist';
 import {Filter} from './components/filter/filter';
 import {FilterText} from './components/filter-text/filter-text';
 import {Introduction} from './components/introduction/introduction';
+import {TuneBookId} from './components/book-id/book-id';
 
 
 @Component({
@@ -34,7 +35,7 @@ import {Introduction} from './components/introduction/introduction';
 ])
 @View({
   templateUrl: './app.html?v=<%= VERSION %>',
-  directives: [RouterOutlet, RouterLink, CSSClass, FilterText]
+  directives: [RouterOutlet, RouterLink, CSSClass, FilterText, TuneBookId]
 })
 export class App {
   tuneBook: TuneBook;
@@ -153,6 +154,12 @@ export class App {
   showFilter() {
     this.router.navigate('/filter');
   };
+  
+  search(event){
+    let searchText = event.target.value.trim().toLowerCase();
+    this.filterSettings.setTitle(searchText);
+    this.tuneBookService.applyFilter();
+  }
   
   /*
   filterChange(event) {

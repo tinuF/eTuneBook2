@@ -209,26 +209,35 @@ export class Filter {
     setType(event) {
         this.type = event.target.value;
         this.filterSettings.setType(this.type);
+        this.applyFilter();
     }
     
     setKey(event) {
         this.key = event.target.value;
         this.filterSettings.setKey(this.key);
+        this.applyFilter();
     }
     
     setColor(event) {
         this.color = event.target.value;
         this.filterSettings.setColor(this.color);
+        this.applyFilter();
     }
     
     setEvent(event) {
         this.event = event.target.value;
         this.filterSettings.setEvent(this.event);
+        this.applyFilter();
     }
     
     setBand(event) {
         this.band = event.target.value;
         this.filterSettings.setBand(this.band);
+        this.applyFilter();
+    }
+    
+    applyFilter(){
+        this.tuneBookService.applyFilter();
     }
     
     
