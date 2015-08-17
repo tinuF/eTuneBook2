@@ -853,6 +853,7 @@
      }
  }
  
+ /*Fixed search bar: http://www.mentful.com/2014/06/22/fixed-search-navbar-with-bootstrap-3-0/ */
  @media(max-width:767px) {
     .navbar .navbar-form {
         width: 185px;
@@ -874,6 +875,7 @@
     -webkit-box-shadow: none;
     box-shadow: none;
 }
+/*End Fixed search bar */
 
 @media print {
 

@@ -3,8 +3,8 @@ import {PlaylistPosition} from '../model/playlistposition';
 import {TuneSetPositionPlayInfo} from '../model/tunesetposition-playinfo';
 import {PartPlayInfo} from '../model/partplayinfo';
 import {TuneBook} from '../model/tuneBook';
-import {getAbcValues, getSubDirective} from '../util/abc';
-import {eliminateThe} from '../util/text';
+import {getAbcValues, getSubDirective} from '../util/abc-util';
+import {eliminateThe} from '../util/text-util';
 
 export function importPlaylists(header){
     // Generate Playlists from the book.

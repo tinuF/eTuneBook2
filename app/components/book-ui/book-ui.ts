@@ -10,9 +10,9 @@ import {TuneBook} from '../../business/model/tunebook';
   selector: 'book',
 })
 @View({
-  templateUrl: './components/book/book.html'
+  templateUrl: './components/book-ui/book-ui.html'
 })
-export class Book {
+export class BookUI {
   tuneBook: TuneBook;
 
   constructor(public tuneBookService: TuneBookService, public router: Router) {

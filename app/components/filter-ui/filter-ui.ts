@@ -6,7 +6,7 @@ import {TuneBook} from '../../business/model/tunebook';
 import {Tune} from '../../business/model/tune';
 import {getSystemProperties} from '../../common/system-properties';
 
-import {FilterSettings} from '../../common/settings/filter';
+import {FilterSettings} from '../../common/settings/filter-settings';
 
 
 
@@ -16,10 +16,10 @@ import {FilterSettings} from '../../common/settings/filter';
     lifecycle: [LifecycleEvent.onInit, LifecycleEvent.onChange] 
 })
 @View({
-    templateUrl: './components/filter/filter.html?v=<%= VERSION %>',
+    templateUrl: './components/filter-ui/filter-ui.html?v=<%= VERSION %>',
     directives: [NgFor, NgSelectOption]
 })
-export class Filter {
+export class FilterUI {
     tuneBook: TuneBook;
     filterSettings: FilterSettings;
     filterChange: EventEmitter = new EventEmitter();

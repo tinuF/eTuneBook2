@@ -9,14 +9,16 @@ import {appPipes} from './pipes/pipes';
 import {getSystemProperties} from './common/system-properties';
 import {TuneBookService} from './services/tunebook-service';
 import {TuneBook} from './business/model/tunebook';
-import {FilterSettings} from './common/settings/filter';
+import {FilterSettings} from './common/settings/filter-settings';
 
-import {Book} from './components/book/book';
-import {TuneList} from './components/tunelist/tunelist';
-import {Filter} from './components/filter/filter';
-import {FilterText} from './components/filter-text/filter-text';
+import {BookUI} from './components/book-ui/book-ui';
+import {TuneListUI} from './components/tunelist-ui/tunelist-ui';
+import {TuneUI} from './components/tune-ui/tune-ui';
+import {FilterUI} from './components/filter-ui/filter-ui';
+import {FilterTextUI} from './components/filter-text-ui/filter-text-ui';
 import {Introduction} from './components/introduction/introduction';
-import {TuneBookId} from './components/book-id/book-id';
+import {BookTitleUI} from './components/book-title-ui/book-title-ui';
+import {TuneAbcUI} from './components/tune-abc-ui/tune-abc-ui';
 
 
 @Component({
@@ -25,17 +27,21 @@ import {TuneBookId} from './components/book-id/book-id';
 })
 @RouteConfig([
   { path: '/', component: Home, as: 'home' },
-  { path: '/book', component: Book, as: 'book' },
+  { path: '/book', component: BookUI, as: 'book' },
   { path: '/info/introduction', component: Introduction, as: 'introduction' },
-  { path: '/tunelist', component: TuneList, as: 'tunelist' },
-  { path: '/filter', component: Filter, as: 'filter' }
+  { path: '/tunes', component: TuneListUI, as: 'tunelist' },
+  { path: '/tunes/:id', component: TuneUI, as: 'tune' },
+  { path: '/filter', component: FilterUI, as: 'filter' }
+  
+  //{ path: '/tunes/:id/abc', component: TuneAbcUI, as: 'tuneabc' }
+  
   //{ path: '/playlists', component: PlaylistList, as: 'playlistlist' },
   //{ path: '/setlist', component: Setlist, as: 'setlist' },
   
 ])
 @View({
   templateUrl: './app.html?v=<%= VERSION %>',
-  directives: [RouterOutlet, RouterLink, CSSClass, FilterText, TuneBookId]
+  directives: [RouterOutlet, RouterLink, CSSClass, FilterTextUI, BookTitleUI]
 })
 export class App {
   tuneBook: TuneBook;
@@ -81,7 +87,7 @@ export class App {
       } finally {
         this.tuneBookService.storeTuneBookAbc();
         alert("Tunebook successfully loaded");
-        this.router.navigate("/tunelist");
+        this.router.navigate("/tunes");
       }
     }, 0);
   }
@@ -124,7 +130,7 @@ export class App {
 
       } finally {
         this.tuneBookService.storeTuneBookAbc();
-        this.router.navigate("/tunelist");
+        this.router.navigate("/tunes");
         
         /*
         if (this.router.) {
@@ -148,7 +154,7 @@ export class App {
   showTunes(  ) {
     this.initActiveMenu();
     this.tunesMenuActive = true;
-    this.router.navigate("/tunelist");
+    this.router.navigate("/tunes");
   };
   
   showFilter() {

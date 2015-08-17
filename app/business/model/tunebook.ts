@@ -1,10 +1,10 @@
 /// <reference path="../../../tsd_typings/tsd.d.ts" />
 
 import {getSystemProperties} from '../../common/system-properties';
-import {getAbcValue} from '../util/abc';
+import {getAbcValue} from '../util/abc-util';
 import {importTuneSets} from '../converter/tuneset-importer';
 import {importPlaylists, importPlaylistPositions, importTuneSetPositionPlayInfos} from '../converter/playlists-importer';
-import {extractTunes, extractTuneSetPositions} from '../filter/filter';
+import {extractTunes, extractTuneSetPositions} from '../filter/filter-logic';
 import {writeAbcHeader, writeTuneAbc} from '../converter/abc-writer';
 import {TuneSet} from './tuneset';
 import {Tune} from './tune';
@@ -13,7 +13,7 @@ import {Playlist} from './playlist';
 import {PlaylistPosition} from './playlistposition';
 import {TuneSetPositionPlayInfo} from './tunesetposition-playinfo';
 import {PartPlayInfo} from './partplayinfo';
-import {AbcExportSettings} from '../../common/settings/abc-export';
+import {AbcExportSettings} from '../../common/settings/abc-export-settings';
 
 
 export class TuneBook {

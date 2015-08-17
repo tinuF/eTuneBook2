@@ -7,13 +7,13 @@ import {TuneBook} from '../../business/model/tunebook';
 
 
 @Component({
-  selector: 'tunebook-id',
+  selector: 'book-title',
   properties: ['tuneBook: tunebook']
 })
 @View({
-  templateUrl: './components/book-id/book-id.html?v=<%= VERSION %>'
+  templateUrl: './components/book-title-ui/book-title-ui.html?v=<%= VERSION %>'
 })
-export class TuneBookId {
+export class BookTitleUI {
   tuneBook: TuneBook;
   
   constructor(public tuneBookService: TuneBookService){

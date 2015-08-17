@@ -1,8 +1,8 @@
 import {Video} from './video';
 import {Website} from './website';
 import {PlayDate} from './playdate';
-import {getAbcValueOfTuneLine, getAbcValue, getSubDirective} from '../util/abc';
-import {calculateFrequencyPlayed} from '../util/date';
+import {getAbcValueOfTuneLine, getAbcValue, getSubDirective} from '../util/abc-util';
+import {calculateFrequencyPlayed} from '../util/date-util';
 import {getSystemProperties} from '../../common/system-properties';
 
 export class Tune {

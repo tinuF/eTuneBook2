@@ -2,9 +2,9 @@ import {TuneSet} from '../model/tuneset';
 import {TuneSetPosition} from '../model/tunesetposition';
 import {Tune} from '../model/tune';
 import {Video} from '../model/video';
-import {getAbcValues, getAbcValueOfTuneLine, getSubDirective} from '../util/abc';
-import {calculateFrequencyPlayed} from '../util/date';
-import {eliminateThe} from '../util/text';
+import {getAbcValues, getAbcValueOfTuneLine, getSubDirective} from '../util/abc-util';
+import {calculateFrequencyPlayed} from '../util/date-util';
+import {eliminateThe} from '../util/text-util';
 
 
 export function importTuneSets(abcjsBook){

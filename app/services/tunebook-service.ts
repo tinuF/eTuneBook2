@@ -3,13 +3,13 @@
 import {TuneBook} from '../business/model/tunebook';
 import {Tune} from '../business/model/tune';
 import {TuneSet} from '../business/model/tuneset';
-import {AbcExportSettings} from '../common/settings/abc-export';
-import {FilterSettings} from '../common/settings/filter';
-import {eliminateThe} from '../business/util/text';
-import {tuneUp, tuneDown} from '../business/util/transposer';
-import {filterTunes, filterTuneSets, extractSetsWithinPlayDatePeriod, extractTunesWithinPlayDatePeriod, extractTunes, extractTuneSetPositions} from '../business/filter/filter';
-import {getAbcValue} from '../business/util/abc';
-import {getRandomArrayIndex} from '../business/util/math';
+import {AbcExportSettings} from '../common/settings/abc-export-settings';
+import {FilterSettings} from '../common/settings/filter-settings';
+import {eliminateThe} from '../business/util/text-util';
+import {tuneUp, tuneDown} from '../business/util/transposer-util';
+import {filterTunes, filterTuneSets, extractSetsWithinPlayDatePeriod, extractTunesWithinPlayDatePeriod, extractTunes, extractTuneSetPositions} from '../business/filter/filter-logic';
+import {getAbcValue} from '../business/util/abc-util';
+import {getRandomArrayIndex} from '../business/util/math-util';
 import {getSystemProperties} from '../common/system-properties';
 
 

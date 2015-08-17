@@ -23,7 +23,7 @@
     </tfoot>
     <tbody>
       <tr *ng-for="#tune of tunes; #i = index" [style.background-color]="tune.color">
-        <th scope="row">{{tune.title | eliminateThe}}</th>
+        <th scope="row"><a [router-link]="['/tune', {id: tune.intTuneId}]">{{tune.title | eliminateThe}}</a></th>
         <td data-title="Incipit"><sampledots [tune]="tune"></sampledots></td>
         <td data-title="Type">{{tune.type}}</td>
         <td data-title="Key">{{tune.key}}</td>

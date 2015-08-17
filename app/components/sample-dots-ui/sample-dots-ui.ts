@@ -9,9 +9,9 @@ import {TuneBookService} from '../../services/tunebook-service';
   properties: ['tune: tune']
 })
 @View({
-  templateUrl: './components/sample-dots/sample-dots.html?v=<%= VERSION %>',
+  templateUrl: './components/sample-dots-ui/sample-dots-ui.html?v=<%= VERSION %>',
 })
-export class SampleDots {
+export class SampleDotsUI {
   tune: Tune;
   tuneObjectArray: Array<any>;
   shown:boolean;

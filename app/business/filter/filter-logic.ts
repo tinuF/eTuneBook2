@@ -1,7 +1,7 @@
 import {TuneBook} from '../model/tunebook';
 import {TuneSet} from '../model/tuneset';
 import {Tune} from '../model/tune';
-import {FilterSettings} from '../../common/settings/filter';
+import {FilterSettings} from '../../common/settings/filter-settings';
 
 export function filterTunes(tunes:Array<Tune>, filterSettings:FilterSettings):Array<Tune>{
     var titleMatch = false;

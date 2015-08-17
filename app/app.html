@@ -50,7 +50,7 @@
             </li>
             -->
             <li><button class="btn btn-default navbar-btn" [style.active] ="bookMenuActive" (click)="editTuneBook()">Book</button></li>
-            <li><tunebook-id [tunebook]="tuneBook"></tunebook-id></li>
+            <li><book-title [tunebook]="tuneBook"></book-title></li>
             <li><button class="btn btn-default navbar-btn" [style.active] ="playlistsMenuActive" (click)="showPlaylists()">Playlists</button></li>
             <li><button class="btn btn-default navbar-btn" [style.active] ="setsMenuActive" (click)="showSets()">Sets</button></li>
             <li><button class="btn btn-default navbar-btn" [style.active] ="tunesMenuActive" (click)="showTunes()">Tunes</button></li>
