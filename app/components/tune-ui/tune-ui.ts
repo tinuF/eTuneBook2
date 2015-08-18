@@ -16,9 +16,11 @@ import {TuneAbcUI} from '../../components/tune-abc-ui/tune-abc-ui';
   lifecycle: [LifecycleEvent.onCheck]
 })
 //@RouteConfig([
-  //{ path: '/tunes/...', component:Parent},
+  // This is only accepted, when there's a partial root in the parent:
+  // { path: '/tunes/:id/...', component: TuneUI, as: 'tune' }
+  // however, this then breaks navigation to /tunes/:id/ 
   //{ path: '/abc', component: TuneAbcUI, as: 'tuneabc' }
-
+//
 //])
 @View({
   templateUrl: './components/tune-ui/tune-ui.html?v=<%= VERSION %>',
@@ -85,7 +87,7 @@ export class TuneUI {
     showTuneAbc() {
         this.initActiveMenu();
         this.tuneAbcMenuActive = true;
-        this.router.navigate("/tune/"+this.tune.intTuneId+"/abc");
+        this.router.parent.navigate("/tune/"+this.tune.intTuneId+"/abc");
     }
 
     showTunePractice() {

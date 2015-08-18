@@ -30,10 +30,10 @@ import {TuneAbcUI} from './components/tune-abc-ui/tune-abc-ui';
   { path: '/book', component: BookUI, as: 'book' },
   { path: '/info/introduction', component: Introduction, as: 'introduction' },
   { path: '/tunes', component: TuneListUI, as: 'tunelist' },
-  { path: '/tunes/:id', component: TuneUI, as: 'tune' },
+  //Partial Routes don't work (no navigation)
+  //{ path: '/tunes/:id/...', component: TuneUI, as: 'tune' },
+  { path: '/tunes/:id/', component: TuneUI, as: 'tune' },
   { path: '/filter', component: FilterUI, as: 'filter' }
-  
-  //{ path: '/tunes/:id/abc', component: TuneAbcUI, as: 'tuneabc' }
   
   //{ path: '/playlists', component: PlaylistList, as: 'playlistlist' },
   //{ path: '/setlist', component: Setlist, as: 'setlist' },
