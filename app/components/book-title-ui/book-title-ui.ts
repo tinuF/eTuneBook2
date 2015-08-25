@@ -7,11 +7,11 @@ import {TuneBook} from '../../business/model/tunebook';
 
 
 @Component({
-  selector: 'book-title',
-  properties: ['tuneBook: tunebook']
+  selector: 'book-title'
 })
 @View({
-  templateUrl: './components/book-title-ui/book-title-ui.html?v=<%= VERSION %>'
+  templateUrl: './components/book-title-ui/book-title-ui.html?v=<%= VERSION %>',
+  styleUrls: ['./components/book-title-ui/book-title-ui.css?v=<%= VERSION %>']
 })
 export class BookTitleUI {
   tuneBook: TuneBook;

@@ -57,18 +57,20 @@ var PATH = {
       './node_modules/systemjs/dist/system.src.js',
       './node_modules/angular2/node_modules/zone.js/dist/zone.js',
       './node_modules/jquery/dist/jquery.min.js',
+      //'./node_modules/material-design-lite/material.min.css',
+      //'./node_modules/material-design-lite/material.min.js',
       './node_modules/bootstrap/dist/js/bootstrap.min.js',
       './node_modules/bootstrap/dist/css/bootstrap.min.css',
-      './bower_components/bootstrap-sidebar/dist/js/sidebar.js',
-      './bower_components/bootstrap-sidebar/dist/css/sidebar.css',
+      //'./bower_components/bootstrap-sidebar/dist/js/sidebar.js',
+      //'./bower_components/bootstrap-sidebar/dist/css/sidebar.css',
       './node_modules/moment/moment.js',
       './lib/abcjs_editor_2.1-min.js',
       './lib/jquery.colorPicker.min.js'
-    ],
-    fonts: [
-      './node_modules/bootstrap/fonts/glyphicons-halflings-regular.ttf',
-      './node_modules/bootstrap/fonts/glyphicons-halflings-regular.woff',
-      './node_modules/bootstrap/fonts/glyphicons-halflings-regular.woff2'
+    //],
+    //fonts: [
+      //'./node_modules/bootstrap/fonts/glyphicons-halflings-regular.ttf',
+      //'./node_modules/bootstrap/fonts/glyphicons-halflings-regular.woff',
+      //'./node_modules/bootstrap/fonts/glyphicons-halflings-regular.woff2'
     ]
   }
 };

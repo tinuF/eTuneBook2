@@ -37,7 +37,7 @@ export class TuneUI {
   tuneInfoMenuActive:boolean;
  
   constructor(public tuneBookService: TuneBookService, public router: Router, routeParams:RouteParams) {
-    this.tune = this.tuneBookService.getTune(routeParams.get('id'));
+    this.tune = this.tuneBookService.setCurrentTune(routeParams.get('id'));
     this.currentState = "Dots";
     this.renderAbc(this.tune);
   }

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>eTuneBook</title>
+	<meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="author" content="Martin Fleischmann | eTuneBook">
+	<meta name="keywords" content="eTuneBook, Abc Tunes">
+	<meta name="description" content="eTuneBook, an application for managing abc tunes.">
+	<meta name="audience" content="all">
+	<meta name="robots" content="index,follow">
+	<meta name="revisit-after" content="7 days">
+	<meta name="page-topic" content="music, notation, repertoire">
+  <link rel="SHORTCUT ICON" type="image/ico" href="favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  
+  <base href="<%= APP_BASE %>">
+  <!-- ignore: Aplha 32 router fix -->
+  <script>baseElement = document.querySelector('base');baseElement.attr = baseElement.getAttribute;</script>
+  
+  <!-- inject:css -->
+  <!-- endinject -->
+</head>
+<body>
+
+  <app>Loading...</app>
+
+  <!-- inject:js -->
+  <!-- endinject -->
+
+  <script src="<%= APP_BASE %>init.js?v=<%= VERSION %>"></script>
+
+</body>
+</html>

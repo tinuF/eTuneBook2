@@ -18,6 +18,7 @@ import {FilterUI} from './components/filter-ui/filter-ui';
 import {FilterTextUI} from './components/filter-text-ui/filter-text-ui';
 import {Introduction} from './components/introduction/introduction';
 import {BookTitleUI} from './components/book-title-ui/book-title-ui';
+import {TuneTitleUI} from './components/tune-title-ui/tune-title-ui';
 import {TuneAbcUI} from './components/tune-abc-ui/tune-abc-ui';
 
 
@@ -30,6 +31,10 @@ import {TuneAbcUI} from './components/tune-abc-ui/tune-abc-ui';
   { path: '/book', component: BookUI, as: 'book' },
   { path: '/info/introduction', component: Introduction, as: 'introduction' },
   { path: '/tunes', component: TuneListUI, as: 'tunelist' },
+  //one route - two compomponents: not supported yet
+  //{ path: '/tunes', 
+  //  components: {TuneListUI, TuneTitleUI}, 
+  //  as: 'tunelist' },
   //Partial Routes don't work (no navigation)
   //{ path: '/tunes/:id/...', component: TuneUI, as: 'tune' },
   { path: '/tunes/:id/', component: TuneUI, as: 'tune' },
@@ -68,6 +73,13 @@ export class App {
       this.tuneBook = this.tuneBookService.initializeTuneBook();
       router.navigate('/introduction');
     }
+    
+    // Needed for material-light (Dropdowns, Search-Button...)
+    // http://stackoverflow.com/questions/31278781/material-design-lite-integration-with-angularjs
+    // TODO: Typescript für componentHandler
+    setTimeout(() => {
+      componentHandler.upgradeAllRegistered();
+    }, 0);
   }
 
   initActiveMenu(){

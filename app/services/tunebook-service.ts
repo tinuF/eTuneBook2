@@ -19,6 +19,7 @@ export class TuneBookService {
   _currentAbcExportSettings: AbcExportSettings;
   _currentFilterSettings: FilterSettings;
   _tunesFiltered:Array<Tune>;
+  _currentTune:Tune;
 
   constructor() {
     this._systemProperties = getSystemProperties();
@@ -37,6 +38,10 @@ export class TuneBookService {
   
   getCurrentFilterSettings(){
     return this._currentFilterSettings;
+  }
+  
+  getCurrentTune(){
+    return this._currentTune;
   }
 
   getTuneBookFromLocalStorage() {
@@ -257,6 +262,12 @@ export class TuneBookService {
   getTune(intTuneId) {
     return this.getCurrentTuneBook().getTuneById(intTuneId);
   }
+  
+  setCurrentTune(intTuneId) {
+    this._currentTune = this.getTune(intTuneId);
+    return this._currentTune;
+  }
+  
 
   deleteTuneSetPositionsAndTune(intTuneId) {
     this.getCurrentTuneBook().deleteTuneSetPositionsAndTune(intTuneId);
@@ -285,7 +296,9 @@ export class TuneBookService {
   setTunesFiltered() {
     // filterTuneSets bringt ganze TuneSets, auch wenn nur ein Tune matched.
     // Deshalb nachgelagert die nicht matchenden Tunes erneut rausfiltern.
-    this._tunesFiltered = filterTunes(extractTunes(filterTuneSets(this.getCurrentTuneBook(), this.getCurrentFilterSettings())), this.getCurrentFilterSettings());
+    if (this.getCurrentTuneBook() != null){
+      this._tunesFiltered = filterTunes(extractTunes(filterTuneSets(this.getCurrentTuneBook(), this.getCurrentFilterSettings())), this.getCurrentFilterSettings());  
+    }
   }
   
   getTunesFiltered() {

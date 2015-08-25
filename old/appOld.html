@@ -26,20 +26,7 @@
         <div class="col-xs-7 col-sm-3 col-md-3 sidebar sidebar-left sidebar-animate sidebar-md-show">
           
           <ul class="nav navbar-stacked nav-list">
-            <li ><label>Abc File</label>
-              <ul  class="nav"" role="menu">
-                <li><a  (click)="importer.click()">Import from local Drive</a></li>
-                <li><a (click)="selectFileOnGoogleDrive()">Import from Google Drive</a></li>
-                <li class="divider"></li>
-                <!--
-                <li><a (click)="loadBxplTuneBook()">{{systemProperties.EXAMPLE_FILENAME_WITHOUTABC}} - Version {{systemProperties.EXAMPLE_VERSION}}</a></li>
-                -->
-                
-                <li><a (click)="exportTuneBook()">Export</a></li>
-                <li class="divider"></li>
-                <li><a (click)="loadBxplTuneBook()">Load Example from Server</a></li>
-              </ul>  
-            </li>
+            
             
             <!--
             <li ><label>Book</label>
@@ -50,7 +37,7 @@
             </li>
             -->
             <li><button class="btn btn-default navbar-btn" [style.active] ="bookMenuActive" (click)="editTuneBook()">Book</button></li>
-            <li><book-title [tunebook]="tuneBook"></book-title></li>
+            <li><book-title></book-title></li>
             <li><button class="btn btn-default navbar-btn" [style.active] ="playlistsMenuActive" (click)="showPlaylists()">Playlists</button></li>
             <li><button class="btn btn-default navbar-btn" [style.active] ="setsMenuActive" (click)="showSets()">Sets</button></li>
             <li><button class="btn btn-default navbar-btn" [style.active] ="tunesMenuActive" (click)="showTunes()">Tunes</button></li>
@@ -98,19 +85,7 @@
         </div>
         -->
     </div>
-          <!--
-          <ul class="nav navbar-stacked">
-            <li class="active">
-              <a href="#">Home</a>
-            </li>
-            <li>
-              <a href="#about">About</a>
-            </li>
-            <li>
-              <a href="#contact">Contact</a>
-            </li>
-          </ul>
-          -->
+         
         </div>
         <div class="main col-md-9 col-md-offset-3">
           <div class="container-fluid">
@@ -120,20 +95,35 @@
         </div>
         <div class="col-xs-7 col-sm-3 col-md-3 sidebar sidebar-right sidebar-animate">
           <ul class="nav navbar-stacked">
-            <li class="active">
-              <a href="#">Home</a>
+            <li ><label>Abc File</label>
+              <ul  class="nav"" role="menu">
+                <li><a  (click)="importer.click()">Import from local Drive</a></li>
+                <li><a (click)="selectFileOnGoogleDrive()">Import from Google Drive</a></li>
+                <li class="divider"></li>
+                <li><a (click)="exportTuneBook()">Export</a></li>
+                <li class="divider"></li>
+                <li><a (click)="loadBxplTuneBook()">Load Example from Server</a></li>
+                <!--
+                <li><a (click)="loadBxplTuneBook()">{{systemProperties.EXAMPLE_FILENAME_WITHOUTABC}} - Version {{systemProperties.EXAMPLE_VERSION}}</a></li>
+                -->
+              </ul>  
             </li>
-            <li>
-              <a href="#about">About</a>
-            </li>
-            <li>
-              <a href="#contact">Contact</a>
+            <br>
+            <li ><label>Info</label>
+              <ul  class="nav"" role="menu">
+                <li [style.active]="introductionMenuActive"><a [router-link]="['/introduction']"> Introduction</a></li>
+                <li [style.active] ="getStartedMenuActive"><a href="#/info/getstarted"> Getting Started</a></li>
+                <li [style.active] ="manualMenuActive"><a href="#/info/manual"> Manual</a></li>
+                <li [style.active] ="releaseNotesMenuActive"><a href="#/info/releasenotes"> Release Notes</a></li>
+                <li [style.active] ="creditsMenuActive"><a href="#/info/credits"> Credits</a></li>
+                <li [style.active] ="feedbackMenuActive"><a href="#/info/feedback"> Feedback</a></li>
+              </ul>  
             </li>
           </ul>
         </div>
       </div>
     </div>
-  </body>
+  
 
 <div class="container">
     <div class="btn-group pull-right hidden-print">

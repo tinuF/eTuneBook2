@@ -37,6 +37,7 @@
     "bootstrap": "^3.3.5",
     "es6-module-loader": "^0.15.0",
     "jquery": "^2.1.4",
+    "material-design-lite": "^1.0.3",
     "moment": "^2.10.5",
     "reflect-metadata": "0.1.0",
     "systemjs": "^0.16.0",

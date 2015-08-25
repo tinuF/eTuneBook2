@@ -8,7 +8,8 @@ import {FilterSettings} from '../../common/settings/filter-settings';
     selector: 'filter-text' 
 })
 @View({
-    templateUrl: './components/filter-text-ui/filter-text-ui.html?v=<%= VERSION %>'
+    templateUrl: './components/filter-text-ui/filter-text-ui.html?v=<%= VERSION %>',
+    styleUrls: ['./components/filter-text-ui/filter-text-ui.css?v=<%= VERSION %>']
 })
 export class FilterTextUI {
     filterSettings: FilterSettings;
