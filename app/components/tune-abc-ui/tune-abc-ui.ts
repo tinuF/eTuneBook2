@@ -6,6 +6,7 @@ import {TuneBookService} from '../../services/tunebook-service';
 import {TuneBook} from '../../business/model/tunebook';
 import {Tune} from '../../business/model/tune';
 import {getSystemProperties} from '../../common/system-properties';
+import {TuneUI} from '../tune-ui/tune-ui'
 
 
 @Component({
@@ -14,15 +15,36 @@ import {getSystemProperties} from '../../common/system-properties';
 })
 @View({
   templateUrl: './components/tune-abc-ui/tune-abc-ui.html?v=<%= VERSION %>',
-  directives: [NgFor]
+  directives: [NgFor, TuneUI]
 })
 export class TuneAbcUI {
     tune:Tune;
+    tuneEditModus:boolean;
+    noteEditModus:boolean;
+    abcEditor:string;
     
     constructor(public tuneBookService: TuneBookService, public router: Router, routeParams:RouteParams) {
     this.tune = this.tuneBookService.getTune(routeParams.get('id'));
+    this.initABCJSEditor();
+    
+    this.tuneEditModus = true;
+    this.noteEditModus = false;
+    this.abcEditor = "Tune Editor";
     
   }
+  
+  onCheck(){
+      
+  }
+  
+  initABCJSEditor(){
+    setTimeout(() => {
+      var editHere = 'abcEditorFor' + this.tune.intTuneId;
+      var showHere = 'DotsForTune' + this.tune.intTuneId;
+      new ABCJS.Editor(editHere, { canvas_id: showHere });
+
+    }, 0);  
+  } 
     
 }
 

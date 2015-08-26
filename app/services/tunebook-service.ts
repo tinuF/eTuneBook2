@@ -7,7 +7,7 @@ import {AbcExportSettings} from '../common/settings/abc-export-settings';
 import {FilterSettings} from '../common/settings/filter-settings';
 import {eliminateThe} from '../business/util/text-util';
 import {tuneUp, tuneDown} from '../business/util/transposer-util';
-import {filterTunes, filterTuneSets, extractSetsWithinPlayDatePeriod, extractTunesWithinPlayDatePeriod, extractTunes, extractTuneSetPositions} from '../business/filter/filter-logic';
+import {filterTunes, filterTuneSets, extractSetsWithinPlayDatePeriod, extractTunes, extractTuneSetPositions} from '../business/filter/filter-logic';
 import {getAbcValue} from '../business/util/abc-util';
 import {getRandomArrayIndex} from '../business/util/math-util';
 import {getSystemProperties} from '../common/system-properties';
@@ -253,10 +253,9 @@ export class TuneBookService {
     return sets[tuneSetIndex].tuneSetId;
   }
 
-  getRandomIntTuneId(playDateFilter) {
-    var tunes = extractTunesWithinPlayDatePeriod(this.getCurrentTuneBook(), playDateFilter);
-    var tuneIndex = getRandomArrayIndex(tunes);
-    return tunes[tuneIndex].intTuneId;
+  getRandomIntTuneId() {
+    let tuneIndex = getRandomArrayIndex(this._tunesFiltered);
+    return this._tunesFiltered[tuneIndex].intTuneId;
   }
 
   getTune(intTuneId) {

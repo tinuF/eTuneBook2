@@ -20,6 +20,7 @@ import {Introduction} from './components/introduction/introduction';
 import {BookTitleUI} from './components/book-title-ui/book-title-ui';
 import {TuneTitleUI} from './components/tune-title-ui/tune-title-ui';
 import {TuneAbcUI} from './components/tune-abc-ui/tune-abc-ui';
+import {RandomTuneUI} from './components/random-tune-ui/random-tune-ui';
 
 
 @Component({
@@ -38,15 +39,16 @@ import {TuneAbcUI} from './components/tune-abc-ui/tune-abc-ui';
   //Partial Routes don't work (no navigation)
   //{ path: '/tunes/:id/...', component: TuneUI, as: 'tune' },
   { path: '/tunes/:id/', component: TuneUI, as: 'tune' },
+  { path: '/tunes/:id/abc', component: TuneAbcUI, as: 'tuneabc' },
   { path: '/filter', component: FilterUI, as: 'filter' }
-  
+  //{ path: '/abc', component: TuneAbcUI, as: 'tuneabc' }
   //{ path: '/playlists', component: PlaylistList, as: 'playlistlist' },
   //{ path: '/setlist', component: Setlist, as: 'setlist' },
   
 ])
 @View({
   templateUrl: './app.html?v=<%= VERSION %>',
-  directives: [RouterOutlet, RouterLink, CSSClass, FilterTextUI, BookTitleUI]
+  directives: [RouterOutlet, RouterLink, CSSClass, FilterTextUI, BookTitleUI, TuneTitleUI, RandomTuneUI]
 })
 export class App {
   tuneBook: TuneBook;

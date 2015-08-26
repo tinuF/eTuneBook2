@@ -87,7 +87,7 @@ export class TuneUI {
     showTuneAbc() {
         this.initActiveMenu();
         this.tuneAbcMenuActive = true;
-        this.router.parent.navigate("/tune/"+this.tune.intTuneId+"/abc");
+        this.router.navigate("/tune/"+this.tune.intTuneId+"/abc");
     }
 
     showTunePractice() {
@@ -194,7 +194,9 @@ export class TuneUI {
     */
     }
 
-    loadRandomTune(playDateFilter) {
+    loadRandomTune() {
+        let intTuneId = this.tuneBookService.getRandomIntTuneId();
+        this.router.navigate("/tunes/"+intTuneId);        
         /*
         $scope.$parent.playDateFilter = playDateFilter;
         var intTuneId = eTuneBookService.getRandomIntTuneId(playDateFilter);

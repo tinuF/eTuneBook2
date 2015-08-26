@@ -1,8 +1,11 @@
-
+<!--
 <button type="button" class="btn btn-default hidden-print" (click)="loadRandomTune()">Random</button>
+-->
+<!--
 <br>
 <h3>{{tune.title | eliminateThe}}</h3>
 <br>
+-->
 <div class="btn-group dotsViewerBtn">
     <button type="button" class="btn btn-default dropdown-toggle  active" data-toggle="dropdown" [style.background-color]="tune.color">
         {{ currentState }} <span class="caret"></span>
@@ -12,10 +15,10 @@
         <li ><a href="" ng-click="showTuneSets()">Sets</a></li>
         <li ><a href="" ng-click="showPlaylists()">Playlists</a></li>
         <li ><a href="#tunes/{{intTuneId}}/videos" >Videos</a></li>
-        <li ><a (click)="showTuneAbc()">Abc</a></li>
+        <!--<li ><a (click)="showTuneAbc()">Abc</a></li>-->
        
-       <!-- <li ><a [router-link]="['/tuneabc', {id: tune.intTuneId}]">Abc</a></li>
-           -->
+       <li ><a [router-link]="['/tuneabc', {id: tune.intTuneId}]">Abc</a></li>
+           
            <!-- How to add child routes?-->
         <li ><a href="#tunes/{{intTuneId}}/practice" >Practice</a></li>
         <li ><a href="#tunes/{{intTuneId}}/info" >Info</a></li>

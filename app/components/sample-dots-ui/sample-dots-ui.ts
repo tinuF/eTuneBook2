@@ -19,10 +19,10 @@ export class SampleDotsUI {
   
   constructor(public tuneBookService: TuneBookService){
     //funktioniert, frisst bei grossen Listen aber zu viel Leistung!
-    //this.showSampleDots();  
+    this.toggleSampleDots();  
     
-    this.shown = false;
-    this.buttonText = 'Show';
+    //this.shown = false;
+    //this.buttonText = 'Show';
   }
   
   toggleSampleDots(){

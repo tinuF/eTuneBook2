@@ -319,6 +319,7 @@ export function extractSetsWithinPlayDatePeriod(tuneBook, playDateFilter){
     return sets;
 }
 
+/*
 export function extractTunesWithinPlayDatePeriod(tuneBook, playDateFilter){
     // Extract Tunes form TuneSets.
     var tunes = [];
@@ -383,6 +384,7 @@ export function extractTunesWithinPlayDatePeriod(tuneBook, playDateFilter){
 
     return tunes;
 }
+*/
 
 export function extractTunes(tuneSets:Array<TuneSet>):Array<Tune>{
     // Extract Tunes form TuneSets.
