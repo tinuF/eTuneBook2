@@ -7,3 +7,4 @@
 /// <reference path="rx/rx-lite.d.ts" />
 /// <reference path="rx/rx.d.ts" />
 /// <reference path="dummies/abcjs/abcjs.d.ts" />
+/// <reference path="systemjs/systemjs.d.ts" />

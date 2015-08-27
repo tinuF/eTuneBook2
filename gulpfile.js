@@ -17,15 +17,18 @@ var watch = require('gulp-watch');
 var Builder = require('systemjs-builder');
 var del = require('del');
 var fs = require('fs');
-var join = require('path').join;
+var path = require('path');
+var join = path.join;
 var runSequence = require('run-sequence');
 var semver = require('semver');
 var series = require('stream-series');
 
-var http = require('http');
 var express = require('express');
 var serveStatic = require('serve-static');
 var openResource = require('open');
+
+var tinylr = require('tiny-lr')();
+var connectLivereload = require('connect-livereload');
 
 // --------------
 // Configuration.
@@ -38,8 +41,6 @@ var PATH = {
       all: 'dist/dev',
       lib: 'dist/dev/lib',
       fonts: 'dist/dev/fonts',
-      ng2: 'dist/dev/lib/angular2.js',
-      router: 'dist/dev/lib/router.js'
     },
     prod: {
       all: 'dist/prod',
@@ -47,22 +48,18 @@ var PATH = {
     }
   },
   src: {
-    // Order is quite important here for the HTML tag injection.
-    lib: [
+    loader: [
       './node_modules/angular2/node_modules/traceur/bin/traceur-runtime.js',
       './node_modules/es6-module-loader/dist/es6-module-loader-sans-promises.js',
       './node_modules/es6-module-loader/dist/es6-module-loader-sans-promises.js.map',
       './node_modules/reflect-metadata/Reflect.js',
       './node_modules/reflect-metadata/Reflect.js.map',
       './node_modules/systemjs/dist/system.src.js',
-      './node_modules/angular2/node_modules/zone.js/dist/zone.js',
       './node_modules/jquery/dist/jquery.min.js',
       //'./node_modules/material-design-lite/material.min.css',
       //'./node_modules/material-design-lite/material.min.js',
       './node_modules/bootstrap/dist/js/bootstrap.min.js',
       './node_modules/bootstrap/dist/css/bootstrap.min.css',
-      //'./bower_components/bootstrap-sidebar/dist/js/sidebar.js',
-      //'./bower_components/bootstrap-sidebar/dist/css/sidebar.css',
       './node_modules/moment/moment.js',
       './lib/abcjs_editor_2.1-min.js',
       './lib/jquery.colorPicker.min.js'
@@ -71,21 +68,24 @@ var PATH = {
       //'./node_modules/bootstrap/fonts/glyphicons-halflings-regular.ttf',
       //'./node_modules/bootstrap/fonts/glyphicons-halflings-regular.woff',
       //'./node_modules/bootstrap/fonts/glyphicons-halflings-regular.woff2'
+    ],
+    loaderConfig: [
+      './app/system.config.js'
+    ],
+    // Order is quite important here for the HTML tag injection.
+    angular: [
+      './node_modules/angular2/bundles/angular2.dev.js',
+      './node_modules/angular2/bundles/router.dev.js'
     ]
   }
 };
 
-var ng2Builder = new Builder({
-  paths: {
-    'angular2/*': 'node_modules/angular2/es6/dev/*.js',
-    rx: 'node_modules/angular2/node_modules/rx/dist/rx.js'
-  },
-  meta: {
-    rx: {
-      format: 'cjs'
-    }
-  }
-});
+PATH.src.lib = PATH.src.loader
+    .concat(PATH.src.loaderConfig)
+    .concat(PATH.src.angular);
+
+var PORT = 5555;
+var LIVE_RELOAD_PORT = 4002;
 
 var appProdBuilder = new Builder({
   baseURL: 'file:./tmp',
@@ -103,8 +103,6 @@ var tsProject = tsc.createProject('tsconfig.json', {
 
 var semverReleases = ['major', 'premajor', 'minor', 'preminor', 'patch',
                       'prepatch', 'prerelease'];
-
-var port = 5555;
 
 // --------------
 // Clean.
@@ -140,18 +138,13 @@ gulp.task('clean.tmp', function(done) {
 // --------------
 // Build dev.
 
-gulp.task('build.ng2.dev', function () {
-  ng2Builder.build('angular2/router', PATH.dest.dev.router, {});
-  return ng2Builder.build('angular2/angular2', PATH.dest.dev.ng2, {});
-});
-
-gulp.task('build.lib.dev', ['build.ng2.dev'], function () {
+gulp.task('build.lib.dev', function () {
   return gulp.src(PATH.src.lib)
     .pipe(gulp.dest(PATH.dest.dev.lib));
 });
 
 /*
-gulp.task('build.fonts.dev', ['build.ng2.dev'], function () {
+gulp.task('build.fonts.dev', function () {
   return gulp.src(PATH.src.fonts)
     .pipe(gulp.dest(PATH.dest.dev.fonts));
 });
@@ -194,18 +187,11 @@ gulp.task('build.dev', function (done) {
 // --------------
 // Build prod.
 
-gulp.task('build.ng2.prod', function () {
-  ng2Builder.build('angular2/router', join('tmp', 'router.js'), {});
-  return ng2Builder.build('angular2/angular2', join('tmp', 'angular2.js'), {});
-});
-
-gulp.task('build.lib.prod', ['build.ng2.prod'], function () {
+gulp.task('build.lib.prod', function () {
   var jsOnly = filter('**/*.js');
   var lib = gulp.src(PATH.src.lib);
-  var ng2 = gulp.src('tmp/angular2.js');
-  var router = gulp.src('tmp/router.js');
 
-  return series(lib, ng2, router)
+  return series(lib)
     .pipe(jsOnly)
     .pipe(concat('lib.js'))
     .pipe(uglify())
@@ -293,31 +279,45 @@ gulp.task('bump.reset', function() {
 // --------------
 // Serve dev.
 
-gulp.task('serve.dev', ['build.dev'], function () {
-  var app;
-
-  watch('./app/**', function () {
-    gulp.start('build.app.dev');
+gulp.task('serve.dev', ['build.dev', 'livereload'], function () {
+  watch('./app/**', function (e) {
+    runSequence('build.app.dev', function () {
+      notifyLiveReload(e);
+    });
   });
-
   serveSPA('dev');
 });
 
 // --------------
 // Serve prod.
 
-gulp.task('serve.prod', ['build.prod'], function () {
-  var app;
-
-  watch('./app/**', function () {
-    gulp.start('build.app.prod');
+gulp.task('serve.prod', ['build.prod', 'livereload'], function () {
+  watch('./app/**', function (e) {
+    runSequence('build.app.prod', function () {
+      notifyLiveReload(e);
+    });
   });
-
   serveSPA('prod');
 });
 
 // --------------
+// Livereload.
+
+gulp.task('livereload', function() {
+  tinylr.listen(LIVE_RELOAD_PORT);
+});
+
+// --------------
 // Utils.
+
+function notifyLiveReload(e) {
+  var fileName = e.path;
+  tinylr.changed({
+    body: {
+      files: [fileName]
+    }
+  });
+}
 
 function transformPath(env) {
   var v = '?v=' + getVersion();
@@ -332,8 +332,7 @@ function injectableDevAssetsRef() {
   var src = PATH.src.lib.map(function(path) {
     return join(PATH.dest.dev.lib, path.split('/').pop());
   });
-  src.push(PATH.dest.dev.ng2, PATH.dest.dev.router,
-           join(PATH.dest.dev.all, '**/*.css'));
+  src.push(join(PATH.dest.dev.all, '**/*.css'));
   return src;
 }
 
@@ -367,11 +366,11 @@ function registerBumpTasks() {
 
 function serveSPA(env) {
   var app;
-  app = express().use(APP_BASE, serveStatic(join(__dirname, PATH.dest[env].all)));
+  app = express().use(APP_BASE, connectLivereload({ port: LIVE_RELOAD_PORT }), serveStatic(join(__dirname, PATH.dest[env].all)));
   app.all(APP_BASE + '*', function (req, res, next) {
     res.sendFile(join(__dirname, PATH.dest[env].all, 'index.html'));
   });
-  app.listen(port, function () {
-    openResource('http://localhost:' + port + APP_BASE);
+  app.listen(PORT, function () {
+    openResource('http://localhost:' + PORT + APP_BASE);
   });
 }

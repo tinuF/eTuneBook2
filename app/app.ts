@@ -1,10 +1,11 @@
 /// <reference path="typings/_custom.d.ts" />
-import {Component, View, bootstrap, CSSClass} from 'angular2/angular2';
-import {RouteConfig, RouterOutlet, RouterLink, routerInjectables, Router} from 'angular2/router';
+import {Component, View, bootstrap} from 'angular2/angular2';
+import {Route, RouteConfig, RouterOutlet, RouterLink, routerInjectables, Router} from 'angular2/router';
 
 import {Home} from './components/home/home';
 
-import {appPipes} from './pipes/pipes';
+// pipes broken in alpha.35
+//import {appPipes} from './pipes/pipes';
 
 import {getSystemProperties} from './common/system-properties';
 import {TuneBookService} from './services/tunebook-service';
@@ -25,7 +26,7 @@ import {RandomTuneUI} from './components/random-tune-ui/random-tune-ui';
 
 @Component({
   selector: 'app',
-  viewInjector: [TuneBookService, appPipes]
+  bindings: [TuneBookService]
 })
 @RouteConfig([
   { path: '/', component: Home, as: 'home' },
@@ -48,7 +49,7 @@ import {RandomTuneUI} from './components/random-tune-ui/random-tune-ui';
 ])
 @View({
   templateUrl: './app.html?v=<%= VERSION %>',
-  directives: [RouterOutlet, RouterLink, CSSClass, FilterTextUI, BookTitleUI, TuneTitleUI, RandomTuneUI]
+  directives: [RouterOutlet, RouterLink, FilterTextUI, BookTitleUI, TuneTitleUI, RandomTuneUI]
 })
 export class App {
   tuneBook: TuneBook;

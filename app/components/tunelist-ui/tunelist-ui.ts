@@ -6,7 +6,8 @@ import {TuneBookService} from '../../services/tunebook-service';
 import {TuneBook} from '../../business/model/tunebook';
 import {Tune} from '../../business/model/tune';
 import {getSystemProperties} from '../../common/system-properties';
-
+import {EliminateThe} from '../../pipes/eliminate-the';
+import {FromNow} from '../../pipes/from-now';
 import {SampleDotsUI} from '../../components/sample-dots-ui/sample-dots-ui';
 
 
@@ -17,7 +18,8 @@ import {SampleDotsUI} from '../../components/sample-dots-ui/sample-dots-ui';
 @View({
   templateUrl: './components/tunelist-ui/tunelist-ui.html?v=<%= VERSION %>',
   directives: [NgFor, RouterLink, SampleDotsUI],
-  styleUrls: ['./tunelist.css?v=<%= VERSION %>']
+  styleUrls: ['./tunelist.css?v=<%= VERSION %>'],
+  pipes: [EliminateThe, FromNow]
 })
 export class TuneListUI {
   tuneBook: TuneBook;

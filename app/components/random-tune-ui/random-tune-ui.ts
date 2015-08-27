@@ -22,7 +22,9 @@ export class RandomTuneUI {
 
   loadRandomTune() {
     let intTuneId = this.tuneBookService.getRandomIntTuneId();
-    this.router.navigate("/tunes/" + intTuneId);
+    let url = "/tunes/" + intTuneId;
+    //broken in alpha.35
+    this.router.navigate(url, false);
   }
 }
 

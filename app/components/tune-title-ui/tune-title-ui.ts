@@ -3,6 +3,7 @@ import {Component, View, LifecycleEvent} from 'angular2/angular2';
 import {RouteParams, Location} from 'angular2/router';
 import {TuneBookService} from '../../services/tunebook-service';
 import {Tune} from '../../business/model/tune';
+import {EliminateThe} from '../../pipes/eliminate-the';
 
 
 @Component({
@@ -11,7 +12,8 @@ import {Tune} from '../../business/model/tune';
 })
 @View({
   templateUrl: './components/tune-title-ui/tune-title-ui.html?v=<%= VERSION %>',
-  styleUrls: ['./components/tune-title-ui/tune-title-ui.css?v=<%= VERSION %>']
+  styleUrls: ['./components/tune-title-ui/tune-title-ui.css?v=<%= VERSION %>'],
+  pipes: [EliminateThe]
 })
 export class TuneTitleUI {
   tune: Tune;
