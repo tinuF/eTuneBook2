@@ -4,9 +4,6 @@ import {Route, RouteConfig, RouterOutlet, RouterLink, routerInjectables, Router}
 
 import {Home} from './components/home/home';
 
-// pipes broken in alpha.35
-//import {appPipes} from './pipes/pipes';
-
 import {getSystemProperties} from './common/system-properties';
 import {TuneBookService} from './services/tunebook-service';
 import {TuneBook} from './business/model/tunebook';
@@ -33,19 +30,11 @@ import {RandomTuneUI} from './components/random-tune-ui/random-tune-ui';
   { path: '/book', component: BookUI, as: 'book' },
   { path: '/info/introduction', component: Introduction, as: 'introduction' },
   { path: '/tunes', component: TuneListUI, as: 'tunelist' },
-  //one route - two compomponents: not supported yet
-  //{ path: '/tunes', 
-  //  components: {TuneListUI, TuneTitleUI}, 
-  //  as: 'tunelist' },
-  //Partial Routes don't work (no navigation)
-  //{ path: '/tunes/:id/...', component: TuneUI, as: 'tune' },
-  { path: '/tunes/:id/', component: TuneUI, as: 'tune' },
-  { path: '/tunes/:id/abc', component: TuneAbcUI, as: 'tuneabc' },
+  //TuneUI: Component with Child-Router. /... means partial Route
+  { path: '/tunes/:id/...', component: TuneUI, as: 'tune' },
   { path: '/filter', component: FilterUI, as: 'filter' }
-  //{ path: '/abc', component: TuneAbcUI, as: 'tuneabc' }
   //{ path: '/playlists', component: PlaylistList, as: 'playlistlist' },
   //{ path: '/setlist', component: Setlist, as: 'setlist' },
-  
 ])
 @View({
   templateUrl: './app.html?v=<%= VERSION %>',

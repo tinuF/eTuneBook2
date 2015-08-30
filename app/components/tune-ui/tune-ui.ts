@@ -1,11 +1,11 @@
 /// <reference path="../../typings/_custom.d.ts" />
 import {Component, View, NgFor, LifecycleEvent} from 'angular2/angular2';
-import {RouteConfig, RouterOutlet, RouterLink, Router, RouteParams} from 'angular2/router';
+import {RouteConfig, RouterOutlet, RouterLink, Router, RouteParams, Location} from 'angular2/router';
 import {TuneBookService} from '../../services/tunebook-service';
 import {TuneBook} from '../../business/model/tunebook';
 import {Tune} from '../../business/model/tune';
 import {getSystemProperties} from '../../common/system-properties';
-import {TuneAbcUI} from '../../components/tune-abc-ui/tune-abc-ui';
+import {TuneAbcUI} from '../tune-abc-ui/tune-abc-ui';
 import {FromNow} from '../../pipes/from-now';
 
 
@@ -13,36 +13,38 @@ import {FromNow} from '../../pipes/from-now';
   selector: 'tune',
   lifecycle: [LifecycleEvent.onCheck]
 })
-//@RouteConfig([
-  // This is only accepted, when there's a partial root in the parent:
-  // { path: '/tunes/:id/...', component: TuneUI, as: 'tune' }
-  // however, this then breaks navigation to /tunes/:id/ 
-  //{ path: '/abc', component: TuneAbcUI, as: 'tuneabc' }
-//
-//])
+@RouteConfig([
+ { path: './abc', component: TuneAbcUI, as: 'tuneabc' }
+])
 @View({
   templateUrl: './components/tune-ui/tune-ui.html?v=<%= VERSION %>',
-  directives: [RouterOutlet, RouterLink, NgFor],
+  directives: [RouterOutlet, RouterLink],
   pipes: [FromNow]
 })
 export class TuneUI {
   tune: Tune;
   tuneObjectArray: Array<any>;
   currentState:string;
-  tuneSetsMenuActive:boolean;
-  tuneVideosMenuActive:boolean;
-  tuneAbcMenuActive:boolean;
-  tunePracticeMenuActive:boolean;
-  tuneInfoMenuActive:boolean;
  
-  constructor(public tuneBookService: TuneBookService, public router: Router, routeParams:RouteParams) {
+  constructor(public tuneBookService: TuneBookService, public router: Router, routeParams:RouteParams, public location:Location) {
     this.tune = this.tuneBookService.setCurrentTune(routeParams.get('id'));
     this.currentState = "Dots";
     this.renderAbc(this.tune);
   }
   
+  
   onCheck(){
+    this.setCurrentState();
+  }
+  
+  setCurrentState(){
+    let path= this.location.path();
     
+    if (path.indexOf('/tunes/'+this.tune.intTuneId+'/abc', 0) >= 0) {
+      this.currentState = "Abc";
+    } else if (path.indexOf('/tunes/'+this.tune.intTuneId, 0) >= 0) {
+      this.currentState = "Dots";
+    }   
   }
   
   showTuneSets() {
@@ -75,43 +77,6 @@ export class TuneUI {
 */
     }
 
-    showTuneVideos() {
-     /*
-        initActiveMenu();
-        $scope.tuneVideosMenuActive = true;
-        $state.transitionTo('tunevideos', {intTuneId: $scope.intTuneId});
-        */
-    }
-
-    showTuneAbc() {
-        this.initActiveMenu();
-        this.tuneAbcMenuActive = true;
-        this.router.navigate("/tune/"+this.tune.intTuneId+"/abc");
-    }
-
-    showTunePractice() {
-        /*
-        initActiveMenu();
-        $scope.tunePracticeMenuActive = true;
-        $state.transitionTo('tunepractice', {intTuneId: $scope.intTuneId});
-        */
-    }
-
-    showTuneInfo() {
-        /*
-        initActiveMenu();
-        $scope.tuneInfoMenuActive = true;
-        $state.transitionTo('tuneinfo', {intTuneId: $scope.intTuneId});
-    */
-    }
-
-    initActiveMenu(){
-        this.tuneSetsMenuActive = false;
-        this.tuneVideosMenuActive = false;
-        this.tuneAbcMenuActive = false;
-        this.tunePracticeMenuActive = false;
-        this.tuneInfoMenuActive = false;
-    }
 
     renderAbc(tune) {
         //Render Abc

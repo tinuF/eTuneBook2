@@ -1,21 +1,20 @@
 /// <reference path="../../typings/_custom.d.ts" />
-import {Component, View, NgFor, LifecycleEvent} from 'angular2/angular2';
+import {Component, View, LifecycleEvent} from 'angular2/angular2';
 import {Router, RouteParams} from 'angular2/router';
 
 import {TuneBookService} from '../../services/tunebook-service';
 import {TuneBook} from '../../business/model/tunebook';
 import {Tune} from '../../business/model/tune';
 import {getSystemProperties} from '../../common/system-properties';
-import {TuneUI} from '../tune-ui/tune-ui'
+
 
 
 @Component({
-  selector: 'tune',
+  selector: 'tune-abc',
   lifecycle: [LifecycleEvent.onCheck]
 })
 @View({
-  templateUrl: './components/tune-abc-ui/tune-abc-ui.html?v=<%= VERSION %>',
-  directives: [NgFor, TuneUI]
+  templateUrl: './components/tune-abc-ui/tune-abc-ui.html?v=<%= VERSION %>'
 })
 export class TuneAbcUI {
     tune:Tune;

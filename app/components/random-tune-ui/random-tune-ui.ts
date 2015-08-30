@@ -1,30 +1,25 @@
 /// <reference path="../../typings/_custom.d.ts" />
-import {Component, View} from 'angular2/angular2';
-import {Router} from 'angular2/router';
+import {Component, View, LifecycleEvent} from 'angular2/angular2';
+import {Router, RouterLink} from 'angular2/router';
 import {TuneBookService} from '../../services/tunebook-service';
 
 @Component({
-  selector: 'random-tune'
+  selector: 'random-tune',
+  lifecycle: [LifecycleEvent.onCheck] 
 })
 @View({
-  templateUrl: './components/random-tune-ui/random-tune-ui.html?v=<%= VERSION %>'
+  templateUrl: './components/random-tune-ui/random-tune-ui.html?v=<%= VERSION %>',
+  directives: [RouterLink],
 })
 export class RandomTuneUI {
+  randomTuneId :number;
    
   constructor(public tuneBookService: TuneBookService, public router: Router) {
-   
+    this.randomTuneId = this.tuneBookService.getRandomIntTuneId(); 
   }
   
   onCheck(){
-    
-  }
-  
-
-  loadRandomTune() {
-    let intTuneId = this.tuneBookService.getRandomIntTuneId();
-    let url = "/tunes/" + intTuneId;
-    //broken in alpha.35
-    this.router.navigate(url, false);
+    this.randomTuneId = this.tuneBookService.getRandomIntTuneId(); 
   }
 }
 

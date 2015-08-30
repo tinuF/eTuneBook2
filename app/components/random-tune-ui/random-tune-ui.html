@@ -8,6 +8,5 @@
 	<i class="material-icons">transform</i>
 </button>
 -->
-<button class="btn btn-small"  (click)="loadRandomTune()">R
-</button>
+<a class="btn btn-small"  [router-link]="['/tune', {id: randomTuneId}]">R</a>
 
