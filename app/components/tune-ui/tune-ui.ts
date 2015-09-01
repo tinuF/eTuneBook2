@@ -14,7 +14,7 @@ import {FromNow} from '../../pipes/from-now';
   lifecycle: [LifecycleEvent.onCheck]
 })
 @RouteConfig([
- { path: './abc', component: TuneAbcUI, as: 'tuneabc' }
+ { path: '/abc', component: TuneAbcUI, as: 'tuneabc' }
 ])
 @View({
   templateUrl: './components/tune-ui/tune-ui.html?v=<%= VERSION %>',
