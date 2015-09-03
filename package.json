@@ -1,6 +1,6 @@
 {
   "name": "eTuneBook2",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "eTuneBook 2",
   "repository": "https://github.com/tinuF/eTuneBook2",
   "scripts": {
@@ -40,7 +40,7 @@
     "es6-module-loader": "^0.15.0",
     "jquery": "^2.1.4",
     "material-design-lite": "^1.0.3",
-    "moment": "^2.10.5",
+    "moment": "^2.10.5",  
     "reflect-metadata": "0.1.0",
     "systemjs": "^0.18.11",
     "zone.js": "^0.4.1"

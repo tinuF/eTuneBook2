@@ -1,10 +1,158 @@
-<br>
+<div class="mdl-grid demo-content">
+  <div class="demo-card-wide mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid" *ng-for="#tune of tunes; #i = index" [style.background-color]="tune.color">
+    <div class="mdl-card__title">
+      <h2 class="mdl-card__title-text"><sampledots [tune]="tune"></sampledots></h2>
+    </div>
+    <div class="mdl-card__supporting-text">
+      <table class="responsive-table">
+     <tbody>
+      <tr >
+        <td data-title="Type">{{tune.type}}</td>
+        <td data-title="Key">{{tune.key}}</td>
+        <td data-title="Played"><div><a class='btn btn-xs btn-default' (click)="justPlayedTheTune(tune)" title="Just Played The Tune">Played</a></div>{{tune.lastPlayed | fromNow}}</td>
+        <!--
+        <td data-title="Frequency" data-type="number">{{tune.frequencyPlayed}}</td>
+        <td data-title="Modified">{{tune.lastModified | fromNow}}</td>   
+        -->
+      </tr>
+    </tbody>
+  </table>
+    </div>
+    <div class="mdl-card__actions mdl-card--border">
+      <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" [router-link]="['/tune', {id: tune.intTuneId}]">
+      {{tune.title | eliminateThe}}
+    </a>
+    </div>
+    <div class="mdl-card__menu">
+      <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+        <i class="material-icons">share</i>
+      </button>
+    </div>
+  </div>
+</div>
 
+
+
+
+
+<!--
+<div class="demo-card-wide mdl-card mdl-shadow--2dp">
+  <div class="mdl-card__title">
+    <h2 class="mdl-card__title-text">Welcome</h2>
+  </div>
+  <div class="mdl-card__supporting-text">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    Mauris sagittis pellentesque lacus eleifend lacinia...
+  </div>
+  <div class="mdl-card__actions mdl-card--border">
+    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+      Get Started
+    </a>
+  </div>
+  <div class="mdl-card__menu">
+    <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+      <i class="material-icons">share</i>
+    </button>
+  </div>
+</div>
+-->
+
+
+<!-- CSS-only Accordion: http://codepen.io/nathanlong/pen/mBrvn-->
+<!--
+<section class="container">
+  <div class="ac" *ng-for="#tune of tunes; #i = index" [style.background-color]="tune.color">
+    <input class="ac-input" id="ac-1{{tune.intTuneId}}" name="ac-1{{tune.intTuneId}}" type="checkbox" />
+    <label class="ac-label" [attr.for]="'ac-1' + tune.intTuneId">{{tune.title | eliminateThe}}</label>
+    <article class="ac-text">
+      
+      <div class="ac-sub">
+        <input class="ac-input" id="ac-2{{tune.intTuneId}}" name="ac-2{{tune.intTuneId}}" type="checkbox" (change)="showSampleDots($event)"/>
+        <label class="ac-label" [attr.for]="'ac-2' + tune.intTuneId">Incipit</label>
+        <article class="ac-sub-text">
+          <sampledots [tune]="tune"></sampledots>      
+        </article>
+      </div>
+      
+      <div class="ac-sub">
+        <input class="ac-input" id="ac-3{{tune.intTuneId}}" name="ac-3{{tune.intTuneId}}" type="checkbox" />
+        <label class="ac-label" [attr.for]="'ac-3' + tune.intTuneId">Key</label>
+        <article class="ac-sub-text">
+            {{tune.key}}
+        </article>
+      </div>
+    </article>
+  </div>
+</section>
+-->
+
+
+<!-- Bootstrap Accordion combined with responsive Table -->
+
+<!--
+
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default" *ng-for="#tune of tunes; #i = index" [style.background-color]="tune.color">
+    <div class="panel-heading" role="tab" id="heading{{tune.intTuneId}}">
+      
+      <h4 class="panel-title">
+        <!-- data-parent="#accordion" bewirkt, dass immer nur ein Tune offen sein kann
+        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{tune.intTuneId}}" aria-expanded="true" [attr.aria-controls]="'collapse' + tune.intTuneId" >
+        -->  
+        <!--(show.bs.collapse)="showSampleDots($event)" funktioniert hier nicht -->
+    <!--    <a role="button" data-toggle="collapse" href="#collapse{{tune.intTuneId}}" aria-expanded="true" [attr.aria-controls]="'collapse' + tune.intTuneId" >
+          <i class="fa fa-question-circle fa-2x fa-fw"></i>{{tune.title | eliminateThe}}
+        </a>
+      </h4>
+      
+        
+      
+    </div>
+    <div id="collapse{{tune.intTuneId}}" class="panel-collapse collapse" role="tabpanel" [attr.aria-labelledby]="'heading' + tune.intTuneId" >
+        <table class="responsive-table">
+     <tbody>
+      <tr >
+        <td data-title=""><a [router-link]="['/tune', {id: tune.intTuneId}]"><sampledots [tune]="tune"></sampledots></a></td>
+        <td data-title="Type">{{tune.type}}</td>
+        <td data-title="Key">{{tune.key}}</td>
+        <td data-title="Played"><div><a class='btn btn-xs btn-default' (click)="justPlayedTheTune(tune)" title="Just Played The Tune">Now</a></div>{{tune.lastPlayed | fromNow}}</td>
+        <td data-title="Frequency" data-type="number">{{tune.frequencyPlayed}}</td>
+        <td data-title="Modified">{{tune.lastModified | fromNow}}</td>   
+      </tr>
+    </tbody>
+  </table>
+  
+      
+      
+      
+    </div>
+  </div>
+</div>
+-->
+
+<!-- Bootstrap Accordion -->
+<!--
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default" *ng-for="#tune of tunes; #i = index" [style.background-color]="tune.color">
+    <div class="panel-heading" role="tab" id="heading{{tune.intTuneId}}">
+      <h4 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{tune.intTuneId}}" aria-expanded="true" [attr.aria-controls]="'collapse' + tune.intTuneId">
+          {{tune.title | eliminateThe}}
+        </a>
+      </h4>
+    </div>
+    <div id="collapse{{tune.intTuneId}}" class="panel-collapse collapse" role="tabpanel" [attr.aria-labelledby]="'heading' + tune.intTuneId">
+      <div class="panel-body">
+        <sampledots [tune]="tune"></sampledots>
+      </div>
+    </div>
+  </div>
+</div>
+-->
+
+<!-- Responsive Table (Table -> Card)
 <div class="container">
   <table class="responsive-table">
-    <!--
-    <caption><tunebook-id [tunebook]="tuneBook"></tunebook-id></caption>
-    -->
     <thead>
       <tr>
         <th scope="col">Tune</th>
@@ -34,43 +182,10 @@
     </tbody>
   </table>
 </div>
+-->
 
 <!--
 <div class="footer navbar-fixed-bottom"><button class="btn btn-default" ng-click="newTune()" title="New Tune"><i class='glyphicon glyphicon-plus'></i></button></div>
 -->
 <div class="footer navbar-fixed-bottom"><button class="btn btn-default" ng-click="newTune()" title="New Tune">New Tune</button></div>
 
-
-
-
-
-
-
-
-<!--
-<div id="/#top" class="panel panel-default">
-    <div class="panel-heading">
-        <tunelist-filter></tunelist-filter>
-    </div>
-    <div class="Table">
-        <tunelist-header></tunelist-header>
-        <div *ng-for="#tune of tunes; #i = index">
-            <tunelist-row [tune]="tune"></tunelist-row>
-        </div>
-    </div>
-</div>
--->
-
-
-<!--
-<ul>
-  <li *ng-for="#tune of tunes; #i = index">
-    Title {{i}} of {{tunes.length}}: {{tune.title}}
-    <tunebox [tune]="tune"></tunebox>
-  </li>
-</ul>
--->
-
-<!--
-<tunebox [tune]="tune" *ng-for="#tune of tunes"></tunebox>
--->

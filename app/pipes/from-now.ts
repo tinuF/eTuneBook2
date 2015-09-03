@@ -7,7 +7,7 @@ import {Pipe} from 'angular2/angular2';
   name: 'fromNow'
 })
 export class FromNow {
-  transform(date): string {
+  transform(date:Date): string {
     var result = "";
 
     if (date != null) {

@@ -55,8 +55,8 @@ export class SampleDotsUI {
       let tunebookString = this.tuneBookService.getSampleAbc(this.tune.intTuneId, 1, 2);
       let parserParams = {};
       let engraverParams = {
-        scale: 0.9,
-        staffwidth: 120,
+        scale: 1.0,
+        staffwidth: 160,
         paddingtop: 0, 
         paddingbottom: 0,
         paddingright: 0, 

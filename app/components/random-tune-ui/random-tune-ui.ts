@@ -19,7 +19,17 @@ export class RandomTuneUI {
   }
   
   onCheck(){
-    this.randomTuneId = this.tuneBookService.getRandomIntTuneId(); 
+    this.randomTuneId = this.tuneBookService.getRandomIntTuneId();
+    
+    /* consumes too much
+    let newTuneId = this.randomTuneId;  
+    
+    while (newTuneId == this.randomTuneId) {
+      newTuneId = this.tuneBookService.getRandomIntTuneId();
+    }
+    
+    this.randomTuneId = newTuneId;
+    */ 
   }
 }
 

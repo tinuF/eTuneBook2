@@ -19,8 +19,7 @@
 <div id="dotsViewer" class="dotsViewer row" [style.background-color]="tune.color">
     <div class="tuneControlButtons">
         <div class="played pull-left">
-            <a class='btn btn-xs btn-default justPlayedTheTune' (click)="justPlayedTheTune(tune)" title="Just Played The Tune">Played </a>{{tune.lastPlayed
-            | fromNow}}
+            <a class='btn btn-xs btn-default justPlayedTheTune' (click)="justPlayedTheTune(tune)" title="Just Played The Tune">Played </a>{{tune.lastPlayed | fromNow}}
         </div>
         <div class="tuneColorizer">
             Color:
