@@ -1,6 +1,6 @@
-/// <reference path="typings/_custom.d.ts" />
+/// <reference path="./typings/_custom.d.ts" />
 import {Component, View, bootstrap} from 'angular2/angular2';
-import {Route, RouteConfig, RouterOutlet, RouterLink, routerInjectables, Router} from 'angular2/router';
+import {Route, RouteConfig, Router, ROUTER_DIRECTIVES, ROUTER_BINDINGS} from 'angular2/router';
 
 import {Home} from './components/home/home';
 
@@ -38,7 +38,8 @@ import {RandomTuneUI} from './components/random-tune-ui/random-tune-ui';
 ])
 @View({
   templateUrl: './app.html?v=<%= VERSION %>',
-  directives: [RouterOutlet, RouterLink, FilterTextUI, BookTitleUI, TuneTitleUI, RandomTuneUI]
+  styleUrls: ['./app.css'],
+  directives: [ROUTER_DIRECTIVES, FilterTextUI, BookTitleUI, TuneTitleUI, RandomTuneUI]
 })
 export class App {
   tuneBook: TuneBook;
@@ -152,6 +153,8 @@ export class App {
   }
     
   editTuneBook() {
+    this.initActiveMenu();
+    this.bookMenuActive = true;
     this.router.navigate('/book');
   };
   
@@ -168,15 +171,17 @@ export class App {
   search(event){
     let searchText = event.target.value.trim().toLowerCase();
     this.filterSettings.setTitle(searchText);
+    
     this.tuneBookService.applyFilter();
   }
   
-  /*
-  filterChange(event) {
+  
+  doSomeThing(event) {
+    //does not work yet (events do not bubble over router-outlet)
     alert('Filter has changed');
-    this.filterSettings = this.tuneBookService.getCurrentFilterSettings();
+    //this.filterSettings = this.tuneBookService.getCurrentFilterSettings();
   };
-  */
+  
 
 /*
   mobilecheck() {
@@ -359,4 +364,4 @@ export class App {
 }
 
 
-bootstrap(App, [routerInjectables]);
+bootstrap(App, [ROUTER_BINDINGS]);

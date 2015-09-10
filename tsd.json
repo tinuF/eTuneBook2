@@ -5,32 +5,20 @@
   "path": "tsd_typings",
   "bundle": "tsd_typings/tsd.d.ts",
   "installed": {
-    "es6-promise/es6-promise.d.ts": {
-      "commit": "fa8d9683f37d07ed79617a6e037916c6718aeb11"
-    },
-    "rx/rx.d.ts": {
-      "commit": "fa8d9683f37d07ed79617a6e037916c6718aeb11"
-    },
-    "rx/rx-lite.d.ts": {
-      "commit": "fa8d9683f37d07ed79617a6e037916c6718aeb11"
-    },
-    "angular2/angular2.d.ts": {
-      "commit": "fa8d9683f37d07ed79617a6e037916c6718aeb11"
-    },
-    "angular2/router.d.ts": {
-      "commit": "fa8d9683f37d07ed79617a6e037916c6718aeb11"
-    },
     "moment/moment.d.ts": {
-      "commit": "fa8d9683f37d07ed79617a6e037916c6718aeb11"
+      "commit": "7f07bd88d1083e995a0dae317a333c9641320cc8"
     },
     "moment/moment-node.d.ts": {
-      "commit": "fa8d9683f37d07ed79617a6e037916c6718aeb11"
+      "commit": "7f07bd88d1083e995a0dae317a333c9641320cc8"
     },
     "jquery/jquery.d.ts": {
-      "commit": "fa8d9683f37d07ed79617a6e037916c6718aeb11"
+      "commit": "7f07bd88d1083e995a0dae317a333c9641320cc8"
     },
     "systemjs/systemjs.d.ts": {
-      "commit": "e5de5c4daf8cdc33ed60704cd6e8021c99a89f92"
+      "commit": "7f07bd88d1083e995a0dae317a333c9641320cc8"
+    },
+    "jasmine/jasmine.d.ts": {
+      "commit": "7f07bd88d1083e995a0dae317a333c9641320cc8"
     }
   }
 }

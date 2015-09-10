@@ -208,7 +208,8 @@ a:hover, a:focus {
 }
 @media (min-width: 48em) {
   .responsive-table tbody td[data-title]:before {
-    content: none;
+    /*content: none;*/
+    content: "";
   }
 }
 
@@ -319,7 +320,8 @@ h3 {
 
 /*Wide card with share menu button*/
 .demo-card-wide.mdl-card {
-  width: 512px;
+  /*width: 512px;*/
+  width: 360px;
 }
 .demo-card-wide > .mdl-card__title {
   color: #fff;

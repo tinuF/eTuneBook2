@@ -1,5 +1,5 @@
 <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
-      <header class="demo-header mdl-layout__header mdl-color--white mdl-color--grey-100 mdl-color-text--grey-600">
+      <header class="demo-header mdl-layout__header mdl-color--teal-50 mdl-color-text--grey-600">
         <div class="mdl-layout__header-row">
           <span class="mdl-layout-title">eTuneBook</span>
           <div class="mdl-layout-spacer"></div>
@@ -25,8 +25,8 @@
           </ul>
         </div>
       </header>
-      <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
-        <header class="demo-drawer-header">
+      <div class="demo-drawer mdl-layout__drawer mdl-color--teal-100 mdl-color-text--blue-grey-900">
+        <header class="demo-drawer-header ">
           <!--
           <img src="images/user.jpg" class="demo-avatar">
           -->
@@ -49,19 +49,18 @@
             </ul>
           </div>
         </header>
-        <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
-          <a class="mdl-navigation__link" [style.active] ="bookMenuActive" (click)="editTuneBook()"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">library_music</i>Book</a>
-          <a class="mdl-navigation__link" [style.active] ="playlistsMenuActive" (click)="showPlaylists()"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">list</i>Playlists</a>
-          <a class="mdl-navigation__link" [style.active] ="setsMenuActive" (click)="showSets()"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">queue_music</i>Sets</a>
-          <a class="mdl-navigation__link" [style.active] ="tunesMenuActive" (click)="showTunes()"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">music_note</i>Tunes</a>
-          <tune-title></tune-title> 
-          <a class="mdl-navigation__link" [style.active] ="filterActive" (click)="showFilter()"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">filter_list</i>Filter</a>
+        <nav class="demo-navigation mdl-navigation  mdl-color--teal-50 mdl-color-text--grey-600">
+          <a class="mdl-navigation__link" [style.active] ="bookMenuActive" (click)="editTuneBook()"><i class="mdl-color-text--blue-grey-900 material-icons" role="presentation">library_music</i>Book</a>
+          <a class="mdl-navigation__link" [style.active] ="playlistsMenuActive" (click)="showPlaylists()"><i class="mdl-color-text--blue-grey-900 material-icons" role="presentation">list</i>Playlists</a>
+          <a class="mdl-navigation__link" [style.active] ="setsMenuActive" (click)="showSets()"><i class="mdl-color-text--blue-grey-900 material-icons" role="presentation">queue_music</i>Sets</a>
+          <a class="mdl-navigation__link" [style.active] ="tunesMenuActive" (click)="showTunes()"><i class="mdl-color-text--blue-grey-900 material-icons" role="presentation">music_note</i>Tunes</a>
+          <a class="mdl-navigation__link" [style.active] ="filterActive" (click)="showFilter()"><i class="mdl-color-text--blue-grey-900 material-icons" role="presentation">filter_list</i>Filter</a>
           <filter-text></filter-text>
           <div class="mdl-layout-spacer"></div>
-          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">help_outline</i><span class="visuallyhidden">Help</span></a>
+          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-900 material-icons" role="presentation">help_outline</i><span class="visuallyhidden">Help</span></a>
         </nav>
       </div>
-      <main class="mdl-layout__content mdl-color--grey-100">
+      <main class="mdl-layout__content mdl-color--teal-50" (filterchange)="doSomeThing($event)">
         <!--/book or /playlists or /sets or /tunes or /abc or /info or /filter -->
         <router-outlet></router-outlet>
       </main>

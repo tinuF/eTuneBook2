@@ -1,6 +1,6 @@
 /// <reference path="../../typings/_custom.d.ts" />
 import {Component, View, NgFor, LifecycleEvent} from 'angular2/angular2';
-import {RouteConfig, RouterOutlet, RouterLink, Router, RouteParams, Location} from 'angular2/router';
+import {RouteConfig, ROUTER_DIRECTIVES, Router, RouteParams, Location} from 'angular2/router';
 import {TuneBookService} from '../../services/tunebook-service';
 import {TuneBook} from '../../business/model/tunebook';
 import {Tune} from '../../business/model/tune';
@@ -18,7 +18,8 @@ import {FromNow} from '../../pipes/from-now';
 ])
 @View({
   templateUrl: './components/tune-ui/tune-ui.html?v=<%= VERSION %>',
-  directives: [RouterOutlet, RouterLink],
+  styleUrls: ['./components/tune-ui/tune-ui.css?v=<%= VERSION %>'],
+  directives: [ROUTER_DIRECTIVES],
   pipes: [FromNow]
 })
 export class TuneUI {

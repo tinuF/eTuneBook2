@@ -15,6 +15,7 @@ import {getSystemProperties} from '../../common/system-properties';
 })
 @View({
   templateUrl: './components/tune-abc-ui/tune-abc-ui.html?v=<%= VERSION %>',
+  styleUrls: ['./components/tune-abc-ui/tune-abc-ui.css?v=<%= VERSION %>'],
   directives: [NgModel] 
 })
 export class TuneAbcUI {

@@ -27,8 +27,10 @@ bower_components
 
 # Users Environment Variables
 .lock-wscript
+.tsdrc
 
 dist
 dev
 lib
 test
+tsd_typings

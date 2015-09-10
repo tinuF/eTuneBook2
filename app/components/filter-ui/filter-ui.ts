@@ -12,7 +12,7 @@ import {FilterSettings} from '../../common/settings/filter-settings';
 
 @Component({
     selector: 'filter',
-    events: ['filterChange'],
+    events: ['filterChange: filterchange'],
     lifecycle: [LifecycleEvent.onInit, LifecycleEvent.onChange] 
 })
 @View({
@@ -237,7 +237,14 @@ export class FilterUI {
     }
     
     applyFilter(){
+        //this is to tell tunelist to update (via bindings)
+        //this works. however compare search in app.ts which is broken in alpha.36
         this.tuneBookService.applyFilter();
+        
+        //does not work yet (events don't bubble over router-outlet)
+        this.filterChange.next({
+            value: this.filterSettings
+        });
     }
     
     
