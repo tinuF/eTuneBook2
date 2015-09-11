@@ -31,11 +31,20 @@ export class TuneUI {
     this.tune = this.tuneBookService.setCurrentTune(routeParams.get('id'));
     this.currentState = "Dots";
     this.renderAbc(this.tune);
+    
+     // Needed for material-light (Dropdowns...)
+    // http://stackoverflow.com/questions/31278781/material-design-lite-integration-with-angularjs
+    // TODO: Typescript für componentHandler
+     setTimeout(() => {
+      componentHandler.upgradeAllRegistered();
+    }, 0);
   }
   
   
   onCheck(){
     this.setCurrentState();
+    //Versuch, an den Titel heranzukommen. funktioniert nicht
+    $(".title.meta-top").css( "color", "red" );
   }
   
   setCurrentState(){
@@ -89,7 +98,15 @@ export class TuneUI {
             let tunebookString = this.skipFingering(this.tune.pure);
             let parserParams = {};
             let engraverParams = {
-                scale: 1.0
+                scale: 1.0,
+                staffwidth: 740,
+                paddingtop: 0, 
+                paddingbottom: 0,
+                paddingright: 0, 
+                paddingleft: 0,
+                editable: false,
+                add_classes: true,
+                listener: null
             };
             let renderParams = {
             };
@@ -110,23 +127,19 @@ export class TuneUI {
     }
 
     tuneUp() {
-        /*
         // Transpose up
-        eTuneBookService.tuneUp($scope.intTuneId);
+        this.tuneBookService.tuneUp(this.tune.intTuneId);
         // Show Transposition
-        renderAbc($scope.tune);
-        eTuneBookService.storeTuneBookAbc();
-    */
+        this.renderAbc(this.tune);
+        this.tuneBookService.storeTuneBookAbc();
     }
 
     tuneDown() {
-        /*
         // Transpose down
-        eTuneBookService.tuneDown($scope.intTuneId);
+        this.tuneBookService.tuneDown(this.tune.intTuneId);
         // Show Transposition
-        renderAbc($scope.tune);
-        eTuneBookService.storeTuneBookAbc();
-   */
+        this.renderAbc(this.tune);
+        this.tuneBookService.storeTuneBookAbc();
     }
 
     editTuneInfo() {
@@ -138,17 +151,12 @@ export class TuneUI {
     }
 
     deleteTune() {
-        /*
         // Delete all TuneSetPositions with that tune
-        eTuneBookService.deleteTuneSetPositionsAndTune($scope.tune.intTuneId);
-        $state.transitionTo('tunelist');
-        //Ein state zurück geht nur, wenn der Delete-Button im State 'tune' gedrückt wurde
-        //Der Delete-Button wird aber auch auf den Sub-States von tune angeboten
-        //$state.transitionTo($rootScope.$previousState, $rootScope.$previousStateParams);
-
+        this.tuneBookService.deleteTuneSetPositionsAndTune(this.tune.intTuneId);
+        this.router.navigate('/tunes');
+        
         // Put TuneBook to localStorage
-        eTuneBookService.storeTuneBookAbc();
-        */
+        this. tuneBookService.storeTuneBookAbc();   
     }
 
     justPlayedTheTune(tune) {

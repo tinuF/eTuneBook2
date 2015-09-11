@@ -64,30 +64,36 @@ export class FilterSettings {
   setFilterText() {
       this.filterText = "";
       
-      if (this.type != "All Types") {
+      if (this.type != "All Types" || this.key != "All Keys" || this.event != "All Events" || this.band != "All Bands") {
+        //this.filterText = "Filter: "
+        if (this.type != "All Types") {
           this.filterText = this.filterText + this.type;
-      }
-      
-      if (this.key != "All Keys") {
+        }
+
+        if (this.key != "All Keys") {
           if (this.filterText != "") {
-              this.filterText = this.filterText + ", ";
+            this.filterText = this.filterText + ", ";
           }
           this.filterText = this.filterText + this.key;
-      }
+        }
 
-      if (this.event != "All Events") {
+        if (this.event != "All Events") {
           if (this.filterText != "") {
-              this.filterText = this.filterText + ", ";
+            this.filterText = this.filterText + ", ";
           }
           this.filterText = this.filterText + this.event;
-      }
+        }
 
-      if (this.band != "All Bands") {
+        if (this.band != "All Bands") {
           if (this.filterText != "") {
-              this.filterText = this.filterText + ", ";
+            this.filterText = this.filterText + ", ";
           }
           this.filterText = this.filterText + this.band;
+        }
       }
+      
+      
+      
 
 /*TODO
       if (this.filterSettings.plmin != null && this.filterSettings.plmin != "") {

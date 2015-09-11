@@ -1,3 +1,18 @@
+ /*Wide card with share menu button*/
+.demo-card-wide.mdl-card {
+  /*width: 512px;*/
+  min-width: 920px;
+}
+.demo-card-wide > .mdl-card__title {
+  /*color: #fff;*/
+  /*height: 176px;*/
+  /*background: url('../assets/demos/welcome_card.jpg') center / cover;*/
+}
+.demo-card-wide > .mdl-card__menu {
+  /*color: #fff;*/
+}
+ 
+ 
  @media screen {
 	.justPlayedTheTune {
 		/*no margin, padding -> button sticks to border-line of first line*/
@@ -101,6 +116,19 @@
          /*border-top: 1px solid lightgray;*/
          margin:5px;
      }
+     
+     /*bringt nichts*/
+     /*
+     .renderTheDots > svg {
+         overflow: auto;
+     }
+     */
+     
+     /*Versuch, an die css-Klassen des abcjs-outputs zu kommen. erfolglos. */
+     .renderTheDots .title {
+         color: red;
+     }
+  
 
     .roundedPanel {
          display: block;

@@ -19,6 +19,7 @@ import {BookTitleUI} from './components/book-title-ui/book-title-ui';
 import {TuneTitleUI} from './components/tune-title-ui/tune-title-ui';
 import {TuneAbcUI} from './components/tune-abc-ui/tune-abc-ui';
 import {RandomTuneUI} from './components/random-tune-ui/random-tune-ui';
+import {PageTitleUI} from './components/page-title-ui/page-title-ui';
 
 
 @Component({
@@ -39,7 +40,7 @@ import {RandomTuneUI} from './components/random-tune-ui/random-tune-ui';
 @View({
   templateUrl: './app.html?v=<%= VERSION %>',
   styleUrls: ['./app.css'],
-  directives: [ROUTER_DIRECTIVES, FilterTextUI, BookTitleUI, TuneTitleUI, RandomTuneUI]
+  directives: [ROUTER_DIRECTIVES, FilterTextUI, BookTitleUI, TuneTitleUI, PageTitleUI, RandomTuneUI]
 })
 export class App {
   tuneBook: TuneBook;
