@@ -1,5 +1,5 @@
 /// <reference path="../../typings/_custom.d.ts" />
-import {Component, View, NgFor, NgSelectOption, EventEmitter, LifecycleEvent} from 'angular2/angular2';
+import {Component, View, NgFor, NgSelectOption, EventEmitter, OnInit} from 'angular2/angular2';
 
 import {TuneBookService} from '../../services/tunebook-service';
 import {TuneBook} from '../../business/model/tunebook';
@@ -12,14 +12,13 @@ import {FilterSettings} from '../../common/settings/filter-settings';
 
 @Component({
     selector: 'filter',
-    events: ['filterChange: filterchange'],
-    lifecycle: [LifecycleEvent.onInit, LifecycleEvent.onChange] 
+    events: ['filterChange: filterchange'] 
 })
 @View({
-    templateUrl: './components/filter-ui/filter-ui.html?v=<%= VERSION %>',
+    templateUrl: './components/filter-ui/filter-ui.html',
     directives: [NgFor, NgSelectOption]
 })
-export class FilterUI {
+export class FilterUI implements OnInit {
     tuneBook: TuneBook;
     filterSettings: FilterSettings;
     filterChange: EventEmitter = new EventEmitter();

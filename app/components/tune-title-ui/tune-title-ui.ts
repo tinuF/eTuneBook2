@@ -1,5 +1,5 @@
 /// <reference path="../../typings/_custom.d.ts" />
-import {Component, View, LifecycleEvent} from 'angular2/angular2';
+import {Component, View, DoCheck} from 'angular2/angular2';
 import {RouteParams, Location} from 'angular2/router';
 import {TuneBookService} from '../../services/tunebook-service';
 import {Tune} from '../../business/model/tune';
@@ -7,15 +7,14 @@ import {EliminateThe} from '../../pipes/eliminate-the';
 
 
 @Component({
-  selector: 'tune-title',
-  lifecycle: [LifecycleEvent.onCheck]
+  selector: 'tune-title'
 })
 @View({
-  templateUrl: './components/tune-title-ui/tune-title-ui.html?v=<%= VERSION %>',
-  styleUrls: ['./components/tune-title-ui/tune-title-ui.css?v=<%= VERSION %>'],
+  templateUrl: './components/tune-title-ui/tune-title-ui.html',
+  styleUrls: ['./components/tune-title-ui/tune-title-ui.css'],
   pipes: [EliminateThe]
 })
-export class TuneTitleUI {
+export class TuneTitleUI implements DoCheck {
   tune: Tune;
   tuneTitle:string;
   path:string;
@@ -27,7 +26,7 @@ export class TuneTitleUI {
   }
   
   
-  onCheck(){
+  doCheck(){
     this.setTuneTitle();
   }
   

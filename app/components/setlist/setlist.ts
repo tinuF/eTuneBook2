@@ -13,7 +13,7 @@ import {TuneBookIdView} from '../../components/book-id/book-id';
   selector: 'setlist'
 })
 @View({
-  templateUrl: './components/setlist/setlist.html?v=<%= VERSION %>',
+  templateUrl: './components/setlist/setlist.html',
   directives: [TuneBookIdView]
 })
 export class TuneSetListView {

@@ -1,28 +1,30 @@
 /// <reference path="../../typings/_custom.d.ts" />
-import {Component, View, NgFor, LifecycleEvent} from 'angular2/angular2';
-import {RouteConfig, ROUTER_DIRECTIVES, Router, RouteParams, Location} from 'angular2/router';
+import {Component, View, NgFor, DoCheck} from 'angular2/angular2';
+import {RouteConfig, ROUTER_DIRECTIVES, Router, RouteParams, Location, OnActivate, OnReuse} from 'angular2/router';
 import {TuneBookService} from '../../services/tunebook-service';
 import {TuneBook} from '../../business/model/tunebook';
 import {Tune} from '../../business/model/tune';
 import {getSystemProperties} from '../../common/system-properties';
 import {TuneAbcUI} from '../tune-abc-ui/tune-abc-ui';
+import {TuneDotsUI} from '../tune-dots-ui/tune-dots-ui';
 import {FromNow} from '../../pipes/from-now';
 
 
 @Component({
-  selector: 'tune',
-  lifecycle: [LifecycleEvent.onCheck]
+  selector: 'tune'
 })
 @RouteConfig([
- { path: '/abc', component: TuneAbcUI, as: 'tuneabc' }
+ { path: '/dots', component: TuneDotsUI, as: 'tunedots' },   
+ { path: '/abc', component: TuneAbcUI, as: 'tuneabc' },
+ { path: '/', as: 'tune', redirectTo: '/dots' }
 ])
 @View({
-  templateUrl: './components/tune-ui/tune-ui.html?v=<%= VERSION %>',
-  styleUrls: ['./components/tune-ui/tune-ui.css?v=<%= VERSION %>'],
+  templateUrl: './components/tune-ui/tune-ui.html',
+  styleUrls: ['./components/tune-ui/tune-ui.css'],
   directives: [ROUTER_DIRECTIVES],
   pipes: [FromNow]
 })
-export class TuneUI {
+export class TuneUI implements DoCheck, OnActivate {
   tune: Tune;
   tuneObjectArray: Array<any>;
   currentState:string;
@@ -41,10 +43,18 @@ export class TuneUI {
   }
   
   
-  onCheck(){
+  doCheck(){
     this.setCurrentState();
     //Versuch, an den Titel heranzukommen. funktioniert nicht
     $(".title.meta-top").css( "color", "red" );
+  }
+  
+  onActivate(next, prev) {
+    //alert('OnActivate: Finished navigating from ' + prev.urlPath + ' to ' + next.urlPath);
+  }
+  
+  onReuse(next, prev) {
+    //alert('OnReuse: Finished navigating from ' + prev.urlPath + ' to ' + next.urlPath);
   }
   
   setCurrentState(){

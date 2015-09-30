@@ -9,7 +9,7 @@ import {TuneBookService} from '../../services/tunebook-service';
   properties: ['tune: tune']
 })
 @View({
-  templateUrl: './components/sample-dots-ui/sample-dots-ui.html?v=<%= VERSION %>',
+  templateUrl: './components/sample-dots-ui/sample-dots-ui.html',
 })
 export class SampleDotsUI {
   tune: Tune;
@@ -19,10 +19,10 @@ export class SampleDotsUI {
   
   constructor(public tuneBookService: TuneBookService){
     //funktioniert, frisst bei grossen Listen aber zu viel Leistung!
-    this.toggleSampleDots();  
+    //this.toggleSampleDots();  
     
-    //this.shown = false;
-    //this.buttonText = 'Show';
+    this.shown = false;
+    this.buttonText = 'Show';
   }
   
   toggleSampleDots(){

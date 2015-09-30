@@ -1,5 +1,5 @@
 /// <reference path="../../typings/_custom.d.ts" />
-import {Component, View, NgFor, LifecycleEvent} from 'angular2/angular2';
+import {Component, View, NgFor, DoCheck} from 'angular2/angular2';
 import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {TuneBookService} from '../../services/tunebook-service';
@@ -12,16 +12,15 @@ import {SampleDotsUI} from '../../components/sample-dots-ui/sample-dots-ui';
 
 
 @Component({
-  selector: 'tunelist',
-  lifecycle: [LifecycleEvent.onCheck]
+  selector: 'tunelist'
 })
 @View({
-  templateUrl: './components/tunelist-ui/tunelist-ui.html?v=<%= VERSION %>',
+  templateUrl: './components/tunelist-ui/tunelist-ui.html',
   directives: [NgFor, ROUTER_DIRECTIVES, SampleDotsUI],
-  styleUrls: ['./components/tunelist-ui/tunelist-ui.css?v=<%= VERSION %>'],
+  styleUrls: ['./components/tunelist-ui/tunelist-ui.css'],
   pipes: [EliminateThe, FromNow]
 })
-export class TuneListUI {
+export class TuneListUI implements DoCheck {
   tuneBook: TuneBook;
   tunes: Array<Tune>;
   systemProperties;
@@ -32,7 +31,7 @@ export class TuneListUI {
     this.tunes = this.tuneBookService.getTunesFiltered();
   }
   
-  onCheck(){
+  doCheck(){
     //todo: this does not work properly with text-search (might be called to often?)
     //with filter it works fine
     //example: text-search 'derry' among slip-jigs gives Dever the Dancer, Humours of Derrycrossane, Slide from Grace

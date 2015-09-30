@@ -1,18 +1,17 @@
 /// <reference path="../../typings/_custom.d.ts" />
-import {Component, View, LifecycleEvent} from 'angular2/angular2';
+import {Component, View, DoCheck} from 'angular2/angular2';
 import {RouteParams, Location} from 'angular2/router';
 import {TuneBookService} from '../../services/tunebook-service';
 
 
 @Component({
-  selector: 'page-title',
-  lifecycle: [LifecycleEvent.onCheck]
+  selector: 'page-title'
 })
 @View({
-  templateUrl: './components/page-title-ui/page-title-ui.html?v=<%= VERSION %>',
-  styleUrls: ['./components/page-title-ui/page-title-ui.css?v=<%= VERSION %>']
+  templateUrl: './components/page-title-ui/page-title-ui.html',
+  styleUrls: ['./components/page-title-ui/page-title-ui.css']
 })
-export class PageTitleUI {
+export class PageTitleUI implements DoCheck {
   pageTitle:string;
   path:string;
   
@@ -21,7 +20,7 @@ export class PageTitleUI {
   }
   
   
-  onCheck(){
+  doCheck(){
     this.setPageTitle();
   }
   

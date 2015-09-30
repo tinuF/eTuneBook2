@@ -38,7 +38,7 @@ import {PageTitleUI} from './components/page-title-ui/page-title-ui';
   //{ path: '/setlist', component: Setlist, as: 'setlist' },
 ])
 @View({
-  templateUrl: './app.html?v=<%= VERSION %>',
+  templateUrl: './app.html',
   styleUrls: ['./app.css'],
   directives: [ROUTER_DIRECTIVES, FilterTextUI, BookTitleUI, TuneTitleUI, PageTitleUI, RandomTuneUI]
 })

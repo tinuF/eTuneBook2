@@ -6,7 +6,7 @@ import {RouterLink} from 'angular2/router';
   selector: 'component-1'
 })
 @View({
-  templateUrl: './components/introduction/introduction.html?v=<%= VERSION %>',
+  templateUrl: './components/introduction/introduction.html',
   directives: [RouterLink]
 })
 export class Introduction {}

@@ -10,65 +10,23 @@ import {getSystemProperties} from '../../common/system-properties';
 
 
 @Component({
-  selector: 'tune-abc'
+  selector: 'tune-dots'
 })
 @View({
-  templateUrl: './components/tune-abc-ui/tune-abc-ui.html',
-  styleUrls: ['./components/tune-abc-ui/tune-abc-ui.css'],
-  directives: [NgModel] 
+  templateUrl: './components/tune-dots-ui/tune-dots-ui.html'
 })
-export class TuneAbcUI implements DoCheck {
+export class TuneDotsUI implements DoCheck {
     tune: Tune;
-    tuneEditModus: boolean;
-    noteEditModus: boolean;
-    abcEditor: string;
+    
 
     constructor(public tuneBookService: TuneBookService, public router: Router, routeParams: RouteParams) {
-        //todo: diese child route hat keine routeParams (was gemäss Config auch richtig ist)
-        //-> wie kommt man an die id von der parent route?
-        //this.tune = this.tuneBookService.getTune(routeParams.get('id'));
         this.tune = this.tuneBookService.getCurrentTune();
-        this.initABCJSEditor();
-
-        this.tuneEditModus = true;
-        this.noteEditModus = false;
-        this.abcEditor = "Tune Editor";
-
     }
 
     doCheck() {
 
     }
 
-    initABCJSEditor() {
-        setTimeout(() => {
-            var editHere = 'abcEditorFor' + this.tune.intTuneId;
-            var showHere = 'DotsForTune' + this.tune.intTuneId;
-            new ABCJS.Editor(editHere, { canvas_id: showHere });
-
-        }, 0);
-    }
-    
-    doneEditing(event) {
-        //Move Value of Textarea to View-Model
-        this.tune.pure = event.target.value;
-        
-        if ( !this.tune.pure ) {
-            // Delete all TuneSetPositions with that tune
-            this.tuneBookService.deleteTuneSetPositionsAndTune(this.tune.intTuneId);
-            this.router.navigate('/tunelist');
-
-        } else {
-            // Sync Tune-Fields
-            this.tune.title = this.tuneBookService.getTuneTitle(this.tune);
-            this.tune.type = this.tuneBookService.getTuneType(this.tune);
-            this.tune.key = this.tuneBookService.getTuneKey(this.tune);
-            this.tune.intTuneId = this.tuneBookService.getTuneId(this.tune);
-        }
-        
-        // Put TuneBook to localStorage
-        this.tuneBookService.storeTuneBookAbc();
-    };
 
 }
 
