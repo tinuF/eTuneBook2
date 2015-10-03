@@ -22,7 +22,7 @@ export class SampleDotsUI {
     //this.toggleSampleDots();  
     
     this.shown = false;
-    this.buttonText = 'Show';
+    this.buttonText = '+';
   }
   
   toggleSampleDots(){
@@ -41,12 +41,12 @@ export class SampleDotsUI {
   
   show(){
     this.shown = true;
-    this.buttonText = 'Hide'
+    this.buttonText = '-'
   }
   
   hide(){
     this.shown = false;
-    this.buttonText = 'Show'
+    this.buttonText = '+'
   }
   
   showSampleDots() {

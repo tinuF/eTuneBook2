@@ -24,9 +24,23 @@
     </a>
     </div>
     <div class="mdl-card__menu">
-      <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-        <i class="material-icons">share</i>
-      </button>
+        <!--
+        <button class="mdl-button mdl-js-button mdl-button--icon" (click)="showSets()" title="Sets"><i class="mdl-color-text--blue-grey-500 material-icons" role="presentation">queue_music</i></button>
+        
+        <button class="mdl-button mdl-js-button mdl-button--icon" (click)="showPlaylists()" title="Playlists"><i class="mdl-color-text--blue-grey-500 material-icons" role="presentation">list</i></button>
+        -->
+       
+      <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="menu{{tune.intTuneId}}">
+            <i class="material-icons mdl-color-text--blue-grey-500">more_vert</i>
+        </button>
+        <ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" [attr.for]="'menu' + tune.intTuneId">
+            
+            <li class="mdl-menu__item" ><a [router-link]="['/tuneabc', {id: tune.intTuneId}]">Abc</a></li>
+           
+            <li class="mdl-menu__item">Sets</li>
+            <li class="mdl-menu__item">Playlists</li>
+        </ul>
+      
     </div>
   </div>
 </div>

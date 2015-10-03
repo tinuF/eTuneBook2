@@ -33,6 +33,7 @@ import {PageTitleUI} from './components/page-title-ui/page-title-ui';
   { path: '/tunes', component: TuneListUI, as: 'tunelist' },
   //TuneUI: Component with Child-Router. /... means partial Route
   { path: '/tunes/:id/...', component: TuneUI, as: 'tune' },
+  { path: '/tunes/:id/abc', component: TuneAbcUI, as: 'tuneabc' },
   { path: '/filter', component: FilterUI, as: 'filter' }
   //{ path: '/playlists', component: PlaylistList, as: 'playlistlist' },
   //{ path: '/setlist', component: Setlist, as: 'setlist' },
