@@ -10,21 +10,62 @@ import {getSystemProperties} from '../../common/system-properties';
 
 
 @Component({
-  selector: 'tune-dots'
+  selector: 'tune-dots',
+  properties: ['tune: tune']
 })
 @View({
   templateUrl: './components/tune-dots-ui/tune-dots-ui.html'
 })
 export class TuneDotsUI implements DoCheck {
     tune: Tune;
+    tuneObjectArray: Array<any>;
+  
     
 
     constructor(public tuneBookService: TuneBookService, public router: Router, routeParams: RouteParams) {
-        this.tune = this.tuneBookService.getCurrentTune();
+       this.renderAbc(this.tune);
     }
 
     doCheck() {
 
+    }
+    
+    renderAbc(tune) {
+        //Render Abc
+        //Important: Has to be timed-out, otherwise fingerings won't show up
+        //Compare with tbkTuneFocus: ABCJS.Editor also timed-out -> fingerings show up
+        //Compare with tbkPopover: ABCJS.renderAbc is not timed-out -> fingerings dont' show (timeout in popover -> no popover is shown)
+        setTimeout(() => {
+            let output = 'DotsForTune' + this.tune.intTuneId;
+            let tunebookString = this.skipFingering(this.tune.pure);
+            let parserParams = {};
+            let engraverParams = {
+                scale: 1.0,
+                staffwidth: 740,
+                paddingtop: 0, 
+                paddingbottom: 0,
+                paddingright: 0, 
+                paddingleft: 0,
+                editable: false,
+                add_classes: true,
+                listener: null
+            };
+            let renderParams = {
+            };
+
+
+            this.tuneObjectArray = ABCJS.renderAbc(output, tunebookString, parserParams, engraverParams, renderParams)
+        }, 0);
+    }
+    
+    skipFingering(tuneAbc) {
+        //Todo: skipFingering
+        /*
+        if (!$scope.fingeringAbcIncl) {
+            tuneAbc = tuneAbc.replace(eTBk.PATTERN_FINGER, '');
+        }
+        */
+        return tuneAbc;
     }
 
 

@@ -1,0 +1,22 @@
+<button class="mdl-button mdl-js-button mdl-button--icon" (click)="tuneUp()" title="Tune Up">+</button>
+<!-- todo: b (meaning flat) is displayed as B -->
+<button class="mdl-button mdl-js-button mdl-button--icon" (click)="tuneDown()" title="Tune Down">-</button>
+<div class="mdl-layout-spacer"></div>
+<!--- todo: ng-really-message="Do you really want to delete the tune?" ng-really-click="deleteTune() -->
+<button class="mdl-button mdl-js-button mdl-button--icon" (click)="deleteTune()" title="Delete Tune"><i class="material-icons">delete</i></button>
+<div class="mdl-layout-spacer"></div>
+<div class="played pull-left">
+    <a class='btn btn-xs btn-default justPlayedTheTune' (click)="justPlayedTheTune(tune)" title="Just Played The Tune">Played </a>    {{tune.lastPlayed| fromNow}}
+</div>
+
+
+<!--
+<div class="tuneControlButtons">
+
+    <div class="tuneColorizer">
+        Color:
+        <input type="text" name="{{tune.color}}" value="{{tune.color}}" title="Colorize" tbk-colorselect/>
+    </div>
+
+</div>
+-->

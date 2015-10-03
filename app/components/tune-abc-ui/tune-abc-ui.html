@@ -1,10 +1,16 @@
-<div id="dotsViewer" class="dotsViewer row" [style.background-color]='tune.color'>
-    <form ng-show="tuneEditModus" >
-        <textarea class="tuneAbcEditor" id="abcEditorFor{{tune.intTuneId}}" class="input-xlarge edit"  [value]="tune.pure" (blur)="doneEditing($event)"></textarea>
-    <!--todo: migrate tbk-abc-element-select tbk-abc-element-change (needed for NoteEditModus) ng-readonly="noteEditModus"-->ß
-    </form>
+<div class="mdl-grid demo-content">
+    <div id="dotsViewer" class="demo-card-wide mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid" [style.background-color]="tune.color">
+        <tune-menu [tune]="tune"></tune-menu>
+        <div class="mdl-layout-spacer"></div>
+        <tune-actions [tune]="tune"></tune-actions>
 
-<!--
+        <div id="dotsViewer" class="dotsViewer row" [style.background-color]='tune.color'>
+            <form ng-show="tuneEditModus">
+                <textarea class="tuneAbcEditor" id="abcEditorFor{{tune.intTuneId}}" class="input-xlarge edit" [value]="tune.pure" (blur)="doneEditing($event)"></textarea>
+                <!--todo: migrate tbk-abc-element-select tbk-abc-element-change (needed for NoteEditModus) ng-readonly="noteEditModus"-->ß
+            </form>
+
+            <!--
     <form class="form-inline" role="form" ng-show="noteEditModus">
 
         <div class="form-group col-md-2">
@@ -38,9 +44,12 @@
         </div>
     </form>
 -->
-</div>
+        </div>
 
-<tune-dots></tune-dots>
+        
+        <tune-dots [tune]="tune"></tune-dots>
+    </div>
+</div>
 
 
 <!--

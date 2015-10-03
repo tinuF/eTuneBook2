@@ -1,11 +1,15 @@
 /// <reference path="../../typings/_custom.d.ts" />
-import {Component, View, DoCheck, NgModel} from 'angular2/angular2';
+import {Component, View, DoCheck} from 'angular2/angular2';
 import {Router, RouteParams} from 'angular2/router';
 
 import {TuneBookService} from '../../services/tunebook-service';
 import {TuneBook} from '../../business/model/tunebook';
 import {Tune} from '../../business/model/tune';
 import {getSystemProperties} from '../../common/system-properties';
+
+import {TuneMenuUI} from '../tune-menu-ui/tune-menu-ui';
+import {TuneActionsUI} from '../tune-actions-ui/tune-actions-ui';
+import {TuneDotsUI} from '../tune-dots-ui/tune-dots-ui';
 
 
 
@@ -15,7 +19,7 @@ import {getSystemProperties} from '../../common/system-properties';
 @View({
   templateUrl: './components/tune-abc-ui/tune-abc-ui.html',
   styleUrls: ['./components/tune-abc-ui/tune-abc-ui.css'],
-  directives: [NgModel] 
+  directives: [TuneMenuUI, TuneActionsUI, TuneDotsUI] 
 })
 export class TuneAbcUI implements DoCheck {
     tune: Tune;

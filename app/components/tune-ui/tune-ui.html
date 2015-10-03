@@ -1,70 +1,8 @@
 <div class="mdl-grid demo-content">
-    <div id="dotsViewer" class="demo-card-wide mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid" [style.background-color]="tune.color">
-
-        <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="tunemenu">
-            <i class="material-icons">more_vert</i>
-        </button>
-        <ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-left" for="tunemenu">
-            <li class="mdl-menu__item" [router-link]="['./tunedots']">Dots</li>
-            <li class="mdl-menu__item">Sets</li>
-            <li class="mdl-menu__item">Playlists</li>
-            <li class="mdl-menu__item">Videos</li>
-            <li class="mdl-menu__item" [router-link]="['./tuneabc']">Abc</li>
-            <li class="mdl-menu__item">Practice</li>
-            <li class="mdl-menu__item">Info</li>
-        </ul>
+    <div class="demo-card-wide mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid" [style.background-color]="tune.color">
+        <tune-menu [tune]="tune"></tune-menu>
         <div class="mdl-layout-spacer"></div>
-        <button class="mdl-button mdl-js-button mdl-button--icon" (click)="tuneUp()" title="Tune Up">+</button>
-        <!-- todo: b (meaning flat) is displayed as B -->
-        <button class="mdl-button mdl-js-button mdl-button--icon" (click)="tuneDown()" title="Tune Down">-</button>
-        <div class="mdl-layout-spacer"></div>
-        <!--- todo: ng-really-message="Do you really want to delete the tune?" ng-really-click="deleteTune() -->
-        <button class="mdl-button mdl-js-button mdl-button--icon" (click)="deleteTune()" title="Delete Tune"><i class="material-icons">delete</i></button>
-        <div class="mdl-layout-spacer"></div>
-        <div class="played pull-left">
-            <a class='btn btn-xs btn-default justPlayedTheTune' (click)="justPlayedTheTune(tune)" title="Just Played The Tune">Played </a>            {{tune.lastPlayed| fromNow}}
-        </div>
-        <!--
-        <div class="mdl-card__title">
-            <button class="mdl-button mdl-js-button mdl-button--icon" title="Dots" [router-link]="['/tune', {id: tune.intTuneId}]">
-                <i class="material-icons">music_note</i>
-            </button>
-            <button class="mdl-button mdl-js-button mdl-button--icon" title="Sets">
-                <i class="material-icons">queue_music</i>
-            </button>
-            <button class="mdl-button mdl-js-button mdl-button--icon" title="Playlists">
-                <i class="material-icons">list</i>
-            </button>
-            <button class="mdl-button mdl-js-button mdl-button--icon" title="Videos">
-                <i class="material-icons">ondemand_video</i>
-            </button>
-            <button class="mdl-button mdl-js-button mdl-button--icon" title="Abc" [router-link]="['./tuneabc']">
-                <i class="material-icons">edit</i>
-            </button>
-            <button class="mdl-button mdl-js-button mdl-button--icon" title="Practice">
-                <i class="material-icons">access_time</i>
-            </button>
-            <button class="mdl-button mdl-js-button mdl-button--icon" title="Info">
-                <i class="material-icons">info</i>
-            </button>
-        </div>
-        -->
-
-        <div class="mdl-card__supporting-text">
-            <router-outlet></router-outlet>
-
-            <div class="tuneControlButtons">
-
-                <div class="tuneColorizer">
-                    Color:
-                    <input type="text" name="{{tune.color}}" value="{{tune.color}}" title="Colorize" tbk-colorselect/>
-                </div>
-                <div class="tuneDeleteButton">
-                    <a class='btn btn-xs btn-default' ng-really-message="Do you really want to delete the tune?" ng-really-click="deleteTune()"
-                    title="Delete Tune"><i class='glyphicon glyphicon-trash'></i></a>
-                </div>
-            </div>
-            <div id="DotsForTune{{tune.intTuneId}}" class="renderTheDots"></div>
-        </div>
+        <tune-actions [tune]="tune"></tune-actions>
+        <tune-dots [tune]="tune"></tune-dots>
     </div>
 </div>

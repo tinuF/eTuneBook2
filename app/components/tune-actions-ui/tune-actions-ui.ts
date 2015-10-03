@@ -6,24 +6,21 @@ import {TuneBook} from '../../business/model/tunebook';
 import {Tune} from '../../business/model/tune';
 import {getSystemProperties} from '../../common/system-properties';
 import {TuneAbcUI} from '../tune-abc-ui/tune-abc-ui';
-import {FromNow} from '../../pipes/from-now';
-
-import {TuneMenuUI} from '../tune-menu-ui/tune-menu-ui';
-import {TuneActionsUI} from '../tune-actions-ui/tune-actions-ui';
 import {TuneDotsUI} from '../tune-dots-ui/tune-dots-ui';
-
+import {FromNow} from '../../pipes/from-now';
 
 
 @Component({
-  selector: 'tune'
+  selector: 'tune-actions',
+  properties: ['tune: tune']
 })
 @View({
-  templateUrl: './components/tune-ui/tune-ui.html',
-  styleUrls: ['./components/tune-ui/tune-ui.css'],
-  directives: [ROUTER_DIRECTIVES, TuneMenuUI, TuneActionsUI, TuneDotsUI],
+  templateUrl: './components/tune-actions-ui/tune-actions-ui.html',
+  styleUrls: ['./components/tune-actions-ui/tune-actions-ui.css'],
+  directives: [ROUTER_DIRECTIVES],
   pipes: [FromNow]
 })
-export class TuneUI {
+export class TuneActionsUI implements DoCheck, OnActivate {
   tune: Tune;
   tuneObjectArray: Array<any>;
   currentState:string;
@@ -31,7 +28,7 @@ export class TuneUI {
   constructor(public tuneBookService: TuneBookService, public router: Router, routeParams:RouteParams, public location:Location) {
     this.tune = this.tuneBookService.setCurrentTune(routeParams.get('id'));
     this.currentState = "Dots";
-    //this.renderAbc(this.tune);
+    this.renderAbc(this.tune);
     
      // Needed for material-light (Dropdowns...)
     // http://stackoverflow.com/questions/31278781/material-design-lite-integration-with-angularjs
@@ -48,6 +45,13 @@ export class TuneUI {
     $(".title.meta-top").css( "color", "red" );
   }
   
+  onActivate(next, prev) {
+    //alert('OnActivate: Finished navigating from ' + prev.urlPath + ' to ' + next.urlPath);
+  }
+  
+  onReuse(next, prev) {
+    //alert('OnReuse: Finished navigating from ' + prev.urlPath + ' to ' + next.urlPath);
+  }
   
   setCurrentState(){
     let path= this.location.path();
