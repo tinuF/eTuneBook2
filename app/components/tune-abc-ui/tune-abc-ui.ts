@@ -32,12 +32,16 @@ export class TuneAbcUI implements DoCheck {
         //-> wie kommt man an die id von der parent route?
         //this.tune = this.tuneBookService.getTune(routeParams.get('id'));
         this.tune = this.tuneBookService.getCurrentTune();
+        
+
+    }
+    
+    onInit(){
         this.initABCJSEditor();
 
         this.tuneEditModus = true;
         this.noteEditModus = false;
         this.abcEditor = "Tune Editor";
-
     }
 
     doCheck() {
