@@ -11,6 +11,7 @@ import {FilterSettings} from './common/settings/filter-settings';
 
 import {BookUI} from './components/book-ui/book-ui';
 import {TuneListUI} from './components/tunelist-ui/tunelist-ui';
+import {SetListUI} from './components/setlist-ui/setlist-ui';
 import {TuneUI} from './components/tune-ui/tune-ui';
 import {FilterUI} from './components/filter-ui/filter-ui';
 import {FilterTextUI} from './components/filter-text-ui/filter-text-ui';
@@ -31,13 +32,11 @@ import {PageTitleUI} from './components/page-title-ui/page-title-ui';
   { path: '/book', component: BookUI, as: 'book' },
   { path: '/info/introduction', component: Introduction, as: 'introduction' },
   { path: '/tunes', component: TuneListUI, as: 'tunelist' },
-  //TuneUI: Component with Child-Router. /... means partial Route
-  //{ path: '/tunes/:id/...', component: TuneUI, as: 'tune' },
   { path: '/tunes/:id', component: TuneUI, as: 'tune' },
   { path: '/tunes/:id/abc', component: TuneAbcUI, as: 'tuneabc' },
+  { path: '/sets', component: SetListUI, as: 'setlist' },
   { path: '/filter', component: FilterUI, as: 'filter' }
-  //{ path: '/playlists', component: PlaylistList, as: 'playlistlist' },
-  //{ path: '/setlist', component: Setlist, as: 'setlist' },
+  //{ path: '/playlists', component: PlaylistList, as: 'playlistlist' }
 ])
 @View({
   templateUrl: './app.html',
@@ -167,6 +166,12 @@ export class App {
     this.router.navigate("/tunes");
   };
   
+  showSets(  ) {
+    this.initActiveMenu();
+    this.setsMenuActive = true;
+    this.router.navigate("/sets");
+  };
+  
   showFilter() {
     this.router.navigate('/filter');
   };
@@ -214,11 +219,7 @@ export class App {
     $state.transitionTo('playlistlist');
   };
 
-  showSets(  ) {
-    this.initActiveMenu();
-    this.setsMenuActive = true;
-    $state.transitionTo('setlist');
-  };
+  
 
   
 

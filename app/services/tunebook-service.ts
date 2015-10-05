@@ -19,6 +19,7 @@ export class TuneBookService {
   _currentAbcExportSettings: AbcExportSettings;
   _currentFilterSettings: FilterSettings;
   _tunesFiltered:Array<Tune>;
+  _tuneSetsFiltered:Array<TuneSet>;
   _currentTune:Tune;
 
   constructor() {
@@ -296,12 +297,17 @@ export class TuneBookService {
     // filterTuneSets bringt ganze TuneSets, auch wenn nur ein Tune matched.
     // Deshalb nachgelagert die nicht matchenden Tunes erneut rausfiltern.
     if (this.getCurrentTuneBook() != null){
-      this._tunesFiltered = filterTunes(extractTunes(filterTuneSets(this.getCurrentTuneBook(), this.getCurrentFilterSettings())), this.getCurrentFilterSettings());  
+      this._tuneSetsFiltered = filterTuneSets(this.getCurrentTuneBook(), this.getCurrentFilterSettings());
+      this._tunesFiltered = filterTunes(extractTunes(this._tuneSetsFiltered), this.getCurrentFilterSettings());  
     }
   }
   
   getTunesFiltered() {
     return this._tunesFiltered;
+  }
+  
+  getTuneSetsFiltered() {
+    return this._tuneSetsFiltered;
   }
   
   applyFilter(){

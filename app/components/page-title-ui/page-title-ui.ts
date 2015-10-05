@@ -31,7 +31,7 @@ export class PageTitleUI implements DoCheck {
     if (this.path.indexOf('/abc', 0) >= 0) {
       this.pageTitle = "Abc"
     } else if (this.path.indexOf('/tunes/', 0) >= 0) {
-      this.pageTitle = "Tune"  
+      this.pageTitle = "Dots"  
     } else if (this.path.indexOf('/tunes', 0) >= 0) {
       this.pageTitle = "Tunes"
     } else if (this.path.indexOf('/filter', 0) >= 0) {
