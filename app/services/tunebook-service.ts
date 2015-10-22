@@ -18,7 +18,7 @@ export class TuneBookService {
   _systemProperties;
   _currentAbcExportSettings: AbcExportSettings;
   _currentFilterSettings: FilterSettings;
-  _tunesFiltered:Array<Tune>;
+  _tunesFiltered:Array<Tune>;//todo: eventuell dynamisch ermitteln
   _tuneSetsFiltered:Array<TuneSet>;
   _currentTune:Tune;
 
@@ -26,8 +26,7 @@ export class TuneBookService {
     this._systemProperties = getSystemProperties();
     this._currentTuneBook = this.getCurrentTuneBook();
     this._currentAbcExportSettings = new AbcExportSettings();
-    this._currentFilterSettings = new FilterSettings();
-    this.setTunesFiltered();
+    this.initializeFilter();
   }
 
   getCurrentTuneBook() {
@@ -44,6 +43,11 @@ export class TuneBookService {
   getCurrentTune(){
     return this._currentTune;
   }
+  
+  initializeFilter(){
+    this._currentFilterSettings = new FilterSettings();
+    this.setTunesFiltered();
+  }
 
   getTuneBookFromLocalStorage() {
     // Retrieve eTuneBook Abc from localStorage
@@ -54,12 +58,14 @@ export class TuneBookService {
     } else {
       //Convert eTuneBook Abc to eTuneBook-Model
       this._currentTuneBook = new TuneBook(abc);
+      this.initializeFilter();
     }
     return this._currentTuneBook;
   }
 
   getTuneBookFromImportedFile(abc, fileName) {
     this._currentTuneBook = new TuneBook(abc);
+    this.initializeFilter();
     if (this._currentTuneBook.name == "") {
       this._currentTuneBook.name = fileName;
     }
@@ -77,6 +83,7 @@ export class TuneBookService {
 
     jqxhr.done(function(data) {
       this._currentTuneBook = new TuneBook(data);
+      this.initializeFilter();
     });
 
     jqxhr.fail(function(data) {
@@ -176,7 +183,7 @@ export class TuneBookService {
   }
 
   addTunePlayDate(tune, newDate) {
-    tune.addTunePlayDate(newDate);
+    tune.addPlayDate(newDate);
   }
 
   addTuneSetPlayDate(tuneSet, newDate) {

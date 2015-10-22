@@ -32,6 +32,12 @@ export class TuneListItemUI {
     //needs jQuery UI
     //jQuery(this.elementRef.nativeElement).draggable({containment:'#draggable-parent'});
   }
+  
+  justPlayedTheTune() {
+    var now = new Date();
+    this.tuneBookService.addTunePlayDate(this.tune, now);
+    this.tuneBookService.storeTuneBookAbc();
+  }
 }
 
 

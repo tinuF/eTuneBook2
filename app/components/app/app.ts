@@ -2,8 +2,6 @@
 import {Component, CORE_DIRECTIVES, FORM_DIRECTIVES} from 'angular2/angular2';
 import {Route, RouteConfig, Router, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router';
 
-import {Home} from '../../components/home/home';
-
 import {getSystemProperties} from '../../common/system-properties';
 import {TuneBookService} from '../../services/tunebook-service';
 import {TuneBook} from '../../business/model/tunebook';
@@ -149,22 +147,6 @@ export class App {
     this.initActiveMenu();
     this.bookMenuActive = true;
     this.router.navigate(['/Book']);
-  }
-  
-  showTunes(  ) {
-    this.initActiveMenu();
-    this.tunesMenuActive = true;
-    this.router.navigate(["/Tunelist"]);
-  }
-  
-  showSets(  ) {
-    this.initActiveMenu();
-    this.setsMenuActive = true;
-    this.router.navigate(["/Sets"]);
-  }
-  
-  showFilter() {
-    this.router.navigate(['/Filter']);
   }
   
   search(event){

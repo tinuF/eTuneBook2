@@ -217,7 +217,7 @@ function _getPlayDatesDirective(tune){
     if (i > 0){
       directive = directive + ",";
     }
-    playDate = moment(tune.playDates[i].playDate);
+    playDate = moment(tune.playDates[i].date);
     directive = directive + playDate.format("YYYY-MM-DDTHH:mm");
   }
 
