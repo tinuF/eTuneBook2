@@ -1,0 +1,41 @@
+
+ @media screen {
+	.input-file {
+	   display: none;
+	}
+
+     input[type="file"] {
+         display: none;
+     }
+
+	.control-label {
+	   width: 1px;
+	}
+
+	iframe.fbLikeBox {
+		display: block;
+	}
+ }
+ 
+
+
+@media print {
+
+	ul {
+		list-style-type: none;
+	}
+
+    
+    .dropdown-toggle, 
+     .fbLikeBox {
+        display: none;
+    }
+
+
+
+    .btn {
+        border: none;
+    }
+}
+	
+

@@ -36,15 +36,30 @@
     <link rel="canonical" href="http://www.example.com/">
     -->
 
-  <link href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en"
+  rel="stylesheet">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <!--
   <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.teal-light_blue.min.css">
-
+-->
 
 
   <!-- inject:css -->
   <!-- endinject -->
+  <!--
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+  -->
+
+  <!--TODO: Bootstrap 4: Replace CDN by npm -->
+  <link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css">
+  <style>
+    body {
+      padding-top: 60px;
+      padding-bottom: 60px;
+      background: #e0f0f0;
+    }
+  </style>
+
 </head>
 
 <body>
@@ -54,8 +69,15 @@
   <!-- inject:js -->
   <!-- endinject -->
 
-  <script src="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.min.js"></script>
-  <script src="<%= APP_BASE %>init.js?v=<%= VERSION %>"></script>
+  <!--TODO: Bootstrap 4: Replace CDN by npm -->
+  <script src="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/js/bootstrap.js"></script>
+  <script>
+    System.import('bootstrap')
+      .catch(function (e) {
+        console.error(e,
+          'Report this error at https://github.com/mgechev/angular2-seed/issues');
+      });
+  </script>
 </body>
 
 </html>

@@ -1,4 +1,4 @@
-/// <reference path="../../tsd_typings/tsd.d.ts" />
+/// <reference path="../typings.d.ts" />
 
 import {TuneBook} from '../business/model/tunebook';
 import {Tune} from '../business/model/tune';

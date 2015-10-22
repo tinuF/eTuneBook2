@@ -1,0 +1,31 @@
+
+<div class="btn-group dotsViewerBtn">
+    <button type="button" class="btn btn-default dropdown-toggle  active" data-toggle="dropdown" [style.background-color]="tune.color">
+        {{ currentState }} <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" role="menu" [style.background-color]="tune.color">
+        <li ><a [router-link]="['/Tune', {id: tune.intTuneId}]" >Dots</a></li>
+        <li ><a href="" ng-click="showTuneSets()">Sets</a></li>
+        <li ><a href="" ng-click="showPlaylists()">Playlists</a></li>
+        <li ><a href="#tunes/{{intTuneId}}/videos" >Videos</a></li>
+        <li ><a [router-link]="['/Tuneabc', {id: tune.intTuneId}]" >Abc</a></li>
+        <li ><a href="#tunes/{{intTuneId}}/practice" >Practice</a></li>
+        <li ><a href="#tunes/{{intTuneId}}/info" >Info</a></li>
+    </ul>
+</div>
+
+
+<!--
+<button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="tunemenu">
+    <i class="material-icons">more_vert</i>
+</button>
+<ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-left" for="tunemenu">
+    <li class="mdl-menu__item" [router-link]="['/tune', {id: tune.intTuneId}]">Dots</li>
+    <li class="mdl-menu__item">Sets</li>
+    <li class="mdl-menu__item">Playlists</li>
+    <li class="mdl-menu__item">Videos</li>
+    <li class="mdl-menu__item" [router-link]="['/tuneabc', {id: tune.intTuneId}]">Abc</li>
+    <li class="mdl-menu__item">Practice</li>
+    <li class="mdl-menu__item">Info</li>
+</ul>
+-->

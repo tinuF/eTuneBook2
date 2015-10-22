@@ -1,0 +1,28 @@
+
+<!--
+
+<tune-menu [tune]="tune"></tune-menu>
+<div id="dotsViewer" class="dotsViewer row" [style.background-color]="tune.color">
+    <tune-actions [tune]="tune"></tune-actions> 
+    <tune-dots [tune]="tune"></tune-dots>  
+</div>
+-->
+
+<div class="demo-card-wide mdl-card" [style.background-color]="tune.color">
+        <div class="mdl-card__supporting-text">
+            <tune-menu [tune]="tune"></tune-menu>
+            
+            <tune-actions [tune]="tune"></tune-actions>    
+        </div>
+        
+        <div class="mdl-card__actions mdl-card--border"></div>
+        
+        <div class="mdl-card__supporting-text">
+            <tune-dots [tune]="tune"></tune-dots>    
+        </div>
+        
+    </div>
+
+
+
+

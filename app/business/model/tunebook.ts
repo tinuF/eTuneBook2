@@ -1,4 +1,4 @@
-/// <reference path="../../../tsd_typings/tsd.d.ts" />
+/// <reference path="../../typings.d.ts" />
 
 import {getSystemProperties} from '../../common/system-properties';
 import {getAbcValue} from '../util/abc-util';

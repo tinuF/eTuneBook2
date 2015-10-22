@@ -1,5 +1,4 @@
-
-/// <reference path="../typings/_custom.d.ts" />
+/// <reference path="../typings.d.ts" />
 
 import {Pipe} from 'angular2/angular2';
 
