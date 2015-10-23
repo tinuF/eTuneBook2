@@ -6,7 +6,7 @@ import {TuneBookService} from '../../services/tunebook-service';
 import {TuneSetPosition} from '../../business/model/tunesetposition';
 import {EliminateThe} from '../../pipes/eliminate-the';
 import {FromNow} from '../../pipes/from-now';
-import {TuneListItemUI} from '../../components/tune-list-item/tune-list-item';
+import {SetpositionTuneUI} from '../../components/setposition-tune/setposition-tune';
 
 
 @Component({
@@ -15,7 +15,7 @@ import {TuneListItemUI} from '../../components/tune-list-item/tune-list-item';
 })
 @View({
   templateUrl: './components/setposition/setposition.html',
-  directives: [ROUTER_DIRECTIVES, TuneListItemUI],
+  directives: [ROUTER_DIRECTIVES, SetpositionTuneUI],
   styleUrls: ['./components/setposition/setposition.css'],
   pipes: [EliminateThe, FromNow]
 })

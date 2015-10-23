@@ -1,4 +1,4 @@
-<div class="card col-md-1" style="width:22rem" [style.background-color]="tune.color">
+<div class="card col-md-1" [style.background-color]="tune.color">
   <div class="card-header" [style.background-color]="tune.color">
     
     <h5 class="card-title"><a [router-link]="['/Tune', {id: tune.intTuneId}]">{{tune.title | eliminateThe}}</a></h5>

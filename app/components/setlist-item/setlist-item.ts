@@ -31,6 +31,12 @@ export class SetListItemUI {
     //needs jQuery UI
     //jQuery(this.elementRef.nativeElement).draggable({containment:'#draggable-parent'});
   }
+  
+  justPlayedTheSet() {
+		var now = new Date();
+		this.tuneBookService.addTuneSetPlayDate(this.set, now);
+		this.tuneBookService.storeTuneBookAbc();
+	};
 }
 
 
