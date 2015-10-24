@@ -10,6 +10,7 @@ import {FilterSettings} from '../../common/settings/filter-settings';
 import {BookUI} from '../../components/book/book';
 import {TuneListUI} from '../../components/tunelist/tunelist';
 import {SetListUI} from '../../components/setlist/setlist';
+import {PlaylistListUI} from '../../components/playlist-list/playlist-list';
 import {TuneUI} from '../../components/tune/tune';
 import {FilterUI} from '../../components/filter/filter';
 import {FilterTextUI} from '../../components/filter-text/filter-text';
@@ -36,8 +37,9 @@ import {PageTitleUI} from '../../components/page-title/page-title';
   { path: '/tunes/:id', component: TuneUI, as: 'Tune' },
   { path: '/tunes/:id/abc', component: TuneAbcUI, as: 'Tuneabc' },
   { path: '/sets', component: SetListUI, as: 'Setlist' },
-  { path: '/filter', component: FilterUI, as: 'Filter' }
-  //{ path: '/playlists', component: PlaylistList, as: 'playlistlist' }
+  { path: '/filter', component: FilterUI, as: 'Filter' },
+  { path: '/playlists', component: PlaylistListUI, as: 'PlaylistList'},
+  //{ path: '/playlists/:id', component: PlaylistUI, as: 'Playlist' },
 ])
 export class App {
   tuneBook: TuneBook;
@@ -184,25 +186,9 @@ export class App {
     this.router.navigate('tuneabc', {intTuneId: this.tuneBook.tuneSets[0].tuneSetPositions[0].tune.intTuneId});
   };
 
-  
-
-  showPlaylists(  ) {
-    this.initActiveMenu();
-    this.playlistsMenuActive = true;
-    $state.transitionTo('playlistlist');
-  };
-
-  
-
-  
-
-  
-
-
   putTuneBookToLocalStorage() {
     this.eTuneBookService.storeTuneBookAbc();
   };
-
 
 
   // Import TuneBook from Google Drive

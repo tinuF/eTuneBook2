@@ -2,7 +2,9 @@
 
 Migration of eTuneBook from Angular 1 to 2. 
 
-Project started with angular2-seed by Minko Gechev
+Based on angular2-seed
+
+Work in Progress...
 
 # How to start
 
@@ -10,12 +12,7 @@ Project started with angular2-seed by Minko Gechev
 git clone https://github.com/tinuF/eTuneBook2.git
 cd eTuneBook2
 npm install
-# If you don't have gulp already installed
-npm install -g gulp
-# dev
-gulp serve.dev
-# prod
-gulp serve.prod
+npm start
 ```
 
 # License

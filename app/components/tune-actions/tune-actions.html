@@ -1,20 +1,20 @@
 
 <div class="played">
-    <a class='btn btn-xs btn-default justPlayedTheTune' (click)="justPlayedTheTune(tune)" title="Just Played The Tune">Played </a>{{tune.lastPlayed | fromNow}}
+    <a class='btn btn-xs btn-secondary justPlayedTheTune' (click)="justPlayedTheTune(tune)" title="Just Played The Tune">Played </a>{{tune.lastPlayed | fromNow}}
 </div>
 
 Color: 
 <input type="text" name="{{tune.color}}" value="{{tune.color}}"  title="Colorize" tbk-colorselect/>
         
 Transpose:
-<button class="mdl-button mdl-js-button mdl-button--icon" (click)="tuneUp()" title="Tune Up">+</button>
+<button class="btn btn-xs btn-secondary" (click)="tuneUp()" title="Tune Up">+</button>
 <!-- todo: b (meaning flat) is displayed as B -->
-<button class="mdl-button mdl-js-button mdl-button--icon" (click)="tuneDown()" title="Tune Down">-</button>
+<button class="btn btn-xs btn-secondary" (click)="tuneDown()" title="Tune Down">-</button>
 <!--
 <div class="mdl-layout-spacer"></div>
 -->
 <!--- todo: ng-really-message="Do you really want to delete the tune?" ng-really-click="deleteTune() -->
-<button class="pull-right mdl-button mdl-js-button mdl-button--icon" (click)="deleteTune()" title="Delete Tune"><i class="material-icons">delete</i></button>
+<button class="pull-right btn btn-xs btn-secondary" (click)="deleteTune()" title="Delete Tune"><i class="material-icons">delete</i></button>
 <!--
 <div class="mdl-layout-spacer"></div>
 -->

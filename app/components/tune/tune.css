@@ -1,24 +1,10 @@
- /*Wide card with share menu button*/
-.demo-card-wide.mdl-card {
-  /*width: 512px;*/
-  display: block;
+.card {
          margin: 0;
          padding: 0;
          min-width: 820px;
          max-width: 820px;
-         border: 1px solid #CCC;
          background: #99EDEA;
-         border-radius: 6px;
-         box-shadow: 0 1px 3px rgba(0,0,0,.25)
-}
-.demo-card-wide > .mdl-card__title {
-  /*color: #fff;*/
-  /*height: 176px;*/
-  /*background: url('../assets/demos/welcome_card.jpg') center / cover;*/
-}
-.demo-card-wide > .mdl-card__menu {
-  /*color: #fff;*/
-}
+     }
  
  
  @media screen {
