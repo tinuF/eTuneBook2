@@ -39,6 +39,24 @@ export class TuneActionsUI implements DoCheck, OnActivate {
     $(".title.meta-top").css( "color", "red" );
   }
   
+  changeRed($event) {
+      this.tune.color.red = parseInt($event.target.value);
+      this.tune.color.convertRGBtoHex();
+      this.tuneBookService.storeTuneBookAbc();
+  }
+  
+  changeGreen($event) {
+      this.tune.color.green = parseInt($event.target.value);
+      this.tune.color.convertRGBtoHex();
+      this.tuneBookService.storeTuneBookAbc();
+  }
+  
+  changeBlue($event) {
+      this.tune.color.blue = parseInt($event.target.value);
+      this.tune.color.convertRGBtoHex();
+      this.tuneBookService.storeTuneBookAbc();
+  }
+  
   onActivate(next, prev) {
     //alert('OnActivate: Finished navigating from ' + prev.urlPath + ' to ' + next.urlPath);
   }

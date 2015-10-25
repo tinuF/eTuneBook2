@@ -214,7 +214,7 @@ export function filterTuneSets(tuneBook:TuneBook, filterSettings:FilterSettings)
                     typeMatch = true;
                 }
 
-                if (!colorMatch && tuneBook.tuneSets[i].tuneSetPositions[z].tune.color == filterSettings.color) {
+                if (!colorMatch && tuneBook.tuneSets[i].tuneSetPositions[z].tune.color.getHexValue() == filterSettings.color) {
                     colorMatch = true;
                 }
 

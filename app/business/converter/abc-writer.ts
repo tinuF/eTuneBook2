@@ -174,8 +174,8 @@ export function writeTuneAbcWithEtbkDirectives(tune: Tune, tuneSetPositions, tar
         }
 
         if (abcOption.color) {
-          if (tune.color != systemProperties.DEFAULT_COLOR) {
-            directive = "%%etbk:color " + tune.color;
+          if (tune.color.getHexValue() != systemProperties.DEFAULT_COLOR) {
+            directive = "%%etbk:color " + tune.color.getHexValue();
             newAbc = newAbc + directive;
             newAbc = newAbc + "\n";
           }

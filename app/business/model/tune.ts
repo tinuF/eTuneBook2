@@ -1,3 +1,4 @@
+import {Color} from './color';
 import {Video} from './video';
 import {Website} from './website';
 import {PlayDate} from './playdate';
@@ -16,7 +17,7 @@ export class Tune {
   videos: Array<Video>;
   websites: Array<Website>;
   annotation: string;
-  color: string;
+  color: Color;
   playDates: Array<PlayDate>;
   lastPlayed: Date;
   frequencyPlayed: number;
@@ -34,7 +35,7 @@ export class Tune {
       this.videos = [];
       this.websites = [];
       this.annotation = "";
-      this.color = systemProperties.DEFAULT_COLOR;
+      this.color = new Color(null,null,null,systemProperties.DEFAULT_COLOR);
       this.playDates = [];
       this.lastPlayed = null;
       this.lastModified = null;
@@ -95,7 +96,7 @@ export class Tune {
           isStandardAbc = false;
 
         } else if (beginOfLine == "%%etbk:color"){
-          this.color = getAbcValueOfTuneLine(tuneSplits[i], "%%etbk:color ", this._systemProperties.DEFAULT_COLOR);
+          this.color = new Color(null,null,null,getAbcValueOfTuneLine(tuneSplits[i], "%%etbk:color ", this._systemProperties.DEFAULT_COLOR));
           isStandardAbc = false;
 
         } else if (beginOfLine == "%%etbk:pldat"){

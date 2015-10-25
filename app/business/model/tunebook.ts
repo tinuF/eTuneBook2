@@ -998,13 +998,13 @@ export class TuneBook {
         addToColorFilter = true;
 
         for (var z = 0; z < colors.length; z++) {
-          if (colors[z] == this.tuneSets[i].tuneSetPositions[c].tune.color) {
+          if (colors[z] == this.tuneSets[i].tuneSetPositions[c].tune.color.getHexValue()) {
             addToColorFilter = false;
           }
         }
 
         if (addToColorFilter) {
-          colors.push(this.tuneSets[i].tuneSetPositions[c].tune.color);
+          colors.push(this.tuneSets[i].tuneSetPositions[c].tune.color.getHexValue());
         }
       }
     }

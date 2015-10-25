@@ -1,5 +1,5 @@
 <div class="mdl-grid demo-content">
-    <div class="demo-card-wide mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid" [style.background-color]="tune.color">
+    <div class="demo-card-wide mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid" [style.background-color]="tune.color.hex">
         <div class="mdl-card__supporting-text">
             <tune-menu [tune]="tune"></tune-menu>
             <!--
@@ -11,7 +11,7 @@
         <div class="mdl-card__actions mdl-card--border"></div>
         
         <div class="mdl-card__supporting-text">
-            <div id="dotsViewer" class="dotsViewer row" [style.background-color]='tune.color'>
+            <div id="dotsViewer" class="dotsViewer row" [style.background-color]='tune.color.hex'>
                 <form ng-show="tuneEditModus">
                     <textarea class="tuneAbcEditor" id="abcEditorFor{{tune.intTuneId}}" class="input-xlarge edit" [value]="tune.pure" (blur)="doneEditing($event)"></textarea>
                     <!--todo: migrate tbk-abc-element-select tbk-abc-element-change (needed for NoteEditModus) ng-readonly="noteEditModus"-->ß

@@ -3,8 +3,17 @@
     <a class='btn btn-xs btn-secondary justPlayedTheTune' (click)="justPlayedTheTune(tune)" title="Just Played The Tune">Played </a>{{tune.lastPlayed | fromNow}}
 </div>
 
+
 Color: 
+<!--
 <input type="text" name="{{tune.color}}" value="{{tune.color}}"  title="Colorize" tbk-colorselect/>
+-->
+<div class="pull-right col-lg-2">
+    <small class="text-muted">Red: {{tune.color.red}}</small><input type="range" min="0" max="255" step="1" [value]="tune.color.red" (change)="changeRed($event)"/>
+    <small class="text-muted">Red: {{tune.color.green}}</small><input type="range" min="0" max="255" step="1" [value]="tune.color.green" (change)="changeGreen($event)"/>
+    <small class="text-muted">Blue: {{tune.color.blue}}</small><input type="range" min="0" max="255" step="1" [value]="tune.color.blue" (change)="changeBlue($event)"/>    
+</div>
+
         
 Transpose:
 <button class="btn btn-xs btn-secondary" (click)="tuneUp()" title="Tune Up">+</button>

@@ -1,5 +1,5 @@
-<div class="card col-md-1" [style.background-color]="tune.color">
-  <div class="card-header" [style.background-color]="tune.color">
+<div class="card col-md-1" [style.background-color]="tune.color.hex">
+  <div class="card-header" [style.background-color]="tune.color.hex">
     
     <h5 class="card-title"><a [router-link]="['/Tune', {id: tune.intTuneId}]">{{tune.title | eliminateThe}}</a></h5>
     
@@ -25,7 +25,7 @@
     -->
   </div>
   
-  <div class="card-block" [style.background-color]="tune.color">
+  <div class="card-block" [style.background-color]="tune.color.hex">
     <!--
     <nav class="navbar navbar-light bg-faded" role="navigation" [style.background-color]="tune.color"> 
       <ul class="nav navbar-nav">
@@ -74,7 +74,7 @@
     <sampledots [tune]="tune"></sampledots>
   </div>
   
-  <div class="card-footer" [style.background-color]="tune.color">
+  <div class="card-footer" [style.background-color]="tune.color.hex">
     <a class='btn btn-secondary btn-sm' (click)="justPlayedTheTune()" title="Just Played The Tune">Played</a>
     <small class="text-muted">{{tune.lastPlayed | fromNow}}</small>
   </div>
