@@ -9,7 +9,7 @@ import {getSystemProperties} from '../../common/system-properties';
 import {EliminateThe} from '../../pipes/eliminate-the';
 import {FromNow} from '../../pipes/from-now';
 import {SampleDotsUI} from '../../components/sample-dots/sample-dots';
-
+import {TunePlayedUI} from '../../components/tune-played/tune-played';
 
 @Component({
   selector: 'tune-list-item',
@@ -17,7 +17,7 @@ import {SampleDotsUI} from '../../components/sample-dots/sample-dots';
 })
 @View({
   templateUrl: './components/tune-list-item/tune-list-item.html',
-  directives: [ROUTER_DIRECTIVES, SampleDotsUI],
+  directives: [ROUTER_DIRECTIVES, SampleDotsUI, TunePlayedUI],
   styleUrls: ['./components/tune-list-item/tune-list-item.css'],
   pipes: [EliminateThe, FromNow]
 })
@@ -31,12 +31,6 @@ export class TuneListItemUI {
   onInit() {
     //needs jQuery UI
     //jQuery(this.elementRef.nativeElement).draggable({containment:'#draggable-parent'});
-  }
-  
-  justPlayedTheTune() {
-    var now = new Date();
-    this.tuneBookService.addTunePlayDate(this.tune, now);
-    this.tuneBookService.storeTuneBookAbc();
   }
 }
 

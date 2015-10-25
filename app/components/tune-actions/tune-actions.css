@@ -1,18 +1,4 @@
- /*Wide card with share menu button*/
-.demo-card-wide.mdl-card {
-  /*width: 512px;*/
-  min-width: 920px;
-}
-.demo-card-wide > .mdl-card__title {
-  /*color: #fff;*/
-  /*height: 176px;*/
-  /*background: url('../assets/demos/welcome_card.jpg') center / cover;*/
-}
-.demo-card-wide > .mdl-card__menu {
-  /*color: #fff;*/
-}
- 
- 
+
  @media screen {
 	.justPlayedTheTune {
 		/*no margin, padding -> button sticks to border-line of first line*/
@@ -24,8 +10,8 @@
 	}
 
 	.tuneColorizer {
-        min-width: 100px;
-		max-width: 100px;
+        min-width: 200px;
+		max-width: 200px;
 		display: inline-block;
 	}
 

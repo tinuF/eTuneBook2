@@ -6,7 +6,7 @@ import {TuneBookService} from '../../services/tunebook-service';
 
 @Component({
   selector: 'sampledots',
-  properties: ['tune: tune']
+  inputs: ['tune: tune']
 })
 @View({
   templateUrl: './components/sample-dots/sample-dots.html',

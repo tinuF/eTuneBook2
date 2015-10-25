@@ -11,6 +11,7 @@ import {FromNow} from '../../pipes/from-now';
 import {TuneMenuUI} from '../tune-menu/tune-menu';
 import {TuneActionsUI} from '../tune-actions/tune-actions';
 import {TuneDotsUI} from '../tune-dots/tune-dots';
+import {TunePlayedUI} from '../tune-played/tune-played';
 
 
 
@@ -20,7 +21,7 @@ import {TuneDotsUI} from '../tune-dots/tune-dots';
 @View({
   templateUrl: './components/tune/tune.html',
   styleUrls: ['./components/tune/tune.css'],
-  directives: [ROUTER_DIRECTIVES, TuneMenuUI, TuneActionsUI, TuneDotsUI],
+  directives: [ROUTER_DIRECTIVES, TuneMenuUI, TuneActionsUI, TuneDotsUI, TunePlayedUI],
   pipes: [FromNow]
 })
 export class TuneUI {

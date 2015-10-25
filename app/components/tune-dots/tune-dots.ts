@@ -30,12 +30,14 @@ export class TuneDotsUI implements DoCheck {
 
     onInit() {
         this.renderAbc(this.tune);
-        $(".title.meta-top").css( "fill", "red" );
+        //$(".title.meta-top").css( "fill", "red" );
     }
     
     
     doCheck() {
-        //$(".title.meta-top").css( "color", "red" );
+        $(".title.meta-top").css( "fill", "red" );
+        $(".text.meta-top").css( "fill", "blue" );
+        $(".meta-bottom").css( "display", "none" );
     }
     
     renderAbc(tune) {
