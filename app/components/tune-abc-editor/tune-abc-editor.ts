@@ -1,87 +1,76 @@
 /// <reference path="../../typings.d.ts" />
-import {Component, View, DoCheck, NgModel} from 'angular2/angular2';
-import {Router, RouteParams} from 'angular2/router';
+import {Component, DoCheck} from 'angular2/angular2';
 
 import {TuneBookService} from '../../services/tunebook-service';
 import {TuneBook} from '../../business/model/tunebook';
 import {Tune} from '../../business/model/tune';
 import {getSystemProperties} from '../../common/system-properties';
 
+import {TuneMenuUI} from '../tune-menu/tune-menu';
+import {TuneActionsUI} from '../tune-actions/tune-actions';
+import {TuneDotsUI} from '../tune-dots/tune-dots';
+import {TunePlayedUI} from '../tune-played/tune-played';
+
 
 
 @Component({
-  selector: 'tune-dots',
-  inputs: ['tune: tune']
+  selector: 'tune-abc-editor',
+  inputs: ['tune: tune'],
+  templateUrl: './components/tune-abc-editor/tune-abc-editor.html',
+  styleUrls: ['./components/tune-abc-editor/tune-abc-editor.css'],
+  directives: [TuneMenuUI, TuneActionsUI, TuneDotsUI, TunePlayedUI]
 })
-@View({
-  templateUrl: './components/tune-dots/tune-dots.html',
-  styleUrls: ['./components/tune-dots/tune-dots.css'],
-})
-export class TuneDotsUI implements DoCheck {
+export class TuneAbcEditorUI implements DoCheck {
     tune: Tune;
-    tuneObjectArray: Array<any>;
-  
-    
+    tuneEditModus: boolean;
+    noteEditModus: boolean;
+    abcEditor: string;
 
-    constructor(public tuneBookService: TuneBookService, public router: Router, routeParams: RouteParams) {
-       
-       
-    }
-
-    onInit() {
-        this.renderAbc(this.tune);
-        //$(".title.meta-top").css( "fill", "red" );
+    constructor(public tuneBookService: TuneBookService) {
+   
     }
     
-    
+    onInit(){
+        this.initABCJSEditor();
+
+        this.tuneEditModus = true;
+        this.noteEditModus = false;
+        this.abcEditor = "Tune Editor";
+    }
+
     doCheck() {
-        //$("svg").css("height", "150px" );
-        $("svg").css("preserveAspectRatio", "xMinYMin meet" );
-        $(".title.meta-top").css( "fill", "red" );
-        //$(".title.meta-top").css( "display", "none" );
-        $(".text.meta-top").css( "fill", "blue" );
-        $(".meta-bottom").css( "display", "none" );
-        //$(".meta-bottom").css( "visibility", "collapse" );
+
     }
-    
-    renderAbc(tune) {
-        //Render Abc
-        //Important: Has to be timed-out, otherwise fingerings won't show up
-        //Compare with tbkTuneFocus: ABCJS.Editor also timed-out -> fingerings show up
-        //Compare with tbkPopover: ABCJS.renderAbc is not timed-out -> fingerings dont' show (timeout in popover -> no popover is shown)
+
+    initABCJSEditor() {
         setTimeout(() => {
-            let output = 'DotsForTune' + this.tune.intTuneId;
-            let tunebookString = this.skipFingering(this.tune.pure);
-            let parserParams = {};
-            let engraverParams = {
-                scale: 1.0,
-                staffwidth: 740,
-                paddingtop: 0, 
-                paddingbottom: 0,
-                paddingright: 0, 
-                paddingleft: 0,
-                editable: false,
-                add_classes: true,
-                listener: null
-            };
-            let renderParams = {
-            };
+            var editHere = 'abcEditorFor' + this.tune.intTuneId;
+            var showHere = 'DotsForTune' + this.tune.intTuneId;
+            new ABCJS.Editor(editHere, { canvas_id: showHere });
 
-
-            this.tuneObjectArray = ABCJS.renderAbc(output, tunebookString, parserParams, engraverParams, renderParams)
         }, 0);
     }
     
-    skipFingering(tuneAbc) {
-        //Todo: skipFingering
-        /*
-        if (!$scope.fingeringAbcIncl) {
-            tuneAbc = tuneAbc.replace(eTBk.PATTERN_FINGER, '');
-        }
-        */
-        return tuneAbc;
-    }
+    doneEditing(event) {
+        //Move Value of Textarea to View-Model
+        this.tune.pure = event.target.value;
+        
+        if ( !this.tune.pure ) {
+            // Delete all TuneSetPositions with that tune
+            this.tuneBookService.deleteTuneSetPositionsAndTune(this.tune.intTuneId);
+            this.router.navigate('/tunelist');
 
+        } else {
+            // Sync Tune-Fields
+            this.tune.title = this.tuneBookService.getTuneTitle(this.tune);
+            this.tune.type = this.tuneBookService.getTuneType(this.tune);
+            this.tune.key = this.tuneBookService.getTuneKey(this.tune);
+            this.tune.intTuneId = this.tuneBookService.getTuneId(this.tune);
+        }
+        
+        // Put TuneBook to localStorage
+        this.tuneBookService.storeTuneBookAbc();
+    };
 
 }
 

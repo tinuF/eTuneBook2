@@ -1,65 +1,14 @@
-<div class="mdl-grid demo-content">
-    <div class="demo-card-wide mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid" [style.background-color]="tune.color.hex">
-        <div class="mdl-card__supporting-text">
-            <tune-menu [tune]="tune"></tune-menu>
-            <!--
-            <div class="mdl-layout-spacer"></div>
-            -->
-            <tune-actions [tune]="tune"></tune-actions>    
-        </div>
-        
-        <div class="mdl-card__actions mdl-card--border"></div>
-        
-        <div class="mdl-card__supporting-text">
-            <div id="dotsViewer" class="dotsViewer row" [style.background-color]='tune.color.hex'>
-                <form ng-show="tuneEditModus">
-                    <textarea class="tuneAbcEditor" id="abcEditorFor{{tune.intTuneId}}" class="input-xlarge edit" [value]="tune.pure" (blur)="doneEditing($event)"></textarea>
-                    <!--todo: migrate tbk-abc-element-select tbk-abc-element-change (needed for NoteEditModus) ng-readonly="noteEditModus"-->ß
-                </form>
+<div class="card col-md-12" [style.background-color]="tune.color.hex">
+    <div class="card-header">
+        <tune-menu [tune]="tune"></tune-menu>
 
-            <!--
-    <form class="form-inline" role="form" ng-show="noteEditModus">
-
-        <div class="form-group col-md-2">
-            <label class="control-label" for="chordSelector">Chord</label>
-            <select class="form-control" id="chordSelector" ng-model="chordOption" ng-options="chordOption.abc for chordOption in chordOptions | orderBy:'abc'" ng-change="changeChord(chordOption)">	</select>
-        </div>
-
-        <div class="form-group col-md-2">
-            <label class="control-label" for="fingerSelector">Finger</label>
-            <select class="form-control" id="fingerSelector" ng-model="fingerOption" ng-options="fingerOption.abc for fingerOption in fingerOptions | orderBy:'abc'" ng-change="changeFinger(fingerOption)">	</select>
-        </div>
-
-        <div class="form-group col-md-2">
-            <label class="control-label" for="accidentalSelector">Accidental</label>
-            <select class="form-control" id="accidentalSelector" ng-model="accidentalOption" ng-options="accidentalOption.abc for accidentalOption in accidentalOptions | orderBy:'abc'" ng-change="changeAccidental(accidentalOption)">	</select>
-        </div>
-
-        <div class="form-group col-md-2">
-            <label class="control-label" for="noteSelector">Note</label>
-            <select class="form-control" id="noteSelector" ng-model="noteOption" ng-options="noteOption.abc for noteOption in noteOptions | orderBy:'-frequency'" ng-change="changeNote(noteOption)">	</select>
-        </div>
-
-        <div class="form-group col-md-2">
-            <label class="control-label" for="octaveSelector">Octave</label>
-            <select class="form-control" id="octaveSelector" ng-model="octaveOption" ng-options="octaveOption.abc for octaveOption in octaveOptions | orderBy:'abc'" ng-change="changeOctave(octaveOption)">	</select>
-        </div>
-
-        <div class="form-group col-md-2">
-            <label class="control-label" for="noteLengthSelector">Length</label>
-            <select class="form-control" id="noteLengthSelector" ng-model="noteLengthOption" ng-options="noteLengthOption.abc for noteLengthOption in noteLengthOptions | orderBy:'abc'" ng-change="changeNoteLength(noteLengthOption)">	</select>
-        </div>
-    </form>
--->
-            </div>        
-        </div>
-        
-        <div class="mdl-card__actions mdl-card--border"></div>
-        
-        <div class="mdl-card__supporting-text">
-            <tune-dots [tune]="tune"></tune-dots>    
-        </div>
-        
+        <tune-actions [tune]="tune"></tune-actions>
+    </div>
+    <div class="card-block">
+        <tune-abc-editor [tune]="tune"></tune-abc-editor>
+    </div>
+    <div class="card-footer">
+        <tune-played [tune]="tune"></tune-played>
     </div>
 </div>
 

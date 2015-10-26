@@ -12,9 +12,7 @@ import {FromNow} from '../../pipes/from-now';
 
 @Component({
   selector: 'tune-actions',
-  inputs: ['tune: tune']
-})
-@View({
+  inputs: ['tune: tune'],
   templateUrl: './components/tune-actions/tune-actions.html',
   styleUrls: ['./components/tune-actions/tune-actions.css'],
   directives: [ROUTER_DIRECTIVES],

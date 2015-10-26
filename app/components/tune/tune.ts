@@ -16,9 +16,7 @@ import {TunePlayedUI} from '../tune-played/tune-played';
 
 
 @Component({
-  selector: 'tune'
-})
-@View({
+  selector: 'tune',
   templateUrl: './components/tune/tune.html',
   styleUrls: ['./components/tune/tune.css'],
   directives: [ROUTER_DIRECTIVES, TuneMenuUI, TuneActionsUI, TuneDotsUI, TunePlayedUI],
@@ -26,31 +24,13 @@ import {TunePlayedUI} from '../tune-played/tune-played';
 })
 export class TuneUI {
   tune: Tune;
-  tuneObjectArray: Array<any>;
-  currentState:string;
  
   constructor(public tuneBookService: TuneBookService, public router: Router, routeParams:RouteParams, public location:Location) {
     this.tune = this.tuneBookService.setCurrentTune(routeParams.get('id'));
-    this.currentState = "Dots";
-    //this.renderAbc(this.tune);
   }
   
   
   doCheck(){
-    this.setCurrentState();
-    //Versuch, an den Titel heranzukommen. funktioniert nicht
-    //$(".title.meta-top").css( "color", "red" );
-  }
-  
-  
-  setCurrentState(){
-    let path= this.location.path();
-    
-    if (path.indexOf('/tunes/'+this.tune.intTuneId+'/abc', 0) >= 0) {
-      this.currentState = "Abc";
-    } else if (path.indexOf('/tunes/'+this.tune.intTuneId, 0) >= 0) {
-      this.currentState = "Dots";
-    }   
   }
   
   showTuneSets() {
@@ -83,58 +63,15 @@ export class TuneUI {
 */
     }
 
-
-    renderAbc(tune) {
-        //Render Abc
-        //Important: Has to be timed-out, otherwise fingerings won't show up
-        //Compare with tbkTuneFocus: ABCJS.Editor also timed-out -> fingerings show up
-        //Compare with tbkPopover: ABCJS.renderAbc is not timed-out -> fingerings dont' show (timeout in popover -> no popover is shown)
-        setTimeout(() => {
-            let output = 'DotsForTune' + this.tune.intTuneId;
-            let tunebookString = this.skipFingering(this.tune.pure);
-            let parserParams = {};
-            let engraverParams = {
-                scale: 1.0,
-                //staffwidth: 740,
-                //paddingtop: 0, 
-                //paddingbottom: 0,
-                //paddingright: 0, 
-                //paddingleft: 0,
-                //editable: false,
-                add_classes: true,
-                //listener: null
-            };
-            let renderParams = {
-            };
-
-
-            this.tuneObjectArray = ABCJS.renderAbc(output, tunebookString, parserParams, engraverParams, renderParams)
-        }, 0);
-    }
-    
-    skipFingering(tuneAbc) {
-        //Todo: skipFingering
-        /*
-        if (!$scope.fingeringAbcIncl) {
-            tuneAbc = tuneAbc.replace(eTBk.PATTERN_FINGER, '');
-        }
-        */
-        return tuneAbc;
-    }
-
     tuneUp() {
         // Transpose up
         this.tuneBookService.tuneUp(this.tune.intTuneId);
-        // Show Transposition
-        this.renderAbc(this.tune);
         this.tuneBookService.storeTuneBookAbc();
     }
 
     tuneDown() {
         // Transpose down
         this.tuneBookService.tuneDown(this.tune.intTuneId);
-        // Show Transposition
-        this.renderAbc(this.tune);
         this.tuneBookService.storeTuneBookAbc();
     }
 
@@ -155,14 +92,6 @@ export class TuneUI {
         this. tuneBookService.storeTuneBookAbc();   
     }
 
-    justPlayedTheTune(tune) {
-        /*
-        var now = new Date();
-        eTuneBookService.addTunePlayDate(tune, now);
-        eTuneBookService.storeTuneBookAbc();
-    */
-    }
-
     loadRandomTune() {
         let intTuneId = this.tuneBookService.getRandomIntTuneId();
         this.router.navigate("/tunes/"+intTuneId);        
@@ -172,13 +101,5 @@ export class TuneUI {
         $state.transitionTo('tune', {intTuneId: intTuneId});
         */
     }
-
-    /*
-    $scope.$watch(function () { return $state.is('tune'); }, function() {
-        if ($state.is('tune')){
-            $scope.currentState = "Dots";
-        }
-    });
-    */
 }
 

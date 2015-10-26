@@ -24,8 +24,22 @@ export class TuneMenuUI  {
   tune: Tune;
   currentState: string;
  
-  constructor(public tuneBookService: TuneBookService, public router: Router, public location:Location) {
-    this.currentState = 'Dots'
+  constructor(public tuneBookService: TuneBookService, public location:Location) {
+   
+  }
+  
+  onInit(){
+    this.setCurrentState();
+  }
+  
+  setCurrentState(){
+    let path= this.location.path();
+    
+    if (path.indexOf('/tunes/'+this.tune.intTuneId+'/abc', 0) >= 0) {
+      this.currentState = "Abc";
+    } else if (path.indexOf('/tunes/'+this.tune.intTuneId, 0) >= 0) {
+      this.currentState = "Dots";
+    }   
   }
 }
 

@@ -10,6 +10,8 @@ import {getSystemProperties} from '../../common/system-properties';
 import {TuneMenuUI} from '../tune-menu/tune-menu';
 import {TuneActionsUI} from '../tune-actions/tune-actions';
 import {TuneDotsUI} from '../tune-dots/tune-dots';
+import {TuneAbcEditorUI} from '../tune-abc-editor/tune-abc-editor';
+import {TunePlayedUI} from '../tune-played/tune-played';
 
 
 
@@ -19,7 +21,7 @@ import {TuneDotsUI} from '../tune-dots/tune-dots';
 @View({
   templateUrl: './components/tune-abc/tune-abc.html',
   styleUrls: ['./components/tune-abc/tune-abc.css'],
-  directives: [TuneMenuUI, TuneActionsUI, TuneDotsUI] 
+  directives: [TuneMenuUI, TuneActionsUI, TuneDotsUI, TunePlayedUI, TuneAbcEditorUI] 
 })
 export class TuneAbcUI implements DoCheck {
     tune: Tune;
@@ -28,12 +30,7 @@ export class TuneAbcUI implements DoCheck {
     abcEditor: string;
 
     constructor(public tuneBookService: TuneBookService, public router: Router, routeParams: RouteParams) {
-        //todo: diese child route hat keine routeParams (was gemäss Config auch richtig ist)
-        //-> wie kommt man an die id von der parent route?
-        //this.tune = this.tuneBookService.getTune(routeParams.get('id'));
-        this.tune = this.tuneBookService.getCurrentTune();
-        
-
+        this.tune = this.tuneBookService.getTune(routeParams.get('id'));
     }
     
     onInit(){
