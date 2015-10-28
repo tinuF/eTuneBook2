@@ -29,6 +29,11 @@ export class TuneBookService {
     this.initializeFilter();
   }
 
+  setCurrentTuneBook(abc) {
+    this._currentTuneBook = new TuneBook(abc);
+    this.initializeFilter();
+  }
+  
   getCurrentTuneBook() {
     if (this._currentTuneBook == null) {
       return this.getTuneBookFromLocalStorage()
@@ -57,15 +62,13 @@ export class TuneBookService {
       this._currentTuneBook = null;
     } else {
       //Convert eTuneBook Abc to eTuneBook-Model
-      this._currentTuneBook = new TuneBook(abc);
-      this.initializeFilter();
+      this.setCurrentTuneBook(abc);
     }
     return this._currentTuneBook;
   }
 
   getTuneBookFromImportedFile(abc, fileName) {
-    this._currentTuneBook = new TuneBook(abc);
-    this.initializeFilter();
+    this.setCurrentTuneBook(abc);
     if (this._currentTuneBook.name == "") {
       this._currentTuneBook.name = fileName;
     }
@@ -82,8 +85,7 @@ export class TuneBookService {
     });
 
     jqxhr.done(function(data) {
-      this._currentTuneBook = new TuneBook(data);
-      this.initializeFilter();
+      this.setCurrentTuneBook(data);
     });
 
     jqxhr.fail(function(data) {
@@ -195,9 +197,9 @@ export class TuneBookService {
   }
 
   initializeTuneBook() {
-    this._currentTuneBook = new TuneBook(this._getAbcforNewTuneBook());
+    this.setCurrentTuneBook(this._getAbcforNewTuneBook());
     //TODO: Check if necessary and refactor
-    this._currentTuneBook.tuneSets[0].tuneSetPositions[0].tune.intTuneId = 1;
+    //this._currentTuneBook.tuneSets[0].tuneSetPositions[0].tune.intTuneId = 1;
     return this._currentTuneBook;
   }
 
@@ -255,15 +257,24 @@ export class TuneBookService {
     return this.getCurrentTuneBook().getTuneSetById(tuneSetId);
   }
 
-  getRandomTuneSetId(playDateFilter) {
-    var sets = extractSetsWithinPlayDatePeriod(this.getCurrentTuneBook(), playDateFilter);
-    var tuneSetIndex = getRandomArrayIndex(sets);
-    return sets[tuneSetIndex].tuneSetId;
+  getRandomTuneSetId() {
+    let tuneSet:TuneSet;
+    let tuneSetIndex = getRandomArrayIndex(this._tuneSetsFiltered);
+    if (this._tuneSetsFiltered.length == tuneSetIndex) {
+      tuneSetIndex = tuneSetIndex - 1;
+    }
+    tuneSet = this._tuneSetsFiltered[tuneSetIndex]; 
+    return tuneSet.tuneSetId;
   }
 
   getRandomIntTuneId() {
+    let tune:Tune;
     let tuneIndex = getRandomArrayIndex(this._tunesFiltered);
-    return this._tunesFiltered[tuneIndex].intTuneId;
+    if (this._tunesFiltered.length == tuneIndex) {
+      tuneIndex = tuneIndex - 1;
+    }
+    tune = this._tunesFiltered[tuneIndex]; 
+    return tune.intTuneId;
   }
 
   getTune(intTuneId) {

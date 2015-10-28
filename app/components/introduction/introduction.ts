@@ -1,12 +1,12 @@
 /// <reference path="../../typings.d.ts" />
-import {Component, View} from 'angular2/angular2';
-import {RouterLink} from 'angular2/router';
+import {Component} from 'angular2/angular2';
 
 @Component({
-  selector: 'component-1'
+  selector: 'introduction',
+  templateUrl: './components/introduction/introduction.html'
 })
-@View({
-  templateUrl: './components/introduction/introduction.html',
-  directives: [RouterLink]
-})
-export class Introduction {}
+export class Introduction {
+  constructor() {
+    
+  }
+}

@@ -18,8 +18,7 @@ import {Introduction} from '../../components/introduction/introduction';
 import {BookTitleUI} from '../../components/book-title/book-title';
 import {TuneTitleUI} from '../../components/tune-title/tune-title';
 import {TuneAbcUI} from '../../components/tune-abc/tune-abc';
-import {RandomTuneUI} from '../../components/random-tune/random-tune';
-import {PageTitleUI} from '../../components/page-title/page-title';
+import {RandomUI} from '../../components/random/random';
 
 
 @Component({
@@ -27,7 +26,7 @@ import {PageTitleUI} from '../../components/page-title/page-title';
   providers: [TuneBookService],
   templateUrl: './components/app/app.html',
   styleUrls: ['./components/app/app.css'],
-  directives: [CORE_DIRECTIVES, FORM_DIRECTIVES, ROUTER_DIRECTIVES, FilterTextUI, BookTitleUI, TuneTitleUI, PageTitleUI, RandomTuneUI]
+  directives: [CORE_DIRECTIVES, FORM_DIRECTIVES, ROUTER_DIRECTIVES, FilterTextUI, BookTitleUI, TuneTitleUI, RandomUI]
 })
 @RouteConfig([
   { path: '/', redirectTo: '/info/introduction', as: 'Home' },
