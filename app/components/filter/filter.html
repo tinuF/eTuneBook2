@@ -1,107 +1,65 @@
+<div class="card col-md-6">
+  <div class="card-header">
     
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <label>Filter</label>
-            </div>
-            <div class="modal-body">
-                <form role="form" class="form-horizontal">
-                    <!--TODO: Migrate ng-daterange: (ng-bs-daterangepicker-plus), include bootstrap-daterange-picker-->
-   <!--                 
-                    <div class="form-group">
-                        <label class="control-label" for="inputPlayRange">Played</label>
-                        <div class="col-lg-5">
-                            <input ng-daterange type="daterange" class="form-control" id="inputPlayRange" ng-model="tuneSetPlayRangeFilter" format="DD.MM.YYYY" ranges="ranges">
-                        </div>
+    <h5 class="card-title">Filter</h5>
+    
+    <small class="text-muted">Filter applies to Tunes, Sets, Playlists, Random</small>  
+    
+  </div>
+  
+  <div class="card-block" >
+    <form role="form" class="form-horizontal">
+                <div class="form-group">
+                    <label class="control-label" for="typeFilter">Type</label>
+  
+                    <div class="col-lg-5">
+                        <select class="form-control" id="typeFilter" ng-control="type" (change)="setType($event)">
+                            <option *ng-for="#type of types" [value]="type">{{type}}</option>
+                        </select>
                     </div>
 
-                    <div class="form-group">
-                        <label class="control-label" for="inputUpdateRange">Modified</label>
-                        <div class="col-lg-5">
-                            <input ng-daterange type="daterange" class="form-control" id="inputUpdateRange" ng-model="tuneSetUpdateRangeFilter" format="DD.MM.YYYY" ranges="ranges">
-                        </div>
-                    </div>
--->
-                   <!--TODO: Migrate frequency and frequencyComparator-->     
-<!--
-                    <div class="form-group">
-                        <label class="control-label" for="tuneSetFrequencyForFilter">Frequency</label>
-                        <div class="col-lg-5">
-                            <input class="form-control" type="text" id="tuneSetFrequencyForFilter" ng-model="tuneSetFrequencyForFilter">
-                        </div>
-                        <div class="radio">
-                            <label class="col-lg-4" for="freqencyComparator1">Less than</label>
-                            <input type="radio" name="freqencyComparator" id="freqencyComparator1" ng-model="freqencyComparator" value="LT" checked>
-                        </div>
+                </div>
 
-                        <div class="radio">
-                            <label class="col-lg-4" for="freqencyComparator2">Greater or equal</label>
-                            <input type="radio" name="freqencyComparator" id="freqencyComparator2" ng-model="freqencyComparator" value="GE">
-                        </div>
-                    </div>
--->
-                    <div class="form-group">
-                        <label class="control-label" for="typeFilter">Type</label>
-                        <!--
-                            todo:  | orderBy:'type' durch alphabetische Sortierung in der Business-Logic ersetzen
-                            -->
-                            
-                        
-                        <div class="col-lg-5">
-                            <select class="form-control"  id="typeFilter" ng-control="type" (change)="setType($event)">
-                                <option *ng-for="#type of types" [value]="type">{{type}}</option>
-                            </select>
-                        </div>
-                       
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="control-label" for="keyFilter">Key</label>
-                        
-                        <div class="col-lg-5">
-                            <!--
-                            todo:  | orderBy:'sort' durch alphabetische Sortierung in der Business-Logic ersetzen
-                            -->
-                            <select class="form-control"  id="keyFilter" ng-control="key" (change)="setKey($event)">
-                                <option *ng-for="#key of keys" [value]="key">{{key}}</option>
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="control-label" for="colorFilter">Color</label>
-                        <div class="col-lg-5">
-                            <!--
-                            todo: | orderBy:'sort' : ersetzen? durch was?
-                            -->
-                            <select class="form-control"  id="colorFilter" ng-control="color" (change)="setColor($event)">
-                                <option *ng-for="#color of colors" [value]="color" [style.background-color]="color">{{color}}</option>
-                            </select>
-                        </div>
-                    </div>
+                <div class="form-group">
+                    <label class="control-label" for="keyFilter">Key</label>
 
-                    <div class="form-group">
-                        <label class="control-label" for="eventFilter">Event</label>
-                        <div class="col-lg-5">
-                            <!--
-                            todo:  | orderBy:'event' durch alphabetische Sortierung in der Business-Logic ersetzen
-                            -->
-                            <select class="form-control"  id="eventFilter" ng-control="event" (change)="setEvent($event)">
-                                <option *ng-for="#event of events" [value]="event">{{event}}</option>
-                            </select>
-                        </div>
+                    <div class="col-lg-5">
+                        <select class="form-control" id="keyFilter" ng-control="key" (change)="setKey($event)">
+                            <option *ng-for="#key of keys" [value]="key">{{key}}</option>
+                        </select>
                     </div>
+                </div>
 
-                    <div class="form-group">
-                        <label class="control-label" for="bandFilter">Band</label>
-                        <div class="col-lg-5">
-                            <select class="form-control"  id="bandFilter" ng-control="band" (change)="setBand($event)">
-                                <option *ng-for="#band of bands" [value]="band">{{band}}</option>
-                            </select>
-                        </div>
+                <div class="form-group">
+                    <label class="control-label" for="colorFilter">Color</label>
+                      <div class="col-lg-5">
+                          <select class="form-control" id="colorFilter" ng-control="color" (change)="setColor($event)">
+                            <option *ng-for="#color of colors" [value]="color" [style.background-color]="color">{{color}}</option>
+                        </select>
                     </div>
-                 </form>                
-            </div>
-        </div>
-    </div>
+                </div>
 
+                <div class="form-group">
+                    <label class="control-label" for="eventFilter">Event</label>
+                    <div class="col-lg-5">
+                        <select class="form-control" id="eventFilter" ng-control="event" (change)="setEvent($event)">
+                            <option *ng-for="#event of events" [value]="event">{{event}}</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="bandFilter">Band</label>
+                    <div class="col-lg-5">
+                        <select class="form-control" id="bandFilter" ng-control="band" (change)="setBand($event)">
+                            <option *ng-for="#band of bands" [value]="band">{{band}}</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+  </div>
+  
+  <div class="card-footer" >
+    
+  </div>
+</div>

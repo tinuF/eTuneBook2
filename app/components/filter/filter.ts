@@ -1,5 +1,5 @@
 /// <reference path="../../typings.d.ts" />
-import {Component, View, NgFor, NgSelectOption, EventEmitter, OnInit} from 'angular2/angular2';
+import {Component, CORE_DIRECTIVES,  EventEmitter, OnInit} from 'angular2/angular2';
 
 import {TuneBookService} from '../../services/tunebook-service';
 import {TuneBook} from '../../business/model/tunebook';
@@ -11,17 +11,14 @@ import {FilterSettings} from '../../common/settings/filter-settings';
 
 
 @Component({
-    selector: 'filter',
-    outputs: ['filterChange: filterchange'] 
-})
-@View({
+    selector: 'holdrio', //filter won't display
     templateUrl: './components/filter/filter.html',
-    directives: [NgFor, NgSelectOption]
+    styleUrls: ['./components/filter/filter.css'],
+    directives: [CORE_DIRECTIVES]
 })
-export class FilterUI implements OnInit {
+export class FilterUI {
     tuneBook: TuneBook;
     filterSettings: FilterSettings;
-    filterChange: EventEmitter = new EventEmitter();
     systemProperties;
     currentFilter: string;
     filterActive: boolean;
@@ -44,7 +41,7 @@ export class FilterUI implements OnInit {
     constructor(public tuneBookService: TuneBookService) {
         this.systemProperties = getSystemProperties();
         this.tuneBook = this.tuneBookService.getCurrentTuneBook();
-        this.filterSettings = this.tuneBookService.getCurrentFilterSettings();        
+        this.filterSettings = this.tuneBookService.getCurrentFilterSettings();
     }
     
     onInit() {
@@ -235,26 +232,9 @@ export class FilterUI implements OnInit {
         this.applyFilter();
     }
     
-    applyFilter(){
+    applyFilter() {
         //this is to tell tunelist to update (via bindings)
         //this works. however compare search in app.ts which is broken in alpha.36
         this.tuneBookService.applyFilter();
-        
-        //does not work yet (events don't bubble over router-outlet)
-        this.filterChange.next({
-            value: this.filterSettings
-        });
     }
-    
-    
 }
-
-
-
-    
-
-
-
-
-
-
