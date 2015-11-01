@@ -1,5 +1,5 @@
 /// <reference path="../../typings.d.ts" />
-import {Component, View, NgFor, DoCheck} from 'angular2/angular2';
+import {Component, NgFor, DoCheck} from 'angular2/angular2';
 import {RouteConfig, ROUTER_DIRECTIVES, Router, RouteParams, Location, OnActivate, OnReuse} from 'angular2/router';
 import {TuneBookService} from '../../services/tunebook-service';
 import {TuneBook} from '../../business/model/tunebook';
@@ -12,7 +12,8 @@ import {TuneMenuUI} from '../tune-menu/tune-menu';
 import {TuneActionsUI} from '../tune-actions/tune-actions';
 import {TuneDotsUI} from '../tune-dots/tune-dots';
 import {TunePlayedUI} from '../tune-played/tune-played';
-//import {TuneVideoListUI} from '../tune-video-list/tune-video-list';
+import {TuneVideoListUI} from '../tune-video-list/tune-video-list';
+import {TuneSetListUI} from '../tune-set-list/tune-set-list';
 
 
 
@@ -20,7 +21,7 @@ import {TunePlayedUI} from '../tune-played/tune-played';
   selector: 'tune',
   templateUrl: './components/tune/tune.html',
   styleUrls: ['./components/tune/tune.css'],
-  directives: [ROUTER_DIRECTIVES, TuneMenuUI, TuneActionsUI, TuneDotsUI, TunePlayedUI],
+  directives: [ROUTER_DIRECTIVES, TuneMenuUI, TuneActionsUI, TuneDotsUI, TunePlayedUI, TuneVideoListUI, TuneSetListUI],
   pipes: [FromNow]
 })
 export class TuneUI {

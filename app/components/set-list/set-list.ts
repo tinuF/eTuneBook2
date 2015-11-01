@@ -4,16 +4,16 @@ import {ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {TuneBookService} from '../../services/tunebook-service';
 import {TuneSet} from '../../business/model/tuneset';
-import {SetListItemUI} from '../../components/setlist-item/setlist-item';
+import {SetListItemUI} from '../../components/set-list-item/set-list-item';
 
 
 @Component({
-  selector: 'setlist'
+  selector: 'set-list'
 })
 @View({
-  templateUrl: './components/setlist/setlist.html',
+  templateUrl: './components/set-list/set-list.html',
   directives: [NgFor, ROUTER_DIRECTIVES, SetListItemUI],
-  styleUrls: ['./components/setlist/setlist.css']
+  styleUrls: ['./components/set-list/set-list.css']
 })
 export class SetListUI implements DoCheck {
   sets: Array<TuneSet>;

@@ -1,7 +1,13 @@
 .card {
   margin-right: 20px;
   padding: 0px;
+  /*
   background: #D7DEDB;
+  */
+}
+
+.card-block {
+  background: lightcyan
 }
 
 a {

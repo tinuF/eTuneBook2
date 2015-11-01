@@ -11,7 +11,7 @@ import {FilterSettings} from '../../common/settings/filter-settings';
 
 
 @Component({
-    selector: 'holdrio', //filter won't display
+    selector: 'etbk-filter', //ACHTUNG: filter kollidiert mit svg filter element, deshalb ist etbk- wichtig!
     templateUrl: './components/filter/filter.html',
     styleUrls: ['./components/filter/filter.css'],
     directives: [CORE_DIRECTIVES]

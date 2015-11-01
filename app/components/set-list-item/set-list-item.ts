@@ -11,13 +11,13 @@ import {SetPositionUI} from '../../components/setposition/setposition';
 
 
 @Component({
-  selector: 'setlist-item',
+  selector: 'set-list-item',
   inputs: ['set: set']
 })
 @View({
-  templateUrl: './components/setlist-item/setlist-item.html',
+  templateUrl: './components/set-list-item/set-list-item.html',
   directives: [ROUTER_DIRECTIVES, NgFor, SampleDotsUI, SetPositionUI],
-  styleUrls: ['./components/setlist-item/setlist-item.css'],
+  styleUrls: ['./components/set-list-item/set-list-item.css'],
   pipes: [EliminateThe, FromNow]
 })
 export class SetListItemUI {

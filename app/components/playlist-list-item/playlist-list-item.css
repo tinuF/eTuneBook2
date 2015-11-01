@@ -1,6 +1,14 @@
 .card, .card-title, .card-header, .card-footer {
-  background: #D7DEDB;
+  background: lightsteelblue;
 }
+
+a {
+  /*
+  color: darkolivegreen;
+  */
+  color: darkcyan;
+}
+
 
 .card {
   margin-right: 20px;
