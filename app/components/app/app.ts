@@ -8,7 +8,7 @@ import {TuneBook} from '../../business/model/tunebook';
 import {FilterSettings} from '../../common/settings/filter-settings';
 
 import {BookUI} from '../../components/book/book';
-import {TuneListUI} from '../../components/tunelist/tunelist';
+import {TuneListUI} from '../../components/tune-list/tune-list';
 import {SetListUI} from '../../components/set-list/set-list';
 import {PlaylistListUI} from '../../components/playlist-list/playlist-list';
 import {TuneUI} from '../../components/tune/tune';
@@ -22,7 +22,7 @@ import {RandomUI} from '../../components/random/random';
 
 
 @Component({
-  selector: 'etbk-app',
+  selector: 'etb-app',
   providers: [TuneBookService],
   templateUrl: './components/app/app.html',
   styleUrls: ['./components/app/app.css'],

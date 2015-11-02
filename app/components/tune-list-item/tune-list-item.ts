@@ -1,5 +1,5 @@
 /// <reference path="../../typings.d.ts" />
-import {Component, View, ElementRef} from 'angular2/angular2';
+import {Component, ElementRef} from 'angular2/angular2';
 import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {TuneBookService} from '../../services/tunebook-service';
@@ -12,10 +12,8 @@ import {SampleDotsUI} from '../../components/sample-dots/sample-dots';
 import {TunePlayedUI} from '../../components/tune-played/tune-played';
 
 @Component({
-  selector: 'tune-list-item',
-  inputs: ['tune: tune']
-})
-@View({
+  selector: 'etb-tune-list-item',
+  inputs: ['tune: tune'],
   templateUrl: './components/tune-list-item/tune-list-item.html',
   directives: [ROUTER_DIRECTIVES, SampleDotsUI, TunePlayedUI],
   styleUrls: ['./components/tune-list-item/tune-list-item.css'],

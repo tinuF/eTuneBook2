@@ -5,13 +5,14 @@ import {ROUTER_DIRECTIVES} from 'angular2/router';
 import {TuneBookService} from '../../services/tunebook-service';
 import {Tune} from '../../business/model/tune';
 import {TuneListItemUI} from '../../components/tune-list-item/tune-list-item';
+import {TuneListMenuUI} from '../../components/tune-list-menu/tune-list-menu';
 
 
 @Component({
-  selector: 'etbk-tunelist',
-  templateUrl: './components/tunelist/tunelist.html',
-  directives: [NgFor, ROUTER_DIRECTIVES, TuneListItemUI],
-  styleUrls: ['./components/tunelist/tunelist.css'],
+  selector: 'etb-tune-list',
+  templateUrl: './components/tune-list/tune-list.html',
+  directives: [NgFor, ROUTER_DIRECTIVES, TuneListItemUI, TuneListMenuUI],
+  styleUrls: ['./components/tune-list/tune-list.css'],
 })
 export class TuneListUI implements DoCheck {
   tunes: Array<Tune>;

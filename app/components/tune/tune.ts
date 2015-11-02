@@ -14,6 +14,7 @@ import {TuneDotsUI} from '../tune-dots/tune-dots';
 import {TunePlayedUI} from '../tune-played/tune-played';
 import {TuneVideoListUI} from '../tune-video-list/tune-video-list';
 import {TuneSetListUI} from '../tune-set-list/tune-set-list';
+import {TunePlaylistListUI} from '../tune-playlist-list/tune-playlist-list';
 
 
 
@@ -21,7 +22,7 @@ import {TuneSetListUI} from '../tune-set-list/tune-set-list';
   selector: 'tune',
   templateUrl: './components/tune/tune.html',
   styleUrls: ['./components/tune/tune.css'],
-  directives: [ROUTER_DIRECTIVES, TuneMenuUI, TuneActionsUI, TuneDotsUI, TunePlayedUI, TuneVideoListUI, TuneSetListUI],
+  directives: [ROUTER_DIRECTIVES, TuneMenuUI, TuneActionsUI, TuneDotsUI, TunePlayedUI, TuneVideoListUI, TuneSetListUI, TunePlaylistListUI],
   pipes: [FromNow]
 })
 export class TuneUI {
