@@ -1,5 +1,5 @@
 /// <reference path="../../typings.d.ts" />
-import {Component, View, NgFor, DoCheck} from 'angular2/angular2';
+import {Component, NgFor, DoCheck} from 'angular2/angular2';
 import {RouteConfig, ROUTER_DIRECTIVES, Router, RouteParams, Location, OnActivate, OnReuse} from 'angular2/router';
 import {TuneBookService} from '../../services/tunebook-service';
 import {TuneBook} from '../../business/model/tunebook';
@@ -11,10 +11,8 @@ import {FromNow} from '../../pipes/from-now';
 
 
 @Component({
-  selector: 'tune-menu',
-  inputs: ['tune: tune']
-})
-@View({
+  selector: 'etb-tune-menu',
+  inputs: ['tune: tune'],
   templateUrl: './components/tune-menu/tune-menu.html',
   styleUrls: ['./components/tune-menu/tune-menu.css'],
   directives: [ROUTER_DIRECTIVES],

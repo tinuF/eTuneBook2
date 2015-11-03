@@ -3,13 +3,11 @@ import {TuneSetPosition} from './tunesetposition';
 export class TuneSet {
   tuneSetId: number;
   tuneSetName: string;
-  sort: number;
   tuneSetPositions: Array<TuneSetPosition> ;
 
   constructor(tuneSetId, tuneSetName, tuneSetPositions) {
     this.tuneSetId = tuneSetId;
     this.tuneSetName = tuneSetName;
-    this.sort =  0;
     this.tuneSetPositions = tuneSetPositions;
   }
 
@@ -37,5 +35,15 @@ export class TuneSet {
     for (var i = 0; i < this.tuneSetPositions.length; i++) {
       this.tuneSetPositions[i].tune.addPlayDate(newDate);
     }
+  }
+  
+  getLastPlayDate():Date{
+    let lastPlayDate: Date;
+    for (var i = 0; i < this.tuneSetPositions.length; i++) {
+      if (lastPlayDate == undefined || this.tuneSetPositions[i].tune.lastPlayed > lastPlayDate) {
+        lastPlayDate = this.tuneSetPositions[i].tune.lastPlayed;  
+      } 
+    }
+    return lastPlayDate;
   }
 }

@@ -1,9 +1,6 @@
 .card {
-  margin-top: 20px;
-  margin-left: 20px;
-  /*
-  width: 22rem;
-  */
+  margin: 5px;
+  padding: 5px;
 }
 
 .youtube-player {

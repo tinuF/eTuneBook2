@@ -79,7 +79,8 @@ export class TuneListMenuUI {
   }
   
   sortRandom(e){
-    alert('Sort Random needs to be implemented!')
+    this.tunes = this.tuneBookService.shuffleTuneList();
+    this.sorting = "random";
   }
 }
 

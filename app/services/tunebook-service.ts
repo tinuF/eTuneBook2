@@ -9,7 +9,7 @@ import {eliminateThe} from '../business/util/text-util';
 import {tuneUp, tuneDown} from '../business/util/transposer-util';
 import {filterTunes, filterTuneSets, extractSetsWithinPlayDatePeriod, extractTunes, extractTuneSetPositions} from '../business/filter/filter-logic';
 import {getAbcValue} from '../business/util/abc-util';
-import {getRandomArrayIndex} from '../business/util/math-util';
+import {getRandomArrayIndex, shuffleArray} from '../business/util/math-util';
 import {getSystemProperties} from '../common/system-properties';
 
 
@@ -276,6 +276,14 @@ export class TuneBookService {
     tune = this._tunesFiltered[tuneIndex]; 
     return tune.intTuneId;
   }
+  
+  shuffleTuneList(){
+    return shuffleArray(this._tunesFiltered);
+  }
+  
+  shuffleTuneSetList(){
+    return shuffleArray(this._tuneSetsFiltered);
+  }
 
   getTune(intTuneId) {
     return this.getCurrentTuneBook().getTuneById(intTuneId);
@@ -382,15 +390,6 @@ export class TuneBookService {
 
   deleteWebsite(intTuneId, url) {
     this.getCurrentTuneBook().deleteWebsite(intTuneId, url);
-  }
-
-  // currently not used. was implemented for ramdom sort in list.
-  _setRandomSort(tuneBook) {
-    var randomNumber = 0;
-    for (var i = 0; i < tuneBook.tuneSets.length; i++) {
-      randomNumber = Math.floor(Math.random() * 100001);
-      tuneBook.tuneSets[i].sort = randomNumber;
-    }
   }
 
   _getAbcforNewTuneBook() {

@@ -10,8 +10,8 @@ import {SetListItemUI} from '../../components/set-list-item/set-list-item';
 
 
 @Component({
-  selector: 'tune-set-list',
-  inputs: ['tune: tune'],
+  selector: 'etb-tune-set-list',
+  inputs: ['tune'],
   templateUrl: './components/tune-set-list/tune-set-list.html',
   styleUrls: ['./components/tune-set-list/tune-set-list.css'],
   directives: [NgFor, ROUTER_DIRECTIVES, SetListItemUI]

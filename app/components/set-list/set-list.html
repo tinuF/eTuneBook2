@@ -1,1 +1,9 @@
-<set-list-item [set]="set" *ng-for="#set of sets; #i = index"></set-list-item>
+<div class="row">
+	<div class="col-xs-1 ">
+		<etb-set-list-menu [sets]="sets"></etb-set-list-menu>
+	</div>
+	<div class="col-xs-11">
+		<etb-set-list-item [set]="set" *ng-for="#set of sets; #i = index"></etb-set-list-item>
+	</div>
+</div>
+

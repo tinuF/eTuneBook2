@@ -1,7 +1,7 @@
 .card {
-         margin: 0;
-         padding: 0;
-         min-width: 820px;
-         max-width: 820px;
-         background: #99EDEA;
-     }
+    margin: 5px;
+    padding: 0;
+    min-width: 820px;
+    max-width: 820px;
+    background: #99EDEA;
+}

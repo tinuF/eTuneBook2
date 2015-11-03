@@ -11,10 +11,8 @@ import {SetPositionUI} from '../../components/setposition/setposition';
 
 
 @Component({
-  selector: 'set-list-item',
-  inputs: ['set: set']
-})
-@View({
+  selector: 'etb-set-list-item',
+  inputs: ['set'],
   templateUrl: './components/set-list-item/set-list-item.html',
   directives: [ROUTER_DIRECTIVES, NgFor, SampleDotsUI, SetPositionUI],
   styleUrls: ['./components/set-list-item/set-list-item.css'],

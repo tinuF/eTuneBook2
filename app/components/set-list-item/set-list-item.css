@@ -1,9 +1,9 @@
 .card {
-  margin-right: 20px;
-  padding: 0px;
-  /*
-  background: #D7DEDB;
-  */
+    margin: 5px;
+    padding: 0;
+    min-width: 360px;
+    max-width: 360px;
+    background: #99EDEA;
 }
 
 .card-block {
