@@ -1,0 +1,27 @@
+.card, .card-title, .card-header, .card-footer {
+  background: lightsteelblue;
+}
+
+a {
+  /*
+  color: darkolivegreen;
+  */
+  color: darkcyan;
+}
+
+
+.card {
+  margin-right: 20px;
+  width: 22rem;
+}
+
+a {
+  /*
+  color: darkolivegreen;
+  */
+  color: darkcyan;
+}
+
+
+
+

@@ -3,10 +3,10 @@
     padding: 0;
     min-width: 360px;
     max-width: 360px;
-    background: #99EDEA;
+    background: lightcyan;
 }
 
-.card-block {
+.card-block, .card-footer {
   background: lightcyan
 }
 

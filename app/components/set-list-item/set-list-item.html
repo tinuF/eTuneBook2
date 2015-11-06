@@ -8,4 +8,7 @@
   <div class="card-block">
     <set-position [position]="position" *ng-for="#position of set.tuneSetPositions; #i = index"></set-position>
   </div>
+  <div class="card-footer">
+    <etb-set-playlist-list [set]="set"></etb-set-playlist-list>
+  </div>
 </div>

@@ -371,6 +371,10 @@ export class TuneBookService {
   getPlaylistsByIntTuneId(intTuneId) {
     return this.getCurrentTuneBook().getPlaylistsByIntTuneId(intTuneId);
   }
+  
+  getPlaylistsByTuneSetId(tuneSetId) {
+    return this.getCurrentTuneBook().getPlaylistsByTuneSetId(tuneSetId);
+  }
 
   getVideo(intTuneId, videoSource, videoCode) {
     return this.getCurrentTuneBook().getVideoById(intTuneId, videoSource, videoCode);

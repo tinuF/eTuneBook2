@@ -5,23 +5,20 @@
 
     <div class="col-xs-11">
         <div class="card col-lg-8" [style.background-color]="tune.color.hex">
-            <div class="card-header">
-
-                <tune-actions [tune]="tune"></tune-actions>
+            <div class="card-header" [style.background-color]="tune.color.hex">
+                <tune-played [tune]="tune"></tune-played>        
             </div>
             <div class="card-block">
                 <tune-dots [tune]="tune"></tune-dots>
             </div>
             <div class="card-footer">
-                <tune-played [tune]="tune"></tune-played>
+                <tune-actions [tune]="tune"></tune-actions>
             </div>
         </div>
         
         <tune-video-list [tune]="tune"></tune-video-list>
 
         <etb-tune-set-list [tune]="tune"></etb-tune-set-list>
-
-        <tune-playlist-list [tune]="tune"></tune-playlist-list>
     </div>
 </div>
 

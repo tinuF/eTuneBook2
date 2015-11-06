@@ -9,13 +9,14 @@ import {EliminateThe} from '../../pipes/eliminate-the';
 import {FromNow} from '../../pipes/from-now';
 import {SampleDotsUI} from '../../components/sample-dots/sample-dots';
 import {SetPositionUI} from '../../components/setposition/setposition';
+import {SetPlaylistListUI} from '../../components/set-playlist-list/set-playlist-list';
 
 
 @Component({
   selector: 'etb-set-list-item',
   inputs: ['set'],
   templateUrl: './components/set-list-item/set-list-item.html',
-  directives: [ROUTER_DIRECTIVES, NgFor, SampleDotsUI, SetPositionUI],
+  directives: [ROUTER_DIRECTIVES, NgFor, SampleDotsUI, SetPositionUI, SetPlaylistListUI],
   styleUrls: ['./components/set-list-item/set-list-item.css'],
   pipes: [EliminateThe, FromNow]
 })
