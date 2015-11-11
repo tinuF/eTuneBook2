@@ -1,4 +1,13 @@
-<div class="card col-xl-12" [style.background-color]="tune.color.hex">
+<div 
+    class="card col-xl-12" 
+    draggable="true" 
+    (dragstart)="handleDragStart($event)"
+    (dragenter)="handleDragEnter($event)"
+    (dragover)="handleDragOver($event)"
+    (dragleave)="handleDragLeave($event)"
+    (drop)="handleDrop($event)"
+    (dragend)="handleDragEnd($event)" 
+    [style.background-color]="tune.color.hex">
     <p >
         <a [router-link]="['/Tune', {id: tune.intTuneId}]">{{tune.title | eliminateThe}}</a>
         <a class='btn btn-secondary btn-sm pull-right' (click)="justPlayedTheTune()" title="Just Played The Tune"><small>Played</small></a>

@@ -6,17 +6,17 @@ import {TuneBookService} from '../../services/tunebook-service';
 import {TuneSetPosition} from '../../business/model/tunesetposition';
 import {EliminateThe} from '../../pipes/eliminate-the';
 import {FromNow} from '../../pipes/from-now';
-import {SetpositionTuneUI} from '../../components/setposition-tune/setposition-tune';
+import {SetpositionTuneUI} from '../../components/set-position-tune/set-position-tune';
 
 
 @Component({
-  selector: 'set-position',
+  selector: 'etb-set-position',
   inputs: ['position: position']
 })
 @View({
-  templateUrl: './components/setposition/setposition.html',
+  templateUrl: './components/set-position/set-position.html',
   directives: [ROUTER_DIRECTIVES, SetpositionTuneUI],
-  styleUrls: ['./components/setposition/setposition.css'],
+  styleUrls: ['./components/set-position/set-position.css'],
   pipes: [EliminateThe, FromNow]
 })
 export class SetPositionUI {

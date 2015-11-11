@@ -5,6 +5,10 @@ a {
   color: darkcyan;
 }
 
+.card.over {
+  border: 2px dashed #000;
+}
+
 
 
 
