@@ -5,6 +5,7 @@ import {ROUTER_DIRECTIVES} from 'angular2/router';
 import {TuneBookService} from '../../services/tunebook-service';
 import {Tune} from '../../business/model/tune';
 import {TuneSet} from '../../business/model/tuneset';
+import {FilterSettings} from '../../common/settings/filter-settings';
 
 
 @Component({
@@ -17,9 +18,10 @@ import {TuneSet} from '../../business/model/tuneset';
 export class SetListMenuUI {
   sets: Array<TuneSet>;
   sorting: string;
+  filterSettings: FilterSettings;
  
   constructor(public tuneBookService: TuneBookService) {
-    
+    this.filterSettings = this.tuneBookService.getCurrentFilterSettings();
   }
   
   onInit(){
@@ -48,6 +50,11 @@ export class SetListMenuUI {
   sortRandom(e){
     this.sets = this.tuneBookService.shuffleTuneSetList();
     this.sorting = "random";
+  }
+  
+  filterSets(e){
+    this.filterSettings.toggleSetIdFilter();
+    this.tuneBookService.applyFilter();  
   }
 }
 

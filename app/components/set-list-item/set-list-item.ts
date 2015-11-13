@@ -10,6 +10,7 @@ import {FromNow} from '../../pipes/from-now';
 import {SampleDotsUI} from '../../components/sample-dots/sample-dots';
 import {SetPositionUI} from '../../components/set-position/set-position';
 import {SetPlaylistListUI} from '../../components/set-playlist-list/set-playlist-list';
+import {FilterSettings} from '../../common/settings/filter-settings';
 
 
 @Component({
@@ -22,9 +23,10 @@ import {SetPlaylistListUI} from '../../components/set-playlist-list/set-playlist
 })
 export class SetListItemUI {
   set: TuneSet;
+  filterSettings: FilterSettings;
   
   constructor(public tuneBookService: TuneBookService, public router: Router, public elementRef: ElementRef) {
-    
+    this.filterSettings = this.tuneBookService.getCurrentFilterSettings();  
   }
   
   onInit() {
@@ -43,6 +45,14 @@ export class SetListItemUI {
     this.set.tuneSetPositions.sort(function(a:TuneSetPosition, b:TuneSetPosition) {
         return a.position - b.position
     })
+  }
+  
+  toggleSetSelection(e){
+    if(e.target.checked){
+      this.filterSettings.addSetId(this.set.tuneSetId);
+    } else {
+      this.filterSettings.removeSetId(this.set.tuneSetId);
+    } 
   }
 }
 

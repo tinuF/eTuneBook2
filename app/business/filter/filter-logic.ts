@@ -115,18 +115,19 @@ export function filterTunes(tunes:Array<Tune>, filterSettings:FilterSettings):Ar
 }
 
 export function filterTuneSets(tuneBook:TuneBook, filterSettings:FilterSettings):Array<TuneSet>{
-    var titleMatch = false;
-    var keyMatch = false;
-    var typeMatch = false;
-    var colorMatch = false;
-    var eventMatch = false;
-    var bandMatch = false;
-    var playMatch = false;
-    var playMin, playMax, updateMin, updateMax;
-    var freqMatch = false;
-    var updateMatch = false;
-    var tuneSetsFiltered = [];
-    var playlists;
+    let titleMatch = false;
+    let keyMatch = false;
+    let typeMatch = false;
+    let colorMatch = false;
+    let eventMatch = false;
+    let bandMatch = false;
+    let playMatch = false;
+    let playMin, playMax, updateMin, updateMax;
+    let freqMatch = false;
+    let updateMatch = false;
+    let tuneSetsFiltered = [];
+    let playlists;
+    let setIdMatch = false;
 
     for (var i = 0; i < tuneBook.tuneSets.length; i++) {
         titleMatch = false;
@@ -138,7 +139,15 @@ export function filterTuneSets(tuneBook:TuneBook, filterSettings:FilterSettings)
         playMatch = false;
         freqMatch = false;
         updateMatch = false;
+        setIdMatch = false;
 
+        if (filterSettings.setIds.length == 0 || !filterSettings.applySetIds) {
+            setIdMatch = true;
+       
+        } else {
+            setIdMatch = filterSettings.setIds.indexOf(tuneBook.tuneSets[i].tuneSetId) > -1    
+        }
+        
         if (filterSettings.title == "") {
             titleMatch = true;
         }
@@ -246,7 +255,7 @@ export function filterTuneSets(tuneBook:TuneBook, filterSettings:FilterSettings)
             }
         }
 
-        if (keyMatch && typeMatch && colorMatch && eventMatch && bandMatch && playMatch && updateMatch && freqMatch && titleMatch){
+        if (keyMatch && typeMatch && colorMatch && eventMatch && bandMatch && playMatch && updateMatch && freqMatch && titleMatch && setIdMatch){
             tuneSetsFiltered.push(tuneBook.tuneSets[i]);
         }
     }

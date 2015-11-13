@@ -11,7 +11,8 @@ export class FilterSettings {
     freq:string;
     updmin:string;
     updmax:string;
-    
+    setIds:Array<number>;
+    applySetIds:boolean;
     filterText:string;
   
   
@@ -22,6 +23,8 @@ export class FilterSettings {
     this.event = "All Events";
     this.band = "All Bands";
     this.title = "";
+    this.setIds = [];
+    this.applySetIds = false;
     /*TODO
     plmin:string;
     plmax:string;
@@ -59,6 +62,21 @@ export class FilterSettings {
   
   setTitle(title:string){
     this.title = title;
+  }
+  
+  addSetId(setId:number){
+    this.setIds.push(setId);
+  }
+  
+  removeSetId(setId:number){
+    let index = this.setIds.indexOf(setId);
+    if (index > -1) {
+      this.setIds.splice(index, 1);
+    }
+  }
+  
+  toggleSetIdFilter(){
+    this.applySetIds = !this.applySetIds;
   }
   
   setFilterText() {

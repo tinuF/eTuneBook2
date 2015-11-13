@@ -11,7 +11,7 @@ import {FilterSettings} from '../../common/settings/filter-settings';
 
 
 @Component({
-    selector: 'etbk-filter', //ACHTUNG: filter kollidiert mit svg filter element, deshalb ist etbk- wichtig!
+    selector: 'etb-filter', //ACHTUNG: filter kollidiert mit svg filter element, deshalb ist etbk- wichtig!
     templateUrl: './components/filter/filter.html',
     styleUrls: ['./components/filter/filter.css'],
     directives: [CORE_DIRECTIVES]
@@ -233,8 +233,6 @@ export class FilterUI {
     }
     
     applyFilter() {
-        //this is to tell tunelist to update (via bindings)
-        //this works. however compare search in app.ts which is broken in alpha.36
         this.tuneBookService.applyFilter();
     }
 }

@@ -79,9 +79,14 @@ export class SetpositionTuneUI {
     let sourcePosition = this.getSourceTuneSetTunePosition(data);
     let targetTuneSetId = this.position.tuneSetId;
     let targetPosition = this.position.position;
+    let moveOrCopy = 'move'
+    
+    if (e.shiftKey) {
+      moveOrCopy = 'copy'
+    }
     
     // update model. angular will then react upon the changed model and re-render both sets  
-    this.tuneBookService.moveTuneSetPosition(sourceTuneSetId, sourcePosition, targetTuneSetId, targetPosition, 'after', 'move');
+    this.tuneBookService.moveTuneSetPosition(sourceTuneSetId, sourcePosition, targetTuneSetId, targetPosition, 'after', moveOrCopy);
     this.tuneBookService.storeTuneBookAbc();
     
     e.target.style.opacity = '1.0';

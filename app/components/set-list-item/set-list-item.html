@@ -1,6 +1,10 @@
 <div class="card col-lg-4">
 	<div class="card-block">
     <p class="card-title">
+      <label class="c-input c-checkbox">
+        <input type="checkbox" (change)="toggleSetSelection($event)">
+        <span class="c-indicator"></span>
+      </label>
       <a [router-link]="['/Tune', {id: set.tuneSetId}]">Set {{set.tuneSetId}}</a>
       <a class='btn btn-secondary btn-sm pull-right' (click)="justPlayedTheSet()" title="Just Played The Set"><small>Played</small></a>
     </p>
