@@ -27,6 +27,10 @@ export class TuneSetListUI {
   onInit(){
     this.sets = this.tuneBookService.getTuneSetsByIntTuneId(this.tune.intTuneId);
   }
+  
+  doCheck(){
+    this.sets = this.tuneBookService.getTuneSetsByIntTuneId(this.tune.intTuneId);
+  }
 }
 
 

@@ -142,7 +142,8 @@ export class TuneBookService {
   }
 
   initializeTuneSet(intTuneId) {
-    return this.getCurrentTuneBook().initializeTuneSet(intTuneId);
+    this.getCurrentTuneBook().initializeTuneSet(intTuneId);
+    this.initializeFilter();
   }
 
   initializePartPlayInfo() {

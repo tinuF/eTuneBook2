@@ -74,7 +74,7 @@ export function filterTunes(tunes:Array<Tune>, filterSettings:FilterSettings):Ar
                 typeMatch = true;
             }
 
-            if (!colorMatch && tunes[i].color == filterSettings.color) {
+            if (!colorMatch && tunes[i].color.hex == filterSettings.color) {
                 colorMatch = true;
             }
 

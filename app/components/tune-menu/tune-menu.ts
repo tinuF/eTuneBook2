@@ -39,5 +39,9 @@ export class TuneMenuUI  {
       this.currentState = "Dots";
     }   
   }
+  
+  newSet(e){
+    this.tuneBookService.initializeTuneSet(this.tune.intTuneId);
+  }
 }
 
