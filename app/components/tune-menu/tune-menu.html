@@ -8,6 +8,9 @@
             </svg>
 		</i>
 	</a>
+    <!--- todo: ng-really-message="Do you really want to delete the tune?" ng-really-click="deleteTune() -->
+	<a class="btn btn-sm btn-secondary" (click)="deleteTune()" title="Delete Tune"><i class="material-icons">delete</i></button>
+
 	<a class="btn btn-secondary btn-sm" title="New Set" (click)="newSet($event)">
 		<!-- material-design icon by google -->
         <i class="icon-add-playlist">

@@ -11,8 +11,6 @@
 }
 
 a {
-  /*
-  color: darkolivegreen;
-  */
-  color: darkcyan;
+	cursor: pointer;
+	color: darkcyan;
 }

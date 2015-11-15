@@ -20,8 +20,10 @@ a {
     color: red;
     display: none;
 }
+
 .deleteArea:hover .delete {
-   display: inline-block;  
+   display: inline-block; 
+   text-decoration: none; 
 }
 
 

@@ -6,7 +6,7 @@
         <span class="c-indicator"></span>
       </label>
       <a [router-link]="['/Tune', {id: set.tuneSetId}]">Set {{set.tuneSetId}}</a>
-      <a class='btn btn-secondary btn-sm pull-right' (click)="justPlayedTheSet()" title="Just Played The Set"><small>Played</small></a>
+      <a class='pull-right' (click)="justPlayedTheSet()" title="Just Played The Set"><i class="material-icons">play_arrow</i></a>
     </p>
   </div>
   <div class="card-block">

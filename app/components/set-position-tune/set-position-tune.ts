@@ -10,6 +10,7 @@ import {getSystemProperties} from '../../common/system-properties';
 import {EliminateThe} from '../../pipes/eliminate-the';
 import {FromNow} from '../../pipes/from-now';
 import {SampleDotsUI} from '../../components/sample-dots/sample-dots';
+import {TunePlayedUI} from '../tune-played/tune-played';
 
 //var dragSrcEl = null;
 
@@ -19,7 +20,7 @@ import {SampleDotsUI} from '../../components/sample-dots/sample-dots';
 })
 @View({
   templateUrl: './components/set-position-tune/set-position-tune.html',
-  directives: [ROUTER_DIRECTIVES, SampleDotsUI],
+  directives: [ROUTER_DIRECTIVES, SampleDotsUI, TunePlayedUI],
   styleUrls: ['./components/set-position-tune/set-position-tune.css'],
   pipes: [EliminateThe, FromNow]
 })

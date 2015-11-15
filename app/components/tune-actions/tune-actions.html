@@ -12,12 +12,11 @@
 	</div>
 	<div class="col-xs-3">
 		<small class="text-muted">Transpose</small>
-		<button class="btn btn-sm btn-secondary" (click)="tuneUp()" title="Tune Up">+</button>
-		<button class="btn btn-sm btn-secondary" (click)="tuneDown()" title="Tune Down">-</button>      
+		<button class="btn btn-sm btn-secondary-outline" (click)="tuneUp()" title="Tune Up">+</button>
+		<button class="btn btn-sm btn-secondary-outline" (click)="tuneDown()" title="Tune Down">-</button>      
 	</div>
 	<div class="col-xs-3">
-		<!--- todo: ng-really-message="Do you really want to delete the tune?" ng-really-click="deleteTune() -->
-		<button class="pull-right btn btn-sm btn-secondary" (click)="deleteTune()" title="Delete Tune"><i class="material-icons">delete</i></button>
+		<etb-tune-played [tune]="tune"></etb-tune-played>
 	</div>
 </div>
 

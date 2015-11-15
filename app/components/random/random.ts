@@ -28,9 +28,11 @@ export class RandomUI  {
     
     target = "/Tune";
     
+    /*
     if (path.indexOf('/sets', 0) >= 0) {
       target = "/Set";
     }
+    */
     
     if (target == "/Tune") {
       targetId = this.tuneBookService.getRandomIntTuneId();  

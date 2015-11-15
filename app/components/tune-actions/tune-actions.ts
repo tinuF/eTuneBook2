@@ -7,6 +7,7 @@ import {Tune} from '../../business/model/tune';
 import {getSystemProperties} from '../../common/system-properties';
 import {TuneAbcUI} from '../tune-abc/tune-abc';
 import {TuneDotsUI} from '../tune-dots/tune-dots';
+import {TunePlayedUI} from '../tune-played/tune-played';
 import {FromNow} from '../../pipes/from-now';
 
 
@@ -15,7 +16,7 @@ import {FromNow} from '../../pipes/from-now';
   inputs: ['tune: tune'],
   templateUrl: './components/tune-actions/tune-actions.html',
   styleUrls: ['./components/tune-actions/tune-actions.css'],
-  directives: [ROUTER_DIRECTIVES],
+  directives: [ROUTER_DIRECTIVES, TunePlayedUI],
   pipes: [FromNow]
 })
 export class TuneActionsUI implements DoCheck, OnActivate {
@@ -164,15 +165,6 @@ export class TuneActionsUI implements DoCheck, OnActivate {
 
     editTune() {
         //$state.transitionTo('tuneabc', {intTuneId: $scope.tune.intTuneId})
-    }
-
-    deleteTune() {
-        // Delete all TuneSetPositions with that tune
-        this.tuneBookService.deleteTuneSetPositionsAndTune(this.tune.intTuneId);
-        this.router.navigate('/tunes');
-        
-        // Put TuneBook to localStorage
-        this. tuneBookService.storeTuneBookAbc();   
     }
 
     justPlayedTheTune(tune) {

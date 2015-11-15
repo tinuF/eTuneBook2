@@ -1,15 +1,14 @@
 /// <reference path="../../typings.d.ts" />
-import {Component, View} from 'angular2/angular2';
+import {Component} from 'angular2/angular2';
 
 import {Tune} from '../../business/model/tune';
 import {TuneBookService} from '../../services/tunebook-service';
 
 @Component({
-  selector: 'sampledots',
-  inputs: ['tune: tune']
-})
-@View({
+  selector: 'etb-sampledots',
+  inputs: ['tune'],
   templateUrl: './components/sample-dots/sample-dots.html',
+  styleUrls: ['./components/sample-dots/sample-dots.css']
 })
 export class SampleDotsUI {
   tune: Tune;

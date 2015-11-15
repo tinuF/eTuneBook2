@@ -6,10 +6,7 @@
   </div>
   
   <div class="card-block" [style.background-color]="tune.color.hex">
-    <sampledots [tune]="tune"></sampledots>
-  </div>
-  
-  <div class="card-footer" [style.background-color]="tune.color.hex">
-    <tune-played [tune]="tune"></tune-played>
+    <etb-sampledots [tune]="tune"></etb-sampledots>
+    <etb-tune-played class="pull-right" [tune]="tune"></etb-tune-played>
   </div>
 </div>

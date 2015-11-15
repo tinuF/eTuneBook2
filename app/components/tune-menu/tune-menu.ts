@@ -22,7 +22,7 @@ export class TuneMenuUI  {
   tune: Tune;
   currentState: string;
  
-  constructor(public tuneBookService: TuneBookService, public location:Location) {
+  constructor(public tuneBookService: TuneBookService, public location:Location, public router:Router) {
    
   }
   
@@ -44,5 +44,14 @@ export class TuneMenuUI  {
     this.tuneBookService.initializeTuneSet(this.tune.intTuneId);
     this.tuneBookService.storeTuneBookAbc();
   }
+  
+  deleteTune() {
+        // Delete all TuneSetPositions with that tune
+        this.tuneBookService.deleteTuneSetPositionsAndTune(this.tune.intTuneId);
+        this.router.navigate(['/Tunes']);
+        
+        // Put TuneBook to localStorage
+        this. tuneBookService.storeTuneBookAbc();   
+    }
 }
 
