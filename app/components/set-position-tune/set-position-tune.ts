@@ -129,4 +129,9 @@ export class SetpositionTuneUI {
     }
     return tuneSetTunePosition;
   }
+  
+  deleteTuneSetPosition(e){
+    this.tuneBookService.deleteTuneSetPosition(this.position.tuneSetId, this.position.position);
+    this.tuneBookService.storeTuneBookAbc();
+  }
 }

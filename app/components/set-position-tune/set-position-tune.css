@@ -9,6 +9,21 @@ a {
   border: 2px dashed #000;
 }
 
+.deleteArea {
+   display: inline-block; 
+   width: 15px;
+   height: 24px;
+   padding-left:10px; 
+}
+
+.delete{
+    color: red;
+    display: none;
+}
+.deleteArea:hover .delete {
+   display: inline-block;  
+}
+
 
 
 

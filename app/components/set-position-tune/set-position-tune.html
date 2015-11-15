@@ -8,9 +8,16 @@
     (drop)="handleDrop($event)"
     (dragend)="handleDragEnd($event)" 
     [style.background-color]="tune.color.hex">
+    <div class="deleteArea pull-right">
+        <a class='delete' (click)="deleteTuneSetPosition($event)">X</a>
+    </div>
+        
     <p >
         <a [router-link]="['/Tune', {id: tune.intTuneId}]">{{tune.title | eliminateThe}}</a>
-        <a class='btn btn-secondary btn-sm pull-right' (click)="justPlayedTheTune()" title="Just Played The Tune"><small>Played</small></a>
+        <a class='btn btn-secondary btn-sm pull-right' (click)="justPlayedTheTune()" title="Just Played The Tune">
+            <small>Played</small>
+        </a>
+            
     </p>
     <small class="text-muted">{{tune.type}} in {{tune.key}}</small>
     

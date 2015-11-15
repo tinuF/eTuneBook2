@@ -42,6 +42,7 @@ export class TuneMenuUI  {
   
   newSet(e){
     this.tuneBookService.initializeTuneSet(this.tune.intTuneId);
+    this.tuneBookService.storeTuneBookAbc();
   }
 }
 
