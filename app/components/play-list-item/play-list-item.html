@@ -1,0 +1,25 @@
+<div class="card col-lg-11">
+	<div class="card-block">
+    <p class="card-title">
+      
+      <span>Nr. {{position.position}}</span>
+      
+    </p>
+  </div>
+  <div class="card-block">
+	<etb-set-list-item [set]="position.tuneSet"></etb-set-list-item>  
+  </div>
+  <div class="card-footer">
+    <div  *ng-for="#playInfo of playInfos; #i = index">
+      <p>{{playInfo.tuneSetPosition.tune.title}}</p>
+      <p>{{playInfo.repeat}}</p>
+      <p>{{playInfo.annotation}}</p>
+      <div  *ng-for="#partPlayInfo of playInfo.partPlayInfos; #i = index">
+        {{partPlayInfo.part}} : {{partPlayInfo.playInfo}}
+      </div>
+    </div>
+
+    <small>{{position.annotation}}</small>
+  </div>
+</div>
+

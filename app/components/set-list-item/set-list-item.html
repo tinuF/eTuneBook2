@@ -5,14 +5,14 @@
         <input type="checkbox" (change)="toggleSetSelection($event)">
         <span class="c-indicator"></span>
       </label>
-      <a [router-link]="['/Tune', {id: set.tuneSetId}]">Set {{set.tuneSetId}}</a>
-      <a class='pull-right' (click)="justPlayedTheSet()" title="Just Played The Set"><i class="material-icons">play_arrow</i></a>
+      <span>Set {{set.tuneSetId}}</span>
+      <a class='pull-right' (click)="justPlayedTheSet()" title="Just Played The Set"><i class="material-icons">play_circle_outline</i></a>
     </p>
   </div>
   <div class="card-block">
     <etb-set-position [position]="position" *ng-for="#position of set.tuneSetPositions; #i = index"></etb-set-position>
   </div>
   <div class="card-footer">
-    <etb-set-playlist-list [set]="set"></etb-set-playlist-list>
+    <etb-set-play-list-list [set]="set"></etb-set-play-list-list>
   </div>
 </div>

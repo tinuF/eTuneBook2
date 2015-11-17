@@ -4,14 +4,14 @@ import {ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {TuneBookService} from '../../services/tunebook-service';
 import {Playlist} from '../../business/model/playlist';
-import {PlaylistListItemUI} from '../../components/playlist-list-item/playlist-list-item';
+import {PlaylistListItemUI} from '../../components/play-list-list-item/play-list-list-item';
 
 
 @Component({
-  selector: 'playlist-list',
-  templateUrl: './components/playlist-list/playlist-list.html',
+  selector: 'etb-playlist-list',
+  templateUrl: './components/play-list-list/play-list-list.html',
   directives: [NgFor, ROUTER_DIRECTIVES, PlaylistListItemUI],
-  styleUrls: ['./components/playlist-list/playlist-list.css']
+  styleUrls: ['./components/play-list-list/play-list-list.css']
 })
 export class PlaylistListUI implements DoCheck {
   playlists: Array<Playlist>;

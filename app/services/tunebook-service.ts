@@ -153,6 +153,10 @@ export class TuneBookService {
   initializeTuneSetPositionPlayInfosForPlaylist(playlistId) {
     this.getCurrentTuneBook().initializeTuneSetPositionPlayInfosForPlaylist(playlistId);
   }
+  
+  getTuneSetPositionPlayInfosForPlaylistPosition(playlistPosition){
+      return this.getCurrentTuneBook().getTuneSetPositionPlayInfosForPlaylistPosition(playlistPosition);
+  }
 
   initializeTuneAndTuneSet(): TuneSet {
     if (this.getCurrentTuneBook() == null) {

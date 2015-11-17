@@ -5,15 +5,15 @@ import {ROUTER_DIRECTIVES} from 'angular2/router';
 import {TuneBookService} from '../../services/tunebook-service';
 import {TuneSet} from '../../business/model/tuneset';
 import {Playlist} from '../../business/model/playlist';
-import {SetPlaylistListItemUI} from '../../components/set-playlist-list-item/set-playlist-list-item';
+import {SetPlaylistListItemUI} from '../../components/set-play-list-list-item/set-play-list-list-item';
 
 
 @Component({
   selector: 'etb-set-playlist-list',
   inputs: ['set'],
-  templateUrl: './components/set-playlist-list/set-playlist-list.html',
+  templateUrl: './components/set-play-list-list/set-play-list-list.html',
   directives: [NgFor, ROUTER_DIRECTIVES, SetPlaylistListItemUI],
-  styleUrls: ['./components/set-playlist-list/set-playlist-list.css']
+  styleUrls: ['./components/set-play-list-list/set-play-list-list.css']
 })
 export class SetPlaylistListUI {
   set: TuneSet;

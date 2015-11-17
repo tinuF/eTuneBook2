@@ -9,7 +9,7 @@ import {EliminateThe} from '../../pipes/eliminate-the';
 import {FromNow} from '../../pipes/from-now';
 import {SampleDotsUI} from '../../components/sample-dots/sample-dots';
 import {SetPositionUI} from '../../components/set-position/set-position';
-import {SetPlaylistListUI} from '../../components/set-playlist-list/set-playlist-list';
+import {SetPlaylistListUI} from '../../components/set-play-list-list/set-play-list-list';
 import {FilterSettings} from '../../common/settings/filter-settings';
 
 

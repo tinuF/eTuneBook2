@@ -10,7 +10,8 @@ import {FilterSettings} from '../../common/settings/filter-settings';
 import {BookUI} from '../../components/book/book';
 import {TuneListUI} from '../../components/tune-list/tune-list';
 import {SetListUI} from '../../components/set-list/set-list';
-import {PlaylistListUI} from '../../components/playlist-list/playlist-list';
+import {PlaylistListUI} from '../../components/play-list-list/play-list-list';
+import {PlaylistUI} from '../../components/play-list/play-list';
 import {TuneUI} from '../../components/tune/tune';
 import {FilterUI} from '../../components/filter/filter';
 import {FilterTextUI} from '../../components/filter-text/filter-text';
@@ -38,7 +39,7 @@ import {RandomUI} from '../../components/random/random';
   { path: '/sets', component: SetListUI, as: 'Setlist' },
   { path: '/filter', component: FilterUI, as: 'Filter' },
   { path: '/playlists', component: PlaylistListUI, as: 'PlaylistList'},
-  //{ path: '/playlists/:id', component: PlaylistUI, as: 'Playlist' },
+  { path: '/playlists/:id', component: PlaylistUI, as: 'Playlist' }
 ])
 export class App {
   tuneBook: TuneBook;

@@ -1,0 +1,14 @@
+.card {
+    margin: 5px;
+    padding: 0;
+    background: lightcyan;
+}
+
+.card-block, .card-footer {
+  background: lightcyan
+}
+
+a {
+	cursor: pointer;
+	color: darkcyan;
+}

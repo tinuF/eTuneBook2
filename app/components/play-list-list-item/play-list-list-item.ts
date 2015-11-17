@@ -1,5 +1,5 @@
 /// <reference path="../../typings.d.ts" />
-import {Component, View, ElementRef} from 'angular2/angular2';
+import {Component, ElementRef} from 'angular2/angular2';
 import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {TuneBookService} from '../../services/tunebook-service';
@@ -10,16 +10,14 @@ import {EliminateThe} from '../../pipes/eliminate-the';
 
 
 @Component({
-  selector: 'etb-set-playlist-list-item',
-  inputs: ['playlist']
-})
-@View({
-  templateUrl: './components/set-playlist-list-item/set-playlist-list-item.html',
+  selector: 'etb-play-list-list-item',
+  inputs: ['playlist'],
+  templateUrl: './components/play-list-list-item/play-list-list-item.html',
   directives: [ROUTER_DIRECTIVES],
-  styleUrls: ['./components/set-playlist-list-item/set-playlist-list-item.css'],
+  styleUrls: ['./components/play-list-list-item/play-list-list-item.css'],
   pipes: [EliminateThe]
 })
-export class SetPlaylistListItemUI {
+export class PlaylistListItemUI {
   playlist: Playlist;
   
   constructor(public tuneBookService: TuneBookService, public router: Router, public elementRef: ElementRef) {
