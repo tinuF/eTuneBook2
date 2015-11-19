@@ -1,7 +1,7 @@
 .card {
     margin: 5px;
     padding: 0;
-    background: lightcyan;
+    background: #99EDEA;
 }
 
 .card-block, .card-footer {
@@ -11,4 +11,21 @@
 a {
 	cursor: pointer;
 	color: darkcyan;
+}
+
+.deleteArea {
+   display: inline-block; 
+   width: 15px;
+   height: 24px;
+   padding-left:10px; 
+}
+
+.delete{
+    color: red;
+    display: none;
+}
+
+.deleteArea:hover .delete {
+   display: inline-block; 
+   text-decoration: none; 
 }

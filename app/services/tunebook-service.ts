@@ -154,6 +154,10 @@ export class TuneBookService {
     this.getCurrentTuneBook().initializeTuneSetPositionPlayInfosForPlaylist(playlistId);
   }
   
+  getTuneSetPositionPlayInfo(playlistPosition, tuneSetPosition){
+      return this.getCurrentTuneBook().getTuneSetPositionPlayInfo(playlistPosition, tuneSetPosition);
+  }
+  
   getTuneSetPositionPlayInfosForPlaylistPosition(playlistPosition){
       return this.getCurrentTuneBook().getTuneSetPositionPlayInfosForPlaylistPosition(playlistPosition);
   }

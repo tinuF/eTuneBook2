@@ -9,7 +9,7 @@ import {SetPlaylistListItemUI} from '../../components/set-play-list-list-item/se
 
 
 @Component({
-  selector: 'etb-set-playlist-list',
+  selector: 'etb-set-play-list-list',
   inputs: ['set'],
   templateUrl: './components/set-play-list-list/set-play-list-list.html',
   directives: [NgFor, ROUTER_DIRECTIVES, SetPlaylistListItemUI],

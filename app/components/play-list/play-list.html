@@ -5,7 +5,9 @@
 		-->
 	</div>
 	<div class="col-xs-11">
-		<etb-play-list-item [position]="position" *ng-for="#position of playlist.playlistPositions; #i = index"></etb-play-list-item>
+		<etb-play-list-item [playlist-position]="position" *ng-for="#position of playlist.playlistPositions; #i = index"></etb-play-list-item>
 	</div>
+	<!--
+	<div class="col-xs-8"></div>
+	-->
 </div>
-

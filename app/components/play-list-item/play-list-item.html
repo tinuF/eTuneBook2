@@ -1,25 +1,38 @@
-<div class="card col-lg-11">
-	<div class="card-block">
-    <p class="card-title">
-      
-      <span>Nr. {{position.position}}</span>
-      
-    </p>
+<div class="card">
+  <div class="card-block">
+    <small>{{playlistPosition.position}}</small>
+    <a class='pull-right' (click)="justPlayedTheSet()" title="Just Played The Set"><i class="material-icons">play_circle_outline</i></a>
+    <div class="deleteArea pull-right">
+      <a class='delete' (click)="deletePlaylistPosition($event)">X</a>
+    </div>
   </div>
   <div class="card-block">
-	<etb-set-list-item [set]="position.tuneSet"></etb-set-list-item>  
-  </div>
-  <div class="card-footer">
-    <div  *ng-for="#playInfo of playInfos; #i = index">
-      <p>{{playInfo.tuneSetPosition.tune.title}}</p>
-      <p>{{playInfo.repeat}}</p>
-      <p>{{playInfo.annotation}}</p>
-      <div  *ng-for="#partPlayInfo of playInfo.partPlayInfos; #i = index">
-        {{partPlayInfo.part}} : {{partPlayInfo.playInfo}}
+    <span>Set {{playlistPosition.tuneSet.tuneSetId}}</span>
+    <div *ng-for="#tuneSetPosition of playlistPosition.tuneSet.tuneSetPositions; #i = index">
+      <div class="row">
+        <div class="col-lg-4 ">
+          <div class="card " [style.background-color]="tuneSetPosition.tune.color.hex">
+            <p>
+              <small>{{tuneSetPosition.currentTuneSetPositionPlayInfo.repeat}}</small>
+              <a [router-link]="['/Tune', {id: tuneSetPosition.tune.intTuneId}]">{{tuneSetPosition.tune.title | eliminateThe}}</a>
+            </p>
+            <small class="text-muted">{{tuneSetPosition.tune.type}} in {{tuneSetPosition.tune.key}}</small>
+            <etb-tune-played class="pull-right" [tune]="tuneSetPosition.tune"></etb-tune-played>
+          </div>
+                
+          <small>{{tuneSetPosition.currentTuneSetPositionPlayInfo.annotation}}</small>
+          <div *ng-for="#partPlayInfo of tuneSetPosition.currentTuneSetPositionPlayInfo.partPlayInfos; #i = index">
+            <small>{{partPlayInfo.part}} :</small>
+            <small >{{partPlayInfo.playInfo}}</small>
+          </div>
+        </div>
+        <div class="col-lg-8">
+          <etb-play-list-tune [tune]="tuneSetPosition.tune"></etb-play-list-tune>
+        </div>
       </div>
     </div>
-
-    <small>{{position.annotation}}</small>
+  </div>
+  <div class="card-footer">
+    <small>{{playlistPosition.annotation}}</small>
   </div>
 </div>
-
