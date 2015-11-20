@@ -1,35 +1,44 @@
-<div class="card">
+<div class="card col-lg-8 playlistPosition">
   <div class="card-block">
-    <small>{{playlistPosition.position}}</small>
-    <a class='pull-right' (click)="justPlayedTheSet()" title="Just Played The Set"><i class="material-icons">play_circle_outline</i></a>
+    <p>{{playlistPosition.position}}
+      <a class='pull-right' (click)="justPlayedTheSet()" title="Just Played The Set"><i class="material-icons">play_circle_outline</i></a>
+      <small class="setId">Set {{playlistPosition.tuneSet.tuneSetId}}</small>  
+    </p>
     <div class="deleteArea pull-right">
       <a class='delete' (click)="deletePlaylistPosition($event)">X</a>
     </div>
   </div>
   <div class="card-block">
-    <span>Set {{playlistPosition.tuneSet.tuneSetId}}</span>
     <div *ng-for="#tuneSetPosition of playlistPosition.tuneSet.tuneSetPositions; #i = index">
-      <div class="row">
-        <div class="col-lg-4 ">
-          <div class="card " [style.background-color]="tuneSetPosition.tune.color.hex">
-            <p>
-              <small>{{tuneSetPosition.currentTuneSetPositionPlayInfo.repeat}}</small>
-              <a [router-link]="['/Tune', {id: tuneSetPosition.tune.intTuneId}]">{{tuneSetPosition.tune.title | eliminateThe}}</a>
-            </p>
-            <small class="text-muted">{{tuneSetPosition.tune.type}} in {{tuneSetPosition.tune.key}}</small>
-            <etb-tune-played class="pull-right" [tune]="tuneSetPosition.tune"></etb-tune-played>
-          </div>
-                
-          <small>{{tuneSetPosition.currentTuneSetPositionPlayInfo.annotation}}</small>
-          <div *ng-for="#partPlayInfo of tuneSetPosition.currentTuneSetPositionPlayInfo.partPlayInfos; #i = index">
-            <small>{{partPlayInfo.part}} :</small>
-            <small >{{partPlayInfo.playInfo}}</small>
-          </div>
+      <div class="card tuneSetPosition" [style.background-color]="tuneSetPosition.tune.color.hex">
+        <p class="card-title">
+          <small class="position">{{tuneSetPosition.position}}</small>
+          <a [router-link]="['/Tune', {id: tuneSetPosition.tune.intTuneId}]">{{tuneSetPosition.tune.title | eliminateThe}}</a>
+          <small class="repeat">{{tuneSetPosition.currentTuneSetPositionPlayInfo.repeat}}</small>
+          <etb-tune-played class="pull-right" [tune]="tuneSetPosition.tune"></etb-tune-played>
+        </p>
+        <small class="text-muted">{{tuneSetPosition.tune.type}} in {{tuneSetPosition.tune.key}}</small>
+        <etb-play-list-tune [tune]="tuneSetPosition.tune"></etb-play-list-tune>
+        <div class="card-footer" [style.background-color]="tuneSetPosition.tune.color.hex" [hidden]="!tuneSetPosition.currentTuneSetPositionPlayInfo.annotation">
+          <small>{{tuneSetPosition.currentTuneSetPositionPlayInfo.annotation}}</small>  
         </div>
-        <div class="col-lg-8">
-          <etb-play-list-tune [tune]="tuneSetPosition.tune"></etb-play-list-tune>
-        </div>
+          
+        
+        
       </div>
+
+<!--
+      <div class="card tuneSetPositionPlayInfo" [style.background-color]="tuneSetPosition.tune.color.hex">        
+      </div>
+-->
+      <div class="card partPlayInfo" *ng-for="#partPlayInfo of tuneSetPosition.currentTuneSetPositionPlayInfo.partPlayInfos; #i = index"
+      [style.background-color]="tuneSetPosition.tune.color.hex">
+        <div class="part">{{partPlayInfo.part}} :</div>
+        <div class="playInfo">{{partPlayInfo.playInfo}}</div>
+      </div>
+
+
+
     </div>
   </div>
   <div class="card-footer">

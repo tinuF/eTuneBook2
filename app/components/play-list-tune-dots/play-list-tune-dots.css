@@ -2,3 +2,11 @@ a {
 	cursor: pointer;
 	color: darkcyan;
 }
+
+.renderTheDots {
+    margin: 5px;
+    padding: 0;
+    min-width: 820px;
+    max-width: 820px;
+    
+}

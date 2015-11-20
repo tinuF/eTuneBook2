@@ -75,12 +75,11 @@ export class PlaylistTuneDotsUI implements DoCheck {
 
     doCheck() {
         //$("svg").css("height", "150px" );
-        $("svg").css("preserveAspectRatio", "xMinYMin meet");
-        $(".title.meta-top").css("fill", "red");
-        //$(".title.meta-top").css( "display", "none" );
-        $(".text.meta-top").css("fill", "blue");
+        //$("svg").css("preserveAspectRatio", "xMinYMin meet");
+        //$(".title.meta-top").css("fill", "red");
+        $(".title.meta-top").css( "display", "none" );
+        $(".meta-top").css("display", "none");
         $(".meta-bottom").css("display", "none");
-        //$(".meta-bottom").css( "visibility", "collapse" );
     }
 
     renderAbc(tune) {

@@ -4,6 +4,51 @@
     background: #99EDEA;
 }
 
+
+.playlistPosition {
+    min-width: 860px;
+}
+
+.tuneSetPosition {
+    margin-top: 5px;
+}
+
+.setId {
+    margin-left: 250px;
+}
+
+.tuneSetPositionPlayInfo {
+    margin-left: 15px;
+}
+
+.repeat {
+    margin-left: 150px;
+}
+
+.partPlayInfo {
+    margin-left: 15px;
+}
+
+.part {
+    margin: 5px; 
+    padding: 5px; 
+	font-size: 0.8em;
+	min-width: 100px;
+	max-width: 100px;
+	display: inline-block;
+	color: black;
+}
+
+.playInfo {
+    margin: 5px; 
+    padding: 5px; 
+	font-size: 0.8em;
+	min-width: 670px;
+	max-width: 670px;
+	display: inline-block;
+	color: black;
+}
+
 .card-block, .card-footer {
   background: lightcyan
 }
