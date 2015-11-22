@@ -41,6 +41,34 @@ export class PlayListItemUI {
         return a.position - b.position
     })
   }
+  
+  prepareForEdit(event){
+    //check http://plnkr.co/edit/Yt4bFd9mF9iwZirtWvYg?p=preview
+    event.target.setAttribute('contentEditable', 'true'); 
+    event.target.focus();
+  }
+  
+  handleKeyDownOnTuneSetPositionRepeat(event, tuneSetPosition) {
+    var keycode = (event.keyCode ? event.keyCode : event.which);
+    // on "enter" set "contentEditable" to "false" to make field not-editable again
+    // and call "read" method which is responsible for setting new value to the object in ngModel
+    if (keycode === 13) { // ENTER
+      event.target.setAttribute('contentEditable', 'false');
+      event.target.blur();
+      event.preventDefault();
+      tuneSetPosition.currentTuneSetPositionPlayInfo.repeat = event.target.textContent;
+      this.tuneBookService.storeTuneBookAbc();
+    }
+    // on "escape"and set the text in the element back to the original value
+    // and set "contentEditable" to "false" to make field not-editable again
+    /*
+    if (keycode === 27) { // ESCAPE
+      element.text(ngModel.$viewValue);
+      event.target.setAttribute('contentEditable', 'false');
+      event.target.blur();
+    }
+    */
+  }
 }
 
 

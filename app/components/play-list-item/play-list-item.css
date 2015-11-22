@@ -1,7 +1,7 @@
 .card {
     margin: 5px;
-    padding: 0;
-    background: #99EDEA;
+    padding: 5px;
+    background: lightcyan;
 }
 
 
@@ -9,21 +9,11 @@
     min-width: 860px;
 }
 
-.tuneSetPosition {
-    margin-top: 5px;
-}
-
-.setId {
-    margin-left: 250px;
-}
 
 .tuneSetPositionPlayInfo {
     margin-left: 15px;
 }
 
-.repeat {
-    margin-left: 150px;
-}
 
 .partPlayInfo {
     margin-left: 15px;
