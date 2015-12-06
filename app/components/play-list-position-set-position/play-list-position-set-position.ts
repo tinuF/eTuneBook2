@@ -3,6 +3,7 @@ import {Component, NgFor, NgIf, Input} from 'angular2/angular2';
 import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {TuneBookService} from '../../services/tunebook-service';
+import {Tune} from '../../business/model/tune';
 import {TuneSet} from '../../business/model/tuneset';
 import {TuneSetPosition} from '../../business/model/tunesetposition';
 import {PlaylistPosition} from '../../business/model/playlistposition';
@@ -17,36 +18,27 @@ import {PlaylistTuneUI} from '../../components/play-list-tune/play-list-tune';
 import {TunePlayedUI} from '../tune-played/tune-played';
 import {SetListItemUI} from '../../components/set-list-item/set-list-item';
 import {PartPlayInfoListUI} from '../../components/part-play-info-list/part-play-info-list';
-import {PlayListPositionSetPositionUI} from '../../components/play-list-position-set-position/play-list-position-set-position';
-import {PlayListPositionSetPositionPlayInfoUI} from '../../components/play-list-position-set-position-play-info/play-list-position-set-position-play-info';
-
 
 
 
 @Component({
-  selector: 'etb-play-list-item',
-  templateUrl: './components/play-list-item/play-list-item.html',
-  directives: [ROUTER_DIRECTIVES, NgFor, NgIf, TuneDotsUI, SampleDotsUI, TunePlayedUI, PlaylistTuneUI, SetListItemUI, PartPlayInfoListUI, PlayListPositionSetPositionUI, PlayListPositionSetPositionPlayInfoUI],
-  styleUrls: ['./components/play-list-item/play-list-item.css'],
+  selector: 'etb-play-list-position-set-position',
+  templateUrl: './components/play-list-position-set-position/play-list-position-set-position.html',
+  directives: [ROUTER_DIRECTIVES, NgFor, NgIf, TuneDotsUI, SampleDotsUI, TunePlayedUI, PlaylistTuneUI, SetListItemUI, PartPlayInfoListUI],
+  styleUrls: ['./components/play-list-position-set-position/play-list-position-set-position.css'],
   pipes: [EliminateThe, FromNow]
 })
-export class PlayListItemUI {
-  @Input() playlistPosition: PlaylistPosition;
+export class PlayListPositionSetPositionUI {
+  @Input() tune: Tune;
   
   constructor(public tuneBookService: TuneBookService, public router: Router) {
     
   }
   
   onInit() {
-    this.tuneBookService.initializeTuneSetPositionPlayInfosForPlaylist(this.playlistPosition.playlistId);
-    this.sortSetPosition();
+    
   }
   
-  sortSetPosition(){
-    this.playlistPosition.tuneSet.tuneSetPositions.sort(function(a:TuneSetPosition, b:TuneSetPosition) {
-        return a.position - b.position
-    })
-  }
 }
 
 

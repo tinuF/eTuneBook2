@@ -1,0 +1,8 @@
+<div class="card col-sm-5" [style.background-color]="tune.color.hex">
+  <p>
+    <a [router-link]="['/Tune', {id: tune.intTuneId}]">{{tune.title | eliminateThe}}</a>
+  </p>
+  <small class="text-muted">{{tune.type}} in {{tune.key}}</small>
+  <etb-sampledots [tune]="tune"></etb-sampledots>
+  <etb-tune-played class="pull-right" [tune]="tune"></etb-tune-played>
+</div>

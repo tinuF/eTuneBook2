@@ -1,37 +1,27 @@
-<div class="card col-sm-8 playlistPosition">
-
+<div class="card playlistPosition col-sm-8">
   <div class="row">
-    <small class="col-sm-1 position">{{playlistPosition.position}}</small>
-    <small class="col-sm-4">Set {{playlistPosition.tuneSet.tuneSetId}}</small>
-    <a class='col-sm-3' (click)="justPlayedTheSet()" title="Just Played The Set"><i class="material-icons">play_circle_outline</i></a>
-    <div class="col-sm-offset-2 deleteArea">
-      <a class='delete' (click)="deletePlaylistPosition($event)">X</a>
-    </div>
-  </div>
-
-  <div *ng-for="#tuneSetPosition of playlistPosition.tuneSet.tuneSetPositions; #i = index">
-    <div class="card tuneSetPosition" [style.background-color]="tuneSetPosition.tune.color.hex">
-      <div class="row">
-        <small class="col-sm-1 position">{{tuneSetPosition.position}}</small>
-        <a class="col-sm-4" [router-link]="['/Tune', {id: tuneSetPosition.tune.intTuneId}]">{{tuneSetPosition.tune.title | eliminateThe}}</a>
-        <small class="col-sm-3" (dblclick)="prepareForEdit($event)" (keydown)="handleKeyDownOnTuneSetPositionRepeat($event, tuneSetPosition)">{{tuneSetPosition.currentTuneSetPositionPlayInfo.repeat}}</small>
-        <etb-tune-played class="col-sm-3" [tune]="tuneSetPosition.tune"></etb-tune-played>
+    <div class="card ">
+      <div class="card-block">
+        <p class="card-title">
+          <small class="col-sm-1 position">{{playlistPosition.position}}</small>
+          <div class="deleteArea">
+            <a class='delete' (click)="deletePlaylistPosition($event)">X</a>
+          </div>
+        </p>
       </div>
-      <small class="col-sm-offset-1 text-muted">{{tuneSetPosition.tune.type}} in {{tuneSetPosition.tune.key}}</small>
-      <etb-play-list-tune [tune]="tuneSetPosition.tune"></etb-play-list-tune>
-      <div class="card-footer" [style.background-color]="tuneSetPosition.tune.color.hex" [hidden]="!tuneSetPosition.currentTuneSetPositionPlayInfo.annotation">
-        <small>{{tuneSetPosition.currentTuneSetPositionPlayInfo.annotation}}</small>
+      <div class="card-block">
+        <p class="card-title">
+          <span>Set {{playlistPosition.tuneSet.tuneSetId}}</span>
+          <a class='pull-right' (click)="justPlayedTheSet()" title="Just Played The Set"><i class="material-icons">play_circle_outline</i></a>
+        </p>
+        <div class="row" *ng-for="#tuneSetPosition of playlistPosition.tuneSet.tuneSetPositions; #i = index">
+          <etb-play-list-position-set-position [tune]="tuneSetPosition.tune"></etb-play-list-position-set-position>    
+          <etb-play-list-position-set-position-play-info [tune-set-position]="tuneSetPosition"></etb-play-list-position-set-position-play-info>
+        </div>
       </div>
     </div>
-
-    <div class="card partPlayInfo" *ng-for="#partPlayInfo of tuneSetPosition.currentTuneSetPositionPlayInfo.partPlayInfos; #i = index"
-    [style.background-color]="tuneSetPosition.tune.color.hex">
-      <div class="part">{{partPlayInfo.part}} :</div>
-      <div class="playInfo">{{partPlayInfo.playInfo}}</div>
+    <div class="card-footer">
+      <small>{{playlistPosition.annotation}}</small>
     </div>
-  </div>
-
-  <div class="card-footer">
-    <small>{{playlistPosition.annotation}}</small>
   </div>
 </div>

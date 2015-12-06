@@ -65,19 +65,19 @@ a {
 	color: darkcyan;
 }
 
-.deleteArea {
+.addArea {
    display: inline-block; 
    width: 15px;
    height: 24px;
    padding-left:10px; 
 }
 
-.delete{
+.add{
     color: red;
     display: none;
 }
 
-.deleteArea:hover .delete {
+.addArea:hover .add {
    display: inline-block; 
    text-decoration: none; 
 }

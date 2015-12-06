@@ -1,0 +1,13 @@
+<div class="card" *ng-for="#partPlayInfo of tuneSetPosition.currentTuneSetPositionPlayInfo.partPlayInfos; #i = index" [style.background-color]="tuneSetPosition.tune.color.hex">
+  <div class="row">
+    <div class="col-sm-3">
+      <small contenteditable (keydown)="handleKeyDownOnPart($event, partPlayInfo)" (blur)="handleBlurOnPart($event, partPlayInfo)">{{partPlayInfo.part}}</small>
+    </div>
+    <div class="col-sm-8">
+      <small contenteditable (keydown)="handleKeyDownOnPartPlayInfo($event, partPlayInfo)" (blur)="handleBlurOnPartPlayInfo($event, partPlayInfo)">{{partPlayInfo.playInfo}}</small>
+    </div>
+    <div class="deleteArea">
+      <a class='delete' (click)="deletePartPlayInfo($event, tuneSetPosition.currentTuneSetPositionPlayInfo, partPlayInfo)">X</a>
+    </div>
+  </div>
+</div>
