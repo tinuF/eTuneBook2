@@ -18,24 +18,46 @@ import {PlaylistTuneUI} from '../../components/play-list-tune/play-list-tune';
 import {TunePlayedUI} from '../tune-played/tune-played';
 import {SetListItemUI} from '../../components/set-list-item/set-list-item';
 import {PartPlayInfoListUI} from '../../components/part-play-info-list/part-play-info-list';
+import {PlayListPositionSetPositionPlayInfoUI} from '../../components/play-list-position-set-position-play-info/play-list-position-set-position-play-info';
 
 
 
 @Component({
   selector: 'etb-play-list-position-set-position',
   templateUrl: './components/play-list-position-set-position/play-list-position-set-position.html',
-  directives: [ROUTER_DIRECTIVES, NgFor, NgIf, TuneDotsUI, SampleDotsUI, TunePlayedUI, PlaylistTuneUI, SetListItemUI, PartPlayInfoListUI],
+  directives: [ROUTER_DIRECTIVES, NgFor, NgIf, TuneDotsUI, SampleDotsUI, TunePlayedUI, PlaylistTuneUI, SetListItemUI, PartPlayInfoListUI, PlayListPositionSetPositionPlayInfoUI],
   styleUrls: ['./components/play-list-position-set-position/play-list-position-set-position.css'],
   pipes: [EliminateThe, FromNow]
 })
 export class PlayListPositionSetPositionUI {
-  @Input() tune: Tune;
+  @Input() tuneSetPosition: TuneSetPosition;
+  playInfoAnnotationShown: boolean;
   
   constructor(public tuneBookService: TuneBookService, public router: Router) {
     
   }
   
   onInit() {
+    this.playInfoAnnotationShown = false;
+  }
+  
+  handleKeyDownOnTuneSetPositionRepeat(event, tuneSetPosition) {
+    var keycode = (event.keyCode ? event.keyCode : event.which);
+    
+    if (keycode === 13) { // ENTER
+      event.target.blur();
+      event.preventDefault();
+      this.handleBlurOnTuneSetPositionRepeat(event, tuneSetPosition);
+    }
+  }
+  
+  handleBlurOnTuneSetPositionRepeat(event, tuneSetPosition) {
+    tuneSetPosition.currentTuneSetPositionPlayInfo.repeat = event.target.textContent;
+    this.tuneBookService.storeTuneBookAbc();
+  }
+  
+  togglePlayInfoAnnotation(){
+    this.playInfoAnnotationShown = !this.playInfoAnnotationShown;
     
   }
   

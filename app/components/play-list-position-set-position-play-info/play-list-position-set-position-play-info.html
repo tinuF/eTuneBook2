@@ -1,14 +1,18 @@
-<div class="card col-sm-6" [style.background-color]="tuneSetPosition.tune.color.hex">
-  <div class="card row" [style.background-color]="tuneSetPosition.tune.color.hex">
-    <small class="col-sm-11" contenteditable (keydown)="handleKeyDownOnTuneSetPositionRepeat($event, tuneSetPosition)" (blur)="handleBlurOnTuneSetPositionRepeat($event, tuneSetPosition)">{{tuneSetPosition.currentTuneSetPositionPlayInfo.repeat}}</small>
-    <div class="addArea" [hidden]="tuneSetPosition.currentTuneSetPositionPlayInfo.annotation">
-      <a class='add' (click)="togglePlayInfoAnnotation()">+</a>
-    </div>
-  </div>
+<!--
+<div class="card row" [style.background-color]="tuneSetPosition.tune.color.hex">
   
-  <div class="card row"  [hidden]="!tuneSetPosition.currentTuneSetPositionPlayInfo.annotation && !playInfoAnnotationShown" [style.background-color]="tuneSetPosition.tune.color.hex">
-    <small class="col-sm-12" contenteditable (keydown)="handleKeyDownOnTuneSetPositionAnnotation($event, tuneSetPosition)" (blur)="handleBlurOnTuneSetPositionAnnotation($event, tuneSetPosition)">{{tuneSetPosition.currentTuneSetPositionPlayInfo.annotation}}</small>
-  </div>
-
-  <etb-part-play-info-list [tune-set-position]="tuneSetPosition"></etb-part-play-info-list>
+  <small class="col-sm-11" contenteditable (keydown)="handleKeyDownOnTuneSetPositionRepeat($event, tuneSetPosition)" (blur)="handleBlurOnTuneSetPositionRepeat($event, tuneSetPosition)">{{tuneSetPosition.currentTuneSetPositionPlayInfo.repeat}}</small>
+  
+  
 </div>
+-->
+<!--
+<div class="addArea pull-right" [hidden]="tuneSetPosition.currentTuneSetPositionPlayInfo.annotation">
+    <a class='add' (click)="togglePlayInfoAnnotation()">+</a>
+  </div>
+-->
+<div class="card row" [hidden]="!tuneSetPosition.currentTuneSetPositionPlayInfo.annotation && !playInfoAnnotationShown" [style.background-color]="tuneSetPosition.tune.color.hex">
+  <small class="col-sm-12" contenteditable (keydown)="handleKeyDownOnTuneSetPositionAnnotation($event, tuneSetPosition)" (blur)="handleBlurOnTuneSetPositionAnnotation($event, tuneSetPosition)">{{tuneSetPosition.currentTuneSetPositionPlayInfo.annotation}}</small>
+</div>
+
+<etb-part-play-info-list [tune-set-position]="tuneSetPosition"></etb-part-play-info-list>

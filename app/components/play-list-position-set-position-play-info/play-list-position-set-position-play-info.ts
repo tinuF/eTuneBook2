@@ -29,14 +29,14 @@ import {PartPlayInfoListUI} from '../../components/part-play-info-list/part-play
 })
 export class PlayListPositionSetPositionPlayInfoUI {
   @Input() tuneSetPosition: TuneSetPosition;
-  playInfoAnnotationShown: boolean;
+  @Input() playInfoAnnotationShown: boolean;
   
   constructor(public tuneBookService: TuneBookService, public router: Router) {
     
   }
   
   onInit() {
-    this.playInfoAnnotationShown = false;
+    //this.playInfoAnnotationShown = false;
   }
   
   handleKeyDownOnTuneSetPositionRepeat(event, tuneSetPosition) {

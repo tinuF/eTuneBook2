@@ -1,6 +1,6 @@
 <div class="card" *ng-for="#partPlayInfo of tuneSetPosition.currentTuneSetPositionPlayInfo.partPlayInfos; #i = index" [style.background-color]="tuneSetPosition.tune.color.hex">
   <div class="row">
-    <div class="col-sm-3">
+    <div class="col-sm-2">
       <small contenteditable (keydown)="handleKeyDownOnPart($event, partPlayInfo)" (blur)="handleBlurOnPart($event, partPlayInfo)">{{partPlayInfo.part}}</small>
     </div>
     <div class="col-sm-8">

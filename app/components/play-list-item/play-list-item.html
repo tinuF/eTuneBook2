@@ -1,27 +1,18 @@
-<div class="card playlistPosition col-sm-8">
-  <div class="row">
-    <div class="card ">
-      <div class="card-block">
-        <p class="card-title">
-          <small class="col-sm-1 position">{{playlistPosition.position}}</small>
-          <div class="deleteArea">
-            <a class='delete' (click)="deletePlaylistPosition($event)">X</a>
-          </div>
-        </p>
-      </div>
-      <div class="card-block">
-        <p class="card-title">
-          <span>Set {{playlistPosition.tuneSet.tuneSetId}}</span>
-          <a class='pull-right' (click)="justPlayedTheSet()" title="Just Played The Set"><i class="material-icons">play_circle_outline</i></a>
-        </p>
-        <div class="row" *ng-for="#tuneSetPosition of playlistPosition.tuneSet.tuneSetPositions; #i = index">
-          <etb-play-list-position-set-position [tune]="tuneSetPosition.tune"></etb-play-list-position-set-position>    
-          <etb-play-list-position-set-position-play-info [tune-set-position]="tuneSetPosition"></etb-play-list-position-set-position-play-info>
-        </div>
-      </div>
-    </div>
-    <div class="card-footer">
-      <small>{{playlistPosition.annotation}}</small>
+<div class="card playlistPosition col-sm-10">
+  <div class="row col-sm-12">
+    <small>{{playlistPosition.position}} - {{playlistPosition.name | eliminateThe}} (Set {{playlistPosition.tuneSet.tuneSetId}})</small>
+    <a class='pull-right' (click)="justPlayedTheSet()" title="Just Played The Set"><i class="material-icons">play_circle_outline</i></a>
+    <div class="deleteArea">
+      <a class='delete' (click)="deletePlaylistPosition($event)">X</a>
     </div>
   </div>
+  <div class="row col-sm-12" *ng-for="#tuneSetPosition of playlistPosition.tuneSet.tuneSetPositions; #i = index">
+    <etb-play-list-position-set-position [tune-set-position]="tuneSetPosition"></etb-play-list-position-set-position>
+  </div>
+
+
+  <div class="card-footer">
+    <small>{{playlistPosition.annotation}}</small>
+  </div>
+
 </div>
