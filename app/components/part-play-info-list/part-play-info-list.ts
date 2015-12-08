@@ -71,6 +71,16 @@ export class PartPlayInfoListUI {
     tuneSetPositionPlayInfo.deletePartPlayInfo(partPlayInfo);
     this.tuneBookService.storeTuneBookAbc();
   }
+  
+  addPartPlayInfoBefore(event, tuneSetPositionPlayInfo:TuneSetPositionPlayInfo, partPlayInfo:PartPlayInfo) {
+    tuneSetPositionPlayInfo.addPartPlayInfoBefore(new PartPlayInfo("", ""), partPlayInfo);
+    this.tuneBookService.storeTuneBookAbc();
+  }
+  
+  addPartPlayInfoAfter(event, tuneSetPositionPlayInfo:TuneSetPositionPlayInfo, partPlayInfo:PartPlayInfo) {
+    tuneSetPositionPlayInfo.addPartPlayInfoAfter(new PartPlayInfo("", ""), partPlayInfo);
+    this.tuneBookService.storeTuneBookAbc();
+  }
 }
 
 

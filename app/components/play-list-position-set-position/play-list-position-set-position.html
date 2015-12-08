@@ -3,15 +3,17 @@
   <div class="col-sm-3">
     <small contenteditable (keydown)="handleKeyDownOnTuneSetPositionRepeat($event, tuneSetPosition)" (blur)="handleBlurOnTuneSetPositionRepeat($event, tuneSetPosition)">{{tuneSetPosition.currentTuneSetPositionPlayInfo.repeat}}</small>
   </div>
-  <small class="col-sm-3 text-muted">{{tuneSetPosition.tune.type}} in {{tuneSetPosition.tune.key}}</small>
-  <!--
-  <etb-sampledots [tune]="tuneSetPosition.tune"></etb-sampledots>
-  -->
+  <small class="col-sm-2 text-muted">{{tuneSetPosition.tune.type}} in {{tuneSetPosition.tune.key}}</small>
+  
   <etb-play-list-tune [tune]="tuneSetPosition.tune"></etb-play-list-tune>
   <etb-tune-played class="pull-right" [tune]="tuneSetPosition.tune"></etb-tune-played>
 
   <etb-play-list-position-set-position-play-info [tune-set-position]="tuneSetPosition" [play-info-annotation-shown]="playInfoAnnotationShown"></etb-play-list-position-set-position-play-info>
 </div>
-<div class="addArea" [hidden]="tuneSetPosition.currentTuneSetPositionPlayInfo.annotation">
-  <a class='add' (click)="togglePlayInfoAnnotation()">+</a>
+<div class="addAnnotationArea" [hidden]="tuneSetPosition.currentTuneSetPositionPlayInfo.annotation">
+  <a class='add' (click)="togglePlayInfoAnnotation()" title="Add Annotation">A</a>
 </div>
+<div class="addPartArea" [hidden]="tuneSetPosition.currentTuneSetPositionPlayInfo.partPlayInfos.length > 0">
+  <a class='add' (click)="addPartPlayInfo()" title="Add Part">P</a>
+</div>
+

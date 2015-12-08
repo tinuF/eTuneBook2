@@ -91,7 +91,9 @@ a {
 [contenteditable]:not(:focus) { border: 1px dashed #ddd; }
 */
 
-[contenteditable]:hover { border: 1px dashed #ddd; }
+[contenteditable]:hover { 
+    border: 1px dashed #ddd; 
+    }
 
 [contenteditable]:focus { 
 	border: 1px solid #51a7e8; 
@@ -100,7 +102,19 @@ a {
 	}
 
 
-.addArea {
+.addPartArea {
+   display: inline-block; 
+   position: absolute;
+   overflow: visible;
+   width: 15px;
+   height: 24px;
+   margin-top: 25px;
+   /*
+   padding-left:10px;
+   */ 
+}
+
+.addAnnotationArea {
    display: inline-block; 
    position: absolute;
    overflow: visible;
@@ -111,12 +125,19 @@ a {
    */ 
 }
 
+
+
 .add{
     color: darkcyan;
     display: none;
 }
 
-.addArea:hover .add {
+.addPartArea:hover .add {
+   display: inline-block; 
+   text-decoration: none; 
+}
+
+.addAnnotationArea:hover .add {
    display: inline-block; 
    text-decoration: none; 
 }

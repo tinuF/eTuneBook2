@@ -58,7 +58,11 @@ export class PlayListPositionSetPositionUI {
   
   togglePlayInfoAnnotation(){
     this.playInfoAnnotationShown = !this.playInfoAnnotationShown;
-    
+  }
+  
+  addPartPlayInfo() {
+    this.tuneSetPosition.currentTuneSetPositionPlayInfo.addPartPlayInfo(new PartPlayInfo("", ""));
+    this.tuneBookService.storeTuneBookAbc();
   }
   
 }
