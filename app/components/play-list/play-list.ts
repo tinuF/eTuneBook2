@@ -5,6 +5,7 @@ import {ROUTER_DIRECTIVES, RouteParams} from 'angular2/router';
 import {TuneBookService} from '../../services/tunebook-service';
 import {TuneSet} from '../../business/model/tuneset';
 import {Playlist} from '../../business/model/playlist';
+import {PlaylistPosition} from '../../business/model/playlistposition';
 import {PlayListItemUI} from '../../components/play-list-item/play-list-item';
 //import {PlayListMenuUI} from './components/play-list-menu/play-list-menu';
 
@@ -22,8 +23,18 @@ export class PlaylistUI {
     this.playlist = this.tuneBookService.getPlaylist(routeParams.get('id'));
   }
   
+  onInit(){
+    this.sortPlaylistPosition();
+  }
+  
   doCheck(){
-    
+    this.sortPlaylistPosition();
+  }
+  
+  sortPlaylistPosition(){
+    this.playlist.playlistPositions.sort(function(a:PlaylistPosition, b:PlaylistPosition) {
+        return a.position - b.position
+    })
   }
 }
 

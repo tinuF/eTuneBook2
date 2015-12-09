@@ -5,7 +5,7 @@ import {PartPlayInfo} from './partplayinfo';
 export class TuneSetPositionPlayInfo {
   playlistPosition: PlaylistPosition;
   tuneSetPosition: TuneSetPosition;
-  repeat: number;
+  repeat: string;
   partPlayInfos: Array<PartPlayInfo>;
   annotation: string;
 

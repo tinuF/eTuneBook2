@@ -225,6 +225,10 @@ export class TuneBookService {
   moveTuneSetPosition(sourceTuneSetId, sourcePosition, targetTuneSetId, targetPosition, beforeOrAfter, moveOrCopy) {
     return this.getCurrentTuneBook().moveTuneSetPosition(sourceTuneSetId, sourcePosition, targetTuneSetId, targetPosition, beforeOrAfter, moveOrCopy);
   }
+  
+  movePlaylistPosition(playlistId, oldPosition, newPosition) {
+    return this.getCurrentTuneBook().movePlaylistPosition(playlistId, oldPosition, newPosition);
+  }
 
   moveUpPlaylistPosition(playlistId, position) {
     return this.getCurrentTuneBook().moveUpPlaylistPosition(playlistId, position);

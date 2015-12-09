@@ -451,6 +451,17 @@ export class TuneBook {
       return tuneSetDeleted;
   }
 
+  movePlaylistPosition(playlistId:number, oldPosition:number, newPosition:number){
+      var playlist:Playlist;
+
+      playlist = this.getPlaylistById(playlistId);
+
+      playlist.movePlaylistPosition(oldPosition, newPosition);
+
+      return playlist;
+  }
+  
+  
   moveUpPlaylistPosition(playlistId, position){
       var playlist;
 

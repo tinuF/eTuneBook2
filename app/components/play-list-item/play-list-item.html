@@ -1,9 +1,11 @@
 <div class="card playlistPosition col-sm-10">
   <div class="row col-sm-12">
-    <small>{{playlistPosition.position}} - {{playlistPosition.name | eliminateThe}} (Set {{playlistPosition.tuneSet.tuneSetId}})</small>
+    <small contenteditable (keydown)="handleKeyDownOnPlaylistPosition($event)" (blur)="handleBlurOnPlaylistPosition($event)">{{playlistPosition.position}}</small>
+    <small contenteditable (keydown)="handleKeyDownOnPlaylistPositionName($event, playlistPosition)" (blur)="handleBlurOnPlaylistPositionName($event, playlistPosition)">{{playlistPosition.name | eliminateThe}} </small>
+    <small>(Set {{playlistPosition.tuneSet.tuneSetId}})</small>
     <a class='pull-right' (click)="justPlayedTheSet()" title="Just Played The Set"><i class="material-icons">play_circle_outline</i></a>
     <div class="deleteArea">
-      <a class='delete' (click)="deletePlaylistPosition($event)">X</a>
+      <a class='delete' (click)="deletePlaylistPosition($event)" title="Delete Playlist Position">X</a>
     </div>
   </div>
   <div class="row col-sm-12" *ng-for="#tuneSetPosition of playlistPosition.tuneSet.tuneSetPositions; #i = index">

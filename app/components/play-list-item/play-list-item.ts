@@ -47,6 +47,26 @@ export class PlayListItemUI {
         return a.position - b.position
     })
   }
+  
+  handleKeyDownOnPlaylistPosition(event) {
+    var keycode = (event.keyCode ? event.keyCode : event.which);
+    
+    if (keycode === 13) { // ENTER
+      event.target.blur();
+      event.preventDefault();
+      this.handleBlurOnPlaylistPosition(event);
+    }
+  }
+  
+  handleBlurOnPlaylistPosition(event) {
+    let oldPosition:number = this.playlistPosition.position
+    let newPosition:number = parseInt(event.target.textContent);
+    
+    if (oldPosition != newPosition) {
+      this.tuneBookService.movePlaylistPosition(this.playlistPosition.playlistId, oldPosition, newPosition);
+      this.tuneBookService.storeTuneBookAbc();  
+    }
+  }
 }
 
 

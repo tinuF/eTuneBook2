@@ -4,7 +4,7 @@ export class TuneSetPosition {
   tuneSetId: number;
   tune: Tune;
   position: string;
-  repeat: number;
+  repeat: string;
   annotation: string;
 
   constructor(tuneSetId, tune, position, repeat, annotation) {
