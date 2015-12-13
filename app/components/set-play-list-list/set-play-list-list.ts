@@ -26,6 +26,10 @@ export class SetPlaylistListUI {
   onInit(){
     this.playlists = this.tuneBookService.getPlaylistsByTuneSetId(this.set.tuneSetId);
   }
+  
+  onCheck(){
+    this.playlists = this.tuneBookService.getPlaylistsByTuneSetId(this.set.tuneSetId);
+  }
 }
 
 

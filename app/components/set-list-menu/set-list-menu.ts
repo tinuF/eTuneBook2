@@ -1,27 +1,33 @@
 /// <reference path="../../typings.d.ts" />
-import {Component} from 'angular2/angular2';
+import {Component, NgFor, FORM_DIRECTIVES} from 'angular2/angular2';
 import {ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {TuneBookService} from '../../services/tunebook-service';
 import {Tune} from '../../business/model/tune';
 import {TuneSet} from '../../business/model/tuneset';
+import {Playlist} from '../../business/model/playlist';
+import {PlaylistPosition} from '../../business/model/playlistposition';
 import {FilterSettings} from '../../common/settings/filter-settings';
+
 
 
 @Component({
   selector: 'etb-set-list-menu',
   inputs: ['sets'],
   templateUrl: './components/set-list-menu/set-list-menu.html',
-  directives: [ROUTER_DIRECTIVES],
+  directives: [ROUTER_DIRECTIVES, NgFor, FORM_DIRECTIVES],
   styleUrls: ['./components/set-list-menu/set-list-menu.css'],
 })
 export class SetListMenuUI {
   sets: Array<TuneSet>;
   sorting: string;
   filterSettings: FilterSettings;
+  playlists: Array<Playlist>;
+  selectedPlaylistId: number;
  
   constructor(public tuneBookService: TuneBookService) {
     this.filterSettings = this.tuneBookService.getCurrentFilterSettings();
+    this.playlists = this.tuneBookService.getPlaylists();
   }
   
   onInit(){
@@ -55,6 +61,16 @@ export class SetListMenuUI {
   filterSets(e){
     this.filterSettings.toggleSetIdFilter();
     this.tuneBookService.applyFilter();  
+  }
+  
+  setSelectedPlaylistId(e){
+    this.selectedPlaylistId = e.target.value;
+  }
+  
+  addSelectedSetsToSelectedPlaylist() {
+    //TODO: refresh page does not work yet
+    this.tuneBookService.addPlaylistPositions(this.selectedPlaylistId, this.filterSettings.setIds);
+    this.tuneBookService.storeTuneBookAbc();
   }
 }
 

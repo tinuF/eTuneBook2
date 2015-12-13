@@ -1,25 +1,18 @@
-.card, .card-title, .card-header, .card-footer {
-  background: lightsteelblue;
-}
-
-a {
-  /*
-  color: darkolivegreen;
-  */
-  color: darkcyan;
-}
-
-
 .card {
-  margin-right: 20px;
-  width: 22rem;
+    margin: 5px;
+    padding: 0;
+    min-width: 360px;
+    max-width: 360px;
+    background: lightcyan;
+}
+
+.card-header, .card-block, .card-footer {
+  background: lightcyan
 }
 
 a {
-  /*
-  color: darkolivegreen;
-  */
-  color: darkcyan;
+	cursor: pointer;
+	color: darkcyan;
 }
 
 

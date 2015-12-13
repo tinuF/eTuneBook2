@@ -7,6 +7,7 @@ import {TuneBook} from '../../business/model/tunebook';
 import {Playlist} from '../../business/model/playlist';
 import {getSystemProperties} from '../../common/system-properties';
 import {EliminateThe} from '../../pipes/eliminate-the';
+import {FilterSettings} from '../../common/settings/filter-settings';
 
 
 @Component({
@@ -19,17 +20,36 @@ import {EliminateThe} from '../../pipes/eliminate-the';
 })
 export class PlaylistListItemUI {
   playlist: Playlist;
+  filterSettings: FilterSettings;
+  shown:boolean;
+  checked:boolean;
   
   constructor(public tuneBookService: TuneBookService, public router: Router, public elementRef: ElementRef) {
     
   }
   
   onInit() {
-    //needs jQuery UI
-    //jQuery(this.elementRef.nativeElement).draggable({containment:'#draggable-parent'});
+    this.filterSettings = this.tuneBookService.getCurrentFilterSettings();
+    this.shown = true;
+    this.checked = false;
   }
   
+  onCheck() {
+    if (this.filterSettings.applyPlaylistIds && this.checked) {
+      this.shown = true;
+    } else {
+      this.shown = false;
+    }
+  }
   
+  togglePlaylistSelection(e){
+    if(e.target.checked){
+      this.filterSettings.addPlaylistId(this.playlist.id);
+          
+    } else {
+      this.filterSettings.removePlaylistId(this.playlist.id); 
+    } 
+  }  
 }
 
 

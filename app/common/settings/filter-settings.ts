@@ -13,6 +13,8 @@ export class FilterSettings {
     updmax:string;
     setIds:Array<number>;
     applySetIds:boolean;
+    playlistIds:Array<number>;
+    applyPlaylistIds:boolean;
     filterText:string;
   
   
@@ -25,6 +27,8 @@ export class FilterSettings {
     this.title = "";
     this.setIds = [];
     this.applySetIds = false;
+    this.playlistIds = [];
+    this.applyPlaylistIds = false;
     /*TODO
     plmin:string;
     plmax:string;
@@ -77,6 +81,21 @@ export class FilterSettings {
   
   toggleSetIdFilter(){
     this.applySetIds = !this.applySetIds;
+  }
+  
+  addPlaylistId(playlistId:number){
+    this.playlistIds.push(playlistId);
+  }
+  
+  removePlaylistId(playlistId:number){
+    let index = this.playlistIds.indexOf(playlistId);
+    if (index > -1) {
+      this.playlistIds.splice(index, 1);
+    }
+  }
+  
+  togglePlaylistIdFilter(){
+    this.applyPlaylistIds = !this.applyPlaylistIds;
   }
   
   setFilterText() {

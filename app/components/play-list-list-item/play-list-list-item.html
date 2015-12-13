@@ -1,20 +1,13 @@
-<div class="card col-md-1">
-  <div class="card-header">
-    
+<div class="card col-md-1" [hidden]="!shown">
+  <div class="card-header"> 
+    <label class="c-input c-checkbox">
+        <input type="checkbox" (change)="togglePlaylistSelection($event)">
+        <span class="c-indicator"></span>
+      </label> 
+    <small class="text-muted">{{playlist.id}}</small>
     <h5 class="card-title">
-        <small class="text-muted">Playlist: {{playlist.id}}</small>
         <a [router-link]="['/Playlist', {id: playlist.id}]">{{playlist.name}}</a>
-        <!--
-        <p class="card-text">{{playlist.name}}</p>
-        -->
     </h5>
-  </div>
-  
-  <div class="card-block">
-     <p class="card-text">{{playlist.event}}</p>
-  </div>
-  
-  <div class="card-footer">
-    <p class="card-text">{{playlist.band}}</p>
+    <small class="text-muted">{{playlist.band}}: {{playlist.event}}</small>
   </div>
 </div>

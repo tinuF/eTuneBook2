@@ -1,6 +1,7 @@
 import {TuneBook} from '../model/tunebook';
 import {TuneSet} from '../model/tuneset';
 import {Tune} from '../model/tune';
+import {Playlist} from '../model/playlist';
 import {FilterSettings} from '../../common/settings/filter-settings';
 
 export function filterTunes(tunes:Array<Tune>, filterSettings:FilterSettings):Array<Tune>{
@@ -128,6 +129,7 @@ export function filterTuneSets(tuneBook:TuneBook, filterSettings:FilterSettings)
     let tuneSetsFiltered = [];
     let playlists;
     let setIdMatch = false;
+    let playlistIdMatch = false;
 
     for (var i = 0; i < tuneBook.tuneSets.length; i++) {
         titleMatch = false;
@@ -140,12 +142,28 @@ export function filterTuneSets(tuneBook:TuneBook, filterSettings:FilterSettings)
         freqMatch = false;
         updateMatch = false;
         setIdMatch = false;
+        playlistIdMatch = false;
 
         if (filterSettings.setIds.length == 0 || !filterSettings.applySetIds) {
             setIdMatch = true;
        
         } else {
             setIdMatch = filterSettings.setIds.indexOf(tuneBook.tuneSets[i].tuneSetId) > -1    
+        }
+        
+        if (filterSettings.playlistIds.length == 0 || !filterSettings.applyPlaylistIds) {
+            playlistIdMatch = true;
+       
+        } else {
+            let setPlaylists:Array<Playlist> = tuneBook.getPlaylistsByTuneSetId(tuneBook.tuneSets[i].tuneSetId);
+            
+            for (var z = 0; z < setPlaylists.length; z++) {
+                for (var j = 0; j < filterSettings.playlistIds.length; j++) {
+                    if (setPlaylists[z].id == filterSettings.playlistIds[j]) {
+                        playlistIdMatch = true;          
+                    }
+                }    
+            }    
         }
         
         if (filterSettings.title == "") {
@@ -255,7 +273,7 @@ export function filterTuneSets(tuneBook:TuneBook, filterSettings:FilterSettings)
             }
         }
 
-        if (keyMatch && typeMatch && colorMatch && eventMatch && bandMatch && playMatch && updateMatch && freqMatch && titleMatch && setIdMatch){
+        if (keyMatch && typeMatch && colorMatch && eventMatch && bandMatch && playMatch && updateMatch && freqMatch && titleMatch && setIdMatch && playlistIdMatch){
             tuneSetsFiltered.push(tuneBook.tuneSets[i]);
         }
     }
@@ -430,4 +448,22 @@ export function extractTuneSetPositions(tuneSets){
     }
 
     return tuneSetPositions;
+}
+
+export function filterPlaylists(playlists: Array<Playlist>, filterSettings: FilterSettings) {
+    let playlistsFiltered: Array<Playlist> = [];
+
+    if (filterSettings.applyPlaylistIds && filterSettings.playlistIds.length > 0) {
+        for (var z = 0; z < playlists.length; z++) {
+            for (var j = 0; j < filterSettings.playlistIds.length; j++) {
+                if (playlists[z].id == filterSettings.playlistIds[j]) {
+                    playlistsFiltered.push(playlists[z]);
+                }
+            }
+        }
+
+        return playlistsFiltered;
+    } else {
+        return playlists;
+    }
 }

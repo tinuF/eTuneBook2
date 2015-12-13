@@ -7,7 +7,7 @@ import {AbcExportSettings} from '../common/settings/abc-export-settings';
 import {FilterSettings} from '../common/settings/filter-settings';
 import {eliminateThe} from '../business/util/text-util';
 import {tuneUp, tuneDown} from '../business/util/transposer-util';
-import {filterTunes, filterTuneSets, extractSetsWithinPlayDatePeriod, extractTunes, extractTuneSetPositions} from '../business/filter/filter-logic';
+import {filterTunes, filterTuneSets, extractSetsWithinPlayDatePeriod, extractTunes, extractTuneSetPositions, filterPlaylists} from '../business/filter/filter-logic';
 import {getAbcValue} from '../business/util/abc-util';
 import {getRandomArrayIndex, shuffleArray} from '../business/util/math-util';
 import {getSystemProperties} from '../common/system-properties';
@@ -241,6 +241,10 @@ export class TuneBookService {
   addEmptyPlaylistPosition(playlistId) {
     return this.getCurrentTuneBook().addEmptyPlaylistPosition(playlistId);
   }
+  
+  addPlaylistPositions(playlistId, setIds) {
+    return this.getCurrentTuneBook().addPlaylistPositions(playlistId, setIds);
+  }
 
   addEmptyPlaylist() {
     return this.getCurrentTuneBook().addEmptyPlaylist();
@@ -318,6 +322,10 @@ export class TuneBookService {
 
   getPlaylists() {
     return this.getCurrentTuneBook().playlists;
+  }
+  
+  getPlaylistsFiltered() {
+    return filterPlaylists(this.getCurrentTuneBook().playlists,this.getCurrentFilterSettings());
   }
 
   getPlaylist(playlistId) {

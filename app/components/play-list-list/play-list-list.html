@@ -1,2 +1,8 @@
-<br> <!-- todo: replace break by css: Abstand zwischen playlist und navbar -->
-<etb-play-list-list-item [playlist]="playlist" *ng-for="#playlist of playlists; #i = index"></etb-play-list-list-item>
+<div class="row">
+	<div class="col-xs-1 ">
+		<etb-play-list-list-menu [playlists]="playlists"></etb-play-list-list-menu>
+	</div>
+	<div class="col-xs-11">
+		<etb-play-list-list-item [playlist]="playlist" *ng-for="#playlist of playlists; #i = index"></etb-play-list-list-item>
+	</div>
+</div>

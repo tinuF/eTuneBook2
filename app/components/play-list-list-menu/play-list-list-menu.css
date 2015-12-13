@@ -1,0 +1,13 @@
+.playlistListMenu {
+	position: fixed;
+	left: 1px;
+	top: 160px;
+    /*background-color: #F5F5F5;*/
+    z-index: 1020;
+    /*height: 50px;*/
+    width: 40px;
+    background-color: lightgray;
+ }
+
+
+

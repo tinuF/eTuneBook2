@@ -795,7 +795,18 @@ export class TuneBook {
       }
   }
 
-  addEmptyPlaylistPosition(playlistId){
+  addPlaylistPositions(playlistId, setIds:Array<number>){
+      let playlist, tuneSet;
+
+      playlist = this.getPlaylistById(playlistId);
+      
+      for (var z = 0; z < setIds.length; z++) {
+        tuneSet = this.getTuneSetById(setIds[z]);
+        playlist.playlistPositions.push(new PlaylistPosition(playlist.id, playlist.playlistPositions.length + 1, tuneSet, "", ""));    
+      }
+  }
+  
+  addEmptyPlaylistPosition(playlistId):PlaylistPosition{
       var playlist, emptyPlaylistPosition;
 
       playlist = this.getPlaylistById(playlistId);

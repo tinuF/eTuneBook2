@@ -1,7 +1,7 @@
 import {PlaylistPosition} from './playlistposition';
 
 export class Playlist {
-  id: string;
+  id: number;
   name: string;
   event: string;
   band: string;
