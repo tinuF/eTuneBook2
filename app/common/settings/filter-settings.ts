@@ -70,6 +70,7 @@ export class FilterSettings {
   
   addSetId(setId:number){
     this.setIds.push(setId);
+    this.setFilterText();
   }
   
   removeSetId(setId:number){
@@ -77,10 +78,12 @@ export class FilterSettings {
     if (index > -1) {
       this.setIds.splice(index, 1);
     }
+    this.setFilterText();
   }
   
   toggleSetIdFilter(){
     this.applySetIds = !this.applySetIds;
+    this.setFilterText();
   }
   
   addPlaylistId(playlistId:number){
@@ -101,35 +104,40 @@ export class FilterSettings {
   setFilterText() {
       this.filterText = "";
       
-      if (this.type != "All Types" || this.key != "All Keys" || this.event != "All Events" || this.band != "All Bands") {
+      if (this.type != "All Types" || this.key != "All Keys" || this.event != "All Events" || this.band != "All Bands" || this.applySetIds) {
         //this.filterText = "Filter: "
         if (this.type != "All Types") {
           this.filterText = this.filterText + this.type;
         }
 
         if (this.key != "All Keys") {
-          if (this.filterText != "") {
-            this.filterText = this.filterText + ", ";
-          }
+          this.addComma();
           this.filterText = this.filterText + this.key;
         }
 
         if (this.event != "All Events") {
-          if (this.filterText != "") {
-            this.filterText = this.filterText + ", ";
-          }
+          this.addComma();
           this.filterText = this.filterText + this.event;
         }
 
         if (this.band != "All Bands") {
-          if (this.filterText != "") {
-            this.filterText = this.filterText + ", ";
-          }
+          this.addComma();
           this.filterText = this.filterText + this.band;
         }
+        
+        if (this.applySetIds && this.setIds.length > 0) {
+          this.addComma();
+          this.filterText = this.filterText + "Sets [";
+          
+          for (var i = 0; i < this.setIds.length; i++) {
+            if (i > 0) {
+              this.addComma();
+            }
+            this.filterText = this.filterText + this.setIds[i];
+          }
+          this.filterText = this.filterText + "]";
+        }
       }
-      
-      
       
 
 /*TODO
@@ -157,5 +165,11 @@ export class FilterSettings {
           this.currentFilter = this.currentFilter + this.filterSettings.plmax;
       }
       */
+  }
+  
+  addComma() {
+    if (this.filterText != "") {
+      this.filterText = this.filterText + ", ";
+    }
   }
 } 

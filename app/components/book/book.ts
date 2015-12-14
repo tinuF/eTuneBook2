@@ -1,24 +1,68 @@
 /// <reference path="../../typings.d.ts" />
-import {Component, View} from 'angular2/angular2';
+import {Component, Input} from 'angular2/angular2';
 import {Router} from 'angular2/router';
 
 import {TuneBookService} from '../../services/tunebook-service';
 import {TuneBook} from '../../business/model/tunebook';
 
 @Component({
-  selector: 'book',
-})
-@View({
-  templateUrl: './components/book/book.html'
+  selector: 'etb-book',
+  templateUrl: './components/book/book.html',
+  styleUrls: ['./components/book/book.css'],
 })
 export class BookUI {
-  tuneBook: TuneBook;
+  @Input() tuneBook: TuneBook;
 
   constructor(public tuneBookService: TuneBookService, public router: Router) {
+    
+  }
+  
+  onInit(){
     this.tuneBook =  this.tuneBookService.getTuneBookFromLocalStorage();
   }
-  edit() {
-    //$state.transitionTo('bookedit', $stateParams);
-    this.router.navigate('bookedit');
+  
+  handleKeyDownOnTuneBookName(event) {
+    var keycode = (event.keyCode ? event.keyCode : event.which);
+    
+    if (keycode === 13) { // ENTER
+      event.target.blur();
+      event.preventDefault();
+      this.handleBlurOnTuneBookName(event);
+    }
+  }
+  
+  handleBlurOnTuneBookName(event) {
+    this.tuneBook.name = event.target.textContent;
+    this.tuneBookService.storeTuneBookAbc();
+  }
+  
+  handleKeyDownOnTuneBookVersion(event) {
+    var keycode = (event.keyCode ? event.keyCode : event.which);
+    
+    if (keycode === 13) { // ENTER
+      event.target.blur();
+      event.preventDefault();
+      this.handleBlurOnTuneBookVersion(event);
+    }
+  }
+  
+  handleBlurOnTuneBookVersion(event) {
+    this.tuneBook.version = event.target.textContent;
+    this.tuneBookService.storeTuneBookAbc();
+  }
+  
+  handleKeyDownOnTuneBookDescription(event) {
+    var keycode = (event.keyCode ? event.keyCode : event.which);
+    
+    if (keycode === 13) { // ENTER
+      event.target.blur();
+      event.preventDefault();
+      this.handleBlurOnTuneBookDescription(event);
+    }
+  }
+  
+  handleBlurOnTuneBookDescription(event) {
+    this.tuneBook.description = event.target.textContent;
+    this.tuneBookService.storeTuneBookAbc();
   }
 }

@@ -76,6 +76,17 @@
 
 <div class="container-fluid">
     <div class="row">
+	   <div class="col-xs-5">
+		  <etb-book-title [tune-book]="tuneBook"></etb-book-title>
+	   </div>
+	   <div class="col-xs-7">
+		  <filter-text></filter-text>
+	   </div>
+    </div>
+
+    
+        
+    <div class="row">
         <!--
         <div class="col-md-1 bd-sidebar">
             <div class="bd-sidebar">
@@ -116,9 +127,6 @@
                 </i>
             </a>
         </li>
-        
-        <book-title class="col-xs-3 hidden-sm-down"></book-title>
-        <filter-text class="col-xs-3 hidden-sm-down"></filter-text>
         
          <li class="nav-item dropdown col-xs-2" [style.active]="infoMenuActive">
             <a class="nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" title="Info">Info

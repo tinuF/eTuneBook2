@@ -1,4 +1,19 @@
-<div class="well">
-    <p class="lead"><strong>{{tuneBook.name}}</strong> - Version {{tuneBook.version}}<br>{{tuneBook.description}}</p>
-    <p class="lead"><button class="btn btn-default" (click)="edit()">Edit</button></p>
+<div class="row">
+	<div class="col-sm-1 "></div>
+	<div class="col-sm-11">
+		<div class="card col-sm-8">
+  			<div class="card-block">
+				<div class="col-sm-3 "><small>Title:</small></div>
+    			<div class="col-sm-9 "><span contenteditable (keydown)="handleKeyDownOnTuneBookName($event)" (blur)="handleBlurOnTuneBookName($event)">{{tuneBook.name}}</span></div>
+			</div>	
+			<div class="card-block">
+				<div class="col-sm-3 "><small>Version:</small></div>
+    			<div class="col-sm-9 "><span contenteditable (keydown)="handleKeyDownOnTuneBookVersion($event)" (blur)="handleBlurOnTuneBookVersion($event)">{{tuneBook.version}}</span></div>
+			</div>
+			<div class="card-block">
+    			<div class="col-sm-3 "><small>Description:</small></div>
+    			<div class="col-sm-9 "><span contenteditable (keydown)="handleKeyDownOnTuneBookDescription($event)" (blur)="handleBlurOnTuneBookDescription($event)">{{tuneBook.description}}</span></div>
+  			</div>
+		</div>
+	</div>
 </div>

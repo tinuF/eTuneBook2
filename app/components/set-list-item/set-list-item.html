@@ -1,13 +1,11 @@
 <div class="card col-lg-4">
 	<div class="card-block">
-    <p class="card-title">
-      <label class="c-input c-checkbox">
+    <label class="c-input c-checkbox">
         <input type="checkbox" (change)="toggleSetSelection($event)">
         <span class="c-indicator"></span>
       </label>
-      <span>Set {{set.tuneSetId}}</span>
+      <small class="text-muted">{{set.tuneSetId}}</small>
       <a class='pull-right' (click)="justPlayedTheSet()" title="Just Played The Set"><i class="material-icons">play_circle_outline</i></a>
-    </p>
   </div>
   <div class="card-block">
     <etb-set-position [position]="position" *ng-for="#position of set.tuneSetPositions; #i = index"></etb-set-position>
