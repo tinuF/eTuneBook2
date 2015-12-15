@@ -1,5 +1,5 @@
 <div class="card col-sm-12" [style.background-color]="tuneSetPosition.tune.color.hex">
-  <a class="col-sm-4" [router-link]="['/Tune', {id: tuneSetPosition.tune.intTuneId}]">{{tuneSetPosition.position}} - {{tuneSetPosition.tune.title | eliminateThe}}</a>
+  <a class="col-sm-4" [router-link]="['/Tune', {id: tuneSetPosition.tune.intTuneId}]">{{tuneSetPosition.position}} {{tuneSetPosition.tune.title | eliminateThe}}</a>
   <div class="col-sm-3">
     <small contenteditable (keydown)="handleKeyDownOnTuneSetPositionRepeat($event, tuneSetPosition)" (blur)="handleBlurOnTuneSetPositionRepeat($event, tuneSetPosition)">{{tuneSetPosition.currentTuneSetPositionPlayInfo.repeat}}</small>
   </div>

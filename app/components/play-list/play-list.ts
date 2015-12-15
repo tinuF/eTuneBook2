@@ -36,6 +36,51 @@ export class PlaylistUI {
         return a.position - b.position
     })
   }
+  
+  handleKeyDownOnPlaylistName(event) {
+    var keycode = (event.keyCode ? event.keyCode : event.which);
+    
+    if (keycode === 13) { // ENTER
+      event.target.blur();
+      event.preventDefault();
+      this.handleBlurOnPlaylistName(event);
+    }
+  }
+  
+  handleBlurOnPlaylistName(event) {
+    this.playlist.name = event.target.textContent;
+    this.tuneBookService.storeTuneBookAbc();
+  }
+  
+  handleKeyDownOnPlaylistBand(event) {
+    var keycode = (event.keyCode ? event.keyCode : event.which);
+    
+    if (keycode === 13) { // ENTER
+      event.target.blur();
+      event.preventDefault();
+      this.handleBlurOnPlaylistBand(event);
+    }
+  }
+  
+  handleBlurOnPlaylistBand(event) {
+    this.playlist.band = event.target.textContent;
+    this.tuneBookService.storeTuneBookAbc();
+  }
+  
+  handleKeyDownOnPlaylistEvent(event) {
+    var keycode = (event.keyCode ? event.keyCode : event.which);
+    
+    if (keycode === 13) { // ENTER
+      event.target.blur();
+      event.preventDefault();
+      this.handleBlurOnPlaylistEvent(event);
+    }
+  }
+  
+  handleBlurOnPlaylistEvent(event) {
+    this.playlist.event = event.target.textContent;
+    this.tuneBookService.storeTuneBookAbc();
+  }
 }
 
 

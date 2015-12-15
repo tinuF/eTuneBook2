@@ -68,7 +68,6 @@ export class SetListMenuUI {
   }
   
   addSelectedSetsToSelectedPlaylist() {
-    //TODO: refresh page does not work yet
     this.tuneBookService.addPlaylistPositions(this.selectedPlaylistId, this.filterSettings.setIds);
     this.tuneBookService.storeTuneBookAbc();
   }

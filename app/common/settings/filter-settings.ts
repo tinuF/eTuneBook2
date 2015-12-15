@@ -88,6 +88,7 @@ export class FilterSettings {
   
   addPlaylistId(playlistId:number){
     this.playlistIds.push(playlistId);
+    this.setFilterText();
   }
   
   removePlaylistId(playlistId:number){
@@ -95,10 +96,12 @@ export class FilterSettings {
     if (index > -1) {
       this.playlistIds.splice(index, 1);
     }
+    this.setFilterText();
   }
   
   togglePlaylistIdFilter(){
     this.applyPlaylistIds = !this.applyPlaylistIds;
+    this.setFilterText();
   }
   
   setFilterText() {
@@ -134,6 +137,19 @@ export class FilterSettings {
               this.addComma();
             }
             this.filterText = this.filterText + this.setIds[i];
+          }
+          this.filterText = this.filterText + "]";
+        }
+        
+        if (this.applyPlaylistIds && this.playlistIds.length > 0) {
+          this.addComma();
+          this.filterText = this.filterText + "Playlists [";
+          
+          for (var i = 0; i < this.playlistIds.length; i++) {
+            if (i > 0) {
+              this.addComma();
+            }
+            this.filterText = this.filterText + this.playlistIds[i];
           }
           this.filterText = this.filterText + "]";
         }
