@@ -450,20 +450,57 @@ export function extractTuneSetPositions(tuneSets){
     return tuneSetPositions;
 }
 
-export function filterPlaylists(playlists: Array<Playlist>, filterSettings: FilterSettings) {
+export function filterPlaylists(playlists: Array<Playlist>, filterSettings: FilterSettings, tuneSetsFiltered: Array<TuneSet>) {
     let playlistsFiltered: Array<Playlist> = [];
+    let playlistIdMatch: boolean = false;
+    //let playlistEventMatch: boolean = false;
+    //let playlistBandMatch: boolean = false;
+    let tuneSetMatch: boolean = false;
+    
 
-    if (filterSettings.applyPlaylistIds && filterSettings.playlistIds.length > 0) {
-        for (var z = 0; z < playlists.length; z++) {
+    for (var z = 0; z < playlists.length; z++) {
+        playlistIdMatch = false;
+        //playlistEventMatch = false;
+        //playlistBandMatch = false;
+        tuneSetMatch = false;
+        
+        if (filterSettings.applyPlaylistIds && filterSettings.playlistIds.length > 0) {
             for (var j = 0; j < filterSettings.playlistIds.length; j++) {
-                if (playlists[z].id == filterSettings.playlistIds[j]) {
-                    playlistsFiltered.push(playlists[z]);
+                if (!playlistIdMatch && playlists[z].id == filterSettings.playlistIds[j]) {
+                    playlistIdMatch = true;
                 }
             }
+        } else {
+            playlistIdMatch = true;
+        }
+        
+        for (var y = 0; y < playlists[z].playlistPositions.length; y++) {
+            
+            for (var a = 0; a < tuneSetsFiltered.length; a++) {
+                if (!tuneSetMatch && playlists[z].playlistPositions[y].tuneSet.tuneSetId == tuneSetsFiltered[a].tuneSetId) {
+                    tuneSetMatch = true;
+                }    
+            }
+        }
+        
+        /*
+        if (filterSettings.event == "All Events" || playlists[z].event == filterSettings.event) {
+            playlistEventMatch = true;
         }
 
-        return playlistsFiltered;
-    } else {
-        return playlists;
+        if (filterSettings.band == "All Bands" || playlists[z].band == filterSettings.band) {
+            playlistBandMatch = true;
+        }    
+        
+        if (playlistIdMatch && playlistEventMatch && playlistBandMatch) {
+            playlistsFiltered.push(playlists[z])
+        }
+        */
+        
+        if (playlistIdMatch && tuneSetMatch) {
+            playlistsFiltered.push(playlists[z])
+        }
     }
+    
+    return playlistsFiltered;
 }

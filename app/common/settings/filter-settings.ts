@@ -107,7 +107,7 @@ export class FilterSettings {
   setFilterText() {
       this.filterText = "";
       
-      if (this.type != "All Types" || this.key != "All Keys" || this.event != "All Events" || this.band != "All Bands" || this.applySetIds) {
+      if (this.type != "All Types" || this.key != "All Keys" || this.event != "All Events" || this.band != "All Bands" || this.applySetIds || this.applyPlaylistIds) {
         //this.filterText = "Filter: "
         if (this.type != "All Types") {
           this.filterText = this.filterText + this.type;

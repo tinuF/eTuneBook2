@@ -325,7 +325,7 @@ export class TuneBookService {
   }
   
   getPlaylistsFiltered() {
-    return filterPlaylists(this.getCurrentTuneBook().playlists,this.getCurrentFilterSettings());
+    return filterPlaylists(this.getCurrentTuneBook().playlists,this.getCurrentFilterSettings(), this.getTuneSetsFiltered());
   }
 
   getPlaylist(playlistId) {
