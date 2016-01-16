@@ -59,6 +59,7 @@ export const NPM_DEPENDENCIES = [
   { src: 'bootstrap/dist/css/bootstrap.min.css', inject: true, dest: CSS_DEST },
   
   { src: 'jquery/dist/jquery.min.js', inject: true, dest: LIB_DEST },
+  { src: 'bootstrap/dist/js/bootstrap.min.js', inject: true, dest: LIB_DEST },
   { src: 'moment/min/moment.min.js', inject: true, dest: LIB_DEST }
 ];
 
