@@ -1,5 +1,4 @@
-/// <reference path="../../typings.d.ts" />
-import {Component, ElementRef} from 'angular2/angular2';
+import {Component, ElementRef, OnInit} from 'angular2/core';
 import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {TuneBookService} from '../../services/tunebook-service';
@@ -18,7 +17,7 @@ import {FilterSettings} from '../../common/settings/filter-settings';
   styleUrls: ['./components/play-list-list-item/play-list-list-item.css'],
   pipes: [EliminateThe]
 })
-export class PlaylistListItemUI {
+export class PlaylistListItemUI implements OnInit {
   playlist: Playlist;
   filterSettings: FilterSettings;
   shown:boolean;
@@ -28,7 +27,7 @@ export class PlaylistListItemUI {
     
   }
   
-  onInit() {
+  ngOnInit() {
     this.filterSettings = this.tuneBookService.getCurrentFilterSettings();
     this.shown = true;
     this.checked = false;

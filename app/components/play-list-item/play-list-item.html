@@ -3,13 +3,13 @@
     <small contenteditable (keydown)="handleKeyDownOnPlaylistPosition($event)" (blur)="handleBlurOnPlaylistPosition($event)">{{playlistPosition.position}}</small>
     <small contenteditable (keydown)="handleKeyDownOnPlaylistPositionName($event, playlistPosition)" (blur)="handleBlurOnPlaylistPositionName($event, playlistPosition)">{{playlistPosition.name | eliminateThe}} </small>
     <small>(Set {{playlistPosition.tuneSet.tuneSetId}})</small>
-    <a class='pull-right' (click)="justPlayedTheSet()" title="Just Played The Set"><i class="material-icons">play_circle_outline</i></a>
+    <a class='pull-sm-right' (click)="justPlayedTheSet()" title="Just Played The Set"><i class="material-icons">play_circle_outline</i></a>
     <div class="deleteArea">
       <a class='delete' (click)="deletePlaylistPosition($event)" title="Delete Playlist Position">X</a>
     </div>
   </div>
-  <div class="row col-sm-12" *ng-for="#tuneSetPosition of playlistPosition.tuneSet.tuneSetPositions; #i = index">
-    <etb-play-list-position-set-position [tune-set-position]="tuneSetPosition"></etb-play-list-position-set-position>
+  <div class="row col-sm-12" *ngFor="#tuneSetPosition of playlistPosition.tuneSet.tuneSetPositions; #i = index">
+    <etb-play-list-position-set-position [tuneSetPosition]="tuneSetPosition"></etb-play-list-position-set-position>
   </div>
 
 

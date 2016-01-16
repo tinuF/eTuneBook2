@@ -1,5 +1,4 @@
-/// <reference path="../../typings.d.ts" />
-import {Component, NgFor, NgIf, Input} from 'angular2/angular2';
+import {Component, Input, OnInit} from 'angular2/core';
 import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {TuneBookService} from '../../services/tunebook-service';
@@ -26,18 +25,18 @@ import {PlayListPositionSetPositionPlayInfoUI} from '../../components/play-list-
 @Component({
   selector: 'etb-play-list-item',
   templateUrl: './components/play-list-item/play-list-item.html',
-  directives: [ROUTER_DIRECTIVES, NgFor, NgIf, TuneDotsUI, SampleDotsUI, TunePlayedUI, PlaylistTuneUI, SetListItemUI, PartPlayInfoListUI, PlayListPositionSetPositionUI, PlayListPositionSetPositionPlayInfoUI],
+  directives: [ROUTER_DIRECTIVES, TuneDotsUI, SampleDotsUI, TunePlayedUI, PlaylistTuneUI, SetListItemUI, PartPlayInfoListUI, PlayListPositionSetPositionUI, PlayListPositionSetPositionPlayInfoUI],
   styleUrls: ['./components/play-list-item/play-list-item.css'],
   pipes: [EliminateThe, FromNow]
 })
-export class PlayListItemUI {
+export class PlayListItemUI implements OnInit {
   @Input() playlistPosition: PlaylistPosition;
   
   constructor(public tuneBookService: TuneBookService, public router: Router) {
     
   }
   
-  onInit() {
+  ngOnInit() {
     this.tuneBookService.initializeTuneSetPositionPlayInfosForPlaylist(this.playlistPosition.playlistId);
     this.sortSetPosition();
   }

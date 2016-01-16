@@ -1,5 +1,4 @@
-/// <reference path="../../typings.d.ts" />
-import {Component, View, DoCheck} from 'angular2/angular2';
+import {Component, View, DoCheck} from 'angular2/core';
 import {RouteParams, Location} from 'angular2/router';
 import {TuneBookService} from '../../services/tunebook-service';
 import {Tune} from '../../business/model/tune';
@@ -7,9 +6,7 @@ import {EliminateThe} from '../../pipes/eliminate-the';
 
 
 @Component({
-  selector: 'tune-title'
-})
-@View({
+  selector: 'tune-title',
   templateUrl: './components/tune-title/tune-title.html',
   styleUrls: ['./components/tune-title/tune-title.css'],
   pipes: [EliminateThe]
@@ -26,7 +23,7 @@ export class TuneTitleUI implements DoCheck {
   }
   
   
-  doCheck(){
+  ngDoCheck(){
     this.setTuneTitle();
   }
   

@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>eTuneBook</title>
+  <title><%= APP_TITLE %></title>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,8 +14,6 @@
   <meta name="revisit-after" content="7 days">
   <meta name="page-topic" content="music, notation, repertoire">
   <link rel="SHORTCUT ICON" type="image/ico" href="favicon.ico">
-
-  <base href="<%= APP_BASE %>">
 
   <!-- Add to homescreen for Chrome on Android -->
   <meta name="mobile-web-app-capable" content="yes">
@@ -48,7 +46,9 @@
   -->
 
   <!--TODO: Bootstrap 4: Replace CDN by npm -->
+  <!--
   <link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css">
+  -->
   <style>
     body {
       padding-top: 60px;
@@ -62,19 +62,32 @@
 <body>
 
   <etb-app>Loading...</etb-app>
-
-  <!-- inject:js -->
+  
+  <!-- shims:js -->
   <!-- endinject -->
 
-  <!--TODO: Bootstrap 4: Replace CDN by npm -->
-  <script src="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/js/bootstrap.js"></script>
+  <script>System.config(<%= JSON.stringify(SYSTEM_CONFIG) %>)</script>
+
+  <!-- libs:js -->
+  <!-- endinject -->
+  
   <script>
-    System.import('bootstrap')
+    System.import('<%= BOOTSTRAP_MODULE %>')
       .catch(function (e) {
         console.error(e,
           'Oops!');
       });
   </script>
+  
+  <!-- inject:js -->
+  <!-- endinject -->
+  
+  <!--TODO: Bootstrap 4: Replace CDN by npm -->
+  <!--
+  <script src="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/js/bootstrap.js"></script>
+  -->
+  
+  
 </body>
 
 </html>

@@ -1,5 +1,4 @@
-/// <reference path="../../typings.d.ts" />
-import {Component, NgFor, NgIf, Input} from 'angular2/angular2';
+import {Component, Input, OnInit} from 'angular2/core';
 import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {TuneBookService} from '../../services/tunebook-service';
@@ -23,11 +22,11 @@ import {PartPlayInfoListUI} from '../../components/part-play-info-list/part-play
 @Component({
   selector: 'etb-play-list-position-set-position-play-info',
   templateUrl: './components/play-list-position-set-position-play-info/play-list-position-set-position-play-info.html',
-  directives: [ROUTER_DIRECTIVES, NgFor, NgIf, TuneDotsUI, SampleDotsUI, TunePlayedUI, PlaylistTuneUI, SetListItemUI, PartPlayInfoListUI],
+  directives: [ROUTER_DIRECTIVES, TuneDotsUI, SampleDotsUI, TunePlayedUI, PlaylistTuneUI, SetListItemUI, PartPlayInfoListUI],
   styleUrls: ['./components/play-list-position-set-position-play-info/play-list-position-set-position-play-info.css'],
   pipes: [EliminateThe, FromNow]
 })
-export class PlayListPositionSetPositionPlayInfoUI {
+export class PlayListPositionSetPositionPlayInfoUI implements OnInit {
   @Input() tuneSetPosition: TuneSetPosition;
   @Input() playInfoAnnotationShown: boolean;
   
@@ -35,7 +34,7 @@ export class PlayListPositionSetPositionPlayInfoUI {
     
   }
   
-  onInit() {
+  ngOnInit() {
     //this.playInfoAnnotationShown = false;
   }
   

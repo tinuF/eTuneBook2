@@ -1,5 +1,4 @@
-/// <reference path="../../typings.d.ts" />
-import {Component, NgFor} from 'angular2/angular2';
+import {Component} from 'angular2/core';
 import {ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {TuneBookService} from '../../services/tunebook-service';
@@ -12,7 +11,7 @@ import {TuneVideoListItemUI} from '../../components/tune-video-list-item/tune-vi
   inputs: ['tune: tune'],
   templateUrl: './components/tune-video-list/tune-video-list.html',
   styleUrls: ['./components/tune-video-list/tune-video-list.css'],
-  directives: [NgFor, ROUTER_DIRECTIVES, TuneVideoListItemUI]
+  directives: [ROUTER_DIRECTIVES, TuneVideoListItemUI]
 })
 export class TuneVideoListUI {
   tune: Tune;

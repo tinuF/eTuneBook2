@@ -1,5 +1,4 @@
-/// <reference path="../../typings.d.ts" />
-import {Component, NgFor, DoCheck} from 'angular2/angular2';
+import {Component, DoCheck} from 'angular2/core';
 import {RouteConfig, ROUTER_DIRECTIVES, Router, RouteParams, Location, OnActivate, OnReuse} from 'angular2/router';
 import {TuneBookService} from '../../services/tunebook-service';
 import {TuneBook} from '../../business/model/tunebook';
@@ -25,7 +24,7 @@ import {TunePlaylistListUI} from '../tune-play-list-list/tune-play-list-list';
   directives: [ROUTER_DIRECTIVES, TuneMenuUI, TuneActionsUI, TuneDotsUI, TunePlayedUI, TuneVideoListUI, TuneSetListUI, TunePlaylistListUI],
   pipes: [FromNow]
 })
-export class TuneUI {
+export class TuneUI implements DoCheck {
   tune: Tune;
  
   constructor(public tuneBookService: TuneBookService, public router: Router, routeParams:RouteParams, public location:Location) {
@@ -33,7 +32,7 @@ export class TuneUI {
   }
   
   
-  doCheck(){
+  ngDoCheck(){
   }
   
   showTuneSets() {

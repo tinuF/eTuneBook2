@@ -1,5 +1,4 @@
-/// <reference path="../../typings.d.ts" />
-import {Component, CORE_DIRECTIVES,  EventEmitter, OnInit} from 'angular2/angular2';
+import {Component, EventEmitter, OnInit} from 'angular2/core';
 
 import {TuneBookService} from '../../services/tunebook-service';
 import {TuneBook} from '../../business/model/tunebook';
@@ -13,10 +12,9 @@ import {FilterSettings} from '../../common/settings/filter-settings';
 @Component({
     selector: 'etb-filter', //ACHTUNG: filter kollidiert mit svg filter element, deshalb ist etbk- wichtig!
     templateUrl: './components/filter/filter.html',
-    styleUrls: ['./components/filter/filter.css'],
-    directives: [CORE_DIRECTIVES]
+    styleUrls: ['./components/filter/filter.css']
 })
-export class FilterUI {
+export class FilterUI implements OnInit {
     tuneBook: TuneBook;
     filterSettings: FilterSettings;
     systemProperties;
@@ -44,7 +42,7 @@ export class FilterUI {
         this.filterSettings = this.tuneBookService.getCurrentFilterSettings();
     }
     
-    onInit() {
+    ngOnInit() {
         this.setFilterOptions();
         this.setSelectedType(this.filterSettings.type);
         this.setSelectedKey(this.filterSettings.key);

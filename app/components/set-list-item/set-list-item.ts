@@ -1,5 +1,4 @@
-/// <reference path="../../typings.d.ts" />
-import {Component, View, NgFor, ElementRef} from 'angular2/angular2';
+import {Component, ElementRef, OnInit} from 'angular2/core';
 import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {TuneBookService} from '../../services/tunebook-service';
@@ -17,11 +16,11 @@ import {FilterSettings} from '../../common/settings/filter-settings';
   selector: 'etb-set-list-item',
   inputs: ['set'],
   templateUrl: './components/set-list-item/set-list-item.html',
-  directives: [ROUTER_DIRECTIVES, NgFor, SampleDotsUI, SetPositionUI, SetPlaylistListUI],
+  directives: [ROUTER_DIRECTIVES, SampleDotsUI, SetPositionUI, SetPlaylistListUI],
   styleUrls: ['./components/set-list-item/set-list-item.css'],
   pipes: [EliminateThe, FromNow]
 })
-export class SetListItemUI {
+export class SetListItemUI implements OnInit {
   set: TuneSet;
   filterSettings: FilterSettings;
   
@@ -29,7 +28,7 @@ export class SetListItemUI {
     this.filterSettings = this.tuneBookService.getCurrentFilterSettings();  
   }
   
-  onInit() {
+  ngOnInit() {
     //needs jQuery UI
     //jQuery(this.elementRef.nativeElement).draggable({containment:'#draggable-parent'});
     this.sortSetPosition();

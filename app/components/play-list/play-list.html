@@ -11,7 +11,7 @@
 			<p class="col-xs-3" contenteditable (keydown)="handleKeyDownOnPlaylistEvent($event)" (blur)="handleBlurOnPlaylistEvent($event)"> {{playlist.event}} </p>
 		</div>
 		<div class="row">
-			<etb-play-list-item [playlist-position]="position" *ng-for="#position of playlist.playlistPositions; #i = index"></etb-play-list-item>
+			<etb-play-list-item [playlistPosition]="position" *ngFor="#position of playlist.playlistPositions; #i = index"></etb-play-list-item>
 		</div>
 	</div>
 	<!--

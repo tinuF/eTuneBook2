@@ -14,7 +14,7 @@
   
                     <div class="col-lg-5">
                         <select class="form-control" id="typeFilter" ng-control="type" (change)="setType($event)">
-                            <option *ng-for="#type of types" [value]="type">{{type}}</option>
+                            <option *ngFor="#type of types" [value]="type">{{type}}</option>
                         </select>
                     </div>
 
@@ -25,7 +25,7 @@
 
                     <div class="col-lg-5">
                         <select class="form-control" id="keyFilter" ng-control="key" (change)="setKey($event)">
-                            <option *ng-for="#key of keys" [value]="key">{{key}}</option>
+                            <option *ngFor="#key of keys" [value]="key">{{key}}</option>
                         </select>
                     </div>
                 </div>
@@ -34,7 +34,7 @@
                     <label class="control-label" for="colorFilter">Color</label>
                       <div class="col-lg-5">
                           <select class="form-control" id="colorFilter" ng-control="color" (change)="setColor($event)">
-                            <option *ng-for="#color of colors" [value]="color" [style.background-color]="color">{{color}}</option>
+                            <option *ngFor="#color of colors" [value]="color" [style.background-color]="color">{{color}}</option>
                         </select>
                     </div>
                 </div>
@@ -43,7 +43,7 @@
                     <label class="control-label" for="eventFilter">Event</label>
                     <div class="col-lg-5">
                         <select class="form-control" id="eventFilter" ng-control="event" (change)="setEvent($event)">
-                            <option *ng-for="#event of events" [value]="event">{{event}}</option>
+                            <option *ngFor="#event of events" [value]="event">{{event}}</option>
                         </select>
                     </div>
                 </div>
@@ -52,7 +52,7 @@
                     <label class="control-label" for="bandFilter">Band</label>
                     <div class="col-lg-5">
                         <select class="form-control" id="bandFilter" ng-control="band" (change)="setBand($event)">
-                            <option *ng-for="#band of bands" [value]="band">{{band}}</option>
+                            <option *ngFor="#band of bands" [value]="band">{{band}}</option>
                         </select>
                     </div>
                 </div>

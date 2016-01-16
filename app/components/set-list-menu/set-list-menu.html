@@ -50,7 +50,7 @@
       </div>
       <div class="modal-body">
         <select class="form-control form-control-lg" (change)="setSelectedPlaylistId($event)">
-		      <option [value]="playlist.id" *ng-for="#playlist of playlists; #i = index">{{playlist.name}} - {{playlist.band}}</option>
+		      <option [value]="playlist.id" *ngFor="#playlist of playlists; #i = index">{{playlist.name}} - {{playlist.band}}</option>
 	  	  </select>
       </div>
       <div class="modal-footer">

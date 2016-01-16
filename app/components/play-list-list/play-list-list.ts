@@ -1,5 +1,4 @@
-/// <reference path="../../typings.d.ts" />
-import {Component, NgFor, DoCheck} from 'angular2/angular2';
+import {Component, DoCheck, OnInit} from 'angular2/core';
 import {ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {TuneBookService} from '../../services/tunebook-service';
@@ -11,21 +10,21 @@ import {PlaylistListMenuUI} from '../../components/play-list-list-menu/play-list
 @Component({
   selector: 'etb-playlist-list',
   templateUrl: './components/play-list-list/play-list-list.html',
-  directives: [NgFor, ROUTER_DIRECTIVES, PlaylistListItemUI, PlaylistListMenuUI],
+  directives: [ROUTER_DIRECTIVES, PlaylistListItemUI, PlaylistListMenuUI],
   styleUrls: ['./components/play-list-list/play-list-list.css']
 })
-export class PlaylistListUI implements DoCheck {
+export class PlaylistListUI implements OnInit, DoCheck {
   playlists: Array<Playlist>;
  
   constructor(public tuneBookService: TuneBookService) {
     
   }
   
-  onInit(){
+  ngOnInit(){
     this.playlists = this.tuneBookService.getPlaylistsFiltered();
   }
   
-  doCheck(){
+  ngDoCheck(){
     this.playlists = this.tuneBookService.getPlaylistsFiltered();
   }
 }

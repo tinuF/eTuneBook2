@@ -1,5 +1,4 @@
-/// <reference path="../../typings.d.ts" />
-import {Component, NgFor} from 'angular2/angular2';
+import {Component, OnInit, DoCheck} from 'angular2/core';
 import {ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {TuneBookService} from '../../services/tunebook-service';
@@ -14,9 +13,9 @@ import {SetListItemUI} from '../../components/set-list-item/set-list-item';
   inputs: ['tune'],
   templateUrl: './components/tune-set-list/tune-set-list.html',
   styleUrls: ['./components/tune-set-list/tune-set-list.css'],
-  directives: [NgFor, ROUTER_DIRECTIVES, SetListItemUI]
+  directives: [ROUTER_DIRECTIVES, SetListItemUI]
 })
-export class TuneSetListUI {
+export class TuneSetListUI implements OnInit, DoCheck {
   tune: Tune;
   sets: Array<TuneSet>;
  
@@ -24,11 +23,11 @@ export class TuneSetListUI {
     
   }
   
-  onInit(){
+  ngOnInit(){
     this.sets = this.tuneBookService.getTuneSetsByIntTuneId(this.tune.intTuneId);
   }
   
-  doCheck(){
+  ngDoCheck(){
     this.sets = this.tuneBookService.getTuneSetsByIntTuneId(this.tune.intTuneId);
   }
 }

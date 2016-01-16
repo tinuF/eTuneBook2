@@ -1,5 +1,4 @@
-/// <reference path="../../typings.d.ts" />
-import {Component, NgFor, DoCheck} from 'angular2/angular2';
+import {Component, DoCheck} from 'angular2/core';
 import {ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {TuneBookService} from '../../services/tunebook-service';
@@ -11,7 +10,7 @@ import {SetListMenuUI} from '../../components/set-list-menu/set-list-menu';
 @Component({
   selector: 'etb-set-list',
   templateUrl: './components/set-list/set-list.html',
-  directives: [NgFor, ROUTER_DIRECTIVES, SetListItemUI, SetListMenuUI],
+  directives: [ROUTER_DIRECTIVES, SetListItemUI, SetListMenuUI],
   styleUrls: ['./components/set-list/set-list.css']
 })
 export class SetListUI implements DoCheck {
@@ -21,7 +20,7 @@ export class SetListUI implements DoCheck {
     this.sets = this.tuneBookService.getTuneSetsFiltered();
   }
   
-  doCheck(){
+  ngDoCheck(){
     this.sets = this.tuneBookService.getTuneSetsFiltered();
   }
 }

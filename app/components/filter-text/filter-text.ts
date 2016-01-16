@@ -1,15 +1,12 @@
-/// <reference path="../../typings.d.ts" />
-import {Component, View} from 'angular2/angular2';
+import {Component} from 'angular2/core';
 
 import {TuneBookService} from '../../services/tunebook-service';
 import {FilterSettings} from '../../common/settings/filter-settings';
 
 @Component({
-    selector: 'filter-text' 
-})
-@View({
+    selector: 'filter-text',
     templateUrl: './components/filter-text/filter-text.html',
-    styleUrls: ['./components/filter-text/filter-text.css']
+    styleUrls: ['./components/filter-text/filter-text.css'] 
 })
 export class FilterTextUI {
     filterSettings: FilterSettings;

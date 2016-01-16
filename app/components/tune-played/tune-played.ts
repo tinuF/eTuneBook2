@@ -1,5 +1,4 @@
-/// <reference path="../../typings.d.ts" />
-import {Component} from 'angular2/angular2';
+import {Component} from 'angular2/core';
 import {TuneBookService} from '../../services/tunebook-service';
 import {Tune} from '../../business/model/tune';
 import {FromNow} from '../../pipes/from-now';

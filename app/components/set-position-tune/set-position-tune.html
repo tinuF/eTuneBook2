@@ -8,17 +8,17 @@
     (drop)="handleDrop($event)"
     (dragend)="handleDragEnd($event)" 
     [style.background-color]="tune.color.hex">
-    <div class="deleteArea pull-right">
+    <div class="deleteArea pull-xl-right">
         <a class='delete' (click)="deleteTuneSetPosition($event)">X</a>
     </div>
         
     <p >
-        <a [router-link]="['/Tune', {id: tune.intTuneId}]">{{tune.title | eliminateThe}}</a>
+        <a [routerLink]="['/Tune', {id: tune.intTuneId}]">{{tune.title | eliminateThe}}</a>
         
     </p>
     <small class="text-muted">{{tune.type}} in {{tune.key}}</small>
     <etb-sampledots [tune]="tune"></etb-sampledots>
-    <etb-tune-played class="pull-right"[tune]="tune"></etb-tune-played>
+    <etb-tune-played class="pull-xl-right"[tune]="tune"></etb-tune-played>
 </div>
 
 

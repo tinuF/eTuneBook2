@@ -1,5 +1,4 @@
-/// <reference path="../../typings.d.ts" />
-import {Component, View, NgFor, DoCheck} from 'angular2/angular2';
+import {Component, View, DoCheck} from 'angular2/core';
 import {RouteConfig, ROUTER_DIRECTIVES, Router, RouteParams, Location, OnActivate, OnReuse} from 'angular2/router';
 import {TuneBookService} from '../../services/tunebook-service';
 import {TuneBook} from '../../business/model/tunebook';
@@ -32,7 +31,7 @@ export class TuneActionsUI implements DoCheck, OnActivate {
   }
   
   
-  doCheck(){
+  ngDoCheck(){
     this.setCurrentState();
     //Versuch, an den Titel heranzukommen. funktioniert nicht
     $(".title.meta-top").css( "color", "red" );

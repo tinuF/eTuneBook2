@@ -1,5 +1,4 @@
-/// <reference path="../../typings.d.ts" />
-import {Component, CORE_DIRECTIVES, FORM_DIRECTIVES} from 'angular2/angular2';
+import {Component} from 'angular2/core';
 import {Route, RouteConfig, Router, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router';
 
 import {getSystemProperties} from '../../common/system-properties';
@@ -27,19 +26,19 @@ import {RandomUI} from '../../components/random/random';
   providers: [TuneBookService],
   templateUrl: './components/app/app.html',
   styleUrls: ['./components/app/app.css'],
-  directives: [CORE_DIRECTIVES, FORM_DIRECTIVES, ROUTER_DIRECTIVES, FilterTextUI, BookTitleUI, TuneTitleUI, RandomUI]
+  directives: [ROUTER_DIRECTIVES, FilterTextUI, BookTitleUI, TuneTitleUI, RandomUI]
 })
 @RouteConfig([
-  { path: '/', redirectTo: '/info/introduction', as: 'Home' },
-  { path: '/book', component: BookUI, as: 'Book' },
-  { path: '/info/introduction', component: Introduction, as: 'Introduction' },
-  { path: '/tunes', component: TuneListUI, as: 'Tunelist' },
-  { path: '/tunes/:id', component: TuneUI, as: 'Tune' },
-  { path: '/tunes/:id/abc', component: TuneAbcUI, as: 'Tuneabc' },
-  { path: '/sets', component: SetListUI, as: 'Setlist' },
-  { path: '/filter', component: FilterUI, as: 'Filter' },
-  { path: '/playlists', component: PlaylistListUI, as: 'PlaylistList'},
-  { path: '/playlists/:id', component: PlaylistUI, as: 'Playlist' }
+  { path: '/', redirectTo: ['Introduction'], name: 'Home' },
+  { path: '/book', component: BookUI, name: 'Book' },
+  { path: '/info/introduction', component: Introduction, name: 'Introduction' },
+  { path: '/tunes', component: TuneListUI, name: 'Tunelist' },
+  { path: '/tunes/:id', component: TuneUI, name: 'Tune' },
+  { path: '/tunes/:id/abc', component: TuneAbcUI, name: 'Tuneabc' },
+  { path: '/sets', component: SetListUI, name: 'Setlist' },
+  { path: '/filter', component: FilterUI, name: 'Filter' },
+  { path: '/playlists', component: PlaylistListUI, name: 'PlaylistList'},
+  { path: '/playlists/:id', component: PlaylistUI, name: 'Playlist' }
 ])
 export class App {
   tuneBook: TuneBook;

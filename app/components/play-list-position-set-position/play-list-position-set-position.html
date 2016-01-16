@@ -1,14 +1,14 @@
 <div class="card col-sm-12" [style.background-color]="tuneSetPosition.tune.color.hex">
-  <a class="col-sm-4" [router-link]="['/Tune', {id: tuneSetPosition.tune.intTuneId}]">{{tuneSetPosition.position}} {{tuneSetPosition.tune.title | eliminateThe}}</a>
+  <a class="col-sm-4" [routerLink]="['/Tune', {id: tuneSetPosition.tune.intTuneId}]">{{tuneSetPosition.position}} {{tuneSetPosition.tune.title | eliminateThe}}</a>
   <div class="col-sm-3">
     <small contenteditable (keydown)="handleKeyDownOnTuneSetPositionRepeat($event, tuneSetPosition)" (blur)="handleBlurOnTuneSetPositionRepeat($event, tuneSetPosition)">{{tuneSetPosition.currentTuneSetPositionPlayInfo.repeat}}</small>
   </div>
   <small class="col-sm-2 text-muted">{{tuneSetPosition.tune.type}} in {{tuneSetPosition.tune.key}}</small>
   
   <etb-play-list-tune [tune]="tuneSetPosition.tune"></etb-play-list-tune>
-  <etb-tune-played class="pull-right" [tune]="tuneSetPosition.tune"></etb-tune-played>
+  <etb-tune-played class="pull-sm-right" [tune]="tuneSetPosition.tune"></etb-tune-played>
 
-  <etb-play-list-position-set-position-play-info [tune-set-position]="tuneSetPosition" [play-info-annotation-shown]="playInfoAnnotationShown"></etb-play-list-position-set-position-play-info>
+  <etb-play-list-position-set-position-play-info [tuneSetPosition]="tuneSetPosition" [play-info-annotation-shown]="playInfoAnnotationShown"></etb-play-list-position-set-position-play-info>
 </div>
 <div class="addAnnotationArea" [hidden]="tuneSetPosition.currentTuneSetPositionPlayInfo.annotation">
   <a class='add' (click)="togglePlayInfoAnnotation()" title="Add Annotation">A</a>

@@ -1,26 +1,14 @@
 import * as gulp from 'gulp';
-import * as runSequence from 'run-sequence';
-import {ENV, PATH} from './tools/config';
-import {
-  autoRegisterTasks,
-  registerInjectableAssetsRef,
-  task
-} from './tools/utils';
-
-
-// --------------
-// Configuration.
-autoRegisterTasks();
-
-registerInjectableAssetsRef(PATH.src.jslib_inject, PATH.dest.dev.lib);
-registerInjectableAssetsRef(PATH.src.csslib, PATH.dest.dev.css);
-
+import {runSequence, task} from './tools/utils';
 
 // --------------
 // Clean (override).
 gulp.task('clean',       task('clean', 'all'));
 gulp.task('clean.dist',  task('clean', 'dist'));
 gulp.task('clean.test',  task('clean', 'test'));
+gulp.task('clean.tmp',   task('clean', 'tmp'));
+
+gulp.task('check.versions', task('check.versions'));
 
 // --------------
 // Postinstall.
@@ -29,20 +17,32 @@ gulp.task('postinstall', done =>
               'npm',
               done));
 
-
 // --------------
 // Build dev.
 gulp.task('build.dev', done =>
   runSequence('clean.dist',
               'tslint',
-              'build.jslib.dev',
-              'build.sass.dev',
+              'build.assets.dev',
               'build.js.dev',
-              'build.csslib.dev',
-              'build.fonts',
-              'build.index.dev',
+              'build.index',
               done));
 
+// --------------
+// Build prod.
+gulp.task('build.prod', done =>
+  runSequence('clean.dist',
+              'clean.tmp',
+              'tslint',
+              'build.assets.prod',
+              'build.html_css.prod',
+              'build.deps',
+              'build.js.prod',
+              'build.bundles',
+              'build.index',
+              done));
+
+// --------------
+// Watch.
 gulp.task('build.dev.watch', done =>
   runSequence('build.dev',
               'watch.dev',
@@ -62,18 +62,18 @@ gulp.task('test', done =>
               'karma.start',
               done));
 
-
 // --------------
 // Serve.
 gulp.task('serve', done =>
-  runSequence(`build.${ENV}`,
+  runSequence('build.dev',
               'server.start',
               'watch.serve',
               done));
 
-
-
 // --------------
-// Build prod.
-// To be implemented (https://github.com/mgechev/angular2-seed/issues/58)
-// Will start implementation when Angular 2 will get close to a stable release.
+// Docs
+// Disabled until https://github.com/sebastian-lenz/typedoc/issues/162 gets resolved
+// gulp.task('docs', done =>
+//   runSequence('build.docs',
+//               'serve.docs',
+//               done));

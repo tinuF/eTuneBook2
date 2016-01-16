@@ -1,12 +1,12 @@
 <div class="card col-md-1" [style.background-color]="tune.color.hex">
   
   <div class="card-header" [style.background-color]="tune.color.hex">
-    <h5 class="card-title"><a [router-link]="['/Tune', {id: tune.intTuneId}]">{{tune.title | eliminateThe}}</a></h5>
+    <h5 class="card-title"><a [routerLink]="['/Tune', {id: tune.intTuneId}]">{{tune.title | eliminateThe}}</a></h5>
     <small class="text-muted">{{tune.type}} in {{tune.key}}</small>  
   </div>
   
   <div class="card-block" [style.background-color]="tune.color.hex">
     <etb-sampledots [tune]="tune"></etb-sampledots>
-    <etb-tune-played class="pull-right" [tune]="tune"></etb-tune-played>
+    <etb-tune-played class="pull-md-right" [tune]="tune"></etb-tune-played>
   </div>
 </div>

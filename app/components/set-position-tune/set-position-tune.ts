@@ -1,5 +1,4 @@
-/// <reference path="../../typings.d.ts" />
-import {Component, View, ElementRef} from 'angular2/angular2';
+import {Component, ElementRef, OnInit} from 'angular2/core';
 import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {TuneBookService} from '../../services/tunebook-service';
@@ -16,15 +15,13 @@ import {TunePlayedUI} from '../tune-played/tune-played';
 
 @Component({
   selector: 'etb-set-position-tune',
-  inputs: ['tune', 'position']
-})
-@View({
+  inputs: ['tune', 'position'],
   templateUrl: './components/set-position-tune/set-position-tune.html',
   directives: [ROUTER_DIRECTIVES, SampleDotsUI, TunePlayedUI],
   styleUrls: ['./components/set-position-tune/set-position-tune.css'],
   pipes: [EliminateThe, FromNow]
 })
-export class SetpositionTuneUI {
+export class SetpositionTuneUI implements OnInit {
   tune: Tune;
   position: TuneSetPosition;
   
@@ -32,7 +29,7 @@ export class SetpositionTuneUI {
     
   }
   
-  onInit() {
+  ngOnInit() {
     //needs jQuery UI
     //jQuery(this.elementRef.nativeElement).draggable({containment:'#draggable-parent'});
   }

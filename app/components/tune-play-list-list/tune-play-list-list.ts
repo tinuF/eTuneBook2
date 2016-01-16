@@ -1,5 +1,4 @@
-/// <reference path="../../typings.d.ts" />
-import {Component, NgFor} from 'angular2/angular2';
+import {Component} from 'angular2/core';
 import {ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {TuneBookService} from '../../services/tunebook-service';
@@ -12,7 +11,7 @@ import {PlaylistListItemUI} from '../../components/play-list-list-item/play-list
   selector: 'etb-tune-play-list-list',
   inputs: ['tune'],
   templateUrl: './components/tune-play-list-list/tune-play-list-list.html',
-  directives: [NgFor, ROUTER_DIRECTIVES, PlaylistListItemUI],
+  directives: [ROUTER_DIRECTIVES, PlaylistListItemUI],
   styleUrls: ['./components/tune-play-list-list/tune-play-list-list.css']
 })
 export class TunePlaylistListUI {

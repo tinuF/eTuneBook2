@@ -1,5 +1,4 @@
-/// <reference path="../../typings.d.ts" />
-import {Component, DoCheck, Input, NgModel} from 'angular2/angular2';
+import {Component, DoCheck, Input, OnInit} from 'angular2/core';
 import {Router, RouteParams} from 'angular2/router';
 
 import {TuneBookService} from '../../services/tunebook-service';
@@ -14,7 +13,7 @@ import {getSystemProperties} from '../../common/system-properties';
     templateUrl: './components/play-list-tune-dots/play-list-tune-dots.html',
     styleUrls: ['./components/play-list-tune-dots/play-list-tune-dots.css'],
 })
-export class PlaylistTuneDotsUI implements DoCheck {
+export class PlaylistTuneDotsUI implements OnInit, DoCheck {
     @Input() tune: Tune;
     tuneObjectArray: Array<any>;
     shown: boolean;
@@ -26,7 +25,7 @@ export class PlaylistTuneDotsUI implements DoCheck {
         
     }
     
-    onInit(){
+    ngOnInit(){
         this.shown = false;
         this.buttonText = '+';
     }
@@ -73,7 +72,7 @@ export class PlaylistTuneDotsUI implements DoCheck {
     }
 
 
-    doCheck() {
+    ngDoCheck() {
         //$("svg").css("height", "150px" );
         //$("svg").css("preserveAspectRatio", "xMinYMin meet");
         //$(".title.meta-top").css("fill", "red");

@@ -1,5 +1,4 @@
-/// <reference path="../../typings.d.ts" />
-import {Component, NgFor, DoCheck} from 'angular2/angular2';
+import {Component, DoCheck} from 'angular2/core';
 import {ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {TuneBookService} from '../../services/tunebook-service';
@@ -11,7 +10,7 @@ import {TuneListMenuUI} from '../../components/tune-list-menu/tune-list-menu';
 @Component({
   selector: 'etb-tune-list',
   templateUrl: './components/tune-list/tune-list.html',
-  directives: [NgFor, ROUTER_DIRECTIVES, TuneListItemUI, TuneListMenuUI],
+  directives: [ROUTER_DIRECTIVES, TuneListItemUI, TuneListMenuUI],
   styleUrls: ['./components/tune-list/tune-list.css'],
 })
 export class TuneListUI implements DoCheck {
@@ -21,7 +20,7 @@ export class TuneListUI implements DoCheck {
     this.tunes = this.tuneBookService.getTunesFiltered();
   }
   
-  doCheck(){
+  ngDoCheck(){
     //todo: this does not work properly with text-search (might be called to often?)
     //with filter it works fine
     //example: text-search 'derry' among slip-jigs gives Dever the Dancer, Humours of Derrycrossane, Slide from Grace

@@ -1,5 +1,4 @@
-/// <reference path="../../typings.d.ts" />
-import {Component, ElementRef} from 'angular2/angular2';
+import {Component, ElementRef, OnInit} from 'angular2/core';
 import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {TuneBookService} from '../../services/tunebook-service';
@@ -19,14 +18,14 @@ import {TunePlayedUI} from '../../components/tune-played/tune-played';
   styleUrls: ['./components/tune-list-item/tune-list-item.css'],
   pipes: [EliminateThe, FromNow]
 })
-export class TuneListItemUI {
+export class TuneListItemUI implements OnInit {
   tune: Tune;
   
   constructor(public tuneBookService: TuneBookService, public router: Router, public elementRef: ElementRef) {
     
   }
   
-  onInit() {
+  ngOnInit() {
     //needs jQuery UI
     //jQuery(this.elementRef.nativeElement).draggable({containment:'#draggable-parent'});
   }

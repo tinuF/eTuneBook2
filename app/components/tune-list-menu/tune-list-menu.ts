@@ -1,5 +1,4 @@
-/// <reference path="../../typings.d.ts" />
-import {Component} from 'angular2/angular2';
+import {Component, OnInit} from 'angular2/core';
 import {ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {TuneBookService} from '../../services/tunebook-service';
@@ -12,7 +11,7 @@ import {Tune} from '../../business/model/tune';
   directives: [ROUTER_DIRECTIVES],
   styleUrls: ['./components/tune-list-menu/tune-list-menu.css'],
 })
-export class TuneListMenuUI {
+export class TuneListMenuUI implements OnInit {
   tunes: Array<Tune>;
   sorting: string;
  
@@ -20,7 +19,7 @@ export class TuneListMenuUI {
     
   }
   
-  onInit(){
+  ngOnInit(){
     this.tunes = this.tuneBookService.getTunesFiltered();
   }
   

@@ -1,5 +1,4 @@
-/// <reference path="../../typings.d.ts" />
-import {Component, Input} from 'angular2/angular2';
+import {Component, Input, OnInit} from 'angular2/core';
 import {Router} from 'angular2/router';
 
 import {TuneBookService} from '../../services/tunebook-service';
@@ -10,14 +9,14 @@ import {TuneBook} from '../../business/model/tunebook';
   templateUrl: './components/book/book.html',
   styleUrls: ['./components/book/book.css'],
 })
-export class BookUI {
+export class BookUI implements OnInit {
   @Input() tuneBook: TuneBook;
 
   constructor(public tuneBookService: TuneBookService, public router: Router) {
     
   }
   
-  onInit(){
+  ngOnInit(){
     this.tuneBook =  this.tuneBookService.getTuneBookFromLocalStorage();
   }
   

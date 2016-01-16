@@ -29,8 +29,13 @@ bower_components
 .lock-wscript
 .tsdrc
 
+#IDE configuration files
+.idea
+.vscode
+
 dist
 dev
 lib
 test
 tools/typings/tsd
+tmp

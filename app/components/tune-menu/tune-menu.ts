@@ -1,5 +1,4 @@
-/// <reference path="../../typings.d.ts" />
-import {Component, NgFor, DoCheck} from 'angular2/angular2';
+import {Component, OnInit} from 'angular2/core';
 import {RouteConfig, ROUTER_DIRECTIVES, Router, RouteParams, Location, OnActivate, OnReuse} from 'angular2/router';
 import {TuneBookService} from '../../services/tunebook-service';
 import {TuneBook} from '../../business/model/tunebook';
@@ -18,7 +17,7 @@ import {FromNow} from '../../pipes/from-now';
   directives: [ROUTER_DIRECTIVES],
   pipes: [FromNow]
 })
-export class TuneMenuUI  {
+export class TuneMenuUI implements OnInit  {
   tune: Tune;
   currentState: string;
  
@@ -26,7 +25,7 @@ export class TuneMenuUI  {
    
   }
   
-  onInit(){
+  ngOnInit(){
     this.setCurrentState();
   }
   

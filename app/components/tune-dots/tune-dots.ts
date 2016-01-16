@@ -1,5 +1,4 @@
-/// <reference path="../../typings.d.ts" />
-import {Component, View, DoCheck, NgModel} from 'angular2/angular2';
+import {Component, OnInit, DoCheck} from 'angular2/core';
 import {Router, RouteParams} from 'angular2/router';
 
 import {TuneBookService} from '../../services/tunebook-service';
@@ -11,13 +10,11 @@ import {getSystemProperties} from '../../common/system-properties';
 
 @Component({
   selector: 'tune-dots',
-  inputs: ['tune: tune']
-})
-@View({
+  inputs: ['tune: tune'],
   templateUrl: './components/tune-dots/tune-dots.html',
-  styleUrls: ['./components/tune-dots/tune-dots.css'],
+  styleUrls: ['./components/tune-dots/tune-dots.css']
 })
-export class TuneDotsUI implements DoCheck {
+export class TuneDotsUI implements OnInit, DoCheck {
     tune: Tune;
     tuneObjectArray: Array<any>;
   
@@ -28,13 +25,13 @@ export class TuneDotsUI implements DoCheck {
        
     }
 
-    onInit() {
+    ngOnInit() {
         this.renderAbc(this.tune);
         //$(".title.meta-top").css( "fill", "red" );
     }
     
     
-    doCheck() {
+    ngDoCheck() {
         //$("svg").css("height", "150px" );
         $("svg").css("preserveAspectRatio", "xMinYMin meet" );
         $(".title.meta-top").css( "fill", "red" );

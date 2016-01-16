@@ -1,5 +1,4 @@
-/// <reference path="../../typings.d.ts" />
-import {Component, Input} from 'angular2/angular2';
+import {Component, Input, OnInit, DoCheck} from 'angular2/core';
 import {TuneBookService} from '../../services/tunebook-service';
 import {TuneBook} from '../../business/model/tunebook';
 
@@ -9,18 +8,18 @@ import {TuneBook} from '../../business/model/tunebook';
   templateUrl: './components/book-title/book-title.html',
   styleUrls: ['./components/book-title/book-title.css']
 })
-export class BookTitleUI {
+export class BookTitleUI implements OnInit, DoCheck {
   @Input() tuneBook: TuneBook;
   
   constructor(public tuneBookService: TuneBookService){
     
   }
   
-  onInit(){
+  ngOnInit(){
     this.tuneBook =  this.tuneBookService.getCurrentTuneBook();
   }
   
-  doCheck(){
+  ngDoCheck(){
     this.tuneBook =  this.tuneBookService.getCurrentTuneBook();
   }
   

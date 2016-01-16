@@ -1,36 +1,36 @@
-import * as connectLivereload from 'connect-livereload';
+import * as util from 'gulp-util';
 import * as express from 'express';
-import * as minilrFn from 'mini-lr';
 import * as openResource from 'open';
 import * as serveStatic from 'serve-static';
+import * as codeChangeTool from './code_change_tools';
 import {resolve} from 'path';
-import {APP_BASE, LIVE_RELOAD_PORT, PATH, PORT, ENV} from '../config';
-
-let minilr = minilrFn();
-
+import {APP_BASE, APP_DEST, DOCS_DEST, DOCS_PORT, PORT} from '../config';
 
 export function serveSPA() {
   let server = express();
-  minilr.listen(LIVE_RELOAD_PORT);
+  codeChangeTool.listen();
+  server.use.apply(server, codeChangeTool.middleware);
 
-  server.use(
-    APP_BASE,
-    connectLivereload({ port: LIVE_RELOAD_PORT }),
-    serveStatic(resolve(process.cwd(), PATH.dest[ENV].all))
-  );
-
-  server.all(APP_BASE + '*', (req, res) =>
-    res.sendFile(resolve(process.cwd(), PATH.dest[ENV].all, 'index.html'))
-  );
-
-  server.listen(PORT, () =>
-    openResource('http://localhost:' + PORT + APP_BASE)
-  );
+  server.listen(PORT, () => {
+    util.log('Server is listening on port: ' + PORT);
+    openResource('http://localhost:' + PORT + APP_BASE + APP_DEST);
+  });
 }
 
 export function notifyLiveReload(e) {
   let fileName = e.path;
-  minilr.changed({
-    body: { files: [fileName] }
-  });
+  codeChangeTool.changed(fileName);
+}
+
+export function serveDocs() {
+  let server = express();
+
+   server.use(
+    APP_BASE,
+    serveStatic(resolve(process.cwd(), DOCS_DEST))
+  );
+
+   server.listen(DOCS_PORT, () =>
+    openResource('http://localhost:' + DOCS_PORT + APP_BASE)
+  );
 }

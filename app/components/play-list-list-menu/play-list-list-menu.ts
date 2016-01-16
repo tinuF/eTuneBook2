@@ -1,5 +1,4 @@
-/// <reference path="../../typings.d.ts" />
-import {Component, NgFor, FORM_DIRECTIVES} from 'angular2/angular2';
+import {Component, OnInit} from 'angular2/core';
 import {ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {TuneBookService} from '../../services/tunebook-service';
@@ -15,10 +14,10 @@ import {FilterSettings} from '../../common/settings/filter-settings';
   selector: 'etb-play-list-list-menu',
   inputs: ['playlists'],
   templateUrl: './components/play-list-list-menu/play-list-list-menu.html',
-  directives: [ROUTER_DIRECTIVES, NgFor, FORM_DIRECTIVES],
+  directives: [ROUTER_DIRECTIVES],
   styleUrls: ['./components/play-list-list-menu/play-list-list-menu.css'],
 })
-export class PlaylistListMenuUI {
+export class PlaylistListMenuUI implements OnInit {
   sorting: string;
   filterSettings: FilterSettings;
   playlists: Array<Playlist>;
@@ -28,7 +27,7 @@ export class PlaylistListMenuUI {
    
   }
   
-  onInit(){
+  ngOnInit(){
     this.filterSettings = this.tuneBookService.getCurrentFilterSettings(); 
   }
   

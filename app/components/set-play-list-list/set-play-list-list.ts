@@ -1,5 +1,4 @@
-/// <reference path="../../typings.d.ts" />
-import {Component, NgFor} from 'angular2/angular2';
+import {Component, OnInit, DoCheck} from 'angular2/core';
 import {ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {TuneBookService} from '../../services/tunebook-service';
@@ -12,10 +11,10 @@ import {SetPlaylistListItemUI} from '../../components/set-play-list-list-item/se
   selector: 'etb-set-play-list-list',
   inputs: ['set'],
   templateUrl: './components/set-play-list-list/set-play-list-list.html',
-  directives: [NgFor, ROUTER_DIRECTIVES, SetPlaylistListItemUI],
+  directives: [ROUTER_DIRECTIVES, SetPlaylistListItemUI],
   styleUrls: ['./components/set-play-list-list/set-play-list-list.css']
 })
-export class SetPlaylistListUI {
+export class SetPlaylistListUI implements OnInit, DoCheck {
   set: TuneSet;
   playlists: Array<Playlist>;
  
@@ -23,11 +22,11 @@ export class SetPlaylistListUI {
     
   }
   
-  onInit(){
+  ngOnInit(){
     this.playlists = this.tuneBookService.getPlaylistsByTuneSetId(this.set.tuneSetId);
   }
   
-  doCheck(){
+  ngDoCheck(){
     this.playlists = this.tuneBookService.getPlaylistsByTuneSetId(this.set.tuneSetId);
   }
 }

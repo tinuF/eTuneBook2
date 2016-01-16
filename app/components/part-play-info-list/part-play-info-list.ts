@@ -1,5 +1,4 @@
-/// <reference path="../../typings.d.ts" />
-import {Component, NgFor, NgIf, Input} from 'angular2/angular2';
+import {Component, Input, OnInit} from 'angular2/core';
 import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {TuneBookService} from '../../services/tunebook-service';
@@ -22,18 +21,18 @@ import {SetListItemUI} from '../../components/set-list-item/set-list-item';
 @Component({
   selector: 'etb-part-play-info-list',
   templateUrl: './components/part-play-info-list/part-play-info-list.html',
-  directives: [ROUTER_DIRECTIVES, NgFor, NgIf, TuneDotsUI, SampleDotsUI, TunePlayedUI, PlaylistTuneUI, SetListItemUI],
+  directives: [ROUTER_DIRECTIVES, TuneDotsUI, SampleDotsUI, TunePlayedUI, PlaylistTuneUI, SetListItemUI],
   styleUrls: ['./components/part-play-info-list/part-play-info-list.css'],
   pipes: [EliminateThe, FromNow]
 })
-export class PartPlayInfoListUI {
+export class PartPlayInfoListUI implements OnInit {
   @Input() tuneSetPosition: TuneSetPosition;
   
   constructor(public tuneBookService: TuneBookService, public router: Router) {
     
   }
   
-  onInit() {
+  ngOnInit() {
     
   }
   

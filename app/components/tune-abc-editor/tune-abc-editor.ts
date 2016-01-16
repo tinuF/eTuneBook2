@@ -1,5 +1,4 @@
-/// <reference path="../../typings.d.ts" />
-import {Component, DoCheck} from 'angular2/angular2';
+import {Component, OnInit, DoCheck} from 'angular2/core';
 
 import {TuneBookService} from '../../services/tunebook-service';
 import {TuneBook} from '../../business/model/tunebook';
@@ -20,7 +19,7 @@ import {TunePlayedUI} from '../tune-played/tune-played';
   styleUrls: ['./components/tune-abc-editor/tune-abc-editor.css'],
   directives: [TuneMenuUI, TuneActionsUI, TuneDotsUI, TunePlayedUI]
 })
-export class TuneAbcEditorUI implements DoCheck {
+export class TuneAbcEditorUI implements OnInit, DoCheck {
     tune: Tune;
     tuneEditModus: boolean;
     noteEditModus: boolean;
@@ -30,7 +29,7 @@ export class TuneAbcEditorUI implements DoCheck {
    
     }
     
-    onInit(){
+    ngOnInit(){
         this.initABCJSEditor();
 
         this.tuneEditModus = true;
@@ -38,7 +37,7 @@ export class TuneAbcEditorUI implements DoCheck {
         this.abcEditor = "Tune Editor";
     }
 
-    doCheck() {
+    ngDoCheck() {
 
     }
 
