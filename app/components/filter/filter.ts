@@ -200,32 +200,33 @@ export class FilterUI implements OnInit {
     }
     */
         
-    setType(event) {
-        this.type = event.target.value;
+    setType(e) {
+        this.type = e.target.value;
         this.filterSettings.setType(this.type);
         this.applyFilter();
     }
     
-    setKey(event) {
-        this.key = event.target.value;
+    setKey(e) {
+        this.key = e.target.value;
         this.filterSettings.setKey(this.key);
         this.applyFilter();
     }
     
-    setColor(event) {
-        this.color = event.target.value;
+    setColor(e) {
+        this.color = e.target.value;
+        //e.target.style.background = this.color;
         this.filterSettings.setColor(this.color);
         this.applyFilter();
     }
     
-    setEvent(event) {
-        this.event = event.target.value;
+    setEvent(e) {
+        this.event = e.target.value;
         this.filterSettings.setEvent(this.event);
         this.applyFilter();
     }
     
-    setBand(event) {
-        this.band = event.target.value;
+    setBand(e) {
+        this.band = e.target.value;
         this.filterSettings.setBand(this.band);
         this.applyFilter();
     }

@@ -891,11 +891,7 @@ export class TuneBook {
 
     var abc = "X:"+newTuneId+"\n" + "T:New Tune";
     var book = new ABCJS.TuneBook(abc);
-    var tune = book.tunes[0];
-
-    tune.intTuneId =  newIntTuneId;
-
-    tune.initializeTuneViewFields();
+    var tune:Tune = new Tune(book.tunes[0], newIntTuneId);
 
     var tuneSet: TuneSet;
     var tuneSetPositions = [];

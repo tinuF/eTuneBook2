@@ -30,8 +30,8 @@ export class Tune {
       this.intTuneId = intTuneId;
       this.pure = "";
       this.title = abcjsTune.title;
-      this.type = "undefined";
-      this.key = "undefined";
+      this.type = "unkown type";
+      this.key = "unkown key";
       this.videos = [];
       this.websites = [];
       this.annotation = "";
@@ -350,18 +350,6 @@ export class Tune {
   getTuneSite(siteType) {
       var siteDirective = "%%etbk:" + siteType + " ";
       return getAbcValue(this.pure, siteDirective, "");
-  }
-
-  //TODO: Constructor?
-  initializeTuneViewFields(){
-    this.type = "";
-    this.key = "";
-    this.videos = [];
-    this.websites = [];
-    this.annotation = "";
-    this.color = this._systemProperties.DEFAULT_COLOR;
-    this.setPlayDates([]);
-    this.lastModified = moment(this._systemProperties.DEFAULT_MODIFICATIONDATE_STRING, "YYYY-MM-DDTHH:mm").toDate();
   }
 
   _getPlayDates(tuneLine){

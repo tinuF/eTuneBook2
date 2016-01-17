@@ -18,11 +18,10 @@
               
             </a>
             <div class="dropdown-menu">
-                <a class="dropdown-item" ng-click="initializeTuneBook()">New Book</a>
+                <a class="dropdown-item" (click)="initializeTuneBook()">New Book</a>
                 <a class="dropdown-item" (click)="newTune()">New Tune</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" (click)="importer.click()">Import Book from Local Drive</a>
-                <a class="dropdown-item" (click)="selectFileOnGoogleDrive()">Import Book from Google Drive</a>
+                <a class="dropdown-item" (click)="importer.click()">Import Book</a>
                 <a class="dropdown-item" (click)="loadBxplTuneBook()">Load Example Book from Server</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" (click)="editTuneBook()">Edit Book Title</a>

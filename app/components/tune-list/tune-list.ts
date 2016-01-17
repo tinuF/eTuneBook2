@@ -21,10 +21,6 @@ export class TuneListUI implements DoCheck {
   }
   
   ngDoCheck(){
-    //todo: this does not work properly with text-search (might be called to often?)
-    //with filter it works fine
-    //example: text-search 'derry' among slip-jigs gives Dever the Dancer, Humours of Derrycrossane, Slide from Grace
-    //(mixture-search 'de' and 'derry')
     this.tunes = this.tuneBookService.getTunesFiltered();
   }
 }
