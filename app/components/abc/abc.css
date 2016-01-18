@@ -1,0 +1,19 @@
+.card {
+    margin: 5px;
+    padding: 5px;
+    background: lightcyan;
+}
+
+
+.card-block, .card-header, .card-footer {
+  background: lightcyan
+}
+
+a {
+	cursor: pointer;
+	color: darkcyan;
+}
+
+.abc-toggle {
+    margin-right: 20px;
+}

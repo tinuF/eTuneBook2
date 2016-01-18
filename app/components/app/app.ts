@@ -7,6 +7,7 @@ import {TuneBook} from '../../business/model/tunebook';
 import {FilterSettings} from '../../common/settings/filter-settings';
 
 import {BookUI} from '../../components/book/book';
+import {AbcUI} from '../../components/abc/abc';
 import {TuneListUI} from '../../components/tune-list/tune-list';
 import {SetListUI} from '../../components/set-list/set-list';
 import {PlaylistListUI} from '../../components/play-list-list/play-list-list';
@@ -31,6 +32,7 @@ import {RandomUI} from '../../components/random/random';
 @RouteConfig([
   { path: '/', redirectTo: ['Introduction'], name: 'Home' },
   { path: '/book', component: BookUI, name: 'Book' },
+  { path: '/abc', component: AbcUI, name: 'Abc' },
   { path: '/info/introduction', component: Introduction, name: 'Introduction' },
   { path: '/tunes', component: TuneListUI, name: 'Tunelist' },
   { path: '/tunes/:id', component: TuneUI, name: 'Tune' },
@@ -161,54 +163,15 @@ export class App {
     this.tuneBook = this.tuneBookService.initializeTuneBook();
     this.tuneBookService.storeTuneBookAbc();
     this.router.navigate(['Tuneabc', {id: this.tuneBook.tuneSets[0].tuneSetPositions[0].tune.intTuneId}]);
-  };
+  }
   
   newTune() {
       let newTuneSet = this.tuneBookService.initializeTuneAndTuneSet();
       this.tuneBookService.storeTuneBookAbc();
       this.router.navigate(['Tuneabc', {id: newTuneSet.tuneSetPositions[0].tune.intTuneId}]);
-  };
-
-/*
-
-
-  exportTuneBook(startDownload) {
-      $state.transitionTo('abc');
-  };
-
-  */
-
-/*
-  this.$watch(function () { return $location.path(); }, function() {
-      var path = $location.path();
-      var pathSplits = path.split("/");
-      var beginOfPath = pathSplits[1].substring(0,4);
-
-      //this.pathSplits = pathSplits;
-
-      initActiveMenu();
-      if (beginOfPath == "sets"){
-          if (pathSplits.length == 2){
-              this.setsMenuActive = true;
-          }
-      } else if (beginOfPath == "tune"){
-          if (pathSplits.length == 2){
-              this.tunesMenuActive = true;
-          }
-      } else if (beginOfPath == "book"){
-          this.bookMenuActive = true;
-      } else if (beginOfPath == "play"){
-          if (pathSplits.length == 2){
-              this.playlistsMenuActive = true;
-          }
-      } else if (beginOfPath == "abc"){
-          this.bookMenuActive = true;
-      } else if (beginOfPath == "info"){
-          this.infoMenuActive = true;
-      }
-  });
-
+  }
   
-  */
+  exportTuneBook() {
+      this.router.navigate(['/Abc']);
+  }
 }
-//bootstrap(App, [ROUTER_PROVIDERS]);

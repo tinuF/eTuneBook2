@@ -166,7 +166,7 @@ export class TuneBook {
       return playlistPositions;
   }
 
-  writeAbc(abcExportSettings:AbcExportSettings){
+  writeAbc(abcExportSettings:AbcExportSettings):string{
     // Generate Abc
     var tbkAbc, tuneAbc, tunes;
 

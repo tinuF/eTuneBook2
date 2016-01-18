@@ -119,11 +119,6 @@ export class TuneBookService {
     return eliminateThe(string);
   }
 
-  createDefaultAbcOption() {
-    // TODO: Check usage
-    return new AbcExportSettings();
-  }
-
   getSampleAbc(intTuneId:number, startFromBar:number, numberOfBars:number) {
     var tune = this.getTune(intTuneId);
     return tune.getSampleAbc(startFromBar, numberOfBars);

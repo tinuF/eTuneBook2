@@ -1,0 +1,48 @@
+<div class="row">
+    <div class="col-sm-1 "></div>
+    <div class="col-sm-11">
+        <div class="card col-sm-10">
+            <div class="card-block">
+                <a class='btn btn-secondary btn-sm' id="saveTuneBookToFile" href="" title="Export to Local File System">Export to Local Drive</a>
+              
+            </div>
+            <div class="card-block">
+                <label class="c-input c-checkbox abc-toggle">
+                    <input type="checkbox" (change)="toggleTuneSetAbc()" [(ngModel)]="abcExportSettings.tuneSet">
+                    <span class="c-indicator">TuneSets</span>
+                </label>
+                <label class="c-input c-checkbox abc-toggle">
+                    <input type="checkbox" (change)="togglePlaylistAbc()" [(ngModel)]="abcExportSettings.playlist">
+                    <span class="c-indicator">Playlists</span>
+                </label>
+                <label class="c-input c-checkbox abc-toggle">
+                    <input type="checkbox" (change)="togglePlayDateAbc()" [(ngModel)]="abcExportSettings.playDate">
+                    <span class="c-indicator">Playdates</span>
+                </label>
+                <label class="c-input c-checkbox abc-toggle">
+                    <input type="checkbox" (change)="toggleColorAbc()" [(ngModel)]="abcExportSettings.color">
+                    <span class="c-indicator">Colors</span>
+                </label>
+                <label class="c-input c-checkbox abc-toggle">
+                    <input type="checkbox" (change)="toggleAnnotationAbc()" [(ngModel)]="abcExportSettings.annotation">
+                    <span class="c-indicator">Comments</span>
+                </label>
+                <label class="c-input c-checkbox abc-toggle">
+                    <input type="checkbox" (change)="toggleSiteAbc()" [(ngModel)]="abcExportSettings.website">
+                    <span class="c-indicator">Sites</span>
+                </label>
+                <label class="c-input c-checkbox abc-toggle">
+                    <input type="checkbox" (change)="toggleTubeAbc()" [(ngModel)]="abcExportSettings.video">
+                    <span class="c-indicator">Videos</span>
+                </label>
+                <label class="c-input c-checkbox abc-toggle">
+                    <input type="checkbox" (change)="toggleFingeringAbc()" [(ngModel)]="abcExportSettings.fingering">
+                    <span class="c-indicator">Fingering</span>
+                </label>
+            </div>
+            <div class="card-block">
+                <pre id="tuneBookExported">{{exportedTuneBook}}</pre>
+            </div>
+        </div>
+    </div>
+</div>
