@@ -8,25 +8,25 @@ import {PlaylistListMenuUI} from '../../components/play-list-list-menu/play-list
 
 
 @Component({
-  selector: 'etb-playlist-list',
-  templateUrl: './components/play-list-list/play-list-list.html',
-  directives: [ROUTER_DIRECTIVES, PlaylistListItemUI, PlaylistListMenuUI],
-  styleUrls: ['./components/play-list-list/play-list-list.css']
+    selector: 'etb-playlist-list',
+    templateUrl: './components/play-list-list/play-list-list.html',
+    directives: [ROUTER_DIRECTIVES, PlaylistListItemUI, PlaylistListMenuUI],
+    styleUrls: ['./components/play-list-list/play-list-list.css']
 })
 export class PlaylistListUI implements OnInit, DoCheck {
-  playlists: Array<Playlist>;
- 
-  constructor(public tuneBookService: TuneBookService) {
-    
-  }
-  
-  ngOnInit(){
-    this.playlists = this.tuneBookService.getPlaylistsFiltered();
-  }
-  
-  ngDoCheck(){
-    this.playlists = this.tuneBookService.getPlaylistsFiltered();
-  }
+    playlists: Array<Playlist>;
+
+    constructor(public tuneBookService: TuneBookService) {
+
+    }
+
+    ngOnInit() {
+        this.playlists = this.tuneBookService.getPlaylistsFiltered();
+    }
+
+    ngDoCheck() {
+        this.playlists = this.tuneBookService.getPlaylistsFiltered();
+    }
 }
 
 

@@ -6,16 +6,16 @@ import {PlaylistTuneDotsUI} from '../../components/play-list-tune-dots/play-list
 
 
 @Component({
-  selector: 'etb-play-list-tune',
-  templateUrl: './components/play-list-tune/play-list-tune.html',
-  styleUrls: ['./components/play-list-tune/play-list-tune.css'],
-  directives: [PlaylistTuneDotsUI]
+    selector: 'etb-play-list-tune',
+    templateUrl: './components/play-list-tune/play-list-tune.html',
+    styleUrls: ['./components/play-list-tune/play-list-tune.css'],
+    directives: [PlaylistTuneDotsUI]
 })
 export class PlaylistTuneUI {
-  @Input() tune: Tune;
- 
-  constructor(public tuneBookService: TuneBookService) {
-    
-  }  
+    @Input() tune: Tune;
+
+    constructor(public tuneBookService: TuneBookService) {
+
+    }
 }
 

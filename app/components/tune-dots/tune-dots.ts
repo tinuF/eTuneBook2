@@ -2,45 +2,45 @@ import {Component, OnInit, DoCheck} from 'angular2/core';
 import {Router, RouteParams} from 'angular2/router';
 
 import {TuneBookService} from '../../services/tunebook-service';
-import {TuneBook} from '../../business/model/tunebook';
 import {Tune} from '../../business/model/tune';
-import {getSystemProperties} from '../../common/system-properties';
-
-
 
 @Component({
-  selector: 'tune-dots',
-  inputs: ['tune: tune'],
-  templateUrl: './components/tune-dots/tune-dots.html',
-  styleUrls: ['./components/tune-dots/tune-dots.css']
+    selector: 'tune-dots',
+    inputs: ['tune: tune'],
+    templateUrl: './components/tune-dots/tune-dots.html',
+    styleUrls: ['./components/tune-dots/tune-dots.css']
 })
 export class TuneDotsUI implements OnInit, DoCheck {
     tune: Tune;
     tuneObjectArray: Array<any>;
-  
-    
+
+
 
     constructor(public tuneBookService: TuneBookService, public router: Router, routeParams: RouteParams) {
-       
-       
+
+
     }
 
     ngOnInit() {
         this.renderAbc(this.tune);
         //$(".title.meta-top").css( "fill", "red" );
     }
-    
-    
+
+
     ngDoCheck() {
         //$("svg").css("height", "150px" );
-        $("svg").css("preserveAspectRatio", "xMinYMin meet" );
-        $(".title.meta-top").css( "fill", "red" );
+        //$("svg").css("preserveAspectRatio", "xMinYMin meet");
+        $(".title.meta-top").css("fill", "red");
+        //Chords
+        $(".chord").css("font-size", "0.7em");
+        //Fingering
+        $("text.annotation").css("font-size", "0.6em");
         //$(".title.meta-top").css( "display", "none" );
-        $(".text.meta-top").css( "fill", "blue" );
-        $(".meta-bottom").css( "display", "none" );
+        //$(".meta-bottom").css("display", "none");
+        $(".meta-bottom").css("font-size", "0.7em");
         //$(".meta-bottom").css( "visibility", "collapse" );
     }
-    
+
     renderAbc(tune) {
         //Render Abc
         //Important: Has to be timed-out, otherwise fingerings won't show up
@@ -52,11 +52,13 @@ export class TuneDotsUI implements OnInit, DoCheck {
             let parserParams = {};
             let engraverParams = {
                 scale: 1.0,
+                /*
                 staffwidth: 740,
-                paddingtop: 0, 
+                paddingtop: 0,
                 paddingbottom: 0,
-                paddingright: 0, 
+                paddingright: 0,
                 paddingleft: 0,
+                */
                 editable: false,
                 add_classes: true,
                 listener: null
@@ -68,7 +70,7 @@ export class TuneDotsUI implements OnInit, DoCheck {
             this.tuneObjectArray = ABCJS.renderAbc(output, tunebookString, parserParams, engraverParams, renderParams)
         }, 0);
     }
-    
+
     skipFingering(tuneAbc) {
         //Todo: skipFingering
         /*

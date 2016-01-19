@@ -8,27 +8,27 @@ import {SetPlaylistListItemUI} from '../../components/set-play-list-list-item/se
 
 
 @Component({
-  selector: 'etb-set-play-list-list',
-  inputs: ['set'],
-  templateUrl: './components/set-play-list-list/set-play-list-list.html',
-  directives: [ROUTER_DIRECTIVES, SetPlaylistListItemUI],
-  styleUrls: ['./components/set-play-list-list/set-play-list-list.css']
+    selector: 'etb-set-play-list-list',
+    inputs: ['set'],
+    templateUrl: './components/set-play-list-list/set-play-list-list.html',
+    directives: [ROUTER_DIRECTIVES, SetPlaylistListItemUI],
+    styleUrls: ['./components/set-play-list-list/set-play-list-list.css']
 })
 export class SetPlaylistListUI implements OnInit, DoCheck {
-  set: TuneSet;
-  playlists: Array<Playlist>;
- 
-  constructor(public tuneBookService: TuneBookService) {
-    
-  }
-  
-  ngOnInit(){
-    this.playlists = this.tuneBookService.getPlaylistsByTuneSetId(this.set.tuneSetId);
-  }
-  
-  ngDoCheck(){
-    this.playlists = this.tuneBookService.getPlaylistsByTuneSetId(this.set.tuneSetId);
-  }
+    set: TuneSet;
+    playlists: Array<Playlist>;
+
+    constructor(public tuneBookService: TuneBookService) {
+
+    }
+
+    ngOnInit() {
+        this.playlists = this.tuneBookService.getPlaylistsByTuneSetId(this.set.tuneSetId);
+    }
+
+    ngDoCheck() {
+        this.playlists = this.tuneBookService.getPlaylistsByTuneSetId(this.set.tuneSetId);
+    }
 }
 
 

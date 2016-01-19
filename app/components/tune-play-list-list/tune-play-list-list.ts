@@ -8,23 +8,23 @@ import {PlaylistListItemUI} from '../../components/play-list-list-item/play-list
 
 
 @Component({
-  selector: 'etb-tune-play-list-list',
-  inputs: ['tune'],
-  templateUrl: './components/tune-play-list-list/tune-play-list-list.html',
-  directives: [ROUTER_DIRECTIVES, PlaylistListItemUI],
-  styleUrls: ['./components/tune-play-list-list/tune-play-list-list.css']
+    selector: 'etb-tune-play-list-list',
+    inputs: ['tune'],
+    templateUrl: './components/tune-play-list-list/tune-play-list-list.html',
+    directives: [ROUTER_DIRECTIVES, PlaylistListItemUI],
+    styleUrls: ['./components/tune-play-list-list/tune-play-list-list.css']
 })
 export class TunePlaylistListUI {
-  tune: Tune;
-  playlists: Array<Playlist>;
- 
-  constructor(public tuneBookService: TuneBookService) {
-    
-  }
-  
-  onInit(){
-    this.playlists = this.tuneBookService.getPlaylistsByIntTuneId(this.tune.intTuneId);
-  }
+    tune: Tune;
+    playlists: Array<Playlist>;
+
+    constructor(public tuneBookService: TuneBookService) {
+
+    }
+
+    onInit() {
+        this.playlists = this.tuneBookService.getPlaylistsByIntTuneId(this.tune.intTuneId);
+    }
 }
 
 

@@ -1,5 +1,4 @@
 import {Component, Input, OnInit} from 'angular2/core';
-import {Router} from 'angular2/router';
 
 import {TuneBookService} from '../../services/tunebook-service';
 import {TuneBook} from '../../business/model/tunebook';

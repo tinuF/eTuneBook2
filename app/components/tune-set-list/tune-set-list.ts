@@ -9,27 +9,27 @@ import {SetListItemUI} from '../../components/set-list-item/set-list-item';
 
 
 @Component({
-  selector: 'etb-tune-set-list',
-  inputs: ['tune'],
-  templateUrl: './components/tune-set-list/tune-set-list.html',
-  styleUrls: ['./components/tune-set-list/tune-set-list.css'],
-  directives: [ROUTER_DIRECTIVES, SetListItemUI]
+    selector: 'etb-tune-set-list',
+    inputs: ['tune'],
+    templateUrl: './components/tune-set-list/tune-set-list.html',
+    styleUrls: ['./components/tune-set-list/tune-set-list.css'],
+    directives: [ROUTER_DIRECTIVES, SetListItemUI]
 })
 export class TuneSetListUI implements OnInit, DoCheck {
-  tune: Tune;
-  sets: Array<TuneSet>;
- 
-  constructor(public tuneBookService: TuneBookService) {
-    
-  }
-  
-  ngOnInit(){
-    this.sets = this.tuneBookService.getTuneSetsByIntTuneId(this.tune.intTuneId);
-  }
-  
-  ngDoCheck(){
-    this.sets = this.tuneBookService.getTuneSetsByIntTuneId(this.tune.intTuneId);
-  }
+    tune: Tune;
+    sets: Array<TuneSet>;
+
+    constructor(public tuneBookService: TuneBookService) {
+
+    }
+
+    ngOnInit() {
+        this.sets = this.tuneBookService.getTuneSetsByIntTuneId(this.tune.intTuneId);
+    }
+
+    ngDoCheck() {
+        this.sets = this.tuneBookService.getTuneSetsByIntTuneId(this.tune.intTuneId);
+    }
 }
 
 

@@ -1,10 +1,7 @@
 import {Component, DoCheck} from 'angular2/core';
-import {RouteConfig, ROUTER_DIRECTIVES, Router, RouteParams, Location, OnActivate, OnReuse} from 'angular2/router';
+import {ROUTER_DIRECTIVES, Router, RouteParams, Location} from 'angular2/router';
 import {TuneBookService} from '../../services/tunebook-service';
-import {TuneBook} from '../../business/model/tunebook';
 import {Tune} from '../../business/model/tune';
-import {getSystemProperties} from '../../common/system-properties';
-import {TuneAbcUI} from '../tune-abc/tune-abc';
 import {FromNow} from '../../pipes/from-now';
 
 import {TuneMenuUI} from '../tune-menu/tune-menu';
@@ -18,51 +15,51 @@ import {TunePlaylistListUI} from '../tune-play-list-list/tune-play-list-list';
 
 
 @Component({
-  selector: 'tune',
-  templateUrl: './components/tune/tune.html',
-  styleUrls: ['./components/tune/tune.css'],
-  directives: [ROUTER_DIRECTIVES, TuneMenuUI, TuneActionsUI, TuneDotsUI, TunePlayedUI, TuneVideoListUI, TuneSetListUI, TunePlaylistListUI],
-  pipes: [FromNow]
+    selector: 'tune',
+    templateUrl: './components/tune/tune.html',
+    styleUrls: ['./components/tune/tune.css'],
+    directives: [ROUTER_DIRECTIVES, TuneMenuUI, TuneActionsUI, TuneDotsUI, TunePlayedUI, TuneVideoListUI, TuneSetListUI, TunePlaylistListUI],
+    pipes: [FromNow]
 })
 export class TuneUI implements DoCheck {
-  tune: Tune;
- 
-  constructor(public tuneBookService: TuneBookService, public router: Router, routeParams:RouteParams, public location:Location) {
-    this.tune = this.tuneBookService.setCurrentTune(routeParams.get('id'));
-  }
-  
-  
-  ngDoCheck(){
-  }
-  
-  showTuneSets() {
-  /*
-        var sets = eTuneBookService.getTuneSetsByIntTuneId($scope.intTuneId);
+    tune: Tune;
 
-        if (sets.length == 0 || sets.length > 1) {
-            initActiveMenu();
-            $scope.tuneSetsMenuActive = true;
-            $state.transitionTo('tunesets', {intTuneId: $scope.intTuneId});
-        } else {
-            //Tune kommt nur in einem Set vor -> Set-View anzeigen
-            $state.transitionTo('set', {tuneSetId: sets[0].tuneSetId});
-        }
-*/
+    constructor(public tuneBookService: TuneBookService, public router: Router, routeParams: RouteParams, public location: Location) {
+        this.tune = this.tuneBookService.setCurrentTune(routeParams.get('id'));
+    }
+
+
+    ngDoCheck() {
+    }
+
+    showTuneSets() {
+        /*
+              var sets = eTuneBookService.getTuneSetsByIntTuneId($scope.intTuneId);
+      
+              if (sets.length == 0 || sets.length > 1) {
+                  initActiveMenu();
+                  $scope.tuneSetsMenuActive = true;
+                  $state.transitionTo('tunesets', {intTuneId: $scope.intTuneId});
+              } else {
+                  //Tune kommt nur in einem Set vor -> Set-View anzeigen
+                  $state.transitionTo('set', {tuneSetId: sets[0].tuneSetId});
+              }
+      */
     }
 
     showPlaylists() {
-/*
-        var playlists = eTuneBookService.getPlaylistsByIntTuneId($scope.intTuneId);
-
-        if (playlists.length == 0 || playlists.length > 1) {
-            initActiveMenu();
-            $scope.playlistsMenuActive = true;
-            $state.transitionTo('tuneplaylists', {intTuneId: $scope.intTuneId});
-        } else {
-            //Tune kommt nur in einer Playlist vor -> Playlist-View anzeigen
-            $state.transitionTo('playlist', {playlistId: playlists[0].id, tune:$scope.intTuneId});
-        }
-*/
+        /*
+                var playlists = eTuneBookService.getPlaylistsByIntTuneId($scope.intTuneId);
+        
+                if (playlists.length == 0 || playlists.length > 1) {
+                    initActiveMenu();
+                    $scope.playlistsMenuActive = true;
+                    $state.transitionTo('tuneplaylists', {intTuneId: $scope.intTuneId});
+                } else {
+                    //Tune kommt nur in einer Playlist vor -> Playlist-View anzeigen
+                    $state.transitionTo('playlist', {playlistId: playlists[0].id, tune:$scope.intTuneId});
+                }
+        */
     }
 
     tuneUp() {
@@ -89,14 +86,14 @@ export class TuneUI implements DoCheck {
         // Delete all TuneSetPositions with that tune
         this.tuneBookService.deleteTuneSetPositionsAndTune(this.tune.intTuneId);
         this.router.navigate('/tunes');
-        
+
         // Put TuneBook to localStorage
-        this. tuneBookService.storeTuneBookAbc();   
+        this.tuneBookService.storeTuneBookAbc();
     }
 
     loadRandomTune() {
         let intTuneId = this.tuneBookService.getRandomIntTuneId();
-        this.router.navigate("/tunes/"+intTuneId);        
+        this.router.navigate("/tunes/" + intTuneId);
         /*
         $scope.$parent.playDateFilter = playDateFilter;
         var intTuneId = eTuneBookService.getRandomIntTuneId(playDateFilter);

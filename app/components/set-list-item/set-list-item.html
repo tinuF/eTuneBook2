@@ -5,7 +5,7 @@
         <span class="c-indicator"></span>
       </label>
       <small class="text-muted">{{set.tuneSetId}}</small>
-      <a class='pull-lg-right' (click)="justPlayedTheSet()" title="Just Played The Set"><i class="material-icons">play_circle_outline</i></a>
+      <a class='pull-lg-right' (click)="justPlayedTheSet()" title="Just Played The Set"><i class="mdi mdi-play-circle-outline"></i></a>
   </div>
   <div class="card-block">
     <etb-set-position [position]="position" *ngFor="#position of set.tuneSetPositions; #i = index"></etb-set-position>

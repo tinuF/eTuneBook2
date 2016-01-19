@@ -1,9 +1,7 @@
 import {Component, OnInit, DoCheck} from 'angular2/core';
 
 import {TuneBookService} from '../../services/tunebook-service';
-import {TuneBook} from '../../business/model/tunebook';
 import {Tune} from '../../business/model/tune';
-import {getSystemProperties} from '../../common/system-properties';
 
 import {TuneMenuUI} from '../tune-menu/tune-menu';
 import {TuneActionsUI} from '../tune-actions/tune-actions';
@@ -13,11 +11,11 @@ import {TunePlayedUI} from '../tune-played/tune-played';
 
 
 @Component({
-  selector: 'tune-abc-editor',
-  inputs: ['tune: tune'],
-  templateUrl: './components/tune-abc-editor/tune-abc-editor.html',
-  styleUrls: ['./components/tune-abc-editor/tune-abc-editor.css'],
-  directives: [TuneMenuUI, TuneActionsUI, TuneDotsUI, TunePlayedUI]
+    selector: 'tune-abc-editor',
+    inputs: ['tune: tune'],
+    templateUrl: './components/tune-abc-editor/tune-abc-editor.html',
+    styleUrls: ['./components/tune-abc-editor/tune-abc-editor.css'],
+    directives: [TuneMenuUI, TuneActionsUI, TuneDotsUI, TunePlayedUI]
 })
 export class TuneAbcEditorUI implements OnInit, DoCheck {
     tune: Tune;
@@ -26,10 +24,10 @@ export class TuneAbcEditorUI implements OnInit, DoCheck {
     abcEditor: string;
 
     constructor(public tuneBookService: TuneBookService) {
-   
+
     }
-    
-    ngOnInit(){
+
+    ngOnInit() {
         this.initABCJSEditor();
 
         this.tuneEditModus = true;
@@ -49,12 +47,12 @@ export class TuneAbcEditorUI implements OnInit, DoCheck {
 
         }, 0);
     }
-    
+
     doneEditing(event) {
         //Move Value of Textarea to View-Model
         this.tune.pure = event.target.value;
-        
-        if ( !this.tune.pure ) {
+
+        if (!this.tune.pure) {
             // Delete all TuneSetPositions with that tune
             this.tuneBookService.deleteTuneSetPositionsAndTune(this.tune.intTuneId);
             this.router.navigate('/tunelist');
@@ -66,7 +64,7 @@ export class TuneAbcEditorUI implements OnInit, DoCheck {
             this.tune.key = this.tuneBookService.getTuneKey(this.tune);
             this.tune.intTuneId = this.tuneBookService.getTuneId(this.tune);
         }
-        
+
         // Put TuneBook to localStorage
         this.tuneBookService.storeTuneBookAbc();
     };

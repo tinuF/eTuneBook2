@@ -7,18 +7,18 @@ import {TuneVideoListItemUI} from '../../components/tune-video-list-item/tune-vi
 
 
 @Component({
-  selector: 'tune-video-list',
-  inputs: ['tune: tune'],
-  templateUrl: './components/tune-video-list/tune-video-list.html',
-  styleUrls: ['./components/tune-video-list/tune-video-list.css'],
-  directives: [ROUTER_DIRECTIVES, TuneVideoListItemUI]
+    selector: 'tune-video-list',
+    inputs: ['tune: tune'],
+    templateUrl: './components/tune-video-list/tune-video-list.html',
+    styleUrls: ['./components/tune-video-list/tune-video-list.css'],
+    directives: [ROUTER_DIRECTIVES, TuneVideoListItemUI]
 })
 export class TuneVideoListUI {
-  tune: Tune;
- 
-  constructor(public tuneBookService: TuneBookService) {
-  
-  }
+    tune: Tune;
+
+    constructor(public tuneBookService: TuneBookService) {
+
+    }
 }
 
 

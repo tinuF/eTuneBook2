@@ -57,6 +57,12 @@ export const NPM_DEPENDENCIES = [
   { src: 'angular2/bundles/http.min.js', inject: 'libs', dest: LIB_DEST },
 
   { src: 'bootstrap/dist/css/bootstrap.min.css', inject: true, dest: CSS_DEST },
+  { src: 'mdi/css/materialdesignicons.min.css', inject: true, dest: CSS_DEST },
+  { src: 'mdi/fonts/materialdesignicons-webfont.eot', inject: true, dest: FONTS_DEST },
+  { src: 'mdi/fonts/materialdesignicons-webfont.svg', inject: true, dest: FONTS_DEST },
+  { src: 'mdi/fonts/materialdesignicons-webfont.ttf', inject: true, dest: FONTS_DEST },
+  { src: 'mdi/fonts/materialdesignicons-webfont.woff', inject: true, dest: FONTS_DEST },
+  { src: 'mdi/fonts/materialdesignicons-webfont.woff2', inject: true, dest: FONTS_DEST },
   
   { src: 'jquery/dist/jquery.min.js', inject: true, dest: LIB_DEST },
   { src: 'bootstrap/dist/js/bootstrap.min.js', inject: true, dest: LIB_DEST },
@@ -69,7 +75,7 @@ export const APP_ASSETS = [
 ];
 
 export const LIB_DEPENDENCIES = [
-  { src: `${LIB_SRC}/abcjs_editor_2.1-min.js`, inject: true, dest: LIB_DEST }
+  { src: `${LIB_SRC}/abcjs_editor_2.3-min.js`, inject: true, dest: LIB_DEST }
 ];
 
 NPM_DEPENDENCIES

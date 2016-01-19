@@ -16,13 +16,3 @@ export class FilterTextUI {
     }
 
 }
-
-
-
-    
-
-
-
-
-
-

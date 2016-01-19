@@ -1,4 +1,4 @@
-import {Component, View, ElementRef, OnInit} from 'angular2/core';
+import {Component, ElementRef, OnInit} from 'angular2/core';
 import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {TuneBookService} from '../../services/tunebook-service';
@@ -9,24 +9,24 @@ import {SetpositionTuneUI} from '../../components/set-position-tune/set-position
 
 
 @Component({
-  selector: 'etb-set-position',
-  inputs: ['position: position'],
-  templateUrl: './components/set-position/set-position.html',
-  directives: [ROUTER_DIRECTIVES, SetpositionTuneUI],
-  styleUrls: ['./components/set-position/set-position.css'],
-  pipes: [EliminateThe, FromNow]
+    selector: 'etb-set-position',
+    inputs: ['position: position'],
+    templateUrl: './components/set-position/set-position.html',
+    directives: [ROUTER_DIRECTIVES, SetpositionTuneUI],
+    styleUrls: ['./components/set-position/set-position.css'],
+    pipes: [EliminateThe, FromNow]
 })
 export class SetPositionUI implements OnInit {
-  position: TuneSetPosition;
-  
-  constructor(public tuneBookService: TuneBookService, public router: Router, public elementRef: ElementRef) {
-    
-  }
-  
-  ngOnInit() {
-    //needs jQuery UI
-    //jQuery(this.elementRef.nativeElement).draggable({containment:'#draggable-parent'});
-  }
+    position: TuneSetPosition;
+
+    constructor(public tuneBookService: TuneBookService, public router: Router, public elementRef: ElementRef) {
+
+    }
+
+    ngOnInit() {
+        //needs jQuery UI
+        //jQuery(this.elementRef.nativeElement).draggable({containment:'#draggable-parent'});
+    }
 }
 
 

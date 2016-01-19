@@ -1,8 +1,7 @@
-import {Component, EventEmitter, OnInit} from 'angular2/core';
+import {Component, OnInit} from 'angular2/core';
 
 import {TuneBookService} from '../../services/tunebook-service';
 import {TuneBook} from '../../business/model/tunebook';
-import {Tune} from '../../business/model/tune';
 import {getSystemProperties} from '../../common/system-properties';
 
 import {FilterSettings} from '../../common/settings/filter-settings';
@@ -41,7 +40,7 @@ export class FilterUI implements OnInit {
         this.tuneBook = this.tuneBookService.getCurrentTuneBook();
         this.filterSettings = this.tuneBookService.getCurrentFilterSettings();
     }
-    
+
     ngOnInit() {
         this.setFilterOptions();
         this.setSelectedType(this.filterSettings.type);
@@ -156,7 +155,7 @@ export class FilterUI implements OnInit {
     setTypes() {
         this.types = this.tuneBook.getTuneTypes();
     }
-    
+
     setKeys() {
         this.keys = this.tuneBook.getKeys();
     }
@@ -199,38 +198,38 @@ export class FilterUI implements OnInit {
         
     }
     */
-        
+
     setType(e) {
         this.type = e.target.value;
         this.filterSettings.setType(this.type);
         this.applyFilter();
     }
-    
+
     setKey(e) {
         this.key = e.target.value;
         this.filterSettings.setKey(this.key);
         this.applyFilter();
     }
-    
+
     setColor(e) {
         this.color = e.target.value;
         //e.target.style.background = this.color;
         this.filterSettings.setColor(this.color);
         this.applyFilter();
     }
-    
+
     setEvent(e) {
         this.event = e.target.value;
         this.filterSettings.setEvent(this.event);
         this.applyFilter();
     }
-    
+
     setBand(e) {
         this.band = e.target.value;
         this.filterSettings.setBand(this.band);
         this.applyFilter();
     }
-    
+
     applyFilter() {
         this.tuneBookService.applyFilter();
     }

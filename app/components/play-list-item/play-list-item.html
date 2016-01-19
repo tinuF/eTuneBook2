@@ -3,9 +3,9 @@
     <small contenteditable (keydown)="handleKeyDownOnPlaylistPosition($event)" (blur)="handleBlurOnPlaylistPosition($event)">{{playlistPosition.position}}</small>
     <small contenteditable (keydown)="handleKeyDownOnPlaylistPositionName($event, playlistPosition)" (blur)="handleBlurOnPlaylistPositionName($event, playlistPosition)">{{playlistPosition.name | eliminateThe}} </small>
     <small>(Set {{playlistPosition.tuneSet.tuneSetId}})</small>
-    <a class='pull-sm-right' (click)="justPlayedTheSet()" title="Just Played The Set"><i class="material-icons">play_circle_outline</i></a>
+    <a class='pull-sm-right' (click)="justPlayedTheSet()" title="Just Played The Set"><i class="mdi mdi-play-circle-outline"></i></a>
     <div class="deleteArea">
-      <a class='delete' (click)="deletePlaylistPosition($event)" title="Delete Playlist Position">X</a>
+      <a class='delete' (click)="deletePlaylistPosition($event)" title="Delete Playlist Position"><i class="mdi mdi-delete"></i></a>
     </div>
   </div>
   <div class="row col-sm-12" *ngFor="#tuneSetPosition of playlistPosition.tuneSet.tuneSetPositions; #i = index">

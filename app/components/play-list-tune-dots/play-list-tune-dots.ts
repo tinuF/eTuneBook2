@@ -2,10 +2,7 @@ import {Component, DoCheck, Input, OnInit} from 'angular2/core';
 import {Router, RouteParams} from 'angular2/router';
 
 import {TuneBookService} from '../../services/tunebook-service';
-import {TuneBook} from '../../business/model/tunebook';
 import {Tune} from '../../business/model/tune';
-import {getSystemProperties} from '../../common/system-properties';
-
 
 
 @Component({
@@ -22,10 +19,10 @@ export class PlaylistTuneDotsUI implements OnInit, DoCheck {
 
 
     constructor(public tuneBookService: TuneBookService, public router: Router, routeParams: RouteParams) {
-        
+
     }
-    
-    ngOnInit(){
+
+    ngOnInit() {
         this.shown = false;
         this.buttonText = '+';
     }
@@ -46,12 +43,12 @@ export class PlaylistTuneDotsUI implements OnInit, DoCheck {
 
     show() {
         this.shown = true;
-        this.buttonText = '-'
+        this.buttonText = '-';
     }
 
     hide() {
         this.shown = false;
-        this.buttonText = '+'
+        this.buttonText = '+';
     }
 
 
@@ -76,7 +73,7 @@ export class PlaylistTuneDotsUI implements OnInit, DoCheck {
         //$("svg").css("height", "150px" );
         //$("svg").css("preserveAspectRatio", "xMinYMin meet");
         //$(".title.meta-top").css("fill", "red");
-        $(".title.meta-top").css( "display", "none" );
+        $(".title.meta-top").css("display", "none");
         $(".meta-top").css("display", "none");
         $(".meta-bottom").css("display", "none");
     }
@@ -92,11 +89,13 @@ export class PlaylistTuneDotsUI implements OnInit, DoCheck {
             let parserParams = {};
             let engraverParams = {
                 scale: 1.0,
+                /*
                 staffwidth: 740,
                 paddingtop: 0,
                 paddingbottom: 0,
                 paddingright: 0,
                 paddingleft: 0,
+                */
                 editable: false,
                 add_classes: true,
                 listener: null
