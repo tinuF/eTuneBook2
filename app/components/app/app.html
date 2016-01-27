@@ -88,30 +88,30 @@
 
 <input class="input-file hidden-print" id="fileInput" type="file" (change)="readTuneBookFromLocalDrive($event)" #importer>
 
-<nav class="navbar navbar-fixed-bottom navbar-light bg-faded">  
+<nav class="navbar navbar-fixed-bottom navbar-light bg-faded">
     <ul class="nav navbar-nav">
         <etb-random class="col-xs-2"></etb-random>
 
-        <li class="nav-item col-xs-2"> 
+        <li class="nav-item col-xs-2">
             <a class="nav-link" title="Filter" [routerLink]="['/Filter']">
                 <span class="hidden-sm-down">Filter</span>
                 <i class="mdi mdi-filter hidden-md-up"></i>
             </a>
         </li>
-        
-         <li class="nav-item dropdown col-xs-2">
+
+        <li class="nav-item dropdown col-xs-2">
             <a class="nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" title="Info">
                 <span class="hidden-sm-down">Info</span>
                 <i class="mdi mdi-help hidden-md-up"></i>
             </a>
-            
+
             <div class="dropdown-menu">
-                <a class="dropdown-item"  href="#/info/introduction">Introduction</a>
-                <a class="dropdown-item"  href="#/info/getstarted">Getting Started</a>
-                <a class="dropdown-item"  href="#/info/manual">Manual</a>
-                <a class="dropdown-item"  href="#/info/releasenotes">Release Notes</a>
-                <a class="dropdown-item"  href="#/info/credits">Credits</a>
-                <a class="dropdown-item"  href="#/info/feedback">Feedback</a>
+                <a class="dropdown-item" href="#/info/introduction">Introduction</a>
+                <a class="dropdown-item" href="#/info/getstarted">Getting Started</a>
+                <a class="dropdown-item" href="#/info/manual">Manual</a>
+                <a class="dropdown-item" href="#/info/releasenotes">Release Notes</a>
+                <a class="dropdown-item" href="#/info/credits">Credits</a>
+                <a class="dropdown-item" href="#/info/feedback">Feedback</a>
             </div>
         </li>
     </ul>

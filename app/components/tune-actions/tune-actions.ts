@@ -7,7 +7,7 @@ import {FromNow} from '../../pipes/from-now';
 
 
 @Component({
-    selector: 'tune-actions',
+    selector: 'etb-tune-actions',
     inputs: ['tune: tune'],
     templateUrl: './components/tune-actions/tune-actions.html',
     styleUrls: ['./components/tune-actions/tune-actions.css'],

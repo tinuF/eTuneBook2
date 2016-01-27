@@ -1,3 +1,7 @@
+.btn {
+    background: lightcyan;
+}
+
 /*Material Design Icons - Integration with Bootstrap*/
 .mdi::before {
     font-size: 24px;

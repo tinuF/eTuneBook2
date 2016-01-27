@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from 'angular2/core';
+import {Component, Input, OnInit, DoCheck} from 'angular2/core';
 import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {TuneBookService} from '../../services/tunebook-service';
@@ -25,8 +25,10 @@ import {PlayListPositionSetPositionPlayInfoUI} from '../../components/play-list-
     styleUrls: ['./components/play-list-item/play-list-item.css'],
     pipes: [EliminateThe, FromNow]
 })
-export class PlayListItemUI implements OnInit {
+export class PlayListItemUI implements OnInit, DoCheck {
     @Input() playlistPosition: PlaylistPosition;
+    editModus: boolean;
+    positions: Array<number>;
 
     constructor(public tuneBookService: TuneBookService, public router: Router) {
 
@@ -35,33 +37,54 @@ export class PlayListItemUI implements OnInit {
     ngOnInit() {
         this.tuneBookService.initializeTuneSetPositionPlayInfosForPlaylist(this.playlistPosition.playlistId);
         this.sortSetPosition();
+        this.setPositions();
+        this.editModus = this.tuneBookService.isEditModus();
+    }
+
+    ngDoCheck() {
+        this.setPositions();
+        this.editModus = this.tuneBookService.isEditModus();
     }
 
     sortSetPosition() {
         this.playlistPosition.tuneSet.tuneSetPositions.sort(function(a: TuneSetPosition, b: TuneSetPosition) {
             return a.position - b.position
-        })
+        });
     }
 
-    handleKeyDownOnPlaylistPosition(event) {
+    handleKeyDownOnPlaylistPositionName(event) {
         var keycode = (event.keyCode ? event.keyCode : event.which);
 
         if (keycode === 13) { // ENTER
             event.target.blur();
             event.preventDefault();
-            this.handleBlurOnPlaylistPosition(event);
+            this.handleBlurOnPlaylistPositionName(event);
         }
     }
 
-    handleBlurOnPlaylistPosition(event) {
-        let oldPosition: number = this.playlistPosition.position
-        let newPosition: number = parseInt(event.target.textContent);
+    handleBlurOnPlaylistPositionName(event) {
+        this.playlistPosition.name = event.target.value;
+        this.tuneBookService.storeTuneBookAbc();
+    }
+
+    setPositions() {
+        this.positions = this.tuneBookService.getPlaylistPositionsAsNumbers(this.playlistPosition.playlistId);
+    }
+
+    setPosition(e) {
+        let oldPosition: number = this.playlistPosition.position;
+        let newPosition: number = parseInt(e.target.value);
 
         if (oldPosition != newPosition) {
             this.tuneBookService.movePlaylistPosition(this.playlistPosition.playlistId, oldPosition, newPosition);
             this.tuneBookService.storeTuneBookAbc();
         }
     }
+
+    deletePlaylistPosition(e) {
+        this.tuneBookService.deletePlaylistPosition(this.playlistPosition.playlistId, this.playlistPosition.position);
+        this.tuneBookService.storeTuneBookAbc();
+    };
 }
 
 

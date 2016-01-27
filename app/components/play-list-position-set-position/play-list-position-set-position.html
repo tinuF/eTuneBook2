@@ -1,19 +1,23 @@
 <div class="card col-sm-12" [style.background-color]="tuneSetPosition.tune.color.hex">
-  <a class="col-sm-4" [routerLink]="['/Tune', {id: tuneSetPosition.tune.intTuneId}]">{{tuneSetPosition.position}} {{tuneSetPosition.tune.title | eliminateThe}}</a>
-  <div class="col-sm-3">
-    <small contenteditable (keydown)="handleKeyDownOnTuneSetPositionRepeat($event, tuneSetPosition)" (blur)="handleBlurOnTuneSetPositionRepeat($event, tuneSetPosition)">{{tuneSetPosition.currentTuneSetPositionPlayInfo.repeat}}</small>
-  </div>
-  <small class="col-sm-2 text-muted">{{tuneSetPosition.tune.type}} in {{tuneSetPosition.tune.key}}</small>
-  
-  <etb-play-list-tune [tune]="tuneSetPosition.tune"></etb-play-list-tune>
-  <etb-tune-played class="pull-sm-right" [tune]="tuneSetPosition.tune"></etb-tune-played>
+    <div class="row">
+        <a class="col-sm-4" [routerLink]="['/Tune', {id: tuneSetPosition.tune.intTuneId}]">{{tuneSetPosition.position}} {{tuneSetPosition.tune.title | eliminateThe}}</a>
+        <div class="col-sm-3">
+            <small [hidden]="editModus">{{tuneSetPosition.currentTuneSetPositionPlayInfo.repeat}}</small>
+            <input class="form-control form-control-sm" [hidden]="!editModus" [value]="tuneSetPosition.currentTuneSetPositionPlayInfo.repeat"
+            (keydown)="handleKeyDownOnTuneSetPositionRepeat($event, tuneSetPosition)" (blur)="handleBlurOnTuneSetPositionRepeat($event, tuneSetPosition)">
+        </div>
+        <small [hidden]="editModus" class="col-sm-2 text-muted">{{tuneSetPosition.tune.type}} in {{tuneSetPosition.tune.key}}</small>
 
-  <etb-play-list-position-set-position-play-info [tuneSetPosition]="tuneSetPosition" [play-info-annotation-shown]="playInfoAnnotationShown"></etb-play-list-position-set-position-play-info>
-</div>
-<div class="addAnnotationArea" [hidden]="tuneSetPosition.currentTuneSetPositionPlayInfo.annotation">
-  <a class='add' (click)="togglePlayInfoAnnotation()" title="Add Annotation">A</a>
-</div>
-<div class="addPartArea" [hidden]="tuneSetPosition.currentTuneSetPositionPlayInfo.partPlayInfos.length > 0">
-  <a class='add' (click)="addPartPlayInfo()" title="Add Part">P</a>
-</div>
+        <etb-play-list-tune  [hidden]="editModus" [tune]="tuneSetPosition.tune"></etb-play-list-tune>
+        <etb-tune-played  class=" pull-sm-right col-sm-2" [hidden]="editModus" [tune]="tuneSetPosition.tune"></etb-tune-played>
 
+        <div class="pull-sm-right btn-toolbar hidden-print" role="toolbar" [hidden]="!editModus">
+            <div class="btn-group" role="group">
+                <a class="btn btn-secondary btn-sm" (click)="togglePlayInfoAnnotation()" title="Show/Hide Annotation">A</a>
+                <a class="btn btn-secondary btn-sm" (click)="addPartPlayInfo()" title="Add Part">+P</a>
+            </div>
+        </div>
+    </div>
+
+    <etb-play-list-position-set-position-play-info [tuneSetPosition]="tuneSetPosition" [playInfoAnnotationShown]="playInfoAnnotationShown"></etb-play-list-position-set-position-play-info>
+</div>

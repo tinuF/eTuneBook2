@@ -70,12 +70,12 @@ export class PlaylistTuneDotsUI implements OnInit, DoCheck {
 
 
     ngDoCheck() {
-        //$("svg").css("height", "150px" );
-        //$("svg").css("preserveAspectRatio", "xMinYMin meet");
-        //$(".title.meta-top").css("fill", "red");
-        $(".title.meta-top").css("display", "none");
         $(".meta-top").css("display", "none");
         $(".meta-bottom").css("display", "none");
+        //Chords
+        $(".chord").css("font-size", "0.7em");
+        //Fingering
+        $("text.annotation").css("font-size", "0.6em");
     }
 
     renderAbc(tune) {

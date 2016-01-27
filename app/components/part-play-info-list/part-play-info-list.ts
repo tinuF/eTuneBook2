@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from 'angular2/core';
+import {Component, Input, OnInit, DoCheck} from 'angular2/core';
 import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {TuneBookService} from '../../services/tunebook-service';
@@ -22,15 +22,20 @@ import {SetListItemUI} from '../../components/set-list-item/set-list-item';
     styleUrls: ['./components/part-play-info-list/part-play-info-list.css'],
     pipes: [EliminateThe, FromNow]
 })
-export class PartPlayInfoListUI implements OnInit {
+export class PartPlayInfoListUI implements OnInit, DoCheck {
     @Input() tuneSetPosition: TuneSetPosition;
+    editModus: boolean;
 
     constructor(public tuneBookService: TuneBookService, public router: Router) {
 
     }
 
     ngOnInit() {
+        this.editModus = this.tuneBookService.isEditModus();
+    }
 
+    ngDoCheck() {
+        this.editModus = this.tuneBookService.isEditModus();
     }
 
     handleKeyDownOnPart(event, partPlayInfo) {
@@ -44,7 +49,7 @@ export class PartPlayInfoListUI implements OnInit {
     }
 
     handleBlurOnPart(event, partPlayInfo) {
-        partPlayInfo.part = event.target.textContent;
+        partPlayInfo.part = event.target.value;
         this.tuneBookService.storeTuneBookAbc();
     }
 
@@ -59,7 +64,7 @@ export class PartPlayInfoListUI implements OnInit {
     }
 
     handleBlurOnPartPlayInfo(event, partPlayInfo) {
-        partPlayInfo.playInfo = event.target.textContent;
+        partPlayInfo.playInfo = event.target.value;
         this.tuneBookService.storeTuneBookAbc();
     }
 

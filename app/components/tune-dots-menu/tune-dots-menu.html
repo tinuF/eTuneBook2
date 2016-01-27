@@ -1,0 +1,23 @@
+<div class="btn-toolbar tuneMenu hidden-print" role="toolbar" [hidden]="!editModus">
+    <div class="btn-group" role="group">
+        <a class="btn btn-secondary btn-sm" title="Edit Abc" [routerLink]="['/Tuneabc', {id: tune.intTuneId}]"><i class="mdi mdi-pencil"></i></a>
+        <!--- todo: ng-really-message="Do you really want to delete the tune?" ng-really-click="deleteTune() -->
+        <a class="btn btn-sm btn-secondary" (click)="deleteTune()" title="Delete Tune"><i class="mdi mdi-delete"></i></a>
+        <a class="btn btn-secondary btn-sm" title="New Set" (click)="newSet($event)"><i class="mdi mdi-playlist-plus"></i></a>
+    </div>
+</div>
+
+<!--
+<div class="btn-group dotsViewerBtn">
+    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" [style.background-color]="tune.color.hex">
+        {{ currentState }} 
+    </button>
+    <div class="dropdown-menu" role="menu" [style.background-color]="tune.color.hex">
+        <a class="dropdown-item" [routerLink]="['/Tune', {id: tune.intTuneId}]" >Dots</a>
+        <a class="dropdown-item" href="" ng-click="showPlaylists()">Playlists</a>
+        <a class="dropdown-item" [routerLink]="['/Tuneabc', {id: tune.intTuneId}]" >Abc</a>
+        <a class="dropdown-item" href="#tunes/{{intTuneId}}/practice" >Practice</a>
+        <a class="dropdown-item" href="#tunes/{{intTuneId}}/info" >Info</a>
+    </div>
+</div>
+-->

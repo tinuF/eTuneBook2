@@ -5,7 +5,7 @@ import {TuneBookService} from '../../services/tunebook-service';
 import {Tune} from '../../business/model/tune';
 
 @Component({
-    selector: 'tune-dots',
+    selector: 'etb-tune-dots',
     inputs: ['tune: tune'],
     templateUrl: './components/tune-dots/tune-dots.html',
     styleUrls: ['./components/tune-dots/tune-dots.css']

@@ -7,7 +7,7 @@ import {TuneVideoListItemUI} from '../../components/tune-video-list-item/tune-vi
 
 
 @Component({
-    selector: 'tune-video-list',
+    selector: 'etb-tune-video-list',
     inputs: ['tune: tune'],
     templateUrl: './components/tune-video-list/tune-video-list.html',
     styleUrls: ['./components/tune-video-list/tune-video-list.css'],

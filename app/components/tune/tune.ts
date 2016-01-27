@@ -3,8 +3,8 @@ import {ROUTER_DIRECTIVES, Router, RouteParams, Location} from 'angular2/router'
 import {TuneBookService} from '../../services/tunebook-service';
 import {Tune} from '../../business/model/tune';
 import {FromNow} from '../../pipes/from-now';
-
 import {TuneMenuUI} from '../tune-menu/tune-menu';
+import {TuneDotsMenuUI} from '../tune-dots-menu/tune-dots-menu';
 import {TuneActionsUI} from '../tune-actions/tune-actions';
 import {TuneDotsUI} from '../tune-dots/tune-dots';
 import {TunePlayedUI} from '../tune-played/tune-played';
@@ -18,7 +18,7 @@ import {TunePlaylistListUI} from '../tune-play-list-list/tune-play-list-list';
     selector: 'tune',
     templateUrl: './components/tune/tune.html',
     styleUrls: ['./components/tune/tune.css'],
-    directives: [ROUTER_DIRECTIVES, TuneMenuUI, TuneActionsUI, TuneDotsUI, TunePlayedUI, TuneVideoListUI, TuneSetListUI, TunePlaylistListUI],
+    directives: [ROUTER_DIRECTIVES, TuneMenuUI, TuneDotsMenuUI, TuneActionsUI, TuneDotsUI, TunePlayedUI, TuneVideoListUI, TuneSetListUI, TunePlaylistListUI],
     pipes: [FromNow]
 })
 export class TuneUI implements DoCheck {

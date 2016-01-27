@@ -26,6 +26,7 @@ import {PlayListPositionSetPositionPlayInfoUI} from '../../components/play-list-
 export class PlayListPositionSetPositionUI implements OnInit {
     @Input() tuneSetPosition: TuneSetPosition;
     playInfoAnnotationShown: boolean;
+    editModus: boolean;
 
     constructor(public tuneBookService: TuneBookService, public router: Router) {
 
@@ -33,6 +34,11 @@ export class PlayListPositionSetPositionUI implements OnInit {
 
     ngOnInit() {
         this.playInfoAnnotationShown = false;
+        this.editModus = this.tuneBookService.isEditModus();
+    }
+
+    ngDoCheck() {
+        this.editModus = this.tuneBookService.isEditModus();
     }
 
     handleKeyDownOnTuneSetPositionRepeat(event, tuneSetPosition) {
@@ -46,7 +52,7 @@ export class PlayListPositionSetPositionUI implements OnInit {
     }
 
     handleBlurOnTuneSetPositionRepeat(event, tuneSetPosition) {
-        tuneSetPosition.currentTuneSetPositionPlayInfo.repeat = event.target.textContent;
+        tuneSetPosition.currentTuneSetPositionPlayInfo.repeat = event.target.value;
         this.tuneBookService.storeTuneBookAbc();
     }
 

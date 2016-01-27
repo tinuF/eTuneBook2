@@ -4,13 +4,14 @@ import {ROUTER_DIRECTIVES} from 'angular2/router';
 import {TuneBookService} from '../../services/tunebook-service';
 import {TuneSet} from '../../business/model/tuneset';
 import {FilterSettings} from '../../common/settings/filter-settings';
+import {EditButtonUI} from '../../components/edit-btn/edit-btn';
 
 
 @Component({
     selector: 'etb-play-list-menu',
     inputs: ['sets'],
     templateUrl: './components/play-list-menu/play-list-menu.html',
-    directives: [ROUTER_DIRECTIVES],
+    directives: [ROUTER_DIRECTIVES, EditButtonUI],
     styleUrls: ['./components/play-list-menu/play-list-menu.css'],
 })
 export class PlayListMenuUI implements OnInit {

@@ -33,8 +33,8 @@ export function getSystemProperties(){
        EXAMPLE_FILENAME: 'Irish Tunes - Martin Fleischmann.abc',
        EXAMPLE_FILENAME_WITHOUTABC: 'Irish Tunes - Martin Fleischmann',
        EXAMPLE_VERSION: '2015-05-25',
-    }    
-} 
+    };
+}
 
 
 /*

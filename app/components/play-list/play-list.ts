@@ -5,13 +5,13 @@ import {TuneBookService} from '../../services/tunebook-service';
 import {Playlist} from '../../business/model/playlist';
 import {PlaylistPosition} from '../../business/model/playlistposition';
 import {PlayListItemUI} from '../../components/play-list-item/play-list-item';
-//import {PlayListMenuUI} from './components/play-list-menu/play-list-menu';
+import {PlayListMenuUI} from '../../components/play-list-menu/play-list-menu';
 
 
 @Component({
     selector: 'etb-play-list',
     templateUrl: './components/play-list/play-list.html',
-    directives: [ROUTER_DIRECTIVES, PlayListItemUI],
+    directives: [ROUTER_DIRECTIVES, PlayListItemUI, PlayListMenuUI],
     styleUrls: ['./components/play-list/play-list.css']
 })
 export class PlaylistUI implements OnInit, DoCheck {

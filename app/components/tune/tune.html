@@ -6,14 +6,15 @@
     <div class="col-xs-11">
         <div class="card col-lg-8" [style.background-color]="tune.color.hex">
             <div class="card-block">
-                <tune-dots [tune]="tune"></tune-dots>
+                <etb-tune-dots-menu [tune]="tune"></etb-tune-dots-menu>    
+                <etb-tune-dots [tune]="tune"></etb-tune-dots>
             </div>
             <div class="card-footer">
-                <tune-actions [tune]="tune"></tune-actions>
+                <etb-tune-actions [tune]="tune"></etb-tune-actions>
             </div>
         </div>
         
-        <tune-video-list [tune]="tune"></tune-video-list>
+        <etb-tune-video-list [tune]="tune"></etb-tune-video-list>
 
         <etb-tune-set-list [tune]="tune"></etb-tune-set-list>
     </div>
