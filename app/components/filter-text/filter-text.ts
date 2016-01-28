@@ -4,7 +4,7 @@ import {TuneBookService} from '../../services/tunebook-service';
 import {FilterSettings} from '../../common/settings/filter-settings';
 
 @Component({
-    selector: 'filter-text',
+    selector: 'etb-filter-text',
     templateUrl: './components/filter-text/filter-text.html',
     styleUrls: ['./components/filter-text/filter-text.css'] 
 })

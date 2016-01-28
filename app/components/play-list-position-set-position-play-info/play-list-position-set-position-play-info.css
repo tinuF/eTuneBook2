@@ -1,6 +1,7 @@
 .card {
     margin: 5px;
     padding: 5px;
+    background: #F2F2F3;
 }
 
 
@@ -56,7 +57,7 @@
 */
 
 .card-block, .card-footer {
-  background: lightcyan
+  background: #F2F2F3
 }
 
 a {

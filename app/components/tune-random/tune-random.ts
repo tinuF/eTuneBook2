@@ -3,11 +3,11 @@ import {Router, RouterLink, Location} from 'angular2/router';
 import {TuneBookService} from '../../services/tunebook-service';
 
 @Component({
-    selector: 'etb-random',
-    templateUrl: './components/random/random.html',
+    selector: 'etb-tune-random',
+    templateUrl: './components/tune-random/tune-random.html',
     directives: [RouterLink]
 })
-export class RandomUI implements OnInit {
+export class TuneRandomUI implements OnInit {
     randomTuneId: number;
 
     constructor(public tuneBookService: TuneBookService, public router: Router, public location: Location) {

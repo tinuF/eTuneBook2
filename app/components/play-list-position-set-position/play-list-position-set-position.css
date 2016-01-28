@@ -1,7 +1,7 @@
 .card {
     margin: 5px;
     padding: 5px;
-    background: lightcyan;
+    background: #F2F2F3;
 }
 
 
@@ -146,9 +146,3 @@ input {
     /*Card Default Color*/
 	background: #fff; 
     }
-
-/*
-.btn {
-    background: lightcyan;
-}
-*/

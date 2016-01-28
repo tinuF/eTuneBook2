@@ -2,9 +2,9 @@
     margin: 5px;
 	margin-left: 20px;
     padding: 5px;
-    /*
-    background: lightcyan;
-    */
+    
+    background: #F2F2F3;
+    
 }
 
 
@@ -16,12 +16,6 @@
 .tuneSetPositionPlayInfo {
     margin-left: 15px;
 }
-
-/*
-.btn {
-    background: lightcyan;
-}
-*/
 
 /*
 .position {
@@ -63,7 +57,7 @@
 */
 
 .card-block, .card-footer {
-  background: lightcyan
+  background: #F2F2F3
 }
 
 a {
