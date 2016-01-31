@@ -5,7 +5,6 @@ import {TuneBookService} from '../../services/tunebook-service';
 import {Tune} from '../../business/model/tune';
 
 import {TuneMenuUI} from '../tune-menu/tune-menu';
-import {TuneActionsUI} from '../tune-actions/tune-actions';
 import {TuneDotsUI} from '../tune-dots/tune-dots';
 import {TuneAbcEditorUI} from '../tune-abc-editor/tune-abc-editor';
 import {TunePlayedUI} from '../tune-played/tune-played';
@@ -16,7 +15,7 @@ import {TunePlayedUI} from '../tune-played/tune-played';
     selector: 'tune-abc',
     templateUrl: './components/tune-abc/tune-abc.html',
     styleUrls: ['./components/tune-abc/tune-abc.css'],
-    directives: [TuneMenuUI, TuneActionsUI, TuneDotsUI, TunePlayedUI, TuneAbcEditorUI]
+    directives: [TuneMenuUI, TuneDotsUI, TunePlayedUI, TuneAbcEditorUI]
 })
 export class TuneAbcUI implements OnInit, DoCheck {
     tune: Tune;

@@ -5,13 +5,14 @@
 
     <div class="col-xs-11">
         <div class="card col-lg-8" [style.background-color]="tune.color.hex">
+           
             <div class="card-block">
-                <etb-tune-dots-menu [tune]="tune"></etb-tune-dots-menu>    
+                <div class="row">
+                    <etb-tune-played [hidden]="editModus" class="pull-right" [tune]="tune"></etb-tune-played>
+                </div>
                 <etb-tune-dots [tune]="tune"></etb-tune-dots>
             </div>
-            <div class="card-footer">
-                <etb-tune-actions [tune]="tune"></etb-tune-actions>
-            </div>
+            
         </div>
         
         <etb-tune-video-list [tune]="tune"></etb-tune-video-list>

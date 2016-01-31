@@ -3,16 +3,19 @@ import {Router, RouteParams} from 'angular2/router';
 
 import {TuneBookService} from '../../services/tunebook-service';
 import {Tune} from '../../business/model/tune';
+import {TuneDotsMenuUI} from '../tune-dots-menu/tune-dots-menu';
 
 @Component({
     selector: 'etb-tune-dots',
     inputs: ['tune: tune'],
+    directives: [TuneDotsMenuUI],
     templateUrl: './components/tune-dots/tune-dots.html',
     styleUrls: ['./components/tune-dots/tune-dots.css']
 })
 export class TuneDotsUI implements OnInit, DoCheck {
     tune: Tune;
     tuneObjectArray: Array<any>;
+    editModus: boolean;
 
 
 
@@ -22,7 +25,8 @@ export class TuneDotsUI implements OnInit, DoCheck {
     }
 
     ngOnInit() {
-        this.renderAbc(this.tune);
+        this.renderAbc();
+        this.editModus = this.tuneBookService.isEditModus();
         //$(".title.meta-top").css( "fill", "red" );
     }
 
@@ -39,9 +43,11 @@ export class TuneDotsUI implements OnInit, DoCheck {
         //$(".meta-bottom").css("display", "none");
         $(".meta-bottom").css("font-size", "0.7em");
         //$(".meta-bottom").css( "visibility", "collapse" );
+        this.editModus = this.tuneBookService.isEditModus();
     }
+    
 
-    renderAbc(tune) {
+    renderAbc() {
         //Render Abc
         //Important: Has to be timed-out, otherwise fingerings won't show up
         //Compare with tbkTuneFocus: ABCJS.Editor also timed-out -> fingerings show up

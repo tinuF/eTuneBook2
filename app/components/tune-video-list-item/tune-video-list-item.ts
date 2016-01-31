@@ -15,6 +15,7 @@ import {Video} from '../../business/model/video';
 export class TuneVideoListItemUI implements OnInit {
     video: Video;
     videoUrl: string;
+    editModus: boolean;
 
     constructor(public tuneBookService: TuneBookService) {
 
@@ -22,10 +23,45 @@ export class TuneVideoListItemUI implements OnInit {
 
     ngOnInit() {
         this.videoUrl = this.getVideoUrl();
+        this.editModus = this.tuneBookService.isEditModus();
+    }
+
+    ngDoCheck() {
+        this.editModus = this.tuneBookService.isEditModus();
     }
 
     getVideoUrl() {
         return "//www.youtube.com/embed/" + this.video.code;
+    }
+
+    handleKeyDownOnVideoCode(event) {
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+
+        if (keycode === 13) { // ENTER
+            event.target.blur();
+            event.preventDefault();
+            this.handleBlurOnVideoCode(event);
+        }
+    }
+
+    handleBlurOnVideoCode(event) {
+        this.video.code = event.target.value;
+        this.tuneBookService.storeTuneBookAbc();
+    }
+    
+    handleKeyDownOnVideoDescription(event) {
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+
+        if (keycode === 13) { // ENTER
+            event.target.blur();
+            event.preventDefault();
+            this.handleBlurOnVideoDescription(event);
+        }
+    }
+
+    handleBlurOnVideoDescription(event) {
+        this.video.description = event.target.value;
+        this.tuneBookService.storeTunseBookAbc();
     }
 }
 

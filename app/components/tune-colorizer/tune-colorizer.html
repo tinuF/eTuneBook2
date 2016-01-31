@@ -1,6 +1,6 @@
 
 <div class="row">
-	<div class="col-xs-2 ">
+	<div class="col-xs-2">
 		<small class="text-muted">R: {{tune.color.red}}</small>	<br>
 		<small class="text-muted">G: {{tune.color.green}}</small> <br>
 		<small class="text-muted">B: {{tune.color.blue}}</small>	
@@ -9,14 +9,6 @@
 		<input type="range" min="0" max="255" step="1" [value]="tune.color.red" (input)="changeRed($event)"/>
 		<input type="range" min="0" max="255" step="1" [value]="tune.color.green" (input)="changeGreen($event)"/>
 		<input type="range" min="0" max="255" step="1" [value]="tune.color.blue" (input)="changeBlue($event)"/>          
-	</div>
-	<div class="col-xs-3">
-		<small class="text-muted">Transpose</small>
-		<button class="btn btn-sm btn-secondary-outline" (click)="tuneUp()" title="Tune Up"><i class="mdi mdi-arrow-up"></i></button>
-		<button class="btn btn-sm btn-secondary-outline" (click)="tuneDown()" title="Tune Down"><i class="mdi mdi-arrow-down"></i></button>      
-	</div>
-	<div class="col-xs-3">
-		<etb-tune-played [tune]="tune"></etb-tune-played>
 	</div>
 </div>
 

@@ -1,6 +1,16 @@
 .card {
-  margin: 5px;
-  padding: 5px;
+    margin: 5px;
+    padding: 5ps;
+    background: #CBC9D2;
+}
+
+.card-block, .card-footer {
+  background: #CBC9D2;
+}
+
+a {
+	cursor: pointer;
+	color: darkcyan;
 }
 
 .youtube-player {
@@ -8,5 +18,6 @@
     height:200px
 }
 
-
-
+.video-code-form {
+    margin-top:20px;
+}

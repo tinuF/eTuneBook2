@@ -1,43 +1,35 @@
-import {Component, OnInit, DoCheck} from 'angular2/core';
-import {ROUTER_DIRECTIVES, Router, Location} from 'angular2/router';
+import {Component, Output, OnInit, DoCheck, EventEmitter} from 'angular2/core';
+import {ROUTER_DIRECTIVES, Router} from 'angular2/router';
 import {TuneBookService} from '../../services/tunebook-service';
 import {Tune} from '../../business/model/tune';
 import {FromNow} from '../../pipes/from-now';
+import {TuneColorizerUI} from '../tune-colorizer/tune-colorizer';
+import {TuneTransposerUI} from '../tune-transposer/tune-transposer';
 
 @Component({
     selector: 'etb-tune-dots-menu',
     inputs: ['tune: tune'],
     templateUrl: './components/tune-dots-menu/tune-dots-menu.html',
     styleUrls: ['./components/tune-dots-menu/tune-dots-menu.css'],
-    directives: [ROUTER_DIRECTIVES],
+    directives: [ROUTER_DIRECTIVES, TuneColorizerUI, TuneTransposerUI],
     pipes: [FromNow]
 })
 export class TuneDotsMenuUI implements OnInit, DoCheck {
     tune: Tune;
-    currentState: string;//TODO: check if needed
     editModus: boolean;
+    @Output() transposeUp: EventEmitter<any> = new EventEmitter();
+    @Output() transposeDown: EventEmitter<any> = new EventEmitter();
 
-    constructor(public tuneBookService: TuneBookService, public location: Location, public router: Router) {
+    constructor(public tuneBookService: TuneBookService, public router: Router) {
 
     }
 
     ngOnInit() {
-        this.setCurrentState();
         this.editModus = this.tuneBookService.isEditModus();
     }
 
     ngDoCheck() {
         this.editModus = this.tuneBookService.isEditModus();
-    }
-
-    setCurrentState() {
-        let path = this.location.path();
-
-        if (path.indexOf('/tunes/' + this.tune.intTuneId + '/abc', 0) >= 0) {
-            this.currentState = "Abc";
-        } else if (path.indexOf('/tunes/' + this.tune.intTuneId, 0) >= 0) {
-            this.currentState = "Dots";
-        }
     }
 
     newSet(e) {
@@ -52,6 +44,16 @@ export class TuneDotsMenuUI implements OnInit, DoCheck {
 
         // Put TuneBook to localStorage
         this.tuneBookService.storeTuneBookAbc();
+    }
+
+    tuneUp() {
+        // Transpose up
+        this.transposeUp.next(null);
+    }
+
+    tuneDown() {
+        // Transpose down
+        this.transposeDown.next(null);
     }
 }
 
