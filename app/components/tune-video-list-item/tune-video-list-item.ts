@@ -1,19 +1,18 @@
-import {Component, OnInit} from 'angular2/core';
-import {ROUTER_DIRECTIVES} from 'angular2/router';
+import {Component, OnInit, DoCheck, Input} from 'angular2/core';
 
 import {TuneBookService} from '../../services/tunebook-service';
 import {Video} from '../../business/model/video';
+import {Tune} from '../../business/model/tune';
 
 
 @Component({
     selector: 'tune-video-list-item',
-    inputs: ['video: video'],
     templateUrl: './components/tune-video-list-item/tune-video-list-item.html',
-    styleUrls: ['./components/tune-video-list-item/tune-video-list-item.css'],
-    directives: [ROUTER_DIRECTIVES]
+    styleUrls: ['./components/tune-video-list-item/tune-video-list-item.css']
 })
-export class TuneVideoListItemUI implements OnInit {
-    video: Video;
+export class TuneVideoListItemUI implements OnInit, DoCheck {
+    @Input() video: Video;
+    @Input() tune: Tune;
     videoUrl: string;
     editModus: boolean;
 
@@ -27,6 +26,7 @@ export class TuneVideoListItemUI implements OnInit {
     }
 
     ngDoCheck() {
+        this.videoUrl = this.getVideoUrl();
         this.editModus = this.tuneBookService.isEditModus();
     }
 
@@ -48,7 +48,7 @@ export class TuneVideoListItemUI implements OnInit {
         this.video.code = event.target.value;
         this.tuneBookService.storeTuneBookAbc();
     }
-    
+
     handleKeyDownOnVideoDescription(event) {
         var keycode = (event.keyCode ? event.keyCode : event.which);
 
@@ -61,7 +61,11 @@ export class TuneVideoListItemUI implements OnInit {
 
     handleBlurOnVideoDescription(event) {
         this.video.description = event.target.value;
-        this.tuneBookService.storeTunseBookAbc();
+        this.tuneBookService.storeTuneBookAbc();
+    }
+
+    deleteVideo() {
+        this.tuneBookService.deleteVideo(this.tune.intTuneId, this.video.source, this.video.code);
     }
 }
 

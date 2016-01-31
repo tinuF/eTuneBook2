@@ -6,8 +6,13 @@
     z-index: 1020;
     /*height: 50px;*/
     width: 40px;
-    background-color: lightgray;
  }
+ 
+ i {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
 
 
 

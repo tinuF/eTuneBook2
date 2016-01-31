@@ -1,15 +1,19 @@
 <div class="card col-lg-4">
-    <div class="form-group row video-code-form" [hidden]="!editModus">
-        <label for="VideoCode" class="col-sm-4 form-control-label">Youtube Key</label>
-        <div class="col-sm-8">
-            <input id="VideoCode" class="form-control form-control-sm" [value]="video.code" (keydown)="handleKeyDownOnVideoCode($event)"
-            (blur)="handleBlurOnVideoCode($event)">
-        </div>
+    <div class="card-block">
+        <a class="btn btn-sm btn-secondary pull-right" [hidden]="!editModus" (click)="deleteVideo()" title="Delete Video"><i class="mdi mdi-delete"></i></a>
+
     </div>
     <div class="card-block">
         <iframe class="youtube-player" type="text/html" src="{{videoUrl}}" frameborder="0"></iframe>
     </div>
     <div class="card-footer">
+        <div class="form-group row video-code-form" [hidden]="!editModus">
+            <label for="VideoCode" class="col-sm-4 form-control-label">Youtube Key</label>
+            <div class="col-sm-8">
+                <input id="VideoCode" class="form-control form-control-sm" [value]="video.code" (keydown)="handleKeyDownOnVideoCode($event)"
+                (blur)="handleBlurOnVideoCode($event)">
+            </div>
+        </div>
         <small [hidden]="editModus" class="text-muted">{{video.description}}</small>
         <div class="form-group row video-description-form" [hidden]="!editModus">
             <label for="VideoDescription" class="col-sm-4 form-control-label">Description</label>

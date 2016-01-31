@@ -1,4 +1,4 @@
-import {Component, Output, OnInit, DoCheck, EventEmitter} from 'angular2/core';
+import {Component, Input, Output, OnInit, DoCheck, EventEmitter} from 'angular2/core';
 import {ROUTER_DIRECTIVES, Router} from 'angular2/router';
 import {TuneBookService} from '../../services/tunebook-service';
 import {Tune} from '../../business/model/tune';
@@ -8,17 +8,16 @@ import {TuneTransposerUI} from '../tune-transposer/tune-transposer';
 
 @Component({
     selector: 'etb-tune-dots-menu',
-    inputs: ['tune: tune'],
     templateUrl: './components/tune-dots-menu/tune-dots-menu.html',
     styleUrls: ['./components/tune-dots-menu/tune-dots-menu.css'],
     directives: [ROUTER_DIRECTIVES, TuneColorizerUI, TuneTransposerUI],
     pipes: [FromNow]
 })
 export class TuneDotsMenuUI implements OnInit, DoCheck {
-    tune: Tune;
-    editModus: boolean;
+    @Input() tune: Tune;
     @Output() transposeUp: EventEmitter<any> = new EventEmitter();
     @Output() transposeDown: EventEmitter<any> = new EventEmitter();
+    editModus: boolean;
 
     constructor(public tuneBookService: TuneBookService, public router: Router) {
 
@@ -30,11 +29,6 @@ export class TuneDotsMenuUI implements OnInit, DoCheck {
 
     ngDoCheck() {
         this.editModus = this.tuneBookService.isEditModus();
-    }
-
-    newSet(e) {
-        this.tuneBookService.initializeTuneSet(this.tune.intTuneId);
-        this.tuneBookService.storeTuneBookAbc();
     }
 
     deleteTune() {

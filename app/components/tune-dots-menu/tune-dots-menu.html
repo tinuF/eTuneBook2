@@ -1,13 +1,15 @@
 <div class="row tune-dots-menu pull-right">
     <etb-tune-colorizer class="col-xs-7" [tune]="tune"></etb-tune-colorizer>
-    
-    <div class="btn-toolbar tuneMenu hidden-print pull-right col-xs-5" role="toolbar" [hidden]="!editModus">
-        <div class="btn-group" role="group">
-            <etb-tune-transposer (transposeUp)="tuneUp()" (transposeDown)="tuneDown()" [tune]="tune"></etb-tune-transposer>
-            <a class="btn btn-secondary btn-sm" title="Edit Abc" [routerLink]="['/Tuneabc', {id: tune.intTuneId}]"><i class="mdi mdi-pencil"></i></a>
-            <!--- todo: ng-really-message="Do you really want to delete the tune?" ng-really-click="deleteTune() -->
-            <a class="btn btn-secondary btn-sm" title="New Set" (click)="newSet($event)"><i class="mdi mdi-playlist-plus"></i></a>
-            <a class="btn btn-sm btn-secondary" (click)="deleteTune()" title="Delete Tune"><i class="mdi mdi-delete"></i></a>
-        </div>
+
+    <etb-tune-transposer class="col-xs-2" (transposeUp)="tuneUp()" (transposeDown)="tuneDown()" [tune]="tune"></etb-tune-transposer>
+
+    <div class="btn-group col-xs-1" role="group" [hidden]="!editModus">
+        <a class="btn btn-secondary btn-sm" title="Edit Abc" [routerLink]="['/Tuneabc', {id: tune.intTuneId}]"><i class="mdi mdi-pencil"></i></a>
     </div>
+    
+    <div class="btn-group pull-right col-xs-1" role="group" [hidden]="!editModus">
+        <!--- todo: ng-really-message="Do you really want to delete the tune?" ng-really-click="deleteTune() -->
+        <a class="btn btn-sm btn-secondary" (click)="deleteTune()" title="Delete Tune"><i class="mdi mdi-delete"></i></a>
+    </div>
+
 </div>

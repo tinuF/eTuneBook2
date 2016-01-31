@@ -2,4 +2,6 @@
     
     <etb-edit-btn></etb-edit-btn>
     
+    <a class="btn btn-secondary btn-sm" title="New Set" [hidden]="!editModus" (click)="newSet($event)"><i class="mdi mdi-format-list-bulleted">+</i></a>
+    <a class="btn btn-secondary btn-sm" title="New Video" [hidden]="!editModus" (click)="newVideo($event)"><i class="mdi mdi-video">+</i></a>
 </div>
