@@ -3,7 +3,7 @@
 		<etb-set-list-menu [sets]="sets"></etb-set-list-menu>
 	</div>
 	<div class="col-xs-11">
-		<etb-set-list-item [set]="set" *ngFor="#set of sets; #i = index"></etb-set-list-item>
+		<etb-set-list-item [set]="set" [showFilterCheckbox]="true" *ngFor="#set of sets; #i = index"></etb-set-list-item>
 	</div>
 </div>
 

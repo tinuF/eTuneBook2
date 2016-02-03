@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit} from 'angular2/core';
+import {Component, ElementRef, OnInit, Input} from 'angular2/core';
 import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {TuneBookService} from '../../services/tunebook-service';
@@ -21,7 +21,8 @@ import {FilterSettings} from '../../common/settings/filter-settings';
     pipes: [EliminateThe, FromNow]
 })
 export class SetListItemUI implements OnInit {
-    set: TuneSet;
+    @Input() set: TuneSet;
+    @Input() showFilterCheckbox: boolean;
     filterSettings: FilterSettings;
 
     constructor(public tuneBookService: TuneBookService, public router: Router, public elementRef: ElementRef) {

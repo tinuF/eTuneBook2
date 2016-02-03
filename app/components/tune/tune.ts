@@ -8,6 +8,7 @@ import {TuneDotsMenuUI} from '../tune-dots-menu/tune-dots-menu';
 import {TuneDotsUI} from '../tune-dots/tune-dots';
 import {TunePlayedUI} from '../tune-played/tune-played';
 import {TuneVideoListUI} from '../tune-video-list/tune-video-list';
+import {TuneInfoListUI} from '../tune-info-list/tune-info-list';
 import {TuneSetListUI} from '../tune-set-list/tune-set-list';
 import {TunePlaylistListUI} from '../tune-play-list-list/tune-play-list-list';
 
@@ -17,7 +18,8 @@ import {TunePlaylistListUI} from '../tune-play-list-list/tune-play-list-list';
     selector: 'tune',
     templateUrl: './components/tune/tune.html',
     styleUrls: ['./components/tune/tune.css'],
-    directives: [ROUTER_DIRECTIVES, TuneMenuUI, TuneDotsMenuUI, TuneDotsUI, TunePlayedUI, TuneVideoListUI, TuneSetListUI, TunePlaylistListUI],
+    directives: [ROUTER_DIRECTIVES, TuneMenuUI, TuneDotsMenuUI, TuneDotsUI, TunePlayedUI, TuneVideoListUI, TuneInfoListUI,
+    TuneSetListUI, TunePlaylistListUI],
     pipes: [FromNow]
 })
 export class TuneUI implements OnInit, DoCheck {
