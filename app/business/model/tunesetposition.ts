@@ -3,7 +3,7 @@ import {Tune} from './tune';
 export class TuneSetPosition {
   tuneSetId: number;
   tune: Tune;
-  position: string;
+  position: number;
   repeat: string;
   annotation: string;
 

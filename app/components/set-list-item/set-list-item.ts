@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, Input} from 'angular2/core';
+import {Component, OnInit, DoCheck, Input} from 'angular2/core';
 import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {TuneBookService} from '../../services/tunebook-service';
@@ -14,24 +14,25 @@ import {FilterSettings} from '../../common/settings/filter-settings';
 
 @Component({
     selector: 'etb-set-list-item',
-    inputs: ['set'],
     templateUrl: './components/set-list-item/set-list-item.html',
     directives: [ROUTER_DIRECTIVES, SampleDotsUI, SetPositionUI, SetPlaylistListUI],
     styleUrls: ['./components/set-list-item/set-list-item.css'],
     pipes: [EliminateThe, FromNow]
 })
-export class SetListItemUI implements OnInit {
+export class SetListItemUI implements OnInit, DoCheck {
     @Input() set: TuneSet;
     @Input() showFilterCheckbox: boolean;
     filterSettings: FilterSettings;
 
-    constructor(public tuneBookService: TuneBookService, public router: Router, public elementRef: ElementRef) {
+    constructor(public tuneBookService: TuneBookService, public router: Router) {
         this.filterSettings = this.tuneBookService.getCurrentFilterSettings();
     }
 
     ngOnInit() {
-        //needs jQuery UI
-        //jQuery(this.elementRef.nativeElement).draggable({containment:'#draggable-parent'});
+        this.sortSetPosition();
+    }
+
+    ngDoCheck() {
         this.sortSetPosition();
     }
 

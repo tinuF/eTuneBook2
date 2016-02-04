@@ -71,27 +71,28 @@ export class SetpositionTuneUI implements OnInit {
 
         let data: string = e.dataTransfer.getData('text/html');
 
-        let sourceTuneSetId = this.getSourceTuneSetId(data);
-        let sourcePosition = this.getSourceTuneSetTunePosition(data);
-        let targetTuneSetId = this.position.tuneSetId;
-        let targetPosition = this.position.position;
-        let moveOrCopy = 'move';
+        let sourceTuneSetId:number = this.getSourceTuneSetId(data);
+        let sourcePosition:number = parseInt(this.getSourceTuneSetTunePosition(data));
+        let targetTuneSetId:number = this.position.tuneSetId;
+        let targetPosition:number = this.position.position;
+        let moveOrCopy:string = 'move';
 
         if (e.shiftKey) {
             moveOrCopy = 'copy';
         }
 
         // update model. angular will then react upon the changed model and re-render both sets  
-        this.tuneBookService.moveTuneSetPosition(sourceTuneSetId, sourcePosition, targetTuneSetId, targetPosition, 'after', moveOrCopy);
+        this.tuneBookService.moveTuneSetPosition(sourceTuneSetId, sourcePosition, targetTuneSetId, targetPosition, 'before', moveOrCopy);
         this.tuneBookService.storeTuneBookAbc();
 
-        e.target.style.opacity = '1.0';
+        this.handleDragEnd(e);
 
         return false;
     }
 
     handleDragEnd(e) {
         //TODO: Spezifischer
+        e.target.style.opacity = '1.0';
         let cards = document.querySelectorAll('.card');
 
         [].forEach.call(cards, function(card) {
