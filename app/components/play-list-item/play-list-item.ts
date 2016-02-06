@@ -48,7 +48,7 @@ export class PlayListItemUI implements OnInit, DoCheck {
 
     sortSetPosition() {
         this.playlistPosition.tuneSet.tuneSetPositions.sort(function(a: TuneSetPosition, b: TuneSetPosition) {
-            return a.position - b.position
+            return a.position - b.position;
         });
     }
 

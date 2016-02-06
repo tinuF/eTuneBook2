@@ -26,21 +26,6 @@ export class TuneMenuUI implements OnInit {
     ngDoCheck() {
         this.editModus = this.tuneBookService.isEditModus();
     }
-
-    newSet(e) {
-        this.tuneBookService.initializeTuneSet(this.tune.intTuneId);
-        this.tuneBookService.storeTuneBookAbc();
-    }
-
-    newVideo(e) {
-        this.tuneBookService.addVideo(this.tune.intTuneId, "ytube", "", "0:00: " + this.tune.title);
-        this.tuneBookService.storeTuneBookAbc();
-    }
-
-    newWebsite(e) {
-        this.tuneBookService.addWebsite(this.tune.intTuneId, "");
-        this.tuneBookService.storeTuneBookAbc();
-    }
 }
 
 

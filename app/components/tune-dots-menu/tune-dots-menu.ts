@@ -49,5 +49,20 @@ export class TuneDotsMenuUI implements OnInit, DoCheck {
         // Transpose down
         this.transposeDown.next(null);
     }
+
+    newSet(e) {
+        this.tuneBookService.initializeTuneSet(this.tune.intTuneId);
+        this.tuneBookService.storeTuneBookAbc();
+    }
+
+    newVideo(e) {
+        this.tuneBookService.addVideo(this.tune.intTuneId, "ytube", "", "0:00: " + this.tune.title);
+        this.tuneBookService.storeTuneBookAbc();
+    }
+
+    newWebsite(e) {
+        this.tuneBookService.addWebsite(this.tune.intTuneId, "");
+        this.tuneBookService.storeTuneBookAbc();
+    }
 }
 

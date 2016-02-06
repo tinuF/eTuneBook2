@@ -1,15 +1,35 @@
-<div class="row tune-dots-menu pull-right">
-    <etb-tune-colorizer class="col-xs-7" [tune]="tune"></etb-tune-colorizer>
+<etb-tune-transposer (transposeUp)="tuneUp()" (transposeDown)="tuneDown()" [tune]="tune"></etb-tune-transposer>
 
-    <etb-tune-transposer class="col-xs-2" (transposeUp)="tuneUp()" (transposeDown)="tuneDown()" [tune]="tune"></etb-tune-transposer>
+<div class="btn-group" role="group">
+    <a class="btn btn-secondary btn-sm" title="Change Color" data-toggle="modal" data-target=".colorizer">
+        <i class="mdi mdi-format-color-fill"></i>
+    </a>
+</div>
 
-    <div class="btn-group col-xs-1" role="group" [hidden]="!editModus">
-        <a class="btn btn-secondary btn-sm" title="Edit Abc" [routerLink]="['/Tuneabc', {id: tune.intTuneId}]"><i class="mdi mdi-pencil"></i></a>
+<div class="btn-group" role="group">
+    <a class="btn btn-secondary btn-sm" title="Edit Abc" [routerLink]="['/Tuneabc', {id: tune.intTuneId}]"><i class="mdi mdi-pencil"></i></a>
+</div>
+
+<div class="btn-group" role="group">
+    <a class="btn btn-secondary btn-sm" title="New Set" (click)="newSet($event)"><i class="mdi mdi-format-list-bulleted"></i></a>
+    <a class="btn btn-secondary btn-sm" title="New Video" (click)="newVideo($event)"><i class="mdi mdi-video"></i></a>
+    <a class="btn btn-secondary btn-sm" title="New Link"  (click)="newWebsite($event)"><i class="mdi mdi-link"></i></a>
+</div>
+
+<a class="btn btn-sm btn-secondary pull-right" (click)="deleteTune()" title="Delete Tune"><i class="mdi mdi-delete"></i></a>
+
+<div class="modal fade colorizer" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Change Color</h4>
+            </div>
+            <div class="modal-body">
+                <etb-tune-colorizer [tune]="tune"></etb-tune-colorizer>
+            </div>
+        </div>
     </div>
-    
-    <div class="btn-group pull-right col-xs-1" role="group" [hidden]="!editModus">
-        <!--- todo: ng-really-message="Do you really want to delete the tune?" ng-really-click="deleteTune() -->
-        <a class="btn btn-sm btn-secondary" (click)="deleteTune()" title="Delete Tune"><i class="mdi mdi-delete"></i></a>
-    </div>
-
 </div>

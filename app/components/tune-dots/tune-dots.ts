@@ -34,7 +34,7 @@ export class TuneDotsUI implements OnInit, DoCheck {
     ngDoCheck() {
         //$("svg").css("height", "150px" );
         //$("svg").css("preserveAspectRatio", "xMinYMin meet");
-        $(".title.meta-top").css("fill", "red");
+        //$(".title.meta-top").css("fill", "red");
         //Chords
         $(".chord").css("font-size", "0.7em");
         //Fingering
