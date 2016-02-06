@@ -1,6 +1,6 @@
 <div 
     class="card col-xl-12" 
-    draggable="true" 
+    [draggable]="editModus" 
     (dragstart)="handleDragStart($event)"
     (dragenter)="handleDragEnter($event)"
     (dragover)="handleDragOver($event)"
@@ -8,9 +8,8 @@
     (drop)="handleDrop($event)"
     (dragend)="handleDragEnd($event)" 
     [style.background-color]="tune.color.hex">
-    <div class="deleteArea pull-xl-right">
-        <a class='delete' (click)="deleteTuneSetPosition($event)">X</a>
-    </div>
+    
+    <a class="btn btn-sm btn-secondary pull-xl-right" (click)="deleteTuneSetPosition($event)" title="Remove Tune from Set" [hidden]="!editModus"><i class="mdi mdi-delete"></i></a>
         
     <p >
         <a [routerLink]="['/Tune', {id: tune.intTuneId}]">{{tune.title | eliminateThe}}</a>
@@ -18,7 +17,7 @@
     </p>
     <small class="text-muted">{{tune.type}} in {{tune.key}}</small>
     <etb-sampledots [tune]="tune"></etb-sampledots>
-    <etb-tune-played class="pull-xl-right"[tune]="tune"></etb-tune-played>
+    <etb-tune-played class="pull-xl-right"[tune]="tune" [hidden]="editModus"></etb-tune-played>
 </div>
 
 

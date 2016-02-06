@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit} from 'angular2/core';
+import {Component, Input, OnInit, DoCheck} from 'angular2/core';
 import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {TuneBookService} from '../../services/tunebook-service';
@@ -9,27 +9,28 @@ import {FromNow} from '../../pipes/from-now';
 import {SampleDotsUI} from '../../components/sample-dots/sample-dots';
 import {TunePlayedUI} from '../tune-played/tune-played';
 
-//var dragSrcEl = null;
-
 @Component({
     selector: 'etb-set-position-tune',
-    inputs: ['tune', 'position'],
     templateUrl: './components/set-position-tune/set-position-tune.html',
     directives: [ROUTER_DIRECTIVES, SampleDotsUI, TunePlayedUI],
     styleUrls: ['./components/set-position-tune/set-position-tune.css'],
     pipes: [EliminateThe, FromNow]
 })
-export class SetpositionTuneUI implements OnInit {
-    tune: Tune;
-    position: TuneSetPosition;
+export class SetpositionTuneUI implements OnInit, DoCheck {
+    @Input() tune: Tune;
+    @Input() position: TuneSetPosition;
+    editModus: boolean;
 
-    constructor(public tuneBookService: TuneBookService, public router: Router, public elementRef: ElementRef) {
+    constructor(public tuneBookService: TuneBookService, public router: Router) {
 
     }
 
     ngOnInit() {
-        //needs jQuery UI
-        //jQuery(this.elementRef.nativeElement).draggable({containment:'#draggable-parent'});
+        this.editModus = this.tuneBookService.isEditModus();
+    }
+
+    ngDoCheck() {
+        this.editModus = this.tuneBookService.isEditModus();
     }
 
     justPlayedTheTune() {
@@ -71,11 +72,11 @@ export class SetpositionTuneUI implements OnInit {
 
         let data: string = e.dataTransfer.getData('text/html');
 
-        let sourceTuneSetId:number = this.getSourceTuneSetId(data);
-        let sourcePosition:number = parseInt(this.getSourceTuneSetTunePosition(data));
-        let targetTuneSetId:number = this.position.tuneSetId;
-        let targetPosition:number = this.position.position;
-        let moveOrCopy:string = 'move';
+        let sourceTuneSetId: number = this.getSourceTuneSetId(data);
+        let sourcePosition: number = parseInt(this.getSourceTuneSetTunePosition(data));
+        let targetTuneSetId: number = this.position.tuneSetId;
+        let targetPosition: number = this.position.position;
+        let moveOrCopy: string = 'move';
 
         if (e.shiftKey) {
             moveOrCopy = 'copy';

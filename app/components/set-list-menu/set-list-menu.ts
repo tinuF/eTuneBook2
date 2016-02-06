@@ -1,22 +1,22 @@
-import {Component, OnInit} from 'angular2/core';
+import {Component, Input, OnInit} from 'angular2/core';
 import {ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {TuneBookService} from '../../services/tunebook-service';
 import {TuneSet} from '../../business/model/tuneset';
 import {Playlist} from '../../business/model/playlist';
 import {FilterSettings} from '../../common/settings/filter-settings';
+import {EditButtonUI} from '../../components/edit-btn/edit-btn';
 
 
 
 @Component({
     selector: 'etb-set-list-menu',
-    inputs: ['sets'],
     templateUrl: './components/set-list-menu/set-list-menu.html',
-    directives: [ROUTER_DIRECTIVES],
+    directives: [ROUTER_DIRECTIVES, EditButtonUI],
     styleUrls: ['./components/set-list-menu/set-list-menu.css'],
 })
 export class SetListMenuUI implements OnInit {
-    sets: Array<TuneSet>;
+    @Input() sets: Array<TuneSet>;
     sorting: string;
     filterSettings: FilterSettings;
     playlists: Array<Playlist>;

@@ -23,6 +23,7 @@ export class SetListItemUI implements OnInit, DoCheck {
     @Input() set: TuneSet;
     @Input() showFilterCheckbox: boolean;
     filterSettings: FilterSettings;
+    editModus: boolean;
 
     constructor(public tuneBookService: TuneBookService, public router: Router) {
         this.filterSettings = this.tuneBookService.getCurrentFilterSettings();
@@ -30,10 +31,12 @@ export class SetListItemUI implements OnInit, DoCheck {
 
     ngOnInit() {
         this.sortSetPosition();
+        this.editModus = this.tuneBookService.isEditModus();
     }
 
     ngDoCheck() {
         this.sortSetPosition();
+        this.editModus = this.tuneBookService.isEditModus();
     }
 
     justPlayedTheSet() {
