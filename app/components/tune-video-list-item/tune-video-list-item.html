@@ -15,7 +15,7 @@
                 (blur)="handleBlurOnVideoCode($event)">
             </div>
         </div>
-        <small class="text-muted">{{video.description}}</small>
+        <small class="text-muted" [hidden]="editModus">{{video.description}}</small>
         <div class="form-group row video-description-form" [hidden]="!editModus">
             <label for="VideoDescription" class="col-sm-4 form-control-label">Description</label>
             <div class="col-sm-8">
