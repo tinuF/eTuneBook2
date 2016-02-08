@@ -1,4 +1,8 @@
-<div class="setlistMenu btn-group hidden-print">
+<div class="setlistMenu1 btn-group hidden-print">
+    <etb-edit-btn></etb-edit-btn>
+</div>
+
+<div class="setlistMenu2 btn-group hidden-print">
     <a class="btn btn-secondary btn-sm" title="Random Sort" (click)="sortRandom($event)">
 		<i class="mdi mdi-shuffle"></i>
 	</a>
@@ -14,8 +18,6 @@
 	<a class="btn btn-secondary btn-sm" title="Add to Playlist" data-toggle="modal" data-target=".bd-example-modal-lg">
 		<i class="mdi mdi-playlist-plus"></i>
 	</a>
-    
-    <etb-edit-btn></etb-edit-btn>
 </div>
 
 <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">

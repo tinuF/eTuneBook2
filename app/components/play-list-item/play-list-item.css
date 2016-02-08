@@ -1,9 +1,8 @@
 .card {
     margin: 5px;
     padding: 5px;
-    background: #FFF5E0;
+    background: #F2EBDC;
 }
-
 
 .playlistPosition {
     min-width: 860px;
@@ -56,9 +55,6 @@
 }
 */
 
-.card-block, .card-footer {
-  background: #FFF5E0;
-}
 
 a {
 	cursor: pointer;

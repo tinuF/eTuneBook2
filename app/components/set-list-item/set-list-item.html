@@ -10,7 +10,5 @@
     <div class="card-block">
         <etb-set-position [position]="position" *ngFor="#position of set.tuneSetPositions; #i = index"></etb-set-position>
     </div>
-    <div class="card-footer">
-        <etb-set-play-list-list [set]="set"></etb-set-play-list-list>
-    </div>
+    <etb-set-play-list-list [set]="set"></etb-set-play-list-list>
 </div>

@@ -47,8 +47,8 @@ export class SetListItemUI implements OnInit, DoCheck {
 
     sortSetPosition() {
         this.set.tuneSetPositions.sort(function(a: TuneSetPosition, b: TuneSetPosition) {
-            return a.position - b.position
-        })
+            return a.position - b.position;
+        });
     }
 
     toggleSetSelection(e) {

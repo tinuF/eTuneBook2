@@ -1,4 +1,14 @@
-.playlistMenu {
+.playlistMenu1 {
+	position: fixed;
+	left: 1px;
+	top: 120px;
+    /*background-color: #F5F5F5;*/
+    z-index: 1020;
+    /*height: 50px;*/
+    width: 40px;
+ }
+
+.playlistMenu2 {
 	position: fixed;
 	left: 1px;
 	top: 160px;
@@ -6,7 +16,6 @@
     z-index: 1020;
     /*height: 50px;*/
     width: 40px;
-    background-color: lightgray;
  }
 
 

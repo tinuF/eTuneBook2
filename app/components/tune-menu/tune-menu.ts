@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from 'angular2/core';
+import {Component, Input, OnInit, DoCheck} from 'angular2/core';
 
 import {TuneBookService} from '../../services/tunebook-service';
 import {Tune} from '../../business/model/tune';
@@ -11,7 +11,7 @@ import {EditButtonUI} from '../../components/edit-btn/edit-btn';
     directives: [EditButtonUI],
     styleUrls: ['./components/tune-menu/tune-menu.css'],
 })
-export class TuneMenuUI implements OnInit {
+export class TuneMenuUI implements OnInit, DoCheck {
     @Input() tune: Tune;
     editModus: boolean;
 
