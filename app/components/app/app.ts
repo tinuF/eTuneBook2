@@ -9,8 +9,9 @@ import {BookUI} from '../../components/book/book';
 import {AbcUI} from '../../components/abc/abc';
 import {TuneListUI} from '../../components/tune-list/tune-list';
 import {SetListUI} from '../../components/set-list/set-list';
-import {PlaylistListUI} from '../../components/play-list-list/play-list-list';
-import {PlaylistUI} from '../../components/play-list/play-list';
+import {PlaylistListUI} from '../../components/playlist-list/playlist-list';
+import {PlaylistUI} from '../../components/playlist/playlist';
+import {PlaylistPositionUI} from '../../components/playlist-position/playlist-position';
 import {TuneUI} from '../../components/tune/tune';
 import {FilterUI} from '../../components/filter/filter';
 import {FilterTextUI} from '../../components/filter-text/filter-text';
@@ -39,15 +40,13 @@ import {SideNavigationUI} from '../../components/side-nav/side-nav';
     { path: '/sets', component: SetListUI, name: 'Setlist' },
     { path: '/filter', component: FilterUI, name: 'Filter' },
     { path: '/playlists', component: PlaylistListUI, name: 'PlaylistList' },
-    { path: '/playlists/:id', component: PlaylistUI, name: 'Playlist' }
+    { path: '/playlists/:id', component: PlaylistUI, name: 'Playlist' },
+    { path: '/playlists/:id/position/:pos', component: PlaylistPositionUI, name: 'PlaylistPosition' }
 ])
 export class App {
     tuneBook: TuneBook;
     systemProperties;
     filterSettings; FilterSettings;
-
-    // Init available colors
-    //$.fn.colorPicker.defaults.colors = ['F5F5F5', 'CCFFCC', 'EFEBD6', 'FFFF99', 'C7DAD4', 'BFE4FF', 'D8CFE6', 'FFE6E6', 'EEE6FF', 'E6FFE6', 'FFCCBF', 'FFFFFF', 'CCCCFF', 'FFFFCC', 'FF9980'];
 
     constructor(public tuneBookService: TuneBookService, public router: Router) {
         this.systemProperties = getSystemProperties();

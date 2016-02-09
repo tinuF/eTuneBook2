@@ -1,0 +1,40 @@
+<div class="card playlistPosition col-sm-10">
+    <div class="row col-sm-12">
+        <div class="col-sm-1">
+            <small [hidden]="editModus">{{playlistPosition.position}}</small>
+            <select [hidden]="!editModus" class="form-control" id="positionChooser" [(ngModel)]="playlistPosition.position"   (change)="setPosition($event)">
+                <option *ngFor="#p of positions" [value]="p">{{p}}</option>
+            </select>
+        </div>
+
+        <div class="col-sm-4">
+            <small [hidden]="editModus">{{playlistPosition.name | eliminateThe}}</small>
+            <input class="form-control form-control-sm" [hidden]="!editModus" [value]="playlistPosition.name" (keydown)="handleKeyDownOnPlaylistPositionName($event)"
+            (blur)="handleBlurOnPlaylistPositionName($event)">
+        </div>
+
+        <div class="col-sm-2">
+            <a class="btn btn-secondary btn-sm" title="Play Infos" [routerLink]="['/PlaylistPosition', {id: playlistPosition.playlistId, pos: playlistPosition.position}]"><i class="mdi mdi-pencil"></i></a>
+            <small>(Set {{playlistPosition.tuneSet.tuneSetId}})</small>
+        </div>
+
+        <a [hidden]="editModus" class='pull-sm-right' (click)="justPlayedTheSet()" title="Just Played The Set"><i class="mdi mdi-play-circle-outline"></i></a>
+
+        <div class="pull-sm-right  btn-toolbar playlistPositionMenu hidden-print" role="toolbar" [hidden]="!editModus">
+            <div class="btn-group" role="group">
+                <a class="btn btn-secondary btn-sm" (click)="copyPlaylistPosition($event)" title="Copy Playlist Position"><i class="mdi mdi-content-copy"></i></a>
+                <a class="btn btn-sm btn-secondary" (click)="deletePlaylistPosition($event)" title="Delete Playlist Position"><i class="mdi mdi-delete"></i></a>
+            </div>
+        </div>
+        
+    </div>
+    <div class="row col-sm-12" *ngFor="#tuneSetPosition of playlistPosition.tuneSet.tuneSetPositions; #i = index">
+        <etb-playlist-position-set-position [tuneSetPosition]="tuneSetPosition"></etb-playlist-position-set-position>
+    </div>
+
+
+    <div class="row col-sm-12" [hidden]="!playlistPosition.annotation">
+        <small>{{playlistPosition.annotation}}</small>
+    </div>
+
+</div>

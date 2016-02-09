@@ -10,7 +10,7 @@ import {TunePlayedUI} from '../tune-played/tune-played';
 import {TuneVideoListUI} from '../tune-video-list/tune-video-list';
 import {TuneInfoListUI} from '../tune-info-list/tune-info-list';
 import {TuneSetListUI} from '../tune-set-list/tune-set-list';
-import {TunePlaylistListUI} from '../tune-play-list-list/tune-play-list-list';
+import {TunePlaylistListUI} from '../tune-playlist-list/tune-playlist-list';
 
 
 

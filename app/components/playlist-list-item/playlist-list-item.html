@@ -1,0 +1,15 @@
+<div class="card col-md-1" [hidden]="!shown">
+  <div class="card-header"> 
+    <label class="c-input c-checkbox">
+        <input type="checkbox" [checked]="isSelected()" (change)="togglePlaylistSelection($event)">
+        <span class="c-indicator"></span>
+      </label> 
+    <small class="text-muted">{{playlist.id}}</small>
+  </div>
+  <div class="card-block">
+    <h5 class="card-title">
+        <a [routerLink]="['/Playlist', {id: playlist.id}]">{{playlist.name}}</a>
+    </h5>
+    <small class="text-muted">{{playlist.band}}: {{playlist.event}}</small>
+  </div>
+</div>

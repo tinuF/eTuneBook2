@@ -1,0 +1,3 @@
+<div class="card-footer" [hidden]="!playlists.length">
+    <etb-set-playlist-list-item [playlist]="playlist" *ngFor="#playlist of playlists; #i = index"></etb-set-playlist-list-item>    
+</div>
