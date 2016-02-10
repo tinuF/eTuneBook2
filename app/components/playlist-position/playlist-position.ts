@@ -22,10 +22,12 @@ export class PlaylistPositionUI implements OnInit, DoCheck {
     playlist: Playlist;
     playlistPosition: PlaylistPosition;
     editModus: boolean;
+    showDots: boolean;
 
     constructor(public tuneBookService: TuneBookService, public router: Router, routeParams: RouteParams, public location: Location) {
         this.playlistPosition = this.tuneBookService.getPlaylistPosition(routeParams.get('id'), routeParams.get('pos'));
         this.playlist = this.tuneBookService.getPlaylist(this.playlistPosition.playlistId);
+        this.showDots = false;
     }
 
     ngOnInit() {
@@ -34,6 +36,10 @@ export class PlaylistPositionUI implements OnInit, DoCheck {
 
     ngDoCheck() {
         this.editModus = this.tuneBookService.isEditModus();
+    }
+    
+    toggleDots() {
+        this.showDots = !this.showDots;
     }
 }
 

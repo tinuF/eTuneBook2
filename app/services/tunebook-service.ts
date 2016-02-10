@@ -5,6 +5,7 @@ import {Tune} from '../business/model/tune';
 import {TuneSet} from '../business/model/tuneset';
 import {AbcExportSettings} from '../common/settings/abc-export-settings';
 import {FilterSettings} from '../common/settings/filter-settings';
+import {PlaylistSettings} from '../common/settings/playlist-settings';
 import {eliminateThe} from '../business/util/text-util';
 import {tuneUp, tuneDown} from '../business/util/transposer-util';
 import {filterTunes, filterTuneSets, extractSetsWithinPlayDatePeriod, extractTunes, extractTuneSetPositions, filterPlaylists} from '../business/filter/filter-logic';
@@ -17,10 +18,11 @@ export class TuneBookService {
     _systemProperties;
     _currentAbcExportSettings: AbcExportSettings;
     _currentFilterSettings: FilterSettings;
-    _tunesFiltered: Array<Tune>;//todo: eventuell dynamisch ermitteln
+    _tunesFiltered: Array<Tune>;
     _tuneSetsFiltered: Array<TuneSet>;
     _currentTune: Tune;
     _editModus: boolean;
+    _currentPlaylistSettings: PlaylistSettings;
 
     constructor() {
         this._systemProperties = getSystemProperties();
@@ -28,6 +30,7 @@ export class TuneBookService {
         this._currentAbcExportSettings = new AbcExportSettings();
         this.initializeFilter();
         this._editModus = false;
+        this._currentPlaylistSettings = new PlaylistSettings();
     }
 
     setCurrentTuneBook(abc) {
@@ -44,6 +47,10 @@ export class TuneBookService {
 
     getCurrentFilterSettings() {
         return this._currentFilterSettings;
+    }
+    
+    getCurrentPlaylistSettings() {
+        return this._currentPlaylistSettings;
     }
 
     getCurrentTune() {

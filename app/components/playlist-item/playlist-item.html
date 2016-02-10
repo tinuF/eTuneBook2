@@ -1,3 +1,5 @@
+
+            
 <div class="card playlistPosition col-sm-10">
     <div class="row col-sm-12">
         <div class="col-sm-1">
@@ -8,13 +10,14 @@
         </div>
 
         <div class="col-sm-4">
+            <a  title="Play Infos" [routerLink]="['/PlaylistPosition', {id: playlistPosition.playlistId, pos: playlistPosition.position}]">
             <small [hidden]="editModus">{{playlistPosition.name | eliminateThe}}</small>
+            </a>
             <input class="form-control form-control-sm" [hidden]="!editModus" [value]="playlistPosition.name" (keydown)="handleKeyDownOnPlaylistPositionName($event)"
             (blur)="handleBlurOnPlaylistPositionName($event)">
         </div>
 
         <div class="col-sm-2">
-            <a class="btn btn-secondary btn-sm" title="Play Infos" [routerLink]="['/PlaylistPosition', {id: playlistPosition.playlistId, pos: playlistPosition.position}]"><i class="mdi mdi-pencil"></i></a>
             <small>(Set {{playlistPosition.tuneSet.tuneSetId}})</small>
         </div>
 
@@ -29,7 +32,7 @@
         
     </div>
     <div class="row col-sm-12" *ngFor="#tuneSetPosition of playlistPosition.tuneSet.tuneSetPositions; #i = index">
-        <etb-playlist-position-set-position [tuneSetPosition]="tuneSetPosition"></etb-playlist-position-set-position>
+        <etb-playlist-item-set-position [tuneSetPosition]="tuneSetPosition"></etb-playlist-item-set-position>
     </div>
 
 

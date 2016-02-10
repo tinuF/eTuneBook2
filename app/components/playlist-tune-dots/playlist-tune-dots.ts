@@ -1,9 +1,7 @@
 import {Component, DoCheck, Input, OnInit} from 'angular2/core';
-import {Router, RouteParams} from 'angular2/router';
 
 import {TuneBookService} from '../../services/tunebook-service';
 import {Tune} from '../../business/model/tune';
-
 
 @Component({
     selector: 'etb-playlist-tune-dots',
@@ -12,41 +10,53 @@ import {Tune} from '../../business/model/tune';
 })
 export class PlaylistTuneDotsUI implements OnInit, DoCheck {
     @Input() tune: Tune;
+    showDots: boolean;
+    numberOfBars: string;
     tuneObjectArray: Array<any>;
     shown: boolean;
-    buttonText: string;
 
-    constructor(public tuneBookService: TuneBookService, public router: Router, routeParams: RouteParams) {
-
+    constructor(public tuneBookService: TuneBookService) {
     }
 
     ngOnInit() {
-        this.shown = false;
-        this.buttonText = '+';
-    }
+        this.showDots = this.tuneBookService.getCurrentPlaylistSettings().isShowDots();
+        this.numberOfBars = this.tuneBookService.getCurrentPlaylistSettings().getNumberOfBars();
 
-    togglePlaylistTuneDots() {
-        if (!this.isRendered()) {
-            this.renderAbc(this.tune);
-            this.show();
-
+        if (this.showDots) {
+            this.show(this.numberOfBars);
         } else {
-            if (!this.shown) {
-                this.show();
-            } else {
-                this.hide();
-            }
+            this.hide();
         }
     }
 
-    show() {
+    ngDoCheck() {
+        this.showDots = this.tuneBookService.getCurrentPlaylistSettings().isShowDots();
+        let previousNumberOfBars = this.numberOfBars;
+        this.numberOfBars = this.tuneBookService.getCurrentPlaylistSettings().getNumberOfBars();
+
+        if (this.showDots) {
+            this.show(previousNumberOfBars);
+        } else {
+            this.hide();
+        }
+
+        jQuery(".meta-top").css("display", "none");
+        jQuery(".meta-bottom").css("display", "none");
+        //Chords
+        jQuery(".chord").css("font-size", "0.7em");
+        //Fingering
+        jQuery("text.annotation").css("font-size", "0.6em");
+    }
+
+    show(previousNumberOfBars: string) {
+        if (!this.isRendered() || this.numberOfBars != previousNumberOfBars) {
+            this.renderAbc();
+        }
         this.shown = true;
-        this.buttonText = '-';
     }
 
     hide() {
         this.shown = false;
-        this.buttonText = '+';
     }
 
 
@@ -62,28 +72,16 @@ export class PlaylistTuneDotsUI implements OnInit, DoCheck {
         return this.shown;
     }
 
-    getButtonText() {
-        return this.buttonText;
-    }
-
-
-    ngDoCheck() {
-        $(".meta-top").css("display", "none");
-        $(".meta-bottom").css("display", "none");
-        //Chords
-        $(".chord").css("font-size", "0.7em");
-        //Fingering
-        $("text.annotation").css("font-size", "0.6em");
-    }
-
-    renderAbc(tune) {
-        //Render Abc
-        //Important: Has to be timed-out, otherwise fingerings won't show up
-        //Compare with tbkTuneFocus: ABCJS.Editor also timed-out -> fingerings show up
-        //Compare with tbkPopover: ABCJS.renderAbc is not timed-out -> fingerings dont' show (timeout in popover -> no popover is shown)
+    renderAbc() {
         setTimeout(() => {
+            let abc: string;
+            if (this.numberOfBars == "*") {
+                abc = this.tune.pure;
+            } else {
+                abc = this.tuneBookService.getSampleAbc(this.tune.intTuneId, 1, parseInt(this.numberOfBars);
+            }
             let output = 'DotsForTune' + this.tune.intTuneId;
-            let tunebookString = this.skipFingering(this.tune.pure);
+            let tunebookString = this.skipFingering(abc);
             let parserParams = {};
             let engraverParams = {
                 scale: 1.0,
@@ -100,6 +98,7 @@ export class PlaylistTuneDotsUI implements OnInit, DoCheck {
             };
             let renderParams = {
             };
+
 
 
             this.tuneObjectArray = ABCJS.renderAbc(output, tunebookString, parserParams, engraverParams, renderParams)

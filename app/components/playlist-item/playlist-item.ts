@@ -12,7 +12,7 @@ import {PlaylistTuneUI} from '../../components/playlist-tune/playlist-tune';
 import {TunePlayedUI} from '../tune-played/tune-played';
 import {SetListItemUI} from '../../components/set-list-item/set-list-item';
 import {PartPlayInfoListUI} from '../../components/part-play-info-list/part-play-info-list';
-import {PlayListPositionSetPositionUI} from '../../components/playlist-position-set-position/playlist-position-set-position';
+import {PlayListItemSetPositionUI} from '../../components/playlist-item-set-position/playlist-item-set-position';
 import {PlayListPositionSetPositionPlayInfoUI} from '../../components/playlist-position-set-position-play-info/playlist-position-set-position-play-info';
 
 
@@ -21,7 +21,7 @@ import {PlayListPositionSetPositionPlayInfoUI} from '../../components/playlist-p
 @Component({
     selector: 'etb-playlist-item',
     templateUrl: './components/playlist-item/playlist-item.html',
-    directives: [ROUTER_DIRECTIVES, TuneDotsUI, SampleDotsUI, TunePlayedUI, PlaylistTuneUI, SetListItemUI, PartPlayInfoListUI, PlayListPositionSetPositionUI, PlayListPositionSetPositionPlayInfoUI],
+    directives: [ROUTER_DIRECTIVES, TuneDotsUI, SampleDotsUI, TunePlayedUI, PlaylistTuneUI, SetListItemUI, PartPlayInfoListUI, PlayListItemSetPositionUI, PlayListPositionSetPositionPlayInfoUI],
     styleUrls: ['./components/playlist-item/playlist-item.css'],
     pipes: [EliminateThe, FromNow]
 })
