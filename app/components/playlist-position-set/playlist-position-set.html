@@ -1,20 +1,13 @@
 <div class="card playlistPosition col-sm-10">
     <div class="row col-sm-12">
         <div class="col-sm-1">
-            <small [hidden]="editModus">{{playlistPosition.position}}</small>
-            <select [hidden]="!editModus" class="form-control" id="positionChooser" [(ngModel)]="playlistPosition.position"   (change)="setPosition($event)">
-                <option *ngFor="#p of positions" [value]="p">{{p}}</option>
-            </select>
+            <small>{{playlistPosition.position}}</small>
         </div>
 
         <div class="col-sm-4">
             <small [hidden]="editModus">{{playlistPosition.name | eliminateThe}}</small>
             <input class="form-control form-control-sm" [hidden]="!editModus" [value]="playlistPosition.name" (keydown)="handleKeyDownOnPlaylistPositionName($event)"
             (blur)="handleBlurOnPlaylistPositionName($event)">
-        </div>
-
-        <div class="col-sm-2">
-            <small>(Set {{playlistPosition.tuneSet.tuneSetId}})</small>
         </div>
 
         <a [hidden]="editModus" class='pull-sm-right' (click)="justPlayedTheSet()" title="Just Played The Set"><i class="mdi mdi-play-circle-outline"></i></a>

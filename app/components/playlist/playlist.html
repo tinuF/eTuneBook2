@@ -1,18 +1,31 @@
 <div class="row">
-	<div class="col-xs-1 ">
-		<etb-playlist-menu [sets]="sets"></etb-playlist-menu>
-	</div>
-	<div class="col-xs-11">
-		<div class="row">
-			<p class="col-xs-4" contenteditable (keydown)="handleKeyDownOnPlaylistName($event)" (blur)="handleBlurOnPlaylistName($event)"> {{playlist.name}} </p>
-			<p class="col-xs-4" contenteditable (keydown)="handleKeyDownOnPlaylistBand($event)" (blur)="handleBlurOnPlaylistBand($event)"> {{playlist.band}} </p>
-			<p class="col-xs-3" contenteditable (keydown)="handleKeyDownOnPlaylistEvent($event)" (blur)="handleBlurOnPlaylistEvent($event)"> {{playlist.event}} </p>
-		</div>
-		<div class="row">
-			<etb-playlist-item [playlistPosition]="position" *ngFor="#position of playlist.playlistPositions; #i = index"></etb-playlist-item>
-		</div>
-	</div>
-	<!--
+    <div class="col-xs-1 ">
+        <etb-playlist-menu [sets]="sets"></etb-playlist-menu>
+    </div>
+    <div class="col-xs-11">
+        <div class="row">
+            <div class="col-xs-4">
+                <p [hidden]="editModus">{{playlist.name}}</p>
+                <input class="form-control form-control-sm" [hidden]="!editModus" [value]="playlist.name" (keydown)="handleKeyDownOnPlaylistName($event)"
+                (blur)="handleBlurOnPlaylistName($event)">
+
+            </div>
+            <div class="col-xs-4">
+                <p [hidden]="editModus">{{playlist.band}}</p>
+                <input class="form-control form-control-sm" [hidden]="!editModus" [value]="playlist.band" (keydown)="handleKeyDownOnPlaylistBand($event)"
+                (blur)="handleBlurOnPlaylistBand($event)">
+            </div>
+            <div class="col-xs-2">
+                <p [hidden]="editModus">{{playlist.event}}</p>
+                <input class="form-control form-control-sm" [hidden]="!editModus" [value]="playlist.event" (keydown)="handleKeyDownOnPlaylistEvent($event)"
+                (blur)="handleBlurOnPlaylistEvent($event)">
+            </div>
+        </div>
+        <div class="row">
+            <etb-playlist-item [playlistPosition]="position" *ngFor="#position of playlist.playlistPositions; #i = index"></etb-playlist-item>
+        </div>
+    </div>
+    <!--
 	<div class="col-xs-8"></div>
 	-->
 </div>

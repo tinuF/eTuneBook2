@@ -1,5 +1,5 @@
 <div class="playlistListMenu btn-group hidden-print">
-	<a class="btn btn-secondary btn-sm" title="Only checked Playlists" (click)="filterPlaylists($event)">
+	<a class="btn btn-secondary btn-sm" title="Only checked Playlists" [ngClass]="{active: filterSettings.applyPlaylistIds}" (click)="filterPlaylists($event)">
 		<i class="mdi mdi-check"></i>
 	</a>
 </div>

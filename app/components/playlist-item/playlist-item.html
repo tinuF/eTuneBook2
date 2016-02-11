@@ -1,24 +1,20 @@
-
-            
 <div class="card playlistPosition col-sm-10">
     <div class="row col-sm-12">
         <div class="col-sm-1">
-            <small [hidden]="editModus">{{playlistPosition.position}}</small>
-            <select [hidden]="!editModus" class="form-control" id="positionChooser" [(ngModel)]="playlistPosition.position"   (change)="setPosition($event)">
+            <a title="Play Infos" [routerLink]="['/PlaylistPosition', {id: playlistPosition.playlistId, pos: playlistPosition.position}]">
+                <small [hidden]="editModus">{{playlistPosition.position}}</small>
+            </a>
+            <select [hidden]="!editModus" class="form-control" id="positionChooser" [(ngModel)]="playlistPosition.position" (change)="setPosition($event)">
                 <option *ngFor="#p of positions" [value]="p">{{p}}</option>
             </select>
         </div>
 
         <div class="col-sm-4">
-            <a  title="Play Infos" [routerLink]="['/PlaylistPosition', {id: playlistPosition.playlistId, pos: playlistPosition.position}]">
-            <small [hidden]="editModus">{{playlistPosition.name | eliminateThe}}</small>
+            <a title="Play Infos" [routerLink]="['/PlaylistPosition', {id: playlistPosition.playlistId, pos: playlistPosition.position}]">
+                <small [hidden]="editModus">{{playlistPosition.name | eliminateThe}}</small>
             </a>
             <input class="form-control form-control-sm" [hidden]="!editModus" [value]="playlistPosition.name" (keydown)="handleKeyDownOnPlaylistPositionName($event)"
             (blur)="handleBlurOnPlaylistPositionName($event)">
-        </div>
-
-        <div class="col-sm-2">
-            <small>(Set {{playlistPosition.tuneSet.tuneSetId}})</small>
         </div>
 
         <a [hidden]="editModus" class='pull-sm-right' (click)="justPlayedTheSet()" title="Just Played The Set"><i class="mdi mdi-play-circle-outline"></i></a>
@@ -29,15 +25,9 @@
                 <a class="btn btn-sm btn-secondary" (click)="deletePlaylistPosition($event)" title="Delete Playlist Position"><i class="mdi mdi-delete"></i></a>
             </div>
         </div>
-        
+
     </div>
     <div class="row col-sm-12" *ngFor="#tuneSetPosition of playlistPosition.tuneSet.tuneSetPositions; #i = index">
         <etb-playlist-item-set-position [tuneSetPosition]="tuneSetPosition"></etb-playlist-item-set-position>
     </div>
-
-
-    <div class="row col-sm-12" [hidden]="!playlistPosition.annotation">
-        <small>{{playlistPosition.annotation}}</small>
-    </div>
-
 </div>

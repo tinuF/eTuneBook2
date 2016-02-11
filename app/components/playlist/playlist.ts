@@ -16,6 +16,7 @@ import {PlayListMenuUI} from '../../components/playlist-menu/playlist-menu';
 })
 export class PlaylistUI implements OnInit, DoCheck {
     playlist: Playlist;
+    editModus: boolean;
 
     constructor(public tuneBookService: TuneBookService, routeParams: RouteParams) {
         this.playlist = this.tuneBookService.getPlaylist(routeParams.get('id'));
@@ -23,10 +24,12 @@ export class PlaylistUI implements OnInit, DoCheck {
 
     ngOnInit() {
         this.sortPlaylistPosition();
+        this.editModus = this.tuneBookService.isEditModus();
     }
 
     ngDoCheck() {
         this.sortPlaylistPosition();
+        this.editModus = this.tuneBookService.isEditModus();
     }
 
     sortPlaylistPosition() {
@@ -35,48 +38,48 @@ export class PlaylistUI implements OnInit, DoCheck {
         });
     }
 
-    handleKeyDownOnPlaylistName(event) {
-        var keycode = (event.keyCode ? event.keyCode : event.which);
+    handleKeyDownOnPlaylistName(e) {
+        var keycode = (e.keyCode ? e.keyCode : e.which);
 
         if (keycode === 13) { // ENTER
-            event.target.blur();
-            event.preventDefault();
-            this.handleBlurOnPlaylistName(event);
+            e.target.blur();
+            e.preventDefault();
+            this.handleBlurOnPlaylistName(e);
         }
     }
 
-    handleBlurOnPlaylistName(event) {
-        this.playlist.name = event.target.textContent;
+    handleBlurOnPlaylistName(e) {
+        this.playlist.name = e.target.value;
         this.tuneBookService.storeTuneBookAbc();
     }
 
-    handleKeyDownOnPlaylistBand(event) {
-        var keycode = (event.keyCode ? event.keyCode : event.which);
+    handleKeyDownOnPlaylistBand(e) {
+        var keycode = (e.keyCode ? e.keyCode : e.which);
 
         if (keycode === 13) { // ENTER
-            event.target.blur();
-            event.preventDefault();
-            this.handleBlurOnPlaylistBand(event);
+            e.target.blur();
+            e.preventDefault();
+            this.handleBlurOnPlaylistBand(e);
         }
     }
 
-    handleBlurOnPlaylistBand(event) {
-        this.playlist.band = event.target.textContent;
+    handleBlurOnPlaylistBand(e) {
+        this.playlist.band = e.target.value;
         this.tuneBookService.storeTuneBookAbc();
     }
 
-    handleKeyDownOnPlaylistEvent(event) {
-        var keycode = (event.keyCode ? event.keyCode : event.which);
+    handleKeyDownOnPlaylistEvent(e) {
+        var keycode = (e.keyCode ? e.keyCode : e.which);
 
         if (keycode === 13) { // ENTER
-            event.target.blur();
-            event.preventDefault();
-            this.handleBlurOnPlaylistEvent(event);
+            e.target.blur();
+            e.preventDefault();
+            this.handleBlurOnPlaylistEvent(e);
         }
     }
 
-    handleBlurOnPlaylistEvent(event) {
-        this.playlist.event = event.target.textContent;
+    handleBlurOnPlaylistEvent(e) {
+        this.playlist.event = e.target.value;
         this.tuneBookService.storeTuneBookAbc();
     }
 }

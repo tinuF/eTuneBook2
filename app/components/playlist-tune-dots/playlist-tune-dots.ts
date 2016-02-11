@@ -78,7 +78,7 @@ export class PlaylistTuneDotsUI implements OnInit, DoCheck {
             if (this.numberOfBars == "*") {
                 abc = this.tune.pure;
             } else {
-                abc = this.tuneBookService.getSampleAbc(this.tune.intTuneId, 1, parseInt(this.numberOfBars);
+                abc = this.tuneBookService.getSampleAbc(this.tune.intTuneId, 1, parseInt(this.numberOfBars));
             }
             let output = 'DotsForTune' + this.tune.intTuneId;
             let tunebookString = this.skipFingering(abc);

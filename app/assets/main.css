@@ -2,6 +2,13 @@
     background: lightcyan;
 }
 
+/**wirkt nicht**/
+/*
+.btn .active {
+    background: #E0F0F0;
+}
+*/
+
 .form-control {
     background: #E0F0F0;
 }

@@ -84,7 +84,13 @@ export class PlayListItemUI implements OnInit, DoCheck {
     deletePlaylistPosition(e) {
         this.tuneBookService.deletePlaylistPosition(this.playlistPosition.playlistId, this.playlistPosition.position);
         this.tuneBookService.storeTuneBookAbc();
-    };
+    }
+
+    justPlayedTheSet() {
+        var now = new Date();
+        this.tuneBookService.addTuneSetPlayDate(this.playlistPosition.tuneSet, now);
+        this.tuneBookService.storeTuneBookAbc();
+    }
 }
 
 

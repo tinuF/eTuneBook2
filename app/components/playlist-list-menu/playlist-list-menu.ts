@@ -14,10 +14,8 @@ import {FilterSettings} from '../../common/settings/filter-settings';
     styleUrls: ['./components/playlist-list-menu/playlist-list-menu.css'],
 })
 export class PlaylistListMenuUI implements OnInit {
-    sorting: string;
     filterSettings: FilterSettings;
     @Input() playlists: Array<Playlist>;
-    selectedPlaylistId: number;
 
     constructor(public tuneBookService: TuneBookService) {
 

@@ -10,7 +10,7 @@
         <a class='btn btn-secondary btn-sm' (click)="backward()" title="Previous">
             <i class="mdi mdi-skip-previous"></i>
         </a>
-        <a class='btn btn-secondary btn-sm' (click)="toggleDots()" title="Show/Hide Dots">
+        <a class='btn btn-secondary btn-sm' [ngClass]="{active: playlistSettings.showDots}" (click)="toggleDots()" title="Show/Hide Dots">
             <i class="mdi mdi-music-note"></i>
         </a>
     </div>
