@@ -22,6 +22,7 @@ import {BookTitleUI} from '../../components/book-title/book-title';
 import {TuneTitleUI} from '../../components/tune-title/tune-title';
 import {TuneAbcUI} from '../../components/tune-abc/tune-abc';
 import {SideNavigationUI} from '../../components/side-nav/side-nav';
+import {SocialNavigationUI} from '../../components/social-nav/social-nav';
 
 
 @Component({
@@ -29,7 +30,7 @@ import {SideNavigationUI} from '../../components/side-nav/side-nav';
     providers: [TuneBookService],
     templateUrl: './components/app/app.html',
     styleUrls: ['./components/app/app.css'],
-    directives: [ROUTER_DIRECTIVES, FilterTextUI, BookTitleUI, TuneTitleUI, SideNavigationUI]
+    directives: [ROUTER_DIRECTIVES, FilterTextUI, BookTitleUI, TuneTitleUI, SideNavigationUI, SocialNavigationUI]
 })
 @RouteConfig([
     { path: '/', redirectTo: ['Introduction'], name: 'Home' },
@@ -141,7 +142,7 @@ export class App {
         this.tuneBookService.storeTuneBookAbc();
         this.router.navigate(['/Tuneabc', { id: newTuneSet.tuneSetPositions[0].tune.intTuneId }]);
     }
-    
+
     newPlaylist() {
         let newPlaylist: Playlist = this.tuneBookService.addEmptyPlaylist();
         this.tuneBookService.storeTuneBookAbc();

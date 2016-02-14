@@ -81,6 +81,42 @@ export class TuneListMenuUI implements OnInit {
         this.tunes = this.tuneBookService.shuffleTuneList();
         this.sorting = "random";
     }
+
+    sortFrequency(e) {
+        if (this.sorting !== "frequencyAsc") {
+            //sort tune frequency ascending  
+            this.tunes.sort(function(a: Tune, b: Tune) {
+                return a.frequencyPlayed - b.frequencyPlayed;
+            });
+            this.sorting = "frequencyAsc";
+
+        } else if (this.sorting !== "frequencyDesc") {
+            //sort tune playdate descending  
+            this.tunes.sort(function(a: Tune, b: Tune) {
+                return b.frequencyPlayed - a.frequencyPlayed;
+            });
+            this.sorting = "frequencyDesc";
+        }
+    }
+    
+    sortId(e) {
+
+        if (this.sorting !== "idAsc") {
+            //sort tune Id ascending  
+            this.tunes.sort(function(a: Tune, b: Tune) {
+                return a.intTuneId - b.intTuneId;
+            });
+            this.sorting = "idAsc";
+
+        } else if (this.sorting !== "idDesc") {
+            //sort tune Id descending  
+            this.tunes.sort(function(a: Tune, b: Tune) {
+                return b.intTuneId - a.intTuneId;
+            });
+            this.sorting = "idDesc";
+        }
+
+    }
 }
 
 

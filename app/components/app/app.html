@@ -6,9 +6,9 @@
     <a class="navbar-brand hidden-sm-down pull-xs-right" href="#/info/introduction" title="eTuneBook">eTuneBook</a>
     <ul class="nav navbar-nav">
         <li class="nav-item dropdown col-xs-1">
-            <a class="nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> 
-              <span class="hidden-sm-down">File</span>
-              <i class="mdi mdi-dots-vertical hidden-md-up" title="Open Menu"></i>    
+            <a class="nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                <span class="hidden-sm-down">File</span>
+                <i class="mdi mdi-dots-vertical hidden-md-up" title="Open Menu"></i>
             </a>
             <div class="dropdown-menu">
                 <a class="dropdown-item" (click)="initializeTuneBook()">New Book</a>
@@ -25,26 +25,26 @@
         </li>
 
         <li class="nav-item col-xs-1">
-            <a class="nav-link"  [routerLink]="['/Tunelist']" title="Load Tunes">
+            <a class="nav-link" [routerLink]="['/Tunelist']" title="Load Tunes">
                 <span class="hidden-sm-down">Tunes</span>
                 <i class="mdi mdi-music-note hidden-md-up"></i>
             </a>
         </li>
-        
+
         <li class="nav-item col-xs-1">
             <a class="nav-link" [routerLink]="['/Setlist']" title="Load Sets">
                 <span class="hidden-sm-down">Sets</span>
                 <i class="mdi mdi-format-list-bulleted hidden-md-up"></i>
             </a>
         </li>
-        
+
         <li class="nav-item col-xs-1">
             <a class="nav-link" [routerLink]="['/PlaylistList']" title="Load Playlists">
                 <span class="hidden-sm-down">Playlists</span>
                 <i class="mdi mdi-play-circle-outline hidden-md-up"></i>
             </a>
         </li>
-        
+
         <form class="form-inline navbar-form pull-xs-right col-xs-5" role="search">
             <input type="text" class="form-control" placeholder="Search" (keyup)="search($event)">
         </form>
@@ -53,38 +53,21 @@
 
 <div class="container-fluid">
     <div class="row">
-	   <div class="col-xs-5">
-		  <etb-book-title [tuneBook]="tuneBook"></etb-book-title>
-	   </div>
-	   <div class="col-xs-7">
-		  <etb-filter-text></etb-filter-text>
-	   </div>
+        <div class="col-xs-5">
+            <etb-book-title [tuneBook]="tuneBook"></etb-book-title>
+        </div>
+        <div class="col-xs-7">
+            <etb-filter-text></etb-filter-text>
+        </div>
     </div>
 
-    
-        
     <div class="row">
         <etb-side-nav></etb-side-nav>
-        <!--
-        <div class="col-md-1 bd-sidebar">
-            <div class="bd-sidebar">
-                <div class="btn-group pull-right hidden-print">
-        <a href="https://twitter.com/bxplr" target="_blank" title="Martin Fleischmann on Twitter" class="btn btn-xs btn-twitter"><i class="icon-twitter"></i> | News</a>
-        <a href="https://www.facebook.com/pages/e-TuneBook/577631982265183" target="_blank" title="eTuneBook on FaceBook" class="btn btn-xs btn-facebook"><i class="icon-facebook"></i> | eTb</a>
-        <a href="https://www.youtube.com/user/pianoboxplayer" target="_blank" title="Martin Fleischmann on YouTube"class="btn btn-xs btn-youtube"><i class="icon-youtube"></i> | Music</a>
+        <etb-social-nav></etb-social-nav>
+
+        <router-outlet></router-outlet>
+
     </div>
-                
-            </div>
-        </div>
-        -->
-        <!--
-        <div class="col-md-12 bd-content">
-            -->
-            <router-outlet></router-outlet>
-        <!--
-        </div>
-        -->
-    </div>  
 </div>
 
 <input class="input-file hidden-print" id="fileInput" type="file" (change)="readTuneBookFromLocalDrive($event)" #importer>

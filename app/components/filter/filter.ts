@@ -19,15 +19,10 @@ export class FilterUI implements OnInit {
     systemProperties;
     currentFilter: string;
     filterActive: boolean;
-    tuneSetPlayRangeFilter;
-    ranges;
-    tuneSetUpdateRangeFilter;
     type;
     types;
     key;
     keys;
-    freqencyComparator;
-    tuneSetFrequencyForFilter;
     event;
     events;
     band;
@@ -48,63 +43,6 @@ export class FilterUI implements OnInit {
         this.setSelectedColor(this.filterSettings.color);
         this.setSelectedEvent(this.filterSettings.event);
         this.setSelectedBand(this.filterSettings.band);
-
-        // Set which Play Range to Filter
-        // Default: Launch Date of eTuneBook till now
-        this.tuneSetPlayRangeFilter = {
-            startDate: moment('05.10.2012', 'DD.MM.YYYY'),
-            endDate: moment()
-        };
-
-        var playMin = this.filterSettings.plmin;
-        if (playMin != null) {
-            this.tuneSetPlayRangeFilter.startDate = moment(playMin, 'DD.MM.YYYY');
-        }
-        var playMax = this.filterSettings.plmax;
-        if (playMax != null) {
-            this.tuneSetPlayRangeFilter.endDate = moment(playMax, 'DD.MM.YYYY');
-        }
-
-        // Set which Update Range to Filter
-        // Default: Launch Date of eTuneBook till now
-        this.tuneSetUpdateRangeFilter = {
-            startDate: moment('05.10.2012', 'DD.MM.YYYY'),
-            endDate: moment()
-        };
-
-        var updateMin = this.filterSettings.updmin;
-        if (updateMin != null) {
-            this.tuneSetUpdateRangeFilter.startDate = moment(updateMin, 'DD.MM.YYYY');
-        }
-        var updateMax = this.filterSettings.updmax;
-        if (updateMax != null) {
-            this.tuneSetUpdateRangeFilter.endDate = moment(updateMax, 'DD.MM.YYYY');
-        }
-
-        this.ranges = {
-            'Today': [moment().startOf('day'), moment().add(1, 'days')],
-            'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-            'Last 7 Days': [moment().subtract(7, 'days'), moment()],
-            'Last 30 Days': [moment().subtract(30, 'days'), moment()],
-            'This Month': [moment().startOf('month'), moment()],
-            'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
-            'Maximum Range': [moment('05.10.2012', 'DD.MM.YYYY'), moment()]
-        };
-
-
-        // Set which Frequency Range to Filter
-        var freqComp = this.filterSettings.freqcomp;
-        if (freqComp == null) {
-            freqComp = "";
-        }
-        var freq = this.filterSettings.freq;
-        if (freq == null) {
-            freq = "";
-        }
-
-        this.freqencyComparator = freqComp;
-        this.tuneSetFrequencyForFilter = freq;
-
     }
 
     setSelectedType(type) {
@@ -179,25 +117,6 @@ export class FilterUI implements OnInit {
         this.setEvents();
         this.setBands();
     }
-    
-    /*
-    applyFilter() {
-
-        this.filterSettings.plmin = this.tuneSetPlayRangeFilter.startDate.format('DD.MM.YYYY');
-        this.filterSettings.plmax = this.tuneSetPlayRangeFilter.endDate.format('DD.MM.YYYY');
-        this.filterSettings.updmin = this.tuneSetUpdateRangeFilter.startDate.format('DD.MM.YYYY');
-        this.filterSettings.updmax = this.tuneSetUpdateRangeFilter.endDate.format('DD.MM.YYYY');
-        this.filterSettings.freqcomp = this.freqencyComparator;
-        this.filterSettings.freq = this.tuneSetFrequencyForFilter;
-        
-        // Emitt Event to Parent
-        
-        this.filterChange.next({
-            value: this.filterSettings
-        });
-        
-    }
-    */
 
     setType(e) {
         this.type = e.target.value;

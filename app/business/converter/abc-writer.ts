@@ -106,7 +106,7 @@ export function writeAbcHeader(tuneBook, abcOption){
 export function writeTuneAbc(tune, tuneSetPositions, abcOption) {
   var tuneAbc = "";
 
-  if (!abcOption.tuneSet && !abcOption.playDate && !abcOption.skill && !abcOption.color && !abcOption.annotation && !abcOption.website && !abcOption.video) {
+  if (!abcOption.tuneSet && !abcOption.playDate && !abcOption.color && !abcOption.annotation && !abcOption.website && !abcOption.video) {
     tuneAbc = tune.pure;
   } else {
     tuneAbc = writeTuneAbcWithEtbkDirectives(tune, tuneSetPositions, "X:", abcOption);

@@ -55,6 +55,25 @@ export class SetListMenuUI implements OnInit {
         this.sorting = "random";
     }
 
+    sortId(e) {
+
+        if (this.sorting !== "idAsc") {
+            //sort tuneSet id ascending  
+            this.sets.sort(function(a: TuneSet, b: TuneSet) {
+                return a.tuneSetId - b.tuneSetId;
+            })
+            this.sorting = "idAsc";
+
+        } else if (this.sorting !== "idDesc") {
+            //sort tuneSet id descending  
+            this.sets.sort(function(a: TuneSet, b: TuneSet) {
+                return b.tuneSetId - a.tuneSetId;
+            })
+            this.sorting = "idDesc";
+        }
+
+    }
+
     filterSets(e) {
         this.filterSettings.toggleSetIdFilter();
         this.tuneBookService.applyFilter();
