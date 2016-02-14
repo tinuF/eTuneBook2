@@ -4,6 +4,8 @@ import {RouteConfig, Router, ROUTER_DIRECTIVES} from 'angular2/router';
 import {getSystemProperties} from '../../common/system-properties';
 import {TuneBookService} from '../../services/tunebook-service';
 import {TuneBook} from '../../business/model/tunebook';
+import {Playlist} from '../../business/model/playlist';
+import {TuneSet} from '../../business/model/tuneset';
 
 import {BookUI} from '../../components/book/book';
 import {AbcUI} from '../../components/abc/abc';
@@ -135,9 +137,15 @@ export class App {
     }
 
     newTune() {
-        let newTuneSet = this.tuneBookService.initializeTuneAndTuneSet();
+        let newTuneSet: TuneSet = this.tuneBookService.initializeTuneAndTuneSet();
         this.tuneBookService.storeTuneBookAbc();
         this.router.navigate(['/Tuneabc', { id: newTuneSet.tuneSetPositions[0].tune.intTuneId }]);
+    }
+    
+    newPlaylist() {
+        let newPlaylist: Playlist = this.tuneBookService.addEmptyPlaylist();
+        this.tuneBookService.storeTuneBookAbc();
+        this.router.navigate(['/Playlist', { id: newPlaylist.id }]);
     }
 
     exportTuneBook() {

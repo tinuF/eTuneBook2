@@ -474,15 +474,21 @@ export function filterPlaylists(playlists: Array<Playlist>, filterSettings: Filt
             playlistIdMatch = true;
         }
 
-        for (var y = 0; y < playlists[z].playlistPositions.length; y++) {
+        if (playlists[z].playlistPositions.length > 0) {
+            for (var y = 0; y < playlists[z].playlistPositions.length; y++) {
 
-            for (var a = 0; a < tuneSetsFiltered.length; a++) {
-                if (!tuneSetMatch && playlists[z].playlistPositions[y].tuneSet.tuneSetId == tuneSetsFiltered[a].tuneSetId) {
-                    tuneSetMatch = true;
+                for (var a = 0; a < tuneSetsFiltered.length; a++) {
+                    if (!tuneSetMatch && playlists[z].playlistPositions[y].tuneSet.tuneSetId == tuneSetsFiltered[a].tuneSetId) {
+                        tuneSetMatch = true;
+                    }
                 }
             }
+
+        } else {
+            //New Playlist
+            tuneSetMatch = true;
         }
-        
+
         /*
         if (filterSettings.event == "All Events" || playlists[z].event == filterSettings.event) {
             playlistEventMatch = true;

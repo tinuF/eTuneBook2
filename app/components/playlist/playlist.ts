@@ -1,5 +1,5 @@
 import {Component, OnInit, DoCheck} from 'angular2/core';
-import {ROUTER_DIRECTIVES, RouteParams} from 'angular2/router';
+import {ROUTER_DIRECTIVES, Router, RouteParams} from 'angular2/router';
 
 import {TuneBookService} from '../../services/tunebook-service';
 import {Playlist} from '../../business/model/playlist';
@@ -18,7 +18,7 @@ export class PlaylistUI implements OnInit, DoCheck {
     playlist: Playlist;
     editModus: boolean;
 
-    constructor(public tuneBookService: TuneBookService, routeParams: RouteParams) {
+    constructor(public tuneBookService: TuneBookService, public router: Router, routeParams: RouteParams) {
         this.playlist = this.tuneBookService.getPlaylist(routeParams.get('id'));
     }
 
@@ -81,6 +81,12 @@ export class PlaylistUI implements OnInit, DoCheck {
     handleBlurOnPlaylistEvent(e) {
         this.playlist.event = e.target.value;
         this.tuneBookService.storeTuneBookAbc();
+    }
+
+    deletePlaylist(e) {
+        this.tuneBookService.deletePlaylist(this.playlist.id);
+        this.tuneBookService.storeTuneBookAbc();
+        this.router.navigate(['/PlaylistList']);
     }
 }
 

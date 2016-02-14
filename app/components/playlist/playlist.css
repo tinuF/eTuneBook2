@@ -1,0 +1,12 @@
+.card {
+    margin: 5px;
+    padding: 5px;
+    min-width: 900px;
+    background: #FFF5E0;
+}
+
+.card-header {
+    padding-bottom: 0px;
+    background: #FFF5E0;
+}
+

@@ -1,6 +1,6 @@
 <div class="card col-sm-12" [style.background-color]="tuneSetPosition.tune.color.hex">
     <div class="row">
-        <a class="col-sm-4" [routerLink]="['/Tune', {id: tuneSetPosition.tune.intTuneId}]">{{tuneSetPosition.position}} {{tuneSetPosition.tune.title | eliminateThe}}</a>
+        <a class="col-sm-4" [routerLink]="['/Tune', {id: tuneSetPosition.tune.intTuneId}]">{{tuneSetPosition.tune.title | eliminateThe}}</a>
         <div class="col-sm-3">
             <small [hidden]="editModus">{{tuneSetPosition.currentTuneSetPositionPlayInfo.repeat}}</small>
         </div>

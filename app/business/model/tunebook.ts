@@ -828,7 +828,7 @@ export class TuneBook {
     addEmptyPlaylist() {
         var emptyPlaylist;
 
-        emptyPlaylist = new Playlist(this._getNextPlaylistId(), "", "", "");
+        emptyPlaylist = new Playlist(this._getNextPlaylistId(), "New Playlist", "Event Type", "Band Name");
         this.playlists.push(emptyPlaylist);
 
         return emptyPlaylist;

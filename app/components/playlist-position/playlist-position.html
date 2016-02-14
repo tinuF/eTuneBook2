@@ -4,14 +4,15 @@
     </div>
 
     <div class="col-xs-11">
-        <div class="row">
-			<p class="col-xs-4"> <a [routerLink]="['/Playlist', {id: playlist.id}]">{{playlist.name}}</a></p>
-			<p class="col-xs-4"> {{playlist.band}} </p>
-			<p class="col-xs-3"> {{playlist.event}} </p>
-		</div>
-        <etb-playlist-position-set [showDots]="showDots" [playlistPosition]="playlistPosition"></etb-playlist-position-set>
+        <div class="card col-xs-9">
+            <div class="card-header">
+                <p class="col-xs-4"> <a [routerLink]="['/Playlist', {id: playlist.id}]">{{playlist.name}}</a></p>
+                <p class="col-xs-4"> {{playlist.band}} </p>
+                <p class="col-xs-3"> {{playlist.event}} </p>
+            </div>
+            <div class="card-block">
+                <etb-playlist-position-set [showDots]="showDots" [playlistPosition]="playlistPosition"></etb-playlist-position-set>
+            </div>
+        </div>
     </div>
 </div>
-
-
-
