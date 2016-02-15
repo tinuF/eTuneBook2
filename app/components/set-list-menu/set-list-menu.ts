@@ -7,8 +7,6 @@ import {Playlist} from '../../business/model/playlist';
 import {FilterSettings} from '../../common/settings/filter-settings';
 import {EditButtonUI} from '../../components/edit-btn/edit-btn';
 
-
-
 @Component({
     selector: 'etb-set-list-menu',
     templateUrl: './components/set-list-menu/set-list-menu.html',
@@ -23,12 +21,12 @@ export class SetListMenuUI implements OnInit {
     selectedPlaylistId: number;
 
     constructor(public tuneBookService: TuneBookService) {
-        this.filterSettings = this.tuneBookService.getCurrentFilterSettings();
-        this.playlists = this.tuneBookService.getPlaylists();
+
     }
 
     ngOnInit() {
-
+        this.filterSettings = this.tuneBookService.getCurrentFilterSettings();
+        this.playlists = this.tuneBookService.getPlaylists();
     }
 
     sortPlaydate(e) {

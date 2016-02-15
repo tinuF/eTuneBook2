@@ -89,6 +89,14 @@ export class TuneBook {
         return playlist.getPlaylistPosition(playlistPositionNr);
     }
 
+    getPlaylistPositionByTuneSetId(playlistId, tuneSetId) {
+        let playlist: Playlist;
+
+        playlist = this.getPlaylistById(playlistId);
+
+        return playlist.getPlaylistPositionByTuneSetId(tuneSetId);
+    }
+
     getTuneSetsByIntTuneId(intTuneId) {
         var tuneSets = [];
 
@@ -214,10 +222,10 @@ export class TuneBook {
         return tuneSetPositions;
     }
 
-    copyPlaylist(playlistId) {
-        var playlistId, playlistName, playlistOriginal, playlistCopy;
+    copyPlaylist(playlistIdOriginal): number {
+        let playlistId, playlistName, playlistOriginal, playlistCopy;
 
-        playlistOriginal = this.getPlaylistById(playlistId);
+        playlistOriginal = this.getPlaylistById(playlistIdOriginal);
 
         playlistId = this._getNextPlaylistId();
         playlistName = 'Copy of ' + playlistOriginal.name;
@@ -226,6 +234,8 @@ export class TuneBook {
         this.playlists.push(playlistCopy);
 
         this._copyPlaylistPositions(playlistOriginal, playlistCopy);
+
+        return playlistId;
     }
 
     _getNextPlaylistId() {
@@ -234,7 +244,7 @@ export class TuneBook {
         maxPlaylistId = 0;
 
         for (var i = 0; i < this.playlists.length; i++) {
-
+            //TODO: Obwohl Playlist.id als number definiert, ist an dieser Stelle ein String drin! 
             currentPlaylistId = parseInt(this.playlists[i].id);
             if (currentPlaylistId > maxPlaylistId) {
                 maxPlaylistId = currentPlaylistId;

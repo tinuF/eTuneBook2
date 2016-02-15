@@ -17,6 +17,7 @@ import {PlaylistPositionUI} from '../../components/playlist-position/playlist-po
 import {TuneUI} from '../../components/tune/tune';
 import {FilterUI} from '../../components/filter/filter';
 import {FilterTextUI} from '../../components/filter-text/filter-text';
+import {InfoUI} from '../../components/info/info';
 import {Introduction} from '../../components/introduction/introduction';
 import {BookTitleUI} from '../../components/book-title/book-title';
 import {TuneTitleUI} from '../../components/tune-title/tune-title';
@@ -36,6 +37,7 @@ import {SocialNavigationUI} from '../../components/social-nav/social-nav';
     { path: '/', redirectTo: ['Introduction'], name: 'Home' },
     { path: '/book', component: BookUI, name: 'Book' },
     { path: '/abc', component: AbcUI, name: 'Abc' },
+    { path: '/info', component: InfoUI, name: 'Info' },
     { path: '/info/introduction', component: Introduction, name: 'Introduction' },
     { path: '/tunes', component: TuneListUI, name: 'Tunelist' },
     { path: '/tunes/:id', component: TuneUI, name: 'Tune' },

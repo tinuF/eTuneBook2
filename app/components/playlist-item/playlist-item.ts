@@ -3,6 +3,7 @@ import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {TuneBookService} from '../../services/tunebook-service';
 import {TuneSetPosition} from '../../business/model/tunesetposition';
+import {Playlist} from '../../business/model/playlist';
 import {PlaylistPosition} from '../../business/model/playlistposition';
 import {EliminateThe} from '../../pipes/eliminate-the';
 import {FromNow} from '../../pipes/from-now';
@@ -16,8 +17,6 @@ import {PlayListItemSetPositionUI} from '../../components/playlist-item-set-posi
 import {PlayListPositionSetPositionPlayInfoUI} from '../../components/playlist-position-set-position-play-info/playlist-position-set-position-play-info';
 
 
-
-
 @Component({
     selector: 'etb-playlist-item',
     templateUrl: './components/playlist-item/playlist-item.html',
@@ -29,6 +28,8 @@ export class PlayListItemUI implements OnInit, DoCheck {
     @Input() playlistPosition: PlaylistPosition;
     editModus: boolean;
     positions: Array<number>;
+    playlists: Array<Playlist>;
+    selectedPlaylistId: number;
 
     constructor(public tuneBookService: TuneBookService, public router: Router) {
 
@@ -39,6 +40,7 @@ export class PlayListItemUI implements OnInit, DoCheck {
         this.sortSetPosition();
         this.setPositions();
         this.editModus = this.tuneBookService.isEditModus();
+        this.playlists = this.tuneBookService.getPlaylists();
     }
 
     ngDoCheck() {
@@ -80,6 +82,17 @@ export class PlayListItemUI implements OnInit, DoCheck {
             this.tuneBookService.storeTuneBookAbc();
         }
     }
+
+    setSelectedPlaylistId(e) {
+        this.selectedPlaylistId = e.target.value;
+    }
+
+    copyPlaylistPosition() {
+        this.tuneBookService.copyPlaylistPositionToOtherPlaylist(this.playlistPosition.playlistId, this.playlistPosition.position, this.selectedPlaylistId);
+        this.tuneBookService.storeTuneBookAbc();
+        this.router.navigate(['/Playlist', { id: this.selectedPlaylistId }]);
+    };
+
 
     deletePlaylistPosition(e) {
         this.tuneBookService.deletePlaylistPosition(this.playlistPosition.playlistId, this.playlistPosition.position);

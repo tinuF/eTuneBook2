@@ -5,12 +5,12 @@ import {InfoMenuUI} from '../../components/info-menu/info-menu';
 
 
 @Component({
-  selector: 'introduction',
-  templateUrl: './components/introduction/introduction.html',
+  selector: 'etb-info',
+  templateUrl: './components/info/info.html',
   directives: [ROUTER_DIRECTIVES, InfoMenuUI],
-  styleUrls: ['./components/introduction/introduction.css']
+  styleUrls: ['./components/info/info.css']
 })
-export class Introduction {
+export class InfoUI {
   constructor() {
     
   }

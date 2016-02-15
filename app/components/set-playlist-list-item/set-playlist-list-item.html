@@ -3,7 +3,7 @@
     <!--
     <small class="text-muted">Playlist: {{playlist.id}}</small>
     -->
-    <a [routerLink]="['/Playlist', {id: playlist.id}]"><small class="text-muted">{{playlist.name}}</small></a>
+    <a title="Play Infos" [routerLink]="['/PlaylistPosition', {id: playlist.id, pos: playlistPosition.position}]"><small class="text-muted">{{playlist.name}}</small></a>
   </div>
   <!--
   <div class="col-md-3">

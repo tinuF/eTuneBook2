@@ -48,7 +48,7 @@ export class TuneBookService {
     getCurrentFilterSettings() {
         return this._currentFilterSettings;
     }
-    
+
     getCurrentPlaylistSettings() {
         return this._currentPlaylistSettings;
     }
@@ -61,7 +61,7 @@ export class TuneBookService {
         return this._editModus;
     }
 
-    toggleEditModus():boolean {
+    toggleEditModus(): boolean {
         this._editModus = !this._editModus;
         return this._editModus;
     }
@@ -273,8 +273,8 @@ export class TuneBookService {
         this.getCurrentTuneBook().deletePlaylist(playlistId);
     }
 
-    copyPlaylist(playlistId) {
-        this.getCurrentTuneBook().copyPlaylist(playlistId);
+    copyPlaylist(playlistId): number {
+        return this.getCurrentTuneBook().copyPlaylist(playlistId);
     }
 
     copyPlaylistPositionToOtherPlaylist(sourcePlaylistId, sourcePlaylistPositionNr, targetPlaylistId) {
@@ -357,6 +357,10 @@ export class TuneBookService {
 
     getPlaylistPosition(playlistId, position) {
         return this.getCurrentTuneBook().getPlaylistPosition(playlistId, position);
+    }
+
+    getPlaylistPositionByTuneSetId(playlistId, tuneSetId) {
+        return this.getCurrentTuneBook().getPlaylistPositionByTuneSetId(playlistId, tuneSetId);
     }
 
     setTunesFiltered() {

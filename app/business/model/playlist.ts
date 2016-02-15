@@ -28,6 +28,15 @@ export class Playlist {
         return null;
     }
 
+    getPlaylistPositionByTuneSetId(tuneSetId) {
+        for (var i = 0; i < this.playlistPositions.length; i++) {
+            if (tuneSetId == this.playlistPositions[i].tuneSet.tuneSetId) {
+                return this.playlistPositions[i];
+            }
+        }
+        return null;
+    }
+
     getPlaylistPositionAsNumbers(): Array<number> {
         let positions: Array<number> = [];
 

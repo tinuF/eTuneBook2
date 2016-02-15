@@ -83,6 +83,12 @@ export class PlaylistUI implements OnInit, DoCheck {
         this.tuneBookService.storeTuneBookAbc();
     }
 
+    copyPlaylist(e) {
+        let newPlaylistId = this.tuneBookService.copyPlaylist(this.playlist.id);
+        this.tuneBookService.storeTuneBookAbc();
+        this.router.navigate(['/Playlist', { id: newPlaylistId }]);
+    }
+
     deletePlaylist(e) {
         this.tuneBookService.deletePlaylist(this.playlist.id);
         this.tuneBookService.storeTuneBookAbc();
