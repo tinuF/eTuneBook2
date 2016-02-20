@@ -1,9 +1,9 @@
 <div class="card col-md-1" [style.background-color]="tune.color.hex">
-  
+  <small class="pull-right text-muted">Tune {{tune.intTuneId}}</small>
   <div class="card-header" [style.background-color]="tune.color.hex">
     <h5 class="card-title"><a [routerLink]="['/Tune', {id: tune.intTuneId}]">{{tune.title | eliminateThe}}</a></h5>
     <small class="text-muted">{{tune.type}} in {{tune.key}}</small>  
-    <small class="pull-right text-muted">{{tune.intTuneId}}</small>  
+    <small class="pull-right text-muted">{{tune.frequencyPlayed}}</small>  
   </div>
   
   <div class="card-block" [style.background-color]="tune.color.hex">

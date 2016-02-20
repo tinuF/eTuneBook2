@@ -21,7 +21,7 @@
 
         <div class="pull-sm-right  btn-toolbar playlistPositionMenu hidden-print" role="toolbar" [hidden]="!editModus">
             <div class="btn-group" role="group">
-                <a class="btn btn-secondary btn-sm"  title="Copy Playlist Position" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="mdi mdi-content-copy"></i></a>
+                <a class="btn btn-secondary btn-sm"  title="Copy Playlist Position" data-toggle="modal" data-target=".copyPlaylistPosition{{playlistPosition.position}}"><i class="mdi mdi-content-copy"></i></a>
                 <a class="btn btn-sm btn-secondary" (click)="deletePlaylistPosition($event)" title="Delete Playlist Position"><i class="mdi mdi-delete"></i></a>
             </div>
         </div>
@@ -31,8 +31,8 @@
         <etb-playlist-item-set-position [tuneSetPosition]="tuneSetPosition"></etb-playlist-item-set-position>
     </div>
 </div>
-<!--does not work yet (wrong playlistPosition in copyPlaylistPosition) - why? -->
-<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<!--does not work yet -->
+<div class="modal fade copyPlaylistPosition{{playlistPosition.position}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">

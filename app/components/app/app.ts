@@ -17,8 +17,8 @@ import {PlaylistPositionUI} from '../../components/playlist-position/playlist-po
 import {TuneUI} from '../../components/tune/tune';
 import {FilterUI} from '../../components/filter/filter';
 import {FilterTextUI} from '../../components/filter-text/filter-text';
-import {InfoUI} from '../../components/info/info';
-import {Introduction} from '../../components/introduction/introduction';
+import {Home} from '../../components/home/home';
+import {ChangeLog} from '../../components/changelog/changelog';
 import {BookTitleUI} from '../../components/book-title/book-title';
 import {TuneTitleUI} from '../../components/tune-title/tune-title';
 import {TuneAbcUI} from '../../components/tune-abc/tune-abc';
@@ -34,11 +34,11 @@ import {SocialNavigationUI} from '../../components/social-nav/social-nav';
     directives: [ROUTER_DIRECTIVES, FilterTextUI, BookTitleUI, TuneTitleUI, SideNavigationUI, SocialNavigationUI]
 })
 @RouteConfig([
-    { path: '/', redirectTo: ['Introduction'], name: 'Home' },
+    { path: '/', redirectTo: ['Home'], name: 'Home' },
     { path: '/book', component: BookUI, name: 'Book' },
     { path: '/abc', component: AbcUI, name: 'Abc' },
-    { path: '/info', component: InfoUI, name: 'Info' },
-    { path: '/info/introduction', component: Introduction, name: 'Introduction' },
+    { path: '/home', component: Home, name: 'Home' },
+    { path: '/changelog', component: ChangeLog, name: 'ChangeLog' },
     { path: '/tunes', component: TuneListUI, name: 'Tunelist' },
     { path: '/tunes/:id', component: TuneUI, name: 'Tune' },
     { path: '/tunes/:id/abc', component: TuneAbcUI, name: 'Tuneabc' },
@@ -63,7 +63,7 @@ export class App {
         } else {
             // Init TuneBook
             this.tuneBook = this.tuneBookService.initializeTuneBook();
-            router.navigate(['/Introduction']);
+            router.navigate(['/Home']);
         }
     }
 

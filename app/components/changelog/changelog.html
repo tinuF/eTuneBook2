@@ -1,0 +1,219 @@
+<div class="row">
+    <div class="col-xs-1 ">
+
+    </div>
+
+    <div class="col-xs-11">
+        <div class="card col-lg-8">
+            <div class="card-block">
+                <etb-info-menu class="pull-right"></etb-info-menu>
+                <h2>Release Notes</h2>
+                <br>
+                <p>2.0.0 - ??.??.16</p>
+                <ul>
+                    <li>Major visual redesign. Enhanced usability on small devices.</li>
+                    <li>Major internal redesign: Migration to Typescript, Angular 2 and Bootstrap 4.</li>
+                    <li>Tunes can now be combined to sets by drag and drop</li>
+                    <li>Tunes, Sets, Playlists, Videos, Links are now displayed as cards</li>
+                    <li>Notes, Sets, Videos, Links are shown all together for a tune.</li>
+                    <li>Playlists where a set is involved are now shown beneath the set. </li>
+                    <li>Stateful Filter: Filtersettings apply to Tunes, Sets, Playlists and the Tune Randomizer</li>
+                    <li>Enhanced Gig List Navigation. No more scrolling. Isolated view of Playlist Position.</li>
+                    <li>New Option for displaying notes for tunes in a playlist position: 4 or 8 bars, or the whole tune.</li>
+                    <li>...</li>
+                    <li>Deprecated: Tune: Skill</li>
+                    <li>Deprecated: Tune: Repeat and Annotation. These informations are now entered only in the context of a playlist</li>
+                    <li>Deprecated: Note Editor</li>
+                    <li>Deprecated: Import/Export from and to Google Drive via Web API. ....</li>
+                </ul>
+                <p>1.2.4 - 11.08.14</p>
+                <ul>
+                    <li>Print Playlists.</li>
+                    <li>Bug-Fix (Workaround for Bootstrap issue): Dropdown in Navbar is now visible on small devices.</li>
+                    <li>Show previous Play Position when navigating back from tune or set.</li>
+                </ul>
+                <p>1.2.3 - 03.08.14</p>
+                <ul>
+                    <li>Collapse and Expand Playlist Positions.</li>
+                    <li>Navigation within Playlists using Play, Fordŵard and Backward Buttons.</li>
+                    <li>Show color of tune in Playlist View.</li>
+                    <li>Navigate from Tune to Playlist (Playlist filtered by Tune).</li>
+                    <li>Button for new Tune, new Playlist and new Playlist Position moved to bottom of viewport.</li>
+                    <li>Temporarily removed loading bar (due to version conflicts).</li>
+                    <li>Removed Skill in Tune and Set List.</li>
+                    <li>Removed Tunes Dropdown in Tune View.</li>
+                    <li>Bug-Fix: Determination of next Playlist Id.</li>
+                    <li>Bug-Fix: Importing Tunebook without eTb Directives.</li>
+                    <li>Bug-Fix: Importing and Exporting Tunebook with special characters (spanish).</li>
+                </ul>
+                <p>1.2.2 - 16.04.14</p>
+                <ul>
+                    <li>Display current Filter.</li>
+                    <li>Copy a Playlist Position to another Playlist.</li>
+                    <li>Delete Button for Tunes.</li>
+                </ul>
+                <p>1.2.1 - 02.03.14</p>
+                <ul>
+                    <li>Copy Playlists.</li>
+                    <li>Override Repeat and Annotations of a Tune in a Playlist.</li>
+                    <li>Specify Part Play Infos for a Tune in a Playlist.</li>
+                    <li>Numbering Tunes per Set in a Playlist.</li>
+                    <li>Delete Confirm when deleting Playlists, Playlist Positions, Part Play Infos and TuneSet Positions.</li>
+                    <li>Fixed broken Type Filter.</li>
+                </ul>
+                <p>1.2.0 - 09.01.14</p>
+                <ul>
+                    <li>eTuneBook runs offline in case there is no internet connection.</li>
+                    <li>Playlists: Group your sets into collections or gig lists.</li>
+                    <li>Deprecated: TuneSet Target (replaced by Playlist Event)</li>
+                    <li>Deprecated: TuneSet Environment (replaced by Playlist Band)</li>
+                    <li>Deprecated: TuneSet Name (replaced by Playlist-Position Name)</li>
+                </ul>
+                <p>1.1.8 - 27.11.13</p>
+                <ul>
+                    <li>Note Editor: Edit Note elements by choosing from options instead of typing text: Chord, Fingering, Accidental,
+                        Note, Octave and Length.</li>
+                </ul>
+                <p>1.1.7 - 12.11.13</p>
+                <ul>
+                    <li>Export TuneBook to Google Drive.</li>
+                    <li>Import TuneBook from Google Drive.</li>
+                    <li>Loading Bar during HTML Requests.</li>
+                    <li>Fixed broken Video.</li>
+                </ul>
+                <p>1.1.6 - 18.10.13</p>
+                <ul>
+                    <li>Optimization for small screens: ngTouch for faster clicks.</li>
+                    <li>Same Filter for Tunes and Sets.</li>
+                    <li>Filter for a given range of playing frequency.</li>
+                    <li>Filter for a given range of modification dates.</li>
+                    <li>Filter for a given range of play dates.</li>
+                    <li>Picking date ranges by bootstrap-daterangepicker.</li>
+                    <li>'Just played the Set' can now be pressed directly on the Set List.</li>
+                </ul>
+                <p>1.1.5 - 10.10.13</p>
+                <ul>
+                    <li>Search-Box on Tune-Set-List (although not refreshing yet upon removing the search text again. work in
+                        progress...).</li>
+                    <li>Search-Box on Tune-List (skipped ng-grid column menu).</li>
+                    <li>Navigating back from a Set: Set should now be first set on list (buz id not in most cases. work in progress...).</li>
+                    <li>Navigating back from a Tune: Tune is now first tune on list.</li>
+                    <li>Buttons: YouTube, FaceBook, Twitter.</li>
+                    <li>Optimization for small screens: Less Tune-Set-List-Columns on mobile Devices.</li>
+                    <li>Optimization for small screens: Less Tune-List-Columns on mobile Devices.</li>
+                    <li>TuneBook was cached by Browser which prevented loading of new Versions. Cache removed from Ajax-Request.</li>
+                    <li>Creating a new Set by copying/moving a Tune (by not choosing a Target).</li>
+                    <li>Moving Tunes within same Set was broken. Fixed now.</li>
+                </ul>
+                <p>1.1.4 - 29.09.13</p>
+                <ul>
+                    <li>Random Selection of Tunes and Sets: Filter by Playdates.</li>
+                    <li>Tune-View: Sets-Selection navigates away to Set-View, if only one Set exists.</li>
+                    <li>Tune- and Set-List: Links to Record-Views by Standard Anchors.</li>
+                    <li>Set-List: Link to Tune-View.</li>
+                    <li>Moving/Copying Tunes was broken. Fixed now.</li>
+                </ul>
+                <p>1.1.3 - 16.09.13</p>
+                <ul>
+                    <li>Random Tune in Tune-View, Random Set in Set-View.</li>
+                    <li>Tune-Selection in Tune-View, Set-Selection in Set-View.</li>
+                    <li>Optimization for small screens: Tune Dropdown Button instead of Tabs.</li>
+                    <li>Optimization for small screens: NavBar Buttons, non-collapsing.</li>
+                    <li>Optimization for small screens: BookTitle removed from Navbar.</li>
+                </ul>
+                <p>1.1.2 - 12.09.13</p>
+                <ul>
+                    <li>Optimization for small screens: Tune-Set-Filter moved from bottom-fixed NavBar to a Modal Dialog.</li>
+                    <li>Optimization for small screens: BookTitle moved to Navbar.</li>
+                    <li>Fixed broken Modals in Set-View (Bootstrap Migration Part 2).</li>
+                </ul>
+                <p>1.1.1 - 09.09.13</p>
+                <ul>
+                    <li>Fixed broken Navigation from the Set-View to the Tune-View in Firefox and IE.</li>
+                    <li>Angular-UI-Router Version 0.2.0</li>
+                    <li>Angular Version 1.0.8. Removed Animation Stuff.</li>
+                    <li>Bootstrap Version 3.0.0. Fix for broken Navigation on Smartphones.</li>
+                </ul>
+                <p>1.1.0 - 31.07.13</p>
+                <ul>
+                    <li>Major Rework of Navigation (migrated to ui-router): Tune List, Set List, Tune Editor and Set Editor.</li>
+                    <li>Top Navigation simplified to: Book, Sets, Tunes, Info.</li>
+                    <li>Edit Book Title, Version and Description (Book Editor).</li>
+                    <li>Introduction of fast scrolling List Grids (migrated to ng-grid).</li>
+                    <li>New Tune List (ng-grid) supporting fast sorting, filtering and grouping.</li>
+                    <li>Set-Editor: Sorting TuneSet Position as Number (sets having more than 10 Tunes are now sorted as they
+                        should)</li>
+                    <li>Dropped support for offline modus (appcache skipped).</li>
+                    <li>Temporarily dropped Midi Support due to problems with the Quicktime-Plugin.
+                        <br>Midi-Support will be re-introduced as soon as abcjs will support javascript Midi.</li>
+                    <li>Major Rework of how videos and external sites ar managed (ng-grid). You can now add more than 3 records.</li>
+                    <li>'Just played the set' puts the current date and time on all tunes in a set.</li>
+                    <li>'Just played the tune' can be clicked in the Set Editor and the Tune Editor.</li>
+                    <li>Filter sets for Target, Environment and Name of TuneSet.</li>
+                    <li>Delete a set position.</li>
+                    <li>Add a new Set for an existing tune.</li>
+                    <li>Add a comment specific for a set position.</li>
+                    <li>Development/Deployment: Migrated to WebStorm and Yeoman.</li>
+                </ul>
+                <p>1.0.7 - 23.05.13</p>
+                <ul>
+                    <li>Fixed New TuneBook/New Tune, which was broken when no TuneBook was imported before.</li>
+                    <li>Export TuneBook to a File on your hard disk.</li>
+                    <li>Edit TuneSet Infos: Target, Environment and Name of TuneSet.</li>
+                    <li>Fixed broken dropdown when navigation bar was collapsed</li>
+                    <li>Copy a tune to another set</li>
+                </ul>
+                <p>1.0.6 - 28.04.2013</p>
+                <ul>
+                    <li>New Tune was broken. Fixed now.</li>
+                    <li>Dots scale increased</li>
+                    <li>Settings: Removed Show/Hide Info,Edit,Rehearse Buttons</li>
+                    <li>abcjs: 1.6 -> 1.7</li>
+                    <li>Change in Topnavigation: Color and Shading</li>
+                    <li>abcjs: 1.3 -> 1.6</li>
+                    <li>Bootstrap: 2.0.4 -> 2.3.1</li>
+                    <li>Angular: 1.0.4 -> 1.0.6</li>
+                    <li>Playing tunes on a MIDI Instrument (IE not supported)</li>
+                    <li>Sets are now printable</li>
+                    <li>Sorting by last modification date</li>
+                    <li>Single Tunes are now printable</li>
+                </ul>
+                <p>1.0.5 - 13.02.2013</p>
+                <ul>
+                    <li>Tunebook Name, Version and Description is now extracted from the abc-header.</li>
+                    <li>Fixed broken Random-Sorting.</li>
+                    <li>First Version of Deep-Linking. Browser Back- and Forward-Button now supported.</li>
+                </ul>
+                <br>
+                <p>1.0.3 - 22.12.2012</p>
+                <ul>
+                    <li>FaceBook LikeBox</li>
+                    <li>First version of tune transposer</li>
+                </ul>
+                <br>
+                <p>1.0.2 - 09.12.2012</p>
+                <ul>
+                    <li>Twice the same tune title in one set: dots are now rendered.</li>
+                    <li>Introduced more compact session modus for smaller screens.</li>
+                </ul>
+                <br>
+                <p>1.0.1 - 15.10.2012</p>
+                <ul>
+                    <li>Total tune set count fixed in key-selector.</li>
+                    <li>The following settings are now remembered (stored in local storage): Which buttons to show, filter and
+                        sort algorithm, selected page.</li>
+                    <li>Reduced page size from 10 sets to 5.</li>
+                    <li>Reduced sample dots to 4 bars.</li>
+                </ul>
+                <br>
+                <p>1.0.0 - 05.10.2012</p>
+                <ul>
+                    <li>Launch of eTuneBook</li>
+                    <li>Added AppCache for offline work.</li>
+                    <li>Fixed broken fingering-switch and extended it to sample dots.</li>
+                    <li>Fixed disappearing of sample dots after editing.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
