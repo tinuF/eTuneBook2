@@ -2,6 +2,8 @@
 // Generated on Wed Jul 15 2015 09:44:02 GMT+0200 (Romance Daylight Time)
 'use strict';
 
+var argv = require('yargs').argv;
+
 module.exports = function(config) {
   config.set({
 
@@ -24,10 +26,12 @@ module.exports = function(config) {
       'node_modules/traceur/bin/traceur.js',
       'node_modules/systemjs/dist/system.src.js',
       'node_modules/reflect-metadata/Reflect.js',
+      // beta.7 IE 11 polyfills from https://github.com/angular/angular/issues/7144
+      'node_modules/angular2/es6/dev/src/testing/shims_for_IE.js',
 
       { pattern: 'node_modules/angular2/**/*.js', included: false, watched: false },
       { pattern: 'node_modules/rxjs/**/*.js', included: false, watched: false },
-      { pattern: 'test/**/*.js', included: false, watched: true },
+      { pattern: 'dist/dev/**/*.js', included: false, watched: true },
       { pattern: 'node_modules/systemjs/dist/system-polyfills.js', included: false, watched: false }, // PhantomJS2 (and possibly others) might require it
 
       'test-main.js'
@@ -36,20 +40,20 @@ module.exports = function(config) {
 
     // list of files to exclude
     exclude: [
-      'node_modules/angular2/**/*_spec.js'
+      'node_modules/angular2/**/*spec.js'
     ],
 
 
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
+      'dist/**/!(*spec).js': ['coverage']
     },
-
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['mocha'],
+    reporters: ['mocha', 'coverage'],
 
 
     // web server port
@@ -72,7 +76,7 @@ module.exports = function(config) {
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
     browsers: [
-      'PhantomJS2',
+      'PhantomJS',
       'Chrome'
     ],
 
@@ -83,11 +87,24 @@ module.exports = function(config) {
         flags: ['--no-sandbox']
       }
     },
-
+    
+    coverageReporter: {
+      dir: 'coverage/',
+      reporters: [
+        { type: 'text-summary' },
+        { type: 'json', subdir: '.', file: 'coverage-final.json' },
+        { type: 'html' }
+      ]
+    },
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: false
+    singleRun: false, 
+
+    // Passing command line arguments to tests
+    client: {
+      files: argv.files
+    }
   });
 
   if (process.env.APPVEYOR) {

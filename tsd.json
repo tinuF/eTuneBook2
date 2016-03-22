@@ -6,13 +6,13 @@
   "bundle": "tools/typings/tsd/tsd.d.ts",
   "installed": {
     "moment/moment.d.ts": {
-      "commit": "7f07bd88d1083e995a0dae317a333c9641320cc8"
+      "commit": "6766ed1d0faf02ede9e2edf2e66bbb2388c825ec"
     },
     "moment/moment-node.d.ts": {
-      "commit": "7f07bd88d1083e995a0dae317a333c9641320cc8"
+      "commit": "6766ed1d0faf02ede9e2edf2e66bbb2388c825ec"
     },
     "jquery/jquery.d.ts": {
-      "commit": "7f07bd88d1083e995a0dae317a333c9641320cc8"
+      "commit": "6766ed1d0faf02ede9e2edf2e66bbb2388c825ec"
     },
     "systemjs/systemjs.d.ts": {
       "commit": "5c3e47967affa3c4128a3875d1664ba206ae1b0f"
