@@ -1,4 +1,4 @@
-import {Component} from 'angular2/core';
+import {Component, Input} from 'angular2/core';
 import {TuneBookService} from '../../services/tunebook-service';
 import {Tune} from '../../business/model/tune';
 import {FromNow} from '../../pipes/from-now';
@@ -6,13 +6,12 @@ import {FromNow} from '../../pipes/from-now';
 
 @Component({
     selector: 'etb-tune-played',
-    inputs: ['tune'],
     templateUrl: './components/tune-played/tune-played.html',
     styleUrls: ['./components/tune-played/tune-played.css'],
     pipes: [FromNow]
 })
 export class TunePlayedUI {
-    tune: Tune;
+    @Input() tune: Tune;
 
     constructor(public tuneBookService: TuneBookService) {
 

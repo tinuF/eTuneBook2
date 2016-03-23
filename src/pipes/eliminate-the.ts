@@ -1,14 +1,14 @@
 import {Pipe, PipeTransform} from 'angular2/core';
 
 @Pipe({
-  name: 'eliminateThe'
+    name: 'eliminateThe'
 })
 export class EliminateThe implements PipeTransform {
-  transform(txt):string {
-    var theSplits = [];
-    if (txt != 'undefined' && txt != null){
-      theSplits = txt.split(",");
+    transform(txt): string {
+        var theSplits = [];
+        if (txt != 'undefined' && txt != null) {
+            theSplits = txt.split(",");
+        }
+        return theSplits[0];
     }
-		return theSplits[0];
-  }
 }

@@ -34,14 +34,14 @@ export class SetListMenuUI implements OnInit {
         if (this.sorting !== "playdateAsc") {
             //sort tuneSet playdate ascending  
             this.sets.sort(function(a: TuneSet, b: TuneSet) {
-                return a.getLastPlayDate().getTime() - b.getLastPlayDate().getTime()
+                return (a.getLastPlayDate() > b.getLastPlayDate()) ? 1 : (a.getLastPlayDate() < b.getLastPlayDate()) ? -1 : 0;
             })
             this.sorting = "playdateAsc";
 
         } else if (this.sorting !== "playdateDesc") {
             //sort tuneSet playdate descending  
             this.sets.sort(function(a: TuneSet, b: TuneSet) {
-                return b.getLastPlayDate().getTime() - a.getLastPlayDate().getTime()
+                return (a.getLastPlayDate() > b.getLastPlayDate()) ? -1 : (a.getLastPlayDate() < b.getLastPlayDate()) ? 1 : 0;
             })
             this.sorting = "playdateDesc";
         }

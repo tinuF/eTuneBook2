@@ -8,7 +8,7 @@ import {FilterSettings} from '../common/settings/filter-settings';
 import {PlaylistSettings} from '../common/settings/playlist-settings';
 import {eliminateThe} from '../business/util/text-util';
 import {tuneUp, tuneDown} from '../business/util/transposer-util';
-import {filterTunes, filterTuneSets, extractSetsWithinPlayDatePeriod, extractTunes, extractTuneSetPositions, filterPlaylists} from '../business/filter/filter-logic';
+import {filterTunes, filterTuneSets, extractTunes, extractTuneSetPositions, filterPlaylists} from '../business/filter/filter-logic';
 import {getRandomArrayIndex, shuffleArray} from '../business/util/math-util';
 import {getSystemProperties} from '../common/system-properties';
 
@@ -40,7 +40,7 @@ export class TuneBookService {
 
     getCurrentTuneBook() {
         if (this._currentTuneBook == null) {
-            return this.getTuneBookFromLocalStorage()
+            return this.getTuneBookFromLocalStorage();
         }
         return this._currentTuneBook;
     }
@@ -234,7 +234,8 @@ export class TuneBookService {
     }
 
     moveTuneSetPosition(sourceTuneSetId, sourcePosition, targetTuneSetId, targetPosition, beforeOrAfter, moveOrCopy) {
-        return this.getCurrentTuneBook().moveTuneSetPosition(sourceTuneSetId, sourcePosition, targetTuneSetId, targetPosition, beforeOrAfter, moveOrCopy);
+        return this.getCurrentTuneBook().moveTuneSetPosition(sourceTuneSetId, sourcePosition, 
+        targetTuneSetId, targetPosition, beforeOrAfter, moveOrCopy);
     }
 
     movePlaylistPosition(playlistId, oldPosition, newPosition) {

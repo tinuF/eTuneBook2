@@ -1,4 +1,4 @@
-import {Component, OnInit, DoCheck} from 'angular2/core';
+import {Component, OnInit, DoCheck, Input} from 'angular2/core';
 import {ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {TuneBookService} from '../../services/tunebook-service';
@@ -10,13 +10,12 @@ import {SetListItemUI} from '../../components/set-list-item/set-list-item';
 
 @Component({
     selector: 'etb-tune-set-list',
-    inputs: ['tune'],
     templateUrl: './components/tune-set-list/tune-set-list.html',
     styleUrls: ['./components/tune-set-list/tune-set-list.css'],
     directives: [ROUTER_DIRECTIVES, SetListItemUI]
 })
 export class TuneSetListUI implements OnInit, DoCheck {
-    tune: Tune;
+    @Input() tune: Tune;
     sets: Array<TuneSet>;
 
     constructor(public tuneBookService: TuneBookService) {

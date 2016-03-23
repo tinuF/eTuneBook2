@@ -1,16 +1,15 @@
-import {Component} from 'angular2/core';
+import {Component, Input} from 'angular2/core';
 
 import {Tune} from '../../business/model/tune';
 import {TuneBookService} from '../../services/tunebook-service';
 
 @Component({
     selector: 'etb-sampledots',
-    inputs: ['tune'],
     templateUrl: './components/sample-dots/sample-dots.html',
     styleUrls: ['./components/sample-dots/sample-dots.css']
 })
 export class SampleDotsUI {
-    tune: Tune;
+    @Input() tune: Tune;
     tuneObjectArray: Array<any>;
     shown: boolean;
     buttonText: string;
@@ -18,7 +17,7 @@ export class SampleDotsUI {
     constructor(public tuneBookService: TuneBookService) {
         //funktioniert, frisst bei grossen Listen aber zu viel Leistung!
         //this.toggleSampleDots();  
-    
+
         this.shown = false;
         this.buttonText = '+';
     }
@@ -68,7 +67,7 @@ export class SampleDotsUI {
             };
 
 
-            this.tuneObjectArray = ABCJS.renderAbc(output, tunebookString, parserParams, engraverParams, renderParams)
+            this.tuneObjectArray = ABCJS.renderAbc(output, tunebookString, parserParams, engraverParams, renderParams);
         }, 0);
     }
 

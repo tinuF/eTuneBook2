@@ -6,14 +6,14 @@ import {TuneBook} from '../model/tuneBook';
 import {getAbcValues, getSubDirective} from '../util/abc-util';
 import {eliminateThe} from '../util/text-util';
 
-export function importPlaylists(header){
+export function importPlaylists(header) {
     // Generate Playlists from the book.
     var playlists, playlistDefinitionDirectives;
 
     playlists = [];
     playlistDefinitionDirectives = getAbcValues(header, "%%etbk:plldf ");
 
-    if (playlistDefinitionDirectives.length > 0){
+    if (playlistDefinitionDirectives.length > 0) {
         for (var y = 0; y < playlistDefinitionDirectives.length; y++) {
             // Get Playlist Definition
             var playlistId = _importPlaylistId(playlistDefinitionDirectives[y]);
@@ -28,16 +28,16 @@ export function importPlaylists(header){
         }
     }
 
-   return playlists;
+    return playlists;
 }
 
-export function importPlaylistPositions(tuneBook){
+export function importPlaylistPositions(tuneBook:TuneBook) {
     // Generate PlaylistPositions from the book.
     var playlistPositionDirectives;
 
     playlistPositionDirectives = getAbcValues(tuneBook.header, "%%etbk:pllps ");
 
-    if (playlistPositionDirectives.length > 0){
+    if (playlistPositionDirectives.length > 0) {
         for (var z = 0; z < playlistPositionDirectives.length; z++) {
             // Get Playlist Positions
             var playlistId = _importPlaylistId(playlistPositionDirectives[z]);
@@ -47,7 +47,7 @@ export function importPlaylistPositions(tuneBook){
             var annotation = _importPlaylistPositionAnnotation(playlistPositionDirectives[z]);
             var tuneSet = tuneBook.getTuneSetById(tuneSetId);
 
-            if(name == "") {
+            if (name == "") {
                 //Default-Name of PlaylistPosition = Name of TuneSet = Name of first tune
                 name = eliminateThe(tuneSet.tuneSetName);
                 name += " Set";
@@ -63,7 +63,7 @@ export function importPlaylistPositions(tuneBook){
     }
 }
 
-export function importTuneSetPositionPlayInfos(tuneBook){
+export function importTuneSetPositionPlayInfos(tuneBook:TuneBook) {
     // Generate TuneSetPositionPlayInfos from the book.
     var tuneSetPositionPlayInfoDirectives, playlistId, playlistPositionNr, tuneSetId,
         tuneSetPositionNr, repeat, partPlayInfoDirective, annotation, partPlayInfos,
@@ -74,7 +74,7 @@ export function importTuneSetPositionPlayInfos(tuneBook){
 
     tuneSetPositionPlayInfos = [];
 
-    if (tuneSetPositionPlayInfoDirectives.length > 0){
+    if (tuneSetPositionPlayInfoDirectives.length > 0) {
         for (var z = 0; z < tuneSetPositionPlayInfoDirectives.length; z++) {
             // Get TuneSetSetPositionPlayInfo
             playlistId = getSubDirective(tuneSetPositionPlayInfoDirectives[z], "pll:", ",");
@@ -97,58 +97,58 @@ export function importTuneSetPositionPlayInfos(tuneBook){
     return tuneSetPositionPlayInfos;
 }
 
-function _importPartPlayInfos(partPlayInfoDirective){
-  var partPlayInfosSplits, partPlayInfoSplits, part, playInfo, partPlayInfos, partPlayInfo;
+function _importPartPlayInfos(partPlayInfoDirective) {
+    var partPlayInfosSplits, partPlayInfoSplits, part, playInfo, partPlayInfos, partPlayInfo;
 
-  partPlayInfosSplits = partPlayInfoDirective.split(",");
-  partPlayInfos = [];
+    partPlayInfosSplits = partPlayInfoDirective.split(",");
+    partPlayInfos = [];
 
-  if (partPlayInfosSplits.length > 0){
-    for (var z = 0; z < partPlayInfosSplits.length; z++) {
-      // Get PartPlayInfo
-      partPlayInfoSplits = partPlayInfosSplits[z].split(":");
+    if (partPlayInfosSplits.length > 0) {
+        for (var z = 0; z < partPlayInfosSplits.length; z++) {
+            // Get PartPlayInfo
+            partPlayInfoSplits = partPlayInfosSplits[z].split(":");
 
-      if (partPlayInfoSplits.length == 2){
-        part = partPlayInfoSplits[0];
-        playInfo = partPlayInfoSplits[1];
+            if (partPlayInfoSplits.length == 2) {
+                part = partPlayInfoSplits[0];
+                playInfo = partPlayInfoSplits[1];
 
-        // Generate partPlayInfo
-        partPlayInfo = new PartPlayInfo(part, playInfo);
-        partPlayInfos.push(partPlayInfo);
-      }
+                // Generate partPlayInfo
+                partPlayInfo = new PartPlayInfo(part, playInfo);
+                partPlayInfos.push(partPlayInfo);
+            }
+        }
     }
-  }
-  return partPlayInfos;
+    return partPlayInfos;
 }
 
-function _importPlaylistId(playlistDirective){
+function _importPlaylistId(playlistDirective) {
     return getSubDirective(playlistDirective, "id:", ",");
 }
 
-function _importPlaylistName(playlistDirective){
+function _importPlaylistName(playlistDirective) {
     return getSubDirective(playlistDirective, "name:", ",");
 }
 
-function _importPlaylistEvent(playlistDirective){
+function _importPlaylistEvent(playlistDirective) {
     return getSubDirective(playlistDirective, "evt:", ",");
 }
 
-function _importPlaylistBand(playlistDirective){
+function _importPlaylistBand(playlistDirective) {
     return getSubDirective(playlistDirective, "band:", ",");
 }
 
-function _importPlaylistPositionPosition(playlistDirective){
+function _importPlaylistPositionPosition(playlistDirective) {
     return getSubDirective(playlistDirective, "pos:", ",");
 }
 
-function _importPlaylistPositionTuneSetId(playlistDirective){
+function _importPlaylistPositionTuneSetId(playlistDirective) {
     return getSubDirective(playlistDirective, "tnset:", ",");
 }
 
-function _importPlaylistPositionName(playlistDirective){
+function _importPlaylistPositionName(playlistDirective) {
     return getSubDirective(playlistDirective, "name:", ",");
 }
 
-function _importPlaylistPositionAnnotation(playlistDirective){
+function _importPlaylistPositionAnnotation(playlistDirective) {
     return getSubDirective(playlistDirective, "ant:", ",");
 }

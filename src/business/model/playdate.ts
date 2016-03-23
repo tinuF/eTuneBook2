@@ -1,7 +1,7 @@
 export class PlayDate {
-  date: Date;
+    date: Date;
 
-  constructor(date: Date){
-    this.date = date;
-  }
+    constructor(date: Date) {
+        this.date = date;
+    }
 }

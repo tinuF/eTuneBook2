@@ -63,14 +63,14 @@ export class TuneListMenuUI implements OnInit {
         if (this.sorting !== "playdateAsc") {
             //sort tune playdate ascending  
             this.tunes.sort(function(a: Tune, b: Tune) {
-                return a.lastPlayed.getTime() - b.lastPlayed.getTime();
+                return (a.lastPlayed > b.lastPlayed) ? 1 : (a.lastPlayed < b.lastPlayed) ? -1 : 0;
             });
             this.sorting = "playdateAsc";
 
         } else if (this.sorting !== "playdateDesc") {
             //sort tune playdate descending  
             this.tunes.sort(function(a: Tune, b: Tune) {
-                return b.lastPlayed.getTime() - a.lastPlayed.getTime();
+                return (a.lastPlayed > b.lastPlayed) ? -1 : (a.lastPlayed < b.lastPlayed) ? 1 : 0;
             });
             this.sorting = "playdateDesc";
         }

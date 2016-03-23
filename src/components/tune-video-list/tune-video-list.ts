@@ -1,4 +1,4 @@
-import {Component} from 'angular2/core';
+import {Component, Input} from 'angular2/core';
 import {ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {TuneBookService} from '../../services/tunebook-service';
@@ -8,13 +8,12 @@ import {TuneVideoListItemUI} from '../../components/tune-video-list-item/tune-vi
 
 @Component({
     selector: 'etb-tune-video-list',
-    inputs: ['tune: tune'],
     templateUrl: './components/tune-video-list/tune-video-list.html',
     styleUrls: ['./components/tune-video-list/tune-video-list.css'],
     directives: [ROUTER_DIRECTIVES, TuneVideoListItemUI]
 })
 export class TuneVideoListUI {
-    tune: Tune;
+    @Input() tune: Tune;
 
     constructor(public tuneBookService: TuneBookService) {
 

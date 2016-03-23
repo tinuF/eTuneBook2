@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit} from 'angular2/core';
+import {Component, OnInit, Input} from 'angular2/core';
 import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {TuneBookService} from '../../services/tunebook-service';
@@ -10,16 +10,15 @@ import {TunePlayedUI} from '../../components/tune-played/tune-played';
 
 @Component({
     selector: 'etb-tune-list-item',
-    inputs: ['tune: tune'],
     templateUrl: './components/tune-list-item/tune-list-item.html',
     directives: [ROUTER_DIRECTIVES, SampleDotsUI, TunePlayedUI],
     styleUrls: ['./components/tune-list-item/tune-list-item.css'],
     pipes: [EliminateThe, FromNow]
 })
 export class TuneListItemUI implements OnInit {
-    tune: Tune;
+    @Input() tune: Tune;
 
-    constructor(public tuneBookService: TuneBookService, public router: Router, public elementRef: ElementRef) {
+    constructor(public tuneBookService: TuneBookService, public router: Router) {
 
     }
 

@@ -1,4 +1,4 @@
-import {Component, DoCheck} from 'angular2/core';
+import {Component, Input} from 'angular2/core';
 import {ROUTER_DIRECTIVES} from 'angular2/router';
 import {TuneBookService} from '../../services/tunebook-service';
 import {Tune} from '../../business/model/tune';
@@ -8,20 +8,15 @@ import {FromNow} from '../../pipes/from-now';
 
 @Component({
     selector: 'etb-tune-colorizer',
-    inputs: ['tune: tune'],
     templateUrl: './components/tune-colorizer/tune-colorizer.html',
     styleUrls: ['./components/tune-colorizer/tune-colorizer.css'],
     directives: [ROUTER_DIRECTIVES, TunePlayedUI],
     pipes: [FromNow]
 })
-export class TuneColorizerUI implements DoCheck {
-    tune: Tune;
+export class TuneColorizerUI {
+    @Input() tune: Tune;
 
     constructor(public tuneBookService: TuneBookService) {
-    }
-
-
-    ngDoCheck() {
     }
 
     changeRed($event) {

@@ -1,4 +1,4 @@
-import {Component, OnInit, DoCheck} from 'angular2/core';
+import {Component, OnInit, DoCheck, Input} from 'angular2/core';
 import {Router, RouteParams} from 'angular2/router';
 import * as jQuery from 'jquery';
 
@@ -9,13 +9,12 @@ import {TuneDotsMenuUI} from '../tune-dots-menu/tune-dots-menu';
 
 @Component({
     selector: 'etb-tune-dots',
-    inputs: ['tune: tune'],
     directives: [TuneDotsMenuUI],
     templateUrl: './components/tune-dots/tune-dots.html',
     styleUrls: ['./components/tune-dots/tune-dots.css']
 })
 export class TuneDotsUI implements OnInit, DoCheck {
-    tune: Tune;
+    @Input() tune: Tune;
     tuneObjectArray: Array<any>;
     editModus: boolean;
 
@@ -68,7 +67,7 @@ export class TuneDotsUI implements OnInit, DoCheck {
             };
 
 
-            this.tuneObjectArray = ABCJS.renderAbc(output, tunebookString, parserParams, engraverParams, renderParams)
+            this.tuneObjectArray = ABCJS.renderAbc(output, tunebookString, parserParams, engraverParams, renderParams);
         }, 0);
     }
 
