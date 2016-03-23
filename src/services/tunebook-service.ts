@@ -1,3 +1,6 @@
+import {Injectable} from 'angular2/core';
+import {Http} from 'angular2/http';
+import 'rxjs/add/operator/map'
 import * as moment from 'moment';
 import * as jQuery from 'jquery';
 import {TuneBook} from '../business/model/tunebook';
@@ -12,7 +15,7 @@ import {filterTunes, filterTuneSets, extractTunes, extractTuneSetPositions, filt
 import {getRandomArrayIndex, shuffleArray} from '../business/util/math-util';
 import {getSystemProperties} from '../common/system-properties';
 
-
+@Injectable()
 export class TuneBookService {
     _currentTuneBook: TuneBook;
     _systemProperties;
@@ -24,7 +27,7 @@ export class TuneBookService {
     _editModus: boolean;
     _currentPlaylistSettings: PlaylistSettings;
 
-    constructor() {
+    constructor(public http: Http) {
         this._systemProperties = getSystemProperties();
         this._currentTuneBook = this.getCurrentTuneBook();
         this._currentAbcExportSettings = new AbcExportSettings();
@@ -92,24 +95,12 @@ export class TuneBookService {
     }
 
     getDefaultFromServer() {
-        //TODO Replace by angular 2 ajax call
-        var jqxhr = jQuery.ajax({
-            url: this._systemProperties.EXAMPLE_FILENAME,
-            async: false,
-            cache: false,
-            dataType: "text"
-        });
-
-        jqxhr.done(function(data) {
-            this.setCurrentTuneBook(data);
-        });
-
-        jqxhr.fail(function(data) {
-            // Something went wrong, never mind lets just handle it gracefully below...
-            alert("Fehler beim Laden von " + this._systemProperties.EXAMPLE_FILENAME);
-        });
-
-        return this._currentTuneBook;
+        this.http.get(this._systemProperties.EXAMPLE_FILENAME)
+            .map(res => res.text())
+            .subscribe(data => {
+                this.setCurrentTuneBook(data);
+                this.storeTuneBookAbc();
+            });
     }
 
     storeTuneBookAbc() {
@@ -211,11 +202,11 @@ export class TuneBookService {
     addTuneSetPlayDate(tuneSet, newDate) {
         tuneSet.addPlayDate(newDate);
     }
-/* TODO: remove
-    setRandomSort(tuneBook) {
-        this._setRandomSort(tuneBook);
-    }
-*/
+    /* TODO: remove
+        setRandomSort(tuneBook) {
+            this._setRandomSort(tuneBook);
+        }
+    */
     initializeTuneBook() {
         this.setCurrentTuneBook(this._getAbcforNewTuneBook());
         //TODO: Check if necessary and refactor
@@ -234,8 +225,8 @@ export class TuneBookService {
     }
 
     moveTuneSetPosition(sourceTuneSetId, sourcePosition, targetTuneSetId, targetPosition, beforeOrAfter, moveOrCopy) {
-        return this.getCurrentTuneBook().moveTuneSetPosition(sourceTuneSetId, sourcePosition, 
-        targetTuneSetId, targetPosition, beforeOrAfter, moveOrCopy);
+        return this.getCurrentTuneBook().moveTuneSetPosition(sourceTuneSetId, sourcePosition,
+            targetTuneSetId, targetPosition, beforeOrAfter, moveOrCopy);
     }
 
     movePlaylistPosition(playlistId, oldPosition, newPosition) {

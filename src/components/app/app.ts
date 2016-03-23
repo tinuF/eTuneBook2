@@ -68,17 +68,10 @@ export class App {
     }
 
     loadBxplTuneBook() {
-        setTimeout(() => {
-            try {
-                this.tuneBook = this.tuneBookService.getDefaultFromServer();
-            } catch (e) {
-                alert("eTuneBook cannot import " + this.systemProperties.EXAMPLE_FILENAME + " due to: " + e.toString());
-            } finally {
-                this.tuneBookService.storeTuneBookAbc();
-                alert("Tunebook successfully loaded");
-                this.router.navigate(["/Tunelist"]);
-            }
-        }, 0);
+        //Der Service lädt das Default-TuneBook und aktualisiert unter anderem die tunesFiltered. 
+        //Als Reaktion auf die Aktualisierung der tunesFiltered, wird die TuneListUI neu geladen
+        //(wegen ngDoCheck)  
+        this.tuneBookService.getDefaultFromServer();
     }
 
     readTuneBookFromLocalDrive($event) {
