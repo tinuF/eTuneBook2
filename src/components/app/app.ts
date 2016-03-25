@@ -9,21 +9,21 @@ import {TuneSet} from '../../business/model/tuneset';
 
 import {BookUI} from '../../components/book/book';
 import {AbcUI} from '../../components/abc/abc';
-import {TuneListUI} from '../../components/tune-list/tune-list';
-import {SetListUI} from '../../components/set-list/set-list';
-import {PlaylistListUI} from '../../components/playlist-list/playlist-list';
-import {PlaylistUI} from '../../components/playlist/playlist';
-import {PlaylistPositionUI} from '../../components/playlist-position/playlist-position';
-import {TuneUI} from '../../components/tune/tune';
+import {TuneListUI} from '../../components/tunes/tune-list';
+import {SetListUI} from '../../components/sets/set-list';
+import {PlaylistListUI} from '../../components/playlists/playlist-list';
+import {PlaylistUI} from '../../components/playlists/playlist';
+import {PlaylistPositionUI} from '../../components/playlists/playlist-position';
+import {TuneUI} from '../../components/tunes/tune';
 import {FilterUI} from '../../components/filter/filter';
-import {FilterTextUI} from '../../components/filter-text/filter-text';
-import {Home} from '../../components/home/home';
-import {ChangeLog} from '../../components/changelog/changelog';
-import {BookTitleUI} from '../../components/book-title/book-title';
-import {TuneTitleUI} from '../../components/tune-title/tune-title';
-import {TuneAbcUI} from '../../components/tune-abc/tune-abc';
-import {SideNavigationUI} from '../../components/side-nav/side-nav';
-import {SocialNavigationUI} from '../../components/social-nav/social-nav';
+import {FilterTextUI} from '../../components/app/filter-text';
+import {Home} from '../../components/help/home';
+import {ChangeLog} from '../../components/help/changelog';
+import {BookTitleUI} from '../../components/app/book-title';
+import {TuneTitleUI} from '../../components/tunes/tune-title';
+import {TuneAbcUI} from '../../components/tunes/tune-abc';
+import {SideNavigationUI} from '../../components/app/side-nav';
+import {SocialNavigationUI} from '../../components/app/social-nav';
 
 
 @Component({
