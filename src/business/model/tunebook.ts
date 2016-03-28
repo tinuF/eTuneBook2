@@ -237,7 +237,9 @@ export class TuneBook {
     }
 
     _getNextPlaylistId() {
-        var nextPlaylistId, currentPlaylistId, maxPlaylistId;
+        let nextPlaylistId: number;
+        let currentPlaylistId: number;
+        let maxPlaylistId: number;
 
         maxPlaylistId = 0;
 
@@ -344,7 +346,7 @@ export class TuneBook {
     }
 
     moveTuneSetPositionTwoSetsInvolved(sourceTuneSetId: number, sourcePosition: number,
-        targetTuneSetId: number, targetPosition: number, beforeOrAfter: string, moveOrCopy: string) {
+        targetTuneSetId: number, targetPosition: number, beforeOrAfter: string, moveOrCopy: string):boolean {
         // Moving or Copying a TuneSetPosition
         let sourceTuneSet = this.getTuneSetById(sourceTuneSetId);
         let sourceTuneSetPosition: TuneSetPosition = null;

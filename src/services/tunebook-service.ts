@@ -68,6 +68,7 @@ export class TuneBookService {
         this._editModus = !this._editModus;
         return this._editModus;
     }
+
     initializeFilter() {
         this._currentFilterSettings = new FilterSettings();
         this.setTunesFiltered();
@@ -167,10 +168,13 @@ export class TuneBookService {
     initializeTuneAndTuneSet(): TuneSet {
         if (this.getCurrentTuneBook() == null) {
             this._currentTuneBook = this.initializeTuneBook();
+            this.initializeFilter();
             return this._currentTuneBook.tuneSets[0];
 
         } else {
-            return this.getCurrentTuneBook().initializeTuneAndTuneSet();
+            let set: TuneSet = this.getCurrentTuneBook().initializeTuneAndTuneSet();
+            this.initializeFilter();
+            return set;
         }
 
     }
@@ -224,9 +228,16 @@ export class TuneBookService {
         return settings;
     }
 
-    moveTuneSetPosition(sourceTuneSetId, sourcePosition, targetTuneSetId, targetPosition, beforeOrAfter, moveOrCopy) {
-        return this.getCurrentTuneBook().moveTuneSetPosition(sourceTuneSetId, sourcePosition,
+    moveTuneSetPosition(sourceTuneSetId, sourcePosition, targetTuneSetId, targetPosition, beforeOrAfter, moveOrCopy):boolean {
+        let tuneSetDeleted: boolean = this.getCurrentTuneBook().moveTuneSetPosition(sourceTuneSetId, sourcePosition,
             targetTuneSetId, targetPosition, beforeOrAfter, moveOrCopy);
+        this.setTunesFiltered();
+        //this.setTunesFiltered() wird gebraucht, damit bei Löschung eines Sets die Liste aktualisiert wird
+        //(die Screens reagieren auf tunesFiltered und tuneSetsFiltered)
+        //Problem: Beim Aktualisieren der Liste geht die Sortierung der Sets verloren. 
+        //Die Sortierung wird im set-list-menu via toggle gesetzt, aber nicht in FilterSettings gespeichert.
+        //TODO: SortierungSettings
+        return tuneSetDeleted;
     }
 
     movePlaylistPosition(playlistId, oldPosition, newPosition) {

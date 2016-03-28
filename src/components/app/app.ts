@@ -67,11 +67,9 @@ export class App {
         }
     }
 
-    loadBxplTuneBook() {
-        //Der Service lädt das Default-TuneBook und aktualisiert unter anderem die tunesFiltered. 
-        //Als Reaktion auf die Aktualisierung der tunesFiltered, wird die TuneListUI neu geladen
-        //(wegen ngDoCheck)  
+    loadBxplTuneBook() {  
         this.tuneBookService.getDefaultFromServer();
+        this.router.navigate(["/Tunelist"]);
     }
 
     readTuneBookFromLocalDrive($event) {
@@ -83,8 +81,8 @@ export class App {
             //Get file extension from fileName
             var ext = fileName.replace(/^.*?\.([a-zA-Z0-9]+)$/, "$1");
 
-            if (ext !== "abc" && ext !== "ABC") {
-                alert("eTuneBook only accepts files with extension .abc or .ABC");
+            if (ext !== "abc" && ext !== "ABC" && ext !== "txt" && ext !== "TXT") {
+                alert("eTuneBook only accepts files with extension .abc or .txt");
 
             } else {
                 // Only process abc files
