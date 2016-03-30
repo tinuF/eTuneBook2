@@ -3,6 +3,7 @@ import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {TuneBookService} from '../../services/tunebook-service';
 import {TuneSetPosition} from '../../business/model/tunesetposition';
+import {TuneSetPositionPlayInfo} from '../../business/model/tunesetposition-playinfo';
 import {EliminateThe} from '../../pipes/eliminate-the';
 import {FromNow} from '../../pipes/from-now';
 import {TunePlayedUI} from '../common/tune-played';
@@ -15,7 +16,7 @@ import {TunePlayedUI} from '../common/tune-played';
     pipes: [EliminateThe, FromNow]
 })
 export class PlayListItemSetPositionUI implements OnInit {
-    @Input() tuneSetPosition: TuneSetPosition;
+    @Input() tuneSetPositionPlayInfo: TuneSetPositionPlayInfo;
     editModus: boolean;
 
     constructor(public tuneBookService: TuneBookService, public router: Router) {

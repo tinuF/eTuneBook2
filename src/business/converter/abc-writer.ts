@@ -1,10 +1,12 @@
 import * as moment from 'moment';
 import {getSystemProperties} from '../../common/system-properties';
 import {Tune} from '../model/tune';
+import {TuneBook} from '../model/tunebook';
+import {AbcExportSettings} from '../../common/settings/abc-export-settings';
 
 var systemProperties = getSystemProperties();
 
-export function writeAbcHeader(tuneBook, abcOption) {
+export function writeAbcHeader(tuneBook:TuneBook, abcOption:AbcExportSettings) {
     // Construct Header
     var tbkAbc, playlist, playlistPosition, tuneSetPositionPlayInfos, tuneSetPositionPlayInfo;
 
@@ -104,7 +106,7 @@ export function writeAbcHeader(tuneBook, abcOption) {
     return tbkAbc;
 }
 
-export function writeTuneAbc(tune, tuneSetPositions, abcOption) {
+export function writeTuneAbc(tune:Tune, tuneSetPositions, abcOption:AbcExportSettings) {
     var tuneAbc = "";
 
     if (!abcOption.tuneSet && !abcOption.playDate && !abcOption.color && !abcOption.annotation && !abcOption.website && !abcOption.video) {
@@ -120,7 +122,7 @@ export function writeTuneAbc(tune, tuneSetPositions, abcOption) {
     return tuneAbc;
 }
 
-export function writeTuneAbcWithEtbkDirectives(tune: Tune, tuneSetPositions, targetLine, abcOption) {
+export function writeTuneAbcWithEtbkDirectives(tune: Tune, tuneSetPositions, targetLine, abcOption:AbcExportSettings) {
     var tuneSplits = [];
     var newAbc = "";
     tuneSplits = tune.pure.split("\n");
@@ -176,7 +178,7 @@ export function writeTuneAbcWithEtbkDirectives(tune: Tune, tuneSetPositions, tar
                         newAbc = newAbc + "\n";
                     }
                 }
-
+                
                 if (abcOption.color) {
                     if (tune.color.getHexValue() != systemProperties.DEFAULT_COLOR) {
                         directive = "%%etbk:color " + tune.color.getHexValue();

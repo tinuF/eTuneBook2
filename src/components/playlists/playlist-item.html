@@ -27,8 +27,8 @@
         </div>
 
     </div>
-    <div class="row col-sm-12" *ngFor="#tuneSetPosition of playlistPosition.tuneSet.tuneSetPositions; #i = index">
-        <etb-playlist-item-set-position [tuneSetPosition]="tuneSetPosition"></etb-playlist-item-set-position>
+    <div class="row col-sm-12" *ngFor="#tuneSetPositionPlayInfo of playlistPosition.tuneSetPositionPlayInfos; #i = index">
+        <etb-playlist-item-set-position [tuneSetPositionPlayInfo]="tuneSetPositionPlayInfo"></etb-playlist-item-set-position>
     </div>
 </div>
 <!--does not work yet -->

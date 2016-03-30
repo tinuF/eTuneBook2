@@ -3,6 +3,7 @@ import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {TuneBookService} from '../../services/tunebook-service';
 import {TuneSetPosition} from '../../business/model/tunesetposition';
+import {TuneSetPositionPlayInfo} from '../../business/model/tunesetposition-playinfo';
 import {PartPlayInfo} from '../../business/model/partplayinfo';
 import {EliminateThe} from '../../pipes/eliminate-the';
 import {FromNow} from '../../pipes/from-now';
@@ -20,7 +21,7 @@ import {PlayListPositionSetPositionPlayInfoUI} from '../../components/playlists/
     pipes: [EliminateThe, FromNow]
 })
 export class PlayListPositionSetPositionUI implements OnInit {
-    @Input() tuneSetPosition: TuneSetPosition;
+    @Input() tuneSetPositionPlayInfo: TuneSetPositionPlayInfo;
     playInfoAnnotationShown: boolean;
     editModus: boolean;
 
@@ -57,7 +58,7 @@ export class PlayListPositionSetPositionUI implements OnInit {
     }
 
     addPartPlayInfo() {
-        this.tuneSetPosition.currentTuneSetPositionPlayInfo.addPartPlayInfo(new PartPlayInfo("", ""));
+        this.tuneSetPositionPlayInfo.addPartPlayInfo(new PartPlayInfo("", ""));
         this.tuneBookService.storeTuneBookAbc();
     }
 

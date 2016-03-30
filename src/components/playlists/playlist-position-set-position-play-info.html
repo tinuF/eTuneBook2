@@ -1,6 +1,6 @@
-<div class="card" [hidden]="!tuneSetPosition.currentTuneSetPositionPlayInfo.annotation && !playInfoAnnotationShown">
-  <small [hidden]="editModus">{{tuneSetPosition.currentTuneSetPositionPlayInfo.annotation}}</small>
-  <input  class="form-control form-control-sm" [hidden]="!editModus" [value]="tuneSetPosition.currentTuneSetPositionPlayInfo.annotation" (keydown)="handleKeyDownOnTuneSetPositionAnnotation($event, tuneSetPosition)" (blur)="handleBlurOnTuneSetPositionAnnotation($event, tuneSetPosition)">
+<div class="card" [hidden]="!tuneSetPositionPlayInfo.annotation && !playInfoAnnotationShown">
+  <small [hidden]="editModus">{{tuneSetPositionPlayInfo.annotation}}</small>
+  <input  class="form-control form-control-sm" [hidden]="!editModus" [value]="tuneSetPositionPlayInfo.annotation" (keydown)="handleKeyDownOnTuneSetPositionAnnotation($event, tuneSetPosition)" (blur)="handleBlurOnTuneSetPositionAnnotation($event, tuneSetPosition)">
 </div>
 
-<etb-part-play-info-list [tuneSetPosition]="tuneSetPosition"></etb-part-play-info-list>
+<etb-part-play-info-list [tuneSetPositionPlayInfo]="tuneSetPositionPlayInfo"></etb-part-play-info-list>

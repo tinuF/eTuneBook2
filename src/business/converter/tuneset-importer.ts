@@ -33,7 +33,7 @@ export function importTuneSets(abcjsBook) {
                 var position = _importTuneSetTunePosition(tuneSetDirectives[y]);
                 var repeat = _importTuneSetTuneRepeat(tuneSetDirectives[y]);
                 var annotation = _importTuneSetTuneAnnotation(tuneSetDirectives[y]);
-
+                
                 // Generate tuneSetPosition
                 var tuneSetPosition: TuneSetPosition;
                 tuneSetPosition = new TuneSetPosition(tuneSetId, tune, position, repeat, annotation);

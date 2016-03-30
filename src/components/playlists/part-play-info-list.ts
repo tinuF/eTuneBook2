@@ -16,7 +16,7 @@ import {FromNow} from '../../pipes/from-now';
     pipes: [EliminateThe, FromNow]
 })
 export class PartPlayInfoListUI implements OnInit, DoCheck {
-    @Input() tuneSetPosition: TuneSetPosition;
+    @Input() tuneSetPositionPlayInfo: TuneSetPositionPlayInfo;
     editModus: boolean;
 
     constructor(public tuneBookService: TuneBookService, public router: Router) {

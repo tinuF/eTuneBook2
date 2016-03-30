@@ -1,15 +1,15 @@
-<div class="card col-sm-12" [style.background-color]="tuneSetPosition.tune.color.hex">
+<div class="card col-sm-12" [style.background-color]="tuneSetPositionPlayInfo.tuneSetPosition.tune.color.hex">
     <div class="row">
-        <a class="col-sm-4" [routerLink]="['/Tune', {id: tuneSetPosition.tune.intTuneId}]">{{tuneSetPosition.tune.title | eliminateThe}}</a>
+        <a class="col-sm-4" [routerLink]="['/Tune', {id: tuneSetPositionPlayInfo.tuneSetPosition.tune.intTuneId}]">{{tuneSetPositionPlayInfo.tuneSetPosition.tune.title | eliminateThe}}</a>
         <div class="col-sm-3">
-            <small [hidden]="editModus">{{tuneSetPosition.currentTuneSetPositionPlayInfo.repeat}}</small>
-            <input class="form-control form-control-sm" [hidden]="!editModus" [value]="tuneSetPosition.currentTuneSetPositionPlayInfo.repeat"
+            <small [hidden]="editModus">{{tuneSetPositionPlayInfo.repeat}}</small>
+            <input class="form-control form-control-sm" [hidden]="!editModus" [value]="tuneSetPositionPlayInfo.repeat"
             (keydown)="handleKeyDownOnTuneSetPositionRepeat($event, tuneSetPosition)" (blur)="handleBlurOnTuneSetPositionRepeat($event, tuneSetPosition)">
         </div>
-        <small [hidden]="editModus" class="col-sm-2 text-muted">{{tuneSetPosition.tune.type}} in {{tuneSetPosition.tune.key}}</small>
+        <small [hidden]="editModus" class="col-sm-2 text-muted">{{tuneSetPositionPlayInfo.tuneSetPosition.tune.type}} in {{tuneSetPositionPlayInfo.tuneSetPosition.tune.key}}</small>
 
-        <etb-playlist-tune  [hidden]="editModus" [tune]="tuneSetPosition.tune"></etb-playlist-tune>
-        <etb-tune-played  class=" pull-sm-right col-sm-2" [hidden]="editModus" [tune]="tuneSetPosition.tune"></etb-tune-played>
+        <etb-playlist-tune  [hidden]="editModus" [tune]="tuneSetPositionPlayInfo.tuneSetPosition.tune"></etb-playlist-tune>
+        <etb-tune-played  class=" pull-sm-right col-sm-2" [hidden]="editModus" [tune]="tuneSetPositionPlayInfo.tuneSetPosition.tune"></etb-tune-played>
 
         <div class="pull-sm-right btn-toolbar hidden-print" role="toolbar" [hidden]="!editModus">
             <div class="btn-group" role="group">
@@ -19,5 +19,5 @@
         </div>
     </div>
 
-    <etb-playlist-position-set-position-play-info [tuneSetPosition]="tuneSetPosition" [playInfoAnnotationShown]="playInfoAnnotationShown"></etb-playlist-position-set-position-play-info>
+    <etb-playlist-position-set-position-play-info [tuneSetPositionPlayInfo]="tuneSetPositionPlayInfo" [playInfoAnnotationShown]="playInfoAnnotationShown"></etb-playlist-position-set-position-play-info>
 </div>

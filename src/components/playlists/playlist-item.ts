@@ -3,6 +3,7 @@ import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {TuneBookService} from '../../services/tunebook-service';
 import {TuneSetPosition} from '../../business/model/tunesetposition';
+import {TuneSetPositionPlayInfo} from '../../business/model/tunesetposition-playinfo';
 import {Playlist} from '../../business/model/playlist';
 import {PlaylistPosition} from '../../business/model/playlistposition';
 import {EliminateThe} from '../../pipes/eliminate-the';
@@ -29,7 +30,6 @@ export class PlayListItemUI implements OnInit, DoCheck {
     }
 
     ngOnInit() {
-        this.tuneBookService.initializeTuneSetPositionPlayInfosForPlaylist(this.playlistPosition.playlistId);
         this.sortSetPosition();
         this.setPositions();
         this.editModus = this.tuneBookService.isEditModus();
@@ -42,8 +42,8 @@ export class PlayListItemUI implements OnInit, DoCheck {
     }
 
     sortSetPosition() {
-        this.playlistPosition.tuneSet.tuneSetPositions.sort(function(a: TuneSetPosition, b: TuneSetPosition) {
-            return a.position - b.position;
+        this.playlistPosition.tuneSetPositionPlayInfos.sort(function(a: TuneSetPositionPlayInfo, b: TuneSetPositionPlayInfo) {
+            return a.tuneSetPosition.position - b.tuneSetPosition.position;
         });
     }
 

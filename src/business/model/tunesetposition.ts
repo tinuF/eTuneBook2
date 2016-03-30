@@ -7,7 +7,7 @@ export class TuneSetPosition {
   position: number;
   repeat: string;
   annotation: string;
-  currentTuneSetPositionPlayInfo:TuneSetPositionPlayInfo; //TODO refactor
+  tuneSetPositionPlayInfos: Array<TuneSetPositionPlayInfo>;
 
   constructor(tuneSetId, tune, position, repeat, annotation) {
     this.tuneSetId = tuneSetId;
@@ -15,5 +15,10 @@ export class TuneSetPosition {
     this.position = position;
     this.repeat = repeat;
     this.annotation = annotation;
+    this.tuneSetPositionPlayInfos = [];
   }
+  
+  addTuneSetPositionPlayInfo(tuneSetPositionPlayInfo: TuneSetPositionPlayInfo) {
+        this.tuneSetPositionPlayInfos.push(tuneSetPositionPlayInfo);
+    }
 }

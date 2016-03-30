@@ -3,7 +3,7 @@
         <small class="pull-xs-right text-muted">Tune {{tune.intTuneId}}</small>
         <h5 class="card-title"><a [routerLink]="['/Tune', {id: tune.intTuneId}]">{{tune.title | eliminateThe}}</a></h5>
         <small class="text-muted">{{tune.type}} in {{tune.key}}</small>
-        <small class="pull-xs-right text-muted">{{tune.frequencyPlayed}}</small>
+        <small class="pull-xs-right text-muted">Freq {{tune.frequencyPlayed}}</small>
     </div>
 
     <div class="card-block" [style.background-color]="tune.color.hex">

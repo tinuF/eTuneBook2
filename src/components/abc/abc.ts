@@ -86,7 +86,7 @@ export class AbcUI implements OnInit {
         this.abcExportSettings.color = !this.abcExportSettings.color;
         this.exportTuneBook(false);
     };
-
+    
     toggleAnnotationAbc() {
         this.abcExportSettings.annotation = !this.abcExportSettings.annotation;
         this.exportTuneBook(false);
