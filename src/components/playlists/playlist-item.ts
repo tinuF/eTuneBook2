@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, DoCheck} from 'angular2/core';
+import {Component, Input, Output, OnInit, DoCheck, EventEmitter} from 'angular2/core';
 import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {TuneBookService} from '../../services/tunebook-service';
@@ -11,6 +11,7 @@ import {FromNow} from '../../pipes/from-now';
 import {PlayListItemSetPositionUI} from '../../components/playlists/playlist-item-set-position';
 
 
+
 @Component({
     selector: 'etb-playlist-item',
     templateUrl: './components/playlists/playlist-item.html',
@@ -20,6 +21,7 @@ import {PlayListItemSetPositionUI} from '../../components/playlists/playlist-ite
 })
 export class PlayListItemUI implements OnInit, DoCheck {
     @Input() playlistPosition: PlaylistPosition;
+    @Output() copyPlaylistPosition: EventEmitter<any> = new EventEmitter();
     editModus: boolean;
     positions: Array<number>;
     playlists: Array<Playlist>;
@@ -79,12 +81,10 @@ export class PlayListItemUI implements OnInit, DoCheck {
     setSelectedPlaylistId(e) {
         this.selectedPlaylistId = e.target.value;
     }
-
-    copyPlaylistPosition() {
-        this.tuneBookService.copyPlaylistPositionToOtherPlaylist(this.playlistPosition.playlistId, this.playlistPosition.position, this.selectedPlaylistId);
-        this.tuneBookService.storeTuneBookAbc();
-        this.router.navigate(['/Playlist', { id: this.selectedPlaylistId }]);
-    };
+    
+    sendPlaylistPositionToCopier() {
+        this.copyPlaylistPosition.next(this.playlistPosition);        
+    }
 
 
     deletePlaylistPosition(e) {

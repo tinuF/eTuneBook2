@@ -1,0 +1,21 @@
+.card {
+    margin: 5px;
+    padding: 5px;
+    background: #F2EBDC;
+}
+
+.playlistPosition {
+    min-width: 860px;
+}
+
+
+.tuneSetPositionPlayInfo {
+    margin-left: 15px;
+}
+
+a {
+	cursor: pointer;
+	color: darkcyan;
+}
+
+

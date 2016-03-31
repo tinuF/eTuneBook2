@@ -6,16 +6,18 @@ import {Playlist} from '../../business/model/playlist';
 import {PlaylistPosition} from '../../business/model/playlistposition';
 import {PlayListItemUI} from '../../components/playlists/playlist-item';
 import {PlayListMenuUI} from '../../components/playlists/playlist-menu';
+import {PlayListPositionCopierUI} from '../../components/playlists/playlist-position-copier';
 
 
 @Component({
     selector: 'etb-playlist',
     templateUrl: './components/playlists/playlist.html',
-    directives: [ROUTER_DIRECTIVES, PlayListItemUI, PlayListMenuUI],
+    directives: [ROUTER_DIRECTIVES, PlayListItemUI, PlayListMenuUI, PlayListPositionCopierUI],
     styleUrls: ['./components/playlists/playlist.css']
 })
 export class PlaylistUI implements OnInit, DoCheck {
     playlist: Playlist;
+    playlistPositionToBeCopied: PlaylistPosition;
     editModus: boolean;
 
     constructor(public tuneBookService: TuneBookService, public router: Router, routeParams: RouteParams) {
@@ -81,6 +83,10 @@ export class PlaylistUI implements OnInit, DoCheck {
     handleBlurOnPlaylistEvent(e) {
         this.playlist.event = e.target.value;
         this.tuneBookService.storeTuneBookAbc();
+    }
+    
+    setPlaylistPositionToBeCopied(e){
+        this.playlistPositionToBeCopied = e;
     }
 
     copyPlaylist(e) {
