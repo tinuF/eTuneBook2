@@ -4,7 +4,7 @@
         <div class="col-sm-3">
             <small [hidden]="editModus">{{tuneSetPositionPlayInfo.repeat}}</small>
             <input class="form-control form-control-sm" [hidden]="!editModus" [value]="tuneSetPositionPlayInfo.repeat"
-            (keydown)="handleKeyDownOnTuneSetPositionRepeat($event, tuneSetPosition)" (blur)="handleBlurOnTuneSetPositionRepeat($event, tuneSetPosition)">
+            (keydown)="handleKeyDownOnTuneSetPositionRepeat($event)" (blur)="handleBlurOnTuneSetPositionRepeat($event)">
         </div>
         <small [hidden]="editModus" class="col-sm-2 text-muted">{{tuneSetPositionPlayInfo.tuneSetPosition.tune.type}} in {{tuneSetPositionPlayInfo.tuneSetPosition.tune.key}}</small>
 

@@ -268,8 +268,8 @@ export class TuneBook {
         }
     }
 
-    _copyPlaylistPositionAndTuneSetPlayInfos(playlistPositionOriginal, targetPlaylist, targetPlaylistPositionNr) {
-        var playlistPositionCopy;
+    _copyPlaylistPositionAndTuneSetPlayInfos(playlistPositionOriginal: PlaylistPosition, targetPlaylist, targetPlaylistPositionNr) {
+        let playlistPositionCopy: PlaylistPosition;
 
         // Generate PlaylistPosition
         playlistPositionCopy = new PlaylistPosition(targetPlaylist.id, targetPlaylistPositionNr, playlistPositionOriginal.tuneSet, playlistPositionOriginal.name, playlistPositionOriginal.annotation);
@@ -281,20 +281,23 @@ export class TuneBook {
         this._copyTuneSetPositionPlayInfos(playlistPositionOriginal, playlistPositionCopy);
     }
 
-    _copyTuneSetPositionPlayInfos(playlistPositionOriginal, playlistPositionCopy) {
-        var tuneSetPositionPlayInfosOriginal, tuneSetPositionPlayInfosCopy,
-            tuneSetPositionPlayInfoOriginal, tuneSetPositionPlayInfoCopy, partPlayInfosCopy;
+    _copyTuneSetPositionPlayInfos(playlistPositionOriginal: PlaylistPosition, playlistPositionCopy: PlaylistPosition) {
+        let tuneSetPositionPlayInfoOriginal: TuneSetPositionPlayInfo; 
+        let tuneSetPositionPlayInfoCopy: TuneSetPositionPlayInfo; 
+        let partPlayInfosCopy: PartPlayInfo;
 
-        tuneSetPositionPlayInfosOriginal = this.getTuneSetPositionPlayInfosForPlaylistPosition(playlistPositionOriginal);
-
-        for (var y = 0; y < tuneSetPositionPlayInfosOriginal.length; y++) {
-            tuneSetPositionPlayInfoOriginal = tuneSetPositionPlayInfosOriginal[y];
+        for (var y = 0; y < playlistPositionOriginal.tuneSetPositionPlayInfos.length; y++) {
+            tuneSetPositionPlayInfoOriginal = playlistPositionOriginal.tuneSetPositionPlayInfos[y];
 
             // Copy partPlayInfos
             partPlayInfosCopy = this._copyPartPlayInfos(tuneSetPositionPlayInfoOriginal);
 
             // Generate tuneSetPositionPlayInfo
             tuneSetPositionPlayInfoCopy = new TuneSetPositionPlayInfo(playlistPositionCopy, tuneSetPositionPlayInfoOriginal.tuneSetPosition, tuneSetPositionPlayInfoOriginal.repeat, partPlayInfosCopy, tuneSetPositionPlayInfoOriginal.annotation);
+            
+            // Copy TuneSetPositionPlayInfos
+            playlistPositionCopy.addTuneSetPositionPlayInfo(tuneSetPositionPlayInfoCopy);
+            
             this.tuneSetPositionPlayInfos.push(tuneSetPositionPlayInfoCopy);
         }
     }

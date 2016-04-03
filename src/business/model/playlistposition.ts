@@ -21,4 +21,8 @@ export class PlaylistPosition {
     addTuneSetPositionPlayInfo(tuneSetPositionPlayInfo: TuneSetPositionPlayInfo) {
         this.tuneSetPositionPlayInfos.push(tuneSetPositionPlayInfo);
     }
+    
+    setTuneSetPositionPlayInfos(tuneSetPositionPlayInfos: Array<TuneSetPositionPlayInfo>){
+        this.tuneSetPositionPlayInfos = tuneSetPositionPlayInfos;
+    }
 }

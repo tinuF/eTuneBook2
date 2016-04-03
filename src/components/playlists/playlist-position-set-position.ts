@@ -38,18 +38,18 @@ export class PlayListPositionSetPositionUI implements OnInit {
         this.editModus = this.tuneBookService.isEditModus();
     }
 
-    handleKeyDownOnTuneSetPositionRepeat(event, tuneSetPosition) {
+    handleKeyDownOnTuneSetPositionRepeat(event) {
         var keycode = (event.keyCode ? event.keyCode : event.which);
 
         if (keycode === 13) { // ENTER
             event.target.blur();
             event.preventDefault();
-            this.handleBlurOnTuneSetPositionRepeat(event, tuneSetPosition);
+            this.handleBlurOnTuneSetPositionRepeat(event);
         }
     }
 
-    handleBlurOnTuneSetPositionRepeat(event, tuneSetPosition) {
-        tuneSetPosition.currentTuneSetPositionPlayInfo.repeat = event.target.value;
+    handleBlurOnTuneSetPositionRepeat(event) {
+        this.tuneSetPositionPlayInfo.repeat = event.target.value;
         this.tuneBookService.storeTuneBookAbc();
     }
 
