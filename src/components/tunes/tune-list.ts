@@ -21,6 +21,8 @@ export class TuneListUI implements DoCheck {
     }
 
     ngDoCheck() {
+        //DoCheck needed for text search
+        //(für Filter-Panel würde @Input() reichen)
         this.tunes = this.tuneBookService.getTunesFiltered();
     }
 }

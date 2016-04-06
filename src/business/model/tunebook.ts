@@ -222,7 +222,10 @@ export class TuneBook {
     }
 
     copyPlaylist(playlistIdOriginal): number {
-        let playlistId, playlistName, playlistOriginal, playlistCopy;
+        let playlistId: number; 
+        let playlistName: string; 
+        let playlistOriginal: Playlist;
+        let playlistCopy: Playlist;
 
         playlistOriginal = this.getPlaylistById(playlistIdOriginal);
 
@@ -237,7 +240,7 @@ export class TuneBook {
         return playlistId;
     }
 
-    _getNextPlaylistId() {
+    _getNextPlaylistId():number {
         let nextPlaylistId: number;
         let currentPlaylistId: number;
         let maxPlaylistId: number;
