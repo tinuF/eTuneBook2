@@ -11,17 +11,10 @@
     "pretty": true,
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
-    "noImplicitAny": false,
+    "noImplicitAny": true,
     "noImplicitReturns": true,
     "noImplicitUseStrict": false,
     "noFallthroughCasesInSwitch": true
   },
-  "exclude": [
-    "node_modules",
-    "dist",
-    "typings/browser.d.ts",
-    "typings/browser",
-    "src"
-  ],
   "compileOnSave": false
 }
