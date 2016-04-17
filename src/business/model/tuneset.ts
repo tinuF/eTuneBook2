@@ -5,13 +5,13 @@ export class TuneSet {
     tuneSetName: string;
     tuneSetPositions: Array<TuneSetPosition>;
 
-    constructor(tuneSetId, tuneSetName, tuneSetPositions) {
+    constructor(tuneSetId: number, tuneSetName: string, tuneSetPositions: Array<TuneSetPosition>) {
         this.tuneSetId = tuneSetId;
         this.tuneSetName = tuneSetName;
         this.tuneSetPositions = tuneSetPositions;
     }
 
-    getTuneSetPositionByPosition(position) {
+    getTuneSetPositionByPosition(position: number) {
         // Get TuneSetPosition from a TuneSet by position
 
         for (var z = 0; z < this.tuneSetPositions.length; z++) {
@@ -36,7 +36,7 @@ export class TuneSet {
     moveTuneSetPosition(oldPosition: number, newPosition: number) {
         //Change moving TuneSet-Position
 
-        let movingTuneSetPosition;
+        let movingTuneSetPosition: TuneSetPosition;
 
         for (var z = 0; z < this.tuneSetPositions.length; z++) {
             if (this.tuneSetPositions[z].position == oldPosition) {
@@ -68,7 +68,7 @@ export class TuneSet {
         }
 
         // Sort TuneSetPositions by position
-        this.tuneSetPositions.sort(function(a, b) {
+        this.tuneSetPositions.sort(function (a, b) {
             return a.position - b.position;
         });
     }
@@ -87,5 +87,45 @@ export class TuneSet {
             }
         }
         return lastPlayDate;
+    }
+
+    deleteTune(intTuneId:number) {
+        let removedTuneSetPosition:TuneSetPosition;
+        
+        removedTuneSetPosition = this.deleteTuneSetPositionByIntTuneId(intTuneId);
+
+        if (this.tuneSetPositions.length > 0) {
+            // TuneSet still has TuneSetPositions
+            // Adjust Positions of remaining TuneSetPositions: Only necessary for tunes that come after the removed tune
+            this.adjustPositonAfterRemovedTuneSetPosition(removedTuneSetPosition);
+        }        
+    }
+    
+    deleteTuneSetPositionByIntTuneId(intTuneId: number): TuneSetPosition {
+        let tuneSetPosition: TuneSetPosition = null;
+
+        for (var z = 0; z < this.tuneSetPositions.length; z++) {
+            if (this.tuneSetPositions[z].tune.intTuneId == intTuneId) {
+                tuneSetPosition = this.tuneSetPositions[z];
+                // Remove TuneSetPosition from TuneSet
+                // TuneSetPosition will be deleted later by Garbage Collector
+                this.tuneSetPositions.splice(z, 1);
+            }
+        }
+        return tuneSetPosition;
+    }
+
+    adjustPositonAfterRemovedTuneSetPosition(removedTuneSetPosition: TuneSetPosition) {
+        let currentPosition = 0;
+
+        for (var y = 0; y < this.tuneSetPositions.length; y++) {
+            currentPosition = this.tuneSetPositions[y].position;
+
+            if (currentPosition > removedTuneSetPosition.position) {
+                currentPosition--;
+                // Change Position on TuneSetPosition
+                this.tuneSetPositions[y].position = currentPosition;
+            }
+        }
     }
 }

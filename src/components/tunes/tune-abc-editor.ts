@@ -68,7 +68,7 @@ export class TuneAbcEditorUI implements OnInit, DoCheck {
 
         if (!this.tune.pure) {
             // Delete all TuneSetPositions with that tune
-            this.tuneBookService.deleteTuneSetPositionsAndTune(this.tune.intTuneId);
+            this.tuneBookService.deleteTune(this.tune.intTuneId);
             this.router.navigate(["/Tunelist"]);
 
         } else {

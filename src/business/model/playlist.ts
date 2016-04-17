@@ -7,7 +7,7 @@ export class Playlist {
     band: string;
     playlistPositions: Array<PlaylistPosition>;
 
-    constructor(playlistId, playlistName, playlistEvent, playlistBand) {
+    constructor(playlistId:number, playlistName:string, playlistEvent:string, playlistBand:string) {
         this.id = playlistId;
         this.name = playlistName;
         this.event = playlistEvent;
@@ -15,11 +15,11 @@ export class Playlist {
         this.playlistPositions = [];
     }
 
-    addPlaylistPosition(playlistPosition) {
+    addPlaylistPosition(playlistPosition:PlaylistPosition) {
         this.playlistPositions.push(playlistPosition);
     }
 
-    getPlaylistPosition(position) {
+    getPlaylistPosition(position:number) {
         for (var i = 0; i < this.playlistPositions.length; i++) {
             if (position == this.playlistPositions[i].position) {
                 return this.playlistPositions[i];
@@ -28,7 +28,7 @@ export class Playlist {
         return null;
     }
 
-    getPlaylistPositionByTuneSetId(tuneSetId) {
+    getPlaylistPositionByTuneSetId(tuneSetId:number) {
         for (var i = 0; i < this.playlistPositions.length; i++) {
             if (tuneSetId == this.playlistPositions[i].tuneSet.tuneSetId) {
                 return this.playlistPositions[i];
@@ -48,7 +48,7 @@ export class Playlist {
     }
 
     movePlaylistPosition(oldPosition: number, newPosition: number) {
-        var movingPlaylistPosition;
+        let movingPlaylistPosition:PlaylistPosition;
 
         //Change moving Playlist-Position
         for (var z = 0; z < this.playlistPositions.length; z++) {
@@ -78,11 +78,11 @@ export class Playlist {
                     }
                 }
             }
-        } 
+        }
 
         // Sort PlaylistPositions by position
-        this.playlistPositions.sort(function(a, b) {
-            return a.position - b.position
+        this.playlistPositions.sort(function (a, b) {
+            return a.position - b.position;
         });
     }
 
@@ -113,7 +113,7 @@ export class Playlist {
         }
 
         // Sort PlaylistPositions by position
-        this.playlistPositions.sort(function(a, b) {
+        this.playlistPositions.sort(function (a, b) {
             return a.position - b.position
         });
     }
@@ -145,21 +145,34 @@ export class Playlist {
             }
 
             // Sort PlaylistPositions by position
-            this.playlistPositions.sort(function(a, b) {
+            this.playlistPositions.sort(function (a, b) {
                 return a.position - b.position
             });
 
         }
     }
 
-    deletePlaylistPosition(position) {
-        var playlistPosition = null;
-        var removedPosition = 0;
-        removedPosition = parseInt(position);
+    deleteTune(intTuneId: number) {
+        let playlistPosition:PlaylistPosition;
+        
+        for (var y = 0; y < this.playlistPositions.length; y++) {
+            playlistPosition = this.playlistPositions[y];
+            
+            playlistPosition.deleteTune(intTuneId); 
+            
+            if (playlistPosition.setTuneSetPositionPlayInfos.length == 0) {
+                // Empty PlaylistPosition
+                this.deletePlaylistPosition(playlistPosition.position);
+            }                    
+        }
+    }
 
+    deletePlaylistPosition(removedPosition:number) {
+        let removedPlaylistPosition:PlaylistPosition;
+        
         for (var z = 0; z < this.playlistPositions.length; z++) {
-            if (this.playlistPositions[z].position == position) {
-                playlistPosition = this.playlistPositions[z];
+            if (this.playlistPositions[z].position == removedPosition) {
+                removedPlaylistPosition = this.playlistPositions[z];
                 // Delete playlistPosition from playlist
                 this.playlistPositions.splice(z, 1);
                 //Falls eine tuneSetPositionPlayInfo zur gelöschten playlistPosition vorhanden wäre_
@@ -168,22 +181,24 @@ export class Playlist {
             }
         }
 
-        if (this.playlistPositions.length == 0) {
-            // Empty playlistt
-
-        } else {
+        if (this.playlistPositions.length > 0) {
             // playlist still has playlistPositions
             // Adjust Positions of remaining playlistPositions: Only necessary for playlistPositions that come after the removed playlistPosition
-            var currentPosition = 0;
+            
+            this.adjustPositonAfterRemovedPlaylistPosition(removedPlaylistPosition);
+        }
+    }
+    
+    adjustPositonAfterRemovedPlaylistPosition(removedPlaylistPosition: PlaylistPosition) {
+        let currentPosition = 0;
 
-            for (var y = 0; y < this.playlistPositions.length; y++) {
-                currentPosition = this.playlistPositions[y].position;
+        for (var y = 0; y < this.playlistPositions.length; y++) {
+            currentPosition = this.playlistPositions[y].position;
 
-                if (currentPosition > removedPosition) {
-                    currentPosition--;
-                    // Change Position on TuneSetPosition
-                    this.playlistPositions[y].position = currentPosition;
-                }
+            if (currentPosition > removedPlaylistPosition.position) {
+                currentPosition--;
+                // Change Position on PlaylistPosition
+                this.playlistPositions[y].position = currentPosition;
             }
         }
     }

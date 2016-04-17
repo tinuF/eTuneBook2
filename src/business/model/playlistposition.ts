@@ -9,7 +9,7 @@ export class PlaylistPosition {
     annotation: string;
     tuneSetPositionPlayInfos: Array<TuneSetPositionPlayInfo>;
 
-    constructor(playlistId, position, tuneSet, name, annotation) {
+    constructor(playlistId:number, position:number, tuneSet:TuneSet, name:string, annotation:string) {
         this.playlistId = playlistId;
         this.position = position;
         this.tuneSet = tuneSet;
@@ -24,5 +24,19 @@ export class PlaylistPosition {
     
     setTuneSetPositionPlayInfos(tuneSetPositionPlayInfos: Array<TuneSetPositionPlayInfo>){
         this.tuneSetPositionPlayInfos = tuneSetPositionPlayInfos;
+    }
+    
+    deleteTune(intTuneId:number) {
+        let tuneSetPositionPlayInfo: TuneSetPositionPlayInfo;
+
+        for (var z = 0; z < this.tuneSetPositionPlayInfos.length; z++) {
+            tuneSetPositionPlayInfo = this.tuneSetPositionPlayInfos[z];
+            
+            if (tuneSetPositionPlayInfo.tuneSetPosition.tune.intTuneId == intTuneId) {
+                // Remove TuneSetPositionPlayInfo from PlaylistPosition
+                // TuneSetPositionPlayInfo will be deleted later by Garbage Collector
+                this.tuneSetPositionPlayInfos.splice(z, 1);
+            }
+        }
     }
 }

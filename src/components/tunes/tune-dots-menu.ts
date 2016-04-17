@@ -32,9 +32,8 @@ export class TuneDotsMenuUI implements OnInit, DoCheck {
     }
 
     deleteTune() {
-        // Delete all TuneSetPositions with that tune
-        this.tuneBookService.deleteTuneSetPositionsAndTune(this.tune.intTuneId);
-        this.router.navigate(['/Tunes']);
+        this.tuneBookService.deleteTune(this.tune.intTuneId);
+        this.router.navigate(['/Tunelist']);
 
         // Put TuneBook to localStorage
         this.tuneBookService.storeTuneBookAbc();

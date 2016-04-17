@@ -1,6 +1,9 @@
 import * as moment from 'moment';
 import {getSystemProperties} from '../../common/system-properties';
 import {Tune} from '../model/tune';
+import {Playlist} from '../model/playlist';
+import {PlaylistPosition} from '../model/playlistposition';
+import {TuneSetPositionPlayInfo} from '../model/tunesetposition-playinfo';
 import {TuneBook} from '../model/tunebook';
 import {AbcExportSettings} from '../../common/settings/abc-export-settings';
 
@@ -8,7 +11,11 @@ var systemProperties = getSystemProperties();
 
 export function writeAbcHeader(tuneBook:TuneBook, abcOption:AbcExportSettings) {
     // Construct Header
-    var tbkAbc, playlist, playlistPosition, tuneSetPositionPlayInfos, tuneSetPositionPlayInfo;
+    let tbkAbc:string; 
+    let playlist:Playlist; 
+    let playlistPosition:PlaylistPosition; 
+    let tuneSetPositionPlayInfos:Array<TuneSetPositionPlayInfo>;
+    let tuneSetPositionPlayInfo:TuneSetPositionPlayInfo;
 
     tbkAbc = "%abc-";
     tbkAbc += systemProperties.ABC_VERSION;
@@ -41,12 +48,10 @@ export function writeAbcHeader(tuneBook:TuneBook, abcOption:AbcExportSettings) {
             tbkAbc += playlist.event;
             tbkAbc += ",band:";
             tbkAbc += playlist.band;
-            tbkAbc += ",ant:";
-            tbkAbc += playlist.annotation;
             tbkAbc += "\n";
 
             for (var z = 0; z < playlist.playlistPositions.length; z++) {
-                //Playlist-Positions
+                //Playlist-Position
                 playlistPosition = playlist.playlistPositions[z];
                 tbkAbc += "%%etbk:pllps id:";
                 tbkAbc += playlist.id;
@@ -60,11 +65,10 @@ export function writeAbcHeader(tuneBook:TuneBook, abcOption:AbcExportSettings) {
                 tbkAbc += playlistPosition.annotation;
                 tbkAbc += "\n";
 
-                tuneSetPositionPlayInfos = tuneBook.getTuneSetPositionPlayInfosForPlaylistPosition(
-                    tuneBook.playlists[i].playlistPositions[z]);
+                tuneSetPositionPlayInfos = playlistPosition.tuneSetPositionPlayInfos;
 
                 for (var y = 0; y < tuneSetPositionPlayInfos.length; y++) {
-                    //TuneSetPositionPlayInfos
+                    //TuneSetPositionPlayInfo
                     tuneSetPositionPlayInfo = tuneSetPositionPlayInfos[y];
 
                     if (!tuneSetPositionPlayInfo.isDefault()) {

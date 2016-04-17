@@ -39,10 +39,10 @@ export class TuneBook {
         this.playlists = [];
         this.tuneSetPositionPlayInfos = [];
 
-        this._extract();
+        this.extract();
     }
 
-    _extract() {
+    extract() {
         this.tuneSets = importTuneSets(this.abcjsBook);   //TuneSets zuerst, weil Playlists auf TuneSets referenzieren
         this.playlists = importPlaylists(this.header);
         importPlaylistPositions(this);
@@ -51,7 +51,7 @@ export class TuneBook {
     }
 
 
-    getTuneById(intTuneId) {
+    getTuneById(intTuneId:number) {
         for (var i = 0; i < this.tuneSets.length; i++) {
             for (var z = 0; z < this.tuneSets[i].tuneSetPositions.length; z++) {
                 if (intTuneId == this.tuneSets[i].tuneSetPositions[z].tune.intTuneId) {
@@ -62,7 +62,7 @@ export class TuneBook {
         return null;
     }
 
-    getTuneSetById(tuneSetId) {
+    getTuneSetById(tuneSetId:number) {
         for (var i = 0; i < this.tuneSets.length; i++) {
             if (tuneSetId == this.tuneSets[i].tuneSetId) {
                 return this.tuneSets[i];
@@ -71,7 +71,7 @@ export class TuneBook {
         return null;
     }
 
-    getPlaylistById(playlistId) {
+    getPlaylistById(playlistId:number) {
         for (var i = 0; i < this.playlists.length; i++) {
             if (playlistId == this.playlists[i].id) {
                 return this.playlists[i];
@@ -156,9 +156,9 @@ export class TuneBook {
         return playlists;
     }
 
-    getPlaylistPositionsByTuneSetId(tuneSetId) {
-        var playlist, playlistPositions;
-        playlistPositions = [];
+    getPlaylistPositionsByTuneSetId(tuneSetId: number) {
+        let playlist: Playlist;
+        let playlistPositions: Array<PlaylistPosition> = [];
 
         for (var i = 0; i < this.playlists.length; i++) {
             playlist = this.playlists[i];
@@ -188,7 +188,7 @@ export class TuneBook {
         tunes = this.getTunes();
 
         // Sort Tunes by intTuneId
-        tunes.sort(function(a, b) {
+        tunes.sort(function (a, b) {
             return a.intTuneId - b.intTuneId
         });
 
@@ -222,8 +222,8 @@ export class TuneBook {
     }
 
     copyPlaylist(playlistIdOriginal): number {
-        let playlistId: number; 
-        let playlistName: string; 
+        let playlistId: number;
+        let playlistName: string;
         let playlistOriginal: Playlist;
         let playlistCopy: Playlist;
 
@@ -240,7 +240,7 @@ export class TuneBook {
         return playlistId;
     }
 
-    _getNextPlaylistId():number {
+    _getNextPlaylistId(): number {
         let nextPlaylistId: number;
         let currentPlaylistId: number;
         let maxPlaylistId: number;
@@ -285,8 +285,8 @@ export class TuneBook {
     }
 
     _copyTuneSetPositionPlayInfos(playlistPositionOriginal: PlaylistPosition, playlistPositionCopy: PlaylistPosition) {
-        let tuneSetPositionPlayInfoOriginal: TuneSetPositionPlayInfo; 
-        let tuneSetPositionPlayInfoCopy: TuneSetPositionPlayInfo; 
+        let tuneSetPositionPlayInfoOriginal: TuneSetPositionPlayInfo;
+        let tuneSetPositionPlayInfoCopy: TuneSetPositionPlayInfo;
         let partPlayInfosCopy: PartPlayInfo;
 
         for (var y = 0; y < playlistPositionOriginal.tuneSetPositionPlayInfos.length; y++) {
@@ -297,10 +297,10 @@ export class TuneBook {
 
             // Generate tuneSetPositionPlayInfo
             tuneSetPositionPlayInfoCopy = new TuneSetPositionPlayInfo(playlistPositionCopy, tuneSetPositionPlayInfoOriginal.tuneSetPosition, tuneSetPositionPlayInfoOriginal.repeat, partPlayInfosCopy, tuneSetPositionPlayInfoOriginal.annotation);
-            
+
             // Copy TuneSetPositionPlayInfos
             playlistPositionCopy.addTuneSetPositionPlayInfo(tuneSetPositionPlayInfoCopy);
-            
+
             this.tuneSetPositionPlayInfos.push(tuneSetPositionPlayInfoCopy);
         }
     }
@@ -639,8 +639,8 @@ export class TuneBook {
         }
     }
 
-    initializeTuneSetPositionPlayInfosForPlaylistPosition(playlistPosition:PlaylistPosition) {
- 
+    initializeTuneSetPositionPlayInfosForPlaylistPosition(playlistPosition: PlaylistPosition) {
+
         // Für ein Set, dass in einer Playlist nicht von seinen Default-Werten abweicht, existiert kein TuneSetPositionPlayInfo im Abc-File.
         // Die Applikation braucht aber auch Default-TuneSetPositionPlayInfos. Diese werden in dieser Methode generiert.
         // Ausserdem werden seit eTuneBook V2 in dieser Methode die für eine PlaylistPosition relevanten TuneSetPositionPlayInfos angehängt. 
@@ -653,7 +653,7 @@ export class TuneBook {
         let tuneSetPosition: TuneSetPosition;
         let tuneSetPositionPlayInfo: TuneSetPositionPlayInfo;
         let partPlayInfos: Array<PartPlayInfo>;
-        
+
         tuneSet = playlistPosition.tuneSet;
 
         for (var z = 0; z < tuneSet.tuneSetPositions.length; z++) {
@@ -786,7 +786,7 @@ export class TuneBook {
     }
 
     deleteVideo(intTuneId, videoSource, videoCode) {
-        var tune, index, remove = false;
+        let tune: Tune;
         tune = this.getTuneById(intTuneId);
         if (tune != null) {
             tune.deleteVideo(videoSource, videoCode);
@@ -794,57 +794,59 @@ export class TuneBook {
     }
 
     deleteWebsite(intTuneId, url) {
-        var tune, wsite, index, remove = false;
+        let tune: Tune;
         tune = this.getTuneById(intTuneId);
         if (tune != null) {
             tune.deleteWebsite(url);
         }
     }
 
-    deleteTuneSetPositionsAndTune(intTuneId) {
-        var tuneSets = [];
+    deleteTuneSet(tuneSet: TuneSet) {
+        // Remove TuneSet from the List of TuneSets
+        // TuneSet will be deleted later by Garbage Collector
+        this.tuneSets.splice(this.tuneSets.indexOf(tuneSet), 1);
+        
+        //TODO:Delete PlaylistPositons of deleted tuneSet 
+    }
+
+    deleteTuneFromSets(intTuneId: number) {
+        let tuneSets: Array<TuneSet> = [];
+        let tuneSet: TuneSet;
+       
         tuneSets = this.getTuneSetsByIntTuneId(intTuneId);
+
         for (var i = 0; i < tuneSets.length; i++) {
-            this._deleteTuneSetPositionsAndTune(tuneSets[i], intTuneId);
-        }
-    }
+            tuneSet = tuneSets[i];
 
-    _deleteTuneSetPositionsAndTune(tuneSet, intTuneId) {
-        var tuneSetPosition = null;
-        var removedPosition = 0;
+            tuneSet.deleteTune(intTuneId);
 
-        for (var z = 0; z < tuneSet.tuneSetPositions.length; z++) {
-            if (tuneSet.tuneSetPositions[z].tune.intTuneId == intTuneId) {
-                removedPosition = parseInt(tuneSet.tuneSetPositions[z].position);
-                tuneSetPosition = tuneSet.tuneSetPositions[z];
-                // Delete TuneSetPosition from TuneSet
-                tuneSet.tuneSetPositions.splice(z, 1);
-            }
-        }
-
-        if (tuneSet.tuneSetPositions.length == 0) {
-            // Empty TuneSet
-            // Remove TuneSet from the List
-            this.tuneSets.splice(this.tuneSets.indexOf(tuneSet), 1);
-
-        } else {
-            // TuneSet still has TuneSetPositions
-            // Adjust Positions of remaining TuneSetPositions: Only necessary for tunes that come after the removed tune
-            var currentPosition = 0;
-
-            for (var y = 0; y < tuneSet.tuneSetPositions.length; y++) {
-                currentPosition = parseInt(tuneSet.tuneSetPositions[y].position);
-
-                if (currentPosition > removedPosition) {
-                    currentPosition--;
-                    // Change Position on TuneSetPosition
-                    tuneSet.tuneSetPositions[y].position = currentPosition.toString();
-                }
+            if (tuneSet.tuneSetPositions.length == 0) {
+                // Empty TuneSet
+                this.deleteTuneSet(tuneSet);
             }
         }
     }
+    
+    deleteTuneFromPlaylists(intTuneId: number) {
+        let playlists: Array<Playlist> = [];
+        let playlist:Playlist;
 
-    addPlaylistPositions(playlistId, setIds: Array<number>) {
+        playlists = this.getPlaylistsByIntTuneId(intTuneId);
+
+        for (var z = 0; z < playlists.length; z++) {
+            playlist = playlists[z];
+            
+            playlist.deleteTune(intTuneId);
+        }
+
+    }
+
+    deleteTune(intTuneId: number) {
+        this.deleteTuneFromSets(intTuneId);
+        this.deleteTuneFromPlaylists(intTuneId);
+    }
+
+    addPlaylistPositions(playlistId: number, setIds: Array<number>) {
         // Add a Default-PlaylistPosition to the playlist for each of the selected Sets
         // Add a Default-TuneSetPositionPlayInfo for each of the TuneSetPositions of the selected Sets
         let playlist: Playlist;

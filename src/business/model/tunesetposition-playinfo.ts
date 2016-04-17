@@ -9,7 +9,8 @@ export class TuneSetPositionPlayInfo {
   partPlayInfos: Array<PartPlayInfo>;
   annotation: string;
 
-  constructor(playlistPosition, tuneSetPosition, repeat, partPlayInfos, annotation) {
+  constructor(playlistPosition:PlaylistPosition, tuneSetPosition:TuneSetPosition, 
+  repeat:string, partPlayInfos:Array<PartPlayInfo>, annotation:string) {
     this.playlistPosition = playlistPosition;
     this.tuneSetPosition = tuneSetPosition;
     this.repeat = repeat;
