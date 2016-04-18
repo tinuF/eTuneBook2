@@ -1,4 +1,4 @@
-export function getRandomArrayIndex(array) {
+export function getRandomArrayIndex(array:Array<any>) {
     // Get a random number between 1 and the number of array elements
     return Math.floor(Math.random() * array.length) + 1;
 }
@@ -8,7 +8,7 @@ export function getRandomArrayIndex(array) {
  * Using Durstenfeld shuffle algorithm.
  * see http://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
  */
-export function shuffleArray(array) {
+export function shuffleArray(array:Array<any>):Array<any> {
     for (var i = array.length - 1; i > 0; i--) {
         var j = Math.floor(Math.random() * (i + 1));
         var temp = array[i];

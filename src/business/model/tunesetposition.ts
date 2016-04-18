@@ -9,7 +9,7 @@ export class TuneSetPosition {
   annotation: string;
   tuneSetPositionPlayInfos: Array<TuneSetPositionPlayInfo>;
 
-  constructor(tuneSetId, tune, position, repeat, annotation) {
+  constructor(tuneSetId:number, tune:Tune, position:number, repeat:string, annotation:string) {
     this.tuneSetId = tuneSetId;
     this.tune = tune;
     this.position = position;

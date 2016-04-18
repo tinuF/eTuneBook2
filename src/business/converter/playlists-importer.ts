@@ -19,7 +19,7 @@ export function importPlaylists(header: string): Array<Playlist> {
     let playlists: Array<Playlist> = [];
 
     if (playlistDefinitionDirectives.length > 0) {
-        for (var y = 0; y < playlistDefinitionDirectives.length; y++) {
+        for (let y = 0; y < playlistDefinitionDirectives.length; y++) {
             // Get Playlist Definition
             playlistId = importPlaylistId(playlistDefinitionDirectives[y]);
             playlistName = importPlaylistName(playlistDefinitionDirectives[y]);
@@ -37,16 +37,16 @@ export function importPlaylists(header: string): Array<Playlist> {
 
 export function importPlaylistPositions(tuneBook: TuneBook) {
     // Generate PlaylistPositions from the book.
-    let playlistPositionDirectives:Array<string> = getAbcValues(tuneBook.header, "%%etbk:pllps ");
-    let playlistId:number;
-    let position:number;
-    let tuneSetId:number;
-    let name:string;
-    let annotation:string;
-    let tuneSet:TuneSet = tuneBook.getTuneSetById(tuneSetId);
+    let playlistPositionDirectives: Array<string> = getAbcValues(tuneBook.header, "%%etbk:pllps ");
+    let playlistId: number;
+    let position: number;
+    let tuneSetId: number;
+    let name: string;
+    let annotation: string;
+    let tuneSet: TuneSet = tuneBook.getTuneSetById(tuneSetId);
 
     if (playlistPositionDirectives.length > 0) {
-        for (var z = 0; z < playlistPositionDirectives.length; z++) {
+        for (let z = 0; z < playlistPositionDirectives.length; z++) {
             // Get Playlist Positions
             playlistId = importPlaylistId(playlistPositionDirectives[z]);
             position = importPlaylistPositionPosition(playlistPositionDirectives[z]);
@@ -55,17 +55,17 @@ export function importPlaylistPositions(tuneBook: TuneBook) {
             annotation = importPlaylistPositionAnnotation(playlistPositionDirectives[z]);
             tuneSet = tuneBook.getTuneSetById(tuneSetId);
 
-            if (name == "") {
+            if (name === "") {
                 //Default-Name of PlaylistPosition = Name of TuneSet = Name of first tune
                 name = eliminateThe(tuneSet.tuneSetName);
                 name += " Set";
             }
 
             // Generate PlaylistPosition
-            var playlistPosition = new PlaylistPosition(playlistId, position, tuneSet, name, annotation);
+            let playlistPosition = new PlaylistPosition(playlistId, position, tuneSet, name, annotation);
 
             // Add PlaylistPosition to Playlist
-            var playlist = tuneBook.getPlaylistById(playlistId);
+            let playlist = tuneBook.getPlaylistById(playlistId);
             playlist.addPlaylistPosition(playlistPosition);
         }
     }
@@ -73,22 +73,22 @@ export function importPlaylistPositions(tuneBook: TuneBook) {
 
 export function importTuneSetPositionPlayInfos(tuneBook: TuneBook) {
     // Generate TuneSetPositionPlayInfos from the book.
-    let tuneSetPositionPlayInfoDirectives:Array<string> = getAbcValues(tuneBook.header, "%%etbk:plltp "); 
-    let playlistId:number; 
-    let playlistPositionNr:number; 
-    let tuneSetId:number;
-    let tuneSetPositionNr:number;
-    let repeat:string;
-    let partPlayInfoDirective:string;
-    let annotation:string;
-    let partPlayInfos:Array<PartPlayInfo>;
-    let playlistPosition:PlaylistPosition;
-    let tuneSetPosition:TuneSetPosition;
-    let tuneSetPositionPlayInfo:TuneSetPositionPlayInfo;
-    let tuneSetPositionPlayInfos:Array<TuneSetPositionPlayInfo> = [];
+    let tuneSetPositionPlayInfoDirectives: Array<string> = getAbcValues(tuneBook.header, "%%etbk:plltp ");
+    let playlistId: number;
+    let playlistPositionNr: number;
+    let tuneSetId: number;
+    let tuneSetPositionNr: number;
+    let repeat: string;
+    let partPlayInfoDirective: string;
+    let annotation: string;
+    let partPlayInfos: Array<PartPlayInfo>;
+    let playlistPosition: PlaylistPosition;
+    let tuneSetPosition: TuneSetPosition;
+    let tuneSetPositionPlayInfo: TuneSetPositionPlayInfo;
+    let tuneSetPositionPlayInfos: Array<TuneSetPositionPlayInfo> = [];
 
     if (tuneSetPositionPlayInfoDirectives.length > 0) {
-        for (var z = 0; z < tuneSetPositionPlayInfoDirectives.length; z++) {
+        for (let z = 0; z < tuneSetPositionPlayInfoDirectives.length; z++) {
             // Get TuneSetSetPositionPlayInfo
             playlistId = parseInt(getSubDirective(tuneSetPositionPlayInfoDirectives[z], "pll:", ","));
             playlistPositionNr = parseInt(getSubDirective(tuneSetPositionPlayInfoDirectives[z], "pllpos:", ","));
@@ -110,23 +110,23 @@ export function importTuneSetPositionPlayInfos(tuneBook: TuneBook) {
     return tuneSetPositionPlayInfos;
 }
 
-function importPartPlayInfos(partPlayInfoDirective:string) {
-    let partPlayInfosSplits:Array<string>; 
-    let partPlayInfoSplits:Array<string>; 
-    let part:string;
-    let playInfo:string;
-    let partPlayInfos:Array<PartPlayInfo>;
-    let partPlayInfo:PartPlayInfo;
+function importPartPlayInfos(partPlayInfoDirective: string) {
+    let partPlayInfosSplits: Array<string>;
+    let partPlayInfoSplits: Array<string>;
+    let part: string;
+    let playInfo: string;
+    let partPlayInfos: Array<PartPlayInfo>;
+    let partPlayInfo: PartPlayInfo;
 
     partPlayInfosSplits = partPlayInfoDirective.split(",");
     partPlayInfos = [];
 
     if (partPlayInfosSplits.length > 0) {
-        for (var z = 0; z < partPlayInfosSplits.length; z++) {
+        for (let z = 0; z < partPlayInfosSplits.length; z++) {
             // Get PartPlayInfo
             partPlayInfoSplits = partPlayInfosSplits[z].split(":");
 
-            if (partPlayInfoSplits.length == 2) {
+            if (partPlayInfoSplits.length === 2) {
                 part = partPlayInfoSplits[0];
                 playInfo = partPlayInfoSplits[1];
 

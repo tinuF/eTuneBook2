@@ -5,7 +5,7 @@ export class Color {
     hex: string;
 
 
-    constructor(red, green, blue, hex) {
+    constructor(red: number, green: number, blue: number, hex: string) {
         this.red = red;
         this.green = green;
         this.blue = blue;
@@ -39,11 +39,11 @@ export class Color {
 
     convertRGBtoHex() {
         //see http://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
-        this.hex = "#" + this.convertComponentToHex(this.red) + this.convertComponentToHex(this.green) 
-        + this.convertComponentToHex(this.blue);
+        this.hex = "#" + this.convertComponentToHex(this.red) + this.convertComponentToHex(this.green)
+            + this.convertComponentToHex(this.blue);
     }
 
-    convertHexToRGB(hex) {
+    convertHexToRGB(hex: string) {
         //see http://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
         var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
         return result ? {

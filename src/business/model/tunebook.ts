@@ -52,8 +52,8 @@ export class TuneBook {
 
 
     getTuneById(intTuneId:number) {
-        for (var i = 0; i < this.tuneSets.length; i++) {
-            for (var z = 0; z < this.tuneSets[i].tuneSetPositions.length; z++) {
+        for (let i = 0; i < this.tuneSets.length; i++) {
+            for (let z = 0; z < this.tuneSets[i].tuneSetPositions.length; z++) {
                 if (intTuneId == this.tuneSets[i].tuneSetPositions[z].tune.intTuneId) {
                     return this.tuneSets[i].tuneSetPositions[z].tune;
                 }
@@ -63,7 +63,7 @@ export class TuneBook {
     }
 
     getTuneSetById(tuneSetId:number) {
-        for (var i = 0; i < this.tuneSets.length; i++) {
+        for (let i = 0; i < this.tuneSets.length; i++) {
             if (tuneSetId == this.tuneSets[i].tuneSetId) {
                 return this.tuneSets[i];
             }
@@ -72,7 +72,7 @@ export class TuneBook {
     }
 
     getPlaylistById(playlistId:number) {
-        for (var i = 0; i < this.playlists.length; i++) {
+        for (let i = 0; i < this.playlists.length; i++) {
             if (playlistId == this.playlists[i].id) {
                 return this.playlists[i];
             }
@@ -80,15 +80,15 @@ export class TuneBook {
         return null;
     }
 
-    getPlaylistPosition(playlistId, playlistPositionNr) {
-        var playlist;
+    getPlaylistPosition(playlistId:number, playlistPositionNr:number):PlaylistPosition {
+        let playlist:Playlist;
 
         playlist = this.getPlaylistById(playlistId);
 
         return playlist.getPlaylistPosition(playlistPositionNr);
     }
 
-    getPlaylistPositionByTuneSetId(playlistId, tuneSetId) {
+    getPlaylistPositionByTuneSetId(playlistId:number, tuneSetId:number) {
         let playlist: Playlist;
 
         playlist = this.getPlaylistById(playlistId);
@@ -96,11 +96,11 @@ export class TuneBook {
         return playlist.getPlaylistPositionByTuneSetId(tuneSetId);
     }
 
-    getTuneSetsByIntTuneId(intTuneId) {
-        var tuneSets = [];
+    getTuneSetsByIntTuneId(intTuneId:number):Array<TuneSet> {
+        let tuneSets:Array<TuneSet> = [];
 
-        for (var i = 0; i < this.tuneSets.length; i++) {
-            for (var z = 0; z < this.tuneSets[i].tuneSetPositions.length; z++) {
+        for (let i = 0; i < this.tuneSets.length; i++) {
+            for (let z = 0; z < this.tuneSets[i].tuneSetPositions.length; z++) {
                 if (intTuneId == this.tuneSets[i].tuneSetPositions[z].tune.intTuneId) {
                     tuneSets.push(this.tuneSets[i]);
                 }
@@ -111,17 +111,17 @@ export class TuneBook {
     }
 
 
-    getPlaylistsByIntTuneId(intTuneId) {
-        var tuneSets = this.getTuneSetsByIntTuneId(intTuneId);
-        var playlists = [];
-        var playlistSelected = false;
+    getPlaylistsByIntTuneId(intTuneId:number) {
+        let tuneSets = this.getTuneSetsByIntTuneId(intTuneId);
+        let playlists = [];
+        let playlistSelected = false;
 
-        for (var i = 0; i < tuneSets.length; i++) {
-            for (var z = 0; z < this.playlists.length; z++) {
-                for (var y = 0; y < this.playlists[z].playlistPositions.length; y++) {
+        for (let i = 0; i < tuneSets.length; i++) {
+            for (let z = 0; z < this.playlists.length; z++) {
+                for (let y = 0; y < this.playlists[z].playlistPositions.length; y++) {
                     if (this.playlists[z].playlistPositions[y].tuneSet == tuneSets[i]) {
                         playlistSelected = false;
-                        for (var w = 0; w < playlists.length; w++) {
+                        for (let w = 0; w < playlists.length; w++) {
                             if (playlists[w] == this.playlists[z]) {
                                 playlistSelected = true;
                             }
@@ -137,15 +137,15 @@ export class TuneBook {
         return playlists;
     }
 
-    getPlaylistsByTuneSetId(tuneSetId) {
-        var playlist, playlists, playlistAdded;
+    getPlaylistsByTuneSetId(tuneSetId:number) {
+        let playlist, playlists, playlistAdded;
         playlists = [];
 
-        for (var i = 0; i < this.playlists.length; i++) {
+        for (let i = 0; i < this.playlists.length; i++) {
             playlist = this.playlists[i];
             playlistAdded = false;
 
-            for (var z = 0; z < playlist.playlistPositions.length && !playlistAdded; z++) {
+            for (let z = 0; z < playlist.playlistPositions.length && !playlistAdded; z++) {
                 if (playlist.playlistPositions[z].tuneSet.tuneSetId == tuneSetId) {
                     playlists.push(playlist);
                     playlistAdded = true;
@@ -160,10 +160,10 @@ export class TuneBook {
         let playlist: Playlist;
         let playlistPositions: Array<PlaylistPosition> = [];
 
-        for (var i = 0; i < this.playlists.length; i++) {
+        for (let i = 0; i < this.playlists.length; i++) {
             playlist = this.playlists[i];
 
-            for (var z = 0; z < playlist.playlistPositions.length; z++) {
+            for (let z = 0; z < playlist.playlistPositions.length; z++) {
                 if (playlist.playlistPositions[z].tuneSet.tuneSetId == tuneSetId) {
                     playlistPositions.push(playlist.playlistPositions[z]);
                 }
@@ -175,7 +175,7 @@ export class TuneBook {
 
     writeAbc(abcExportSettings: AbcExportSettings): string {
         // Generate Abc
-        var tbkAbc, tuneAbc, tunes;
+        let tbkAbc, tuneAbc, tunes;
 
         tunes = [];
         tuneAbc = "";
@@ -192,7 +192,7 @@ export class TuneBook {
             return a.intTuneId - b.intTuneId
         });
 
-        for (var i = 0; i < tunes.length; i++) {
+        for (let i = 0; i < tunes.length; i++) {
             tuneAbc = writeTuneAbc(tunes[i], this.getTuneSetPositionsByIntTuneId(tunes[i].intTuneId), abcExportSettings);
             tbkAbc += tuneAbc;
             tbkAbc += "\n";	//empty line between tunes
@@ -207,11 +207,11 @@ export class TuneBook {
         return extractTunes(this.tuneSets);
     }
 
-    getTuneSetPositionsByIntTuneId(intTuneId) {
-        var tuneSetPositions = [];
+    getTuneSetPositionsByIntTuneId(intTuneId:number) {
+        let tuneSetPositions = [];
 
-        for (var i = 0; i < this.tuneSets.length; i++) {
-            for (var z = 0; z < this.tuneSets[i].tuneSetPositions.length; z++) {
+        for (let i = 0; i < this.tuneSets.length; i++) {
+            for (let z = 0; z < this.tuneSets[i].tuneSetPositions.length; z++) {
                 if (intTuneId == this.tuneSets[i].tuneSetPositions[z].tune.intTuneId) {
                     tuneSetPositions.push(this.tuneSets[i].tuneSetPositions[z]);
                 }
@@ -247,7 +247,7 @@ export class TuneBook {
 
         maxPlaylistId = 0;
 
-        for (var i = 0; i < this.playlists.length; i++) {
+        for (let i = 0; i < this.playlists.length; i++) {
             //TODO: Obwohl Playlist.id als number definiert, ist an dieser Stelle ein String drin! 
             //currentPlaylistId = parseInt(this.playlists[i].id);
             currentPlaylistId = this.playlists[i].id;
@@ -261,17 +261,17 @@ export class TuneBook {
         return nextPlaylistId;
     }
 
-    _copyPlaylistPositions(playlistOriginal, playlistCopy) {
-        var playlistPositionOriginal, playlistPositionCopy;
+    copyPlaylistPositions(playlistOriginal, playlistCopy) {
+        let playlistPositionOriginal, playlistPositionCopy;
 
-        for (var y = 0; y < playlistOriginal.playlistPositions.length; y++) {
+        for (let y = 0; y < playlistOriginal.playlistPositions.length; y++) {
             playlistPositionOriginal = playlistOriginal.playlistPositions[y];
 
             this._copyPlaylistPositionAndTuneSetPlayInfos(playlistPositionOriginal, playlistCopy, playlistPositionOriginal.position);
         }
     }
 
-    _copyPlaylistPositionAndTuneSetPlayInfos(playlistPositionOriginal: PlaylistPosition, targetPlaylist, targetPlaylistPositionNr) {
+    copyPlaylistPositionAndTuneSetPlayInfos(playlistPositionOriginal: PlaylistPosition, targetPlaylist, targetPlaylistPositionNr) {
         let playlistPositionCopy: PlaylistPosition;
 
         // Generate PlaylistPosition
@@ -284,12 +284,12 @@ export class TuneBook {
         this._copyTuneSetPositionPlayInfos(playlistPositionOriginal, playlistPositionCopy);
     }
 
-    _copyTuneSetPositionPlayInfos(playlistPositionOriginal: PlaylistPosition, playlistPositionCopy: PlaylistPosition) {
+    copyTuneSetPositionPlayInfos(playlistPositionOriginal: PlaylistPosition, playlistPositionCopy: PlaylistPosition) {
         let tuneSetPositionPlayInfoOriginal: TuneSetPositionPlayInfo;
         let tuneSetPositionPlayInfoCopy: TuneSetPositionPlayInfo;
         let partPlayInfosCopy: PartPlayInfo;
 
-        for (var y = 0; y < playlistPositionOriginal.tuneSetPositionPlayInfos.length; y++) {
+        for (let y = 0; y < playlistPositionOriginal.tuneSetPositionPlayInfos.length; y++) {
             tuneSetPositionPlayInfoOriginal = playlistPositionOriginal.tuneSetPositionPlayInfos[y];
 
             // Copy partPlayInfos
@@ -306,11 +306,11 @@ export class TuneBook {
     }
 
     getTuneSetPositionPlayInfosForPlaylistPosition(playlistPosition) {
-        var tuneSetPositionPlayInfos, tuneSetPositionPlayInfo;
+        let tuneSetPositionPlayInfos, tuneSetPositionPlayInfo;
 
         tuneSetPositionPlayInfos = [];
 
-        for (var z = 0; z < this.tuneSetPositionPlayInfos.length; z++) {
+        for (let z = 0; z < this.tuneSetPositionPlayInfos.length; z++) {
             if (this.tuneSetPositionPlayInfos[z].playlistPosition == playlistPosition) {
                 tuneSetPositionPlayInfo = this.tuneSetPositionPlayInfos[z];
                 tuneSetPositionPlayInfos.push(tuneSetPositionPlayInfo);
@@ -320,13 +320,13 @@ export class TuneBook {
         return tuneSetPositionPlayInfos;
     }
 
-    _copyPartPlayInfos(tuneSetPositionPlayInfoOriginal) {
-        var partPlayInfosOriginal, partPlayInfosCopy,
+    copyPartPlayInfos(tuneSetPositionPlayInfoOriginal) {
+        let partPlayInfosOriginal, partPlayInfosCopy,
             partPlayInfoOriginal, partPlayInfoCopy;
 
         partPlayInfosCopy = [];
 
-        for (var y = 0; y < tuneSetPositionPlayInfoOriginal.partPlayInfos.length; y++) {
+        for (let y = 0; y < tuneSetPositionPlayInfoOriginal.partPlayInfos.length; y++) {
             partPlayInfoOriginal = tuneSetPositionPlayInfoOriginal.partPlayInfos[y];
 
             // Generate partPlayInfo
@@ -338,7 +338,7 @@ export class TuneBook {
     }
 
     copyPlaylistPositionToOtherPlaylist(sourcePlaylistId, sourcePlaylistPositionNr, targetPlaylistId) {
-        var playlistPosition, targetPlaylist, targetPlaylistPositionNr;
+        let playlistPosition, targetPlaylist, targetPlaylistPositionNr;
 
         playlistPosition = this.getPlaylistPosition(sourcePlaylistId, sourcePlaylistPositionNr);
         targetPlaylist = this.getPlaylistById(targetPlaylistId);
@@ -361,7 +361,7 @@ export class TuneBook {
         let tuneSetDeleted: boolean = false;
         let removedPosition: number = sourcePosition;
 
-        for (var z = 0; z < sourceTuneSet.tuneSetPositions.length; z++) {
+        for (let z = 0; z < sourceTuneSet.tuneSetPositions.length; z++) {
             if (sourceTuneSet.tuneSetPositions[z].position == sourcePosition) {
                 sourceTuneSetPosition = sourceTuneSet.tuneSetPositions[z];
             }
@@ -380,7 +380,7 @@ export class TuneBook {
         if (moveOrCopy == "move") {
 
             // Remove TuneSetPosition from Source TuneSet
-            for (var z = 0; z < sourceTuneSet.tuneSetPositions.length; z++) {
+            for (let z = 0; z < sourceTuneSet.tuneSetPositions.length; z++) {
                 if (sourceTuneSet.tuneSetPositions[z].position == sourcePosition) {
                     // Delete TuneSetPosition from TuneSet
                     sourceTuneSet.tuneSetPositions.splice(z, 1);
@@ -397,9 +397,9 @@ export class TuneBook {
                 // TuneSet still has TuneSetPositions
                 // Adjust Positions of remaining TuneSetPositions:
                 // Only necessary for tunes that come after the removed tune
-                var currentPosition = 0;
+                let currentPosition = 0;
 
-                for (var y = 0; y < sourceTuneSet.tuneSetPositions.length; y++) {
+                for (let y = 0; y < sourceTuneSet.tuneSetPositions.length; y++) {
                     currentPosition = sourceTuneSet.tuneSetPositions[y].position;
 
                     if (currentPosition > removedPosition) {
@@ -413,14 +413,14 @@ export class TuneBook {
 
         // Handle Target TuneSet
         if (targetTuneSetId != null) {
-            var newPosition = 0;
+            let newPosition = 0;
             newPosition = targetPosition;
 
             if (beforeOrAfter == "after") {
                 newPosition++;
             }
 
-            var targetTuneSetPosition: TuneSetPosition;
+            let targetTuneSetPosition: TuneSetPosition;
 
             if (moveOrCopy == "move") {
                 // Set new TuneSetId and Position on TuneSetPosition
@@ -437,14 +437,14 @@ export class TuneBook {
 
             // Add TuneSetPosition to TuneSet (only if source tuneSet ist different from target tuneSet)
             // At index (newPosition--) insert the moving TuneSetPosition, but don't remove other TuneSetPositions
-            var insertAt = newPosition - 1;
+            let insertAt = newPosition - 1;
             targetTuneSet.tuneSetPositions.splice(insertAt, 0, targetTuneSetPosition);
 
             // Change Position of other TuneSetPositions in the Targe-Set:
             // Only necessary for tunes that come after the inserted tune
-            for (var y = 0; y < targetTuneSet.tuneSetPositions.length; y++) {
+            for (let y = 0; y < targetTuneSet.tuneSetPositions.length; y++) {
 
-                var currentPosition = 0;
+                let currentPosition = 0;
 
                 if (targetTuneSet.tuneSetPositions[y] == targetTuneSetPosition) {
                     // TuneSetPosition which was moved: Already Done
@@ -479,32 +479,11 @@ export class TuneBook {
     }
 
     movePlaylistPosition(playlistId: number, oldPosition: number, newPosition: number) {
-        var playlist: Playlist;
+        let playlist: Playlist;
 
         playlist = this.getPlaylistById(playlistId);
 
         playlist.movePlaylistPosition(oldPosition, newPosition);
-
-        return playlist;
-    }
-
-
-    moveUpPlaylistPosition(playlistId, position) {
-        var playlist;
-
-        playlist = this.getPlaylistById(playlistId);
-
-        playlist.moveUpPlaylistPosition(position);
-
-        return playlist;
-    }
-
-    moveDownPlaylistPosition(playlistId, position) {
-        var playlist;
-
-        playlist = this.getPlaylistById(playlistId);
-
-        playlist.moveDownPlaylistPosition(position);
 
         return playlist;
     }
@@ -515,10 +494,10 @@ export class TuneBook {
 
     _initializeTuneSet(tune) {
         // Get next tuneSetId
-        var nextTuneSetId = this._getNextTuneSetId();
-        var tuneSet: TuneSet;
-        var tuneSetPositions = [];
-        var tuneSetPosition = new TuneSetPosition(nextTuneSetId, tune, 1, "3x", "");
+        let nextTuneSetId = this.getNextTuneSetId();
+        let tuneSet: TuneSet;
+        let tuneSetPositions = [];
+        let tuneSetPosition = new TuneSetPosition(nextTuneSetId, tune, 1, "3x", "");
         //addNewTuneSetDirective(tuneSetPosition);
         tuneSetPositions.push(tuneSetPosition);
         tuneSet = new TuneSet(nextTuneSetId, tune.title, tuneSetPositions);
@@ -529,12 +508,12 @@ export class TuneBook {
         return tuneSet;
     }
 
-    _getNextTuneSetId() {
-        var nextTuneSetId, currentTuneSetId, maxTuneSetId;
+    getNextTuneSetId() {
+        let nextTuneSetId, currentTuneSetId, maxTuneSetId;
 
         maxTuneSetId = 0;
 
-        for (var i = 0; i < this.tuneSets.length; i++) {
+        for (let i = 0; i < this.tuneSets.length; i++) {
             //currentTuneSetId = parseInt(this.tuneSets[i].tuneSetId);
             currentTuneSetId = this.tuneSets[i].tuneSetId;
             if (currentTuneSetId > maxTuneSetId) {
@@ -547,15 +526,15 @@ export class TuneBook {
     }
 
     deletePlaylistPosition(playlistId, position) {
-        var playlist = this.getPlaylistById(playlistId);
+        let playlist = this.getPlaylistById(playlistId);
 
         playlist.deletePlaylistPosition(position);
     }
 
     deletePlaylist(playlistId) {
-        var playlist = this.getPlaylistById(playlistId);
+        let playlist = this.getPlaylistById(playlistId);
 
-        for (var z = 0; z < this.playlists.length; z++) {
+        for (let z = 0; z < this.playlists.length; z++) {
             if (this.playlists[z].id == playlistId) {
                 // Delete all playlistPositions
                 // nicht nötig, da beim Export die Playlist der Trigger ist
@@ -568,7 +547,7 @@ export class TuneBook {
 
     deleteTuneSetPosition(tuneSetId, position) {
         // Deleting a TuneSetPosition: The Tune can end up set-less -> in this case a new set is generated.
-        var tuneSet, tuneSetPosition, playlistPositions, tuneSetPositionPlayInfo, tuneSetDeleted, removedPosition;
+        let tuneSet, tuneSetPosition, playlistPositions, tuneSetPositionPlayInfo, tuneSetDeleted, removedPosition;
 
         tuneSet = this.getTuneSetById(tuneSetId);
         tuneSetPosition = null;
@@ -577,7 +556,7 @@ export class TuneBook {
         removedPosition = 0;
         removedPosition = parseInt(position);
 
-        for (var z = 0; z < tuneSet.tuneSetPositions.length; z++) {
+        for (let z = 0; z < tuneSet.tuneSetPositions.length; z++) {
             if (tuneSet.tuneSetPositions[z].position == position) {
                 tuneSetPosition = tuneSet.tuneSetPositions[z];
                 // Delete TuneSetPosition from TuneSet
@@ -600,9 +579,9 @@ export class TuneBook {
         } else {
             // TuneSet still has TuneSetPositions
             // Adjust Positions of remaining TuneSetPositions: Only necessary for tunes that come after the removed tune
-            var currentPosition = 0;
+            let currentPosition = 0;
 
-            for (var y = 0; y < tuneSet.tuneSetPositions.length; y++) {
+            for (let y = 0; y < tuneSet.tuneSetPositions.length; y++) {
                 currentPosition = parseInt(tuneSet.tuneSetPositions[y].position);
 
                 if (currentPosition > removedPosition) {
@@ -617,7 +596,7 @@ export class TuneBook {
         // Get all PlaylistPositions for this TuneSet
         playlistPositions = this.getPlaylistPositionsByTuneSetId(tuneSet.tuneSetId);
 
-        for (var w = 0; w < playlistPositions.length; w++) {
+        for (let w = 0; w < playlistPositions.length; w++) {
             tuneSetPositionPlayInfo = this.getTuneSetPositionPlayInfo(playlistPositions[w], tuneSetPosition);
             // Remove TuneSetPositionPlayInfo from the List
             this.tuneSetPositionPlayInfos.splice(this.tuneSetPositionPlayInfos.indexOf(tuneSetPositionPlayInfo), 1);
@@ -634,7 +613,7 @@ export class TuneBook {
     }
 
     initializePlaylists() {
-        for (var i = 0; i < this.playlists.length; i++) {
+        for (let i = 0; i < this.playlists.length; i++) {
             this.initializeTuneSetPositionPlayInfos(this.playlists[i]);
         }
     }
@@ -656,7 +635,7 @@ export class TuneBook {
 
         tuneSet = playlistPosition.tuneSet;
 
-        for (var z = 0; z < tuneSet.tuneSetPositions.length; z++) {
+        for (let z = 0; z < tuneSet.tuneSetPositions.length; z++) {
             tuneSetPositionPlayInfo = undefined;
             tuneSetPosition = tuneSet.tuneSetPositions[z];
             tuneSetPositionPlayInfo = this.getTuneSetPositionPlayInfo(playlistPosition, tuneSetPosition);
@@ -677,7 +656,7 @@ export class TuneBook {
     }
 
     initializeTuneSetPositionPlayInfos(playlist: Playlist) {
-        for (var i = 0; i < playlist.playlistPositions.length; i++) {
+        for (let i = 0; i < playlist.playlistPositions.length; i++) {
             this.initializeTuneSetPositionPlayInfosForPlaylistPosition(playlist.playlistPositions[i]);
         }
     }
@@ -686,13 +665,13 @@ export class TuneBook {
         this.initializeTuneSetPositionPlayInfos(this.getPlaylistById(playlistId));
     }
 
-    getPlaylistPositionsByIntTuneId(playlistId, intTuneId) {
-        var playlistPositions = [];
-        var tuneSets = this.getTuneSetsByIntTuneId(intTuneId);
-        var playlist = this.getPlaylistById(playlistId);
+    getPlaylistPositionsByIntTuneId(playlistId:number, intTuneId:number) {
+        let playlistPositions = [];
+        let tuneSets = this.getTuneSetsByIntTuneId(intTuneId);
+        let playlist = this.getPlaylistById(playlistId);
 
-        for (var i = 0; i < tuneSets.length; i++) {
-            for (var y = 0; y < playlist.playlistPositions.length; y++) {
+        for (let i = 0; i < tuneSets.length; i++) {
+            for (let y = 0; y < playlist.playlistPositions.length; y++) {
                 if (playlist.playlistPositions[y].tuneSet == tuneSets[i]) {
                     playlistPositions.push(playlist.playlistPositions[y]);
                 }
@@ -702,48 +681,11 @@ export class TuneBook {
         return playlistPositions;
     }
 
-    getTuneSetPositionsForTuneSetId(tuneSetId, tuneSetPositions) {
+    getTuneSetPositionsForTuneSetId(tuneSetId:number, tuneSetPositions) {
         // Extract TuneSetPositions from TuneSets.
-        for (var i = 0; i < this.tuneSets.length; i++) {
-            for (var z = 0; z < this.tuneSets[i].tuneSetPositions.length; z++) {
+        for (let i = 0; i < this.tuneSets.length; i++) {
+            for (let z = 0; z < this.tuneSets[i].tuneSetPositions.length; z++) {
                 if (tuneSetId == this.tuneSets[i].tuneSetPositions[z].tuneSetId) {
-                    tuneSetPositions.push(this.tuneSets[i].tuneSetPositions[z]);
-                }
-            }
-        }
-
-        return tuneSetPositions;
-    }
-
-    getTuneSetsAsTuneSetPositions(intTuneId) {
-        // Extract TuneSetPositions from TuneSets.
-        var tuneSetIds = [];
-        var tuneSetPositions = [];
-
-        //First get TuneSetIds for intTuneId
-        for (var i = 0; i < this.tuneSets.length; i++) {
-            for (var z = 0; z < this.tuneSets[i].tuneSetPositions.length; z++) {
-                if (intTuneId == this.tuneSets[i].tuneSetPositions[z].tune.intTuneId) {
-                    tuneSetIds.push(this.tuneSets[i].tuneSetId);
-                }
-            }
-        }
-
-        //Then get TuneSetPositions for the tuneSetIds
-        for (var y = 0; y < tuneSetIds.length; y++) {
-            this.getTuneSetPositionsForTuneSetId(tuneSetIds[y], tuneSetPositions);
-        }
-
-        return tuneSetPositions;
-    }
-
-    extractFirstTuneSetPositions() {
-        // Extract First TuneSetPositions from all TuneSets.
-        var tuneSetPositions = [];
-
-        for (var i = 0; i < this.tuneSets.length; i++) {
-            for (var z = 0; z < this.tuneSets[i].tuneSetPositions.length; z++) {
-                if (this.tuneSets[i].tuneSetPositions[z].position == 1) {
                     tuneSetPositions.push(this.tuneSets[i].tuneSetPositions[z]);
                 }
             }
@@ -758,44 +700,44 @@ export class TuneBook {
         return extractTuneSetPositions(this.tuneSets);
     }
 
-    addVideo(intTuneId, videoSource, videoCode, videoDescription) {
-        var tune;
-        tune = this.getTuneById(intTuneId);
+    addVideo(intTuneId:number, videoSource:string, videoCode:string, videoDescription:string) {
+        let tune:Tune = this.getTuneById(intTuneId);
+        
         if (tune != null) {
             return tune.addVideo(videoSource, videoCode, videoDescription);
-        }
+        } 
         return null;
     }
 
-    addWebsite(intTuneId, url) {
-        var tune;
-        tune = this.getTuneById(intTuneId);
+    addWebsite(intTuneId:number, url:string) {
+        let tune:Tune = this.getTuneById(intTuneId);
+        
         if (tune != null) {
             return tune.addWebsite(url);
         }
         return null;
     }
 
-
-    getVideoById(intTuneId, videoSource, videoCode) {
-        var tune = this.getTuneById(intTuneId);
+    getVideoById(intTuneId:number, videoSource:string, videoCode:string) {
+        let tune = this.getTuneById(intTuneId);
+        
         if (tune != null) {
             return tune.getVideoById(videoSource, videoCode);
         }
         return null;
     }
 
-    deleteVideo(intTuneId, videoSource, videoCode) {
-        let tune: Tune;
-        tune = this.getTuneById(intTuneId);
+    deleteVideo(intTuneId:number, videoSource:string, videoCode:string) {
+        let tune: Tune = this.getTuneById(intTuneId);
+        
         if (tune != null) {
             tune.deleteVideo(videoSource, videoCode);
         }
     }
 
-    deleteWebsite(intTuneId, url) {
-        let tune: Tune;
-        tune = this.getTuneById(intTuneId);
+    deleteWebsite(intTuneId:number, url:string) {
+        let tune: Tune = this.getTuneById(intTuneId);
+        
         if (tune != null) {
             tune.deleteWebsite(url);
         }
@@ -815,7 +757,7 @@ export class TuneBook {
        
         tuneSets = this.getTuneSetsByIntTuneId(intTuneId);
 
-        for (var i = 0; i < tuneSets.length; i++) {
+        for (let i = 0; i < tuneSets.length; i++) {
             tuneSet = tuneSets[i];
 
             tuneSet.deleteTune(intTuneId);
@@ -833,7 +775,7 @@ export class TuneBook {
 
         playlists = this.getPlaylistsByIntTuneId(intTuneId);
 
-        for (var z = 0; z < playlists.length; z++) {
+        for (let z = 0; z < playlists.length; z++) {
             playlist = playlists[z];
             
             playlist.deleteTune(intTuneId);
@@ -855,7 +797,7 @@ export class TuneBook {
 
         playlist = this.getPlaylistById(playlistId);
 
-        for (var z = 0; z < setIds.length; z++) {
+        for (let z = 0; z < setIds.length; z++) {
             tuneSet = this.getTuneSetById(setIds[z]);
             playlistPosition = new PlaylistPosition(playlist.id, playlist.playlistPositions.length + 1, tuneSet, "", "");
             this.initializeTuneSetPositionPlayInfosForPlaylistPosition(playlistPosition);
@@ -864,7 +806,7 @@ export class TuneBook {
     }
 
     addEmptyPlaylistPosition(playlistId): PlaylistPosition {
-        var playlist, emptyPlaylistPosition;
+        let playlist, emptyPlaylistPosition;
 
         playlist = this.getPlaylistById(playlistId);
         emptyPlaylistPosition = new PlaylistPosition(playlist.id, playlist.playlistPositions.length + 1, null, "", "");
@@ -874,7 +816,7 @@ export class TuneBook {
     }
 
     addEmptyPlaylist() {
-        var emptyPlaylist;
+        let emptyPlaylist;
 
         emptyPlaylist = new Playlist(this._getNextPlaylistId(), "New Playlist", "Event Type", "Band Name");
         this.playlists.push(emptyPlaylist);
@@ -883,11 +825,11 @@ export class TuneBook {
     }
 
     getTuneSetPositionPlayInfo(playlistPosition, tuneSetPosition) {
-        var tuneSetPositionPlayInfo;
+        let tuneSetPositionPlayInfo;
 
         tuneSetPositionPlayInfo = undefined;
 
-        for (var z = 0; z < this.tuneSetPositionPlayInfos.length; z++) {
+        for (let z = 0; z < this.tuneSetPositionPlayInfos.length; z++) {
             if (this.tuneSetPositionPlayInfos[z].playlistPosition == playlistPosition
                 && this.tuneSetPositionPlayInfos[z].tuneSetPosition == tuneSetPosition) {
                 tuneSetPositionPlayInfo = this.tuneSetPositionPlayInfos[z];
@@ -897,27 +839,20 @@ export class TuneBook {
         return tuneSetPositionPlayInfo;
     }
 
-    getFirstTuneSetPositionById(tuneSetId) {
-        var tuneSet;
-
-        tuneSet = this.getTuneSetById(tuneSetId);
-        return tuneSet.extractFirstTuneSetPosition();
-    }
-
     initializePartPlayInfo() {
         return new PartPlayInfo("", "");
     }
 
     initializeTuneAndTuneSet() {
         // Get next tuneSetId, intTuneId and tuneId
-        var maxTuneSetId = 0;
-        var maxIntTuneId = 0;
-        var maxTuneId = 0;
-        var currentTuneId = 0;
-        var currentIntTuneId = 0;
-        var currentTuneSetId = 0;
+        let maxTuneSetId = 0;
+        let maxIntTuneId = 0;
+        let maxTuneId = 0;
+        let currentTuneId = 0;
+        let currentIntTuneId = 0;
+        let currentTuneSetId = 0;
 
-        for (var i = 0; i < this.tuneSets.length; i++) {
+        for (let i = 0; i < this.tuneSets.length; i++) {
 
             //currentTuneSetId = parseInt(this.tuneSets[i].tuneSetId);
             currentTuneSetId = this.tuneSets[i].tuneSetId;
@@ -925,7 +860,7 @@ export class TuneBook {
                 maxTuneSetId = currentTuneSetId;
             }
 
-            for (var z = 0; z < this.tuneSets[i].tuneSetPositions.length; z++) {
+            for (let z = 0; z < this.tuneSets[i].tuneSetPositions.length; z++) {
 
                 //currentIntTuneId = parseInt(this.tuneSets[i].tuneSetPositions[z].tune.intTuneId);
                 currentIntTuneId = this.tuneSets[i].tuneSetPositions[z].tune.intTuneId;
@@ -942,17 +877,17 @@ export class TuneBook {
         }
 
         // Create new Tune with X: maxTuneId + 1 and T: New Tune
-        var newTuneId = ++maxTuneId;
-        var newTuneSetId = ++maxTuneSetId;
-        var newIntTuneId = ++maxIntTuneId;
+        let newTuneId = ++maxTuneId;
+        let newTuneSetId = ++maxTuneSetId;
+        let newIntTuneId = ++maxIntTuneId;
 
-        var abc = "X:" + newTuneId + "\n" + "T:New Tune";
-        var book = new ABCJS.TuneBook(abc);
-        var tune: Tune = new Tune(book.tunes[0], newIntTuneId);
+        let abc = "X:" + newTuneId + "\n" + "T:New Tune";
+        let book = new ABCJS.TuneBook(abc);
+        let tune: Tune = new Tune(book.tunes[0], newIntTuneId);
 
-        var tuneSet: TuneSet;
-        var tuneSetPositions = [];
-        var tuneSetPosition = new TuneSetPosition(newTuneSetId, tune, 1, "3x", "");
+        let tuneSet: TuneSet;
+        let tuneSetPositions:Array<TuneSetPosition> = [];
+        let tuneSetPosition = new TuneSetPosition(newTuneSetId, tune, 1, "3x", "");
         tuneSetPositions.push(tuneSetPosition);
         tuneSet = new TuneSet(newTuneSetId, tune.title, tuneSetPositions);
 
@@ -967,11 +902,11 @@ export class TuneBook {
         let types: Array<string> = [];
         let addToTypeFilter = true;
 
-        for (var i = 0; i < this.tuneSets.length; i++) {
-            for (var c = 0; c < this.tuneSets[i].tuneSetPositions.length; c++) {
+        for (let i = 0; i < this.tuneSets.length; i++) {
+            for (let c = 0; c < this.tuneSets[i].tuneSetPositions.length; c++) {
                 addToTypeFilter = true;
 
-                for (var z = 0; z < types.length; z++) {
+                for (let z = 0; z < types.length; z++) {
                     if (types[z] == this.tuneSets[i].tuneSetPositions[c].tune.type) {
                         addToTypeFilter = false;
                     }
@@ -990,14 +925,14 @@ export class TuneBook {
 
     getKeys(): Array<string> {
         //Extract Keys for KeyFilter
-        var keys = [];
-        var addToKeyFilter = true;
+        let keys:Array<string> = [];
+        let addToKeyFilter = true;
 
-        for (var i = 0; i < this.tuneSets.length; i++) {
-            for (var c = 0; c < this.tuneSets[i].tuneSetPositions.length; c++) {
+        for (let i = 0; i < this.tuneSets.length; i++) {
+            for (let c = 0; c < this.tuneSets[i].tuneSetPositions.length; c++) {
                 addToKeyFilter = true;
 
-                for (var z = 0; z < keys.length; z++) {
+                for (let z = 0; z < keys.length; z++) {
                     if (keys[z] == this.tuneSets[i].tuneSetPositions[c].tune.key) {
                         addToKeyFilter = false;
                     }
@@ -1016,13 +951,13 @@ export class TuneBook {
 
     getEvents(): Array<string> {
         //Extract Events for EventFilter
-        var events = [];
-        var addToEventFilter = true;
+        let events:Array<string> = [];
+        let addToEventFilter = true;
 
-        for (var i = 0; i < this.playlists.length; i++) {
+        for (let i = 0; i < this.playlists.length; i++) {
             addToEventFilter = true;
 
-            for (var z = 0; z < events.length; z++) {
+            for (let z = 0; z < events.length; z++) {
                 if (events[z] == this.playlists[i].event) {
                     addToEventFilter = false;
                 }
@@ -1041,13 +976,13 @@ export class TuneBook {
 
     getBands(): Array<string> {
         //Extract Bands for BandFilter
-        var bands = [];
-        var addToBandFilter = true;
+        let bands:Array<string> = [];
+        let addToBandFilter = true;
 
-        for (var i = 0; i < this.playlists.length; i++) {
+        for (let i = 0; i < this.playlists.length; i++) {
             addToBandFilter = true;
 
-            for (var z = 0; z < bands.length; z++) {
+            for (let z = 0; z < bands.length; z++) {
                 if (bands[z] == this.playlists[i].band) {
                     addToBandFilter = false;
                 }
@@ -1065,14 +1000,14 @@ export class TuneBook {
 
     getColors(): Array<string> {
         //Extract Colors for ColorFilter
-        var colors = [];
-        var addToColorFilter = true;
+        let colors:Array<string> = [];
+        let addToColorFilter = true;
 
-        for (var i = 0; i < this.tuneSets.length; i++) {
-            for (var c = 0; c < this.tuneSets[i].tuneSetPositions.length; c++) {
+        for (let i = 0; i < this.tuneSets.length; i++) {
+            for (let c = 0; c < this.tuneSets[i].tuneSetPositions.length; c++) {
                 addToColorFilter = true;
 
-                for (var z = 0; z < colors.length; z++) {
+                for (let z = 0; z < colors.length; z++) {
                     if (colors[z] == this.tuneSets[i].tuneSetPositions[c].tune.color.getHexValue()) {
                         addToColorFilter = false;
                     }

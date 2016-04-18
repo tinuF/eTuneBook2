@@ -6,19 +6,19 @@ import {calculateFrequencyPlayed} from '../util/date-util';
 import {eliminateThe} from '../util/text-util';
 
 
-export function importTuneSets(abcjsBook) {
+export function importTuneSets(abcjsBook: any) {
     // Generate TuneSets from the abcjsBook.
 
-    var allTuneSetPositions: Array<TuneSetPosition> = [];
-    var tunesWithoutTuneSetDirective: Array<Tune> = [];
-    var tuneSetDirectives = [];
-    var tuneSets: Array<TuneSet> = [];
-    var tune: Tune = null;
-    var intTuneId = 1;
+    let allTuneSetPositions: Array<TuneSetPosition> = [];
+    let tunesWithoutTuneSetDirective: Array<any> = [];
+    let tuneSetDirectives: Array<string> = [];
+    let tuneSets: Array<TuneSet> = [];
+    let tune: Tune = null;
+    let intTuneId = 1;
 
     // Generate TuneSetPositions
-    for (var i = 0; i < abcjsBook.tunes.length; i++) {
-        var abcjsTune = abcjsBook.tunes[i];
+    for (let i = 0; i < abcjsBook.tunes.length; i++) {
+        let abcjsTune = abcjsBook.tunes[i];
         tuneSetDirectives = [];
         tuneSetDirectives = getAbcValues(abcjsTune.pure, "%%etbk:tnset ");
 
@@ -27,15 +27,15 @@ export function importTuneSets(abcjsBook) {
             // The tune can have one or more tuneSetDirective
             tune = new Tune(abcjsTune, intTuneId);
 
-            for (var y = 0; y < tuneSetDirectives.length; y++) {
+            for (let y = 0; y < tuneSetDirectives.length; y++) {
                 // Get tuneSetId, position, repeat
-                var tuneSetId = _importTuneSetId(tuneSetDirectives[y]);
-                var position = _importTuneSetTunePosition(tuneSetDirectives[y]);
-                var repeat = _importTuneSetTuneRepeat(tuneSetDirectives[y]);
-                var annotation = _importTuneSetTuneAnnotation(tuneSetDirectives[y]);
-                
+                let tuneSetId = importTuneSetId(tuneSetDirectives[y]);
+                let position = importTuneSetTunePosition(tuneSetDirectives[y]);
+                let repeat = importTuneSetTuneRepeat(tuneSetDirectives[y]);
+                let annotation = importTuneSetTuneAnnotation(tuneSetDirectives[y]);
+
                 // Generate tuneSetPosition
-                var tuneSetPosition: TuneSetPosition;
+                let tuneSetPosition: TuneSetPosition;
                 tuneSetPosition = new TuneSetPosition(tuneSetId, tune, position, repeat, annotation);
                 allTuneSetPositions.push(tuneSetPosition);
             }
@@ -46,35 +46,36 @@ export function importTuneSets(abcjsBook) {
             // Zwischenspeichern und sp�ter aufgrund der dynamisch ermittelten maxTuneSetId generieren
             // Entweder Fehlerfall (wenn eTuneBook, dann muss in jedem Tune ein TuneSet-Directive stehen)
             // Oder TuneBook, dass noch nie durch eTuneBook gespeichert wurde.
-            tunesWithoutTuneSetDirective.push(tune);
+            tunesWithoutTuneSetDirective.push(abcjsTune);
         }
     }
 
     // Sort TuneSetPositions by TuneSetId
-    allTuneSetPositions.sort(function(a, b) {
-        return a.tuneSetId - b.tuneSetId
+    allTuneSetPositions.sort(function (a, b) {
+        return a.tuneSetId - b.tuneSetId;
     });
 
     // Generate TuneSets from Tunes with TuneSetDirectives
-    var wTuneSetId = 0;
-    for (var i = 0; i < allTuneSetPositions.length; i++) {
+    let wTuneSetId = 0;
+
+    for (let i = 0; i < allTuneSetPositions.length; i++) {
 
         if (wTuneSetId !== allTuneSetPositions[i].tuneSetId) {
             // First TuneSetPosition of new tuneSetId
             wTuneSetId = allTuneSetPositions[i].tuneSetId;
 
-            var tuneSet: TuneSet;
-            var tuneSetName = "";
-            var tuneSetPositions = [];
+            let tuneSet: TuneSet;
+            let tuneSetName = "";
+            let tuneSetPositions: Array<TuneSetPosition> = [];
 
             // Get all tuneSetPositions for wTuneSetId
-            for (var z = 0; z < allTuneSetPositions.length; z++) {
-                var tuneSetPosition: TuneSetPosition = allTuneSetPositions[z];
+            for (let z = 0; z < allTuneSetPositions.length; z++) {
+                let tuneSetPosition: TuneSetPosition = allTuneSetPositions[z];
 
-                if (wTuneSetId == tuneSetPosition.tuneSetId) {
+                if (wTuneSetId === tuneSetPosition.tuneSetId) {
                     tuneSetPositions.push(tuneSetPosition);
 
-                    if (tuneSetPosition.position == 1) {
+                    if (tuneSetPosition.position === 1) {
                         //Name of TuneSet = Name of first tune
                         tuneSetName = eliminateThe(tuneSetPosition.tune.title);
                         tuneSetName += " Set";
@@ -92,13 +93,13 @@ export function importTuneSets(abcjsBook) {
     // Get next free TuneSetId
     wTuneSetId++;
 
-    for (var i = 0; i < tunesWithoutTuneSetDirective.length; i++) {
-        var tuneSet: TuneSet;
-        var tuneSetPositions = [];
-        var tuneSetPosition: TuneSetPosition;
-        var tune: Tune = tunesWithoutTuneSetDirective[i];
+    for (let i = 0; i < tunesWithoutTuneSetDirective.length; i++) {
+        let tuneSet: TuneSet;
+        let tuneSetPositions: Array<TuneSetPosition> = [];
+        let tuneSetPosition: TuneSetPosition;
+        let tune: Tune;
 
-        tune = new Tune(abcjsTune, intTuneId);
+        tune = new Tune(tunesWithoutTuneSetDirective[i], intTuneId);
 
         tuneSetPosition = new TuneSetPosition(wTuneSetId, tune, 1, "3x", "");
         tuneSetPositions.push(tuneSetPosition);
@@ -111,10 +112,12 @@ export function importTuneSets(abcjsBook) {
     return tuneSets;
 }
 
-function _importTuneSetId(tuneSetDirective) {
-    var tuneSetId = '0';
-    var tuneSetIdSplits = [];
+function importTuneSetId(tuneSetDirective: string): number {
+    let tuneSetId: string;
+    let tuneSetIdSplits: Array<string> = [];
+
     tuneSetIdSplits = tuneSetDirective.split("id:");
+
     if (tuneSetIdSplits.length > 1) {
         tuneSetIdSplits = tuneSetIdSplits[1].split(",");
         tuneSetId = tuneSetIdSplits[0].replace(/^\s+|\s+$/g, '');
@@ -123,35 +126,44 @@ function _importTuneSetId(tuneSetDirective) {
     return parseInt(tuneSetId);
 }
 
-function _importTuneSetTunePosition(tuneSetDirective) {
-    var tuneSetTunePosition = "undefined";
-    var tuneSetTunePositionSplits = [];
+function importTuneSetTunePosition(tuneSetDirective: string): number {
+    let tuneSetTunePosition: string;
+    let tuneSetTunePositionSplits: Array<string> = [];
+
     tuneSetTunePositionSplits = tuneSetDirective.split("pos:");
+
     if (tuneSetTunePositionSplits.length > 1) {
         tuneSetTunePositionSplits = tuneSetTunePositionSplits[1].split(",");
         tuneSetTunePosition = tuneSetTunePositionSplits[0].replace(/^\s+|\s+$/g, '');
     }
-    return tuneSetTunePosition;
+
+    return parseInt(tuneSetTunePosition);
 }
 
-function _importTuneSetTuneRepeat(tuneSetDirective) {
-    var tuneSetTuneRepeat = "undefined";
-    var tuneSetTuneRepeatSplits = [];
+function importTuneSetTuneRepeat(tuneSetDirective: string): string {
+    let tuneSetTuneRepeat: string;
+    let tuneSetTuneRepeatSplits: Array<string> = [];
+
     tuneSetTuneRepeatSplits = tuneSetDirective.split("rep:");
+
     if (tuneSetTuneRepeatSplits.length > 1) {
         tuneSetTuneRepeatSplits = tuneSetTuneRepeatSplits[1].split(",");
         tuneSetTuneRepeat = tuneSetTuneRepeatSplits[0].replace(/^\s+|\s+$/g, '');
     }
+
     return tuneSetTuneRepeat;
 }
 
-function _importTuneSetTuneAnnotation(tuneSetDirective) {
-    var tuneSetTuneAnnotation = "";
-    var tuneSetTuneAnnotationSplits = [];
+function importTuneSetTuneAnnotation(tuneSetDirective: string): string {
+    let tuneSetTuneAnnotation: string = "";
+    let tuneSetTuneAnnotationSplits: Array<string> = [];
+
     tuneSetTuneAnnotationSplits = tuneSetDirective.split("ant:");
+
     if (tuneSetTuneAnnotationSplits.length > 1) {
         tuneSetTuneAnnotationSplits = tuneSetTuneAnnotationSplits[1].split(",");
         tuneSetTuneAnnotation = tuneSetTuneAnnotationSplits[0].replace(/^\s+|\s+$/g, '');
     }
+
     return tuneSetTuneAnnotation;
 }

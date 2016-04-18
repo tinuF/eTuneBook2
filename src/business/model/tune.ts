@@ -8,8 +8,8 @@ import {calculateFrequencyPlayed} from '../util/date-util';
 import {getSystemProperties} from '../../common/system-properties';
 
 export class Tune {
-    _systemProperties;
-    _abcjsTune: any;
+    systemProperties: any;
+    abcjsTune: any;
     intTuneId: number;
     pure: string;
     title: string;
@@ -24,10 +24,10 @@ export class Tune {
     frequencyPlayed: number;
     lastModified: Date;
 
-    constructor(abcjsTune, intTuneId) {
+    constructor(abcjsTune: any, intTuneId: number) {
         let systemProperties = getSystemProperties();
-        this._systemProperties = systemProperties;
-        this._abcjsTune = abcjsTune;
+        this.systemProperties = systemProperties;
+        this.abcjsTune = abcjsTune;
         this.intTuneId = intTuneId;
         this.pure = "";
         this.title = abcjsTune.title;
@@ -41,17 +41,17 @@ export class Tune {
         this.lastPlayed = null;
         this.lastModified = null;
 
-        this._extractTuneFields();
+        this.extractTuneFields();
     }
 
-    _extractTuneFields() {
+    extractTuneFields() {
         //Extract eTuneBook-specific fields and purify Abc
-        var tuneSplits = this._abcjsTune.pure.split("\n");
-        var newAbc = "";
-        var isStandardAbc = true;
-        var beginOfLine = "";
+        let tuneSplits = this.abcjsTune.pure.split("\n");
+        let newAbc = "";
+        let isStandardAbc = true;
+        let beginOfLine = "";
 
-        for (var i = 0; i < tuneSplits.length; i++) {
+        for (let i = 0; i < tuneSplits.length; i++) {
             beginOfLine = "";
             isStandardAbc = true;
 
@@ -67,7 +67,7 @@ export class Tune {
                     this.key = getAbcValueOfTuneLine(tuneSplits[i], "K:", "undefined");
 
                 } else if (beginOfLine == "H:") {
-                    var tuneModificationString = getAbcValueOfTuneLine(tuneSplits[i], "Modified ", "undefined");
+                    let tuneModificationString = getAbcValueOfTuneLine(tuneSplits[i], "Modified ", "undefined");
 
                     if (tuneModificationString != "undefined") {
                         tuneModificationString = tuneModificationString + "T22:00";
@@ -97,12 +97,12 @@ export class Tune {
                     isStandardAbc = false;
 
                 } else if (beginOfLine == "%%etbk:color") {
-                    this.color = new Color(null, null, null, getAbcValueOfTuneLine(tuneSplits[i], "%%etbk:color ", this._systemProperties.DEFAULT_COLOR));
+                    this.color = new Color(null, null, null, getAbcValueOfTuneLine(tuneSplits[i], "%%etbk:color ", this.systemProperties.DEFAULT_COLOR));
                     isStandardAbc = false;
 
                 } else if (beginOfLine == "%%etbk:pldat") {
-                    var playDatesString = getAbcValueOfTuneLine(tuneSplits[i], "%%etbk:pldat ", "");
-                    this.setPlayDates(this._getPlayDates(playDatesString));
+                    let playDatesString = getAbcValueOfTuneLine(tuneSplits[i], "%%etbk:pldat ", "");
+                    this.setPlayDates(this.getPlayDates(playDatesString));
                     isStandardAbc = false;
                 }
             }
@@ -117,27 +117,26 @@ export class Tune {
         this.pure = newAbc;
     }
 
-    getSampleAbc(startFromBar, numberOfBars) {
-        var tuneSplits = [];
-        var barSplits = [];
-        var barSplit = "";
-        var barLength = 0;
-        var dotsLineSplits = [];
-        var newAbc = "";
-        var beginOfLine = "";
-        var barPattern = /\|/g;		//matches | globally (every occurence)
-        var barMatches = [];
-        var titleCount = 0;
-        var totBarCount = 0;
-        var isHeaderLine = false;
-        var isNeeded = false;
-        var isBar = false;
-        var isLastBar = false;
-        var isInFocus = true;
-        var simulateTitle = false;
+    getSampleAbc(startFromBar: number, numberOfBars: number) {
+        let tuneSplits: Array<string> = [];
+        let barSplits: Array<string> = [];
+        let barSplit = "";
+        let barLength = 0;
+        let newAbc = "";
+        let beginOfLine = "";
+        let barPattern = /\|/g;		//matches | globally (every occurence)
+        let titleCount = 0;
+        let totBarCount = 0;
+        let isHeaderLine = false;
+        let isNeeded = false;
+        let isBar = false;
+        let isLastBar = false;
+        let isInFocus = true;
+        let simulateTitle = false;
+
         tuneSplits = this.pure.split("\n");
 
-        for (var i = 0; i < tuneSplits.length; i++) {
+        for (let i = 0; i < tuneSplits.length; i++) {
             isHeaderLine = false;
             isBar = false;
             isNeeded = false;
@@ -176,7 +175,7 @@ export class Tune {
                     barSplits = barSplits[0].split("|");
 
                     // Annahmen:
-                    //-Es gibt keine Takte, die �ber zwei Zeilen verteilt sind.
+                    //-Es gibt keine Takte, die ueber zwei Zeilen verteilt sind.
 
                     // Es braucht im Minimum einen Takt-Strich als Hinweise daf�r,
                     // dass es sich um eine Dots-Line handelt
@@ -188,7 +187,7 @@ export class Tune {
 
                     } else {
 
-                        for (var z = 0; z < barSplits.length; z++) {
+                        for (let z = 0; z < barSplits.length; z++) {
                             barSplit = barSplits[z].replace(/^\s+|\s+$/g, '');
 
                             if (isInFocus) {
@@ -201,8 +200,8 @@ export class Tune {
                                     // -Takt-Strich am Ende der Linie
                                     // -Doppel-Taktstrich (kein Zeichen zwischen den Takt-Strichen)
                                     // Hinweise:
-                                    // -Ein Takt-Strich am Schluss der Line h�tte barLength == 1, wenn der
-                                    // Zeilenumbruch nicht rausgenommen w�rde.
+                                    // -Ein Takt-Strich am Schluss der Line haette barLength == 1, wenn der
+                                    // Zeilenumbruch nicht rausgenommen wuerde.
                                     // -Es gibt aber auch nach dem Rausnehmen des Zeilenumgruchs noch letzte Takt-Striche
                                     // mit barLength == 1. Dort sind versteckte Zeichen drin, die auch zu einem Zeilenumbruch f�hren.
                                     // Mit obiger replace-Funktion werden diese entfernt.
@@ -260,7 +259,7 @@ export class Tune {
 
     }
 
-    _setLastPlayed() {
+    setLastPlayed() {
         // TODO: Sort playDates
         if (this.playDates.length == 0) {
             return this.lastPlayed = null;
@@ -269,13 +268,13 @@ export class Tune {
         }
     }
 
-    setPlayDates(playDates) {
+    setPlayDates(playDates: Array<PlayDate>) {
         this.playDates = playDates;
-        this._setLastPlayed();
+        this.setLastPlayed();
     }
 
-    addVideo(videoSource, videoCode, videoDescription) {
-        var video;
+    addVideo(videoSource: string, videoCode: string, videoDescription: string) {
+        let video: Video;
 
         //Todo: Don't add if source/code already exists.
         video = new Video(videoSource, videoCode, videoDescription);
@@ -283,8 +282,8 @@ export class Tune {
         return video;
     }
 
-    addWebsite(url) {
-        var website;
+    addWebsite(url: string) {
+        let website: Website;
 
         //Todo: Don't add if url already exists.
         website = new Website(url);
@@ -292,10 +291,11 @@ export class Tune {
         return website;
     }
 
-    deleteWebsite(url) {
-        var index, remove = false;
+    deleteWebsite(url: string) {
+        let index: number;
+        let remove = false;
 
-        for (var i = 0; i < this.websites.length; i++) {
+        for (let i = 0; i < this.websites.length; i++) {
             if (url == this.websites[i].url) {
                 index = i;
                 remove = true;
@@ -307,9 +307,9 @@ export class Tune {
         }
     }
 
-    getVideoById(videoSource, videoCode) {
+    getVideoById(videoSource: string, videoCode: string): Video {
 
-        for (var i = 0; i < this.videos.length; i++) {
+        for (let i = 0; i < this.videos.length; i++) {
             if (videoSource == this.videos[i].source && videoCode == this.videos[i].code) {
                 return this.videos[i];
             }
@@ -318,9 +318,11 @@ export class Tune {
         return null;
     }
 
-    deleteVideo(videoSource, videoCode) {
-        var index, remove = false;
-        for (var i = 0; i < this.videos.length; i++) {
+    deleteVideo(videoSource: string, videoCode: string) {
+        let index: number;
+        let remove = false;
+
+        for (let i = 0; i < this.videos.length; i++) {
             if (videoSource == this.videos[i].source && videoCode == this.videos[i].code) {
                 index = i;
                 remove = true;
@@ -348,19 +350,19 @@ export class Tune {
         return getAbcValue(this.pure, "X:", "undefined");
     }
 
-    getTuneSite(siteType) {
-        var siteDirective = "%%etbk:" + siteType + " ";
+    getTuneSite(siteType: string) {
+        let siteDirective = "%%etbk:" + siteType + " ";
         return getAbcValue(this.pure, siteDirective, "");
     }
 
-    _getPlayDates(tuneLine) {
-        var playDates = [];
-        var playDate = new Date();
-        var playDatesSplits = [];
+    getPlayDates(tuneLine: string) {
+        let playDates: Array<PlayDate> = [];
+        let playDate = new Date();
+        let playDatesSplits: Array<string> = [];
 
         playDatesSplits = tuneLine.split(",");
 
-        for (var i = 0; i < playDatesSplits.length; i++) {
+        for (let i = 0; i < playDatesSplits.length; i++) {
             //moment kann nicht verwendet werden, weil Object mit methoden, und Object kann folglich nicht aus localStorage restored werden.
             //playDate = newPlayDate(moment(playDatesSplits[i], "YYYY-MM-DDTHH:mm"));
             playDate = moment(playDatesSplits[i], "YYYY-MM-DDTHH:mm").toDate();
@@ -370,7 +372,7 @@ export class Tune {
         return playDates;
     }
 
-    addPlayDate(newDate) {
+    addPlayDate(newDate: Date) {
         if (this.lastPlayed != null && moment(this.lastPlayed).diff(newDate, "minutes") == 0) {
             // Power-Clicker
             // Do nothing
@@ -387,19 +389,19 @@ export class Tune {
         }
     }
 
-    importVideo(videoDirective) {
-        return new Video(this._importVideoSource(videoDirective), this._importVideoCode(videoDirective), this._importVideoDescription(videoDirective));
+    importVideo(videoDirective: string) {
+        return new Video(this.importVideoSource(videoDirective), this.importVideoCode(videoDirective), this.importVideoDescription(videoDirective));
     }
 
-    _importVideoSource(videoDirective) {
+    importVideoSource(videoDirective: string) {
         return getSubDirective(videoDirective, "src:", ",");
     }
 
-    _importVideoCode(videoDirective) {
+    importVideoCode(videoDirective: string) {
         return getSubDirective(videoDirective, "cde:", ",");
     }
 
-    _importVideoDescription(videoDirective) {
+    importVideoDescription(videoDirective: string) {
         return getSubDirective(videoDirective, "desc:", "\n");
     }
 

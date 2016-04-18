@@ -5,12 +5,6 @@ export class FilterSettings {
     color: string;
     event: string;
     band: string;
-    plmin: string;
-    plmax: string;
-    freqcomp: string;
-    freq: string;
-    updmin: string;
-    updmax: string;
     setIds: Array<number>;
     applySetIds: boolean;
     playlistIds: Array<number>;
@@ -29,14 +23,6 @@ export class FilterSettings {
         this.applySetIds = false;
         this.playlistIds = [];
         this.applyPlaylistIds = false;
-        /*TODO
-        plmin:string;
-        plmax:string;
-        freqcomp:string;
-        freq:string;
-        updmin:string;
-        updmax:string;
-        */
     }
 
     setKey(key: string) {
@@ -154,32 +140,6 @@ export class FilterSettings {
                 this.filterText = this.filterText + "]";
             }
         }
-
-        /*TODO
-              if (this.filterSettings.plmin != null && this.filterSettings.plmin != "") {
-                  if (this.currentFilter != "") {
-                      this.currentFilter = this.currentFilter + ", ";
-                  }
-                  this.currentFilter = this.currentFilter + "played ";
-        
-                  if (this.filterSettings.plmax != null && this.filterSettings.plmax != "") {
-        
-                  } else {
-                      this.currentFilter = this.currentFilter + "from ";
-                  }
-        
-                  this.currentFilter = this.currentFilter + this.filterSettings.plmin;
-              }
-        
-              if (this.filterSettings.plmax != null && this.filterSettings.plmax != "") {
-                  if (this.filterSettings.plmin != null && this.filterSettings.plmin != "") {
-                      this.currentFilter = this.currentFilter + "-";
-                  } else if (this.currentFilter != "") {
-                      this.currentFilter = this.currentFilter + ",played to ";
-                  }
-                  this.currentFilter = this.currentFilter + this.filterSettings.plmax;
-              }
-              */
     }
 
     addComma() {

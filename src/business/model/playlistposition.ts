@@ -9,7 +9,7 @@ export class PlaylistPosition {
     annotation: string;
     tuneSetPositionPlayInfos: Array<TuneSetPositionPlayInfo>;
 
-    constructor(playlistId:number, position:number, tuneSet:TuneSet, name:string, annotation:string) {
+    constructor(playlistId: number, position: number, tuneSet: TuneSet, name: string, annotation: string) {
         this.playlistId = playlistId;
         this.position = position;
         this.tuneSet = tuneSet;
@@ -21,17 +21,17 @@ export class PlaylistPosition {
     addTuneSetPositionPlayInfo(tuneSetPositionPlayInfo: TuneSetPositionPlayInfo) {
         this.tuneSetPositionPlayInfos.push(tuneSetPositionPlayInfo);
     }
-    
-    setTuneSetPositionPlayInfos(tuneSetPositionPlayInfos: Array<TuneSetPositionPlayInfo>){
+
+    setTuneSetPositionPlayInfos(tuneSetPositionPlayInfos: Array<TuneSetPositionPlayInfo>) {
         this.tuneSetPositionPlayInfos = tuneSetPositionPlayInfos;
     }
-    
-    deleteTune(intTuneId:number) {
+
+    deleteTune(intTuneId: number) {
         let tuneSetPositionPlayInfo: TuneSetPositionPlayInfo;
 
-        for (var z = 0; z < this.tuneSetPositionPlayInfos.length; z++) {
+        for (let z = 0; z < this.tuneSetPositionPlayInfos.length; z++) {
             tuneSetPositionPlayInfo = this.tuneSetPositionPlayInfos[z];
-            
+
             if (tuneSetPositionPlayInfo.tuneSetPosition.tune.intTuneId == intTuneId) {
                 // Remove TuneSetPositionPlayInfo from PlaylistPosition
                 // TuneSetPositionPlayInfo will be deleted later by Garbage Collector

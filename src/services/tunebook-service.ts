@@ -239,16 +239,8 @@ export class TuneBookService {
         return tuneSetDeleted;
     }
 
-    movePlaylistPosition(playlistId:number, oldPosition, newPosition) {
+    movePlaylistPosition(playlistId:number, oldPosition:number, newPosition:number) {
         return this.getCurrentTuneBook().movePlaylistPosition(playlistId, oldPosition, newPosition);
-    }
-
-    moveUpPlaylistPosition(playlistId:number, position) {
-        return this.getCurrentTuneBook().moveUpPlaylistPosition(playlistId, position);
-    }
-
-    moveDownPlaylistPosition(playlistId:number, position) {
-        return this.getCurrentTuneBook().moveDownPlaylistPosition(playlistId, position);
     }
 
     addEmptyPlaylistPosition(playlistId:number) {
@@ -389,16 +381,8 @@ export class TuneBookService {
         this.setTunesFiltered();
     }
 
-    getFirstTuneSetPositions() {
-        return this.getCurrentTuneBook().extractFirstTuneSetPositions();
-    }
-
     getFirstTuneSetPosition(tuneSet: TuneSet) {
         return tuneSet.getFirstTuneSetPosition();
-    }
-
-    getFirstTuneSetPositionById(tuneSetId:number) {
-        return this.getCurrentTuneBook().getFirstTuneSetPositionById(tuneSetId);
     }
 
     getTuneSetPositions() {
@@ -407,10 +391,6 @@ export class TuneBookService {
 
     getTuneSetPositionsFiltered(filterOptions) {
         return extractTuneSetPositions(filterTuneSets(this.getCurrentTuneBook(), filterOptions));
-    }
-
-    getTuneSetsAsTuneSetPositions(intTuneId:number) {
-        return this.getCurrentTuneBook().getTuneSetsAsTuneSetPositions(intTuneId);
     }
 
     getTuneSetsByIntTuneId(intTuneId:number) {

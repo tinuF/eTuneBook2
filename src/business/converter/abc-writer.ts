@@ -1,6 +1,7 @@
 import * as moment from 'moment';
 import {getSystemProperties} from '../../common/system-properties';
 import {Tune} from '../model/tune';
+import {TuneSetPosition} from '../model/tunesetposition';
 import {Playlist} from '../model/playlist';
 import {PlaylistPosition} from '../model/playlistposition';
 import {TuneSetPositionPlayInfo} from '../model/tunesetposition-playinfo';
@@ -9,13 +10,13 @@ import {AbcExportSettings} from '../../common/settings/abc-export-settings';
 
 var systemProperties = getSystemProperties();
 
-export function writeAbcHeader(tuneBook:TuneBook, abcOption:AbcExportSettings) {
+export function writeAbcHeader(tuneBook: TuneBook, abcOption: AbcExportSettings) {
     // Construct Header
-    let tbkAbc:string; 
-    let playlist:Playlist; 
-    let playlistPosition:PlaylistPosition; 
-    let tuneSetPositionPlayInfos:Array<TuneSetPositionPlayInfo>;
-    let tuneSetPositionPlayInfo:TuneSetPositionPlayInfo;
+    let tbkAbc: string;
+    let playlist: Playlist;
+    let playlistPosition: PlaylistPosition;
+    let tuneSetPositionPlayInfos: Array<TuneSetPositionPlayInfo>;
+    let tuneSetPositionPlayInfo: TuneSetPositionPlayInfo;
 
     tbkAbc = "%abc-";
     tbkAbc += systemProperties.ABC_VERSION;
@@ -37,7 +38,7 @@ export function writeAbcHeader(tuneBook:TuneBook, abcOption:AbcExportSettings) {
     }
 
     if (abcOption.playlist) {
-        for (var i = 0; i < tuneBook.playlists.length; i++) {
+        for (let i = 0; i < tuneBook.playlists.length; i++) {
             //Playlist-Definition
             playlist = tuneBook.playlists[i];
             tbkAbc += "%%etbk:plldf id:";
@@ -50,7 +51,7 @@ export function writeAbcHeader(tuneBook:TuneBook, abcOption:AbcExportSettings) {
             tbkAbc += playlist.band;
             tbkAbc += "\n";
 
-            for (var z = 0; z < playlist.playlistPositions.length; z++) {
+            for (let z = 0; z < playlist.playlistPositions.length; z++) {
                 //Playlist-Position
                 playlistPosition = playlist.playlistPositions[z];
                 tbkAbc += "%%etbk:pllps id:";
@@ -67,7 +68,7 @@ export function writeAbcHeader(tuneBook:TuneBook, abcOption:AbcExportSettings) {
 
                 tuneSetPositionPlayInfos = playlistPosition.tuneSetPositionPlayInfos;
 
-                for (var y = 0; y < tuneSetPositionPlayInfos.length; y++) {
+                for (let y = 0; y < tuneSetPositionPlayInfos.length; y++) {
                     //TuneSetPositionPlayInfo
                     tuneSetPositionPlayInfo = tuneSetPositionPlayInfos[y];
 
@@ -84,8 +85,8 @@ export function writeAbcHeader(tuneBook:TuneBook, abcOption:AbcExportSettings) {
                         tbkAbc += tuneSetPositionPlayInfo.repeat;
                         tbkAbc += ",arr:{";
 
-                        var firstPart = true;
-                        for (var w = 0; w < tuneSetPositionPlayInfo.partPlayInfos.length; w++) {
+                        let firstPart = true;
+                        for (let w = 0; w < tuneSetPositionPlayInfo.partPlayInfos.length; w++) {
                             //PartPlayInfos
                             if (firstPart) {
                                 firstPart = false;
@@ -110,8 +111,8 @@ export function writeAbcHeader(tuneBook:TuneBook, abcOption:AbcExportSettings) {
     return tbkAbc;
 }
 
-export function writeTuneAbc(tune:Tune, tuneSetPositions, abcOption:AbcExportSettings) {
-    var tuneAbc = "";
+export function writeTuneAbc(tune: Tune, tuneSetPositions: Array<TuneSetPosition>, abcOption: AbcExportSettings) {
+    let tuneAbc = "";
 
     if (!abcOption.tuneSet && !abcOption.playDate && !abcOption.color && !abcOption.annotation && !abcOption.website && !abcOption.video) {
         tuneAbc = tune.pure;
@@ -126,17 +127,17 @@ export function writeTuneAbc(tune:Tune, tuneSetPositions, abcOption:AbcExportSet
     return tuneAbc;
 }
 
-export function writeTuneAbcWithEtbkDirectives(tune: Tune, tuneSetPositions, targetLine, abcOption:AbcExportSettings) {
-    var tuneSplits = [];
-    var newAbc = "";
+export function writeTuneAbcWithEtbkDirectives(tune: Tune, tuneSetPositions: Array<TuneSetPosition>, targetLine: string, abcOption: AbcExportSettings) {
+    let tuneSplits: Array<string> = [];
+    let newAbc = "";
     tuneSplits = tune.pure.split("\n");
-    var curLineIsTargetLine = false;
-    var lastLineIsTargetLine = false;
-    var directivesAdded = false;
-    var directive = "";
+    let curLineIsTargetLine = false;
+    let lastLineIsTargetLine = false;
+    let directivesAdded = false;
+    let directive = "";
 
     // Add all directives after the TargetLine
-    for (var i = 0; i < tuneSplits.length; i++) {
+    for (let i = 0; i < tuneSplits.length; i++) {
         if (!directivesAdded) {
             if (tuneSplits[i].indexOf(targetLine) !== -1) {
                 curLineIsTargetLine = true;
@@ -146,10 +147,10 @@ export function writeTuneAbcWithEtbkDirectives(tune: Tune, tuneSetPositions, tar
 
             if (!curLineIsTargetLine && lastLineIsTargetLine) {
                 if (abcOption.tuneSet) {
-                    for (var w = 0; w < tuneSetPositions.length; w++) {
-                        directive = "%%etbk:tnset id:" + tuneSetPositions[w].tuneSetId + ",pos:" 
-                        + tuneSetPositions[w].position + ",rep:" + tuneSetPositions[w].repeat 
-                        + ",ant:" + tuneSetPositions[w].annotation;
+                    for (let w = 0; w < tuneSetPositions.length; w++) {
+                        directive = "%%etbk:tnset id:" + tuneSetPositions[w].tuneSetId + ",pos:"
+                            + tuneSetPositions[w].position + ",rep:" + tuneSetPositions[w].repeat
+                            + ",ant:" + tuneSetPositions[w].annotation;
 
                         newAbc = newAbc + directive;
                         newAbc = newAbc + "\n";
@@ -157,7 +158,7 @@ export function writeTuneAbcWithEtbkDirectives(tune: Tune, tuneSetPositions, tar
                 }
 
                 if (abcOption.website) {
-                    for (var z = 0; z < tune.websites.length; z++) {
+                    for (let z = 0; z < tune.websites.length; z++) {
                         directive = "%%etbk:wsite " + tune.websites[z].url;
                         newAbc = newAbc + directive;
                         newAbc = newAbc + "\n";
@@ -165,7 +166,7 @@ export function writeTuneAbcWithEtbkDirectives(tune: Tune, tuneSetPositions, tar
                 }
 
                 if (abcOption.video) {
-                    for (var z = 0; z < tune.videos.length; z++) {
+                    for (let z = 0; z < tune.videos.length; z++) {
                         directive = "%%etbk:video "
                             + "src:" + tune.videos[z].source
                             + ",cde:" + tune.videos[z].code
@@ -182,7 +183,7 @@ export function writeTuneAbcWithEtbkDirectives(tune: Tune, tuneSetPositions, tar
                         newAbc = newAbc + "\n";
                     }
                 }
-                
+
                 if (abcOption.color) {
                     if (tune.color.getHexValue() != systemProperties.DEFAULT_COLOR) {
                         directive = "%%etbk:color " + tune.color.getHexValue();
@@ -218,12 +219,12 @@ export function writeTuneAbcWithEtbkDirectives(tune: Tune, tuneSetPositions, tar
     return newAbc;
 }
 
-function _getPlayDatesDirective(tune) {
-    var directive = "%%etbk:pldat ";
-    var playDate = null;
+function _getPlayDatesDirective(tune: Tune) {
+    let directive = "%%etbk:pldat ";
+    let playDate: any = null;
 
     // Prepare PlayDatesDirective
-    for (var i = 0; i < tune.playDates.length; i++) {
+    for (let i = 0; i < tune.playDates.length; i++) {
         if (i > 0) {
             directive = directive + ",";
         }
