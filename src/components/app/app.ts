@@ -20,7 +20,6 @@ import {FilterTextUI} from '../../components/app/filter-text';
 import {Home} from '../../components/help/home';
 import {ChangeLog} from '../../components/help/changelog';
 import {BookTitleUI} from '../../components/app/book-title';
-import {TuneTitleUI} from '../../components/tunes/tune-title';
 import {TuneAbcUI} from '../../components/tunes/tune-abc';
 import {SideNavigationUI} from '../../components/app/side-nav';
 import {SocialNavigationUI} from '../../components/app/social-nav';
@@ -31,7 +30,7 @@ import {SocialNavigationUI} from '../../components/app/social-nav';
     providers: [TuneBookService],
     templateUrl: './components/app/app.html',
     styleUrls: ['./components/app/app.css'],
-    directives: [ROUTER_DIRECTIVES, FilterTextUI, BookTitleUI, TuneTitleUI, SideNavigationUI, SocialNavigationUI]
+    directives: [ROUTER_DIRECTIVES, FilterTextUI, BookTitleUI, SideNavigationUI, SocialNavigationUI]
 })
 @RouteConfig([
     { path: '/', redirectTo: ['Home'], name: 'Home' },

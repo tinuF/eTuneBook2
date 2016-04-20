@@ -197,19 +197,6 @@ export function extractTunes(tuneSets: Array<TuneSet>): Array<Tune> {
     return tunes;
 }
 
-export function extractTuneSetPositions(tuneSets: Array<TuneSet>): Array<TuneSetPosition> {
-    // Extract TuneSetPositions from TuneSets.
-    let tuneSetPositions: Array<TuneSetPosition> = [];
-
-    for (let i = 0; i < tuneSets.length; i++) {
-        for (let z = 0; z < tuneSets[i].tuneSetPositions.length; z++) {
-            tuneSetPositions.push(tuneSets[i].tuneSetPositions[z]);
-        }
-    }
-
-    return tuneSetPositions;
-}
-
 export function filterPlaylists(playlists: Array<Playlist>, filterSettings: FilterSettings, tuneSetsFiltered: Array<TuneSet>) {
     let playlistsFiltered: Array<Playlist> = [];
     let playlistIdMatch: boolean = false;

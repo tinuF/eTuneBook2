@@ -1,4 +1,4 @@
-import {Component, OnInit, DoCheck} from 'angular2/core';
+import {Component, OnInit, DoCheck, ViewChild, ElementRef, Renderer} from 'angular2/core';
 import {ROUTER_DIRECTIVES, Router, RouteParams} from 'angular2/router';
 
 import {TuneBookService} from '../../services/tunebook-service';
@@ -16,12 +16,15 @@ import {PlayListPositionCopierUI} from '../../components/playlists/playlist-posi
     styleUrls: ['./components/playlists/playlist.css']
 })
 export class PlaylistUI implements OnInit, DoCheck {
+    @ViewChild('inputPlaylistName') inputPlaylistName: ElementRef;
+    @ViewChild('inputPlaylistBand') inputPlaylistBand: ElementRef;
+    @ViewChild('inputPlaylistEvent') inputPlaylistEvent: ElementRef;
     playlist: Playlist;
     playlistPositionToBeCopied: PlaylistPosition;
     editModus: boolean;
 
-    constructor(public tuneBookService: TuneBookService, public router: Router, routeParams: RouteParams) {
-        this.playlist = this.tuneBookService.getPlaylist(routeParams.get('id'));
+    constructor(public tuneBookService: TuneBookService, public router: Router, routeParams: RouteParams, public renderer: Renderer) {
+        this.playlist = this.tuneBookService.getPlaylist(parseInt(routeParams.get('id')));
     }
 
     ngOnInit() {
@@ -40,48 +43,51 @@ export class PlaylistUI implements OnInit, DoCheck {
         });
     }
 
-    handleKeyDownOnPlaylistName(e) {
-        var keycode = (e.keyCode ? e.keyCode : e.which);
+    handleKeyDownOnPlaylistName(e:KeyboardEvent) {
+        let keycode = (e.keyCode ? e.keyCode : e.which);
 
         if (keycode === 13) { // ENTER
-            e.target.blur();
+            (<HTMLInputElement>e.target).blur();
             e.preventDefault();
-            this.handleBlurOnPlaylistName(e);
+            this.renderer.invokeElementMethod(this.inputPlaylistBand.nativeElement, 'focus', []);
+            this.renderer.invokeElementMethod(this.inputPlaylistBand.nativeElement, 'select', []);
         }
     }
 
-    handleBlurOnPlaylistName(e) {
-        this.playlist.name = e.target.value;
+    handleBlurOnPlaylistName(e:FocusEvent) {
+        this.playlist.name = (<HTMLInputElement>e.target).value;
         this.tuneBookService.storeTuneBookAbc();
     }
 
-    handleKeyDownOnPlaylistBand(e) {
-        var keycode = (e.keyCode ? e.keyCode : e.which);
+    handleKeyDownOnPlaylistBand(e:KeyboardEvent) {
+        let keycode = (e.keyCode ? e.keyCode : e.which);
 
         if (keycode === 13) { // ENTER
-            e.target.blur();
+            (<HTMLInputElement>e.target).blur();
             e.preventDefault();
-            this.handleBlurOnPlaylistBand(e);
+            this.renderer.invokeElementMethod(this.inputPlaylistEvent.nativeElement, 'focus', []);
+            this.renderer.invokeElementMethod(this.inputPlaylistEvent.nativeElement, 'select', []);
         }
     }
 
-    handleBlurOnPlaylistBand(e) {
-        this.playlist.band = e.target.value;
+    handleBlurOnPlaylistBand(e:FocusEvent) {
+        this.playlist.band = (<HTMLInputElement>e.target).value;
         this.tuneBookService.storeTuneBookAbc();
     }
 
-    handleKeyDownOnPlaylistEvent(e) {
-        var keycode = (e.keyCode ? e.keyCode : e.which);
+    handleKeyDownOnPlaylistEvent(e:KeyboardEvent) {
+        let keycode = (e.keyCode ? e.keyCode : e.which);
 
         if (keycode === 13) { // ENTER
-            e.target.blur();
+            (<HTMLInputElement>e.target).blur();
             e.preventDefault();
-            this.handleBlurOnPlaylistEvent(e);
+            this.renderer.invokeElementMethod(this.inputPlaylistName.nativeElement, 'focus', []);
+            this.renderer.invokeElementMethod(this.inputPlaylistName.nativeElement, 'select', []);
         }
     }
 
-    handleBlurOnPlaylistEvent(e) {
-        this.playlist.event = e.target.value;
+    handleBlurOnPlaylistEvent(e:FocusEvent) {
+        this.playlist.event = (<HTMLInputElement>e.target).value;
         this.tuneBookService.storeTuneBookAbc();
     }
     
@@ -89,13 +95,13 @@ export class PlaylistUI implements OnInit, DoCheck {
         this.playlistPositionToBeCopied = e;
     }
 
-    copyPlaylist(e) {
+    copyPlaylist() {
         let newPlaylistId = this.tuneBookService.copyPlaylist(this.playlist.id);
         this.tuneBookService.storeTuneBookAbc();
         this.router.navigate(['/Playlist', { id: newPlaylistId }]);
     }
 
-    deletePlaylist(e) {
+    deletePlaylist() {
         this.tuneBookService.deletePlaylist(this.playlist.id);
         this.tuneBookService.storeTuneBookAbc();
         this.router.navigate(['/PlaylistList']);

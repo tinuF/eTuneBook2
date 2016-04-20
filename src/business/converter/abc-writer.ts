@@ -12,59 +12,59 @@ var systemProperties = getSystemProperties();
 
 export function writeAbcHeader(tuneBook: TuneBook, abcOption: AbcExportSettings) {
     // Construct Header
-    let tbkAbc: string;
+    let abc: string;
     let playlist: Playlist;
     let playlistPosition: PlaylistPosition;
     let tuneSetPositionPlayInfos: Array<TuneSetPositionPlayInfo>;
     let tuneSetPositionPlayInfo: TuneSetPositionPlayInfo;
 
-    tbkAbc = "%abc-";
-    tbkAbc += systemProperties.ABC_VERSION;
-    tbkAbc += "\n";
-    tbkAbc += "I:abc-creator eTuneBook-";
-    tbkAbc += systemProperties.VERSION;
-    tbkAbc += "\n";
+    abc = "%abc-";
+    abc += systemProperties.ABC_VERSION;
+    abc += "\n";
+    abc += "I:abc-creator eTuneBook-";
+    abc += systemProperties.VERSION;
+    abc += "\n";
 
     if (abcOption.includeAtLeastOneEtbkDirective()) {
-        tbkAbc += "%%etbk:bname ";
-        tbkAbc += tuneBook.name;
-        tbkAbc += "\n";
-        tbkAbc += "%%etbk:bvers ";
-        tbkAbc += tuneBook.version;
-        tbkAbc += "\n";
-        tbkAbc += "%%etbk:bdesc ";
-        tbkAbc += tuneBook.description;
-        tbkAbc += "\n";
+        abc += "%%etbk:bname ";
+        abc += tuneBook.name;
+        abc += "\n";
+        abc += "%%etbk:bvers ";
+        abc += tuneBook.version;
+        abc += "\n";
+        abc += "%%etbk:bdesc ";
+        abc += tuneBook.description;
+        abc += "\n";
     }
 
     if (abcOption.playlist) {
         for (let i = 0; i < tuneBook.playlists.length; i++) {
             //Playlist-Definition
             playlist = tuneBook.playlists[i];
-            tbkAbc += "%%etbk:plldf id:";
-            tbkAbc += playlist.id;
-            tbkAbc += ",name:";
-            tbkAbc += playlist.name;
-            tbkAbc += ",evt:";
-            tbkAbc += playlist.event;
-            tbkAbc += ",band:";
-            tbkAbc += playlist.band;
-            tbkAbc += "\n";
+            abc += "%%etbk:plldf id:";
+            abc += playlist.id;
+            abc += ",name:";
+            abc += playlist.name;
+            abc += ",evt:";
+            abc += playlist.event;
+            abc += ",band:";
+            abc += playlist.band;
+            abc += "\n";
 
             for (let z = 0; z < playlist.playlistPositions.length; z++) {
                 //Playlist-Position
                 playlistPosition = playlist.playlistPositions[z];
-                tbkAbc += "%%etbk:pllps id:";
-                tbkAbc += playlist.id;
-                tbkAbc += ",pos:";
-                tbkAbc += playlistPosition.position;
-                tbkAbc += ",tnset:";
-                tbkAbc += playlistPosition.tuneSet.tuneSetId;
-                tbkAbc += ",name:";
-                tbkAbc += playlistPosition.name;
-                tbkAbc += ",ant:";
-                tbkAbc += playlistPosition.annotation;
-                tbkAbc += "\n";
+                abc += "%%etbk:pllps id:";
+                abc += playlist.id;
+                abc += ",pos:";
+                abc += playlistPosition.position;
+                abc += ",tnset:";
+                abc += playlistPosition.tuneSet.tuneSetId;
+                abc += ",name:";
+                abc += playlistPosition.name;
+                abc += ",ant:";
+                abc += playlistPosition.annotation;
+                abc += "\n";
 
                 tuneSetPositionPlayInfos = playlistPosition.tuneSetPositionPlayInfos;
 
@@ -73,17 +73,17 @@ export function writeAbcHeader(tuneBook: TuneBook, abcOption: AbcExportSettings)
                     tuneSetPositionPlayInfo = tuneSetPositionPlayInfos[y];
 
                     if (!tuneSetPositionPlayInfo.isDefault()) {
-                        tbkAbc += "%%etbk:plltp pll:";
-                        tbkAbc += tuneSetPositionPlayInfo.playlistPosition.playlistId;
-                        tbkAbc += ",pllpos:";
-                        tbkAbc += tuneSetPositionPlayInfo.playlistPosition.position;
-                        tbkAbc += ",tnset:";
-                        tbkAbc += tuneSetPositionPlayInfo.tuneSetPosition.tuneSetId;
-                        tbkAbc += ",tnsetpos:";
-                        tbkAbc += tuneSetPositionPlayInfo.tuneSetPosition.position;
-                        tbkAbc += ",rep:";
-                        tbkAbc += tuneSetPositionPlayInfo.repeat;
-                        tbkAbc += ",arr:{";
+                        abc += "%%etbk:plltp pll:";
+                        abc += tuneSetPositionPlayInfo.playlistPosition.playlistId;
+                        abc += ",pllpos:";
+                        abc += tuneSetPositionPlayInfo.playlistPosition.position;
+                        abc += ",tnset:";
+                        abc += tuneSetPositionPlayInfo.tuneSetPosition.tuneSetId;
+                        abc += ",tnsetpos:";
+                        abc += tuneSetPositionPlayInfo.tuneSetPosition.position;
+                        abc += ",rep:";
+                        abc += tuneSetPositionPlayInfo.repeat;
+                        abc += ",arr:{";
 
                         let firstPart = true;
                         for (let w = 0; w < tuneSetPositionPlayInfo.partPlayInfos.length; w++) {
@@ -91,24 +91,24 @@ export function writeAbcHeader(tuneBook: TuneBook, abcOption: AbcExportSettings)
                             if (firstPart) {
                                 firstPart = false;
                             } else {
-                                tbkAbc += ",";
+                                abc += ",";
                             }
-                            tbkAbc += tuneSetPositionPlayInfo.partPlayInfos[w].part;
-                            tbkAbc += ":";
-                            tbkAbc += tuneSetPositionPlayInfo.partPlayInfos[w].playInfo;
+                            abc += tuneSetPositionPlayInfo.partPlayInfos[w].part;
+                            abc += ":";
+                            abc += tuneSetPositionPlayInfo.partPlayInfos[w].playInfo;
                         }
 
-                        tbkAbc += "},ant:";
-                        tbkAbc += tuneSetPositionPlayInfo.annotation;
-                        tbkAbc += "\n";
+                        abc += "},ant:";
+                        abc += tuneSetPositionPlayInfo.annotation;
+                        abc += "\n";
                     }
                 }
             }
         }
     }
 
-    tbkAbc += "\n";
-    return tbkAbc;
+    abc += "\n";
+    return abc;
 }
 
 export function writeTuneAbc(tune: Tune, tuneSetPositions: Array<TuneSetPosition>, abcOption: AbcExportSettings) {

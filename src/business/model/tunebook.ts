@@ -2,7 +2,7 @@ import {getSystemProperties} from '../../common/system-properties';
 import {getAbcValue} from '../util/abc-util';
 import {importTuneSets} from '../converter/tuneset-importer';
 import {importPlaylists, importPlaylistPositions, importTuneSetPositionPlayInfos} from '../converter/playlists-importer';
-import {extractTunes, extractTuneSetPositions} from '../filter/filter-logic';
+import {extractTunes} from '../filter/filter-logic';
 import {writeAbcHeader, writeTuneAbc} from '../converter/abc-writer';
 import {TuneSet} from './tuneset';
 import {Tune} from './tune';
@@ -221,7 +221,7 @@ export class TuneBook {
         return tuneSetPositions;
     }
 
-    copyPlaylist(playlistIdOriginal): number {
+    copyPlaylist(playlistIdOriginal:number): number {
         let playlistId: number;
         let playlistName: string;
         let playlistOriginal: Playlist;
@@ -229,18 +229,18 @@ export class TuneBook {
 
         playlistOriginal = this.getPlaylistById(playlistIdOriginal);
 
-        playlistId = this._getNextPlaylistId();
+        playlistId = this.getNextPlaylistId();
         playlistName = 'Copy of ' + playlistOriginal.name;
 
         playlistCopy = new Playlist(playlistId, playlistName, playlistOriginal.event, playlistOriginal.band);
         this.playlists.push(playlistCopy);
 
-        this._copyPlaylistPositions(playlistOriginal, playlistCopy);
+        this.copyPlaylistPositions(playlistOriginal, playlistCopy);
 
         return playlistId;
     }
 
-    _getNextPlaylistId(): number {
+    getNextPlaylistId(): number {
         let nextPlaylistId: number;
         let currentPlaylistId: number;
         let maxPlaylistId: number;
@@ -261,17 +261,17 @@ export class TuneBook {
         return nextPlaylistId;
     }
 
-    copyPlaylistPositions(playlistOriginal, playlistCopy) {
-        let playlistPositionOriginal, playlistPositionCopy;
-
+    copyPlaylistPositions(playlistOriginal:Playlist, playlistCopy:Playlist) {
+        let playlistPositionOriginal:PlaylistPosition; 
+        
         for (let y = 0; y < playlistOriginal.playlistPositions.length; y++) {
             playlistPositionOriginal = playlistOriginal.playlistPositions[y];
 
-            this._copyPlaylistPositionAndTuneSetPlayInfos(playlistPositionOriginal, playlistCopy, playlistPositionOriginal.position);
+            this.copyPlaylistPositionAndTuneSetPlayInfos(playlistPositionOriginal, playlistCopy, playlistPositionOriginal.position);
         }
     }
 
-    copyPlaylistPositionAndTuneSetPlayInfos(playlistPositionOriginal: PlaylistPosition, targetPlaylist, targetPlaylistPositionNr) {
+    copyPlaylistPositionAndTuneSetPlayInfos(playlistPositionOriginal: PlaylistPosition, targetPlaylist:Playlist, targetPlaylistPositionNr:number) {
         let playlistPositionCopy: PlaylistPosition;
 
         // Generate PlaylistPosition
@@ -281,7 +281,7 @@ export class TuneBook {
         targetPlaylist.addPlaylistPosition(playlistPositionCopy);
 
         // Copy TuneSetPositionPlayInfos
-        this._copyTuneSetPositionPlayInfos(playlistPositionOriginal, playlistPositionCopy);
+        this.copyTuneSetPositionPlayInfos(playlistPositionOriginal, playlistPositionCopy);
     }
 
     copyTuneSetPositionPlayInfos(playlistPositionOriginal: PlaylistPosition, playlistPositionCopy: PlaylistPosition) {
@@ -293,7 +293,7 @@ export class TuneBook {
             tuneSetPositionPlayInfoOriginal = playlistPositionOriginal.tuneSetPositionPlayInfos[y];
 
             // Copy partPlayInfos
-            partPlayInfosCopy = this._copyPartPlayInfos(tuneSetPositionPlayInfoOriginal);
+            partPlayInfosCopy = this.copyPartPlayInfos(tuneSetPositionPlayInfoOriginal);
 
             // Generate tuneSetPositionPlayInfo
             tuneSetPositionPlayInfoCopy = new TuneSetPositionPlayInfo(playlistPositionCopy, tuneSetPositionPlayInfoOriginal.tuneSetPosition, tuneSetPositionPlayInfoOriginal.repeat, partPlayInfosCopy, tuneSetPositionPlayInfoOriginal.annotation);
@@ -679,25 +679,6 @@ export class TuneBook {
         }
 
         return playlistPositions;
-    }
-
-    getTuneSetPositionsForTuneSetId(tuneSetId:number, tuneSetPositions) {
-        // Extract TuneSetPositions from TuneSets.
-        for (let i = 0; i < this.tuneSets.length; i++) {
-            for (let z = 0; z < this.tuneSets[i].tuneSetPositions.length; z++) {
-                if (tuneSetId == this.tuneSets[i].tuneSetPositions[z].tuneSetId) {
-                    tuneSetPositions.push(this.tuneSets[i].tuneSetPositions[z]);
-                }
-            }
-        }
-
-        return tuneSetPositions;
-    }
-
-    getTuneSetPositions() {
-        // Extract TuneSetPositions from TuneSets.
-
-        return extractTuneSetPositions(this.tuneSets);
     }
 
     addVideo(intTuneId:number, videoSource:string, videoCode:string, videoDescription:string) {

@@ -350,11 +350,6 @@ export class Tune {
         return getAbcValue(this.pure, "X:", "undefined");
     }
 
-    getTuneSite(siteType: string) {
-        let siteDirective = "%%etbk:" + siteType + " ";
-        return getAbcValue(this.pure, siteDirective, "");
-    }
-
     getPlayDates(tuneLine: string) {
         let playDates: Array<PlayDate> = [];
         let playDate = new Date();

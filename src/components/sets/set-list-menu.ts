@@ -78,6 +78,7 @@ export class SetListMenuUI implements OnInit {
     }
 
     setSelectedPlaylistId(e) {
+        //TODO: In e.target.value steht fälschlicherweise der Name der Playlist drin, nicht die Id)
         this.selectedPlaylistId = e.target.value;
     }
 

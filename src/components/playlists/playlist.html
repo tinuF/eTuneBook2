@@ -6,26 +6,25 @@
         <div class="card col-xs-9">
             <div class="card-block">
                 <div class="col-xs-4">
-                    <p [hidden]="editModus">{{playlist.name}}</p>
-                    <input class="form-control form-control-sm" [hidden]="!editModus" [value]="playlist.name" (keydown)="handleKeyDownOnPlaylistName($event)"
+                    <p *ngIf="!editModus">{{playlist.name}}</p>
+                    <input #inputPlaylistName class="form-control form-control-sm" *ngIf="editModus" [value]="playlist.name" (keydown)="handleKeyDownOnPlaylistName($event)"
                     (blur)="handleBlurOnPlaylistName($event)">
-
                 </div>
                 <div class="col-xs-4">
-                    <p [hidden]="editModus">{{playlist.band}}</p>
-                    <input class="form-control form-control-sm" [hidden]="!editModus" [value]="playlist.band" (keydown)="handleKeyDownOnPlaylistBand($event)"
+                    <p *ngIf="!editModus">{{playlist.band}}</p>
+                    <input #inputPlaylistBand class="form-control form-control-sm" *ngIf="editModus" [value]="playlist.band" (keydown)="handleKeyDownOnPlaylistBand($event)"
                     (blur)="handleBlurOnPlaylistBand($event)">
                 </div>
                 <div class="col-xs-2">
-                    <p [hidden]="editModus">{{playlist.event}}</p>
-                    <input class="form-control form-control-sm" [hidden]="!editModus" [value]="playlist.event" (keydown)="handleKeyDownOnPlaylistEvent($event)"
+                    <p *ngIf="!editModus">{{playlist.event}}</p>
+                    <input #inputPlaylistEvent class="form-control form-control-sm" *ngIf="editModus" [value]="playlist.event" (keydown)="handleKeyDownOnPlaylistEvent($event)"
                     (blur)="handleBlurOnPlaylistEvent($event)">
                 </div>
 
-                <div class="pull-sm-right  btn-toolbar playlistMenu hidden-print" role="toolbar" [hidden]="!editModus">
+                <div class="pull-sm-right  btn-toolbar playlistMenu hidden-print" role="toolbar" *ngIf="editModus">
                     <div class="btn-group" role="group">
-                        <a class="btn btn-secondary btn-sm" (click)="copyPlaylist($event)" title="Copy Playlist"><i class="mdi mdi-content-copy"></i></a>
-                        <a class="btn btn-sm btn-secondary" (click)="deletePlaylist($event)" title="Delete Playlist"><i class="mdi mdi-delete"></i></a>
+                        <a class="btn btn-secondary btn-sm" (click)="copyPlaylist()" title="Copy Playlist"><i class="mdi mdi-content-copy"></i></a>
+                        <a class="btn btn-sm btn-secondary" (click)="deletePlaylist()" title="Delete Playlist"><i class="mdi mdi-delete"></i></a>
                     </div>
                 </div>
             </div>
