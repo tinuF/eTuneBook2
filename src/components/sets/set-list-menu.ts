@@ -18,7 +18,7 @@ export class SetListMenuUI implements OnInit {
     sorting: string;
     filterSettings: FilterSettings;
     playlists: Array<Playlist>;
-    selectedPlaylistId: number;
+    selectedPlaylist: Playlist;
 
     constructor(public tuneBookService: TuneBookService) {
 
@@ -77,13 +77,12 @@ export class SetListMenuUI implements OnInit {
         this.tuneBookService.applyFilter();
     }
 
-    setSelectedPlaylistId(e) {
-        //TODO: In e.target.value steht fälschlicherweise der Name der Playlist drin, nicht die Id)
-        this.selectedPlaylistId = e.target.value;
+    setSelectedPlaylistId(playlist:Playlist) {
+        this.selectedPlaylist = playlist;
     }
 
     addSelectedSetsToSelectedPlaylist() {
-        this.tuneBookService.addPlaylistPositions(this.selectedPlaylistId, this.filterSettings.setIds);
+        this.tuneBookService.addPlaylistPositions(this.selectedPlaylist.id, this.filterSettings.setIds);
         this.tuneBookService.storeTuneBookAbc();
     }
 }

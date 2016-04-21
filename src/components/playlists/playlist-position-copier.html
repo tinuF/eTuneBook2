@@ -8,12 +8,11 @@
         <h4 class="modal-title">Choose a playlist</h4>
       </div>
       <div class="modal-body">
-        <select class="form-control form-control-lg" (change)="setSelectedPlaylistId($event)">
-		      <option [value]="playlist.id" *ngFor="#playlist of playlists; #i = index">{{playlist.name}} - {{playlist.band}}</option>
+        <select class="form-control form-control-md" [(ngModel)]="selectedPlaylist">
+		      <option [ngValue]="playlist" *ngFor="#playlist of playlists; #i = index">{{playlist.name}} - {{playlist.band}}</option>
 	  	  </select>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="copyPlaylistPosition()">Copy</button>
       </div>
     </div>

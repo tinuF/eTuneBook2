@@ -20,7 +20,7 @@ import {PlayListItemSetPositionUI} from '../../components/playlists/playlist-ite
 export class PlayListPositionCopierUI implements OnInit {
     @Input() playlistPosition: PlaylistPosition;
     playlists: Array<Playlist>;
-    selectedPlaylistId: number;
+    selectedPlaylist: Playlist;
 
     constructor(public tuneBookService: TuneBookService, public router: Router, public elementRef: ElementRef) {
 
@@ -31,15 +31,14 @@ export class PlayListPositionCopierUI implements OnInit {
         //jQuery(this.elementRef.nativeElement).show(); 
     }
 
-    setSelectedPlaylistId(e) {
-        //TODO: In e.target.value steht fälschlicherweise der Name der Playlist drin, nicht die Id)
-        this.selectedPlaylistId = e.target.value;
+    setSelectedPlaylistId(playlist:Playlist) {
+        this.selectedPlaylist = playlist;
     }
 
     copyPlaylistPosition() {
-        this.tuneBookService.copyPlaylistPositionToOtherPlaylist(this.playlistPosition.playlistId, this.playlistPosition.position, this.selectedPlaylistId);
+        this.tuneBookService.copyPlaylistPositionToOtherPlaylist(this.playlistPosition.playlistId, this.playlistPosition.position, this.selectedPlaylist.id);
         this.tuneBookService.storeTuneBookAbc();
-        this.router.navigate(['/Playlist', { id: this.selectedPlaylistId }]);
+        this.router.navigate(['/Playlist', { id: this.selectedPlaylist.id }]);
     };
 }
 

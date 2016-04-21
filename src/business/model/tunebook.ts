@@ -320,7 +320,7 @@ export class TuneBook {
         return tuneSetPositionPlayInfos;
     }
 
-    copyPartPlayInfos(tuneSetPositionPlayInfoOriginal) {
+    copyPartPlayInfos(tuneSetPositionPlayInfoOriginal:TuneSetPositionPlayInfo) {
         let partPlayInfosOriginal, partPlayInfosCopy,
             partPlayInfoOriginal, partPlayInfoCopy;
 
@@ -337,15 +337,17 @@ export class TuneBook {
         return partPlayInfosCopy;
     }
 
-    copyPlaylistPositionToOtherPlaylist(sourcePlaylistId, sourcePlaylistPositionNr, targetPlaylistId) {
-        let playlistPosition, targetPlaylist, targetPlaylistPositionNr;
+    copyPlaylistPositionToOtherPlaylist(sourcePlaylistId:number, sourcePlaylistPositionNr:number, targetPlaylistId:number) {
+        let playlistPosition:PlaylistPosition;
+        let targetPlaylist:Playlist; 
+        let targetPlaylistPositionNr:number;
 
         playlistPosition = this.getPlaylistPosition(sourcePlaylistId, sourcePlaylistPositionNr);
         targetPlaylist = this.getPlaylistById(targetPlaylistId);
         // Am Schluss einfügen
         targetPlaylistPositionNr = targetPlaylist.playlistPositions.length + 1;
 
-        this._copyPlaylistPositionAndTuneSetPlayInfos(playlistPosition, targetPlaylist, targetPlaylistPositionNr);
+        this.copyPlaylistPositionAndTuneSetPlayInfos(playlistPosition, targetPlaylist, targetPlaylistPositionNr);
     }
 
     moveTuneSetPositionOneSetInvolved(tuneSetId: number, oldPosition: number, newPosition: number) {
