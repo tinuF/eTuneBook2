@@ -59,7 +59,7 @@ export function writeAbcHeader(tuneBook: TuneBook, abcOption: AbcExportSettings)
                 abc += ",pos:";
                 abc += playlistPosition.position;
                 abc += ",tnset:";
-                abc += playlistPosition.tuneSet.tuneSetId;
+                abc += playlistPosition.tuneSet.id;
                 abc += ",name:";
                 abc += playlistPosition.name;
                 abc += ",ant:";

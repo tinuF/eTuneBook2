@@ -53,9 +53,9 @@ export class SetListItemUI implements OnInit, DoCheck {
 
     toggleSetSelection(e) {
         if (e.target.checked) {
-            this.filterSettings.addSetId(this.set.tuneSetId);
+            this.filterSettings.addSetId(this.set.id);
         } else {
-            this.filterSettings.removeSetId(this.set.tuneSetId);
+            this.filterSettings.removeSetId(this.set.id);
         }
     }
 }

@@ -1,12 +1,12 @@
 import {TuneSetPosition} from './tunesetposition';
 
 export class TuneSet {
-    tuneSetId: number;
+    id: number;
     tuneSetName: string;
     tuneSetPositions: Array<TuneSetPosition>;
 
     constructor(tuneSetId: number, tuneSetName: string, tuneSetPositions: Array<TuneSetPosition>) {
-        this.tuneSetId = tuneSetId;
+        this.id = tuneSetId;
         this.tuneSetName = tuneSetName;
         this.tuneSetPositions = tuneSetPositions;
     }
@@ -89,10 +89,10 @@ export class TuneSet {
         return lastPlayDate;
     }
 
-    deleteTune(intTuneId:number) {
+    deleteTune(tuneId:number) {
         let removedTuneSetPosition:TuneSetPosition;
         
-        removedTuneSetPosition = this.deleteTuneSetPositionByIntTuneId(intTuneId);
+        removedTuneSetPosition = this.deleteTuneSetPositionByTuneId(tuneId);
 
         if (this.tuneSetPositions.length > 0) {
             // TuneSet still has TuneSetPositions
@@ -101,11 +101,25 @@ export class TuneSet {
         }        
     }
     
-    deleteTuneSetPositionByIntTuneId(intTuneId: number): TuneSetPosition {
+    deleteTuneSetPosition(position: number): TuneSetPosition {
+        let tuneSetPosition: TuneSetPosition = null;
+
+        for (let z = 0; z < this.tuneSetPositions.length; z++) {
+            if (this.tuneSetPositions[z].position == position) {
+                tuneSetPosition = this.tuneSetPositions[z];
+                // Remove TuneSetPosition from TuneSet
+                // TuneSetPosition will be deleted later by Garbage Collector
+                this.tuneSetPositions.splice(z, 1);
+            }
+        }
+        return tuneSetPosition;
+    }
+    
+    deleteTuneSetPositionByTuneId(tuneId: number): TuneSetPosition {
         let tuneSetPosition: TuneSetPosition = null;
 
         for (var z = 0; z < this.tuneSetPositions.length; z++) {
-            if (this.tuneSetPositions[z].tune.intTuneId == intTuneId) {
+            if (this.tuneSetPositions[z].tune.id == tuneId) {
                 tuneSetPosition = this.tuneSetPositions[z];
                 // Remove TuneSetPosition from TuneSet
                 // TuneSetPosition will be deleted later by Garbage Collector

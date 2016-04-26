@@ -23,11 +23,11 @@ export class TuneSetListUI implements OnInit, DoCheck {
     }
 
     ngOnInit() {
-        this.sets = this.tuneBookService.getTuneSetsByIntTuneId(this.tune.intTuneId);
+        this.sets = this.tuneBookService.getTuneSetsByTuneId(this.tune.id);
     }
 
     ngDoCheck() {
-        this.sets = this.tuneBookService.getTuneSetsByIntTuneId(this.tune.intTuneId);
+        this.sets = this.tuneBookService.getTuneSetsByTuneId(this.tune.id);
     }
 }
 

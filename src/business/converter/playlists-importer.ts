@@ -43,7 +43,7 @@ export function importPlaylistPositions(tuneBook: TuneBook) {
     let tuneSetId: number;
     let name: string;
     let annotation: string;
-    let tuneSet: TuneSet = tuneBook.getTuneSetById(tuneSetId);
+    let tuneSet: TuneSet;
 
     if (playlistPositionDirectives.length > 0) {
         for (let z = 0; z < playlistPositionDirectives.length; z++) {

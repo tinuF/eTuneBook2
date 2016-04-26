@@ -32,7 +32,7 @@ export class TuneDotsMenuUI implements OnInit, DoCheck {
     }
 
     deleteTune() {
-        this.tuneBookService.deleteTune(this.tune.intTuneId);
+        this.tuneBookService.deleteTune(this.tune.id);
         this.router.navigate(['/Tunelist']);
 
         // Put TuneBook to localStorage
@@ -50,17 +50,17 @@ export class TuneDotsMenuUI implements OnInit, DoCheck {
     }
 
     newSet(e) {
-        this.tuneBookService.initializeTuneSet(this.tune.intTuneId);
+        this.tuneBookService.initializeTuneSet(this.tune.id);
         this.tuneBookService.storeTuneBookAbc();
     }
 
     newVideo(e) {
-        this.tuneBookService.addVideo(this.tune.intTuneId, "ytube", "", "0:00: " + this.tune.title);
+        this.tuneBookService.addVideo(this.tune.id, "ytube", "", "0:00: " + this.tune.title);
         this.tuneBookService.storeTuneBookAbc();
     }
 
     newWebsite(e) {
-        this.tuneBookService.addWebsite(this.tune.intTuneId, "");
+        this.tuneBookService.addWebsite(this.tune.id, "");
         this.tuneBookService.storeTuneBookAbc();
     }
 }

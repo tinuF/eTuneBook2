@@ -48,8 +48,8 @@ export class SampleDotsUI {
 
     showSampleDots() {
         setTimeout(() => {
-            let output = 'sampleDotsForTune' + this.tune.intTuneId;
-            let tunebookString = this.tuneBookService.getSampleAbc(this.tune.intTuneId, 1, 2);
+            let output = 'sampleDotsForTune' + this.tune.id;
+            let tunebookString = this.tuneBookService.getSampleAbc(this.tune.id, 1, 2);
             let parserParams = {};
             let engraverParams = {
                 scale: 1.0,

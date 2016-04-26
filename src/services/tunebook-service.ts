@@ -116,25 +116,25 @@ export class TuneBookService {
         return this.abcExportSettings;
     }
 
-    getSampleAbc(intTuneId: number, startFromBar: number, numberOfBars: number) {
-        var tune = this.getTune(intTuneId);
+    getSampleAbc(tuneId: number, startFromBar: number, numberOfBars: number) {
+        var tune = this.getTune(tuneId);
         return tune.getSampleAbc(startFromBar, numberOfBars);
     }
 
-    tuneUp(intTuneId:number) {
-        var tune = this.getTune(intTuneId);
+    tuneUp(tuneId:number) {
+        var tune = this.getTune(tuneId);
         // Transpose up and Sync Tune-Key
         tune.key = this.getTuneKey(tuneUp(tune));
     }
 
-    tuneDown(intTuneId:number) {
-        var tune = this.getTune(intTuneId);
+    tuneDown(tuneId:number) {
+        var tune = this.getTune(tuneId);
         // Transpose down and Sync Tune-Key
         tune.key = this.getTuneKey(tuneDown(tune));
     }
 
-    initializeTuneSet(intTuneId:number) {
-        this.getCurrentTuneBook().initializeTuneSet(intTuneId);
+    initializeTuneSet(tuneId:number) {
+        this.getCurrentTuneBook().initializeTuneSet(tuneId);
         this.initializeFilter();
     }
 
@@ -187,7 +187,7 @@ export class TuneBookService {
     initializeTuneBook() {
         this.setCurrentTuneBook(this.getAbcforNewTuneBook());
         //TODO: Check if necessary and refactor
-        //this.tuneBook.tuneSets[0].tuneSetPositions[0].tune.intTuneId = 1;
+        //this.tuneBook.tuneSets[0].tuneSetPositions[0].tune.id = 1;
         return this.tuneBook;
     }
 /*
@@ -218,10 +218,6 @@ export class TuneBookService {
 
     movePlaylistPosition(playlistId:number, oldPosition:number, newPosition:number) {
         return this.getCurrentTuneBook().movePlaylistPosition(playlistId, oldPosition, newPosition);
-    }
-
-    addEmptyPlaylistPosition(playlistId:number) {
-        return this.getCurrentTuneBook().addEmptyPlaylistPosition(playlistId);
     }
 
     addPlaylistPositions(playlistId:number, setIds:Array<number>) {
@@ -263,17 +259,17 @@ export class TuneBookService {
             tuneSetIndex = tuneSetIndex - 1;
         }
         tuneSet = this.tuneSetsFiltered[tuneSetIndex];
-        return tuneSet.tuneSetId;
+        return tuneSet.id;
     }
 
-    getRandomIntTuneId() {
+    getRandomTuneId() {
         let tune: Tune;
         let tuneIndex = getRandomArrayIndex(this.tunesFiltered);
         if (this.tunesFiltered.length == tuneIndex) {
             tuneIndex = tuneIndex - 1;
         }
         tune = this.tunesFiltered[tuneIndex];
-        return tune.intTuneId;
+        return tune.id;
     }
 
     shuffleTuneList() {
@@ -284,12 +280,12 @@ export class TuneBookService {
         return shuffleArray(this.tuneSetsFiltered);
     }
 
-    getTune(intTuneId:number) {
-        return this.getCurrentTuneBook().getTuneById(intTuneId);
+    getTune(tuneId:number) {
+        return this.getCurrentTuneBook().getTuneById(tuneId);
     }
 
-    deleteTune(intTuneId:number) {
-        this.getCurrentTuneBook().deleteTune(intTuneId);
+    deleteTune(tuneId:number) {
+        this.getCurrentTuneBook().deleteTune(tuneId);
         //Remove Tune from tunesFiltered, tuneSetsFiltered
         this.setTunesFiltered();
         //TODO: when tuneSet deleted -> delete playlistposition....
@@ -319,8 +315,8 @@ export class TuneBookService {
         return this.getCurrentTuneBook().getPlaylistById(playlistId).getPlaylistPositionAsNumbers();
     }
 
-    getPlaylistPositionsByIntTuneId(playlistId:number, intTuneId:number) {
-        return this.getCurrentTuneBook().getPlaylistPositionsByIntTuneId(playlistId, intTuneId);
+    getPlaylistPositionsByTuneId(playlistId:number, tuneId:number) {
+        return this.getCurrentTuneBook().getPlaylistPositionsByTuneId(playlistId, tuneId);
     }
 
     getPlaylistPosition(playlistId:number, position:number) {
@@ -356,36 +352,36 @@ export class TuneBookService {
         return tuneSet.getFirstTuneSetPosition();
     }
 
-    getTuneSetsByIntTuneId(intTuneId:number) {
-        return this.getCurrentTuneBook().getTuneSetsByIntTuneId(intTuneId);
+    getTuneSetsByTuneId(tuneId:number) {
+        return this.getCurrentTuneBook().getTuneSetsByTuneId(tuneId);
     }
 
-    getPlaylistsByIntTuneId(intTuneId:number) {
-        return this.getCurrentTuneBook().getPlaylistsByIntTuneId(intTuneId);
+    getPlaylistsByTuneId(tuneId:number) {
+        return this.getCurrentTuneBook().getPlaylistsByTuneId(tuneId);
     }
 
     getPlaylistsByTuneSetId(tuneSetId:number) {
         return this.getCurrentTuneBook().getPlaylistsByTuneSetId(tuneSetId);
     }
 
-    getVideo(intTuneId:number, videoSource:string, videoCode:string) {
-        return this.getCurrentTuneBook().getVideoById(intTuneId, videoSource, videoCode);
+    getVideo(tuneId:number, videoSource:string, videoCode:string) {
+        return this.getCurrentTuneBook().getVideoById(tuneId, videoSource, videoCode);
     }
 
-    addVideo(intTuneId:number, videoSource:string, videoCode:string, videoDescription:string) {
-        return this.getCurrentTuneBook().addVideo(intTuneId, videoSource, videoCode, videoDescription);
+    addVideo(tuneId:number, videoSource:string, videoCode:string, videoDescription:string) {
+        return this.getCurrentTuneBook().addVideo(tuneId, videoSource, videoCode, videoDescription);
     }
 
-    deleteVideo(intTuneId:number, videoSource:string, videoCode:string) {
-        this.getCurrentTuneBook().deleteVideo(intTuneId, videoSource, videoCode);
+    deleteVideo(tuneId:number, videoSource:string, videoCode:string) {
+        this.getCurrentTuneBook().deleteVideo(tuneId, videoSource, videoCode);
     }
 
-    addWebsite(intTuneId:number, url:string) {
-        return this.getCurrentTuneBook().addWebsite(intTuneId, url);
+    addWebsite(tuneId:number, url:string) {
+        return this.getCurrentTuneBook().addWebsite(tuneId, url);
     }
 
-    deleteWebsite(intTuneId:number, url:string) {
-        this.getCurrentTuneBook().deleteWebsite(intTuneId, url);
+    deleteWebsite(tuneId:number, url:string) {
+        this.getCurrentTuneBook().deleteWebsite(tuneId, url);
     }
 
     getAbcforNewTuneBook() {

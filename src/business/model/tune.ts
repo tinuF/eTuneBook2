@@ -8,9 +8,8 @@ import {calculateFrequencyPlayed} from '../util/date-util';
 import {getSystemProperties} from '../../common/system-properties';
 
 export class Tune {
-    systemProperties: any;
+    id: number;
     abcjsTune: any;
-    intTuneId: number;
     pure: string;
     title: string;
     type: string;
@@ -23,12 +22,13 @@ export class Tune {
     lastPlayed: Date;
     frequencyPlayed: number;
     lastModified: Date;
+    systemProperties: any;
 
-    constructor(abcjsTune: any, intTuneId: number) {
+    constructor(abcjsTune: any, tuneId: number) {
         let systemProperties = getSystemProperties();
         this.systemProperties = systemProperties;
         this.abcjsTune = abcjsTune;
-        this.intTuneId = intTuneId;
+        this.id = tuneId;
         this.pure = "";
         this.title = abcjsTune.title;
         this.type = "unkown type";

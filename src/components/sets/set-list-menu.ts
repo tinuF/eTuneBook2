@@ -58,14 +58,14 @@ export class SetListMenuUI implements OnInit {
         if (this.sorting !== "idAsc") {
             //sort tuneSet id ascending  
             this.sets.sort(function(a: TuneSet, b: TuneSet) {
-                return a.tuneSetId - b.tuneSetId;
+                return a.id - b.id;
             })
             this.sorting = "idAsc";
 
         } else if (this.sorting !== "idDesc") {
             //sort tuneSet id descending  
             this.sets.sort(function(a: TuneSet, b: TuneSet) {
-                return b.tuneSetId - a.tuneSetId;
+                return b.id - a.id;
             })
             this.sorting = "idDesc";
         }

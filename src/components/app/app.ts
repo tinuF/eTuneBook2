@@ -126,13 +126,13 @@ export class App {
     initializeTuneBook() {
         this.tuneBook = this.tuneBookService.initializeTuneBook();
         this.tuneBookService.storeTuneBookAbc();
-        this.router.navigate(['/Tuneabc', { id: this.tuneBook.tuneSets[0].tuneSetPositions[0].tune.intTuneId }]);
+        this.router.navigate(['/Tuneabc', { id: this.tuneBook.tuneSets[0].tuneSetPositions[0].tune.id }]);
     }
 
     newTune() {
         let newTuneSet: TuneSet = this.tuneBookService.initializeTuneAndTuneSet();
         this.tuneBookService.storeTuneBookAbc();
-        this.router.navigate(['/Tuneabc', { id: newTuneSet.tuneSetPositions[0].tune.intTuneId }]);
+        this.router.navigate(['/Tuneabc', { id: newTuneSet.tuneSetPositions[0].tune.id }]);
     }
 
     newPlaylist() {

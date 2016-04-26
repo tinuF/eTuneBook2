@@ -44,7 +44,7 @@ export class TuneInfoListItemUI implements OnInit, DoCheck {
     }
 
     deleteInfo() {
-        this.tuneBookService.deleteWebsite(this.tune.intTuneId, this.website.url);
+        this.tuneBookService.deleteWebsite(this.tune.id, this.website.url);
     }
 }
 

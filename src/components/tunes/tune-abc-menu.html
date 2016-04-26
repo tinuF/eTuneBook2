@@ -7,7 +7,7 @@
 </div>
 
 <div class="btn-group" role="group">
-    <a class="btn btn-secondary btn-sm" title="Exit Edit Modus" [ngClass]="{active: editModus}" [routerLink]="['/Tune', {id: tune.intTuneId}]"><i class="mdi mdi-pencil"></i></a>
+    <a class="btn btn-secondary btn-sm" title="Exit Edit Modus" [ngClass]="{active: editModus}" [routerLink]="['/Tune', {id: tune.id}]"><i class="mdi mdi-pencil"></i></a>
 </div>
 
 <a class="btn btn-sm btn-secondary pull-right" (click)="deleteTune()" title="Delete Tune"><i class="mdi mdi-delete"></i></a>

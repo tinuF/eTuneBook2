@@ -15,7 +15,7 @@ export class TuneRandomizerUI {
 
 
     randomize(e) {
-        let randomTuneId: number = this.tuneBookService.getRandomIntTuneId();
+        let randomTuneId: number = this.tuneBookService.getRandomTuneId();
         this.router.navigate(["/Tune", { id: randomTuneId }]);
     }
 }

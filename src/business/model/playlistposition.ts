@@ -26,13 +26,13 @@ export class PlaylistPosition {
         this.tuneSetPositionPlayInfos = tuneSetPositionPlayInfos;
     }
 
-    deleteTune(intTuneId: number) {
+    deleteTune(tuneId: number) {
         let tuneSetPositionPlayInfo: TuneSetPositionPlayInfo;
 
         for (let z = 0; z < this.tuneSetPositionPlayInfos.length; z++) {
             tuneSetPositionPlayInfo = this.tuneSetPositionPlayInfos[z];
 
-            if (tuneSetPositionPlayInfo.tuneSetPosition.tune.intTuneId == intTuneId) {
+            if (tuneSetPositionPlayInfo.tuneSetPosition.tune.id == tuneId) {
                 // Remove TuneSetPositionPlayInfo from PlaylistPosition
                 // TuneSetPositionPlayInfo will be deleted later by Garbage Collector
                 this.tuneSetPositionPlayInfos.splice(z, 1);

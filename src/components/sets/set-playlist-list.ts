@@ -22,11 +22,11 @@ export class SetPlaylistListUI implements OnInit, DoCheck {
     }
 
     ngOnInit() {
-        this.playlists = this.tuneBookService.getPlaylistsByTuneSetId(this.set.tuneSetId);
+        this.playlists = this.tuneBookService.getPlaylistsByTuneSetId(this.set.id);
     }
 
     ngDoCheck() {
-        this.playlists = this.tuneBookService.getPlaylistsByTuneSetId(this.set.tuneSetId);
+        this.playlists = this.tuneBookService.getPlaylistsByTuneSetId(this.set.id);
     }
 }
 

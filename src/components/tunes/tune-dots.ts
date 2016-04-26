@@ -47,7 +47,7 @@ export class TuneDotsUI implements OnInit, DoCheck {
         //Compare with tbkTuneFocus: ABCJS.Editor also timed-out -> fingerings show up
         //Compare with tbkPopover: ABCJS.renderAbc is not timed-out -> fingerings dont' show (timeout in popover -> no popover is shown)
         setTimeout(() => {
-            let output = 'DotsForTune' + this.tune.intTuneId;
+            let output = 'DotsForTune' + this.tune.id;
             let tunebookString = this.skipFingering(this.tune.pure);
             let parserParams = {};
             let engraverParams = {

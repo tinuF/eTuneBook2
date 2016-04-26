@@ -41,8 +41,8 @@ export class TuneAbcEditorUI implements OnInit, DoCheck {
 
     initABCJSEditor() {
         setTimeout(() => {
-            var editHere = 'abcEditorFor' + this.tune.intTuneId;
-            var showHere = 'DotsForTune' + this.tune.intTuneId;
+            var editHere = 'abcEditorFor' + this.tune.id;
+            var showHere = 'DotsForTune' + this.tune.id;
 
             let engraverParams = {
                 scale: 1.0,
@@ -68,7 +68,7 @@ export class TuneAbcEditorUI implements OnInit, DoCheck {
 
         if (!this.tune.pure) {
             // Delete all TuneSetPositions with that tune
-            this.tuneBookService.deleteTune(this.tune.intTuneId);
+            this.tuneBookService.deleteTune(this.tune.id);
             this.router.navigate(["/Tunelist"]);
 
         } else {
@@ -76,7 +76,7 @@ export class TuneAbcEditorUI implements OnInit, DoCheck {
             this.tune.title = this.tuneBookService.getTuneTitle(this.tune);
             this.tune.type = this.tuneBookService.getTuneType(this.tune);
             this.tune.key = this.tuneBookService.getTuneKey(this.tune);
-            this.tune.intTuneId = this.tuneBookService.getTuneId(this.tune);
+            this.tune.id = this.tuneBookService.getTuneId(this.tune);
         }
 
         // Put TuneBook to localStorage

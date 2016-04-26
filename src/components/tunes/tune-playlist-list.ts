@@ -22,7 +22,7 @@ export class TunePlaylistListUI {
     }
 
     onInit() {
-        this.playlists = this.tuneBookService.getPlaylistsByIntTuneId(this.tune.intTuneId);
+        this.playlists = this.tuneBookService.getPlaylistsByTuneId(this.tune.id);
     }
 }
 

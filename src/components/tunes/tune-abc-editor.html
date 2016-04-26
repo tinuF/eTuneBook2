@@ -2,10 +2,10 @@
     <div id="dotsViewer" class="col-xs-5" [style.background-color]='tune.color.hex'>
         <form ng-show="tuneEditModus">
             <fieldset class="form-group">
-                <textarea id="abcEditorFor{{tune.intTuneId}}" class="form-control"  [value]="tune.pure" (blur)="doneEditing($event)"></textarea>
+                <textarea id="abcEditorFor{{tune.id}}" class="form-control"  [value]="tune.pure" (blur)="doneEditing($event)"></textarea>
                 <!--todo: migrate tbk-abc-element-select tbk-abc-element-change (needed for NoteEditModus) ng-readonly="noteEditModus"-->
             </fieldset>
         </form>
     </div>
-    <div id="DotsForTune{{tune.intTuneId}}" class="col-xs-5"></div>
+    <div id="DotsForTune{{tune.id}}" class="col-xs-5"></div>
 </div>

@@ -1,6 +1,6 @@
 <div class="card col-sm-12" [style.background-color]="tuneSetPositionPlayInfo.tuneSetPosition.tune.color.hex">
     <div class="row">
-        <a class="col-sm-4" [routerLink]="['/Tune', {id: tuneSetPositionPlayInfo.tuneSetPosition.tune.intTuneId}]">{{tuneSetPositionPlayInfo.tuneSetPosition.tune.title | eliminateThe}}</a>
+        <a class="col-sm-4" [routerLink]="['/Tune', {id: tuneSetPositionPlayInfo.tuneSetPosition.tune.id}]">{{tuneSetPositionPlayInfo.tuneSetPosition.tune.title | eliminateThe}}</a>
         <div class="col-sm-3">
             <small [hidden]="editModus">{{tuneSetPositionPlayInfo.repeat}}</small>
             <input class="form-control form-control-sm" [hidden]="!editModus" [value]="tuneSetPositionPlayInfo.repeat"

@@ -14,7 +14,7 @@ export function importTuneSets(abcjsBook: any) {
     let tuneSetDirectives: Array<string> = [];
     let tuneSets: Array<TuneSet> = [];
     let tune: Tune = null;
-    let intTuneId = 1;
+    let tuneId = 1;
 
     // Generate TuneSetPositions
     for (let i = 0; i < abcjsBook.tunes.length; i++) {
@@ -25,7 +25,7 @@ export function importTuneSets(abcjsBook: any) {
         if (tuneSetDirectives.length > 0) {
             // Tune that was exported from eTuneBook
             // The tune can have one or more tuneSetDirective
-            tune = new Tune(abcjsTune, intTuneId);
+            tune = new Tune(abcjsTune, tuneId);
 
             for (let y = 0; y < tuneSetDirectives.length; y++) {
                 // Get tuneSetId, position, repeat
@@ -40,7 +40,7 @@ export function importTuneSets(abcjsBook: any) {
                 allTuneSetPositions.push(tuneSetPosition);
             }
 
-            intTuneId++;
+            tuneId++;
 
         } else {
             // Zwischenspeichern und sp�ter aufgrund der dynamisch ermittelten maxTuneSetId generieren
@@ -99,13 +99,13 @@ export function importTuneSets(abcjsBook: any) {
         let tuneSetPosition: TuneSetPosition;
         let tune: Tune;
 
-        tune = new Tune(tunesWithoutTuneSetDirective[i], intTuneId);
+        tune = new Tune(tunesWithoutTuneSetDirective[i], tuneId);
 
         tuneSetPosition = new TuneSetPosition(wTuneSetId, tune, 1, "3x", "");
         tuneSetPositions.push(tuneSetPosition);
         tuneSet = new TuneSet(wTuneSetId, tune.title, tuneSetPositions);
         tuneSets.push(tuneSet);
-        intTuneId++;
+        tuneId++;
         wTuneSetId++;
     }
 

@@ -65,7 +65,7 @@ export class TuneVideoListItemUI implements OnInit, DoCheck {
     }
 
     deleteVideo() {
-        this.tuneBookService.deleteVideo(this.tune.intTuneId, this.video.source, this.video.code);
+        this.tuneBookService.deleteVideo(this.tune.id, this.video.source, this.video.code);
     }
 }
 

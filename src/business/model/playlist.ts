@@ -30,7 +30,7 @@ export class Playlist {
 
     getPlaylistPositionByTuneSetId(tuneSetId: number): PlaylistPosition {
         for (let i = 0; i < this.playlistPositions.length; i++) {
-            if (tuneSetId == this.playlistPositions[i].tuneSet.tuneSetId) {
+            if (tuneSetId == this.playlistPositions[i].tuneSet.id) {
                 return this.playlistPositions[i];
             }
         }
@@ -86,13 +86,13 @@ export class Playlist {
         });
     }
 
-    deleteTune(intTuneId: number) {
+    deleteTune(tuneId: number) {
         let playlistPosition: PlaylistPosition;
 
         for (let y = 0; y < this.playlistPositions.length; y++) {
             playlistPosition = this.playlistPositions[y];
 
-            playlistPosition.deleteTune(intTuneId);
+            playlistPosition.deleteTune(tuneId);
 
             if (playlistPosition.setTuneSetPositionPlayInfos.length == 0) {
                 // Empty PlaylistPosition

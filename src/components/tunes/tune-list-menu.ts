@@ -104,14 +104,14 @@ export class TuneListMenuUI implements OnInit {
         if (this.sorting !== "idAsc") {
             //sort tune Id ascending  
             this.tunes.sort(function(a: Tune, b: Tune) {
-                return a.intTuneId - b.intTuneId;
+                return a.id - b.id;
             });
             this.sorting = "idAsc";
 
         } else if (this.sorting !== "idDesc") {
             //sort tune Id descending  
             this.tunes.sort(function(a: Tune, b: Tune) {
-                return b.intTuneId - a.intTuneId;
+                return b.id - a.id;
             });
             this.sorting = "idDesc";
         }

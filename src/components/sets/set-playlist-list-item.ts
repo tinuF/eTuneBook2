@@ -25,7 +25,7 @@ export class SetPlaylistListItemUI implements OnInit {
     }
 
     ngOnInit() {
-       this.playlistPosition = this.tuneBookService.getPlaylistPositionByTuneSetId(this.playlist.id, this.set.tuneSetId);
+       this.playlistPosition = this.tuneBookService.getPlaylistPositionByTuneSetId(this.playlist.id, this.set.id);
     }
 }
 

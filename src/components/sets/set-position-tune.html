@@ -12,7 +12,7 @@
     <a class="btn btn-sm btn-secondary pull-xl-right" (click)="deleteTuneSetPosition($event)" title="Remove Tune from Set" [hidden]="!editModus"><i class="mdi mdi-delete"></i></a>
         
     <p >
-        <a [routerLink]="['/Tune', {id: tune.intTuneId}]">{{tune.title | eliminateThe}}</a>
+        <a [routerLink]="['/Tune', {id: tune.id}]">{{tune.title | eliminateThe}}</a>
         
     </p>
     <small class="text-muted">{{tune.type}} in {{tune.key}}</small>

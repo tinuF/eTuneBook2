@@ -23,14 +23,14 @@ export class TuneTransposerUI {
 
     tuneUp() {
         // Transpose up
-        this.tuneBookService.tuneUp(this.tune.intTuneId);
+        this.tuneBookService.tuneUp(this.tune.id);
         this.tuneBookService.storeTuneBookAbc();
         this.transposeUp.next(null);
     }
 
     tuneDown() {
         // Transpose down
-        this.tuneBookService.tuneDown(this.tune.intTuneId);
+        this.tuneBookService.tuneDown(this.tune.id);
         this.tuneBookService.storeTuneBookAbc();
         this.transposeDown.next(null);
     }

@@ -87,14 +87,14 @@ export function filterTuneSets(tuneBook: TuneBook, filterSettings: FilterSetting
             setIdMatch = true;
 
         } else {
-            setIdMatch = filterSettings.setIds.indexOf(tuneBook.tuneSets[i].tuneSetId) > -1;
+            setIdMatch = filterSettings.setIds.indexOf(tuneBook.tuneSets[i].id) > -1;
         }
 
         if (filterSettings.playlistIds.length === 0 || !filterSettings.applyPlaylistIds) {
             playlistIdMatch = true;
 
         } else {
-            let setPlaylists: Array<Playlist> = tuneBook.getPlaylistsByTuneSetId(tuneBook.tuneSets[i].tuneSetId);
+            let setPlaylists: Array<Playlist> = tuneBook.getPlaylistsByTuneSetId(tuneBook.tuneSets[i].id);
 
             for (let z = 0; z < setPlaylists.length; z++) {
                 for (let j = 0; j < filterSettings.playlistIds.length; j++) {
@@ -130,7 +130,7 @@ export function filterTuneSets(tuneBook: TuneBook, filterSettings: FilterSetting
         }
 
         if (!eventMatch || !bandMatch) {
-            playlists = tuneBook.getPlaylistsByTuneSetId(tuneBook.tuneSets[i].tuneSetId);
+            playlists = tuneBook.getPlaylistsByTuneSetId(tuneBook.tuneSets[i].id);
 
             for (let y = 0; y < playlists.length; y++) {
                 if (filterSettings.event == playlists[y].event) {
@@ -184,7 +184,7 @@ export function extractTunes(tuneSets: Array<TuneSet>): Array<Tune> {
             addToTunes = true;
 
             for (let y = 0; y < tunes.length; y++) {
-                if (tunes[y].intTuneId == tuneSets[i].tuneSetPositions[z].tune.intTuneId) {
+                if (tunes[y].id == tuneSets[i].tuneSetPositions[z].tune.id) {
                     addToTunes = false;
                 }
             }
@@ -225,7 +225,7 @@ export function filterPlaylists(playlists: Array<Playlist>, filterSettings: Filt
             for (let y = 0; y < playlists[z].playlistPositions.length; y++) {
 
                 for (let a = 0; a < tuneSetsFiltered.length; a++) {
-                    if (!tuneSetMatch && playlists[z].playlistPositions[y].tuneSet.tuneSetId == tuneSetsFiltered[a].tuneSetId) {
+                    if (!tuneSetMatch && playlists[z].playlistPositions[y].tuneSet.id == tuneSetsFiltered[a].id) {
                         tuneSetMatch = true;
                     }
                 }
