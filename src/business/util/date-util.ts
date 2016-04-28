@@ -1,13 +1,15 @@
 import * as moment from 'moment';
+import {PlayDate} from '../model/playDate';
 
-export function calculateFrequencyPlayed(playDates) {
+
+export function calculateFrequencyPlayed(playDates:Array<PlayDate>) {
     var today = moment();
     var frequencyPlayed = 0;
     var days = 0;
 
     for (var i = 0; i < playDates.length; i++) {
         days = 0;
-        var checkDay = moment(playDates[i].playDate);
+        var checkDay = moment(playDates[i].date);
         days = today.diff(checkDay, 'days');
 
         if (days < 1000) {

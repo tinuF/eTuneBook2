@@ -25,8 +25,8 @@ export class AbcUI implements OnInit {
     }
 
 
-    exportTuneBook(startDownload) {
-        var date = moment(new Date());
+    exportTuneBook(startDownload:boolean) {
+        let date = moment(new Date());
         this.tuneBook.version = date.format("YYYY-MM-DDTHH:mm");
         this.exportedTuneBook = this.tuneBookService.writeAbc(this.abcExportSettings);
 
@@ -34,18 +34,18 @@ export class AbcUI implements OnInit {
         this.saveTuneBookAsFile(this.exportedTuneBook, startDownload);
     }
 
-    saveTuneBookAsFile(exportedTuneBookAsText, startDownload) {
-        //var exportedTuneBookAsBlob = new Blob([exportedTuneBookAsText], {type:'text/plain'});
-        //var exportedTuneBookAsBlob = new Blob([exportedTuneBookAsText], {type:'text/plain;charset=ISO-8859-1'});
-        //var exportedTuneBookAsBlob = new Blob([exportedTuneBookAsText], {encoding:"UTF-8", type:'text/plain;charset=UTF-8'});
-        //var exportedTuneBookAsBlob = new Blob([exportedTuneBookAsText], {encoding:"ISO-8859-1", type:'text/plain;charset=ISO-8859-1'});
-        var BOM = "\uFEFF";
-        var data = BOM + exportedTuneBookAsText;
-        var exportedTuneBookAsBlob = new Blob([data], { type: 'text/plain;charset=UTF-8' });
+    saveTuneBookAsFile(exportedTuneBookAsText:string, startDownload:boolean) {
+        //let exportedTuneBookAsBlob = new Blob([exportedTuneBookAsText], {type:'text/plain'});
+        //let exportedTuneBookAsBlob = new Blob([exportedTuneBookAsText], {type:'text/plain;charset=ISO-8859-1'});
+        //let exportedTuneBookAsBlob = new Blob([exportedTuneBookAsText], {encoding:"UTF-8", type:'text/plain;charset=UTF-8'});
+        //let exportedTuneBookAsBlob = new Blob([exportedTuneBookAsText], {encoding:"ISO-8859-1", type:'text/plain;charset=ISO-8859-1'});
+        let BOM = "\uFEFF";
+        let data = BOM + exportedTuneBookAsText;
+        let exportedTuneBookAsBlob = new Blob([data], { type: 'text/plain;charset=UTF-8' });
 
-        var fileNameToSaveAs = "My TuneBook";
+        let fileNameToSaveAs = "My TuneBook";
 
-        var downloadLink = <HTMLLinkElement>document.getElementById("saveTuneBookToFile");
+        let downloadLink = <HTMLLinkElement>document.getElementById("saveTuneBookToFile");
         downloadLink.href = this.createObjectURL(exportedTuneBookAsBlob);
         downloadLink.title = fileNameToSaveAs;
 
@@ -54,7 +54,7 @@ export class AbcUI implements OnInit {
         }
     }
 
-    createObjectURL(file) {
+    createObjectURL(file:any) {
         if (window.URL && window.URL.createObjectURL) {
             return window.URL.createObjectURL(file);
         } else {

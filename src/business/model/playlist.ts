@@ -109,9 +109,9 @@ export class Playlist {
                 removedPlaylistPosition = this.playlistPositions[z];
                 // Delete playlistPosition from playlist
                 this.playlistPositions.splice(z, 1);
-                //Falls eine tuneSetPositionPlayInfo zur gelöschten playlistPosition vorhanden wäre_
-                //Löschen nicht nötig, da bei writeAbcHeader die playlistPosition nicht mehr geschrieben wird,
-                //und somit die tuneSetPositionPlayInfo auch nicht.
+                
+                // Remove all TuneSetPositionPlayInfos from the removed PlaylistPosition
+                removedPlaylistPosition.tuneSetPositionPlayInfos = [];
             }
         }
 

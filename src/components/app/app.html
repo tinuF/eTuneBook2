@@ -46,7 +46,10 @@
         </li>
 
         <form class="form-inline navbar-form pull-xs-right col-xs-5" role="search">
+            <!--
             <input type="text" class="form-control" placeholder="Search" (keyup)="search($event)">
+            -->
+            <input type="text" class="form-control" placeholder="Search" [value]="filterSettings.title" (keyup)="search($event)">
         </form>
     </ul>
 </nav>

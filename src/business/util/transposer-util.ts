@@ -1,4 +1,6 @@
-export function tuneDown(tune) {
+import {Tune} from '../model/tune';
+
+export function tuneDown(tune:Tune) {
     // Adaption of Jens Wollschl�ger's ABC-Transposer (http://www.8ung.at/abctransposer/)
     var neu = encodeURI(tune.pure);
 
@@ -156,7 +158,7 @@ export function tuneDown(tune) {
     return tune;
 }
 
-export function tuneUp(tune) {
+export function tuneUp(tune:Tune) {
     // Adaption of Jens Wollschl�ger's ABC-Transposer (http://www.8ung.at/abctransposer/)
     var neu = encodeURI(tune.pure);
 

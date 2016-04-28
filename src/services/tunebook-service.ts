@@ -5,6 +5,7 @@ import * as moment from 'moment';
 import {TuneBook} from '../business/model/tunebook';
 import {Tune} from '../business/model/tune';
 import {TuneSet} from '../business/model/tuneset';
+import {Playlist} from '../business/model/playlist';
 import {AbcExportSettings} from '../common/settings/abc-export-settings';
 import {FilterSettings} from '../common/settings/filter-settings';
 import {PlaylistSettings} from '../common/settings/playlist-settings';
@@ -25,12 +26,16 @@ export class TuneBookService {
     editModus: boolean;
 
     constructor(public http: Http) {
+        console.log("TuneBookService:constructor start");
+        
         this.systemProperties = getSystemProperties();
         this.tuneBook = this.getCurrentTuneBook();
         this.abcExportSettings = new AbcExportSettings();
-        this.initializeFilter();
+        this.initializeFilter();    //TODO: initializeFilter() wird schon in getCurrentTuneBook() aufgerufen!
         this.editModus = false;
         this.playlistSettings = new PlaylistSettings();
+        
+        console.log("TuneBookService:constructor end");
     }
 
     setCurrentTuneBook(abc:string) {
@@ -39,6 +44,10 @@ export class TuneBookService {
     }
 
     getCurrentTuneBook() {
+        //==null checks ===null and ===undefined
+        //===undefined when called from constructor
+        //undefined: noch nicht zugewiesen (nur deklariert)
+        //null: zugewiesen mit null
         if (this.tuneBook == null) {
             return this.getTuneBookFromLocalStorage();
         }
@@ -63,13 +72,19 @@ export class TuneBookService {
     }
 
     initializeFilter() {
-        this.filterSettings = new FilterSettings();
+        if (this.filterSettings == null) {
+            this.filterSettings = new FilterSettings();    
+        
+        } else {
+            this.filterSettings.initialize();
+        }
+        
         this.setTunesFiltered();
     }
 
     getTuneBookFromLocalStorage() {
         // Retrieve eTuneBook Abc from localStorage
-        var abc = JSON.parse(localStorage.getItem(this.systemProperties.STORAGE_ID_TUNEBOOK) || '[]');
+        let abc = JSON.parse(localStorage.getItem(this.systemProperties.STORAGE_ID_TUNEBOOK) || '[]');
 
         if (abc == undefined || abc == "") {
             this.tuneBook = null;
@@ -117,18 +132,18 @@ export class TuneBookService {
     }
 
     getSampleAbc(tuneId: number, startFromBar: number, numberOfBars: number) {
-        var tune = this.getTune(tuneId);
+        let tune = this.getTune(tuneId);
         return tune.getSampleAbc(startFromBar, numberOfBars);
     }
 
     tuneUp(tuneId:number) {
-        var tune = this.getTune(tuneId);
+        let tune = this.getTune(tuneId);
         // Transpose up and Sync Tune-Key
         tune.key = this.getTuneKey(tuneUp(tune));
     }
 
     tuneDown(tuneId:number) {
-        var tune = this.getTune(tuneId);
+        let tune = this.getTune(tuneId);
         // Transpose down and Sync Tune-Key
         tune.key = this.getTuneKey(tuneDown(tune));
     }
@@ -143,17 +158,19 @@ export class TuneBookService {
     }
 
     initializeTuneAndTuneSet(): TuneSet {
+        let newTuneSet:TuneSet;
+        
         if (this.getCurrentTuneBook() == null) {
             this.tuneBook = this.initializeTuneBook();
-            this.initializeFilter();
-            return this.tuneBook.tuneSets[0];
-
+            newTuneSet = this.tuneBook.tuneSets[0];
         } else {
-            let set: TuneSet = this.getCurrentTuneBook().initializeTuneAndTuneSet();
-            this.initializeFilter();
-            return set;
+            newTuneSet = this.getCurrentTuneBook().initializeTuneAndTuneSet();
+            this.storeTuneBookAbc();
         }
-
+        
+        this.initializeFilter();
+        
+        return newTuneSet;
     }
 
     getTuneKey(tune:Tune) {
@@ -168,8 +185,8 @@ export class TuneBookService {
         return tune.getTuneType();
     }
 
-    getTuneId(tune:Tune) {
-        return tune.getTuneId();
+    getTuneAbcId(tune:Tune) {
+        return tune.getTuneAbcId();
     }
 
     addTunePlayDate(tune:Tune, newDate:Date) {
@@ -186,13 +203,14 @@ export class TuneBookService {
     */
     initializeTuneBook() {
         this.setCurrentTuneBook(this.getAbcforNewTuneBook());
+        this.storeTuneBookAbc();
         //TODO: Check if necessary and refactor
         //this.tuneBook.tuneSets[0].tuneSetPositions[0].tune.id = 1;
         return this.tuneBook;
     }
 /*
     getSettingsFromStore() {
-        var settings = [];
+        let settings = [];
 
         // Retrieve Settings from localStorage
         // TODO: Store AbcExportSettings and FilterSettings?
@@ -224,12 +242,15 @@ export class TuneBookService {
         return this.getCurrentTuneBook().addPlaylistPositions(playlistId, setIds);
     }
 
-    addEmptyPlaylist() {
-        return this.getCurrentTuneBook().addEmptyPlaylist();
+    addEmptyPlaylist():Playlist {
+        let newPlaylist: Playlist = this.getCurrentTuneBook().addEmptyPlaylist();
+        this.storeTuneBookAbc();
+        return newPlaylist;
     }
 
     deleteTuneSetPosition(tuneSetId:number, position:number) {
-        return this.getCurrentTuneBook().deleteTuneSetPosition(tuneSetId, position);
+        this.getCurrentTuneBook().deleteTuneSetPosition(tuneSetId, position);
+        this.initializeFilter();
     }
 
     deletePlaylistPosition(playlistId:number, position:number) {
@@ -334,6 +355,7 @@ export class TuneBookService {
             this.tuneSetsFiltered = filterTuneSets(this.getCurrentTuneBook(), this.getCurrentFilterSettings());
             this.tunesFiltered = filterTunes(extractTunes(this.tuneSetsFiltered), this.getCurrentFilterSettings());
         }
+        console.log("TuneBookService:setTunesFiltered called");
     }
 
     getTunesFiltered() {
@@ -386,7 +408,7 @@ export class TuneBookService {
 
     getAbcforNewTuneBook() {
         //TODO: Angleichen mit initializeTuneSet und initializeTuneAndTuneSet
-        var abc = "";
+        let abc = "";
 
         abc = this.initializeAbcHeader();
         // First Tune
@@ -399,13 +421,13 @@ export class TuneBookService {
     }
 
     initializeAbcHeader() {
-        var tuneBookName = "My TuneBook";
-        var tuneBookDescription = "The tunes I play";
-        var date = moment(new Date());
-        var tuneBookVersion = date.format("YYYY-MM-DDTHH:mm");
+        let tuneBookName = "My TuneBook";
+        let tuneBookDescription = "The tunes I play";
+        let date = moment(new Date());
+        let tuneBookVersion = date.format("YYYY-MM-DDTHH:mm");
 
         // Construct Header
-        var tbkAbc = "%abc-";
+        let tbkAbc = "%abc-";
         tbkAbc += this.systemProperties.ABC_VERSION;
         tbkAbc += "\n";
         tbkAbc += "I:abc-creator eTuneBook-";

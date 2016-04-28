@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from 'angular2/core';
+import {Component} from 'angular2/core';
 import {ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {TuneBookService} from '../../services/tunebook-service';
@@ -11,13 +11,9 @@ import {EditButtonUI} from '../../components/common/edit-btn';
     directives: [ROUTER_DIRECTIVES, EditButtonUI],
     styleUrls: ['./components/playlists/playlist-menu.css'],
 })
-export class PlayListMenuUI implements OnInit {
+export class PlayListMenuUI {
 
     constructor(public tuneBookService: TuneBookService) {
-
-    }
-
-    ngOnInit() {
 
     }
 }

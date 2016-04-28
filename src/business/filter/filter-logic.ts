@@ -1,6 +1,5 @@
 import {TuneBook} from '../model/tunebook';
 import {TuneSet} from '../model/tuneset';
-import {TuneSetPosition} from '../model/tunesetposition';
 import {Tune} from '../model/tune';
 import {Playlist} from '../model/playlist';
 import {FilterSettings} from '../../common/settings/filter-settings';
@@ -251,7 +250,7 @@ export function filterPlaylists(playlists: Array<Playlist>, filterSettings: Filt
         */
 
         if (playlistIdMatch && tuneSetMatch) {
-            playlistsFiltered.push(playlists[z])
+            playlistsFiltered.push(playlists[z]);
         }
     }
 

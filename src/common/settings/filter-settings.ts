@@ -13,6 +13,10 @@ export class FilterSettings {
 
 
     constructor() {
+        this.initialize();
+    }
+    
+    initialize() {
         this.key = "All Keys";
         this.type = "All Types";
         this.color = "All Colors";

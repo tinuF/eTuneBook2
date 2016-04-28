@@ -1,5 +1,6 @@
-export function eliminateThe(string) {
-    var theSplits = [];
+export function eliminateThe(string:string) {
+    let theSplits:Array<string> = [];
+    
     if (string != 'undefined' && string != null) {
         theSplits = string.split(",");
     }

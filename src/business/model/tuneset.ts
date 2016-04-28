@@ -73,7 +73,7 @@ export class TuneSet {
         });
     }
 
-    addPlayDate(newDate) {
+    addPlayDate(newDate:Date) {
         for (var i = 0; i < this.tuneSetPositions.length; i++) {
             this.tuneSetPositions[i].tune.addPlayDate(newDate);
         }

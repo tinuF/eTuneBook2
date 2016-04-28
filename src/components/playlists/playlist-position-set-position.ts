@@ -2,7 +2,6 @@ import {Component, Input, OnInit} from 'angular2/core';
 import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {TuneBookService} from '../../services/tunebook-service';
-import {TuneSetPosition} from '../../business/model/tunesetposition';
 import {TuneSetPositionPlayInfo} from '../../business/model/tunesetposition-playinfo';
 import {PartPlayInfo} from '../../business/model/partplayinfo';
 import {EliminateThe} from '../../pipes/eliminate-the';

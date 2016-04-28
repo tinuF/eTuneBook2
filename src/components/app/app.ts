@@ -1,11 +1,11 @@
-import {Component} from 'angular2/core';
+import {Component, OnInit} from 'angular2/core';
 import {RouteConfig, Router, ROUTER_DIRECTIVES} from 'angular2/router';
 
-import {getSystemProperties} from '../../common/system-properties';
 import {TuneBookService} from '../../services/tunebook-service';
 import {TuneBook} from '../../business/model/tunebook';
 import {Playlist} from '../../business/model/playlist';
 import {TuneSet} from '../../business/model/tuneset';
+import {FilterSettings} from '../../common/settings/filter-settings';
 
 import {BookUI} from '../../components/book/book';
 import {AbcUI} from '../../components/abc/abc';
@@ -47,26 +47,28 @@ import {SocialNavigationUI} from '../../components/app/social-nav';
     { path: '/playlists/:id', component: PlaylistUI, name: 'Playlist' },
     { path: '/playlists/:id/position/:pos', component: PlaylistPositionUI, name: 'PlaylistPosition' }
 ])
-export class App {
+export class App implements OnInit {
     tuneBook: TuneBook;
-    systemProperties;
-    filterSettings; FilterSettings;
+    filterSettings: FilterSettings;
 
     constructor(public tuneBookService: TuneBookService, public router: Router) {
-        this.systemProperties = getSystemProperties();
-        this.tuneBook = this.tuneBookService.getTuneBookFromLocalStorage();
-        this.filterSettings = this.tuneBookService.getCurrentFilterSettings();
-
-        if (this.tuneBook !== null && this.tuneBook.hasOwnProperty("tuneSets")) {
-
-        } else {
-            // Init TuneBook
-            this.tuneBook = this.tuneBookService.initializeTuneBook();
-            router.navigate(['/Home']);
-        }
+        
     }
 
-    loadBxplTuneBook() {  
+    ngOnInit() {
+        this.tuneBook = this.tuneBookService.getCurrentTuneBook();
+        this.filterSettings = this.tuneBookService.getCurrentFilterSettings();
+
+        if (this.tuneBook === null) {
+            // Init TuneBook
+            this.tuneBook = this.tuneBookService.initializeTuneBook();
+            this.router.navigate(['/Home']);
+        }
+    }
+    
+    loadBxplTuneBook() { 
+        //Hier braucht es offensichtlich kein this.tuneBook = ...
+        //vermutlich wegen dem Binding im Template. 
         this.tuneBookService.getDefaultFromServer();
         this.router.navigate(["/Tunelist"]);
     }
@@ -98,11 +100,11 @@ export class App {
         }
     }
 
-    getTuneBookFromImportedFile(abc, fileName) {
+    getTuneBookFromImportedFile(abc:string, fileName:string) {
         setTimeout(() => {
             try {
                 this.tuneBook = this.tuneBookService.getTuneBookFromImportedFile(abc, fileName);
-
+                
             } catch (e) {
                 alert("eTuneBook cannot import " + fileName + " due to: " + e.toString());
 
@@ -125,19 +127,16 @@ export class App {
 
     initializeTuneBook() {
         this.tuneBook = this.tuneBookService.initializeTuneBook();
-        this.tuneBookService.storeTuneBookAbc();
         this.router.navigate(['/Tuneabc', { id: this.tuneBook.tuneSets[0].tuneSetPositions[0].tune.id }]);
     }
 
     newTune() {
         let newTuneSet: TuneSet = this.tuneBookService.initializeTuneAndTuneSet();
-        this.tuneBookService.storeTuneBookAbc();
         this.router.navigate(['/Tuneabc', { id: newTuneSet.tuneSetPositions[0].tune.id }]);
     }
 
     newPlaylist() {
         let newPlaylist: Playlist = this.tuneBookService.addEmptyPlaylist();
-        this.tuneBookService.storeTuneBookAbc();
         this.router.navigate(['/Playlist', { id: newPlaylist.id }]);
     }
 

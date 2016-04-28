@@ -8,14 +8,13 @@ import {Component, Input, OnDestroy} from 'angular2/core';
     styleUrls: ['./components/common/spinner.css'],
 })
 export class SpinnerUI implements OnDestroy {
-    private currentTimeout: any;
-    private isDelayedRunning: boolean = false;
+    currentTimeout: any;
+    isDelayedRunning: boolean = false;
+
+    @Input() delay: number = 300;
 
     @Input()
-    public delay: number = 300;
-
-    @Input()
-    public set isRunning(value: boolean) {
+    set isRunning(value: boolean) {
         if (!value) {
             this.cancelTimeout();
             this.isDelayedRunning = false;
@@ -31,7 +30,7 @@ export class SpinnerUI implements OnDestroy {
         }, this.delay);
     }
 
-    private cancelTimeout(): void {
+    cancelTimeout(): void {
         clearTimeout(this.currentTimeout);
         this.currentTimeout = undefined;
     }

@@ -73,10 +73,12 @@ export class TuneAbcEditorUI implements OnInit, DoCheck {
 
         } else {
             // Sync Tune-Fields
+            
+            //TODO: Move to Service
             this.tune.title = this.tuneBookService.getTuneTitle(this.tune);
             this.tune.type = this.tuneBookService.getTuneType(this.tune);
             this.tune.key = this.tuneBookService.getTuneKey(this.tune);
-            this.tune.id = this.tuneBookService.getTuneId(this.tune);
+            
         }
 
         // Put TuneBook to localStorage

@@ -102,7 +102,7 @@ export class PlaylistTuneDotsUI implements OnInit, DoCheck {
 
 
 
-            this.tuneObjectArray = ABCJS.renderAbc(output, tunebookString, parserParams, engraverParams, renderParams)
+            this.tuneObjectArray = ABCJS.renderAbc(output, tunebookString, parserParams, engraverParams, renderParams);
         }, 0);
     }
 

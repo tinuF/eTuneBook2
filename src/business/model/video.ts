@@ -3,7 +3,7 @@ export class Video {
   code: string;
   description: string;
 
-  constructor(source, code, description) {
+  constructor(source:string, code:string, description:string) {
     this.source = source;
     this.code =  code;
     this.description = description;

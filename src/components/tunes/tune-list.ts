@@ -73,16 +73,17 @@ export class TuneListUI implements OnInit, DoCheck, OnDestroy, AfterViewInit, Ca
         console.log("tune-list:ngAfterViewInit called");
     }
     
-    //does not work
+    
     routerCanReuse(next: ComponentInstruction, prev: ComponentInstruction) {
          return true; 
     }
     
-    //does not work. Komponente wird zerstört bei Weg-Nagivation.
+    
     routerOnReuse(next: ComponentInstruction, prev: ComponentInstruction) {
         this.tunes = this.tuneBookService.getTunesFiltered();
         console.log("tune-list:routerOnReuse called");
     }
+    
 }
 
 

@@ -124,7 +124,7 @@ export class Tune {
         let barLength = 0;
         let newAbc = "";
         let beginOfLine = "";
-        let barPattern = /\|/g;		//matches | globally (every occurence)
+        //let barPattern = /\|/g;		//matches | globally (every occurence)
         let titleCount = 0;
         let totBarCount = 0;
         let isHeaderLine = false;
@@ -346,7 +346,7 @@ export class Tune {
         return getAbcValue(this.pure, "R:", "undefined").toLowerCase();
     }
 
-    getTuneId() {
+    getTuneAbcId() {
         return getAbcValue(this.pure, "X:", "undefined");
     }
 

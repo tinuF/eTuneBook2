@@ -21,7 +21,7 @@ export class PlaylistPositionUI implements OnInit, DoCheck {
     showDots: boolean;
 
     constructor(public tuneBookService: TuneBookService, public router: Router, routeParams: RouteParams, public location: Location) {
-        this.playlistPosition = this.tuneBookService.getPlaylistPosition(routeParams.get('id'), routeParams.get('pos'));
+        this.playlistPosition = this.tuneBookService.getPlaylistPosition(parseInt(routeParams.get('id')), parseInt(routeParams.get('pos')));
         this.playlist = this.tuneBookService.getPlaylist(this.playlistPosition.playlistId);
         this.showDots = false;
     }

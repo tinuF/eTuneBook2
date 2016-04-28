@@ -21,7 +21,8 @@ export class AbcExportSettings {
         this.fingering = true;
     }
 
-    update(tuneSetAbcIncl, playDateAbcIncl, colorAbcIncl, annotationAbcIncl, siteAbcIncl, tubeAbcIncl, playlistAbcIncl, fingeringAbcIncl) {
+    update(tuneSetAbcIncl: boolean, playDateAbcIncl: boolean, colorAbcIncl: boolean, annotationAbcIncl: boolean, 
+    siteAbcIncl: boolean, tubeAbcIncl: boolean, playlistAbcIncl: boolean, fingeringAbcIncl: boolean) {
         this.tuneSet = tuneSetAbcIncl;
         this.playDate = playDateAbcIncl;
         this.color = colorAbcIncl;
