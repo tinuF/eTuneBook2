@@ -1,12 +1,12 @@
 <div class="card col-lg-4">
     <small class="pull-left text-muted">Link</small>
-    <div class="card-block" [hidden]="!editModus">
+    <div class="card-block" *ngIf="editModus">
         <a class="btn btn-sm btn-secondary pull-right"  (click)="deleteInfo()" title="Delete Info"><i class="mdi mdi-delete"></i></a>
     </div>
-    <div class="card-block" [hidden]="editModus">
+    <div class="card-block" *ngIf="!editModus">
         <a class="btn btn-sm btn-secondary"  href="{{website.url}}" target="_blank">{{website.url}}</a>
     </div>
-    <div class="card-footer" [hidden]="!editModus">
+    <div class="card-footer" *ngIf="editModus">
         <div class="form-group row website-url-form" >
             <div class="col-sm-12">
                 <input id="WebsiteUrl" class="form-control form-control-sm" [value]="website.url" (keydown)="handleKeyDownOnWebsiteUrl($event)"

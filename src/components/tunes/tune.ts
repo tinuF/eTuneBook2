@@ -27,7 +27,7 @@ export class TuneUI implements OnInit, DoCheck {
     editModus: boolean;
 
     constructor(public tuneBookService: TuneBookService, public router: Router, routeParams: RouteParams, public location: Location) {
-        this.tune = this.tuneBookService.getTune(routeParams.get('id'));
+        this.tune = this.tuneBookService.getTune(parseInt(routeParams.get('id')));
     }
 
     ngOnInit() {

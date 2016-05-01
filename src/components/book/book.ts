@@ -30,8 +30,8 @@ export class BookUI implements OnInit {
         }
     }
 
-    handleBlurOnTuneBookName(event) {
-        this.tuneBook.name = event.target.textContent;
+    handleBlurOnTuneBookName(focusEvent:FocusEvent) {
+        this.tuneBook.name = (<HTMLInputElement>focusEvent.target).value;
         this.tuneBookService.storeTuneBookAbc();
     }
 
@@ -45,8 +45,8 @@ export class BookUI implements OnInit {
         }
     }
 
-    handleBlurOnTuneBookVersion(event) {
-        this.tuneBook.version = event.target.textContent;
+    handleBlurOnTuneBookVersion(focusEvent:FocusEvent) {
+        this.tuneBook.version = (<HTMLInputElement>focusEvent.target).value;
         this.tuneBookService.storeTuneBookAbc();
     }
 
@@ -60,8 +60,8 @@ export class BookUI implements OnInit {
         }
     }
 
-    handleBlurOnTuneBookDescription(event) {
-        this.tuneBook.description = event.target.textContent;
+    handleBlurOnTuneBookDescription(focusEvent:FocusEvent) {
+        this.tuneBook.description = (<HTMLInputElement>focusEvent.target).value;
         this.tuneBookService.storeTuneBookAbc();
     }
 }

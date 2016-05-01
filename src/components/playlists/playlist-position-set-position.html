@@ -2,16 +2,16 @@
     <div class="row">
         <a class="col-sm-4" [routerLink]="['/Tune', {id: tuneSetPositionPlayInfo.tuneSetPosition.tune.id}]">{{tuneSetPositionPlayInfo.tuneSetPosition.tune.title | eliminateThe}}</a>
         <div class="col-sm-3">
-            <small [hidden]="editModus">{{tuneSetPositionPlayInfo.repeat}}</small>
-            <input class="form-control form-control-sm" [hidden]="!editModus" [value]="tuneSetPositionPlayInfo.repeat"
+            <small *ngIf="!editModus">{{tuneSetPositionPlayInfo.repeat}}</small>
+            <input class="form-control form-control-sm" *ngIf="editModus" [value]="tuneSetPositionPlayInfo.repeat"
             (keydown)="handleKeyDownOnTuneSetPositionRepeat($event)" (blur)="handleBlurOnTuneSetPositionRepeat($event)">
         </div>
-        <small [hidden]="editModus" class="col-sm-2 text-muted">{{tuneSetPositionPlayInfo.tuneSetPosition.tune.type}} in {{tuneSetPositionPlayInfo.tuneSetPosition.tune.key}}</small>
+        <small *ngIf="!editModus" class="col-sm-2 text-muted">{{tuneSetPositionPlayInfo.tuneSetPosition.tune.type}} in {{tuneSetPositionPlayInfo.tuneSetPosition.tune.key}}</small>
 
-        <etb-playlist-tune  [hidden]="editModus" [tune]="tuneSetPositionPlayInfo.tuneSetPosition.tune"></etb-playlist-tune>
-        <etb-tune-played  class=" pull-sm-right col-sm-2" [hidden]="editModus" [tune]="tuneSetPositionPlayInfo.tuneSetPosition.tune"></etb-tune-played>
+        <etb-playlist-tune  *ngIf="!editModus" [tune]="tuneSetPositionPlayInfo.tuneSetPosition.tune"></etb-playlist-tune>
+        <etb-tune-played  class=" pull-sm-right col-sm-2" *ngIf="!editModus" [tune]="tuneSetPositionPlayInfo.tuneSetPosition.tune"></etb-tune-played>
 
-        <div class="pull-sm-right btn-toolbar hidden-print" role="toolbar" [hidden]="!editModus">
+        <div class="pull-sm-right btn-toolbar hidden-print" role="toolbar" *ngIf="editModus">
             <div class="btn-group" role="group">
                 <a class="btn btn-secondary btn-sm" (click)="togglePlayInfoAnnotation()" title="Show/Hide Annotation">A</a>
                 <a class="btn btn-secondary btn-sm" (click)="addPartPlayInfo()" title="Add Part">+</a>

@@ -1,19 +1,47 @@
 <div class="card" *ngFor="#partPlayInfo of tuneSetPositionPlayInfo.partPlayInfos; #i = index">
     <div class="row">
         <div class="col-sm-2 ">
-            <small [hidden]="editModus">{{partPlayInfo.part}}</small>
-            <input  class="form-control form-control-sm" [hidden]="!editModus" [value]="partPlayInfo.part" (keydown)="handleKeyDownOnPart($event, partPlayInfo)" (blur)="handleBlurOnPart($event, partPlayInfo)">
+          
         </div>
         <div class="col-sm-8">
-            <small [hidden]="editModus">{{partPlayInfo.playInfo}}</small>
-            <input  class="form-control form-control-sm" [hidden]="!editModus" [value]="partPlayInfo.playInfo" (keydown)="handleKeyDownOnPartPlayInfo($event, partPlayInfo)" (blur)="handleBlurOnPartPlayInfo($event, partPlayInfo)">
+          
         </div>
 
-        <div class="pull-sm-right btn-toolbar partPlayInfoMenu hidden-print" role="toolbar" [hidden]="!editModus">
+        <div class="pull-sm-right btn-toolbar partPlayInfoMenu hidden-print" role="toolbar" *ngIf="editModus">
             <div class="btn-group" role="group">
-                <a class="btn btn-secondary btn-sm" (click)="addPartPlayInfoBefore($event, tuneSetPosition.currentTuneSetPositionPlayInfo, partPlayInfo)" title="Add Part Before">+<i class="mdi mdi-arrow-up"></i></a>
-                <a class="btn btn-secondary btn-sm" (click)="addPartPlayInfoAfter($event, tuneSetPosition.currentTuneSetPositionPlayInfo, partPlayInfo)" title="Add Part After">+<i class="mdi mdi-arrow-down"></i></a>
-                <a class="btn btn-sm btn-secondary" (click)="deletePartPlayInfo($event, tuneSetPosition.currentTuneSetPositionPlayInfo, partPlayInfo)" title="Delete Part"><i class="mdi mdi-delete"></i></a>
+                <a class="btn btn-secondary btn-sm" (click)="addPartPlayInfoBefore($event, tuneSetPositionPlayInfo, partPlayInfo)" title="Add Part Before"><i class="mdi mdi-plus"></i></a>
+                
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2 ">
+            <small *ngIf="!editModus">{{partPlayInfo.part}}</small>
+            <input  class="form-control form-control-sm" *ngIf="editModus" [value]="partPlayInfo.part" (keydown)="handleKeyDownOnPart($event, partPlayInfo)" (blur)="handleBlurOnPart($event, partPlayInfo)">
+        </div>
+        <div class="col-sm-8">
+            <small *ngIf="!editModus">{{partPlayInfo.playInfo}}</small>
+            <input  class="form-control form-control-sm" *ngIf="editModus" [value]="partPlayInfo.playInfo" (keydown)="handleKeyDownOnPartPlayInfo($event, partPlayInfo)" (blur)="handleBlurOnPartPlayInfo($event, partPlayInfo)">
+        </div>
+
+        <div class="pull-sm-right btn-toolbar partPlayInfoMenu hidden-print" role="toolbar" *ngIf="editModus">
+            <div class="btn-group" role="group">
+                <a class="btn btn-sm btn-secondary" (click)="deletePartPlayInfo($event, tuneSetPositionPlayInfo, partPlayInfo)" title="Delete Part"><i class="mdi mdi-delete"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2 ">
+          
+        </div>
+        <div class="col-sm-8">
+          
+        </div>
+
+        <div class="pull-sm-right btn-toolbar partPlayInfoMenu hidden-print" role="toolbar" *ngIf="editModus">
+            <div class="btn-group" role="group">
+                <a class="btn btn-secondary btn-sm" (click)="addPartPlayInfoAfter($event, tuneSetPositionPlayInfo, partPlayInfo)" title="Add Part After"><i class="mdi mdi-plus"></i></a>
+          
             </div>
         </div>
     </div>

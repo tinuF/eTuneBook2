@@ -44,8 +44,8 @@ export class TuneVideoListItemUI implements OnInit, DoCheck {
         }
     }
 
-    handleBlurOnVideoCode(event) {
-        this.video.code = event.target.value;
+    handleBlurOnVideoCode(focusEvent:FocusEvent) {
+        this.video.code = (<HTMLInputElement>focusEvent.target).value;
         this.tuneBookService.storeTuneBookAbc();
     }
 
@@ -59,8 +59,8 @@ export class TuneVideoListItemUI implements OnInit, DoCheck {
         }
     }
 
-    handleBlurOnVideoDescription(event) {
-        this.video.description = event.target.value;
+    handleBlurOnVideoDescription(focusEvent:FocusEvent) {
+        this.video.description = (<HTMLInputElement>focusEvent.target).value;
         this.tuneBookService.storeTuneBookAbc();
     }
 

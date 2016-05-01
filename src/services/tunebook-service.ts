@@ -259,10 +259,13 @@ export class TuneBookService {
 
     deletePlaylist(playlistId:number) {
         this.getCurrentTuneBook().deletePlaylist(playlistId);
+        this.storeTuneBookAbc();
     }
 
     copyPlaylist(playlistId:number): number {
-        return this.getCurrentTuneBook().copyPlaylist(playlistId);
+        let newPlaylistId:number = this.getCurrentTuneBook().copyPlaylist(playlistId);
+        this.storeTuneBookAbc();
+        return newPlaylistId;
     }
 
     copyPlaylistPositionToOtherPlaylist(sourcePlaylistId:number, sourcePlaylistPositionNr:number, targetPlaylistId:number) {

@@ -1,1 +1,1 @@
-<div id="DotsForTune{{tune.id}}" class="renderTheDots" [hidden]="!shouldBeShown()"></div>
+<div id="DotsForTune{{tune.id}}" class="renderTheDots" *ngIf="shouldBeShown()"></div>

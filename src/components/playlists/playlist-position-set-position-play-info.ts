@@ -33,33 +33,33 @@ export class PlayListPositionSetPositionPlayInfoUI implements OnInit, DoCheck {
         this.editModus = this.tuneBookService.isEditModus();
     }
 
-    handleKeyDownOnTuneSetPositionRepeat(event, tuneSetPosition) {
+    handleKeyDownOnTuneSetPositionRepeat(event) {
         var keycode = (event.keyCode ? event.keyCode : event.which);
 
         if (keycode === 13) { // ENTER
             event.target.blur();
             event.preventDefault();
-            this.handleBlurOnTuneSetPositionRepeat(event, tuneSetPosition);
+            this.handleBlurOnTuneSetPositionRepeat(event);
         }
     }
 
-    handleBlurOnTuneSetPositionRepeat(event, tuneSetPosition) {
-        tuneSetPosition.currentTuneSetPositionPlayInfo.repeat = event.target.value;
+    handleBlurOnTuneSetPositionRepeat(focusEvent:FocusEvent) {
+        this.tuneSetPositionPlayInfo.repeat = (<HTMLInputElement>focusEvent.target).value;
         this.tuneBookService.storeTuneBookAbc();
     }
 
-    handleKeyDownOnTuneSetPositionAnnotation(event, tuneSetPosition) {
+    handleKeyDownOnTuneSetPositionAnnotation(event) {
         var keycode = (event.keyCode ? event.keyCode : event.which);
 
         if (keycode === 13) { // ENTER
             event.target.blur();
             event.preventDefault();
-            this.handleBlurOnTuneSetPositionAnnotation(event, tuneSetPosition);
+            this.handleBlurOnTuneSetPositionAnnotation(event);
         }
     }
 
-    handleBlurOnTuneSetPositionAnnotation(event, tuneSetPosition) {
-        tuneSetPosition.currentTuneSetPositionPlayInfo.annotation = event.target.value;
+    handleBlurOnTuneSetPositionAnnotation(focusEvent:FocusEvent) {
+        this.tuneSetPositionPlayInfo.annotation = (<HTMLInputElement>focusEvent.target).value;
         this.tuneBookService.storeTuneBookAbc();
     }
 

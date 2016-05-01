@@ -38,8 +38,8 @@ export class TuneInfoListItemUI implements OnInit, DoCheck {
         }
     }
 
-    handleBlurOnWebsiteUrl(event) {
-        this.website.url = event.target.value;
+    handleBlurOnWebsiteUrl(focusEvent:FocusEvent) {
+        this.website.url = (<HTMLInputElement>focusEvent.target).value;
         this.tuneBookService.storeTuneBookAbc();
     }
 

@@ -54,8 +54,8 @@ export class PlayListPositionSetUI implements OnInit, DoCheck {
         }
     }
 
-    handleBlurOnPlaylistPositionName(event) {
-        this.playlistPosition.name = event.target.value;
+    handleBlurOnPlaylistPositionName(focusEvent:FocusEvent) {
+        this.playlistPosition.name = (<HTMLInputElement>focusEvent.target).value;
         this.tuneBookService.storeTuneBookAbc();
     }
 
@@ -76,7 +76,7 @@ export class PlayListPositionSetUI implements OnInit, DoCheck {
     deletePlaylistPosition(e) {
         this.tuneBookService.deletePlaylistPosition(this.playlistPosition.playlistId, this.playlistPosition.position);
         this.tuneBookService.storeTuneBookAbc();
-    };
+    }
 }
 
 

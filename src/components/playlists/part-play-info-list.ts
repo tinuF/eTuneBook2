@@ -30,7 +30,7 @@ export class PartPlayInfoListUI implements OnInit, DoCheck {
         this.editModus = this.tuneBookService.isEditModus();
     }
 
-    handleKeyDownOnPart(event, partPlayInfo) {
+    handleKeyDownOnPart(event, partPlayInfo:PartPlayInfo) {
         var keycode = (event.keyCode ? event.keyCode : event.which);
 
         if (keycode === 13) { // ENTER
@@ -40,12 +40,12 @@ export class PartPlayInfoListUI implements OnInit, DoCheck {
         }
     }
 
-    handleBlurOnPart(event, partPlayInfo) {
-        partPlayInfo.part = event.target.value;
+    handleBlurOnPart(focusEvent:FocusEvent, partPlayInfo:PartPlayInfo) {
+        partPlayInfo.part = (<HTMLInputElement>focusEvent.target).value;
         this.tuneBookService.storeTuneBookAbc();
     }
 
-    handleKeyDownOnPartPlayInfo(event, partPlayInfo) {
+    handleKeyDownOnPartPlayInfo(event, partPlayInfo:PartPlayInfo) {
         var keycode = (event.keyCode ? event.keyCode : event.which);
 
         if (keycode === 13) { // ENTER
@@ -55,12 +55,12 @@ export class PartPlayInfoListUI implements OnInit, DoCheck {
         }
     }
 
-    handleBlurOnPartPlayInfo(event, partPlayInfo) {
-        partPlayInfo.playInfo = event.target.value;
+    handleBlurOnPartPlayInfo(focusEvent:FocusEvent, partPlayInfo:PartPlayInfo) {
+        partPlayInfo.playInfo = (<HTMLInputElement>focusEvent.target).value;
         this.tuneBookService.storeTuneBookAbc();
     }
 
-    deletePartPlayInfo(event, tuneSetPositionPlayInfo, partPlayInfo) {
+    deletePartPlayInfo(event, tuneSetPositionPlayInfo, partPlayInfo:PartPlayInfo) {
         tuneSetPositionPlayInfo.deletePartPlayInfo(partPlayInfo);
         this.tuneBookService.storeTuneBookAbc();
     }

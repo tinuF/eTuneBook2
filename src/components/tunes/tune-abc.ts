@@ -23,7 +23,7 @@ export class TuneAbcUI implements OnInit, DoCheck {
     abcEditor: string;
 
     constructor(public tuneBookService: TuneBookService, public router: Router, routeParams: RouteParams) {
-        this.tune = this.tuneBookService.getTune(routeParams.get('id'));
+        this.tune = this.tuneBookService.getTune(parseInt(routeParams.get('id')));
     }
 
     ngOnInit() {

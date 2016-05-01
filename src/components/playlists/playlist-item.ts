@@ -20,7 +20,7 @@ import {PlayListItemSetPositionUI} from '../../components/playlists/playlist-ite
 })
 export class PlayListItemUI implements OnInit, DoCheck {
     @Input() playlistPosition: PlaylistPosition;
-    @Output() copyPlaylistPosition: EventEmitter<any> = new EventEmitter();
+    @Output() copyPlaylistPosition: EventEmitter<PlaylistPosition> = new EventEmitter();
     editModus: boolean;
     positions: Array<number>;
     playlists: Array<Playlist>;
@@ -58,11 +58,11 @@ export class PlayListItemUI implements OnInit, DoCheck {
         }
     }
 
-    handleBlurOnPlaylistPositionName(event) {
-        this.playlistPosition.name = event.target.value;
+    handleBlurOnPlaylistPositionName(focusEvent:FocusEvent) {
+        this.playlistPosition.name = (<HTMLInputElement>focusEvent.target).value;
         this.tuneBookService.storeTuneBookAbc();
     }
-
+    
     setPositions() {
         this.positions = this.tuneBookService.getPlaylistPositionsAsNumbers(this.playlistPosition.playlistId);
     }

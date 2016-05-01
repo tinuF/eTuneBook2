@@ -1,4 +1,4 @@
-<div class="card col-md-1" [hidden]="!shown">
+<div class="card col-md-1" *ngIf="shown">
   <div class="card-header"> 
     <label class="c-input c-checkbox">
         <input type="checkbox" [checked]="isSelected()" (change)="togglePlaylistSelection($event)">

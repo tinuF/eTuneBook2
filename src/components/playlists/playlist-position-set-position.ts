@@ -47,8 +47,8 @@ export class PlayListPositionSetPositionUI implements OnInit {
         }
     }
 
-    handleBlurOnTuneSetPositionRepeat(event) {
-        this.tuneSetPositionPlayInfo.repeat = event.target.value;
+    handleBlurOnTuneSetPositionRepeat(focusEvent:FocusEvent) {
+        this.tuneSetPositionPlayInfo.repeat = (<HTMLInputElement>focusEvent.target).value;
         this.tuneBookService.storeTuneBookAbc();
     }
 
@@ -60,7 +60,6 @@ export class PlayListPositionSetPositionUI implements OnInit {
         this.tuneSetPositionPlayInfo.addPartPlayInfo(new PartPlayInfo("", ""));
         this.tuneBookService.storeTuneBookAbc();
     }
-
 }
 
 

@@ -43,67 +43,65 @@ export class PlaylistUI implements OnInit, DoCheck {
         });
     }
 
-    handleKeyDownOnPlaylistName(e:KeyboardEvent) {
-        let keycode = (e.keyCode ? e.keyCode : e.which);
+    handleKeyDownOnPlaylistName(keyboardEvent:KeyboardEvent) {
+        let keycode = (keyboardEvent.keyCode ? keyboardEvent.keyCode : keyboardEvent.which);
 
         if (keycode === 13) { // ENTER
-            (<HTMLInputElement>e.target).blur();
-            e.preventDefault();
+            (<HTMLInputElement>keyboardEvent.target).blur();
+            keyboardEvent.preventDefault();
             this.renderer.invokeElementMethod(this.inputPlaylistBand.nativeElement, 'focus', []);
             this.renderer.invokeElementMethod(this.inputPlaylistBand.nativeElement, 'select', []);
         }
     }
 
-    handleBlurOnPlaylistName(e:FocusEvent) {
-        this.playlist.name = (<HTMLInputElement>e.target).value;
+    handleBlurOnPlaylistName(focusEvent:FocusEvent) {
+        this.playlist.name = (<HTMLInputElement>focusEvent.target).value;
         this.tuneBookService.storeTuneBookAbc();
     }
 
-    handleKeyDownOnPlaylistBand(e:KeyboardEvent) {
-        let keycode = (e.keyCode ? e.keyCode : e.which);
+    handleKeyDownOnPlaylistBand(keyboardEvent:KeyboardEvent) {
+        let keycode = (keyboardEvent.keyCode ? keyboardEvent.keyCode : keyboardEvent.which);
 
         if (keycode === 13) { // ENTER
-            (<HTMLInputElement>e.target).blur();
-            e.preventDefault();
+            (<HTMLInputElement>keyboardEvent.target).blur();
+            keyboardEvent.preventDefault();
             this.renderer.invokeElementMethod(this.inputPlaylistEvent.nativeElement, 'focus', []);
             this.renderer.invokeElementMethod(this.inputPlaylistEvent.nativeElement, 'select', []);
         }
     }
 
-    handleBlurOnPlaylistBand(e:FocusEvent) {
-        this.playlist.band = (<HTMLInputElement>e.target).value;
+    handleBlurOnPlaylistBand(focusEvent:FocusEvent) {
+        this.playlist.band = (<HTMLInputElement>focusEvent.target).value;
         this.tuneBookService.storeTuneBookAbc();
     }
 
-    handleKeyDownOnPlaylistEvent(e:KeyboardEvent) {
-        let keycode = (e.keyCode ? e.keyCode : e.which);
+    handleKeyDownOnPlaylistEvent(keyboardEvent:KeyboardEvent) {
+        let keycode = (keyboardEvent.keyCode ? keyboardEvent.keyCode : keyboardEvent.which);
 
         if (keycode === 13) { // ENTER
-            (<HTMLInputElement>e.target).blur();
-            e.preventDefault();
+            (<HTMLInputElement>keyboardEvent.target).blur();
+            keyboardEvent.preventDefault();
             this.renderer.invokeElementMethod(this.inputPlaylistName.nativeElement, 'focus', []);
             this.renderer.invokeElementMethod(this.inputPlaylistName.nativeElement, 'select', []);
         }
     }
 
-    handleBlurOnPlaylistEvent(e:FocusEvent) {
-        this.playlist.event = (<HTMLInputElement>e.target).value;
+    handleBlurOnPlaylistEvent(focusEvent:FocusEvent) {
+        this.playlist.event = (<HTMLInputElement>focusEvent.target).value;
         this.tuneBookService.storeTuneBookAbc();
     }
     
-    setPlaylistPositionToBeCopied(e){
-        this.playlistPositionToBeCopied = e;
+    setPlaylistPositionToBeCopied(playlistPosition:PlaylistPosition){
+        this.playlistPositionToBeCopied = playlistPosition;
     }
 
     copyPlaylist() {
         let newPlaylistId = this.tuneBookService.copyPlaylist(this.playlist.id);
-        this.tuneBookService.storeTuneBookAbc();
         this.router.navigate(['/Playlist', { id: newPlaylistId }]);
     }
 
     deletePlaylist() {
         this.tuneBookService.deletePlaylist(this.playlist.id);
-        this.tuneBookService.storeTuneBookAbc();
         this.router.navigate(['/PlaylistList']);
     }
 }
