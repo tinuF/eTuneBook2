@@ -1,6 +1,7 @@
 <div class="card" *ngIf="tuneSetPositionPlayInfo.annotation || playInfoAnnotationShown">
   <small *ngIf="!editModus">{{tuneSetPositionPlayInfo.annotation}}</small>
-  <input  class="form-control form-control-sm" *ngIf="editModus" [value]="tuneSetPositionPlayInfo.annotation" (keydown)="handleKeyDownOnTuneSetPositionAnnotation($event)" (blur)="handleBlurOnTuneSetPositionAnnotation($event)">
+  <input  class="form-control form-control-sm" *ngIf="editModus" [(ngModel)]="tuneSetPositionPlayInfo.annotation" 
+  (keydown)="handleKeyDownOnTuneSetPositionAnnotation($event)" (blur)="handleBlurOnTuneSetPositionAnnotation($event)">
 </div>
 
 <etb-part-play-info-list [tuneSetPositionPlayInfo]="tuneSetPositionPlayInfo"></etb-part-play-info-list>

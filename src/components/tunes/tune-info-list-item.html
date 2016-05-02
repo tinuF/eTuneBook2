@@ -9,7 +9,8 @@
     <div class="card-footer" *ngIf="editModus">
         <div class="form-group row website-url-form" >
             <div class="col-sm-12">
-                <input id="WebsiteUrl" class="form-control form-control-sm" [value]="website.url" (keydown)="handleKeyDownOnWebsiteUrl($event)"
+                <input #inputWebsiteUrl id="WebsiteUrl" class="form-control form-control-sm" [(ngModel)]="website.url" 
+                (keydown)="handleKeyDownOnWebsiteUrl($event)"
                 (blur)="handleBlurOnWebsiteUrl($event)">
             </div>
         </div>

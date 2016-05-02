@@ -17,11 +17,13 @@
     <div class="row">
         <div class="col-sm-2 ">
             <small *ngIf="!editModus">{{partPlayInfo.part}}</small>
-            <input  class="form-control form-control-sm" *ngIf="editModus" [value]="partPlayInfo.part" (keydown)="handleKeyDownOnPart($event, partPlayInfo)" (blur)="handleBlurOnPart($event, partPlayInfo)">
+            <input  class="form-control form-control-sm" *ngIf="editModus" [(ngModel)]="partPlayInfo.part" 
+            (keydown)="handleKeyDownOnPart($event, partPlayInfo)" (blur)="handleBlurOnPart($event, partPlayInfo)">
         </div>
         <div class="col-sm-8">
             <small *ngIf="!editModus">{{partPlayInfo.playInfo}}</small>
-            <input  class="form-control form-control-sm" *ngIf="editModus" [value]="partPlayInfo.playInfo" (keydown)="handleKeyDownOnPartPlayInfo($event, partPlayInfo)" (blur)="handleBlurOnPartPlayInfo($event, partPlayInfo)">
+            <input  class="form-control form-control-sm" *ngIf="editModus" [(ngModel)]="partPlayInfo.playInfo" 
+            (keydown)="handleKeyDownOnPartPlayInfo($event, partPlayInfo)" (blur)="handleBlurOnPartPlayInfo($event, partPlayInfo)">
         </div>
 
         <div class="pull-sm-right btn-toolbar partPlayInfoMenu hidden-print" role="toolbar" *ngIf="editModus">

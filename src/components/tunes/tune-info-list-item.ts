@@ -1,4 +1,4 @@
-import {Component, OnInit, DoCheck, Input} from 'angular2/core';
+import {Component, OnInit, DoCheck, Input, ViewChild, ElementRef, Renderer} from 'angular2/core';
 
 import {TuneBookService} from '../../services/tunebook-service';
 import {Website} from '../../business/model/website';
@@ -13,10 +13,11 @@ import {Tune} from '../../business/model/tune';
 export class TuneInfoListItemUI implements OnInit, DoCheck {
     @Input() website: Website;
     @Input() tune: Tune;
+    @ViewChild('inputWebsiteUrl') inputWebsiteUrl: ElementRef;
     videoUrl: string;
     editModus: boolean;
 
-    constructor(public tuneBookService: TuneBookService) {
+    constructor(public tuneBookService: TuneBookService, public renderer: Renderer) {
 
     }
 
@@ -28,18 +29,15 @@ export class TuneInfoListItemUI implements OnInit, DoCheck {
         this.editModus = this.tuneBookService.isEditModus();
     }
 
-    handleKeyDownOnWebsiteUrl(event) {
-        var keycode = (event.keyCode ? event.keyCode : event.which);
+    handleKeyDownOnWebsiteUrl(keyboardEvent:KeyboardEvent) {
+        let keycode = (keyboardEvent.keyCode ? keyboardEvent.keyCode : keyboardEvent.which);
 
         if (keycode === 13) { // ENTER
-            event.target.blur();
-            event.preventDefault();
-            this.handleBlurOnWebsiteUrl(event);
+            this.renderer.invokeElementMethod(this.inputWebsiteUrl.nativeElement, 'blur', []);
         }
     }
 
     handleBlurOnWebsiteUrl(focusEvent:FocusEvent) {
-        this.website.url = (<HTMLInputElement>focusEvent.target).value;
         this.tuneBookService.storeTuneBookAbc();
     }
 

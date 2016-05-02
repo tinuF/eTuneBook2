@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from 'angular2/core';
+import {Component, Input, OnInit, ViewChild, ElementRef, Renderer} from 'angular2/core';
 import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {TuneBookService} from '../../services/tunebook-service';
@@ -21,10 +21,11 @@ import {PlayListPositionSetPositionPlayInfoUI} from '../../components/playlists/
 })
 export class PlayListPositionSetPositionUI implements OnInit {
     @Input() tuneSetPositionPlayInfo: TuneSetPositionPlayInfo;
+    @ViewChild('inputTuneSetPositionPlayInfoRepeat') inputTuneSetPositionPlayInfoRepeat: ElementRef;
     playInfoAnnotationShown: boolean;
     editModus: boolean;
 
-    constructor(public tuneBookService: TuneBookService, public router: Router) {
+    constructor(public tuneBookService: TuneBookService, public router: Router, public renderer: Renderer) {
 
     }
 
@@ -37,18 +38,15 @@ export class PlayListPositionSetPositionUI implements OnInit {
         this.editModus = this.tuneBookService.isEditModus();
     }
 
-    handleKeyDownOnTuneSetPositionRepeat(event) {
-        var keycode = (event.keyCode ? event.keyCode : event.which);
+    handleKeyDownOnTuneSetPositionPlayInfoRepeat(keyboardEvent:KeyboardEvent) {
+        let keycode = (keyboardEvent.keyCode ? keyboardEvent.keyCode : keyboardEvent.which);
 
         if (keycode === 13) { // ENTER
-            event.target.blur();
-            event.preventDefault();
-            this.handleBlurOnTuneSetPositionRepeat(event);
+            this.renderer.invokeElementMethod(this.inputTuneSetPositionPlayInfoRepeat.nativeElement, 'blur', []);
         }
     }
 
-    handleBlurOnTuneSetPositionRepeat(focusEvent:FocusEvent) {
-        this.tuneSetPositionPlayInfo.repeat = (<HTMLInputElement>focusEvent.target).value;
+    handleBlurOnTuneSetPositionPlayInfoRepeat(focusEvent:FocusEvent) {
         this.tuneBookService.storeTuneBookAbc();
     }
 

@@ -1,4 +1,4 @@
-import {Component, OnInit, DoCheck, Input} from 'angular2/core';
+import {Component, OnInit, DoCheck, Input, ViewChild, ElementRef, Renderer} from 'angular2/core';
 
 import {TuneBookService} from '../../services/tunebook-service';
 import {Video} from '../../business/model/video';
@@ -13,10 +13,12 @@ import {Tune} from '../../business/model/tune';
 export class TuneVideoListItemUI implements OnInit, DoCheck {
     @Input() video: Video;
     @Input() tune: Tune;
+    @ViewChild('inputVideoCode') inputVideoCode: ElementRef;
+    @ViewChild('inputVideoDescription') inputVideoDescription: ElementRef;
     videoUrl: string;
     editModus: boolean;
 
-    constructor(public tuneBookService: TuneBookService) {
+    constructor(public tuneBookService: TuneBookService, public renderer: Renderer) {
 
     }
 
@@ -33,34 +35,32 @@ export class TuneVideoListItemUI implements OnInit, DoCheck {
     getVideoUrl() {
         return "//www.youtube.com/embed/" + this.video.code;
     }
-
-    handleKeyDownOnVideoCode(event) {
-        var keycode = (event.keyCode ? event.keyCode : event.which);
+    
+    handleKeyDownOnVideoCode(keyboardEvent:KeyboardEvent) {
+        let keycode = (keyboardEvent.keyCode ? keyboardEvent.keyCode : keyboardEvent.which);
 
         if (keycode === 13) { // ENTER
-            event.target.blur();
-            event.preventDefault();
-            this.handleBlurOnVideoCode(event);
+            this.renderer.invokeElementMethod(this.inputVideoCode.nativeElement, 'blur', []);
+            this.renderer.invokeElementMethod(this.inputVideoDescription.nativeElement, 'focus', []);
+            this.renderer.invokeElementMethod(this.inputVideoDescription.nativeElement, 'select', []);
         }
     }
 
     handleBlurOnVideoCode(focusEvent:FocusEvent) {
-        this.video.code = (<HTMLInputElement>focusEvent.target).value;
         this.tuneBookService.storeTuneBookAbc();
     }
 
-    handleKeyDownOnVideoDescription(event) {
-        var keycode = (event.keyCode ? event.keyCode : event.which);
+    handleKeyDownOnVideoDescription(keyboardEvent:KeyboardEvent) {
+        let keycode = (keyboardEvent.keyCode ? keyboardEvent.keyCode : keyboardEvent.which);
 
         if (keycode === 13) { // ENTER
-            event.target.blur();
-            event.preventDefault();
-            this.handleBlurOnVideoDescription(event);
+            this.renderer.invokeElementMethod(this.inputVideoDescription.nativeElement, 'blur', []);
+            this.renderer.invokeElementMethod(this.inputVideoCode.nativeElement, 'focus', []);
+            this.renderer.invokeElementMethod(this.inputVideoCode.nativeElement, 'select', []);
         }
     }
 
     handleBlurOnVideoDescription(focusEvent:FocusEvent) {
-        this.video.description = (<HTMLInputElement>focusEvent.target).value;
         this.tuneBookService.storeTuneBookAbc();
     }
 

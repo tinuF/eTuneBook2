@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, DoCheck} from 'angular2/core';
+import {Component, Input, OnInit, DoCheck, ViewChild, ElementRef, Renderer} from 'angular2/core';
 import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {TuneBookService} from '../../services/tunebook-service';
@@ -20,10 +20,11 @@ import {PlayListPositionSetPositionUI} from '../../components/playlists/playlist
 })
 export class PlayListPositionSetUI implements OnInit, DoCheck {
     @Input() playlistPosition: PlaylistPosition;
+    @ViewChild('inputPlaylistPositionName') inputPlaylistPositionName: ElementRef;
     editModus: boolean;
     positions: Array<number>;
 
-    constructor(public tuneBookService: TuneBookService, public router: Router) {
+    constructor(public tuneBookService: TuneBookService, public router: Router, public renderer: Renderer) {
 
     }
 
@@ -44,18 +45,15 @@ export class PlayListPositionSetUI implements OnInit, DoCheck {
         });
     }
 
-    handleKeyDownOnPlaylistPositionName(event) {
-        var keycode = (event.keyCode ? event.keyCode : event.which);
+    handleKeyDownOnPlaylistPositionName(keyboardEvent:KeyboardEvent) {
+        let keycode = (keyboardEvent.keyCode ? keyboardEvent.keyCode : keyboardEvent.which);
 
         if (keycode === 13) { // ENTER
-            event.target.blur();
-            event.preventDefault();
-            this.handleBlurOnPlaylistPositionName(event);
+            this.renderer.invokeElementMethod(this.inputPlaylistPositionName.nativeElement, 'blur', []);
         }
     }
 
     handleBlurOnPlaylistPositionName(focusEvent:FocusEvent) {
-        this.playlistPosition.name = (<HTMLInputElement>focusEvent.target).value;
         this.tuneBookService.storeTuneBookAbc();
     }
 

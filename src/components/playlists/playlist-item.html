@@ -4,7 +4,8 @@
             <a title="Play Infos" [routerLink]="['/PlaylistPosition', {id: playlistPosition.playlistId, pos: playlistPosition.position}]">
                 <small *ngIf="!editModus">{{playlistPosition.position}}</small>
             </a>
-            <select *ngIf="editModus" class="form-control" id="positionChooser" [(ngModel)]="playlistPosition.position" (change)="setPosition($event)">
+            <select *ngIf="editModus" class="form-control" id="positionChooser" [(ngModel)]="playlistPosition.position" 
+            (change)="setPosition($event)">
                 <option *ngFor="#p of positions" [value]="p">{{p}}</option>
             </select>
         </div>
@@ -13,7 +14,8 @@
             <a title="Play Infos" [routerLink]="['/PlaylistPosition', {id: playlistPosition.playlistId, pos: playlistPosition.position}]">
                 <small *ngIf="!editModus">{{playlistPosition.name | eliminateThe}}</small>
             </a>
-            <input class="form-control form-control-sm" *ngIf="editModus" [value]="playlistPosition.name" (keydown)="handleKeyDownOnPlaylistPositionName($event)"
+            <input class="form-control form-control-sm" *ngIf="editModus" [(ngModel)]="playlistPosition.name" 
+            (keydown)="handleKeyDownOnPlaylistPositionName($event)"
             (blur)="handleBlurOnPlaylistPositionName($event)">
         </div>
 

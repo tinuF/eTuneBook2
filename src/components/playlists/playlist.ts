@@ -47,15 +47,17 @@ export class PlaylistUI implements OnInit, DoCheck {
         let keycode = (keyboardEvent.keyCode ? keyboardEvent.keyCode : keyboardEvent.which);
 
         if (keycode === 13) { // ENTER
-            (<HTMLInputElement>keyboardEvent.target).blur();
-            keyboardEvent.preventDefault();
+            //(<HTMLInputElement>keyboardEvent.target).blur();
+            //keyboardEvent.preventDefault();
+            this.renderer.invokeElementMethod(this.inputPlaylistName.nativeElement, 'blur', []);
             this.renderer.invokeElementMethod(this.inputPlaylistBand.nativeElement, 'focus', []);
             this.renderer.invokeElementMethod(this.inputPlaylistBand.nativeElement, 'select', []);
         }
     }
 
     handleBlurOnPlaylistName(focusEvent:FocusEvent) {
-        this.playlist.name = (<HTMLInputElement>focusEvent.target).value;
+        //this.playlist.name = this.inputPlaylistName.nativeElement.value;
+        //this.playlist.name = (<HTMLInputElement>focusEvent.target).value;
         this.tuneBookService.storeTuneBookAbc();
     }
 
@@ -63,15 +65,13 @@ export class PlaylistUI implements OnInit, DoCheck {
         let keycode = (keyboardEvent.keyCode ? keyboardEvent.keyCode : keyboardEvent.which);
 
         if (keycode === 13) { // ENTER
-            (<HTMLInputElement>keyboardEvent.target).blur();
-            keyboardEvent.preventDefault();
+            this.renderer.invokeElementMethod(this.inputPlaylistBand.nativeElement, 'blur', []);
             this.renderer.invokeElementMethod(this.inputPlaylistEvent.nativeElement, 'focus', []);
             this.renderer.invokeElementMethod(this.inputPlaylistEvent.nativeElement, 'select', []);
         }
     }
 
     handleBlurOnPlaylistBand(focusEvent:FocusEvent) {
-        this.playlist.band = (<HTMLInputElement>focusEvent.target).value;
         this.tuneBookService.storeTuneBookAbc();
     }
 
@@ -79,15 +79,13 @@ export class PlaylistUI implements OnInit, DoCheck {
         let keycode = (keyboardEvent.keyCode ? keyboardEvent.keyCode : keyboardEvent.which);
 
         if (keycode === 13) { // ENTER
-            (<HTMLInputElement>keyboardEvent.target).blur();
-            keyboardEvent.preventDefault();
+            this.renderer.invokeElementMethod(this.inputPlaylistEvent.nativeElement, 'blur', []);
             this.renderer.invokeElementMethod(this.inputPlaylistName.nativeElement, 'focus', []);
             this.renderer.invokeElementMethod(this.inputPlaylistName.nativeElement, 'select', []);
         }
     }
 
     handleBlurOnPlaylistEvent(focusEvent:FocusEvent) {
-        this.playlist.event = (<HTMLInputElement>focusEvent.target).value;
         this.tuneBookService.storeTuneBookAbc();
     }
     

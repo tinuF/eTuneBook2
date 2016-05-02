@@ -7,17 +7,20 @@
             <div class="card-block">
                 <div class="col-xs-4">
                     <p *ngIf="!editModus">{{playlist.name}}</p>
-                    <input #inputPlaylistName class="form-control form-control-sm" *ngIf="editModus" [value]="playlist.name" (keydown)="handleKeyDownOnPlaylistName($event)"
+                    <input #inputPlaylistName class="form-control form-control-sm" *ngIf="editModus" [(ngModel)]="playlist.name" 
+                    (keydown)="handleKeyDownOnPlaylistName($event)"
                     (blur)="handleBlurOnPlaylistName($event)">
                 </div>
                 <div class="col-xs-4">
                     <p *ngIf="!editModus">{{playlist.band}}</p>
-                    <input #inputPlaylistBand class="form-control form-control-sm" *ngIf="editModus" [value]="playlist.band" (keydown)="handleKeyDownOnPlaylistBand($event)"
+                    <input #inputPlaylistBand class="form-control form-control-sm" *ngIf="editModus" [(ngModel)]="playlist.band" 
+                    (keydown)="handleKeyDownOnPlaylistBand($event)"
                     (blur)="handleBlurOnPlaylistBand($event)">
                 </div>
                 <div class="col-xs-2">
                     <p *ngIf="!editModus">{{playlist.event}}</p>
-                    <input #inputPlaylistEvent class="form-control form-control-sm" *ngIf="editModus" [value]="playlist.event" (keydown)="handleKeyDownOnPlaylistEvent($event)"
+                    <input #inputPlaylistEvent class="form-control form-control-sm" *ngIf="editModus" [(ngModel)]="playlist.event" 
+                    (keydown)="handleKeyDownOnPlaylistEvent($event)"
                     (blur)="handleBlurOnPlaylistEvent($event)">
                 </div>
 
