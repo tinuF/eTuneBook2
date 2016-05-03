@@ -18,8 +18,10 @@ import {TunePlayedUI} from '../common/tune-played';
 })
 export class SetpositionTuneUI implements OnInit, DoCheck {
     @Input() tune: Tune;
-    @Input() position: TuneSetPosition;
+    @Input() tuneSetPosition: TuneSetPosition;
     editModus: boolean;
+    dragStart: boolean;
+    dragOver: boolean;
 
     constructor(public tuneBookService: TuneBookService, public router: Router) {
 
@@ -30,6 +32,7 @@ export class SetpositionTuneUI implements OnInit, DoCheck {
     }
 
     ngDoCheck() {
+        //console.log("set-position-tune:ngDoCheck called");
         this.editModus = this.tuneBookService.isEditModus();
     }
 
@@ -39,69 +42,72 @@ export class SetpositionTuneUI implements OnInit, DoCheck {
         this.tuneBookService.storeTuneBookAbc();
     }
 
-    handleDragStart(e) {
-        e.target.style.opacity = '0.4'; // e.target is the source node
-        //dragSrcEl = e.target;
-        e.dataTransfer.effectAllowed = 'move';
-        //e.dataTransfer.setData('text/html', e.target.innerHTML);
-        let data: string = "id:" + this.position.tuneSetId + ",pos:" + this.position.position;
-        e.dataTransfer.setData('text/html', data);
+    handleDragStart(dragEvent: DragEvent) {
+        console.log("DragStart: "+ this.tune.title);
+        this.dragStart = true;
+        dragEvent.dataTransfer.effectAllowed = 'move';
+        let data: string = "id:" + this.tuneSetPosition.tuneSetId + ",pos:" + this.tuneSetPosition.position;
+        dragEvent.dataTransfer.setData('text/html', data);
     }
 
-    handleDragOver(e) {
-        if (e.preventDefault) {
-            e.preventDefault();
+    handleDragOver(dragEvent: DragEvent) {
+        console.log("DragOver: "+ this.tune.title);
+        
+        if (dragEvent.preventDefault) {
+            dragEvent.preventDefault();
         }
 
-        e.dataTransfer.dropEffect = 'move';
+        dragEvent.dataTransfer.dropEffect = 'move';
         return false;
     }
 
-    handleDragEnter(e) {
-        e.target.classList.add('over');
+    handleDragEnter(dragEvent: DragEvent) {
+        console.log("DragEnter: "+ this.tune.title);
+        this.dragOver = true;
+        //(<HTMLElement>dragEvent.target).classList.add('over');
     }
 
-    handleDragLeave(e) {
-        e.target.classList.remove('over');
+    handleDragLeave(dragEvent: DragEvent) {
+        console.log("DragLeave: "+ this.tune.title);
+        this.dragOver = false;
+        //(<HTMLElement>dragEvent.target).classList.remove('over');
     }
 
-    handleDrop(e) {
-        if (e.stopPropagation) {
-            e.stopPropagation();
+    handleDrop(dragEvent: DragEvent) {
+        console.log("Drop: "+ this.tune.title);
+        if (dragEvent.stopPropagation) {
+            dragEvent.stopPropagation();
         }
 
-        let data: string = e.dataTransfer.getData('text/html');
+        let data: string = dragEvent.dataTransfer.getData('text/html');
 
         let sourceTuneSetId: number = this.getSourceTuneSetId(data);
         let sourcePosition: number = parseInt(this.getSourceTuneSetTunePosition(data));
-        let targetTuneSetId: number = this.position.tuneSetId;
-        let targetPosition: number = this.position.position;
+        let targetTuneSetId: number = this.tuneSetPosition.tuneSetId;
+        let targetPosition: number = this.tuneSetPosition.position;
         let moveOrCopy: string = 'move';
 
-        if (e.shiftKey) {
+        if (dragEvent.shiftKey) {
             moveOrCopy = 'copy';
         }
 
         // update model. angular will then react upon the changed model and re-render both sets  
         this.tuneBookService.moveTuneSetPosition(sourceTuneSetId, sourcePosition, targetTuneSetId, targetPosition, 'before', moveOrCopy);
         this.tuneBookService.storeTuneBookAbc();
-
-        this.handleDragEnd(e);
+        
+        this.dragOver = false;
 
         return false;
     }
 
-    handleDragEnd(e) {
-        //TODO: Spezifischer
-        e.target.style.opacity = '1.0';
-        let cards = document.querySelectorAll('.card');
-
-        [].forEach.call(cards, function(card) {
-            card.classList.remove('over');
-        });
+    handleDragEnd(dragEvent: DragEvent) {
+        console.log("DragEnd: "+ this.tune.title);
+        //(<HTMLElement>dragEvent.target).style.opacity = '1.0';
+        this.dragStart = false;
+        this.dragOver = false;
     }
 
-    getSourceTuneSetId(data): number {
+    getSourceTuneSetId(data: string): number {
         let tuneSetId: string;
         let tuneSetIdSplits: Array<string> = [];
 
@@ -115,7 +121,7 @@ export class SetpositionTuneUI implements OnInit, DoCheck {
         return parseInt(tuneSetId);
     }
 
-    getSourceTuneSetTunePosition(data): string {
+    getSourceTuneSetTunePosition(data: string): string {
         let tuneSetTunePosition: string;
         let tuneSetTunePositionSplits: Array<string> = [];
 
@@ -129,7 +135,7 @@ export class SetpositionTuneUI implements OnInit, DoCheck {
     }
 
     deleteTuneSetPosition(e) {
-        this.tuneBookService.deleteTuneSetPosition(this.position.tuneSetId, this.position.position);
+        this.tuneBookService.deleteTuneSetPosition(this.tuneSetPosition.tuneSetId, this.tuneSetPosition.position);
         this.tuneBookService.storeTuneBookAbc();
     }
 }

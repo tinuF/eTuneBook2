@@ -1,6 +1,9 @@
 <div 
     class="card col-xl-12" 
-    [draggable]="editModus" 
+    [draggable]="editModus"
+    [class.move]="editModus"
+    [class.drag-start]="dragStart"
+    [class.drag-over]="dragOver" 
     (dragstart)="handleDragStart($event)"
     (dragenter)="handleDragEnter($event)"
     (dragover)="handleDragOver($event)"
