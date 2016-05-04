@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, DoCheck} from 'angular2/core';
+import {Component, Input, OnInit, OnDestroy} from 'angular2/core';
 import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {TuneBookService} from '../../services/tunebook-service';
@@ -16,10 +16,11 @@ import {TunePlayedUI} from '../common/tune-played';
     styleUrls: ['./components/sets/set-position-tune.css'],
     pipes: [EliminateThe, FromNow]
 })
-export class SetpositionTuneUI implements OnInit, DoCheck {
+export class SetpositionTuneUI implements OnInit, OnDestroy {
     @Input() tune: Tune;
     @Input() tuneSetPosition: TuneSetPosition;
     editModus: boolean;
+    editModusSubscription: any;
     dragStart: boolean;
     dragOver: boolean;
 
@@ -28,12 +29,12 @@ export class SetpositionTuneUI implements OnInit, DoCheck {
     }
 
     ngOnInit() {
-        this.editModus = this.tuneBookService.isEditModus();
+        this.editModusSubscription = this.tuneBookService.editModusChange$.subscribe(
+            editModus => this.editModus = editModus);
     }
 
-    ngDoCheck() {
-        //console.log("set-position-tune:ngDoCheck called");
-        this.editModus = this.tuneBookService.isEditModus();
+    ngOnDestroy() {
+        this.editModusSubscription.unsubscribe();
     }
 
     justPlayedTheTune() {
@@ -43,7 +44,7 @@ export class SetpositionTuneUI implements OnInit, DoCheck {
     }
 
     handleDragStart(dragEvent: DragEvent) {
-        console.log("DragStart: "+ this.tune.title);
+        console.log("DragStart: " + this.tune.title);
         this.dragStart = true;
         dragEvent.dataTransfer.effectAllowed = 'move';
         let data: string = "id:" + this.tuneSetPosition.tuneSetId + ",pos:" + this.tuneSetPosition.position;
@@ -51,8 +52,8 @@ export class SetpositionTuneUI implements OnInit, DoCheck {
     }
 
     handleDragOver(dragEvent: DragEvent) {
-        console.log("DragOver: "+ this.tune.title);
-        
+        console.log("DragOver: " + this.tune.title);
+
         if (dragEvent.preventDefault) {
             dragEvent.preventDefault();
         }
@@ -62,19 +63,19 @@ export class SetpositionTuneUI implements OnInit, DoCheck {
     }
 
     handleDragEnter(dragEvent: DragEvent) {
-        console.log("DragEnter: "+ this.tune.title);
+        console.log("DragEnter: " + this.tune.title);
         this.dragOver = true;
         //(<HTMLElement>dragEvent.target).classList.add('over');
     }
 
     handleDragLeave(dragEvent: DragEvent) {
-        console.log("DragLeave: "+ this.tune.title);
+        console.log("DragLeave: " + this.tune.title);
         this.dragOver = false;
         //(<HTMLElement>dragEvent.target).classList.remove('over');
     }
 
     handleDrop(dragEvent: DragEvent) {
-        console.log("Drop: "+ this.tune.title);
+        console.log("Drop: " + this.tune.title);
         if (dragEvent.stopPropagation) {
             dragEvent.stopPropagation();
         }
@@ -94,14 +95,14 @@ export class SetpositionTuneUI implements OnInit, DoCheck {
         // update model. angular will then react upon the changed model and re-render both sets  
         this.tuneBookService.moveTuneSetPosition(sourceTuneSetId, sourcePosition, targetTuneSetId, targetPosition, 'before', moveOrCopy);
         this.tuneBookService.storeTuneBookAbc();
-        
+
         this.dragOver = false;
 
         return false;
     }
 
     handleDragEnd(dragEvent: DragEvent) {
-        console.log("DragEnd: "+ this.tune.title);
+        console.log("DragEnd: " + this.tune.title);
         //(<HTMLElement>dragEvent.target).style.opacity = '1.0';
         this.dragStart = false;
         this.dragOver = false;

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewChild, ElementRef, Renderer} from 'angular2/core';
+import {Component, Input, OnInit, OnDestroy, ViewChild, ElementRef, Renderer} from 'angular2/core';
 import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {TuneBookService} from '../../services/tunebook-service';
@@ -19,11 +19,12 @@ import {PlayListPositionSetPositionPlayInfoUI} from '../../components/playlists/
     styleUrls: ['./components/playlists/playlist-position-set-position.css'],
     pipes: [EliminateThe, FromNow]
 })
-export class PlayListPositionSetPositionUI implements OnInit {
+export class PlayListPositionSetPositionUI implements OnInit, OnDestroy {
     @Input() tuneSetPositionPlayInfo: TuneSetPositionPlayInfo;
     @ViewChild('inputTuneSetPositionPlayInfoRepeat') inputTuneSetPositionPlayInfoRepeat: ElementRef;
     playInfoAnnotationShown: boolean;
     editModus: boolean;
+    editModusSubscription: any;
 
     constructor(public tuneBookService: TuneBookService, public router: Router, public renderer: Renderer) {
 
@@ -31,12 +32,14 @@ export class PlayListPositionSetPositionUI implements OnInit {
 
     ngOnInit() {
         this.playInfoAnnotationShown = false;
-        this.editModus = this.tuneBookService.isEditModus();
+        this.editModusSubscription = this.tuneBookService.editModusChange$.subscribe(
+            editModus => this.editModus = editModus);
+    }
+    
+    ngOnDestroy() {
+        this.editModusSubscription.unsubscribe();
     }
 
-    ngDoCheck() {
-        this.editModus = this.tuneBookService.isEditModus();
-    }
 
     handleKeyDownOnTuneSetPositionPlayInfoRepeat(keyboardEvent:KeyboardEvent) {
         let keycode = (keyboardEvent.keyCode ? keyboardEvent.keyCode : keyboardEvent.which);

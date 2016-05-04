@@ -1,4 +1,4 @@
-import {Component, Input, Output, OnInit, DoCheck, EventEmitter} from 'angular2/core';
+import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
 import {ROUTER_DIRECTIVES, Router} from 'angular2/router';
 import {TuneBookService} from '../../services/tunebook-service';
 import {Tune} from '../../business/model/tune';
@@ -13,7 +13,7 @@ import {TuneTransposerUI} from '../tunes/tune-transposer';
     directives: [ROUTER_DIRECTIVES, TuneColorizerUI, TuneTransposerUI],
     pipes: [FromNow]
 })
-export class TuneAbcMenuUI implements OnInit, DoCheck {
+export class TuneAbcMenuUI implements OnInit {
     @Input() tune: Tune;
     @Output() transposeUp: EventEmitter<any> = new EventEmitter();
     @Output() transposeDown: EventEmitter<any> = new EventEmitter();
@@ -24,10 +24,6 @@ export class TuneAbcMenuUI implements OnInit, DoCheck {
     }
 
     ngOnInit() {
-        this.editModus = this.tuneBookService.isEditModus();
-    }
-
-    ngDoCheck() {
         this.editModus = this.tuneBookService.isEditModus();
     }
 

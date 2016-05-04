@@ -1,5 +1,5 @@
-import {Component, OnInit, DoCheck, Input} from 'angular2/core';
-import {Router, RouteParams} from 'angular2/router';
+import {Component, OnInit, OnDestroy, Input, ElementRef} from 'angular2/core';
+import {Router} from 'angular2/router';
 import * as jQuery from 'jquery';
 
 import {TuneBookService} from '../../services/tunebook-service';
@@ -13,39 +13,29 @@ import {TuneDotsMenuUI} from '../tunes/tune-dots-menu';
     templateUrl: './components/tunes/tune-dots.html',
     styleUrls: ['./components/tunes/tune-dots.css']
 })
-export class TuneDotsUI implements OnInit, DoCheck {
+export class TuneDotsUI implements OnInit, OnDestroy {
     @Input() tune: Tune;
     tuneObjectArray: Array<any>;
     editModus: boolean;
+    editModusSubscription: any;
 
-    constructor(public tuneBookService: TuneBookService, public router: Router, routeParams: RouteParams) {
+    constructor(public tuneBookService: TuneBookService, public router: Router, public elementRef: ElementRef) {
 
 
     }
 
     ngOnInit() {
         this.renderAbc();
-        this.editModus = this.tuneBookService.isEditModus();
+        this.editModusSubscription = this.tuneBookService.editModusChange$.subscribe(
+            editModus => this.editModus = editModus);
     }
 
-
-    ngDoCheck() {
-        //$(".title.meta-top").css("fill", "red");
-        //Chords
-        jQuery(".chord").css("font-size", "0.7em");
-        //Fingering
-        jQuery("text.annotation").css("font-size", "0.6em");
-        //$(".meta-bottom").css("display", "none");
-        jQuery(".meta-bottom").css("font-size", "0.7em");
-        this.editModus = this.tuneBookService.isEditModus();
+    ngOnDestroy() {
+        this.editModusSubscription.unsubscribe();
     }
-
 
     renderAbc() {
         //Render Abc
-        //Important: Has to be timed-out, otherwise fingerings won't show up
-        //Compare with tbkTuneFocus: ABCJS.Editor also timed-out -> fingerings show up
-        //Compare with tbkPopover: ABCJS.renderAbc is not timed-out -> fingerings dont' show (timeout in popover -> no popover is shown)
         setTimeout(() => {
             let output = 'DotsForTune' + this.tune.id;
             let tunebookString = this.skipFingering(this.tune.pure);
@@ -68,6 +58,14 @@ export class TuneDotsUI implements OnInit, DoCheck {
 
 
             this.tuneObjectArray = ABCJS.renderAbc(output, tunebookString, parserParams, engraverParams, renderParams);
+
+            //jQuery(".title.meta-top").css("fill", "red");
+            jQuery(this.elementRef.nativeElement).find(".chord").css("font-size", "0.7em");
+            //Fingering
+            jQuery(this.elementRef.nativeElement).find("text.annotation").css("font-size", "0.6em");
+            //jQuery(".meta-bottom").css("display", "none");
+            jQuery(this.elementRef.nativeElement).find(".meta-bottom").css("font-size", "0.7em");
+
         }, 0);
     }
 

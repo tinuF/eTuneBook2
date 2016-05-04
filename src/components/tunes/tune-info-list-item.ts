@@ -16,17 +16,19 @@ export class TuneInfoListItemUI implements OnInit, DoCheck {
     @ViewChild('inputWebsiteUrl') inputWebsiteUrl: ElementRef;
     videoUrl: string;
     editModus: boolean;
+    editModusSubscription: any;
 
     constructor(public tuneBookService: TuneBookService, public renderer: Renderer) {
 
     }
-
+    
     ngOnInit() {
-        this.editModus = this.tuneBookService.isEditModus();
+        this.editModusSubscription = this.tuneBookService.editModusChange$.subscribe(
+            editModus => this.editModus = editModus);
     }
 
-    ngDoCheck() {
-        this.editModus = this.tuneBookService.isEditModus();
+    ngOnDestroy() {
+        this.editModusSubscription.unsubscribe();
     }
 
     handleKeyDownOnWebsiteUrl(keyboardEvent:KeyboardEvent) {

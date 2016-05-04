@@ -22,6 +22,7 @@ export class PlaylistUI implements OnInit, DoCheck {
     playlist: Playlist;
     playlistPositionToBeCopied: PlaylistPosition;
     editModus: boolean;
+    editModusSubscription: any;
 
     constructor(public tuneBookService: TuneBookService, public router: Router, routeParams: RouteParams, public renderer: Renderer) {
         this.playlist = this.tuneBookService.getPlaylist(parseInt(routeParams.get('id')));
@@ -29,12 +30,16 @@ export class PlaylistUI implements OnInit, DoCheck {
 
     ngOnInit() {
         this.sortPlaylistPosition();
-        this.editModus = this.tuneBookService.isEditModus();
+        this.editModusSubscription = this.tuneBookService.editModusChange$.subscribe(
+            editModus => this.editModus = editModus);
     }
-
+    
     ngDoCheck() {
         this.sortPlaylistPosition();
-        this.editModus = this.tuneBookService.isEditModus();
+    }
+    
+    ngOnDestroy() {
+        this.editModusSubscription.unsubscribe();
     }
 
     sortPlaylistPosition() {

@@ -1,4 +1,4 @@
-import {Component, OnInit, DoCheck} from 'angular2/core';
+import {Component, OnInit, OnDestroy} from 'angular2/core';
 import {ROUTER_DIRECTIVES, Router, RouteParams, Location} from 'angular2/router';
 import {TuneBookService} from '../../services/tunebook-service';
 import {Tune} from '../../business/model/tune';
@@ -22,20 +22,22 @@ import {TunePlaylistListUI} from '../tunes/tune-playlist-list';
     TuneSetListUI, TunePlaylistListUI],
     pipes: [FromNow]
 })
-export class TuneUI implements OnInit, DoCheck {
+export class TuneUI implements OnInit, OnDestroy {
     tune: Tune;
     editModus: boolean;
+    editModusSubscription: any;
 
     constructor(public tuneBookService: TuneBookService, public router: Router, routeParams: RouteParams, public location: Location) {
         this.tune = this.tuneBookService.getTune(parseInt(routeParams.get('id')));
     }
 
     ngOnInit() {
-        this.editModus = this.tuneBookService.isEditModus();
+        this.editModusSubscription = this.tuneBookService.editModusChange$.subscribe(
+            editModus => this.editModus = editModus);
     }
 
-    ngDoCheck() {
-        this.editModus = this.tuneBookService.isEditModus();
+    ngOnDestroy() {
+        this.editModusSubscription.unsubscribe();
     }
 }
 

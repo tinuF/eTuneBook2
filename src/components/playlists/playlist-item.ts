@@ -22,6 +22,7 @@ export class PlayListItemUI implements OnInit, DoCheck {
     @Input() playlistPosition: PlaylistPosition;
     @Output() copyPlaylistPosition: EventEmitter<PlaylistPosition> = new EventEmitter();
     editModus: boolean;
+    editModusSubscription: any;
     positions: Array<number>;
     playlists: Array<Playlist>;
     selectedPlaylistId: number;
@@ -33,13 +34,17 @@ export class PlayListItemUI implements OnInit, DoCheck {
     ngOnInit() {
         this.sortSetPosition();
         this.setPositions();
-        this.editModus = this.tuneBookService.isEditModus();
+        this.editModusSubscription = this.tuneBookService.editModusChange$.subscribe(
+            editModus => this.editModus = editModus);
         this.playlists = this.tuneBookService.getPlaylists();
     }
 
     ngDoCheck() {
         this.setPositions();
-        this.editModus = this.tuneBookService.isEditModus();
+    }
+    
+    ngOnDestroy() {
+        this.editModusSubscription.unsubscribe();
     }
 
     sortSetPosition() {

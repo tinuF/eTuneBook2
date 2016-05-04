@@ -1,4 +1,4 @@
-import {Component, OnInit, DoCheck} from 'angular2/core';
+import {Component, OnInit, OnDestroy} from 'angular2/core';
 import {ROUTER_DIRECTIVES, Router, RouteParams, Location} from 'angular2/router';
 import {TuneBookService} from '../../services/tunebook-service';
 import {Playlist} from '../../business/model/playlist';
@@ -14,10 +14,11 @@ import {PlayListPositionMenuUI} from '../../components/playlists/playlist-positi
     directives: [ROUTER_DIRECTIVES, PlayListPositionSetUI, PlayListPositionMenuUI],
     pipes: [FromNow]
 })
-export class PlaylistPositionUI implements OnInit, DoCheck {
+export class PlaylistPositionUI implements OnInit, OnDestroy {
     playlist: Playlist;
     playlistPosition: PlaylistPosition;
     editModus: boolean;
+    editModusSubscription: any;
     showDots: boolean;
 
     constructor(public tuneBookService: TuneBookService, public router: Router, routeParams: RouteParams, public location: Location) {
@@ -25,13 +26,14 @@ export class PlaylistPositionUI implements OnInit, DoCheck {
         this.playlist = this.tuneBookService.getPlaylist(this.playlistPosition.playlistId);
         this.showDots = false;
     }
-
+    
     ngOnInit() {
-        this.editModus = this.tuneBookService.isEditModus();
+        this.editModusSubscription = this.tuneBookService.editModusChange$.subscribe(
+            editModus => this.editModus = editModus);
     }
-
-    ngDoCheck() {
-        this.editModus = this.tuneBookService.isEditModus();
+    
+    ngOnDestroy() {
+        this.editModusSubscription.unsubscribe();
     }
     
     toggleDots() {

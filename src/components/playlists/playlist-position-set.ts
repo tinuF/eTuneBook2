@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, DoCheck, ViewChild, ElementRef, Renderer} from 'angular2/core';
+import {Component, Input, OnInit, DoCheck, OnDestroy, ViewChild, ElementRef, Renderer} from 'angular2/core';
 import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {TuneBookService} from '../../services/tunebook-service';
@@ -8,9 +8,6 @@ import {EliminateThe} from '../../pipes/eliminate-the';
 import {FromNow} from '../../pipes/from-now';
 import {PlayListPositionSetPositionUI} from '../../components/playlists/playlist-position-set-position';
 
-
-
-
 @Component({
     selector: 'etb-playlist-position-set',
     templateUrl: './components/playlists/playlist-position-set.html',
@@ -18,25 +15,30 @@ import {PlayListPositionSetPositionUI} from '../../components/playlists/playlist
     styleUrls: ['./components/playlists/playlist-position-set.css'],
     pipes: [EliminateThe, FromNow]
 })
-export class PlayListPositionSetUI implements OnInit, DoCheck {
+export class PlayListPositionSetUI implements OnInit, DoCheck, OnDestroy {
     @Input() playlistPosition: PlaylistPosition;
     @ViewChild('inputPlaylistPositionName') inputPlaylistPositionName: ElementRef;
     editModus: boolean;
+    editModusSubscription: any;
     positions: Array<number>;
 
     constructor(public tuneBookService: TuneBookService, public router: Router, public renderer: Renderer) {
 
     }
-
+    
     ngOnInit() {
         this.sortSetPosition();
         this.setPositions();
-        this.editModus = this.tuneBookService.isEditModus();
+        this.editModusSubscription = this.tuneBookService.editModusChange$.subscribe(
+            editModus => this.editModus = editModus);
     }
 
     ngDoCheck() {
         this.setPositions();
-        this.editModus = this.tuneBookService.isEditModus();
+    }
+    
+    ngOnDestroy() {
+        this.editModusSubscription.unsubscribe();
     }
 
     sortSetPosition() {

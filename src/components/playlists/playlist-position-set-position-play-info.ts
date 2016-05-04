@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, DoCheck} from 'angular2/core';
+import {Component, Input, OnInit, OnDestroy} from 'angular2/core';
 import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {TuneBookService} from '../../services/tunebook-service';
@@ -16,21 +16,23 @@ import {PartPlayInfoListUI} from '../../components/playlists/part-play-info-list
     styleUrls: ['./components/playlists/playlist-position-set-position-play-info.css'],
     pipes: [EliminateThe, FromNow]
 })
-export class PlayListPositionSetPositionPlayInfoUI implements OnInit, DoCheck {
+export class PlayListPositionSetPositionPlayInfoUI implements OnInit, OnDestroy {
     @Input() tuneSetPositionPlayInfo: TuneSetPositionPlayInfo;
     @Input() playInfoAnnotationShown: boolean;
     editModus:boolean;
+    editModusSubscription: any;
 
     constructor(public tuneBookService: TuneBookService, public router: Router) {
 
     }
 
     ngOnInit() {
-        this.editModus = this.tuneBookService.isEditModus();
+        this.editModusSubscription = this.tuneBookService.editModusChange$.subscribe(
+            editModus => this.editModus = editModus);
     }
-
-    ngDoCheck() {
-        this.editModus = this.tuneBookService.isEditModus();
+    
+    ngOnDestroy() {
+        this.editModusSubscription.unsubscribe();
     }
 
     handleKeyDownOnTuneSetPositionRepeat(event) {

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, DoCheck} from 'angular2/core';
+import {Component, Input, OnInit, OnDestroy} from 'angular2/core';
 import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {TuneBookService} from '../../services/tunebook-service';
@@ -14,20 +14,22 @@ import {FromNow} from '../../pipes/from-now';
     styleUrls: ['./components/playlists/part-play-info-list.css'],
     pipes: [EliminateThe, FromNow]
 })
-export class PartPlayInfoListUI implements OnInit, DoCheck {
+export class PartPlayInfoListUI implements OnInit, OnDestroy {
     @Input() tuneSetPositionPlayInfo: TuneSetPositionPlayInfo;
     editModus: boolean;
+    editModusSubscription: any;
 
     constructor(public tuneBookService: TuneBookService, public router: Router) {
 
     }
 
     ngOnInit() {
-        this.editModus = this.tuneBookService.isEditModus();
+        this.editModusSubscription = this.tuneBookService.editModusChange$.subscribe(
+            editModus => this.editModus = editModus);
     }
-
-    ngDoCheck() {
-        this.editModus = this.tuneBookService.isEditModus();
+    
+    ngOnDestroy() {
+        this.editModusSubscription.unsubscribe();
     }
 
     handleKeyDownOnPart(event, partPlayInfo:PartPlayInfo) {

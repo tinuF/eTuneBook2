@@ -1,5 +1,8 @@
 import {Injectable} from 'angular2/core';
 import {Http} from 'angular2/http';
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/operator/share';
+import {Observer} from 'rxjs/Observer';
 import 'rxjs/add/operator/map';
 import * as moment from 'moment';
 import {TuneBook} from '../business/model/tunebook';
@@ -19,26 +22,31 @@ export class TuneBookService {
     tuneBook: TuneBook;
     tunesFiltered: Array<Tune>;
     tuneSetsFiltered: Array<TuneSet>;
-    systemProperties:any;
+    systemProperties: any;
     abcExportSettings: AbcExportSettings;
     filterSettings: FilterSettings;
     playlistSettings: PlaylistSettings;
     editModus: boolean;
+    editModusChange$: Observable<boolean>;
+    editModusObserver: Observer<boolean>;
 
     constructor(public http: Http) {
         console.log("TuneBookService:constructor start");
-        
+
         this.systemProperties = getSystemProperties();
         this.tuneBook = this.getCurrentTuneBook();
         this.abcExportSettings = new AbcExportSettings();
         this.initializeFilter();    //TODO: initializeFilter() wird schon in getCurrentTuneBook() aufgerufen!
         this.editModus = false;
         this.playlistSettings = new PlaylistSettings();
-        
+
+        this.editModusChange$ = new Observable(observer => this.editModusObserver = observer).share();
+        // share() allows multiple subscribers
+
         console.log("TuneBookService:constructor end");
     }
 
-    setCurrentTuneBook(abc:string) {
+    setCurrentTuneBook(abc: string) {
         this.tuneBook = new TuneBook(abc);
         this.initializeFilter();
     }
@@ -68,17 +76,18 @@ export class TuneBookService {
 
     toggleEditModus(): boolean {
         this.editModus = !this.editModus;
+        this.editModusObserver.next(this.editModus);
         return this.editModus;
     }
 
     initializeFilter() {
         if (this.filterSettings == null) {
-            this.filterSettings = new FilterSettings();    
-        
+            this.filterSettings = new FilterSettings();
+
         } else {
             this.filterSettings.initialize();
         }
-        
+
         this.setTunesFiltered();
     }
 
@@ -95,7 +104,7 @@ export class TuneBookService {
         return this.tuneBook;
     }
 
-    getTuneBookFromImportedFile(abc:string, fileName:string) {
+    getTuneBookFromImportedFile(abc: string, fileName: string) {
         this.setCurrentTuneBook(abc);
         if (this.tuneBook.name == "") {
             this.tuneBook.name = fileName;
@@ -116,13 +125,13 @@ export class TuneBookService {
         // Generate TuneBook Abc from the current TuneBook and store it in localStorage
         localStorage.setItem(this.systemProperties.STORAGE_ID_TUNEBOOK, JSON.stringify(this.writeAbc(new AbcExportSettings())));
     }
-/*
-    storeSettings(settings) {
-        // Store settings in localStorage
-        // currently not used. check possible usage for AbcExportSettings, FilterSettings
-        localStorage.setItem(this.systemProperties.STORAGE_ID_SETTINGS, JSON.stringify(settings));
-    }
-*/
+    /*
+        storeSettings(settings) {
+            // Store settings in localStorage
+            // currently not used. check possible usage for AbcExportSettings, FilterSettings
+            localStorage.setItem(this.systemProperties.STORAGE_ID_SETTINGS, JSON.stringify(settings));
+        }
+    */
     writeAbc(abcExportSettings: AbcExportSettings) {
         return this.getCurrentTuneBook().writeAbc(this.getAbcExportSettings());
     }
@@ -136,19 +145,19 @@ export class TuneBookService {
         return tune.getSampleAbc(startFromBar, numberOfBars);
     }
 
-    tuneUp(tuneId:number) {
+    tuneUp(tuneId: number) {
         let tune = this.getTune(tuneId);
         // Transpose up and Sync Tune-Key
         tune.key = this.getTuneKey(tuneUp(tune));
     }
 
-    tuneDown(tuneId:number) {
+    tuneDown(tuneId: number) {
         let tune = this.getTune(tuneId);
         // Transpose down and Sync Tune-Key
         tune.key = this.getTuneKey(tuneDown(tune));
     }
 
-    initializeTuneSet(tuneId:number) {
+    initializeTuneSet(tuneId: number) {
         this.getCurrentTuneBook().initializeTuneSet(tuneId);
         this.initializeFilter();
     }
@@ -158,8 +167,8 @@ export class TuneBookService {
     }
 
     initializeTuneAndTuneSet(): TuneSet {
-        let newTuneSet:TuneSet;
-        
+        let newTuneSet: TuneSet;
+
         if (this.getCurrentTuneBook() == null) {
             this.tuneBook = this.initializeTuneBook();
             newTuneSet = this.tuneBook.tuneSets[0];
@@ -167,33 +176,33 @@ export class TuneBookService {
             newTuneSet = this.getCurrentTuneBook().initializeTuneAndTuneSet();
             this.storeTuneBookAbc();
         }
-        
+
         this.initializeFilter();
-        
+
         return newTuneSet;
     }
 
-    getTuneKey(tune:Tune) {
+    getTuneKey(tune: Tune) {
         return tune.getTuneKey();
     }
 
-    getTuneTitle(tune:Tune) {
+    getTuneTitle(tune: Tune) {
         return tune.getTuneTitle();
     }
 
-    getTuneType(tune:Tune) {
+    getTuneType(tune: Tune) {
         return tune.getTuneType();
     }
 
-    getTuneAbcId(tune:Tune) {
+    getTuneAbcId(tune: Tune) {
         return tune.getTuneAbcId();
     }
 
-    addTunePlayDate(tune:Tune, newDate:Date) {
+    addTunePlayDate(tune: Tune, newDate: Date) {
         tune.addPlayDate(newDate);
     }
 
-    addTuneSetPlayDate(tuneSet:TuneSet, newDate:Date) {
+    addTuneSetPlayDate(tuneSet: TuneSet, newDate: Date) {
         tuneSet.addPlayDate(newDate);
     }
     /* TODO: remove
@@ -208,21 +217,21 @@ export class TuneBookService {
         //this.tuneBook.tuneSets[0].tuneSetPositions[0].tune.id = 1;
         return this.tuneBook;
     }
-/*
-    getSettingsFromStore() {
-        let settings = [];
+    /*
+        getSettingsFromStore() {
+            let settings = [];
+    
+            // Retrieve Settings from localStorage
+            // TODO: Store AbcExportSettings and FilterSettings?
+            settings = JSON.parse(localStorage.getItem(this.systemProperties.STORAGE_ID_SETTINGS) || '[]');
+    
+            return settings;
+        }
+    */
+    moveTuneSetPosition(sourceTuneSetId: number, sourcePosition: number,
+        targetTuneSetId: number, targetPosition: number,
+        beforeOrAfter: string, moveOrCopy: string): boolean {
 
-        // Retrieve Settings from localStorage
-        // TODO: Store AbcExportSettings and FilterSettings?
-        settings = JSON.parse(localStorage.getItem(this.systemProperties.STORAGE_ID_SETTINGS) || '[]');
-
-        return settings;
-    }
-*/
-    moveTuneSetPosition(sourceTuneSetId:number, sourcePosition:number, 
-                        targetTuneSetId:number, targetPosition:number, 
-                        beforeOrAfter:string, moveOrCopy:string):boolean {
-        
         let tuneSetDeleted: boolean = this.getCurrentTuneBook().moveTuneSetPosition(sourceTuneSetId, sourcePosition,
             targetTuneSetId, targetPosition, beforeOrAfter, moveOrCopy);
         this.setTunesFiltered();
@@ -234,45 +243,45 @@ export class TuneBookService {
         return tuneSetDeleted;
     }
 
-    movePlaylistPosition(playlistId:number, oldPosition:number, newPosition:number) {
+    movePlaylistPosition(playlistId: number, oldPosition: number, newPosition: number) {
         return this.getCurrentTuneBook().movePlaylistPosition(playlistId, oldPosition, newPosition);
     }
 
-    addPlaylistPositions(playlistId:number, setIds:Array<number>) {
+    addPlaylistPositions(playlistId: number, setIds: Array<number>) {
         return this.getCurrentTuneBook().addPlaylistPositions(playlistId, setIds);
     }
 
-    addEmptyPlaylist():Playlist {
+    addEmptyPlaylist(): Playlist {
         let newPlaylist: Playlist = this.getCurrentTuneBook().addEmptyPlaylist();
         this.storeTuneBookAbc();
         return newPlaylist;
     }
 
-    deleteTuneSetPosition(tuneSetId:number, position:number) {
+    deleteTuneSetPosition(tuneSetId: number, position: number) {
         this.getCurrentTuneBook().deleteTuneSetPosition(tuneSetId, position);
         this.initializeFilter();
     }
 
-    deletePlaylistPosition(playlistId:number, position:number) {
+    deletePlaylistPosition(playlistId: number, position: number) {
         this.getCurrentTuneBook().deletePlaylistPosition(playlistId, position);
     }
 
-    deletePlaylist(playlistId:number) {
+    deletePlaylist(playlistId: number) {
         this.getCurrentTuneBook().deletePlaylist(playlistId);
         this.storeTuneBookAbc();
     }
 
-    copyPlaylist(playlistId:number): number {
-        let newPlaylistId:number = this.getCurrentTuneBook().copyPlaylist(playlistId);
+    copyPlaylist(playlistId: number): number {
+        let newPlaylistId: number = this.getCurrentTuneBook().copyPlaylist(playlistId);
         this.storeTuneBookAbc();
         return newPlaylistId;
     }
 
-    copyPlaylistPositionToOtherPlaylist(sourcePlaylistId:number, sourcePlaylistPositionNr:number, targetPlaylistId:number) {
+    copyPlaylistPositionToOtherPlaylist(sourcePlaylistId: number, sourcePlaylistPositionNr: number, targetPlaylistId: number) {
         this.getCurrentTuneBook().copyPlaylistPositionToOtherPlaylist(sourcePlaylistId, sourcePlaylistPositionNr, targetPlaylistId);
     }
 
-    getTuneSet(tuneSetId:number) {
+    getTuneSet(tuneSetId: number) {
         return this.getCurrentTuneBook().getTuneSetById(tuneSetId);
     }
 
@@ -304,11 +313,11 @@ export class TuneBookService {
         return shuffleArray(this.tuneSetsFiltered);
     }
 
-    getTune(tuneId:number) {
+    getTune(tuneId: number) {
         return this.getCurrentTuneBook().getTuneById(tuneId);
     }
 
-    deleteTune(tuneId:number) {
+    deleteTune(tuneId: number) {
         this.getCurrentTuneBook().deleteTune(tuneId);
         //Remove Tune from tunesFiltered, tuneSetsFiltered
         this.setTunesFiltered();
@@ -327,27 +336,27 @@ export class TuneBookService {
         return filterPlaylists(this.getCurrentTuneBook().playlists, this.getCurrentFilterSettings(), this.getTuneSetsFiltered());
     }
 
-    getPlaylist(playlistId:number) {
+    getPlaylist(playlistId: number) {
         return this.getCurrentTuneBook().getPlaylistById(playlistId);
     }
 
-    getPlaylistPositions(playlistId:number) {
+    getPlaylistPositions(playlistId: number) {
         return this.getCurrentTuneBook().getPlaylistById(playlistId).playlistPositions;
     }
 
-    getPlaylistPositionsAsNumbers(playlistId:number) {
+    getPlaylistPositionsAsNumbers(playlistId: number) {
         return this.getCurrentTuneBook().getPlaylistById(playlistId).getPlaylistPositionAsNumbers();
     }
 
-    getPlaylistPositionsByTuneId(playlistId:number, tuneId:number) {
+    getPlaylistPositionsByTuneId(playlistId: number, tuneId: number) {
         return this.getCurrentTuneBook().getPlaylistPositionsByTuneId(playlistId, tuneId);
     }
 
-    getPlaylistPosition(playlistId:number, position:number) {
+    getPlaylistPosition(playlistId: number, position: number) {
         return this.getCurrentTuneBook().getPlaylistPosition(playlistId, position);
     }
 
-    getPlaylistPositionByTuneSetId(playlistId:number, tuneSetId:number) {
+    getPlaylistPositionByTuneSetId(playlistId: number, tuneSetId: number) {
         return this.getCurrentTuneBook().getPlaylistPositionByTuneSetId(playlistId, tuneSetId);
     }
 
@@ -377,35 +386,35 @@ export class TuneBookService {
         return tuneSet.getFirstTuneSetPosition();
     }
 
-    getTuneSetsByTuneId(tuneId:number) {
+    getTuneSetsByTuneId(tuneId: number) {
         return this.getCurrentTuneBook().getTuneSetsByTuneId(tuneId);
     }
 
-    getPlaylistsByTuneId(tuneId:number) {
+    getPlaylistsByTuneId(tuneId: number) {
         return this.getCurrentTuneBook().getPlaylistsByTuneId(tuneId);
     }
 
-    getPlaylistsByTuneSetId(tuneSetId:number) {
+    getPlaylistsByTuneSetId(tuneSetId: number) {
         return this.getCurrentTuneBook().getPlaylistsByTuneSetId(tuneSetId);
     }
 
-    getVideo(tuneId:number, videoSource:string, videoCode:string) {
+    getVideo(tuneId: number, videoSource: string, videoCode: string) {
         return this.getCurrentTuneBook().getVideoById(tuneId, videoSource, videoCode);
     }
 
-    addVideo(tuneId:number, videoSource:string, videoCode:string, videoDescription:string) {
+    addVideo(tuneId: number, videoSource: string, videoCode: string, videoDescription: string) {
         return this.getCurrentTuneBook().addVideo(tuneId, videoSource, videoCode, videoDescription);
     }
 
-    deleteVideo(tuneId:number, videoSource:string, videoCode:string) {
+    deleteVideo(tuneId: number, videoSource: string, videoCode: string) {
         this.getCurrentTuneBook().deleteVideo(tuneId, videoSource, videoCode);
     }
 
-    addWebsite(tuneId:number, url:string) {
+    addWebsite(tuneId: number, url: string) {
         return this.getCurrentTuneBook().addWebsite(tuneId, url);
     }
 
-    deleteWebsite(tuneId:number, url:string) {
+    deleteWebsite(tuneId: number, url: string) {
         this.getCurrentTuneBook().deleteWebsite(tuneId, url);
     }
 
