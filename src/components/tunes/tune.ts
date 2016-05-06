@@ -1,5 +1,8 @@
 import {Component, OnInit, OnDestroy} from 'angular2/core';
 import {ROUTER_DIRECTIVES, Router, RouteParams, Location} from 'angular2/router';
+
+import {Subscription}   from 'rxjs/Subscription';
+
 import {TuneBookService} from '../../services/tunebook-service';
 import {Tune} from '../../business/model/tune';
 import {FromNow} from '../../pipes/from-now';
@@ -25,14 +28,15 @@ import {TunePlaylistListUI} from '../tunes/tune-playlist-list';
 export class TuneUI implements OnInit, OnDestroy {
     tune: Tune;
     editModus: boolean;
-    editModusSubscription: any;
+    editModusSubscription: Subscription;
 
     constructor(public tuneBookService: TuneBookService, public router: Router, routeParams: RouteParams, public location: Location) {
         this.tune = this.tuneBookService.getTune(parseInt(routeParams.get('id')));
     }
 
     ngOnInit() {
-        this.editModusSubscription = this.tuneBookService.editModusChange$.subscribe(
+        this.editModus = this.tuneBookService.isEditModus();
+        this.editModusSubscription = this.tuneBookService.editModusObservable.subscribe(
             editModus => this.editModus = editModus);
     }
 

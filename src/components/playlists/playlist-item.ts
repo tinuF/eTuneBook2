@@ -1,6 +1,8 @@
 import {Component, Input, Output, OnInit, DoCheck, EventEmitter} from 'angular2/core';
 import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
 
+import {Subscription}   from 'rxjs/Subscription';
+
 import {TuneBookService} from '../../services/tunebook-service';
 import {TuneSetPositionPlayInfo} from '../../business/model/tunesetposition-playinfo';
 import {Playlist} from '../../business/model/playlist';
@@ -22,7 +24,7 @@ export class PlayListItemUI implements OnInit, DoCheck {
     @Input() playlistPosition: PlaylistPosition;
     @Output() copyPlaylistPosition: EventEmitter<PlaylistPosition> = new EventEmitter();
     editModus: boolean;
-    editModusSubscription: any;
+    editModusSubscription: Subscription;
     positions: Array<number>;
     playlists: Array<Playlist>;
     selectedPlaylistId: number;
@@ -34,7 +36,8 @@ export class PlayListItemUI implements OnInit, DoCheck {
     ngOnInit() {
         this.sortSetPosition();
         this.setPositions();
-        this.editModusSubscription = this.tuneBookService.editModusChange$.subscribe(
+        this.editModus = this.tuneBookService.isEditModus();
+        this.editModusSubscription = this.tuneBookService.editModusObservable.subscribe(
             editModus => this.editModus = editModus);
         this.playlists = this.tuneBookService.getPlaylists();
     }

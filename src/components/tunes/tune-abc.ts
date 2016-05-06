@@ -1,4 +1,4 @@
-import {Component, OnInit, DoCheck} from 'angular2/core';
+import {Component} from 'angular2/core';
 import {Router, RouteParams} from 'angular2/router';
 
 import {TuneBookService} from '../../services/tunebook-service';
@@ -16,7 +16,7 @@ import {TunePlayedUI} from '../common/tune-played';
     styleUrls: ['./components/tunes/tune-abc.css'],
     directives: [TuneAbcMenuUI, TunePlayedUI, TuneAbcEditorUI]
 })
-export class TuneAbcUI implements OnInit, DoCheck {
+export class TuneAbcUI  {
     tune: Tune;
     tuneEditModus: boolean;
     noteEditModus: boolean;
@@ -24,12 +24,5 @@ export class TuneAbcUI implements OnInit, DoCheck {
 
     constructor(public tuneBookService: TuneBookService, public router: Router, routeParams: RouteParams) {
         this.tune = this.tuneBookService.getTune(parseInt(routeParams.get('id')));
-    }
-
-    ngOnInit() {
-    }
-
-    ngDoCheck() {
-
     }
 }

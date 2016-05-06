@@ -1,5 +1,7 @@
 import {Component, OnInit, OnDestroy, Input, ElementRef} from 'angular2/core';
 import {Router} from 'angular2/router';
+
+import {Subscription}   from 'rxjs/Subscription';
 import * as jQuery from 'jquery';
 
 import {TuneBookService} from '../../services/tunebook-service';
@@ -17,7 +19,7 @@ export class TuneDotsUI implements OnInit, OnDestroy {
     @Input() tune: Tune;
     tuneObjectArray: Array<any>;
     editModus: boolean;
-    editModusSubscription: any;
+    editModusSubscription: Subscription;
 
     constructor(public tuneBookService: TuneBookService, public router: Router, public elementRef: ElementRef) {
 
@@ -26,7 +28,8 @@ export class TuneDotsUI implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.renderAbc();
-        this.editModusSubscription = this.tuneBookService.editModusChange$.subscribe(
+        this.editModus = this.tuneBookService.isEditModus();
+        this.editModusSubscription = this.tuneBookService.editModusObservable.subscribe(
             editModus => this.editModus = editModus);
     }
 

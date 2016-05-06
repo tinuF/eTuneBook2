@@ -1,12 +1,14 @@
 import {Component, Input, OnInit, OnDestroy, ViewChild, ElementRef, Renderer} from 'angular2/core';
 import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
 
+import {Subscription}   from 'rxjs/Subscription';
+
 import {TuneBookService} from '../../services/tunebook-service';
 import {TuneSetPositionPlayInfo} from '../../business/model/tunesetposition-playinfo';
 import {PartPlayInfo} from '../../business/model/partplayinfo';
 import {EliminateThe} from '../../pipes/eliminate-the';
 import {FromNow} from '../../pipes/from-now';
-import {PlaylistTuneUI} from '../../components/playlists/playlist-tune';
+import {PlaylistTuneDotsUI} from '../../components/playlists/playlist-tune-dots';
 import {TunePlayedUI} from '../common/tune-played';
 import {PlayListPositionSetPositionPlayInfoUI} from '../../components/playlists/playlist-position-set-position-play-info';
 
@@ -15,7 +17,7 @@ import {PlayListPositionSetPositionPlayInfoUI} from '../../components/playlists/
 @Component({
     selector: 'etb-playlist-position-set-position',
     templateUrl: './components/playlists/playlist-position-set-position.html',
-    directives: [ROUTER_DIRECTIVES, TunePlayedUI, PlaylistTuneUI, PlayListPositionSetPositionPlayInfoUI],
+    directives: [ROUTER_DIRECTIVES, TunePlayedUI, PlaylistTuneDotsUI, PlayListPositionSetPositionPlayInfoUI],
     styleUrls: ['./components/playlists/playlist-position-set-position.css'],
     pipes: [EliminateThe, FromNow]
 })
@@ -24,7 +26,7 @@ export class PlayListPositionSetPositionUI implements OnInit, OnDestroy {
     @ViewChild('inputTuneSetPositionPlayInfoRepeat') inputTuneSetPositionPlayInfoRepeat: ElementRef;
     playInfoAnnotationShown: boolean;
     editModus: boolean;
-    editModusSubscription: any;
+    editModusSubscription: Subscription;
 
     constructor(public tuneBookService: TuneBookService, public router: Router, public renderer: Renderer) {
 
@@ -32,7 +34,8 @@ export class PlayListPositionSetPositionUI implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.playInfoAnnotationShown = false;
-        this.editModusSubscription = this.tuneBookService.editModusChange$.subscribe(
+        this.editModus = this.tuneBookService.isEditModus();
+        this.editModusSubscription = this.tuneBookService.editModusObservable.subscribe(
             editModus => this.editModus = editModus);
     }
     

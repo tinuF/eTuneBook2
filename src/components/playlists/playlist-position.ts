@@ -1,5 +1,8 @@
 import {Component, OnInit, OnDestroy} from 'angular2/core';
 import {ROUTER_DIRECTIVES, Router, RouteParams, Location} from 'angular2/router';
+
+import {Subscription}   from 'rxjs/Subscription';
+
 import {TuneBookService} from '../../services/tunebook-service';
 import {Playlist} from '../../business/model/playlist';
 import {PlaylistPosition} from '../../business/model/playlistposition';
@@ -18,7 +21,7 @@ export class PlaylistPositionUI implements OnInit, OnDestroy {
     playlist: Playlist;
     playlistPosition: PlaylistPosition;
     editModus: boolean;
-    editModusSubscription: any;
+    editModusSubscription: Subscription;
     showDots: boolean;
 
     constructor(public tuneBookService: TuneBookService, public router: Router, routeParams: RouteParams, public location: Location) {
@@ -28,7 +31,8 @@ export class PlaylistPositionUI implements OnInit, OnDestroy {
     }
     
     ngOnInit() {
-        this.editModusSubscription = this.tuneBookService.editModusChange$.subscribe(
+        this.editModus = this.tuneBookService.isEditModus();
+        this.editModusSubscription = this.tuneBookService.editModusObservable.subscribe(
             editModus => this.editModus = editModus);
     }
     

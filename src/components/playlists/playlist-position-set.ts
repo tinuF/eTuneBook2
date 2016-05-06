@@ -1,6 +1,8 @@
 import {Component, Input, OnInit, DoCheck, OnDestroy, ViewChild, ElementRef, Renderer} from 'angular2/core';
 import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
 
+import {Subscription}   from 'rxjs/Subscription';
+
 import {TuneBookService} from '../../services/tunebook-service';
 import {TuneSetPositionPlayInfo} from '../../business/model/tunesetposition-playinfo';
 import {PlaylistPosition} from '../../business/model/playlistposition';
@@ -19,7 +21,7 @@ export class PlayListPositionSetUI implements OnInit, DoCheck, OnDestroy {
     @Input() playlistPosition: PlaylistPosition;
     @ViewChild('inputPlaylistPositionName') inputPlaylistPositionName: ElementRef;
     editModus: boolean;
-    editModusSubscription: any;
+    editModusSubscription: Subscription;
     positions: Array<number>;
 
     constructor(public tuneBookService: TuneBookService, public router: Router, public renderer: Renderer) {
@@ -29,7 +31,8 @@ export class PlayListPositionSetUI implements OnInit, DoCheck, OnDestroy {
     ngOnInit() {
         this.sortSetPosition();
         this.setPositions();
-        this.editModusSubscription = this.tuneBookService.editModusChange$.subscribe(
+        this.editModus = this.tuneBookService.isEditModus();
+        this.editModusSubscription = this.tuneBookService.editModusObservable.subscribe(
             editModus => this.editModus = editModus);
     }
 

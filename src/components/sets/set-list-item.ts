@@ -1,6 +1,8 @@
 import {Component, OnInit, DoCheck, Input} from 'angular2/core';
 import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
 
+import {Subscription}   from 'rxjs/Subscription';
+
 import {TuneBookService} from '../../services/tunebook-service';
 import {TuneSet} from '../../business/model/tuneset';
 import {TuneSetPosition} from '../../business/model/tunesetposition';
@@ -24,7 +26,7 @@ export class SetListItemUI implements OnInit, DoCheck {
     @Input() showFilterCheckbox: boolean;
     filterSettings: FilterSettings;
     editModus: boolean;
-    editModusSubscription: any;
+    editModusSubscription: Subscription;
 
     constructor(public tuneBookService: TuneBookService, public router: Router) {
         this.filterSettings = this.tuneBookService.getCurrentFilterSettings();
@@ -32,7 +34,8 @@ export class SetListItemUI implements OnInit, DoCheck {
 
     ngOnInit() {
         this.sortSetPosition();
-        this.editModusSubscription = this.tuneBookService.editModusChange$.subscribe(
+        this.editModus = this.tuneBookService.isEditModus();
+        this.editModusSubscription = this.tuneBookService.editModusObservable.subscribe(
             editModus => this.editModus = editModus);
     }
 

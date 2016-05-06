@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, DoCheck} from 'angular2/core';
+import {Component, Input, OnInit} from 'angular2/core';
 import {Router} from 'angular2/router';
 import * as jQuery from 'jquery';
 
@@ -17,7 +17,7 @@ import {TunePlayedUI} from '../common/tune-played';
     styleUrls: ['./components/tunes/tune-abc-editor.css'],
     directives: [TuneMenuUI, TuneDotsUI, TunePlayedUI]
 })
-export class TuneAbcEditorUI implements OnInit, DoCheck {
+export class TuneAbcEditorUI implements OnInit {
     @Input() tune: Tune;
     abcEditor: any;
 
@@ -27,16 +27,6 @@ export class TuneAbcEditorUI implements OnInit, DoCheck {
 
     ngOnInit() {
         this.initABCJSEditor();
-    }
-
-    ngDoCheck() {
-        //$(".title.meta-top").css("fill", "red");
-        //Chords
-        jQuery(".chord").css("font-size", "0.7em");
-        //Fingering
-        jQuery("text.annotation").css("font-size", "0.6em");
-        //$(".meta-bottom").css("display", "none");
-        jQuery(".meta-bottom").css("font-size", "0.7em");
     }
 
     initABCJSEditor() {
@@ -59,6 +49,14 @@ export class TuneAbcEditorUI implements OnInit, DoCheck {
 
             this.abcEditor = new ABCJS.Editor(editHere, { canvas_id: showHere, render_options: engraverParams });
 
+            //$(".title.meta-top").css("fill", "red");
+            //Chords
+            jQuery(".chord").css("font-size", "0.7em");
+            //Fingering
+            jQuery("text.annotation").css("font-size", "0.6em");
+            //$(".meta-bottom").css("display", "none");
+            jQuery(".meta-bottom").css("font-size", "0.7em");
+
         }, 0);
     }
 
@@ -73,12 +71,12 @@ export class TuneAbcEditorUI implements OnInit, DoCheck {
 
         } else {
             // Sync Tune-Fields
-            
+
             //TODO: Move to Service
             this.tune.title = this.tuneBookService.getTuneTitle(this.tune);
             this.tune.type = this.tuneBookService.getTuneType(this.tune);
             this.tune.key = this.tuneBookService.getTuneKey(this.tune);
-            
+
         }
 
         // Put TuneBook to localStorage

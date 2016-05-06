@@ -40,13 +40,6 @@ export class PlaylistTuneDotsUI implements OnInit, DoCheck {
         } else {
             this.hide();
         }
-
-        jQuery(".meta-top").css("display", "none");
-        jQuery(".meta-bottom").css("display", "none");
-        //Chords
-        jQuery(".chord").css("font-size", "0.7em");
-        //Fingering
-        jQuery("text.annotation").css("font-size", "0.6em");
     }
 
     show(previousNumberOfBars: string) {
@@ -103,6 +96,14 @@ export class PlaylistTuneDotsUI implements OnInit, DoCheck {
 
 
             this.tuneObjectArray = ABCJS.renderAbc(output, tunebookString, parserParams, engraverParams, renderParams);
+
+            jQuery(".meta-top").css("display", "none");
+            jQuery(".meta-bottom").css("display", "none");
+            //Chords
+            jQuery(".chord").css("font-size", "0.7em");
+            //Fingering
+            jQuery("text.annotation").css("font-size", "0.6em");
+            
         }, 0);
     }
 

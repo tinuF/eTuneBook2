@@ -1,10 +1,11 @@
 import {Injectable} from 'angular2/core';
 import {Http} from 'angular2/http';
+
+import {BehaviorSubject} from 'rxjs/subject/BehaviorSubject';
 import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/operator/share';
-import {Observer} from 'rxjs/Observer';
 import 'rxjs/add/operator/map';
 import * as moment from 'moment';
+
 import {TuneBook} from '../business/model/tunebook';
 import {Tune} from '../business/model/tune';
 import {TuneSet} from '../business/model/tuneset';
@@ -20,15 +21,25 @@ import {getSystemProperties} from '../common/system-properties';
 @Injectable()
 export class TuneBookService {
     tuneBook: TuneBook;
+
     tunesFiltered: Array<Tune>;
+
     tuneSetsFiltered: Array<TuneSet>;
+    //tuneSetsFilteredSubject: BehaviorSubject<Array<TuneSet>>;
+    //tuneSetsFilteredObservable: Observable<Array<TuneSet>>;
+    
+    modelChangeSubject: BehaviorSubject<string>;
+    modelChangeObservable: Observable<string>;
+        
+    
     systemProperties: any;
     abcExportSettings: AbcExportSettings;
     filterSettings: FilterSettings;
     playlistSettings: PlaylistSettings;
+    
     editModus: boolean;
-    editModusChange$: Observable<boolean>;
-    editModusObserver: Observer<boolean>;
+    editModusSubject: BehaviorSubject<boolean>;
+    editModusObservable: Observable<boolean>;  
 
     constructor(public http: Http) {
         console.log("TuneBookService:constructor start");
@@ -36,12 +47,16 @@ export class TuneBookService {
         this.systemProperties = getSystemProperties();
         this.tuneBook = this.getCurrentTuneBook();
         this.abcExportSettings = new AbcExportSettings();
+        
         this.initializeFilter();    //TODO: initializeFilter() wird schon in getCurrentTuneBook() aufgerufen!
+        this.modelChangeSubject = new BehaviorSubject("constructor");
+        this.modelChangeObservable= this.modelChangeSubject.asObservable();
+        
         this.editModus = false;
+        this.editModusSubject = new BehaviorSubject(this.editModus);
+        this.editModusObservable = this.editModusSubject.asObservable();
+        
         this.playlistSettings = new PlaylistSettings();
-
-        this.editModusChange$ = new Observable(observer => this.editModusObserver = observer).share();
-        // share() allows multiple subscribers
 
         console.log("TuneBookService:constructor end");
     }
@@ -76,7 +91,7 @@ export class TuneBookService {
 
     toggleEditModus(): boolean {
         this.editModus = !this.editModus;
-        this.editModusObserver.next(this.editModus);
+        this.editModusSubject.next(this.editModus);
         return this.editModus;
     }
 
@@ -160,6 +175,7 @@ export class TuneBookService {
     initializeTuneSet(tuneId: number) {
         this.getCurrentTuneBook().initializeTuneSet(tuneId);
         this.initializeFilter();
+        this.modelChangeSubject.next("initializeTuneSet");
     }
 
     initializePartPlayInfo() {
@@ -322,6 +338,7 @@ export class TuneBookService {
         //Remove Tune from tunesFiltered, tuneSetsFiltered
         this.setTunesFiltered();
         //TODO: when tuneSet deleted -> delete playlistposition....
+        this.modelChangeSubject.next("deleteTune");
     }
 
     getTunes() {

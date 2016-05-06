@@ -1,5 +1,7 @@
 import {Component, OnInit, DoCheck, OnDestroy, Input, ViewChild, ElementRef, Renderer} from 'angular2/core';
 
+import {Subscription}   from 'rxjs/Subscription';
+
 import {TuneBookService} from '../../services/tunebook-service';
 import {Video} from '../../business/model/video';
 import {Tune} from '../../business/model/tune';
@@ -17,7 +19,7 @@ export class TuneVideoListItemUI implements OnInit, OnDestroy, DoCheck {
     @ViewChild('inputVideoDescription') inputVideoDescription: ElementRef;
     videoUrl: string;
     editModus: boolean;
-    editModusSubscription: any;
+    editModusSubscription: Subscription;
 
     constructor(public tuneBookService: TuneBookService, public renderer: Renderer) {
 
@@ -25,7 +27,8 @@ export class TuneVideoListItemUI implements OnInit, OnDestroy, DoCheck {
     
     ngOnInit() {
         this.videoUrl = this.getVideoUrl();
-        this.editModusSubscription = this.tuneBookService.editModusChange$.subscribe(
+        this.editModus = this.tuneBookService.isEditModus();
+        this.editModusSubscription = this.tuneBookService.editModusObservable.subscribe(
             editModus => this.editModus = editModus);
     }
 
