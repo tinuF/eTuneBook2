@@ -4,6 +4,7 @@ import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
 import {Subscription}   from 'rxjs/Subscription';
 
 import {TuneBookService} from '../../services/tunebook-service';
+import {ACTION} from '../../common/action';
 import {TuneSetPositionPlayInfo} from '../../business/model/tunesetposition-playinfo';
 import {PartPlayInfo} from '../../business/model/partplayinfo';
 import {EliminateThe} from '../../pipes/eliminate-the';
@@ -19,7 +20,7 @@ import {FromNow} from '../../pipes/from-now';
 export class PartPlayInfoListUI implements OnInit, OnDestroy {
     @Input() tuneSetPositionPlayInfo: TuneSetPositionPlayInfo;
     editModus: boolean;
-    editModusSubscription: Subscription;
+    actionSubscription: Subscription;
 
     constructor(public tuneBookService: TuneBookService, public router: Router) {
 
@@ -27,12 +28,17 @@ export class PartPlayInfoListUI implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.editModus = this.tuneBookService.isEditModus();
-        this.editModusSubscription = this.tuneBookService.editModusObservable.subscribe(
-            editModus => this.editModus = editModus);
+        this.actionSubscription = this.tuneBookService.actionObservable.subscribe(
+            (action) => {
+                console.log("part-play-info-list:actionSubscription called: " + action);
+                if (action === ACTION.TOGGLE_EDIT_MODUS) {
+                    this.editModus = this.tuneBookService.isEditModus();
+                }
+            });
     }
     
     ngOnDestroy() {
-        this.editModusSubscription.unsubscribe();
+        this.actionSubscription.unsubscribe();
     }
 
     handleKeyDownOnPart(event, partPlayInfo:PartPlayInfo) {

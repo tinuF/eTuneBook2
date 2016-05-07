@@ -5,6 +5,7 @@ import {Subscription}   from 'rxjs/Subscription';
 import * as jQuery from 'jquery';
 
 import {TuneBookService} from '../../services/tunebook-service';
+import {ACTION} from '../../common/action';
 import {Tune} from '../../business/model/tune';
 import {TuneDotsMenuUI} from '../tunes/tune-dots-menu';
 
@@ -19,7 +20,7 @@ export class TuneDotsUI implements OnInit, OnDestroy {
     @Input() tune: Tune;
     tuneObjectArray: Array<any>;
     editModus: boolean;
-    editModusSubscription: Subscription;
+    actionSubscription: Subscription;
 
     constructor(public tuneBookService: TuneBookService, public router: Router, public elementRef: ElementRef) {
 
@@ -29,12 +30,17 @@ export class TuneDotsUI implements OnInit, OnDestroy {
     ngOnInit() {
         this.renderAbc();
         this.editModus = this.tuneBookService.isEditModus();
-        this.editModusSubscription = this.tuneBookService.editModusObservable.subscribe(
-            editModus => this.editModus = editModus);
+        this.actionSubscription = this.tuneBookService.actionObservable.subscribe(
+            (action) => {
+                console.log("tune-dots:actionSubscription called: " + action);
+                if (action === ACTION.TOGGLE_EDIT_MODUS) {
+                    this.editModus = this.tuneBookService.isEditModus();
+                }
+            });
     }
 
     ngOnDestroy() {
-        this.editModusSubscription.unsubscribe();
+        this.actionSubscription.unsubscribe();
     }
 
     renderAbc() {

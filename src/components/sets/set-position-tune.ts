@@ -4,6 +4,7 @@ import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
 import {Subscription}   from 'rxjs/Subscription';
 
 import {TuneBookService} from '../../services/tunebook-service';
+import {ACTION} from '../../common/action';
 import {Tune} from '../../business/model/tune';
 import {TuneSetPosition} from '../../business/model/tunesetposition';
 import {EliminateThe} from '../../pipes/eliminate-the';
@@ -22,7 +23,7 @@ export class SetpositionTuneUI implements OnInit, OnDestroy {
     @Input() tune: Tune;
     @Input() tuneSetPosition: TuneSetPosition;
     editModus: boolean;
-    editModusSubscription: Subscription;
+    actionSubscription: Subscription;
     dragStart: boolean;
     dragOver: boolean;
 
@@ -32,12 +33,17 @@ export class SetpositionTuneUI implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.editModus = this.tuneBookService.isEditModus();
-        this.editModusSubscription = this.tuneBookService.editModusObservable.subscribe(
-            editModus => this.editModus = editModus);
+        this.actionSubscription = this.tuneBookService.actionObservable.subscribe(
+            (action) => {
+                console.log("set-position-tune:actionSubscription called: " + action);
+                if (action === ACTION.TOGGLE_EDIT_MODUS) {
+                    this.editModus = this.tuneBookService.isEditModus();
+                }
+            });
     }
 
     ngOnDestroy() {
-        this.editModusSubscription.unsubscribe();
+        this.actionSubscription.unsubscribe();
     }
 
     justPlayedTheTune() {

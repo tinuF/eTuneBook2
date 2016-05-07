@@ -4,6 +4,7 @@ import {ROUTER_DIRECTIVES, Router, RouteParams, Location} from 'angular2/router'
 import {Subscription}   from 'rxjs/Subscription';
 
 import {TuneBookService} from '../../services/tunebook-service';
+import {ACTION} from '../../common/action';
 import {Playlist} from '../../business/model/playlist';
 import {PlaylistPosition} from '../../business/model/playlistposition';
 import {FromNow} from '../../pipes/from-now';
@@ -21,7 +22,7 @@ export class PlaylistPositionUI implements OnInit, OnDestroy {
     playlist: Playlist;
     playlistPosition: PlaylistPosition;
     editModus: boolean;
-    editModusSubscription: Subscription;
+    actionSubscription: Subscription;
     showDots: boolean;
 
     constructor(public tuneBookService: TuneBookService, public router: Router, routeParams: RouteParams, public location: Location) {
@@ -32,12 +33,17 @@ export class PlaylistPositionUI implements OnInit, OnDestroy {
     
     ngOnInit() {
         this.editModus = this.tuneBookService.isEditModus();
-        this.editModusSubscription = this.tuneBookService.editModusObservable.subscribe(
-            editModus => this.editModus = editModus);
+        this.actionSubscription = this.tuneBookService.actionObservable.subscribe(
+            (action) => {
+                console.log("playlist-position:actionSubscription called: " + action);
+                if (action === ACTION.TOGGLE_EDIT_MODUS) {
+                    this.editModus = this.tuneBookService.isEditModus();
+                }
+            });
     }
     
     ngOnDestroy() {
-        this.editModusSubscription.unsubscribe();
+        this.actionSubscription.unsubscribe();
     }
     
     toggleDots() {

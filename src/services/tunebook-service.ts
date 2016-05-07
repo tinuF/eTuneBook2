@@ -17,30 +17,23 @@ import {tuneUp, tuneDown} from '../business/util/transposer-util';
 import {filterTunes, filterTuneSets, extractTunes, filterPlaylists} from '../business/filter/filter-logic';
 import {getRandomArrayIndex, shuffleArray} from '../business/util/math-util';
 import {getSystemProperties} from '../common/system-properties';
+import {ACTION} from '../common/action';
 
 @Injectable()
 export class TuneBookService {
     tuneBook: TuneBook;
-
     tunesFiltered: Array<Tune>;
-
     tuneSetsFiltered: Array<TuneSet>;
-    //tuneSetsFilteredSubject: BehaviorSubject<Array<TuneSet>>;
-    //tuneSetsFilteredObservable: Observable<Array<TuneSet>>;
-    
-    modelChangeSubject: BehaviorSubject<string>;
-    modelChangeObservable: Observable<string>;
-        
-    
-    systemProperties: any;
     abcExportSettings: AbcExportSettings;
     filterSettings: FilterSettings;
     playlistSettings: PlaylistSettings;
-    
     editModus: boolean;
-    editModusSubject: BehaviorSubject<boolean>;
-    editModusObservable: Observable<boolean>;  
 
+    actionSubject: BehaviorSubject<string>;
+    actionObservable: Observable<string>;
+        
+    systemProperties: any;
+    
     constructor(public http: Http) {
         console.log("TuneBookService:constructor start");
 
@@ -49,12 +42,10 @@ export class TuneBookService {
         this.abcExportSettings = new AbcExportSettings();
         
         this.initializeFilter();    //TODO: initializeFilter() wird schon in getCurrentTuneBook() aufgerufen!
-        this.modelChangeSubject = new BehaviorSubject("constructor");
-        this.modelChangeObservable= this.modelChangeSubject.asObservable();
+        this.actionSubject = new BehaviorSubject("constructor");
+        this.actionObservable= this.actionSubject.asObservable();
         
         this.editModus = false;
-        this.editModusSubject = new BehaviorSubject(this.editModus);
-        this.editModusObservable = this.editModusSubject.asObservable();
         
         this.playlistSettings = new PlaylistSettings();
 
@@ -91,7 +82,7 @@ export class TuneBookService {
 
     toggleEditModus(): boolean {
         this.editModus = !this.editModus;
-        this.editModusSubject.next(this.editModus);
+        this.actionSubject.next(ACTION.TOGGLE_EDIT_MODUS);
         return this.editModus;
     }
 
@@ -175,7 +166,7 @@ export class TuneBookService {
     initializeTuneSet(tuneId: number) {
         this.getCurrentTuneBook().initializeTuneSet(tuneId);
         this.initializeFilter();
-        this.modelChangeSubject.next("initializeTuneSet");
+        this.actionSubject.next(ACTION.NEW_TUNESET);
     }
 
     initializePartPlayInfo() {
@@ -276,6 +267,7 @@ export class TuneBookService {
     deleteTuneSetPosition(tuneSetId: number, position: number) {
         this.getCurrentTuneBook().deleteTuneSetPosition(tuneSetId, position);
         this.initializeFilter();
+        this.actionSubject.next(ACTION.DELETE_TUNESETPOSITION);
     }
 
     deletePlaylistPosition(playlistId: number, position: number) {
@@ -338,7 +330,7 @@ export class TuneBookService {
         //Remove Tune from tunesFiltered, tuneSetsFiltered
         this.setTunesFiltered();
         //TODO: when tuneSet deleted -> delete playlistposition....
-        this.modelChangeSubject.next("deleteTune");
+        this.actionSubject.next(ACTION.DELETE_TUNE);
     }
 
     getTunes() {
@@ -397,6 +389,7 @@ export class TuneBookService {
 
     applyFilter() {
         this.setTunesFiltered();
+        this.actionSubject.next(ACTION.APPLY_FILTER);
     }
 
     getFirstTuneSetPosition(tuneSet: TuneSet) {

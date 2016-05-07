@@ -4,6 +4,7 @@ import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
 import {Subscription}   from 'rxjs/Subscription';
 
 import {TuneBookService} from '../../services/tunebook-service';
+import {ACTION} from '../../common/action';
 import {TuneSetPositionPlayInfo} from '../../business/model/tunesetposition-playinfo';
 import {PlaylistPosition} from '../../business/model/playlistposition';
 import {EliminateThe} from '../../pipes/eliminate-the';
@@ -21,7 +22,7 @@ export class PlayListPositionSetUI implements OnInit, DoCheck, OnDestroy {
     @Input() playlistPosition: PlaylistPosition;
     @ViewChild('inputPlaylistPositionName') inputPlaylistPositionName: ElementRef;
     editModus: boolean;
-    editModusSubscription: Subscription;
+    actionSubscription: Subscription;
     positions: Array<number>;
 
     constructor(public tuneBookService: TuneBookService, public router: Router, public renderer: Renderer) {
@@ -32,8 +33,13 @@ export class PlayListPositionSetUI implements OnInit, DoCheck, OnDestroy {
         this.sortSetPosition();
         this.setPositions();
         this.editModus = this.tuneBookService.isEditModus();
-        this.editModusSubscription = this.tuneBookService.editModusObservable.subscribe(
-            editModus => this.editModus = editModus);
+        this.actionSubscription = this.tuneBookService.actionObservable.subscribe(
+            (action) => {
+                console.log("playlist-position-set:actionSubscription called: " + action);
+                if (action === ACTION.TOGGLE_EDIT_MODUS) {
+                    this.editModus = this.tuneBookService.isEditModus();
+                }
+            });
     }
 
     ngDoCheck() {
@@ -41,7 +47,7 @@ export class PlayListPositionSetUI implements OnInit, DoCheck, OnDestroy {
     }
     
     ngOnDestroy() {
-        this.editModusSubscription.unsubscribe();
+        this.actionSubscription.unsubscribe();
     }
 
     sortSetPosition() {

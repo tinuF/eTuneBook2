@@ -1,7 +1,10 @@
 import {Component, OnInit, DoCheck, OnDestroy, AfterViewInit, ChangeDetectorRef} from 'angular2/core';
 import {ROUTER_DIRECTIVES, CanReuse, OnReuse, ComponentInstruction} from 'angular2/router';
 
+import {Subscription}   from 'rxjs/Subscription';
+
 import {TuneBookService} from '../../services/tunebook-service';
+import {ACTION} from '../../common/action';
 import {Tune} from '../../business/model/tune';
 import {TuneListItemUI} from '../../components/tunes/tune-list-item';
 import {TuneListMenuUI} from '../../components/tunes/tune-list-menu';
@@ -17,10 +20,10 @@ import {SpinnerUI} from '../../components/common/spinner';
 export class TuneListUI implements OnInit, DoCheck, OnDestroy, AfterViewInit, CanReuse, OnReuse {
     tunes: Array<Tune>;
     isRendering:boolean;
+    actionSubscription: Subscription;
 
     constructor(public tuneBookService: TuneBookService, private cdr : ChangeDetectorRef) {
-        this.tunes = this.tuneBookService.getTunesFiltered();
-        console.log("tune-list:constructor called");
+        //console.log("tune-list:constructor called");
     }
 
     ngOnInit() {
@@ -32,9 +35,18 @@ export class TuneListUI implements OnInit, DoCheck, OnDestroy, AfterViewInit, Ca
         
         //this.cdr.detach();
         //this.isRendering = true;
+        this.tunes = this.tuneBookService.getTunesFiltered();
+        
+        this.actionSubscription = this.tuneBookService.actionObservable.subscribe(
+            (action) => {
+                console.log("tune-list:ngOnInit-Subscription called: " + action);
+                if (action === ACTION.APPLY_FILTER) {
+                    this.tunes = this.tuneBookService.getTunesFiltered();
+                }
+            });
         console.log("tune-list:ngOnInit called");
     }
-    
+    /*
     ngDoCheck() {
         //Kompoponenten, die gleichzeitig mit der Tune-List angezeigt werden
         //(Text-Search, Sortier-Buttons), lösen asynchrone Funktionen aus.
@@ -62,8 +74,10 @@ export class TuneListUI implements OnInit, DoCheck, OnDestroy, AfterViewInit, Ca
         this.tunes = this.tuneBookService.getTunesFiltered();
         console.log("tune-list:ngDoCheck called");
     }
+    */
     
     ngOnDestroy() {
+        this.actionSubscription.unsubscribe();
         console.log("tune-list:ngOnDestroy called");
     }
     

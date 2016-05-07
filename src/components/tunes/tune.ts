@@ -4,6 +4,7 @@ import {ROUTER_DIRECTIVES, Router, RouteParams, Location} from 'angular2/router'
 import {Subscription}   from 'rxjs/Subscription';
 
 import {TuneBookService} from '../../services/tunebook-service';
+import {ACTION} from '../../common/action';
 import {Tune} from '../../business/model/tune';
 import {FromNow} from '../../pipes/from-now';
 import {TuneMenuUI} from '../tunes/tune-menu';
@@ -28,7 +29,7 @@ import {TunePlaylistListUI} from '../tunes/tune-playlist-list';
 export class TuneUI implements OnInit, OnDestroy {
     tune: Tune;
     editModus: boolean;
-    editModusSubscription: Subscription;
+    actionSubscription: Subscription;
 
     constructor(public tuneBookService: TuneBookService, public router: Router, routeParams: RouteParams, public location: Location) {
         this.tune = this.tuneBookService.getTune(parseInt(routeParams.get('id')));
@@ -36,12 +37,17 @@ export class TuneUI implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.editModus = this.tuneBookService.isEditModus();
-        this.editModusSubscription = this.tuneBookService.editModusObservable.subscribe(
-            editModus => this.editModus = editModus);
+        this.actionSubscription = this.tuneBookService.actionObservable.subscribe(
+            (action) => {
+                console.log("tune:actionSubscription called: " + action);
+                if (action === ACTION.TOGGLE_EDIT_MODUS) {
+                    this.editModus = this.tuneBookService.isEditModus();
+                }
+            });
     }
 
     ngOnDestroy() {
-        this.editModusSubscription.unsubscribe();
+        this.actionSubscription.unsubscribe();
     }
 }
 

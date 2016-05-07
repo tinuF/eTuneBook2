@@ -4,9 +4,9 @@ import {ROUTER_DIRECTIVES} from 'angular2/router';
 import {Subscription}   from 'rxjs/Subscription';
 
 import {TuneBookService} from '../../services/tunebook-service';
+import {ACTION} from '../../common/action';
 import {Tune} from '../../business/model/tune';
 import {TuneSet} from '../../business/model/tuneset';
-
 import {SetListItemUI} from '../../components/sets/set-list-item';
 
 
@@ -19,7 +19,7 @@ import {SetListItemUI} from '../../components/sets/set-list-item';
 export class TuneSetListUI implements OnInit, OnDestroy {
     @Input() tune: Tune;
     sets: Array<TuneSet>;
-    modelChangeSubscription: Subscription;
+    actionSubscription: Subscription;
 
     constructor(public tuneBookService: TuneBookService) {
 
@@ -28,17 +28,17 @@ export class TuneSetListUI implements OnInit, OnDestroy {
     ngOnInit() {
         this.sets = this.tuneBookService.getTuneSetsByTuneId(this.tune.id);
         
-        this.modelChangeSubscription = this.tuneBookService.modelChangeObservable.subscribe(
-            (method) => {
-                console.log("tune-set-list:ngOnInit-Subscription called: " + method);
-                if (method === "initializeTuneSet" || method === "deleteTune") {
+        this.actionSubscription = this.tuneBookService.actionObservable.subscribe(
+            (action) => {
+                console.log("tune-set-list:ngOnInit-Subscription called: " + action);
+                if (action === ACTION.NEW_TUNESET || action === ACTION.DELETE_TUNESETPOSITION) {
                     this.sets = this.tuneBookService.getTuneSetsByTuneId(this.tune.id);
                 }
             });
     }
 
     ngOnDestroy() {
-        this.modelChangeSubscription.unsubscribe();
+        this.actionSubscription.unsubscribe();
     }
 
     /*
