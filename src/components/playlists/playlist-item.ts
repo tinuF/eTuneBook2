@@ -25,7 +25,7 @@ export class PlayListItemUI implements OnInit, DoCheck {
     @Input() playlistPosition: PlaylistPosition;
     @Output() copyPlaylistPosition: EventEmitter<PlaylistPosition> = new EventEmitter();
     editModus: boolean;
-    actionSubscription: Subscription;
+    modusActionSubscription: Subscription;
     positions: Array<number>;
     playlists: Array<Playlist>;
     selectedPlaylistId: number;
@@ -40,9 +40,9 @@ export class PlayListItemUI implements OnInit, DoCheck {
         this.editModus = this.tuneBookService.isEditModus();
         this.playlists = this.tuneBookService.getPlaylists();
         
-        this.actionSubscription = this.tuneBookService.actionObservable.subscribe(
+        this.modusActionSubscription = this.tuneBookService.modusActionObservable.subscribe(
             (action) => {
-                console.log("playlist-item:actionSubscription called: " + action);
+                console.log("playlist-item:modusActionSubscription called: " + action);
                 if (action === ACTION.TOGGLE_EDIT_MODUS) {
                     this.editModus = this.tuneBookService.isEditModus();
                 }
@@ -54,7 +54,7 @@ export class PlayListItemUI implements OnInit, DoCheck {
     }
     
     ngOnDestroy() {
-        this.actionSubscription.unsubscribe();
+        this.modusActionSubscription.unsubscribe();
     }
 
     sortSetPosition() {

@@ -40,6 +40,7 @@ export class PlaylistTuneDotsUI implements OnInit, DoCheck {
         } else {
             this.hide();
         }
+        console.log("playlist-tune-dots:ngDoCheck called");
     }
 
     show(previousNumberOfBars: string) {

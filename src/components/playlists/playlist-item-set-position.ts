@@ -20,7 +20,7 @@ import {TunePlayedUI} from '../common/tune-played';
 export class PlayListItemSetPositionUI implements OnInit, OnDestroy {
     @Input() tuneSetPositionPlayInfo: TuneSetPositionPlayInfo;
     editModus: boolean;
-    actionSubscription: Subscription;
+    modusActionSubscription: Subscription;
 
     constructor(public tuneBookService: TuneBookService, public router: Router) {
 
@@ -28,9 +28,9 @@ export class PlayListItemSetPositionUI implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.editModus = this.tuneBookService.isEditModus();
-        this.actionSubscription = this.tuneBookService.actionObservable.subscribe(
+        this.modusActionSubscription = this.tuneBookService.modusActionObservable.subscribe(
             (action) => {
-                console.log("playlist-item-set-position:actionSubscription called: " + action);
+                console.log("playlist-item-set-position:modusActionSubscription called: " + action);
                 if (action === ACTION.TOGGLE_EDIT_MODUS) {
                     this.editModus = this.tuneBookService.isEditModus();
                 }
@@ -38,7 +38,7 @@ export class PlayListItemSetPositionUI implements OnInit, OnDestroy {
     }
     
     ngOnDestroy() {
-        this.actionSubscription.unsubscribe();
+        this.modusActionSubscription.unsubscribe();
     }
 }
 

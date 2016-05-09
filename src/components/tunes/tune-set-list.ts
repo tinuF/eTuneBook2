@@ -19,7 +19,7 @@ import {SetListItemUI} from '../../components/sets/set-list-item';
 export class TuneSetListUI implements OnInit, OnDestroy {
     @Input() tune: Tune;
     sets: Array<TuneSet>;
-    actionSubscription: Subscription;
+    modelActionSubscription: Subscription;
 
     constructor(public tuneBookService: TuneBookService) {
 
@@ -28,21 +28,21 @@ export class TuneSetListUI implements OnInit, OnDestroy {
     ngOnInit() {
         this.sets = this.tuneBookService.getTuneSetsByTuneId(this.tune.id);
         
-        this.actionSubscription = this.tuneBookService.actionObservable.subscribe(
+        this.modelActionSubscription = this.tuneBookService.modelActionObservable.subscribe(
             (action) => {
-                console.log("tune-set-list:ngOnInit-Subscription called: " + action);
-                if (action === ACTION.NEW_TUNESET || action === ACTION.DELETE_TUNESETPOSITION) {
+                console.log("tune-set-list:modelActionSubscription called: " + action);
+                if (action === ACTION.ADD_TUNESET || action === ACTION.DELETE_TUNESETPOSITION) {
                     this.sets = this.tuneBookService.getTuneSetsByTuneId(this.tune.id);
                 }
             });
     }
 
     ngOnDestroy() {
-        this.actionSubscription.unsubscribe();
+        this.modelActionSubscription.unsubscribe();
     }
 
     /*
-        ngDoCheck() {
+        //ngDoCheck() {
             this.sets = this.tuneBookService.getTuneSetsByTuneId(this.tune.id);
             console.log("tune-set-list:ngDoCheck called");
             //wenn ein Set hinzukommt oder wegfällt, muss die Liste angepasst werden

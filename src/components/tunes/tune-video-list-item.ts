@@ -20,7 +20,7 @@ export class TuneVideoListItemUI implements OnInit, OnDestroy, DoCheck {
     @ViewChild('inputVideoDescription') inputVideoDescription: ElementRef;
     videoUrl: string;
     editModus: boolean;
-    actionSubscription: Subscription;
+    modusActionSubscription: Subscription;
 
     constructor(public tuneBookService: TuneBookService, public renderer: Renderer) {
 
@@ -30,9 +30,9 @@ export class TuneVideoListItemUI implements OnInit, OnDestroy, DoCheck {
         this.videoUrl = this.getVideoUrl();
         this.editModus = this.tuneBookService.isEditModus();
         
-        this.actionSubscription = this.tuneBookService.actionObservable.subscribe(
+        this.modusActionSubscription = this.tuneBookService.modusActionObservable.subscribe(
             (action) => {
-                console.log("tune-video-list-item:actionSubscription called: " + action);
+                console.log("tune-video-list-item:modusActionSubscription called: " + action);
                 if (action === ACTION.TOGGLE_EDIT_MODUS) {
                     this.editModus = this.tuneBookService.isEditModus();
                 }
@@ -40,7 +40,7 @@ export class TuneVideoListItemUI implements OnInit, OnDestroy, DoCheck {
     }
 
     ngOnDestroy() {
-        this.actionSubscription.unsubscribe();
+        this.modusActionSubscription.unsubscribe();
     }
 
 

@@ -23,7 +23,7 @@ export class SetpositionTuneUI implements OnInit, OnDestroy {
     @Input() tune: Tune;
     @Input() tuneSetPosition: TuneSetPosition;
     editModus: boolean;
-    actionSubscription: Subscription;
+    modusActionSubscription: Subscription;
     dragStart: boolean;
     dragOver: boolean;
 
@@ -33,9 +33,9 @@ export class SetpositionTuneUI implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.editModus = this.tuneBookService.isEditModus();
-        this.actionSubscription = this.tuneBookService.actionObservable.subscribe(
+        this.modusActionSubscription = this.tuneBookService.modusActionObservable.subscribe(
             (action) => {
-                console.log("set-position-tune:actionSubscription called: " + action);
+                console.log("set-position-tune:modusActionSubscription called: " + action);
                 if (action === ACTION.TOGGLE_EDIT_MODUS) {
                     this.editModus = this.tuneBookService.isEditModus();
                 }
@@ -43,7 +43,7 @@ export class SetpositionTuneUI implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.actionSubscription.unsubscribe();
+        this.modusActionSubscription.unsubscribe();
     }
 
     justPlayedTheTune() {

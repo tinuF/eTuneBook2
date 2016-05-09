@@ -22,7 +22,7 @@ export class PlaylistPositionUI implements OnInit, OnDestroy {
     playlist: Playlist;
     playlistPosition: PlaylistPosition;
     editModus: boolean;
-    actionSubscription: Subscription;
+    modusActionSubscription: Subscription;
     showDots: boolean;
 
     constructor(public tuneBookService: TuneBookService, public router: Router, routeParams: RouteParams, public location: Location) {
@@ -33,9 +33,9 @@ export class PlaylistPositionUI implements OnInit, OnDestroy {
     
     ngOnInit() {
         this.editModus = this.tuneBookService.isEditModus();
-        this.actionSubscription = this.tuneBookService.actionObservable.subscribe(
+        this.modusActionSubscription = this.tuneBookService.modusActionObservable.subscribe(
             (action) => {
-                console.log("playlist-position:actionSubscription called: " + action);
+                console.log("playlist-position:modusActionSubscription called: " + action);
                 if (action === ACTION.TOGGLE_EDIT_MODUS) {
                     this.editModus = this.tuneBookService.isEditModus();
                 }
@@ -43,7 +43,7 @@ export class PlaylistPositionUI implements OnInit, OnDestroy {
     }
     
     ngOnDestroy() {
-        this.actionSubscription.unsubscribe();
+        this.modusActionSubscription.unsubscribe();
     }
     
     toggleDots() {

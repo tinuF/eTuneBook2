@@ -20,7 +20,7 @@ export class TuneDotsUI implements OnInit, OnDestroy {
     @Input() tune: Tune;
     tuneObjectArray: Array<any>;
     editModus: boolean;
-    actionSubscription: Subscription;
+    modusActionSubscription: Subscription;
 
     constructor(public tuneBookService: TuneBookService, public router: Router, public elementRef: ElementRef) {
 
@@ -30,9 +30,9 @@ export class TuneDotsUI implements OnInit, OnDestroy {
     ngOnInit() {
         this.renderAbc();
         this.editModus = this.tuneBookService.isEditModus();
-        this.actionSubscription = this.tuneBookService.actionObservable.subscribe(
+        this.modusActionSubscription = this.tuneBookService.modusActionObservable.subscribe(
             (action) => {
-                console.log("tune-dots:actionSubscription called: " + action);
+                console.log("tune-dots:modusActionSubscription called: " + action);
                 if (action === ACTION.TOGGLE_EDIT_MODUS) {
                     this.editModus = this.tuneBookService.isEditModus();
                 }
@@ -40,7 +40,7 @@ export class TuneDotsUI implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.actionSubscription.unsubscribe();
+        this.modusActionSubscription.unsubscribe();
     }
 
     renderAbc() {

@@ -1,4 +1,4 @@
-import {Component, OnInit, DoCheck, Input} from 'angular2/core';
+import {Component, OnInit, Input} from 'angular2/core';
 import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {Subscription}   from 'rxjs/Subscription';
@@ -22,12 +22,12 @@ import {FilterSettings} from '../../common/settings/filter-settings';
     styleUrls: ['./components/sets/set-list-item.css'],
     pipes: [EliminateThe, FromNow]
 })
-export class SetListItemUI implements OnInit, DoCheck {
+export class SetListItemUI implements OnInit {
     @Input() set: TuneSet;
     @Input() showFilterCheckbox: boolean;
     filterSettings: FilterSettings;
     editModus: boolean;
-    actionSubscription: Subscription;
+    modusActionSubscription: Subscription;
 
     constructor(public tuneBookService: TuneBookService, public router: Router) {
         this.filterSettings = this.tuneBookService.getCurrentFilterSettings();
@@ -36,21 +36,23 @@ export class SetListItemUI implements OnInit, DoCheck {
     ngOnInit() {
         this.sortSetPosition();
         this.editModus = this.tuneBookService.isEditModus();
-        this.actionSubscription = this.tuneBookService.actionObservable.subscribe(
+        this.modusActionSubscription = this.tuneBookService.modusActionObservable.subscribe(
             (action) => {
-                console.log("set-list-item:actionSubscription called: " + action);
+                console.log("set-list-item:modusActionSubscription called: " + action);
                 if (action === ACTION.TOGGLE_EDIT_MODUS) {
                     this.editModus = this.tuneBookService.isEditModus();
                 }
             });
     }
-
-    ngDoCheck() {
+/*
+   // ngDoCheck() {
         this.sortSetPosition();
+        console.log("set-list-item:ngDoCheck called");
     }
+  */
     
     ngOnDestroy() {
-        this.actionSubscription.unsubscribe();
+        this.modusActionSubscription.unsubscribe();
     }
 
     justPlayedTheSet() {

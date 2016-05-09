@@ -25,9 +25,6 @@ export class TuneDotsMenuUI {
     deleteTune() {
         this.tuneBookService.deleteTune(this.tune.id);
         this.router.navigate(['/Tunelist']);
-
-        // Put TuneBook to localStorage
-        this.tuneBookService.storeTuneBookAbc();
     }
 
     tuneUp() {
@@ -40,19 +37,16 @@ export class TuneDotsMenuUI {
         this.transposeDown.next(null);
     }
 
-    newSet(e) {
-        this.tuneBookService.initializeTuneSet(this.tune.id);
-        this.tuneBookService.storeTuneBookAbc();
+    newSet() {
+        this.tuneBookService.addTuneSet(this.tune.id);
     }
 
-    newVideo(e) {
+    newVideo() {
         this.tuneBookService.addVideo(this.tune.id, "ytube", "", "0:00: " + this.tune.title);
-        this.tuneBookService.storeTuneBookAbc();
     }
 
-    newWebsite(e) {
+    newWebsite() {
         this.tuneBookService.addWebsite(this.tune.id, "");
-        this.tuneBookService.storeTuneBookAbc();
     }
 }
 

@@ -23,7 +23,7 @@ export class PlayListPositionSetPositionPlayInfoUI implements OnInit, OnDestroy 
     @Input() tuneSetPositionPlayInfo: TuneSetPositionPlayInfo;
     @Input() playInfoAnnotationShown: boolean;
     editModus:boolean;
-    actionSubscription: Subscription;
+    modusActionSubscription: Subscription;
 
     constructor(public tuneBookService: TuneBookService, public router: Router) {
 
@@ -31,9 +31,9 @@ export class PlayListPositionSetPositionPlayInfoUI implements OnInit, OnDestroy 
 
     ngOnInit() {
         this.editModus = this.tuneBookService.isEditModus();
-        this.actionSubscription = this.tuneBookService.actionObservable.subscribe(
+        this.modusActionSubscription = this.tuneBookService.modusActionObservable.subscribe(
             (action) => {
-                console.log("playlist-position-set-position-play-info:actionSubscription called: " + action);
+                console.log("playlist-position-set-position-play-info:modusActionSubscription called: " + action);
                 if (action === ACTION.TOGGLE_EDIT_MODUS) {
                     this.editModus = this.tuneBookService.isEditModus();
                 }
@@ -41,7 +41,7 @@ export class PlayListPositionSetPositionPlayInfoUI implements OnInit, OnDestroy 
     }
     
     ngOnDestroy() {
-        this.actionSubscription.unsubscribe();
+        this.modusActionSubscription.unsubscribe();
     }
 
     handleKeyDownOnTuneSetPositionRepeat(event) {

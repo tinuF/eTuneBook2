@@ -20,7 +20,7 @@ import {FromNow} from '../../pipes/from-now';
 export class PartPlayInfoListUI implements OnInit, OnDestroy {
     @Input() tuneSetPositionPlayInfo: TuneSetPositionPlayInfo;
     editModus: boolean;
-    actionSubscription: Subscription;
+    modusActionSubscription: Subscription;
 
     constructor(public tuneBookService: TuneBookService, public router: Router) {
 
@@ -28,9 +28,9 @@ export class PartPlayInfoListUI implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.editModus = this.tuneBookService.isEditModus();
-        this.actionSubscription = this.tuneBookService.actionObservable.subscribe(
+        this.modusActionSubscription = this.tuneBookService.modusActionObservable.subscribe(
             (action) => {
-                console.log("part-play-info-list:actionSubscription called: " + action);
+                console.log("part-play-info-list:modusActionSubscription called: " + action);
                 if (action === ACTION.TOGGLE_EDIT_MODUS) {
                     this.editModus = this.tuneBookService.isEditModus();
                 }
@@ -38,7 +38,7 @@ export class PartPlayInfoListUI implements OnInit, OnDestroy {
     }
     
     ngOnDestroy() {
-        this.actionSubscription.unsubscribe();
+        this.modusActionSubscription.unsubscribe();
     }
 
     handleKeyDownOnPart(event, partPlayInfo:PartPlayInfo) {

@@ -10,6 +10,8 @@ import {TuneBook} from '../business/model/tunebook';
 import {Tune} from '../business/model/tune';
 import {TuneSet} from '../business/model/tuneset';
 import {Playlist} from '../business/model/playlist';
+import {Video} from '../business/model/video';
+import {Website} from '../business/model/website';
 import {AbcExportSettings} from '../common/settings/abc-export-settings';
 import {FilterSettings} from '../common/settings/filter-settings';
 import {PlaylistSettings} from '../common/settings/playlist-settings';
@@ -29,8 +31,14 @@ export class TuneBookService {
     playlistSettings: PlaylistSettings;
     editModus: boolean;
 
-    actionSubject: BehaviorSubject<string>;
-    actionObservable: Observable<string>;
+    modelActionSubject: BehaviorSubject<string>;
+    modelActionObservable: Observable<string>;
+    
+    filterActionSubject: BehaviorSubject<string>;
+    filterActionObservable: Observable<string>;
+    
+    modusActionSubject: BehaviorSubject<string>;
+    modusActionObservable: Observable<string>;
         
     systemProperties: any;
     
@@ -42,8 +50,15 @@ export class TuneBookService {
         this.abcExportSettings = new AbcExportSettings();
         
         this.initializeFilter();    //TODO: initializeFilter() wird schon in getCurrentTuneBook() aufgerufen!
-        this.actionSubject = new BehaviorSubject("constructor");
-        this.actionObservable= this.actionSubject.asObservable();
+        
+        this.modelActionSubject = new BehaviorSubject("constructor");
+        this.modelActionObservable= this.modelActionSubject.asObservable();
+        
+        this.filterActionSubject = new BehaviorSubject("constructor");
+        this.filterActionObservable= this.filterActionSubject.asObservable();
+        
+        this.modusActionSubject = new BehaviorSubject("constructor");
+        this.modusActionObservable= this.modusActionSubject.asObservable();
         
         this.editModus = false;
         
@@ -68,6 +83,18 @@ export class TuneBookService {
         return this.tuneBook;
     }
 
+    broadCastModelAction(action: string) {
+        this.modelActionSubject.next(action);
+    }
+    
+    broadCastFilterAction(action: string) {
+        this.filterActionSubject.next(action);
+    }
+    
+    broadCastModusAction(action: string) {
+        this.modusActionSubject.next(action);
+    }
+    
     getCurrentFilterSettings() {
         return this.filterSettings;
     }
@@ -82,7 +109,7 @@ export class TuneBookService {
 
     toggleEditModus(): boolean {
         this.editModus = !this.editModus;
-        this.actionSubject.next(ACTION.TOGGLE_EDIT_MODUS);
+        this.broadCastModusAction(ACTION.TOGGLE_EDIT_MODUS);
         return this.editModus;
     }
 
@@ -115,16 +142,24 @@ export class TuneBookService {
         if (this.tuneBook.name == "") {
             this.tuneBook.name = fileName;
         }
+        this.storeTuneBookAbc();
+        this.broadCastModelAction(ACTION.IMPORT_TUNEBOOK);
         return this.tuneBook;
     }
 
-    getDefaultFromServer() {
+    getExampleTuneBookFromServer() {
         this.http.get(this.systemProperties.EXAMPLE_FILENAME)
             .map(res => res.text())
             .subscribe(data => {
                 this.setCurrentTuneBook(data);
                 this.storeTuneBookAbc();
+                this.broadCastModelAction(ACTION.LOAD_EXAMPLE_TUNEBOOK);
             });
+    }
+    
+    storeTuneBookAbcAndBroadCastAction(action: string) {
+        this.storeTuneBookAbc();
+        this.broadCastModelAction(action);
     }
 
     storeTuneBookAbc() {
@@ -163,10 +198,11 @@ export class TuneBookService {
         tune.key = this.getTuneKey(tuneDown(tune));
     }
 
-    initializeTuneSet(tuneId: number) {
+    addTuneSet(tuneId: number) {
         this.getCurrentTuneBook().initializeTuneSet(tuneId);
         this.initializeFilter();
-        this.actionSubject.next(ACTION.NEW_TUNESET);
+        this.storeTuneBookAbc();
+        this.broadCastModelAction(ACTION.ADD_TUNESET);
     }
 
     initializePartPlayInfo() {
@@ -220,6 +256,7 @@ export class TuneBookService {
     initializeTuneBook() {
         this.setCurrentTuneBook(this.getAbcforNewTuneBook());
         this.storeTuneBookAbc();
+        this.broadCastModelAction(ACTION.INITIALIZE_TUNEBOOK);
         //TODO: Check if necessary and refactor
         //this.tuneBook.tuneSets[0].tuneSetPositions[0].tune.id = 1;
         return this.tuneBook;
@@ -267,7 +304,7 @@ export class TuneBookService {
     deleteTuneSetPosition(tuneSetId: number, position: number) {
         this.getCurrentTuneBook().deleteTuneSetPosition(tuneSetId, position);
         this.initializeFilter();
-        this.actionSubject.next(ACTION.DELETE_TUNESETPOSITION);
+        this.broadCastModelAction(ACTION.DELETE_TUNESETPOSITION);
     }
 
     deletePlaylistPosition(playlistId: number, position: number) {
@@ -330,7 +367,8 @@ export class TuneBookService {
         //Remove Tune from tunesFiltered, tuneSetsFiltered
         this.setTunesFiltered();
         //TODO: when tuneSet deleted -> delete playlistposition....
-        this.actionSubject.next(ACTION.DELETE_TUNE);
+        this.storeTuneBookAbc();
+        this.broadCastModelAction(ACTION.DELETE_TUNE);
     }
 
     getTunes() {
@@ -389,7 +427,7 @@ export class TuneBookService {
 
     applyFilter() {
         this.setTunesFiltered();
-        this.actionSubject.next(ACTION.APPLY_FILTER);
+        this.broadCastFilterAction(ACTION.APPLY_FILTER);
     }
 
     getFirstTuneSetPosition(tuneSet: TuneSet) {
@@ -412,16 +450,22 @@ export class TuneBookService {
         return this.getCurrentTuneBook().getVideoById(tuneId, videoSource, videoCode);
     }
 
-    addVideo(tuneId: number, videoSource: string, videoCode: string, videoDescription: string) {
-        return this.getCurrentTuneBook().addVideo(tuneId, videoSource, videoCode, videoDescription);
+    addVideo(tuneId: number, videoSource: string, videoCode: string, videoDescription: string): Video {
+        let video: Video = this.getCurrentTuneBook().addVideo(tuneId, videoSource, videoCode, videoDescription);
+        this.storeTuneBookAbc();
+        this.broadCastModelAction(ACTION.ADD_VIDEO);
+        return video;
     }
 
     deleteVideo(tuneId: number, videoSource: string, videoCode: string) {
         this.getCurrentTuneBook().deleteVideo(tuneId, videoSource, videoCode);
     }
 
-    addWebsite(tuneId: number, url: string) {
-        return this.getCurrentTuneBook().addWebsite(tuneId, url);
+    addWebsite(tuneId: number, url: string): Website {
+        let website: Website = this.getCurrentTuneBook().addWebsite(tuneId, url);
+        this.storeTuneBookAbc();
+        this.broadCastModelAction(ACTION.ADD_WEBSITE);
+        return website;
     }
 
     deleteWebsite(tuneId: number, url: string) {

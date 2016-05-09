@@ -46,9 +46,6 @@
         </li>
 
         <form class="form-inline navbar-form pull-xs-right col-xs-5" role="search">
-            <!--
-            <input type="text" class="form-control" placeholder="Search" (keyup)="search($event)">
-            -->
             <input type="text" class="form-control" placeholder="Search" [value]="filterSettings.title" (keyup)="search($event)">
         </form>
     </ul>
@@ -57,7 +54,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-xs-5">
-            <etb-book-title [tuneBook]="tuneBook"></etb-book-title>
+            <etb-book-title></etb-book-title>
         </div>
         <div class="col-xs-7">
             <etb-filter-text></etb-filter-text>

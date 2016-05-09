@@ -29,7 +29,7 @@ import {TunePlaylistListUI} from '../tunes/tune-playlist-list';
 export class TuneUI implements OnInit, OnDestroy {
     tune: Tune;
     editModus: boolean;
-    actionSubscription: Subscription;
+    modusActionSubscription: Subscription;
 
     constructor(public tuneBookService: TuneBookService, public router: Router, routeParams: RouteParams, public location: Location) {
         this.tune = this.tuneBookService.getTune(parseInt(routeParams.get('id')));
@@ -37,9 +37,9 @@ export class TuneUI implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.editModus = this.tuneBookService.isEditModus();
-        this.actionSubscription = this.tuneBookService.actionObservable.subscribe(
+        this.modusActionSubscription = this.tuneBookService.modusActionObservable.subscribe(
             (action) => {
-                console.log("tune:actionSubscription called: " + action);
+                console.log("tune:modusActionSubscription called: " + action);
                 if (action === ACTION.TOGGLE_EDIT_MODUS) {
                     this.editModus = this.tuneBookService.isEditModus();
                 }
@@ -47,7 +47,7 @@ export class TuneUI implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.actionSubscription.unsubscribe();
+        this.modusActionSubscription.unsubscribe();
     }
 }
 

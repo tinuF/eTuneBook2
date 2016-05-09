@@ -1,8 +1,8 @@
-import {Component, Input, OnInit} from 'angular2/core';
-import {Router} from 'angular2/router';
+import {Component, OnInit, ViewChild, ElementRef, Renderer} from 'angular2/core';
 
 import {TuneBookService} from '../../services/tunebook-service';
 import {TuneBook} from '../../business/model/tunebook';
+import {ACTION} from '../../common/action';
 
 @Component({
     selector: 'etb-book',
@@ -10,58 +10,58 @@ import {TuneBook} from '../../business/model/tunebook';
     styleUrls: ['./components/book/book.css'],
 })
 export class BookUI implements OnInit {
-    @Input() tuneBook: TuneBook;
+    tuneBook: TuneBook;
+    @ViewChild('inputTuneBookName') inputTuneBookName: ElementRef;
+    @ViewChild('inputTuneBookVersion') inputTuneBookVersion: ElementRef;
+    @ViewChild('inputTuneBookDescription') inputTuneBookDescription: ElementRef;
 
-    constructor(public tuneBookService: TuneBookService, public router: Router) {
+    constructor(public tuneBookService: TuneBookService, public renderer: Renderer) {
 
     }
 
     ngOnInit() {
-        this.tuneBook = this.tuneBookService.getTuneBookFromLocalStorage();
+        this.tuneBook = this.tuneBookService.getCurrentTuneBook();
     }
 
-    handleKeyDownOnTuneBookName(event) {
-        var keycode = (event.keyCode ? event.keyCode : event.which);
+    handleKeyDownOnTuneBookName(keyboardEvent:KeyboardEvent) {
+        let keycode = (keyboardEvent.keyCode ? keyboardEvent.keyCode : keyboardEvent.which);
 
         if (keycode === 13) { // ENTER
-            event.target.blur();
-            event.preventDefault();
-            this.handleBlurOnTuneBookName(event);
+            this.renderer.invokeElementMethod(this.inputTuneBookName.nativeElement, 'blur', []);
+            this.renderer.invokeElementMethod(this.inputTuneBookVersion.nativeElement, 'focus', []);
+            this.renderer.invokeElementMethod(this.inputTuneBookVersion.nativeElement, 'select', []);
         }
     }
 
     handleBlurOnTuneBookName(focusEvent:FocusEvent) {
-        this.tuneBook.name = (<HTMLInputElement>focusEvent.target).value;
-        this.tuneBookService.storeTuneBookAbc();
+        this.tuneBookService.storeTuneBookAbcAndBroadCastAction(ACTION.EDIT_TUNEBOOK_NAME);
     }
-
-    handleKeyDownOnTuneBookVersion(event) {
-        var keycode = (event.keyCode ? event.keyCode : event.which);
+    
+    handleKeyDownOnTuneBookVersion(keyboardEvent:KeyboardEvent) {
+        let keycode = (keyboardEvent.keyCode ? keyboardEvent.keyCode : keyboardEvent.which);
 
         if (keycode === 13) { // ENTER
-            event.target.blur();
-            event.preventDefault();
-            this.handleBlurOnTuneBookVersion(event);
+            this.renderer.invokeElementMethod(this.inputTuneBookVersion.nativeElement, 'blur', []);
+            this.renderer.invokeElementMethod(this.inputTuneBookDescription.nativeElement, 'focus', []);
+            this.renderer.invokeElementMethod(this.inputTuneBookDescription.nativeElement, 'select', []);
         }
     }
 
     handleBlurOnTuneBookVersion(focusEvent:FocusEvent) {
-        this.tuneBook.version = (<HTMLInputElement>focusEvent.target).value;
-        this.tuneBookService.storeTuneBookAbc();
+        this.tuneBookService.storeTuneBookAbcAndBroadCastAction(ACTION.EDIT_TUNEBOOK_VERSION);
     }
 
-    handleKeyDownOnTuneBookDescription(event) {
-        var keycode = (event.keyCode ? event.keyCode : event.which);
+    handleKeyDownOnTuneBookDescription(keyboardEvent:KeyboardEvent) {
+        let keycode = (keyboardEvent.keyCode ? keyboardEvent.keyCode : keyboardEvent.which);
 
         if (keycode === 13) { // ENTER
-            event.target.blur();
-            event.preventDefault();
-            this.handleBlurOnTuneBookDescription(event);
+            this.renderer.invokeElementMethod(this.inputTuneBookDescription.nativeElement, 'blur', []);
+            this.renderer.invokeElementMethod(this.inputTuneBookName.nativeElement, 'focus', []);
+            this.renderer.invokeElementMethod(this.inputTuneBookName.nativeElement, 'select', []);
         }
     }
 
     handleBlurOnTuneBookDescription(focusEvent:FocusEvent) {
-        this.tuneBook.description = (<HTMLInputElement>focusEvent.target).value;
-        this.tuneBookService.storeTuneBookAbc();
+        this.tuneBookService.storeTuneBookAbcAndBroadCastAction(ACTION.EDIT_TUNEBOOK_DESCRIPTION);
     }
 }

@@ -19,7 +19,7 @@ export class TuneInfoListItemUI implements OnInit, OnDestroy {
     @ViewChild('inputWebsiteUrl') inputWebsiteUrl: ElementRef;
     videoUrl: string;
     editModus: boolean;
-    actionSubscription: Subscription;
+    modusActionSubscription: Subscription;
 
     constructor(public tuneBookService: TuneBookService, public renderer: Renderer) {
 
@@ -27,7 +27,7 @@ export class TuneInfoListItemUI implements OnInit, OnDestroy {
     
     ngOnInit() {
         this.editModus = this.tuneBookService.isEditModus();
-        this.actionSubscription = this.tuneBookService.actionObservable.subscribe(
+        this.modusActionSubscription = this.tuneBookService.modusActionObservable.subscribe(
             (action) => {
                 console.log("tune-info-list-item:actionSubscription called: " + action);
                 if (action === ACTION.TOGGLE_EDIT_MODUS) {
@@ -37,7 +37,7 @@ export class TuneInfoListItemUI implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.actionSubscription.unsubscribe();
+        this.modusActionSubscription.unsubscribe();
     }
 
     handleKeyDownOnWebsiteUrl(keyboardEvent:KeyboardEvent) {

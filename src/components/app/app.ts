@@ -69,7 +69,7 @@ export class App implements OnInit {
     loadBxplTuneBook() { 
         //Hier braucht es offensichtlich kein this.tuneBook = ...
         //vermutlich wegen dem Binding im Template. 
-        this.tuneBookService.getDefaultFromServer();
+        this.tuneBookService.getExampleTuneBookFromServer();
         this.router.navigate(["/Tunelist"]);
     }
 
@@ -109,7 +109,6 @@ export class App implements OnInit {
                 alert("eTuneBook cannot import " + fileName + " due to: " + e.toString());
 
             } finally {
-                this.tuneBookService.storeTuneBookAbc();
                 this.router.navigate(["/Tunelist"]);
             }
         }, 0);
