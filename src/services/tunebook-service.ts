@@ -303,7 +303,9 @@ export class TuneBookService {
     }
 
     addPlaylistPositions(playlistId: number, setIds: Array<number>) {
-        return this.getCurrentTuneBook().addPlaylistPositions(playlistId, setIds);
+        this.getCurrentTuneBook().addPlaylistPositions(playlistId, setIds);
+        this.storeTuneBookAbc();
+        this.broadCastModelAction(ACTION.ADD_SETS_TO_PLAYLIST);
     }
 
     addEmptyPlaylist(): Playlist {

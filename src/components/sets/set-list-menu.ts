@@ -83,7 +83,6 @@ export class SetListMenuUI implements OnInit {
 
     addSelectedSetsToSelectedPlaylist() {
         this.tuneBookService.addPlaylistPositions(this.selectedPlaylist.id, this.filterSettings.setIds);
-        this.tuneBookService.storeTuneBookAbc();
     }
 }
 
