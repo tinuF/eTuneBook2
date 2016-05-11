@@ -14,7 +14,7 @@
             <i class="mdi mdi-music-note"></i>
         </a>
     </div>
-    <select title="number of bars" class="form-control" id="numberOfBarChooser" [(ngModel)]="numberOfBars" (change)="setNumberOfBars($event)">
-        <option *ngFor="#n of numberOfBarOptions" [value]="n">{{n}}</option>
+    <select title="number of bars" class="form-control" id="numberOfBarChooser" [ngModel]="numberOfBars" (ngModelChange)="changeNumberOfBars($event)">
+        <option *ngFor="#n of numberOfBarOptions" [ngValue]="n">{{n}}</option>
     </select>
 </div>

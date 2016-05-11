@@ -1,7 +1,10 @@
-import {Component, DoCheck, Input, OnInit} from 'angular2/core';
+import {Component, Input, OnInit, OnDestroy} from 'angular2/core';
+
 import * as jQuery from 'jquery';
+import {Subscription}   from 'rxjs/Subscription';
 
 import {TuneBookService} from '../../services/tunebook-service';
+import {ACTION} from '../../common/action';
 import {Tune} from '../../business/model/tune';
 
 @Component({
@@ -9,44 +12,70 @@ import {Tune} from '../../business/model/tune';
     templateUrl: './components/playlists/playlist-tune-dots.html',
     styleUrls: ['./components/playlists/playlist-tune-dots.css'],
 })
-export class PlaylistTuneDotsUI implements OnInit, DoCheck {
+export class PlaylistTuneDotsUI implements OnInit, OnDestroy{
     @Input() tune: Tune;
     showDots: boolean;
     numberOfBars: string;
+    numberOfBarsRendered: string;
     tuneObjectArray: Array<any>;
     shown: boolean;
+    modusActionSubscription: Subscription;
 
     constructor(public tuneBookService: TuneBookService) {
     }
-
+    
     ngOnInit() {
+        this.toggleDots();
+        
+        this.modusActionSubscription = this.tuneBookService.modusActionObservable.subscribe(
+            (action) => {
+                console.log("playlist-tune-dots:modusActionSubscription called: " + action);
+                if (action === ACTION.TOGGLE_SHOW_PLAYLIST_DOTS) {
+                    this.toggleDots();
+                } else if (action === ACTION.CHANGE_NUMBER_OF_BARS_OF_PLAYLIST_DOTS) {
+                    this.changeNumberOfBars()
+                }
+            });
+    }
+    
+    ngOnDestroy() {
+        this.modusActionSubscription.unsubscribe();
+    }
+    
+    loadPlaylistSettings() {
         this.showDots = this.tuneBookService.getCurrentPlaylistSettings().isShowDots();
         this.numberOfBars = this.tuneBookService.getCurrentPlaylistSettings().getNumberOfBars();
+    }
+    
+    changeNumberOfBars() {
+        this.loadPlaylistSettings();
 
         if (this.showDots) {
-            this.show(this.numberOfBars);
+            this.showUponBarChange();
         } else {
             this.hide();
         }
     }
-
-    ngDoCheck() {
-        this.showDots = this.tuneBookService.getCurrentPlaylistSettings().isShowDots();
-        let previousNumberOfBars = this.numberOfBars;
-        this.numberOfBars = this.tuneBookService.getCurrentPlaylistSettings().getNumberOfBars();
+    
+    toggleDots() {
+        this.loadPlaylistSettings();
 
         if (this.showDots) {
-            this.show(previousNumberOfBars);
+            this.show();
         } else {
             this.hide();
         }
-        console.log("playlist-tune-dots:ngDoCheck called");
+    }
+    
+    showUponBarChange() {
+        this.renderAbc();
+        this.shown = true;
     }
 
-    show(previousNumberOfBars: string) {
-        if (!this.isRendered() || this.numberOfBars != previousNumberOfBars) {
+    show() {
+        if (!this.isRendered() || this.numberOfBars !== this.numberOfBarsRendered) {
             this.renderAbc();
-        }
+        } 
         this.shown = true;
     }
 
@@ -63,11 +92,8 @@ export class PlaylistTuneDotsUI implements OnInit, DoCheck {
         return rendered;
     }
 
-    shouldBeShown() {
-        return this.shown;
-    }
-
     renderAbc() {
+        this.numberOfBarsRendered = this.numberOfBars;
         setTimeout(() => {
             let abc: string;
             if (this.numberOfBars == "*") {

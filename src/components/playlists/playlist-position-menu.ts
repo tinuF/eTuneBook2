@@ -58,13 +58,14 @@ export class PlayListPositionMenuUI implements OnInit {
     }
 
     toggleDots() {
-        this.playlistSettings.toggleShowDots();
+        this.tuneBookService.toggleShowPlaylistDots();
     }
-
-    setNumberOfBars(e) {
-        this.playlistSettings.setNumberOfBars(e.target.value);
+    
+    changeNumberOfBars(numberOfBars: string) {
+        this.numberOfBars = numberOfBars;
+        this.playlistSettings.setNumberOfBars(numberOfBars);
+        this.tuneBookService.changeNumberOfBarsOfPlaylistDots();
     }
-
 }
 
 

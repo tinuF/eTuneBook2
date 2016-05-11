@@ -112,6 +112,17 @@ export class TuneBookService {
         this.broadCastModusAction(ACTION.TOGGLE_EDIT_MODUS);
         return this.editModus;
     }
+    
+    toggleShowPlaylistDots(): boolean {
+        this.playlistSettings.toggleShowDots();
+        this.broadCastModusAction(ACTION.TOGGLE_SHOW_PLAYLIST_DOTS);
+        return this.editModus;
+    }
+    
+    changeNumberOfBarsOfPlaylistDots(){
+        //Number of Bars already changed (binding to component)
+        this.broadCastModusAction(ACTION.CHANGE_NUMBER_OF_BARS_OF_PLAYLIST_DOTS);
+    }
 
     initializeFilter() {
         if (this.filterSettings == null) {

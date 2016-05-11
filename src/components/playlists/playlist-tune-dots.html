@@ -1,1 +1,2 @@
-<div id="DotsForTune{{tune.id}}" class="renderTheDots" *ngIf="shouldBeShown()"></div>
+<!-- Achtung: ng-if anstatt hidden funktioniert hier nicht in allen Fällen (angular2 beta 14)-->
+<div id="DotsForTune{{tune.id}}" class="renderTheDots" [hidden]="!shown"></div>
