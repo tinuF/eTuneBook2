@@ -1,4 +1,4 @@
-import {Component, OnInit, DoCheck, ViewChild, ElementRef, Renderer} from 'angular2/core';
+import {Component, OnInit, OnDestroy, ViewChild, ElementRef, Renderer} from 'angular2/core';
 import {ROUTER_DIRECTIVES, Router, RouteParams} from 'angular2/router';
 
 import {Subscription}   from 'rxjs/Subscription';
@@ -18,7 +18,7 @@ import {PlayListPositionCopierUI} from '../../components/playlists/playlist-posi
     directives: [ROUTER_DIRECTIVES, PlayListItemUI, PlayListMenuUI, PlayListPositionCopierUI],
     styleUrls: ['./components/playlists/playlist.css']
 })
-export class PlaylistUI implements OnInit, DoCheck {
+export class PlaylistUI implements OnInit, OnDestroy {
     @ViewChild('inputPlaylistName') inputPlaylistName: ElementRef;
     @ViewChild('inputPlaylistBand') inputPlaylistBand: ElementRef;
     @ViewChild('inputPlaylistEvent') inputPlaylistEvent: ElementRef;
@@ -41,10 +41,6 @@ export class PlaylistUI implements OnInit, DoCheck {
                     this.editModus = this.tuneBookService.isEditModus();
                 }
             });
-    }
-    
-    ngDoCheck() {
-        this.sortPlaylistPosition();
     }
     
     ngOnDestroy() {

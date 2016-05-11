@@ -14,7 +14,7 @@
             <a title="Play Infos" [routerLink]="['/PlaylistPosition', {id: playlistPosition.playlistId, pos: playlistPosition.position}]">
                 <small *ngIf="!editModus">{{playlistPosition.name | eliminateThe}}</small>
             </a>
-            <input class="form-control form-control-sm" *ngIf="editModus" [(ngModel)]="playlistPosition.name" 
+            <input #inputPlaylistPositionName class="form-control form-control-sm" *ngIf="editModus" [(ngModel)]="playlistPosition.name" 
             (keydown)="handleKeyDownOnPlaylistPositionName($event)"
             (blur)="handleBlurOnPlaylistPositionName($event)">
         </div>
@@ -24,7 +24,7 @@
         <div class="pull-sm-right  btn-toolbar playlistPositionMenu hidden-print" role="toolbar" *ngIf="editModus">
             <div class="btn-group" role="group">
                 <a class="btn btn-secondary btn-sm"  title="Copy Playlist Position" (click)="sendPlaylistPositionToCopier()" data-toggle="modal" data-target=".copyPlaylistPosition"><i class="mdi mdi-content-copy"></i></a>
-                <a class="btn btn-sm btn-secondary" (click)="deletePlaylistPosition($event)" title="Delete Playlist Position"><i class="mdi mdi-delete"></i></a>
+                <a class="btn btn-sm btn-secondary" (click)="deletePlaylistPosition()" title="Delete Playlist Position"><i class="mdi mdi-delete"></i></a>
             </div>
         </div>
 

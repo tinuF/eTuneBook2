@@ -44,12 +44,6 @@ export class SetListItemUI implements OnInit {
                 }
             });
     }
-/*
-   // ngDoCheck() {
-        this.sortSetPosition();
-        console.log("set-list-item:ngDoCheck called");
-    }
-  */
     
     ngOnDestroy() {
         this.modusActionSubscription.unsubscribe();

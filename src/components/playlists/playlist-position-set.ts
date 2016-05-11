@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, DoCheck, OnDestroy, ViewChild, ElementRef, Renderer} from 'angular2/core';
+import {Component, Input, OnInit, OnDestroy, ViewChild, ElementRef, Renderer} from 'angular2/core';
 import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {Subscription}   from 'rxjs/Subscription';
@@ -18,12 +18,11 @@ import {PlayListPositionSetPositionUI} from '../../components/playlists/playlist
     styleUrls: ['./components/playlists/playlist-position-set.css'],
     pipes: [EliminateThe, FromNow]
 })
-export class PlayListPositionSetUI implements OnInit, DoCheck, OnDestroy {
+export class PlayListPositionSetUI implements OnInit, OnDestroy {
     @Input() playlistPosition: PlaylistPosition;
     @ViewChild('inputPlaylistPositionName') inputPlaylistPositionName: ElementRef;
     editModus: boolean;
     modusActionSubscription: Subscription;
-    positions: Array<number>;
 
     constructor(public tuneBookService: TuneBookService, public router: Router, public renderer: Renderer) {
 
@@ -31,8 +30,8 @@ export class PlayListPositionSetUI implements OnInit, DoCheck, OnDestroy {
     
     ngOnInit() {
         this.sortSetPosition();
-        this.setPositions();
         this.editModus = this.tuneBookService.isEditModus();
+        
         this.modusActionSubscription = this.tuneBookService.modusActionObservable.subscribe(
             (action) => {
                 console.log("playlist-position-set:modusActionSubscription called: " + action);
@@ -40,10 +39,6 @@ export class PlayListPositionSetUI implements OnInit, DoCheck, OnDestroy {
                     this.editModus = this.tuneBookService.isEditModus();
                 }
             });
-    }
-
-    ngDoCheck() {
-        this.setPositions();
     }
     
     ngOnDestroy() {
@@ -68,23 +63,10 @@ export class PlayListPositionSetUI implements OnInit, DoCheck, OnDestroy {
         this.tuneBookService.storeTuneBookAbc();
     }
 
-    setPositions() {
-        this.positions = this.tuneBookService.getPlaylistPositionsAsNumbers(this.playlistPosition.playlistId);
-    }
-
-    setPosition(e) {
-        let oldPosition: number = this.playlistPosition.position;
-        let newPosition: number = parseInt(e.target.value);
-
-        if (oldPosition != newPosition) {
-            this.tuneBookService.movePlaylistPosition(this.playlistPosition.playlistId, oldPosition, newPosition);
-            this.tuneBookService.storeTuneBookAbc();
-        }
-    }
-
-    deletePlaylistPosition(e) {
+    deletePlaylistPosition() {
+        let playlistId = this.playlistPosition.playlistId;
         this.tuneBookService.deletePlaylistPosition(this.playlistPosition.playlistId, this.playlistPosition.position);
-        this.tuneBookService.storeTuneBookAbc();
+        this.router.navigate(['/Playlist', { id: playlistId }]);
     }
 }
 

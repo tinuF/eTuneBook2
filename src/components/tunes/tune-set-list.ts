@@ -40,18 +40,6 @@ export class TuneSetListUI implements OnInit, OnDestroy {
     ngOnDestroy() {
         this.modelActionSubscription.unsubscribe();
     }
-
-    /*
-        //ngDoCheck() {
-            this.sets = this.tuneBookService.getTuneSetsByTuneId(this.tune.id);
-            console.log("tune-set-list:ngDoCheck called");
-            //wenn ein Set hinzukommt oder wegfällt, muss die Liste angepasst werden
-            //angular reagiert auf das Tune im @Input nur bei geänderter Referenz 
-            //Problem: Das Rendern durch ABCJS (nur bei Init) löst hunderte asynchrone Events aus
-            //(abhängig von der Länge des Tunes), 
-            //die jedes mal dazu führen, dass ngDoCheck ausgeführt wird.
-        }
-        */
 }
 
 

@@ -10,6 +10,7 @@ export const ACTION = {
     'ADD_WEBSITE':'addWebsite',
     'DELETE_TUNE':'deleteTune',
     'DELETE_TUNESETPOSITION': 'deleteTuneSetPosition',
+    'DELETE_PLAYLISTPOSITION': 'deletePlaylistPosition',
     'ADD_SETS_TO_PLAYLIST':'addPlaylistPositions',
     'APPLY_FILTER':'applyFilter',
     'TOGGLE_EDIT_MODUS':'toggleEditModus',

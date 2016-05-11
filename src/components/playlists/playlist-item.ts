@@ -1,4 +1,4 @@
-import {Component, Input, Output, OnInit, DoCheck, EventEmitter} from 'angular2/core';
+import {Component, Input, Output, OnInit, OnDestroy, EventEmitter, ViewChild, ElementRef, Renderer} from 'angular2/core';
 import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {Subscription}   from 'rxjs/Subscription';
@@ -6,7 +6,6 @@ import {Subscription}   from 'rxjs/Subscription';
 import {TuneBookService} from '../../services/tunebook-service';
 import {ACTION} from '../../common/action';
 import {TuneSetPositionPlayInfo} from '../../business/model/tunesetposition-playinfo';
-import {Playlist} from '../../business/model/playlist';
 import {PlaylistPosition} from '../../business/model/playlistposition';
 import {EliminateThe} from '../../pipes/eliminate-the';
 import {FromNow} from '../../pipes/from-now';
@@ -21,16 +20,17 @@ import {PlayListItemSetPositionUI} from '../../components/playlists/playlist-ite
     styleUrls: ['./components/playlists/playlist-item.css'],
     pipes: [EliminateThe, FromNow]
 })
-export class PlayListItemUI implements OnInit, DoCheck {
+export class PlayListItemUI implements OnInit, OnDestroy {
     @Input() playlistPosition: PlaylistPosition;
     @Output() copyPlaylistPosition: EventEmitter<PlaylistPosition> = new EventEmitter();
+    @ViewChild('inputPlaylistPositionName') inputPlaylistPositionName: ElementRef;
     editModus: boolean;
     modusActionSubscription: Subscription;
+    modelActionSubscription: Subscription;
     positions: Array<number>;
-    playlists: Array<Playlist>;
     selectedPlaylistId: number;
 
-    constructor(public tuneBookService: TuneBookService, public router: Router) {
+    constructor(public tuneBookService: TuneBookService, public router: Router, public renderer: Renderer) {
 
     }
 
@@ -38,8 +38,7 @@ export class PlayListItemUI implements OnInit, DoCheck {
         this.sortSetPosition();
         this.setPositions();
         this.editModus = this.tuneBookService.isEditModus();
-        this.playlists = this.tuneBookService.getPlaylists();
-        
+
         this.modusActionSubscription = this.tuneBookService.modusActionObservable.subscribe(
             (action) => {
                 console.log("playlist-item:modusActionSubscription called: " + action);
@@ -47,37 +46,39 @@ export class PlayListItemUI implements OnInit, DoCheck {
                     this.editModus = this.tuneBookService.isEditModus();
                 }
             });
+
+        this.modelActionSubscription = this.tuneBookService.modelActionObservable.subscribe(
+            (action) => {
+                console.log("playlist-item:modelActionSubscription called: " + action);
+                if (action === ACTION.DELETE_PLAYLISTPOSITION) {
+                    this.setPositions();
+                }
+            });
     }
 
-    ngDoCheck() {
-        this.setPositions();
-    }
-    
     ngOnDestroy() {
         this.modusActionSubscription.unsubscribe();
+        this.modelActionSubscription.unsubscribe();
     }
 
     sortSetPosition() {
-        this.playlistPosition.tuneSetPositionPlayInfos.sort(function(a: TuneSetPositionPlayInfo, b: TuneSetPositionPlayInfo) {
+        this.playlistPosition.tuneSetPositionPlayInfos.sort(function (a: TuneSetPositionPlayInfo, b: TuneSetPositionPlayInfo) {
             return a.tuneSetPosition.position - b.tuneSetPosition.position;
         });
     }
 
-    handleKeyDownOnPlaylistPositionName(event) {
-        var keycode = (event.keyCode ? event.keyCode : event.which);
+    handleKeyDownOnPlaylistPositionName(keyboardEvent:KeyboardEvent) {
+        let keycode = (keyboardEvent.keyCode ? keyboardEvent.keyCode : keyboardEvent.which);
 
         if (keycode === 13) { // ENTER
-            event.target.blur();
-            event.preventDefault();
-            this.handleBlurOnPlaylistPositionName(event);
+            this.renderer.invokeElementMethod(this.inputPlaylistPositionName.nativeElement, 'blur', []);
         }
     }
 
     handleBlurOnPlaylistPositionName(focusEvent:FocusEvent) {
-        this.playlistPosition.name = (<HTMLInputElement>focusEvent.target).value;
         this.tuneBookService.storeTuneBookAbc();
     }
-    
+
     setPositions() {
         this.positions = this.tuneBookService.getPlaylistPositionsAsNumbers(this.playlistPosition.playlistId);
     }
@@ -95,15 +96,13 @@ export class PlayListItemUI implements OnInit, DoCheck {
     setSelectedPlaylistId(e) {
         this.selectedPlaylistId = e.target.value;
     }
-    
+
     sendPlaylistPositionToCopier() {
-        this.copyPlaylistPosition.next(this.playlistPosition);        
+        this.copyPlaylistPosition.next(this.playlistPosition);
     }
 
-
-    deletePlaylistPosition(e) {
+    deletePlaylistPosition() {
         this.tuneBookService.deletePlaylistPosition(this.playlistPosition.playlistId, this.playlistPosition.position);
-        this.tuneBookService.storeTuneBookAbc();
     }
 
     justPlayedTheSet() {

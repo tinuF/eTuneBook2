@@ -6,7 +6,7 @@
 
         <div class="col-sm-4">
             <small *ngIf="!editModus">{{playlistPosition.name | eliminateThe}}</small>
-            <input class="form-control form-control-sm" *ngIf="editModus" [(ngModel)]="playlistPosition.name" 
+            <input #inputPlaylistPositionName class="form-control form-control-sm" *ngIf="editModus" [(ngModel)]="playlistPosition.name" 
             (keydown)="handleKeyDownOnPlaylistPositionName($event)"
             (blur)="handleBlurOnPlaylistPositionName($event)">
         </div>

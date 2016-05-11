@@ -322,6 +322,8 @@ export class TuneBookService {
 
     deletePlaylistPosition(playlistId: number, position: number) {
         this.getCurrentTuneBook().deletePlaylistPosition(playlistId, position);
+        this.storeTuneBookAbc();
+        this.broadCastModelAction(ACTION.DELETE_PLAYLISTPOSITION);
     }
 
     deletePlaylist(playlistId: number) {

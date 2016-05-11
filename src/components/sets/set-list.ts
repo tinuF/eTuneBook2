@@ -48,13 +48,6 @@ export class SetListUI implements OnInit, OnDestroy {
     ngOnDestroy() {
         this.filterActionSubscription.unsubscribe();
     }
-
-/*
-    //ngDoCheck() {
-        this.sets = this.tuneBookService.getTuneSetsFiltered();
-        console.log("set-list:ngDoCheck called");
-    }
-    */
 }
 
 

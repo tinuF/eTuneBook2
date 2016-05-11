@@ -27,7 +27,7 @@ export class TuneVideoListItemUI implements OnInit, OnDestroy, DoCheck {
     }
     
     ngOnInit() {
-        this.videoUrl = this.getVideoUrl();
+        this.setVideoUrl();
         this.editModus = this.tuneBookService.isEditModus();
         
         this.modusActionSubscription = this.tuneBookService.modusActionObservable.subscribe(
@@ -43,13 +43,8 @@ export class TuneVideoListItemUI implements OnInit, OnDestroy, DoCheck {
         this.modusActionSubscription.unsubscribe();
     }
 
-
-    ngDoCheck() {
-        this.videoUrl = this.getVideoUrl();
-    }
-
-    getVideoUrl() {
-        return "//www.youtube.com/embed/" + this.video.code;
+    setVideoUrl() {
+        this.videoUrl =  "//www.youtube.com/embed/" + this.video.code;
     }
     
     handleKeyDownOnVideoCode(keyboardEvent:KeyboardEvent) {
@@ -64,6 +59,7 @@ export class TuneVideoListItemUI implements OnInit, OnDestroy, DoCheck {
 
     handleBlurOnVideoCode(focusEvent:FocusEvent) {
         this.tuneBookService.storeTuneBookAbc();
+        this.setVideoUrl();
     }
 
     handleKeyDownOnVideoDescription(keyboardEvent:KeyboardEvent) {
