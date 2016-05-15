@@ -24,6 +24,8 @@ import {ACTION} from '../common/action';
 @Injectable()
 export class TuneBookService {
     tuneBook: TuneBook;
+    tuneBookAbcBackUp: string;
+    
     tunesFiltered: Array<Tune>;
     tuneSetsFiltered: Array<TuneSet>;
     abcExportSettings: AbcExportSettings;
@@ -33,35 +35,35 @@ export class TuneBookService {
 
     modelActionSubject: BehaviorSubject<string>;
     modelActionObservable: Observable<string>;
-    
+
     filterActionSubject: BehaviorSubject<string>;
     filterActionObservable: Observable<string>;
-    
+
     modusActionSubject: BehaviorSubject<string>;
     modusActionObservable: Observable<string>;
-        
+
     systemProperties: any;
-    
+
     constructor(public http: Http) {
         console.log("TuneBookService:constructor start");
 
         this.systemProperties = getSystemProperties();
         this.tuneBook = this.getCurrentTuneBook();
         this.abcExportSettings = new AbcExportSettings();
-        
+
         this.initializeFilter();    //TODO: initializeFilter() wird schon in getCurrentTuneBook() aufgerufen!
-        
+
         this.modelActionSubject = new BehaviorSubject("constructor");
-        this.modelActionObservable= this.modelActionSubject.asObservable();
-        
+        this.modelActionObservable = this.modelActionSubject.asObservable();
+
         this.filterActionSubject = new BehaviorSubject("constructor");
-        this.filterActionObservable= this.filterActionSubject.asObservable();
-        
+        this.filterActionObservable = this.filterActionSubject.asObservable();
+
         this.modusActionSubject = new BehaviorSubject("constructor");
-        this.modusActionObservable= this.modusActionSubject.asObservable();
-        
+        this.modusActionObservable = this.modusActionSubject.asObservable();
+
         this.editModus = false;
-        
+
         this.playlistSettings = new PlaylistSettings();
 
         console.log("TuneBookService:constructor end");
@@ -86,15 +88,15 @@ export class TuneBookService {
     broadCastModelAction(action: string) {
         this.modelActionSubject.next(action);
     }
-    
+
     broadCastFilterAction(action: string) {
         this.filterActionSubject.next(action);
     }
-    
+
     broadCastModusAction(action: string) {
         this.modusActionSubject.next(action);
     }
-    
+
     getCurrentFilterSettings() {
         return this.filterSettings;
     }
@@ -112,14 +114,14 @@ export class TuneBookService {
         this.broadCastModusAction(ACTION.TOGGLE_EDIT_MODUS);
         return this.editModus;
     }
-    
+
     toggleShowPlaylistDots(): boolean {
         this.playlistSettings.toggleShowDots();
         this.broadCastModusAction(ACTION.TOGGLE_SHOW_PLAYLIST_DOTS);
         return this.editModus;
     }
-    
-    changeNumberOfBarsOfPlaylistDots(){
+
+    changeNumberOfBarsOfPlaylistDots() {
         //Number of Bars already changed (binding to component)
         this.broadCastModusAction(ACTION.CHANGE_NUMBER_OF_BARS_OF_PLAYLIST_DOTS);
     }
@@ -167,7 +169,7 @@ export class TuneBookService {
                 this.broadCastModelAction(ACTION.LOAD_EXAMPLE_TUNEBOOK);
             });
     }
-    
+
     storeTuneBookAbcAndBroadCastAction(action: string) {
         this.storeTuneBookAbc();
         this.broadCastModelAction(action);
@@ -175,7 +177,54 @@ export class TuneBookService {
 
     storeTuneBookAbc() {
         // Generate TuneBook Abc from the current TuneBook and store it in localStorage
-        localStorage.setItem(this.systemProperties.STORAGE_ID_TUNEBOOK, JSON.stringify(this.writeAbc(new AbcExportSettings())));
+        setTimeout(() => {
+            try {
+                let tuneBookAbc: string = JSON.stringify(this.writeAbc(new AbcExportSettings()));
+                this.checkTuneBookAbcConsistency(tuneBookAbc);
+                localStorage.setItem(this.systemProperties.STORAGE_ID_TUNEBOOK, tuneBookAbc);
+                this.tuneBookAbcBackUp = tuneBookAbc;
+                console.log('TuneBook consistent and saved');    
+
+            } catch (e) {
+                alert(e.toString());
+
+                if (this.isQuotaExceeded(e)) {
+                    // Storage full
+                }
+                
+                // Reload from tuneBookAbcSave
+                this.tuneBook = new TuneBook(JSON.parse(this.tuneBookAbcBackUp));
+                alert('Last action ignored. TuneBook reloaded')
+
+            }
+        }, 0);
+    }
+
+    checkTuneBookAbcConsistency(tuneBookAbc: string) {
+        let tuneBook = new TuneBook(JSON.parse(tuneBookAbc));
+    }
+
+    isQuotaExceeded(e) {
+        let quotaExceeded = false;
+        if (e) {
+            if (e.code) {
+                switch (e.code) {
+                    case 22:
+                        quotaExceeded = true;
+                        break;
+                    case 1014:
+                        // Firefox
+                        if (e.name === 'NS_ERROR_DOM_QUOTA_REACHED') {
+                            quotaExceeded = true;
+                        }
+                        break;
+                }
+            } else if (e.number === -2147024882) {
+                // Internet Explorer 8
+                quotaExceeded = true;
+            }
+        }
+        return quotaExceeded;
     }
     /*
         storeSettings(settings) {
@@ -185,7 +234,7 @@ export class TuneBookService {
         }
     */
     writeAbc(abcExportSettings: AbcExportSettings) {
-        return this.getCurrentTuneBook().writeAbc(this.getAbcExportSettings());
+        return this.getCurrentTuneBook().writeAbc(abcExportSettings);
     }
 
     getAbcExportSettings(): AbcExportSettings {
@@ -275,11 +324,11 @@ export class TuneBookService {
     /*
         getSettingsFromStore() {
             let settings = [];
-    
+     
             // Retrieve Settings from localStorage
             // TODO: Store AbcExportSettings and FilterSettings?
             settings = JSON.parse(localStorage.getItem(this.systemProperties.STORAGE_ID_SETTINGS) || '[]');
-    
+     
             return settings;
         }
     */

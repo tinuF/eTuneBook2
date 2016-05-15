@@ -1,0 +1,12 @@
+<div class="col-sm-2 ">
+    <small *ngIf="!editModus">{{partPlayInfo.part}}</small>
+    <input class="form-control form-control-sm" *ngIf="editModus" [(ngModel)]="partPlayInfo.part" 
+    (keydown)="handleKeyDownOnPart($event, partPlayInfo)"
+        (blur)="handleBlurOnPart($event, partPlayInfo)">
+</div>
+<div class="col-sm-7">
+    <small *ngIf="!editModus">{{partPlayInfo.playInfo}}</small>
+    <input class="form-control form-control-sm" *ngIf="editModus" [(ngModel)]="partPlayInfo.playInfo" 
+    (keydown)="handleKeyDownOnPartPlayInfo($event, partPlayInfo)"
+        (blur)="handleBlurOnPartPlayInfo($event, partPlayInfo)">
+</div>

@@ -1,0 +1,24 @@
+<div class="card" *ngFor="#partPlayInfo of tuneSetPositionPlayInfo.partPlayInfos; #i = index">
+    <div class="row">
+        <div class="col-sm-1 btn-toolbar hidden-print" role="toolbar" *ngIf="editModus">
+            <div class="btn-group" role="group">
+                <a class="btn btn-secondary btn-sm" (click)="addPartPlayInfoBefore(partPlayInfo)" 
+                title="Add Line Above"><small>+</small></a>
+
+            </div>
+        </div>
+        
+        <etb-part-play-info-list-item [partPlayInfo]="partPlayInfo"></etb-part-play-info-list-item>
+
+        <div class="col-sm-2 btn-toolbar hidden-print" role="toolbar" *ngIf="editModus">
+            <div class="btn-group" role="group">
+
+                <a class="btn btn-secondary btn-sm" (click)="addPartPlayInfoAfter(partPlayInfo)" 
+                title="Add Line Below"><small>+</small></a>
+
+                <a class="btn btn-sm btn-secondary" (click)="deletePartPlayInfo(partPlayInfo)" 
+                title="Delete Part"><i class="mdi mdi-delete"></i></a>
+            </div>
+        </div>
+    </div>
+</div>

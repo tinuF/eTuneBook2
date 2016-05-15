@@ -1,0 +1,17 @@
+.card {
+    margin: 5px;
+	margin-left: 20px;
+    padding: 5px;
+    
+    background: #F2F2F3;
+    
+}
+
+.card-block, .card-footer {
+  background: #F2F2F3
+}
+
+a {
+	cursor: pointer;
+	color: darkcyan;
+}
