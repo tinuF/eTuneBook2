@@ -53,6 +53,8 @@ export class PartPlayInfoListItemUI implements OnInit, OnDestroy {
     }
 
     handleBlurOnPart(focusEvent:FocusEvent) {
+        //Replace : and , with - (: and , are used as separators and thus are not allowed)
+        this.partPlayInfo.part = this.partPlayInfo.part.replace(/[:,]/g,'-');
         this.tuneBookService.storeTuneBookAbc();
     }
 
@@ -67,6 +69,8 @@ export class PartPlayInfoListItemUI implements OnInit, OnDestroy {
     }
 
     handleBlurOnPartPlayInfo(focusEvent:FocusEvent) {
+        //Replace : and , with - (: and , are used as separators and thus are not allowed)
+        this.partPlayInfo.playInfo = this.partPlayInfo.playInfo.replace(/[:,]/g,'-');
         this.tuneBookService.storeTuneBookAbc();
     }
 }

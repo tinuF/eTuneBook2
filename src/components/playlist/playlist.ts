@@ -9,7 +9,7 @@ import {Playlist} from '../../business/model/playlist';
 import {PlaylistPosition} from '../../business/model/playlistposition';
 import {PlayListItemUI} from '../../components/playlist/playlist-item';
 import {PlayListMenuUI} from '../../components/playlist/playlist-menu';
-import {PlayListPositionCopierUI} from '../../components/playlist/playlist-position-copier';
+import {PlayListPositionCopierUI} from '../../components/common/playlist/playlist-position-copier';
 
 
 @Component({

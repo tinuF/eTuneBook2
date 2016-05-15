@@ -6,7 +6,6 @@ import {Subscription}   from 'rxjs/Subscription';
 import {TuneBookService} from '../../services/tunebook-service';
 import {ACTION} from '../../common/action';
 import {TuneSetPositionPlayInfo} from '../../business/model/tunesetposition-playinfo';
-import {PartPlayInfo} from '../../business/model/partplayinfo';
 import {EliminateThe} from '../../pipes/eliminate-the';
 import {FromNow} from '../../pipes/from-now';
 import {PlaylistTuneDotsUI} from '../../components/playlist-position/playlist-tune-dots';
@@ -59,15 +58,6 @@ export class PlayListPositionSetPositionUI implements OnInit, OnDestroy {
     }
 
     handleBlurOnTuneSetPositionPlayInfoRepeat(focusEvent:FocusEvent) {
-        this.tuneBookService.storeTuneBookAbc();
-    }
-
-    togglePlayInfoAnnotation() {
-        this.playInfoAnnotationShown = !this.playInfoAnnotationShown;
-    }
-
-    addPartPlayInfo() {
-        this.tuneSetPositionPlayInfo.addPartPlayInfo(new PartPlayInfo("", ""));
         this.tuneBookService.storeTuneBookAbc();
     }
 }

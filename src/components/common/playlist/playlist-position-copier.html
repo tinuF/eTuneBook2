@@ -1,4 +1,5 @@
-<div class="modal fade copyPlaylistPosition"  tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div class="modal fade copyPlaylistPosition"  tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" 
+aria-hidden="true">
   <div class="modal-dialog modal-md">
     <div class="modal-content">
       <div class="modal-header">
@@ -9,11 +10,13 @@
       </div>
       <div class="modal-body">
         <select class="form-control form-control-md" [(ngModel)]="selectedPlaylist">
-		      <option [ngValue]="playlist" *ngFor="#playlist of playlists; #i = index">{{playlist.name}} - {{playlist.band}}</option>
+		      <option [ngValue]="playlist" 
+          *ngFor="#playlist of playlists; #i = index">{{playlist.name}} - {{playlist.band}}</option>
 	  	  </select>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="copyPlaylistPosition()">Copy</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" 
+        (click)="copyPlaylistPosition()">Copy</button>
       </div>
     </div>
   </div>

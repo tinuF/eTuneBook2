@@ -1,24 +1,29 @@
 <div class="card col-sm-12" [style.background-color]="tuneSetPositionPlayInfo.tuneSetPosition.tune.color.hex">
     <div class="row">
-        <a class="col-sm-4" [routerLink]="['/Tune', {id: tuneSetPositionPlayInfo.tuneSetPosition.tune.id}]">{{tuneSetPositionPlayInfo.tuneSetPosition.tune.title | eliminateThe}}</a>
+        <a class="col-sm-4" 
+        [routerLink]="['/Tune', {id: tuneSetPositionPlayInfo.tuneSetPosition.tune.id}]">
+        {{tuneSetPositionPlayInfo.tuneSetPosition.tune.title | eliminateThe}}</a>
+        
         <div class="col-sm-3">
             <small *ngIf="!editModus">{{tuneSetPositionPlayInfo.repeat}}</small>
             <input #inputTuneSetPositionPlayInfoRepeat class="form-control form-control-sm" *ngIf="editModus" 
             [(ngModel)]="tuneSetPositionPlayInfo.repeat"
-            (keydown)="handleKeyDownOnTuneSetPositionPlayInfoRepeat($event)" (blur)="handleBlurOnTuneSetPositionPlayInfoRepeat($event)">
+            (keydown)="handleKeyDownOnTuneSetPositionPlayInfoRepeat($event)" 
+            (blur)="handleBlurOnTuneSetPositionPlayInfoRepeat($event)">
         </div>
-        <small *ngIf="!editModus" class="col-sm-2 text-muted">{{tuneSetPositionPlayInfo.tuneSetPosition.tune.type}} in {{tuneSetPositionPlayInfo.tuneSetPosition.tune.key}}</small>
+        
+        <small *ngIf="!editModus" 
+        class="col-sm-2 text-muted">
+        {{tuneSetPositionPlayInfo.tuneSetPosition.tune.type}} in {{tuneSetPositionPlayInfo.tuneSetPosition.tune.key}}</small>
 
-        <etb-playlist-tune-dots  *ngIf="!editModus" [tune]="tuneSetPositionPlayInfo.tuneSetPosition.tune"></etb-playlist-tune-dots>
-        <etb-tune-played  class=" pull-sm-right col-sm-2" *ngIf="!editModus" [tune]="tuneSetPositionPlayInfo.tuneSetPosition.tune"></etb-tune-played>
-
-        <div class="pull-sm-right btn-toolbar hidden-print" role="toolbar" *ngIf="editModus">
-            <div class="btn-group" role="group">
-                <a class="btn btn-secondary btn-sm" (click)="togglePlayInfoAnnotation()" title="Show/Hide Annotation">A</a>
-                <a class="btn btn-secondary btn-sm" (click)="addPartPlayInfo()" title="Add Part">+</a>
-            </div>
-        </div>
+        <etb-playlist-tune-dots  *ngIf="!editModus" 
+        [tune]="tuneSetPositionPlayInfo.tuneSetPosition.tune"></etb-playlist-tune-dots>
+        
+        <etb-tune-played  class=" pull-sm-right col-sm-2" *ngIf="!editModus" 
+        [tune]="tuneSetPositionPlayInfo.tuneSetPosition.tune"></etb-tune-played>
+        
     </div>
 
-    <etb-playlist-position-set-position-play-info [tuneSetPositionPlayInfo]="tuneSetPositionPlayInfo" [playInfoAnnotationShown]="playInfoAnnotationShown"></etb-playlist-position-set-position-play-info>
+    <etb-playlist-position-set-position-play-info [tuneSetPositionPlayInfo]="tuneSetPositionPlayInfo">
+        </etb-playlist-position-set-position-play-info>
 </div>

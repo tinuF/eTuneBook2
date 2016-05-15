@@ -10,17 +10,19 @@ import {PlaylistPosition} from '../../business/model/playlistposition';
 import {FromNow} from '../../pipes/from-now';
 import {PlayListPositionSetUI} from '../../components/playlist-position/playlist-position-set';
 import {PlayListPositionMenuUI} from '../../components/playlist-position/playlist-position-menu';
+import {PlayListPositionCopierUI} from '../../components/common/playlist/playlist-position-copier';
 
 @Component({
     selector: 'etb-playlist-position',
     templateUrl: './components/playlist-position/playlist-position.html',
     styleUrls: ['./components/playlist-position/playlist-position.css'],
-    directives: [ROUTER_DIRECTIVES, PlayListPositionSetUI, PlayListPositionMenuUI],
+    directives: [ROUTER_DIRECTIVES, PlayListPositionSetUI, PlayListPositionMenuUI, PlayListPositionCopierUI],
     pipes: [FromNow]
 })
 export class PlaylistPositionUI implements OnInit, OnDestroy {
     playlist: Playlist;
     playlistPosition: PlaylistPosition;
+    playlistPositionToBeCopied: PlaylistPosition;
     editModus: boolean;
     modusActionSubscription: Subscription;
     showDots: boolean;
@@ -48,6 +50,10 @@ export class PlaylistPositionUI implements OnInit, OnDestroy {
     
     toggleDots() {
         this.showDots = !this.showDots;
+    }
+    
+    setPlaylistPositionToBeCopied(playlistPosition:PlaylistPosition){
+        this.playlistPositionToBeCopied = playlistPosition;
     }
 }
 

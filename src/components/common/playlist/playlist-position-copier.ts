@@ -1,19 +1,19 @@
-import {Component, Input, OnInit, ElementRef} from 'angular2/core';
+import {Component, Input, OnInit} from 'angular2/core';
 import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
 
-import {TuneBookService} from '../../services/tunebook-service';
-import {Playlist} from '../../business/model/playlist';
-import {PlaylistPosition} from '../../business/model/playlistposition';
-import {EliminateThe} from '../../pipes/eliminate-the';
-import {FromNow} from '../../pipes/from-now';
-import {PlayListItemSetPositionUI} from '../../components/playlist/playlist-item-set-position';
+import {TuneBookService} from '../../../services/tunebook-service';
+import {Playlist} from '../../../business/model/playlist';
+import {PlaylistPosition} from '../../../business/model/playlistposition';
+import {EliminateThe} from '../../../pipes/eliminate-the';
+import {FromNow} from '../../../pipes/from-now';
+import {PlayListItemSetPositionUI} from '../../../components/playlist/playlist-item-set-position';
 
 
 @Component({
     selector: 'etb-playlist-position-copier',
-    templateUrl: './components/playlist/playlist-position-copier.html',
+    templateUrl: './components/common/playlist/playlist-position-copier.html',
     directives: [ROUTER_DIRECTIVES, PlayListItemSetPositionUI],
-    styleUrls: ['./components/playlist/playlist-position-copier.css'],
+    styleUrls: ['./components/common/playlist/playlist-position-copier.css'],
     pipes: [EliminateThe, FromNow]
 })
 export class PlayListPositionCopierUI implements OnInit {
@@ -21,13 +21,13 @@ export class PlayListPositionCopierUI implements OnInit {
     playlists: Array<Playlist>;
     selectedPlaylist: Playlist;
 
-    constructor(public tuneBookService: TuneBookService, public router: Router, public elementRef: ElementRef) {
+    constructor(public tuneBookService: TuneBookService, public router: Router) {
 
     }
 
     ngOnInit() {
         this.playlists = this.tuneBookService.getPlaylists();
-        //jQuery(this.elementRef.nativeElement).show(); 
+        console.log("playlist-position-copier:ngOnInit called");
     }
 
     setSelectedPlaylistId(playlist:Playlist) {

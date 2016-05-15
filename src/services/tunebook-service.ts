@@ -194,10 +194,10 @@ export class TuneBookService {
                 
                 // Reload from tuneBookAbcSave
                 this.tuneBook = new TuneBook(JSON.parse(this.tuneBookAbcBackUp));
-                alert('Last action ignored. TuneBook reloaded')
+                alert('Last action ignored. TuneBook reloaded');
 
             }
-        }, 0);
+        }, 1000);
     }
 
     checkTuneBookAbcConsistency(tuneBookAbc: string) {

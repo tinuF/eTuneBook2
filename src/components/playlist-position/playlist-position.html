@@ -11,8 +11,10 @@
                 <p class="col-xs-3"> {{playlist.event}} </p>
             </div>
             <div class="card-block">
-                <etb-playlist-position-set [playlistPosition]="playlistPosition"></etb-playlist-position-set>
+                <etb-playlist-position-set 
+                [playlistPosition]="playlistPosition"></etb-playlist-position-set>
             </div>
         </div>
     </div>
 </div>
+<etb-playlist-position-copier [playlistPosition]="playlistPosition"></etb-playlist-position-copier>

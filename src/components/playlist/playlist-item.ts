@@ -98,7 +98,7 @@ export class PlayListItemUI implements OnInit, OnDestroy {
     }
 
     sendPlaylistPositionToCopier() {
-        this.copyPlaylistPosition.next(this.playlistPosition);
+        //this.copyPlaylistPosition.next(this.playlistPosition);
     }
 
     deletePlaylistPosition() {

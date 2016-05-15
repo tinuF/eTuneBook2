@@ -21,6 +21,7 @@ import {PlayListPositionSetPositionUI} from '../../components/playlist-position/
 export class PlayListPositionSetUI implements OnInit, OnDestroy {
     @Input() playlistPosition: PlaylistPosition;
     @ViewChild('inputPlaylistPositionName') inputPlaylistPositionName: ElementRef;
+    @ViewChild('inputPlaylistPositionAnnotation') inputPlaylistPositionAnnotation: ElementRef;
     editModus: boolean;
     modusActionSubscription: Subscription;
 
@@ -56,10 +57,26 @@ export class PlayListPositionSetUI implements OnInit, OnDestroy {
 
         if (keycode === 13) { // ENTER
             this.renderer.invokeElementMethod(this.inputPlaylistPositionName.nativeElement, 'blur', []);
+            this.renderer.invokeElementMethod(this.inputPlaylistPositionAnnotation.nativeElement, 'focus', []);
+            this.renderer.invokeElementMethod(this.inputPlaylistPositionAnnotation.nativeElement, 'select', []);
         }
     }
 
     handleBlurOnPlaylistPositionName(focusEvent:FocusEvent) {
+        this.tuneBookService.storeTuneBookAbc();
+    }
+    
+    handleKeyDownOnPlaylistPositionAnnotation(keyboardEvent:KeyboardEvent) {
+        let keycode = (keyboardEvent.keyCode ? keyboardEvent.keyCode : keyboardEvent.which);
+
+        if (keycode === 13) { // ENTER
+            this.renderer.invokeElementMethod(this.inputPlaylistPositionAnnotation.nativeElement, 'blur', []);
+            this.renderer.invokeElementMethod(this.inputPlaylistPositionName.nativeElement, 'focus', []);
+            this.renderer.invokeElementMethod(this.inputPlaylistPositionName.nativeElement, 'select', []);
+        }
+    }
+
+    handleBlurOnPlaylistPositionAnnotation(focusEvent:FocusEvent) {
         this.tuneBookService.storeTuneBookAbc();
     }
 

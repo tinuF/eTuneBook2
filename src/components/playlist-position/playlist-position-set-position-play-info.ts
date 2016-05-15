@@ -6,6 +6,7 @@ import {Subscription}   from 'rxjs/Subscription';
 import {TuneBookService} from '../../services/tunebook-service';
 import {ACTION} from '../../common/action';
 import {TuneSetPositionPlayInfo} from '../../business/model/tunesetposition-playinfo';
+import {PartPlayInfo} from '../../business/model/partplayinfo';
 import {EliminateThe} from '../../pipes/eliminate-the';
 import {FromNow} from '../../pipes/from-now';
 import {PartPlayInfoListUI} from '../../components/playlist-position/part-play-info-list';
@@ -21,7 +22,6 @@ import {PartPlayInfoListUI} from '../../components/playlist-position/part-play-i
 })
 export class PlayListPositionSetPositionPlayInfoUI implements OnInit, OnDestroy {
     @Input() tuneSetPositionPlayInfo: TuneSetPositionPlayInfo;
-    @Input() playInfoAnnotationShown: boolean;
     editModus:boolean;
     modusActionSubscription: Subscription;
 
@@ -73,10 +73,10 @@ export class PlayListPositionSetPositionPlayInfoUI implements OnInit, OnDestroy 
         this.tuneSetPositionPlayInfo.annotation = (<HTMLInputElement>focusEvent.target).value;
         this.tuneBookService.storeTuneBookAbc();
     }
-
-    togglePlayInfoAnnotation() {
-        this.playInfoAnnotationShown = !this.playInfoAnnotationShown;
-
+    
+    addPartPlayInfo() {
+        this.tuneSetPositionPlayInfo.addPartPlayInfo(new PartPlayInfo("", ""));
+        this.tuneBookService.storeTuneBookAbc();
     }
 }
 
