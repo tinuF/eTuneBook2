@@ -1,0 +1,14 @@
+<div class="card col-lg-4">
+    <div class="card-block">
+        <label class="c-input c-checkbox" *ngIf="showFilterCheckbox">
+            <input type="checkbox" (change)="toggleSetSelection($event)">
+            <span class="c-indicator"></span>
+        </label>
+        <small class="text-muted">Set {{set.id}}</small>
+        <a class='pull-lg-right' (click)="justPlayedTheSet()" title="Just Played The Set" *ngIf="!editModus"><i class="mdi mdi-play-circle-outline"></i></a>
+    </div>
+    <div class="card-block">
+        <etb-set-position [position]="position" *ngFor="let position of set.tuneSetPositions"></etb-set-position>
+    </div>
+    <etb-set-playlist-list [set]="set"></etb-set-playlist-list>
+</div>

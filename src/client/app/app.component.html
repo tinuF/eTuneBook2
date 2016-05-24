@@ -1,0 +1,73 @@
+<nav class="navbar navbar-light navbar-fixed-top bg-faded" role="navigation">
+    <!--
+    <a class="navbar-brand hidden-sm-down pull-right" href="#/info/introduction" title="eTuneBook"><img src="../../favicon.ico" class="img-responsive" width="24" height="24" alt="eTuneBook">
+    </a>
+    -->
+    <a class="navbar-brand hidden-sm-down pull-xs-right" href="#/home" title="eTuneBook">eTuneBook</a>
+    <ul class="nav navbar-nav">
+        <li class="nav-item dropdown col-xs-1">
+            <a class="nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                <span class="hidden-sm-down">File</span>
+                <i class="mdi mdi-dots-vertical hidden-md-up" title="Open Menu"></i>
+            </a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" (click)="initializeTuneBook()">New Book</a>
+                <a class="dropdown-item" (click)="newTune()">New Tune</a>
+                <a class="dropdown-item" (click)="newPlaylist()">New Playlist</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" (click)="importer.click()">Import Book</a>
+                <a class="dropdown-item" (click)="loadBxplTuneBook()">Load Example Book from Server</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" (click)="editTuneBook()">Edit Book Title</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" (click)="exportTuneBook()">Export Book</a>
+            </div>
+        </li>
+
+        <li class="nav-item col-xs-1">
+            <a class="nav-link" [routerLink]="['/tunes']" title="Load Tunes">
+                <span class="hidden-sm-down">Tunes</span>
+                <i class="mdi mdi-music-note hidden-md-up"></i>
+            </a>
+        </li>
+
+        <li class="nav-item col-xs-1">
+            <a class="nav-link" [routerLink]="['/sets']" title="Load Sets">
+                <span class="hidden-sm-down">Sets</span>
+                <i class="mdi mdi-format-list-bulleted hidden-md-up"></i>
+            </a>
+        </li>
+
+        <li class="nav-item col-xs-1">
+            <a class="nav-link" [routerLink]="['/playlists']" title="Load Playlists">
+                <span class="hidden-sm-down">Playlists</span>
+                <i class="mdi mdi-play-circle-outline hidden-md-up"></i>
+            </a>
+        </li>
+
+        <form class="form-inline navbar-form pull-xs-right col-xs-5" role="search">
+            <input type="text" class="form-control" placeholder="Search" [value]="filterSettings.title" (keyup)="search($event)">
+        </form>
+    </ul>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-5">
+            <etb-book-title></etb-book-title>
+        </div>
+        <div class="col-xs-7">
+            <etb-filter-text></etb-filter-text>
+        </div>
+    </div>
+
+    <div class="row">
+        <etb-side-nav></etb-side-nav>
+        <etb-social-nav></etb-social-nav>
+
+        <router-outlet></router-outlet>
+
+    </div>
+</div>
+
+<input class="input-file hidden-print" id="fileInput" type="file" (change)="readTuneBookFromLocalDrive($event)" #importer>

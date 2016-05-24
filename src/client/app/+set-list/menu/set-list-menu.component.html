@@ -1,0 +1,46 @@
+<div class="setlistMenu1 btn-group hidden-print">
+    <etb-edit-btn></etb-edit-btn>
+</div>
+
+<div class="setlistMenu2 btn-group hidden-print">
+    <a class="btn btn-secondary btn-sm" title="Random Sort" (click)="sortRandom($event)">
+		<i class="mdi mdi-shuffle"></i>
+	</a>
+	
+	<a class="btn btn-secondary btn-sm" title="Playdate Sort" (click)="sortPlaydate($event)">
+		<i class="mdi mdi-history"></i>
+	</a>
+    
+    <a class="btn btn-secondary btn-sm" title="Numeric Sort" (click)="sortId($event)">
+		<i class="mdi mdi-sort-numeric"></i>
+	</a>
+	
+	<a class="btn btn-secondary btn-sm" title="Only checked Sets" (click)="filterSets($event)">
+		<i class="mdi mdi-check"></i>
+	</a>
+	
+	<a class="btn btn-secondary btn-sm" title="Add to Playlist" data-toggle="modal" data-target=".bd-example-modal-lg">
+		<i class="mdi mdi-playlist-plus"></i>
+	</a>
+</div>
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Choose a playlist</h4>
+      </div>
+      <div class="modal-body">
+        <select class="form-control form-control-md" [(ngModel)]="selectedPlaylist">
+		      <option [ngValue]="playlist" *ngFor="let playlist of playlists">{{playlist.name}} - {{playlist.band}}</option>
+	  	  </select>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addSelectedSetsToSelectedPlaylist()">Copy</button>
+      </div>
+    </div>
+  </div>
+</div>
