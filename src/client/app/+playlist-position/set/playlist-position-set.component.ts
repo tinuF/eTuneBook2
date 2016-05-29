@@ -3,9 +3,9 @@ import { Router } from '@angular/router';
 
 import { Subscription }   from 'rxjs/Subscription';
 
-import { TuneBookService, TuneSetPositionPlayInfo, PlaylistPosition, ACTION } from '../business/index';
-import { EliminateThePipe } from '../shared/index';
-import { PlayListPositionSetPositionComponent } from '../+playlist-position/index';
+import { TuneBookService, TuneSetPositionPlayInfo, PlaylistPosition, ACTION } from '../../business/index';
+import { EliminateThePipe } from '../../shared/pipes/index';
+import { PlayListPositionSetPositionComponent } from './position/playlist-position-set-position.component';
 
 @Component({
     moduleId: module.id,

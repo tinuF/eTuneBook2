@@ -4,8 +4,9 @@ import { ROUTER_DIRECTIVES, OnActivate, RouteSegment } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 
 import { TuneBookService, Playlist, PlaylistPosition, ACTION } from '../business/index';
-import { PlayListPositionCopierComponent } from '../shared/index';
-import { PlayListPositionSetComponent, PlayListPositionMenuComponent, } from '../+playlist-position/index';
+import { PlayListPositionCopierComponent } from '../shared/playlist/playlist-position-copier.component';
+import { PlayListPositionSetComponent } from './set/playlist-position-set.component';
+import { PlayListPositionMenuComponent, } from './menu/playlist-position-menu.component';
 
 @Component({
     moduleId: module.id,
@@ -31,7 +32,7 @@ export class PlaylistPositionComponent implements OnInit, OnActivate, OnDestroy 
         this.editModus = this.tuneBookService.isEditModus();
         this.modusActionSubscription = this.tuneBookService.modusActionObservable.subscribe(
             (action) => {
-                console.log('playlist-position:modusActionSubscription called: ' + action);
+                //console.log('playlist-position:modusActionSubscription called: ' + action);
                 if (action === ACTION.TOGGLE_EDIT_MODUS) {
                     this.editModus = this.tuneBookService.isEditModus();
                 }

@@ -2,17 +2,17 @@ import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 
 import { Subscription }   from 'rxjs/Subscription';
 
-import { TuneBookService, TuneSetPositionPlayInfo, PartPlayInfo, ACTION } from '../business/index';
-import { PartPlayInfoListComponent } from '../+playlist-position/index';
+import { TuneBookService, TuneSetPositionPlayInfo, PartPlayInfo, ACTION } from '../../../../business/index';
+import { PartPlayInfoListComponent } from './part-play-info-list/part-play-info-list.component';
 
 @Component({
     moduleId: module.id,
-    selector: 'etb-playlist-position-set-position-play-info',
-    templateUrl: 'playlist-position-set-position-play-info.component.html',
+    selector: 'etb-play-info',
+    templateUrl: 'play-info.component.html',
     directives: [PartPlayInfoListComponent],
-    styleUrls: ['playlist-position-set-position-play-info.component.css']
+    styleUrls: ['play-info.component.css']
 })
-export class PlayListPositionSetPositionPlayInfoComponent implements OnInit, OnDestroy {
+export class PlayInfoComponent implements OnInit, OnDestroy {
     @Input() tuneSetPositionPlayInfo: TuneSetPositionPlayInfo;
     editModus: boolean;
     modusActionSubscription: Subscription;

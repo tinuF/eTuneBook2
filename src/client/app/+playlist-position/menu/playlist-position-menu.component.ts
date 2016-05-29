@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { TuneBookService, PlaylistPosition, PlaylistSettings } from '../business/index';
-import { EditButtonComponent } from '../shared/index';
+import { TuneBookService, PlaylistPosition, PlaylistSettings } from '../../business/index';
+import { EditButtonComponent } from '../../shared/modus/edit-btn.component';
 
 @Component({
     moduleId: module.id,

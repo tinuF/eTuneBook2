@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { OnActivate, RouteSegment } from '@angular/router';
 
 import { TuneBookService, Tune } from '../business/index';
-import { TunePlayedComponent } from '../shared/index';
-import { TuneAbcMenuComponent, TuneAbcEditorComponent } from './shared/index';
+import { TunePlayedComponent } from '../shared/tune/index';
+import { TuneAbcMenuComponent } from './menu/tune-abc-menu.component';
+import { TuneAbcEditorComponent } from './editor/tune-abc-editor.component';
 
 @Component({
     moduleId: module.id,

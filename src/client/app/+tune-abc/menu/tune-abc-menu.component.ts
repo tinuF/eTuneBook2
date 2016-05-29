@@ -2,7 +2,7 @@ import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 import { ROUTER_DIRECTIVES, Router } from '@angular/router';
 
 import { TuneBookService, Tune } from '../../business/index';
-import { TuneColorizerComponent, TuneTransposerComponent } from '../../shared/index';
+import { TuneColorizerComponent, TuneTransposerComponent } from '../../shared/tune/index';
 
 @Component({
     moduleId: module.id,

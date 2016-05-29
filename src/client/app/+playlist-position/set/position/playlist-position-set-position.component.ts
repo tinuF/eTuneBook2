@@ -3,16 +3,16 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
 
 import { Subscription } from 'rxjs/Subscription';
 
-import { TuneBookService, TuneSetPositionPlayInfo, ACTION } from '../business/index';
-import { EliminateThePipe, TunePlayedComponent } from '../shared/index';
-import { PlayListPositionSetPositionPlayInfoComponent, PlaylistTuneDotsComponent } from '../+playlist-position/index';
+import { TuneBookService, TuneSetPositionPlayInfo, ACTION } from '../../../business/index';
+import { EliminateThePipe, TunePlayedComponent } from '../../../shared/index';
+import { PlayInfoComponent } from './play-info/play-info.component';
+import { PlaylistTuneDotsComponent } from './tune-dots/playlist-tune-dots.component';
 
 @Component({
     moduleId: module.id,
     selector: 'etb-playlist-position-set-position',
     templateUrl: 'playlist-position-set-position.component.html',
-    directives: [ROUTER_DIRECTIVES, TunePlayedComponent, PlaylistTuneDotsComponent,
-        PlayListPositionSetPositionPlayInfoComponent],
+    directives: [ROUTER_DIRECTIVES, TunePlayedComponent, PlaylistTuneDotsComponent, PlayInfoComponent],
     styleUrls: ['playlist-position-set-position.component.css'],
     pipes: [EliminateThePipe]
 })

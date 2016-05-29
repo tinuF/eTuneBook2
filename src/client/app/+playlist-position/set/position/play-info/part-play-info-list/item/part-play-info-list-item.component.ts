@@ -2,7 +2,7 @@ import { Component, Input, OnInit, OnDestroy, ViewChild, ElementRef, Renderer } 
 
 import { Subscription }   from 'rxjs/Subscription';
 
-import { TuneBookService, PartPlayInfo, ACTION } from '../business/index';
+import { TuneBookService, PartPlayInfo, ACTION } from '../../../../../../business/index';
 
 @Component({
     moduleId: module.id,

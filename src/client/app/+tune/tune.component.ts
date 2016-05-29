@@ -25,7 +25,7 @@ export class TuneComponent implements OnInit, OnActivate, OnDestroy {
     modusActionSubscription: Subscription;
 
     constructor(public tuneBookService: TuneBookService) {
-
+        console.log('tune:constructor called');
     }
 
     ngOnInit() {

@@ -2,8 +2,8 @@ import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 
 import { Subscription }   from 'rxjs/Subscription';
 
-import { TuneBookService, TuneSetPositionPlayInfo, PartPlayInfo, ACTION } from '../business/index';
-import { PartPlayInfoListItemComponent } from '../+playlist-position/index';
+import { TuneBookService, TuneSetPositionPlayInfo, PartPlayInfo, ACTION } from '../../../../../business/index';
+import { PartPlayInfoListItemComponent } from './item/part-play-info-list-item.component';
 
 @Component({
     moduleId: module.id,

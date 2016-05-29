@@ -3,17 +3,17 @@ import { Routes, Router, ROUTER_DIRECTIVES } from '@angular/router';
 
 import { TuneBookService, TuneBook, Playlist, TuneSet, FilterSettings} from './business/index';
 import { FilterTextComponent, SideNavigationComponent, SocialNavigationComponent, BookTitleComponent } from './shared/index';
-import { BookComponent } from './+book/index';
-import { AbcComponent } from './+abc/index';
-import { TuneListComponent } from './+tune-list/index';
-import { SetListComponent } from './+set-list/index';
-import { PlaylistListComponent } from './+playlist-list/index';
-import { PlaylistComponent } from './+playlist/index';
-import { PlaylistPositionComponent } from './+playlist-position/index';
-import { TuneComponent } from './+tune/index';
-import { FilterComponent} from './+filter/index';
+import { BookComponent } from './+book/book.component';
+import { AbcComponent } from './+abc/abc.component';
+import { TuneListComponent } from './+tune-list/tune-list.component';
+import { SetListComponent } from './+set-list/set-list.component';
+import { PlaylistListComponent } from './+playlist-list/playlist-list.component';
+import { PlaylistComponent } from './+playlist/playlist.component';
+import { PlaylistPositionComponent } from './+playlist-position/playlist-position.component';
+import { TuneComponent } from './+tune/tune.component';
+import { FilterComponent} from './+filter/filter.component';
 import { HomeComponent, ChangeLogComponent } from './+help/index';
-import { TuneAbcComponent } from './+tune-abc/index';
+import { TuneAbcComponent } from './+tune-abc/tune-abc.component';
 
 @Component({
     moduleId: module.id,
@@ -47,6 +47,9 @@ import { TuneAbcComponent } from './+tune-abc/index';
 //{ path: '/tunes', component: TuneListComponent },
 //{ path: '/tunes/:id', component: TuneComponent }
 //routes have to be unique, or nested
+
+//https://www.youtube.com/watch?v=d8yAdeshpcw&feature=youtu.be
+//Components as strings not as types. not in rc.1 
 
 @Routes([
     { path: '/', component: HomeComponent },

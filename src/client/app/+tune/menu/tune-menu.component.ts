@@ -14,7 +14,7 @@ export class TuneMenuComponent {
     @Input() tune: Tune;
 
     constructor(public tuneBookService: TuneBookService) {
-
+        console.log('tune-menu:constructor called');
     }
 }
 
