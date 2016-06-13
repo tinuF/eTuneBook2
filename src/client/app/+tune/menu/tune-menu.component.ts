@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { TuneBookService, Tune } from '../../business/index';
+import { Tune } from '../../business/index';
 import { EditButtonComponent } from '../../shared/modus/edit-btn.component';
 
 @Component({
@@ -13,7 +13,7 @@ import { EditButtonComponent } from '../../shared/modus/edit-btn.component';
 export class TuneMenuComponent {
     @Input() tune: Tune;
 
-    constructor(public tuneBookService: TuneBookService) {
+    constructor() {
         console.log('tune-menu:constructor called');
     }
 }

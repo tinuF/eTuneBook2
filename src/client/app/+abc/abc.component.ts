@@ -7,8 +7,8 @@ import { TuneBookService, TuneBook, AbcExportSettings } from '../business/index'
 @Component({
   moduleId: module.id,
   selector: 'etb-abc',
-  templateUrl: 'abc.component.component.html',
-  styleUrls: ['abc.component.component.css'],
+  templateUrl: 'abc.component.html',
+  styleUrls: ['abc.component.css'],
 })
 export class AbcComponent implements OnInit {
     @Input() tuneBook: TuneBook;

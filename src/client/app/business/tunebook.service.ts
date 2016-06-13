@@ -172,7 +172,7 @@ export class TuneBookService {
         setTimeout(() => {
             try {
                 let tuneBookAbc: string = JSON.stringify(this.writeAbc(new AbcExportSettings()));
-                this.checkTuneBookAbcConsistency(tuneBookAbc);
+                //this.checkTuneBookAbcConsistency(tuneBookAbc);
                 localStorage.setItem(this.systemProperties.STORAGE_ID_TUNEBOOK, tuneBookAbc);
                 this.tuneBookAbcBackUp = tuneBookAbc;
                 console.log('TuneBook consistent and saved');
@@ -331,6 +331,8 @@ export class TuneBookService {
         let tuneSetDeleted: boolean = this.getCurrentTuneBook().moveTuneSetPosition(sourceTuneSetId, sourcePosition,
             targetTuneSetId, targetPosition, beforeOrAfter, moveOrCopy);
         this.setTunesFiltered();
+        this.storeTuneBookAbc();
+        this.broadCastFilterAction(ACTION.APPLY_FILTER);
         //this.setTunesFiltered() wird gebraucht, damit bei Löschung eines Sets die Liste aktualisiert wird
         //(die Screens reagieren auf tunesFiltered und tuneSetsFiltered)
         //Problem: Beim Aktualisieren der Liste geht die Sortierung der Sets verloren. 
@@ -357,6 +359,7 @@ export class TuneBookService {
 
     deleteTuneSetPosition(tuneSetId: number, position: number) {
         this.getCurrentTuneBook().deleteTuneSetPosition(tuneSetId, position);
+        this.storeTuneBookAbc();
         this.initializeFilter();
         this.broadCastModelAction(ACTION.DELETE_TUNESETPOSITION);
     }

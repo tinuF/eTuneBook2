@@ -2,7 +2,7 @@
     <div class="row col-sm-12">
         <div class="col-sm-2">
             <a title="Play Infos" 
-            [routerLink]="['/PlaylistPosition', {id: playlistPosition.playlistId, pos: playlistPosition.position}]">
+            [routerLink]="['/playlist', playlistPosition.playlistId, 'position', playlistPosition.position]">
                 <small *ngIf="!editModus">{{playlistPosition.position}}</small>
             </a>
             <select *ngIf="editModus" class="form-control" id="positionChooser" 
@@ -14,7 +14,7 @@
 
         <div class="col-sm-4">
             <a title="Play Infos" 
-            [routerLink]="['/PlaylistPosition', {id: playlistPosition.playlistId, pos: playlistPosition.position}]">
+            [routerLink]="['/playlist', playlistPosition.playlistId, 'position', playlistPosition.position]">
                 <small *ngIf="!editModus">{{playlistPosition.name | eliminateThe}}</small>
             </a>
             <input #inputPlaylistPositionName class="form-control form-control-sm" *ngIf="editModus" 

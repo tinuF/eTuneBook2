@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { OnActivate, RouteSegment } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { Subscription } from 'rxjs/Subscription';
 
@@ -16,15 +16,16 @@ import { TuneSetListComponent} from './set-list/tune-set-list.component';
     selector: 'etb-tune',
     templateUrl: 'tune.component.html',
     styleUrls: ['tune.component.css'],
-    directives: [TuneMenuComponent,TuneDotsComponent, TunePlayedComponent,
+    directives: [TuneMenuComponent, TuneDotsComponent, TunePlayedComponent,
         TuneVideoListComponent, TuneInfoListComponent, TuneSetListComponent],
 })
-export class TuneComponent implements OnInit, OnActivate, OnDestroy {
+export class TuneComponent implements OnInit, OnDestroy {
     tune: Tune;
     editModus: boolean;
     modusActionSubscription: Subscription;
+    routerSubscription: Subscription;
 
-    constructor(public tuneBookService: TuneBookService) {
+    constructor(public tuneBookService: TuneBookService, public router: Router, public route: ActivatedRoute) {
         console.log('tune:constructor called');
     }
 
@@ -37,14 +38,19 @@ export class TuneComponent implements OnInit, OnActivate, OnDestroy {
                     this.editModus = this.tuneBookService.isEditModus();
                 }
             });
+
+        this.routerSubscription = this.route
+            .params
+            .subscribe(params => {
+                let id = +params['id'];
+                this.tune = this.tuneBookService.getTune(id);
+            });
     }
 
     ngOnDestroy() {
         this.modusActionSubscription.unsubscribe();
-    }
-
-    routerOnActivate(currRouteSegment: RouteSegment) {
-        this.tune = this.tuneBookService.getTune(parseInt(currRouteSegment.getParam('id')));
+        this.routerSubscription.unsubscribe();
+        //console.log('tune:ngOnDestroy called:');
     }
 }
 

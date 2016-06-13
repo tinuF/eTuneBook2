@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef, Renderer } from '@angular/core';
-import { ROUTER_DIRECTIVES, Router, OnActivate, RouteSegment } from '@angular/router';
+import { ROUTER_DIRECTIVES, Router, ActivatedRoute } from '@angular/router';
 
 import { Subscription }   from 'rxjs/Subscription';
 
@@ -15,7 +15,7 @@ import { PlayListMenuComponent } from './menu/playlist-menu.component';
     directives: [ROUTER_DIRECTIVES, PlayListItemComponent, PlayListMenuComponent, PlayListPositionCopierComponent],
     styleUrls: ['playlist.component.css']
 })
-export class PlaylistComponent implements OnInit, OnDestroy, OnActivate {
+export class PlaylistComponent implements OnInit, OnDestroy {
     @ViewChild('inputPlaylistName') inputPlaylistName: ElementRef;
     @ViewChild('inputPlaylistBand') inputPlaylistBand: ElementRef;
     @ViewChild('inputPlaylistEvent') inputPlaylistEvent: ElementRef;
@@ -23,13 +23,13 @@ export class PlaylistComponent implements OnInit, OnDestroy, OnActivate {
     playlistPositionToBeCopied: PlaylistPosition;
     editModus: boolean;
     modusActionSubscription: Subscription;
+    routerSubscription: Subscription;
 
-    constructor(public tuneBookService: TuneBookService, public router: Router, public renderer: Renderer) {
+    constructor(public tuneBookService: TuneBookService, public router: Router, public route: ActivatedRoute, public renderer: Renderer) {
 
     }
 
     ngOnInit() {
-        this.sortPlaylistPosition();
         this.editModus = this.tuneBookService.isEditModus();
         this.modusActionSubscription = this.tuneBookService.modusActionObservable.subscribe(
             (action) => {
@@ -38,14 +38,19 @@ export class PlaylistComponent implements OnInit, OnDestroy, OnActivate {
                     this.editModus = this.tuneBookService.isEditModus();
                 }
             });
-    }
 
-    routerOnActivate(currRouteSegment: RouteSegment) {
-        this.playlist = this.tuneBookService.getPlaylist(parseInt(currRouteSegment.getParam('id')));
+        this.routerSubscription = this.route
+            .params
+            .subscribe(params => {
+                let id = +params['id'];
+                this.playlist = this.tuneBookService.getPlaylist(id);
+                this.sortPlaylistPosition();
+            });
     }
 
     ngOnDestroy() {
         this.modusActionSubscription.unsubscribe();
+        this.routerSubscription.unsubscribe();
     }
 
     sortPlaylistPosition() {
@@ -106,12 +111,12 @@ export class PlaylistComponent implements OnInit, OnDestroy, OnActivate {
 
     copyPlaylist() {
         let newPlaylistId = this.tuneBookService.copyPlaylist(this.playlist.id);
-        this.router.navigate(['/Playlist', { id: newPlaylistId }]);
+        this.router.navigate(['/playlist', newPlaylistId ]);
     }
 
     deletePlaylist() {
         this.tuneBookService.deletePlaylist(this.playlist.id);
-        this.router.navigate(['/PlaylistList']);
+        this.router.navigate(['/playlistList']);
     }
 }
 

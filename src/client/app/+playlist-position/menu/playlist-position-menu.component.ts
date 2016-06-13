@@ -34,7 +34,7 @@ export class PlayListPositionMenuComponent implements OnInit {
             nextPosition = 1;
         }
 
-        this.router.navigate(['/PlaylistPosition', { id: this.playlistPosition.playlistId, pos: nextPosition }]);
+        this.router.navigate(['/playlist', this.playlistPosition.playlistId, 'position', nextPosition]);
     }
 
     backward() {
@@ -46,7 +46,7 @@ export class PlayListPositionMenuComponent implements OnInit {
             previousPosition = this.tuneBookService.getPlaylistPositions(this.playlistPosition.playlistId).length;
         }
 
-        this.router.navigate(['/PlaylistPosition', { id: this.playlistPosition.playlistId, pos: previousPosition }]);
+        this.router.navigate(['/playlist', this.playlistPosition.playlistId, 'position', previousPosition]);
     }
 
     toggleDots() {

@@ -16,7 +16,7 @@ export class TuneRandomizerComponent {
 
     randomize() {
         let randomTuneId: number = this.tuneBookService.getRandomTuneId();
-        this.router.navigate(['/tunes/:id', randomTuneId]);
+        this.router.navigate(['/tunes', randomTuneId]);
     }
 }
 

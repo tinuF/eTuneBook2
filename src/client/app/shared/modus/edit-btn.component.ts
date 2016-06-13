@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { TuneBookService } from '../../business//index';
+import { TuneBookService } from '../../business/index';
 
 @Component({
     moduleId: module.id,

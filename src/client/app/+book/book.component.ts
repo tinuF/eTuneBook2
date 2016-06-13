@@ -5,8 +5,8 @@ import { TuneBookService, TuneBook, ACTION } from '../business/index';
 @Component({
     moduleId: module.id,
     selector: 'etb-book',
-    templateUrl: 'book.component.component.html',
-    styleUrls: ['book.component.component.css'],
+    templateUrl: 'book.component.html',
+    styleUrls: ['book.component.css'],
 })
 export class BookComponent implements OnInit {
     tuneBook: TuneBook;

@@ -5,5 +5,5 @@ export * from './modus/edit-btn.component';
 export * from './nav/index';
 export * from './pipes/index';
 export * from './playlist/playlist-position-copier.component';
-export * from './set/index';
+export * from './set/set-list-item.component';
 export * from './tune/index';

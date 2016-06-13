@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
-import { OnActivate, RouteSegment } from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+
+import { Subscription } from 'rxjs/Subscription';
 
 import { TuneBookService, Tune } from '../business/index';
 import { TunePlayedComponent } from '../shared/tune/index';
@@ -13,17 +15,26 @@ import { TuneAbcEditorComponent } from './editor/tune-abc-editor.component';
     styleUrls: ['tune-abc.component.css'],
     directives: [TuneAbcMenuComponent, TunePlayedComponent, TuneAbcEditorComponent]
 })
-export class TuneAbcComponent implements OnActivate {
+export class TuneAbcComponent implements OnInit, OnDestroy {
     tune: Tune;
-    tuneEditModus: boolean;
-    noteEditModus: boolean;
     abcEditor: string;
+    routerSubscription: Subscription;
 
-    constructor(public tuneBookService: TuneBookService) {
-
+    constructor(public tuneBookService: TuneBookService, public router: Router, public route: ActivatedRoute) {
+        console.log('tune-abc:constructor called');
     }
 
-    routerOnActivate(currRouteSegment: RouteSegment) {
-        this.tune = this.tuneBookService.getTune(parseInt(currRouteSegment.getParam('id')));
+    ngOnInit() {
+        this.routerSubscription = this.route
+            .params
+            .subscribe(params => {
+                let id = +params['id'];
+                this.tune = this.tuneBookService.getTune(id);
+            });
+    }
+
+    ngOnDestroy() {
+        this.routerSubscription.unsubscribe();
+        //console.log('tune-abc:ngOnDestroy called:');
     }
 }

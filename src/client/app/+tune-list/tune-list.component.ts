@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy, AfterViewInit, ChangeDetectorRef } from '@angular/core';
-//import { CanReuse, OnReuse, ComponentInstruction} from '@angular/router';
 
 import { Subscription } from 'rxjs/Subscription';
 
@@ -15,10 +14,13 @@ import { TuneListMenuComponent } from './menu/tune-list-menu.component';
     directives: [TuneListItemComponent, TuneListMenuComponent, SpinnerComponent],
     styleUrls: ['tune-list.component.css'],
 })
-export class TuneListComponent implements OnInit, OnDestroy, AfterViewInit  {
+export class TuneListComponent implements OnInit, OnDestroy, AfterViewInit {
     tunes: Array<Tune>;
     isRendering: boolean;
     filterActionSubscription: Subscription;
+    modelActionSubscription: Subscription;
+    routerSubscription: Subscription;
+    selectedId: number;
 
     constructor(public tuneBookService: TuneBookService, private cdr: ChangeDetectorRef) {
         console.log('tune-list:constructor called');
@@ -37,8 +39,21 @@ export class TuneListComponent implements OnInit, OnDestroy, AfterViewInit  {
 
         this.filterActionSubscription = this.tuneBookService.filterActionObservable.subscribe(
             (action) => {
-                //console.log('tune-list:filterActionSubscription called: ' + action);
+                console.log('tune-list:filterActionSubscription called: ' + action);
+
                 if (action === ACTION.APPLY_FILTER) {
+                    this.tunes = this.tuneBookService.getTunesFiltered();
+                }
+            });
+
+        this.modelActionSubscription = this.tuneBookService.modelActionObservable.subscribe(
+            (action) => {
+                console.log('tune-list:modelActionSubscription called: ' + action);
+
+                if (action === ACTION.IMPORT_TUNEBOOK ||
+                    action === ACTION.LOAD_EXAMPLE_TUNEBOOK ||
+                    action === ACTION.INITIALIZE_TUNEBOOK) {
+
                     this.tunes = this.tuneBookService.getTunesFiltered();
                 }
             });
@@ -76,6 +91,7 @@ export class TuneListComponent implements OnInit, OnDestroy, AfterViewInit  {
 
     ngOnDestroy() {
         this.filterActionSubscription.unsubscribe();
+        this.modelActionSubscription.unsubscribe();
         //console.log('tune-list:ngOnDestroy called');
     }
 
@@ -85,17 +101,10 @@ export class TuneListComponent implements OnInit, OnDestroy, AfterViewInit  {
         console.log('tune-list:ngAfterViewInit called');
     }
 
-/*
-    routerCanReuse(next: ComponentInstruction, prev: ComponentInstruction) {
-        return true;
+    isSelected(tune: Tune) {
+        return tune.id === this.selectedId;
     }
 
-
-    routerOnReuse(next: ComponentInstruction, prev: ComponentInstruction) {
-        this.tunes = this.tuneBookService.getTunesFiltered();
-        //console.log('tune-list:routerOnReuse called');
-    }
-*/
 }
 
 

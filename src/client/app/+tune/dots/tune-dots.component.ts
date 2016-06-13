@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input, ElementRef } from '@angular/core';
+import { Component, OnInit, OnChanges, OnDestroy, Input, ElementRef } from '@angular/core';
 
 import { Subscription } from 'rxjs/Subscription';
 import * as jQuery from 'jquery';
@@ -13,7 +13,7 @@ import { TuneDotsMenuComponent } from './menu/tune-dots-menu.component';
     templateUrl: 'tune-dots.component.html',
     styleUrls: ['tune-dots.component.css']
 })
-export class TuneDotsComponent implements OnInit, OnDestroy {
+export class TuneDotsComponent implements OnInit, OnChanges, OnDestroy {
     @Input() tune: Tune;
     tuneObjectArray: Array<any>;
     editModus: boolean;
@@ -33,6 +33,10 @@ export class TuneDotsComponent implements OnInit, OnDestroy {
                     this.editModus = this.tuneBookService.isEditModus();
                 }
             });
+    }
+
+    ngOnChanges() {
+        this.renderAbc();
     }
 
     ngOnDestroy() {

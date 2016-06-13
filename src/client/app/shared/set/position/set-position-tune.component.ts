@@ -100,7 +100,6 @@ export class SetpositionTuneComponent implements OnInit, OnDestroy {
 
         // update model. angular will then react upon the changed model and re-render both sets  
         this.tuneBookService.moveTuneSetPosition(sourceTuneSetId, sourcePosition, targetTuneSetId, targetPosition, 'before', moveOrCopy);
-        this.tuneBookService.storeTuneBookAbc();
 
         this.dragOver = false;
 
@@ -143,6 +142,5 @@ export class SetpositionTuneComponent implements OnInit, OnDestroy {
 
     deleteTuneSetPosition(e) {
         this.tuneBookService.deleteTuneSetPosition(this.tuneSetPosition.tuneSetId, this.tuneSetPosition.position);
-        this.tuneBookService.storeTuneBookAbc();
     }
 }

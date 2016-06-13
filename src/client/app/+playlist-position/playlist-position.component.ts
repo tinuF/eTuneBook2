@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ROUTER_DIRECTIVES, OnActivate, RouteSegment } from '@angular/router';
+import { ROUTER_DIRECTIVES, Router, ActivatedRoute } from '@angular/router';
 
 import { Subscription } from 'rxjs/Subscription';
 
@@ -16,15 +16,16 @@ import { PlayListPositionMenuComponent, } from './menu/playlist-position-menu.co
     directives: [ROUTER_DIRECTIVES, PlayListPositionSetComponent,
         PlayListPositionMenuComponent, PlayListPositionCopierComponent]
 })
-export class PlaylistPositionComponent implements OnInit, OnActivate, OnDestroy {
+export class PlaylistPositionComponent implements OnInit, OnDestroy {
     playlist: Playlist;
     playlistPosition: PlaylistPosition;
     playlistPositionToBeCopied: PlaylistPosition;
     editModus: boolean;
     modusActionSubscription: Subscription;
+    routerSubscription: Subscription;
     showDots: boolean;
 
-    constructor(public tuneBookService: TuneBookService) {
+    constructor(public tuneBookService: TuneBookService, public router: Router, public route: ActivatedRoute) {
 
     }
 
@@ -37,17 +38,21 @@ export class PlaylistPositionComponent implements OnInit, OnActivate, OnDestroy 
                     this.editModus = this.tuneBookService.isEditModus();
                 }
             });
-    }
 
-    routerOnActivate(currRouteSegment: RouteSegment) {
-        this.playlistPosition = this.tuneBookService.getPlaylistPosition(
-            parseInt(currRouteSegment.getParam('id')), parseInt(currRouteSegment.getParam('pos')));
-        this.playlist = this.tuneBookService.getPlaylist(this.playlistPosition.playlistId);
-        this.showDots = false;
+        this.routerSubscription = this.route
+            .params
+            .subscribe(params => {
+                let playlistId = +params['pl'];
+                let position = +params['ps'];
+                this.playlistPosition = this.tuneBookService.getPlaylistPosition(playlistId, position);
+                this.playlist = this.tuneBookService.getPlaylist(this.playlistPosition.playlistId);
+                this.showDots = false;
+            });
     }
 
     ngOnDestroy() {
         this.modusActionSubscription.unsubscribe();
+        this.routerSubscription.unsubscribe();
     }
 
     toggleDots() {

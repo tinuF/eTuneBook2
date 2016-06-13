@@ -3,7 +3,7 @@ import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import * as jQuery from 'jquery';
 import { Subscription }   from 'rxjs/Subscription';
 
-import { TuneBookService, Tune, ACTION } from '../business/index';
+import { TuneBookService, Tune, ACTION } from '../../../../business/index';
 
 @Component({
     moduleId: module.id,

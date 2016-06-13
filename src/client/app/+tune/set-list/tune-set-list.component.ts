@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { Component, OnInit, OnChanges, OnDestroy, Input } from '@angular/core';
 
 import { Subscription } from 'rxjs/Subscription';
 
@@ -12,7 +12,7 @@ import { SetListItemComponent } from '../../shared/set/set-list-item.component';
     styleUrls: ['tune-set-list.component.css'],
     directives: [SetListItemComponent]
 })
-export class TuneSetListComponent implements OnInit, OnDestroy {
+export class TuneSetListComponent implements OnInit, OnChanges, OnDestroy {
     @Input() tune: Tune;
     sets: Array<TuneSet>;
     modelActionSubscription: Subscription;
@@ -31,6 +31,10 @@ export class TuneSetListComponent implements OnInit, OnDestroy {
                     this.sets = this.tuneBookService.getTuneSetsByTuneId(this.tune.id);
                 }
             });
+    }
+
+    ngOnChanges() {
+        this.sets = this.tuneBookService.getTuneSetsByTuneId(this.tune.id);
     }
 
     ngOnDestroy() {
