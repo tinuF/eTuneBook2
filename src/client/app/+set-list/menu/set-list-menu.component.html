@@ -3,19 +3,19 @@
 </div>
 
 <div class="setlistMenu2 btn-group hidden-print">
-    <a class="btn btn-secondary btn-sm" title="Random Sort" (click)="sortRandom($event)">
+    <a class="btn btn-secondary btn-sm" title="Random Sort" (click)="sortRandom()">
 		<i class="mdi mdi-shuffle"></i>
 	</a>
 	
-	<a class="btn btn-secondary btn-sm" title="Playdate Sort" (click)="sortPlaydate($event)">
+	<a class="btn btn-secondary btn-sm" title="Playdate Sort" (click)="sortPlaydate()">
 		<i class="mdi mdi-history"></i>
 	</a>
     
-    <a class="btn btn-secondary btn-sm" title="Numeric Sort" (click)="sortId($event)">
+    <a class="btn btn-secondary btn-sm" title="Numeric Sort" (click)="sortId()">
 		<i class="mdi mdi-sort-numeric"></i>
 	</a>
 	
-	<a class="btn btn-secondary btn-sm" title="Only checked Sets" (click)="filterSets($event)">
+	<a class="btn btn-secondary btn-sm" title="Only checked Sets" (click)="filterSets()">
 		<i class="mdi mdi-check"></i>
 	</a>
 	
@@ -39,7 +39,7 @@
 	  	  </select>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addSelectedSetsToSelectedPlaylist()">Copy</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="addSelectedSetsToSelectedPlaylist()">Add</button>
       </div>
     </div>
   </div>

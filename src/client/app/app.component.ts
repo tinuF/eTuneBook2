@@ -28,7 +28,7 @@ export class AppComponent implements OnInit {
         if (this.tuneBook === null) {
             // Init TuneBook
             this.tuneBook = this.tuneBookService.initializeTuneBook();
-            this.router.navigate(['/home']);
+            this.router.navigate(['/welcome']);
         }
     }
 

@@ -1,3 +1,4 @@
+
 import { Component } from '@angular/core';
 import { ROUTER_DIRECTIVES } from '@angular/router';
 
@@ -6,12 +7,12 @@ import { InfoMenuComponent } from '../+help/info-menu.component';
 
 @Component({
     moduleId: module.id,
-    selector: 'etb-home',
-    templateUrl: 'home.component.html',
+    selector: 'etb-feedback',
+    templateUrl: 'feedback.component.html',
     directives: [ROUTER_DIRECTIVES, InfoMenuComponent],
-    styleUrls: ['home.component.css']
+    styleUrls: ['feedback.component.css']
 })
-export class HomeComponent {
+export class FeedbackComponent {
     constructor() {
 
     }

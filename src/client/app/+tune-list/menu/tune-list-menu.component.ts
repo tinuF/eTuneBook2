@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { TuneBookService, Tune } from '../../business/index';
 
@@ -9,7 +9,7 @@ import { TuneBookService, Tune } from '../../business/index';
     styleUrls: ['tune-list-menu.component.css']
 })
 export class TuneListMenuComponent implements OnInit {
-    tunes: Array<Tune>;
+    @Input() tunes: Array<Tune>;
     sorting: string;
 
     constructor(public tuneBookService: TuneBookService) {
@@ -17,10 +17,12 @@ export class TuneListMenuComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.tunes = this.tuneBookService.getTunesFiltered();
+        //Tunes werden mit den Sets eingelesen (SetId aufsteigend)
+        //Deshalb hier aufsteigend nach TuneId sortieren
+        this.sortId();
     }
 
-    sortTitle(e) {
+    sortTitle() {
 
         if (this.sorting !== 'titleAsc') {
             //sort tune title ascending  
@@ -55,7 +57,7 @@ export class TuneListMenuComponent implements OnInit {
 
     }
 
-    sortPlaydate(e) {
+    sortPlaydate() {
 
         if (this.sorting !== 'playdateAsc') {
             //sort tune playdate ascending  
@@ -74,12 +76,12 @@ export class TuneListMenuComponent implements OnInit {
 
     }
 
-    sortRandom(e) {
+    sortRandom() {
         this.tunes = this.tuneBookService.shuffleTuneList();
         this.sorting = 'random';
     }
 
-    sortFrequency(e) {
+    sortFrequency() {
         if (this.sorting !== 'frequencyAsc') {
             //sort tune frequency ascending  
             this.tunes.sort(function (a: Tune, b: Tune) {
@@ -96,7 +98,7 @@ export class TuneListMenuComponent implements OnInit {
         }
     }
 
-    sortId(e) {
+    sortId() {
 
         if (this.sorting !== 'idAsc') {
             //sort tune Id ascending  
