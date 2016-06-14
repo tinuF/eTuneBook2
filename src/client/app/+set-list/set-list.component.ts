@@ -18,7 +18,7 @@ export class SetListComponent implements OnInit, OnDestroy {
     filterActionSubscription: Subscription;
 
     constructor(public tuneBookService: TuneBookService) {
-        console.log('set-list:constructor called');
+        //console.log('set-list:constructor called');
     }
 
     ngOnInit() {
@@ -39,7 +39,7 @@ export class SetListComponent implements OnInit, OnDestroy {
                     this.sets = this.tuneBookService.getTuneSetsFiltered();
                 }
             });
-        console.log('set-list:ngOnInit called');
+        //console.log('set-list:ngOnInit called');
     }
 
     ngOnDestroy() {

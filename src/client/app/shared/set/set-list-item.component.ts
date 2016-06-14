@@ -20,13 +20,22 @@ export class SetListItemComponent implements OnInit, OnDestroy {
     filterSettings: FilterSettings;
     editModus: boolean;
     modusActionSubscription: Subscription;
+    selected: boolean;
 
     constructor(public tuneBookService: TuneBookService) {
-        this.filterSettings = this.tuneBookService.getCurrentFilterSettings();
+
     }
 
     ngOnInit() {
+        this.filterSettings = this.tuneBookService.getCurrentFilterSettings();
+        this.selected = false;
+
+        if (this.filterSettings.setIds.indexOf(this.set.id) > -1) {
+            this.selected = true;
+        }
+
         this.sortSetPosition();
+
         this.editModus = this.tuneBookService.isEditModus();
         this.modusActionSubscription = this.tuneBookService.modusActionObservable.subscribe(
             (action) => {

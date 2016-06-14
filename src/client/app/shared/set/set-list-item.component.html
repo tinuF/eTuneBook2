@@ -1,7 +1,7 @@
 <div class="card col-lg-4">
     <div class="card-block">
         <label class="c-input c-checkbox" *ngIf="showFilterCheckbox">
-            <input type="checkbox" (change)="toggleSetSelection($event)">
+            <input type="checkbox" [checked]="selected" (change)="toggleSetSelection($event)">
             <span class="c-indicator"></span>
         </label>
         <small class="text-muted">Set {{set.id}}</small>

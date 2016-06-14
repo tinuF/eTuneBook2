@@ -16,16 +16,21 @@ export class SetListMenuComponent implements OnInit {
     filterSettings: FilterSettings;
     playlists: Array<Playlist>;
     selectedPlaylist: Playlist;
+    applySetIds: boolean;
 
     constructor(public tuneBookService: TuneBookService) {
-        console.log('set-list-menu:constructor called');
+        //console.log('set-list-menu:constructor called');
     }
 
     ngOnInit() {
         this.filterSettings = this.tuneBookService.getCurrentFilterSettings();
+        this.applySetIds = this.filterSettings.applySetIds;
+
         this.playlists = this.tuneBookService.getPlaylists();
         //Sets sind bereits mit SetId aufsteigend sortiert
         this.sorting = 'idAsc';
+        //console.log('set-list-menu:ngOnInit called');
+
     }
 
     sortPlaydate() {
@@ -74,6 +79,7 @@ export class SetListMenuComponent implements OnInit {
     filterSets() {
         this.filterSettings.toggleSetIdFilter();
         this.tuneBookService.applyFilter();
+        this.applySetIds = !this.applySetIds;
     }
 
     setSelectedPlaylistId(playlist: Playlist) {
