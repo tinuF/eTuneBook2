@@ -6,7 +6,7 @@
 
     </div>
     <div class="card-block">
-        <iframe class="youtube-player" type="text/html" src="{{videoUrl}}" frameborder="0"></iframe>
+        <iframe class="youtube-player" type="text/html" [src]="videoUrl" frameborder="0"></iframe>
         <small  *ngIf="!editModus">{{video.description}}</small>
     </div>
     <div class="card-footer" *ngIf="editModus">

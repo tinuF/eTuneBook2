@@ -1,5 +1,5 @@
 import { BookComponent } from './book.component';
 
 export const BookRoutes = [
-  { path: '/book', component: BookComponent, index: true },
+  { path: '/book', component: BookComponent, terminal: true },
 ];
