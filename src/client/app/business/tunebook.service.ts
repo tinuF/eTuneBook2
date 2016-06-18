@@ -118,6 +118,14 @@ export class TuneBookService {
         this.broadCastModusAction(ACTION.CHANGE_NUMBER_OF_BARS_OF_PLAYLIST_DOTS);
     }
 
+    isRendering() {
+        this.broadCastModusAction(ACTION.IS_RENDERING);
+    }
+
+    isRendered() {
+        this.broadCastModusAction(ACTION.IS_RENDERED);
+    }
+
     initializeFilter() {
         if (this.filterSettings == null) {
             this.filterSettings = new FilterSettings();

@@ -30,11 +30,11 @@ export class TuneListComponent implements OnInit, OnDestroy, AfterViewInit {
         // we need to detach the change detector initially, to prevent a
         // 'changed after checked' error.
 
-        //TODO: Spinner-Logik läuft auf eine Exception
-        //Aktueller Zone-Bug: https://github.com/angular/angular/issues/7721
-
         //this.cdr.detach();
-        //this.isRendering = true;
+        this.isRendering = true;
+        // this.tuneBookService.isRendering() wird gebraucht, damit auf dieser Stufe cdr.detach() nicht nötig
+        // warum ist unklar
+        this.tuneBookService.isRendering();
         this.tunes = this.tuneBookService.getTunesFiltered();
 
         this.filterActionSubscription = this.tuneBookService.filterActionObservable.subscribe(
@@ -96,8 +96,9 @@ export class TuneListComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     ngAfterViewInit() {
-        //this.isRendering = false;
+        this.isRendering = false;
         //setTimeout(() => this.cdr.reattach());
+        this.tuneBookService.isRendered();
         console.log('tune-list:ngAfterViewInit called');
     }
 

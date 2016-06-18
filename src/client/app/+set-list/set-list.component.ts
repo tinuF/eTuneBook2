@@ -1,8 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 
 import { Subscription } from 'rxjs/Subscription';
 
 import { TuneBookService, TuneSet, ACTION } from '../business/index';
+import { SpinnerComponent } from '../shared/nav/spinner.component';
 import { SetListItemComponent } from '../shared/set/set-list-item.component';
 import { SetListMenuComponent } from './menu/set-list-menu.component';
 
@@ -10,12 +11,13 @@ import { SetListMenuComponent } from './menu/set-list-menu.component';
     moduleId: module.id,
     selector: 'etb-set-list',
     templateUrl: 'set-list.component.html',
-    directives: [SetListItemComponent, SetListMenuComponent],
+    directives: [SetListItemComponent, SetListMenuComponent, SpinnerComponent],
     styleUrls: ['set-list.component.css']
 })
-export class SetListComponent implements OnInit, OnDestroy {
+export class SetListComponent implements OnInit, AfterViewInit, OnDestroy {
     sets: Array<TuneSet>;
     filterActionSubscription: Subscription;
+    isRendering: boolean;
 
     constructor(public tuneBookService: TuneBookService) {
         //console.log('set-list:constructor called');
@@ -25,11 +27,11 @@ export class SetListComponent implements OnInit, OnDestroy {
         // we need to detach the change detector initially, to prevent a
         // 'changed after checked' error.
 
-        //TODO: Spinner-Logik läuft auf eine Exception
-        //Aktueller Zone-Bug: https://github.com/angular/angular/issues/7721
-
         //this.cdr.detach();
-        //this.isRendering = true;
+        this.isRendering = true;
+        // this.tuneBookService.isRendering() wird gebraucht, damit auf dieser Stufe cdr.detach() nicht nötig
+        // warum ist unklar
+        this.tuneBookService.isRendering();
         this.sets = this.tuneBookService.getTuneSetsFiltered();
 
         this.filterActionSubscription = this.tuneBookService.filterActionObservable.subscribe(
@@ -42,6 +44,13 @@ export class SetListComponent implements OnInit, OnDestroy {
         //console.log('set-list:ngOnInit called');
     }
 
+    ngAfterViewInit() {
+        this.isRendering = false;
+        //setTimeout(() => this.cdr.reattach());
+        this.tuneBookService.isRendered();
+        console.log('set-list:ngAfterViewInit called');
+    }
+    
     ngOnDestroy() {
         this.filterActionSubscription.unsubscribe();
     }

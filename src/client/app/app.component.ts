@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Router, ROUTER_DIRECTIVES } from '@angular/router';
 
-import { TuneBookService, TuneBook, Playlist, TuneSet, FilterSettings} from './business/index';
-import { FilterTextComponent, SideNavigationComponent, SocialNavigationComponent, BookTitleComponent } from './shared/index';
+import { Subscription } from 'rxjs/Subscription';
+
+import { TuneBookService, TuneBook, Playlist, TuneSet, FilterSettings, ACTION} from './business/index';
+import { FilterTextComponent, SideNavigationComponent, SocialNavigationComponent,
+    BookTitleComponent, SpinnerComponent } from './shared/index';
 
 @Component({
     moduleId: module.id,
@@ -11,13 +14,15 @@ import { FilterTextComponent, SideNavigationComponent, SocialNavigationComponent
     templateUrl: 'app.component.html',
     styleUrls: ['app.component.css'],
     directives: [ROUTER_DIRECTIVES, FilterTextComponent, BookTitleComponent,
-        SideNavigationComponent, SocialNavigationComponent]
+        SideNavigationComponent, SocialNavigationComponent, SpinnerComponent]
 })
 export class AppComponent implements OnInit {
     tuneBook: TuneBook;
     filterSettings: FilterSettings;
+    modusActionSubscription: Subscription;
+    isRendering: boolean;
 
-    constructor(public tuneBookService: TuneBookService, public router: Router) {
+    constructor(public tuneBookService: TuneBookService, public router: Router, private cdr: ChangeDetectorRef) {
 
     }
 
@@ -28,8 +33,25 @@ export class AppComponent implements OnInit {
         if (this.tuneBook === null) {
             // Init TuneBook
             this.tuneBook = this.tuneBookService.initializeTuneBook();
-            this.router.navigate(['/welcome']);
         }
+
+        // this.isRendering macht nichts auf Ebene app
+        // wenn diese Stelle jedoch entfernt wird, dann funktioniert der spinner nicht mehr.
+        // warum ist unklar
+        this.isRendering = true;
+        this.modusActionSubscription = this.tuneBookService.modusActionObservable.subscribe(
+            (action) => {
+                console.log('app:modusActionSubscription called: ' + action);
+
+                if (action === ACTION.IS_RENDERING) {
+
+                    this.isRendering = true;
+                    this.cdr.detach();
+                } else if (action === ACTION.IS_RENDERED) {
+                    this.isRendering = false;
+                    setTimeout(() => this.cdr.reattach());
+                }
+            });
     }
 
     loadBxplTuneBook() {
@@ -92,17 +114,17 @@ export class AppComponent implements OnInit {
 
     initializeTuneBook() {
         this.tuneBook = this.tuneBookService.initializeTuneBook();
-        this.router.navigate(['/tunes', this.tuneBook.tuneSets[0].tuneSetPositions[0].tune.id, 'abc' ]);
+        this.router.navigate(['/tunes', this.tuneBook.tuneSets[0].tuneSetPositions[0].tune.id, 'abc']);
     }
 
     newTune() {
         let newTuneSet: TuneSet = this.tuneBookService.initializeTuneAndTuneSet();
-        this.router.navigate(['/tunes', newTuneSet.tuneSetPositions[0].tune.id, 'abc' ]);
+        this.router.navigate(['/tunes', newTuneSet.tuneSetPositions[0].tune.id, 'abc']);
     }
 
     newPlaylist() {
         let newPlaylist: Playlist = this.tuneBookService.addEmptyPlaylist();
-        this.router.navigate(['/playlist', newPlaylist.id ]);
+        this.router.navigate(['/playlist', newPlaylist.id]);
     }
 
     exportTuneBook() {

@@ -15,5 +15,7 @@ export const ACTION = {
     'APPLY_FILTER':'applyFilter',
     'TOGGLE_EDIT_MODUS':'toggleEditModus',
     'TOGGLE_SHOW_PLAYLIST_DOTS':'toggleShowPlaylistDots',
-    'CHANGE_NUMBER_OF_BARS_OF_PLAYLIST_DOTS':'changeNumberOfBarsOfPlaylistDots'
+    'CHANGE_NUMBER_OF_BARS_OF_PLAYLIST_DOTS':'changeNumberOfBarsOfPlaylistDots',
+    'IS_RENDERING':'isRendering',
+    'IS_RENDERED':'isRendered'
 };

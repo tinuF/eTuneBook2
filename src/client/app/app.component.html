@@ -64,7 +64,13 @@
     <div class="row">
         <etb-side-nav></etb-side-nav>
         <etb-social-nav></etb-social-nav>
-
+        <!--
+        <div *ngIf="isRendering">router loading...</div>
+        
+        -->
+        <!--
+        <etb-spinner [isRunning]="isRendering"></etb-spinner>
+        -->
         <router-outlet></router-outlet>
 
     </div>

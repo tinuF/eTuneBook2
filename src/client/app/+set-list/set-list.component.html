@@ -1,9 +1,11 @@
-<div class="row">
-	<div class="col-xs-1 ">
-		<etb-set-list-menu [sets]="sets"></etb-set-list-menu>
+<div [ngSwitch]="isRendering">
+	<div *ngSwitchCase="false" class="row">
+		<div class="col-xs-1 ">
+			<etb-set-list-menu [sets]="sets"></etb-set-list-menu>
+		</div>
+		<div class="col-xs-11">
+			<etb-set-list-item [set]="set" [showFilterCheckbox]="true" *ngFor="let set of sets"></etb-set-list-item>
+		</div>
 	</div>
-	<div class="col-xs-11">
-		<etb-set-list-item [set]="set" [showFilterCheckbox]="true" *ngFor="let set of sets"></etb-set-list-item>
-	</div>
+	<etb-spinner *ngSwitchCase="true" [isRunning]="isRendering"></etb-spinner>
 </div>
-
