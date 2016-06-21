@@ -31,7 +31,7 @@ export class PlayListPositionCopierComponent implements OnInit {
         this.tuneBookService.copyPlaylistPositionToOtherPlaylist(this.playlistPosition.playlistId,
             this.playlistPosition.position, this.selectedPlaylist.id);
         this.tuneBookService.storeTuneBookAbc();
-        this.router.navigate(['/Playlist', { id: this.selectedPlaylist.id }]);
+        this.router.navigate(['/playlist', this.selectedPlaylist.id ]);
     };
 }
 

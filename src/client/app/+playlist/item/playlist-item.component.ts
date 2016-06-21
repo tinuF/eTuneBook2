@@ -17,7 +17,7 @@ import { PlayListItemSetPositionComponent } from './set-position/playlist-item-s
 })
 export class PlayListItemComponent implements OnInit, OnDestroy {
     @Input() playlistPosition: PlaylistPosition;
-    @Output() copyPlaylistPosition: EventEmitter<PlaylistPosition> = new EventEmitter();
+    @Output() copyPlaylistPosition: EventEmitter<any> = new EventEmitter();
     @ViewChild('inputPlaylistPositionName') inputPlaylistPositionName: ElementRef;
     editModus: boolean;
     modusActionSubscription: Subscription;
@@ -93,7 +93,7 @@ export class PlayListItemComponent implements OnInit, OnDestroy {
     }
 
     sendPlaylistPositionToCopier() {
-        //this.copyPlaylistPosition.next(this.playlistPosition);
+        this.copyPlaylistPosition.next(this.playlistPosition);
     }
 
     deletePlaylistPosition() {
