@@ -1,8 +1,9 @@
 import { APP_BASE_HREF } from '@angular/common';
-import { enableProdMode, provide } from '@angular/core';
+import { enableProdMode, provide, SystemJsComponentResolver, ComponentResolver } from '@angular/core';
 import { bootstrap } from '@angular/platform-browser-dynamic';
 import { APP_ROUTER_PROVIDERS } from './app.routes';
 import { HTTP_PROVIDERS } from '@angular/http';
+import {RuntimeCompiler} from '@angular/compiler'
 
 import { AppComponent } from './app.component';
 
@@ -10,6 +11,11 @@ if ('<%= ENV %>' === 'prod') { enableProdMode(); }
 
 bootstrap(AppComponent, [
   APP_ROUTER_PROVIDERS,
+  {
+    provide: ComponentResolver,
+    useFactory: (r) => new SystemJsComponentResolver(r),
+    deps: [RuntimeCompiler]
+  },
   HTTP_PROVIDERS,
   provide(APP_BASE_HREF, { useValue: '<%= APP_BASE %>' })
 ]);
