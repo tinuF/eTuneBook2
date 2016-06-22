@@ -10,7 +10,7 @@ export const HelpRoutes = [
   //{ path: '/credits', component: CreditsComponent, terminal: true },
   //{ path: '/feedback', component: FeedbackComponent, terminal: true },
   //lazy loading
-  { path: '/', component: '../app/+help/welcome.component#WelcomeComponent', terminal: true },
+  { path: '', component: '../app/+help/welcome.component#WelcomeComponent', terminal: true },
   { path: 'welcome', component: '../app/+help/welcome.component#WelcomeComponent', terminal: true },
   { path: 'changelog', component: '../app/+help/changelog.component#ChangeLogComponent', terminal: true },
   { path: 'credits', component: '../app/+help/credits.component#CreditsComponent', terminal: true },
