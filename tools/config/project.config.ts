@@ -16,8 +16,6 @@ export class ProjectConfig extends SeedConfig {
         super();
         this.APP_TITLE = 'eTuneBook';
         let additional_deps: InjectableDependency[] = [
-            // {src: 'jquery/dist/jquery.min.js', inject: 'libs'},
-            // {src: 'lodash/lodash.min.js', inject: 'libs'},
             { src: 'bootstrap/dist/css/bootstrap.min.css', inject: true },
             { src: 'mdi/css/materialdesignicons.min.css', inject: true },
             { src: 'mdi/fonts/materialdesignicons-webfont.eot', inject: this.FONTS_DEST },
@@ -25,9 +23,9 @@ export class ProjectConfig extends SeedConfig {
             { src: 'mdi/fonts/materialdesignicons-webfont.ttf', inject: this.FONTS_DEST },
             { src: 'mdi/fonts/materialdesignicons-webfont.woff', inject: this.FONTS_DEST },
             { src: 'mdi/fonts/materialdesignicons-webfont.woff2', inject: this.FONTS_DEST },
-            { src: 'jquery/dist/jquery.min.js', inject: 'libs' },
+            //{ src: 'jquery/dist/jquery.min.js', inject: 'libs' },
             { src: 'bootstrap/dist/js/bootstrap.min.js', inject: 'libs' },
-            { src: 'moment/min/moment.min.js', inject: 'libs' }
+            //{ src: 'moment/min/moment.min.js', inject: 'libs' }
         ];
 
         const seedDependencies = this.NPM_DEPENDENCIES;
@@ -42,6 +40,12 @@ export class ProjectConfig extends SeedConfig {
 
         // moment
         (<any>this.SYSTEM_CONFIG_DEV.paths)['moment'] = '/node_modules/moment/moment.js';
+
+        // jquery
+        (<any>this.SYSTEM_CONFIG_DEV.paths)['jquery'] = '/node_modules/jquery/dist/jquery.min.js';
+
+        // abcjs
+        //(<any>this.SYSTEM_CONFIG_DEV.paths)['ABCJS'] = '/src/client/assets/abcjs_editor_2.3-min.js';
 
     }
 }
