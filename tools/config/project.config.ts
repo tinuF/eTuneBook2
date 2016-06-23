@@ -31,14 +31,17 @@ export class ProjectConfig extends SeedConfig {
         ];
 
         const seedDependencies = this.NPM_DEPENDENCIES;
-
         this.NPM_DEPENDENCIES = seedDependencies.concat(additional_deps);
 
-        this.APP_ASSETS = [
-            // {src: `${this.ASSETS_SRC}/css/toastr.min.css`, inject: true},
-            // {src: `${this.APP_DEST}/assets/scss/global.css`, inject: true},
-            { src: `${this.ASSETS_SRC}/abcjs_editor_2.3-min.js`, vendor: true, inject: true }
+        let additional_assets: InjectableDependency[] = [
+            { src: `${this.ASSETS_SRC}/abcjs_editor_2.3-min.js`, vendor: true, inject: 'libs' }
         ];
+
+        const seedAssets = this.APP_ASSETS;
+        this.APP_ASSETS = seedAssets.concat(additional_assets);
+
+        // moment
+        (<any>this.SYSTEM_CONFIG_DEV.paths)['moment'] = '/node_modules/moment/moment.js';
 
     }
 }
