@@ -23,7 +23,8 @@ export class ProjectConfig extends SeedConfig {
             { src: 'mdi/fonts/materialdesignicons-webfont.ttf', inject: this.FONTS_DEST },
             { src: 'mdi/fonts/materialdesignicons-webfont.woff', inject: this.FONTS_DEST },
             { src: 'mdi/fonts/materialdesignicons-webfont.woff2', inject: this.FONTS_DEST },
-            //{ src: 'jquery/dist/jquery.min.js', inject: 'libs' },
+            //jquery is needed by bootstrap (dropdown) -> must be injected
+            { src: 'jquery/dist/jquery.min.js', inject: 'libs' },
             { src: 'bootstrap/dist/js/bootstrap.min.js', inject: 'libs' },
             //{ src: 'moment/min/moment.min.js', inject: 'libs' }
         ];
@@ -38,14 +39,14 @@ export class ProjectConfig extends SeedConfig {
         const seedAssets = this.APP_ASSETS;
         this.APP_ASSETS = seedAssets.concat(additional_assets);
 
-        // moment
+        // moment in import statements
         (<any>this.SYSTEM_CONFIG_DEV.paths)['moment'] = '/node_modules/moment/moment.js';
 
-        // jquery
+        // jquery in import statements
         (<any>this.SYSTEM_CONFIG_DEV.paths)['jquery'] = '/node_modules/jquery/dist/jquery.min.js';
 
         // abcjs
-        //(<any>this.SYSTEM_CONFIG_DEV.paths)['ABCJS'] = '/src/client/assets/abcjs_editor_2.3-min.js';
+        //(<any>this.SYSTEM_CONFIG_DEV.paths)['abcjs'] = '/src/client/assets/abcjs_editor_2.3-min.js';
 
     }
 }
