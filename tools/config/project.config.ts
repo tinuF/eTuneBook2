@@ -1,7 +1,6 @@
 import { join } from 'path';
 
 import { SeedConfig } from './seed.config';
-import { InjectableDependency } from './seed.config.interfaces';
 
 /**
  * This class extends the basic seed configuration, allowing for project specific overrides. A few examples can be found
@@ -15,7 +14,8 @@ export class ProjectConfig extends SeedConfig {
     constructor() {
         super();
         this.APP_TITLE = 'eTuneBook';
-        let additional_deps: InjectableDependency[] = [
+        this.NPM_DEPENDENCIES = [
+            ...this.NPM_DEPENDENCIES,
             { src: 'bootstrap/dist/css/bootstrap.min.css', inject: true },
             { src: 'mdi/css/materialdesignicons.min.css', inject: true },
             { src: 'mdi/fonts/materialdesignicons-webfont.eot', inject: this.FONTS_DEST },
@@ -29,16 +29,14 @@ export class ProjectConfig extends SeedConfig {
             //{ src: 'moment/min/moment.min.js', inject: 'libs' }
         ];
 
-        const seedDependencies = this.NPM_DEPENDENCIES;
-        this.NPM_DEPENDENCIES = seedDependencies.concat(additional_deps);
-
-        let additional_assets: InjectableDependency[] = [
-            { src: `${this.ASSETS_SRC}/abcjs_editor_2.3-min.js`, vendor: true, inject: 'libs' }
-        ];
-
-        const seedAssets = this.APP_ASSETS;
-        this.APP_ASSETS = seedAssets.concat(additional_assets);
-
+        /*
+                let additional_assets: InjectableDependency[] = [
+                    { src: `${this.ASSETS_SRC}/abcjs_editor_2.3-min.js`, vendor: true, inject: 'libs' }
+                ];
+        
+                const seedAssets = this.APP_ASSETS;
+                this.APP_ASSETS = seedAssets.concat(additional_assets);
+        */
         // moment in import statements
         (<any>this.SYSTEM_CONFIG_DEV.paths)['moment'] = '/node_modules/moment/moment.js';
 

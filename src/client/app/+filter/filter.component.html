@@ -17,7 +17,7 @@
                         <label class="control-label" for="typeFilter">Type</label>
 
                         <div class="col-lg-5">
-                            <select class="form-control" id="typeFilter" [(ngModel)]="type" ngControl="type" (change)="setType($event)">
+                            <select class="form-control" id="typeFilter" [(ngModel)]="type" name="type" (change)="setType($event)">
                                 <option *ngFor="let t of types" [value]="t">{{t}}</option>
                             </select>
                         </div>
@@ -28,7 +28,7 @@
                         <label class="control-label" for="keyFilter">Key</label>
 
                         <div class="col-lg-5">
-                            <select class="form-control" id="keyFilter" [(ngModel)]="key" ngControl="key" (change)="setKey($event)">
+                            <select class="form-control" id="keyFilter" [(ngModel)]="key" name="key" (change)="setKey($event)">
                                 <option *ngFor="let k of keys" [value]="k">{{k}}</option>
                             </select>
                         </div>
@@ -37,7 +37,7 @@
                     <div class="form-group">
                         <label class="control-label" for="colorFilter">Color</label>
                         <div class="col-lg-5">
-                            <select class="form-control" id="colorFilter" [style.background-color]="color" [(ngModel)]="color" ngControl="color" (change)="setColor($event)">
+                            <select class="form-control" id="colorFilter" [style.background-color]="color" [(ngModel)]="color" name="color" (change)="setColor($event)">
                                 <option *ngFor="let c of colors" [value]="c">{{c}}</option>
                             </select>
                         </div>
@@ -46,7 +46,7 @@
                     <div class="form-group">
                         <label class="control-label" for="eventFilter">Event</label>
                         <div class="col-lg-5">
-                            <select class="form-control" id="eventFilter" [(ngModel)]="event" ngControl="event" (change)="setEvent($event)">
+                            <select class="form-control" id="eventFilter" [(ngModel)]="event" name="event" (change)="setEvent($event)">
                                 <option *ngFor="let e of events" [value]="e">{{e}}</option>
                             </select>
                         </div>
@@ -55,7 +55,7 @@
                     <div class="form-group">
                         <label class="control-label" for="bandFilter">Band</label>
                         <div class="col-lg-5">
-                            <select class="form-control" id="bandFilter" [(ngModel)]="band" ngControl="band" (change)="setBand($event)">
+                            <select class="form-control" id="bandFilter" [(ngModel)]="band" name="band" (change)="setBand($event)">
                                 <option *ngFor="let b of bands" [value]="b">{{b}}</option>
                             </select>
                         </div>
