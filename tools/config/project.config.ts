@@ -27,6 +27,7 @@ export class ProjectConfig extends SeedConfig {
             { src: 'jquery/dist/jquery.min.js', inject: 'libs' },
             { src: 'bootstrap/dist/js/bootstrap.min.js', inject: 'libs' },
             //{ src: 'moment/min/moment.min.js', inject: 'libs' }
+            { src: `${this.PROJECT_ROOT}/${this.APP_DEST}/lib/abcjs_editor_2.3-min.js`, inject: 'libs' }
         ];
 
         /*
@@ -44,7 +45,7 @@ export class ProjectConfig extends SeedConfig {
         (<any>this.SYSTEM_CONFIG_DEV.paths)['jquery'] = '/node_modules/jquery/dist/jquery.min.js';
 
         // abcjs
-        //(<any>this.SYSTEM_CONFIG_DEV.paths)['abcjs'] = '/src/client/assets/abcjs_editor_2.3-min.js';
+        //(<any>this.SYSTEM_CONFIG_DEV.paths)['abcjs'] = `${this.PROJECT_ROOT}/${this.APP_DEST}/lib/abcjs_editor_2.3-min.js`;
 
     }
 }
