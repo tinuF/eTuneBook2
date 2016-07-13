@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <base href="<%= APP_BASE %>">
-  <title><%= APP_TITLE %></title>
+  <title>
+    <%= APP_TITLE %>
+  </title>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -35,14 +38,21 @@
     -->
 
   <link href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en"
-  rel="stylesheet">
+    rel="stylesheet">
 
   <!-- inject:css -->
   <!-- endinject -->
-  
+
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
-  <!--<script src="lib/abcjs_editor_2.3-min.js"></script>-->
-  
+  <script src="lib/abcjs_editor_2.3-min.js"></script>
+  <!--
+  <script>
+  System.registerDynamic('ABCJS', [], false, function(require, exports, module) {
+    module.exports = window.ABCJS;
+  });
+  </script>
+  -->
+
   <style>
     body {
       padding-top: 60px;
@@ -56,38 +66,39 @@
 <body>
 
   <etb-app>Loading...</etb-app>
-  
+
   <script>
   // Fixes undefined module function in SystemJS bundle
   function module() {}
   </script>
-  
+
   <!-- shims:js -->
   <!-- endinject -->
 
   <% if (ENV === 'dev') { %>
-  <script>
+    <script>
     System.config(<%=
       JSON.stringify(SYSTEM_CONFIG, null, 2)
     %>)
   </script>
-  <% } %>
+    <% } %>
 
-  <!-- libs:js -->
-  <!-- endinject -->
-  
-  <!-- inject:js -->
-  <!-- endinject -->
-  
-  <% if (ENV === 'dev') { %>
-  <script>
+      <!-- libs:js -->
+      <!-- endinject -->
+
+      <!-- inject:js -->
+      <!-- endinject -->
+
+      <% if (ENV === 'dev') { %>
+        <script>
   System.import('<%= BOOTSTRAP_MODULE %>')
     .catch(function (e) {
       console.error(e,
         'Report this error at https://github.com/mgechev/angular2-seed/issues');
     });
   </script>
-  <% } %>
-  
+        <% } %>
+
 </body>
+
 </html>

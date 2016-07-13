@@ -1,11 +1,10 @@
-//import { PlaylistListComponent } from './playlist-list.component';
+import { PlaylistListComponent } from './playlist-list.component';
 
 export const PlaylistListRoutes = [
-  //{ path: '/playlists', component: PlaylistListComponent, terminal: true }
-  //lazy loading
   {
     path: 'playlists',
-    component: '../app/+playlist-list/playlist-list.component#PlaylistListComponent',
+    //component: '../app/+playlist-list/playlist-list.component#PlaylistListComponent',
+    component: PlaylistListComponent,
     terminal: true
   }
 ];

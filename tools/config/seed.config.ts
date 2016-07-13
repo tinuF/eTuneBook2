@@ -309,7 +309,7 @@ export class SeedConfig {
       '*': `node_modules/*`
     },
     packages: {
-      rxjs: { defaultExtension: false }
+      rxjs: { defaultExtension: 'js' }
     }
   };
 
@@ -387,6 +387,13 @@ export class SeedConfig {
     'ios >= 7',
     'android >= 4.4',
     'bb >= 10'
+  ];
+
+  /**
+   * White list for CSS color guard
+   * @type {[string, string][]}
+   */
+  COLOR_GUARD_WHITE_LIST: [string, string][] = [
   ];
 
   /**

@@ -1,6 +1,6 @@
 {
   "name": "eTuneBook2",
-  "version": "0.1.9",
+  "version": "0.2.0",
   "description": "eTuneBook 2",
   "repository": "https://github.com/tinuF/eTuneBook2",
   "scripts": {
@@ -38,6 +38,7 @@
     "browser-sync": "^2.11.2",
     "codelyzer": "0.0.20",
     "colorguard": "^1.1.1",
+    "compression": "^1.6.2",
     "connect": "^3.4.1",
     "connect-history-api-fallback": "^1.2.0",
     "connect-livereload": "^0.5.3",
