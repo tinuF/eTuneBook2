@@ -14,24 +14,27 @@ export class ProjectConfig extends SeedConfig {
     constructor() {
         super();
         this.APP_TITLE = 'eTuneBook';
+        /*
         this.NPM_DEPENDENCIES = [
             ...this.NPM_DEPENDENCIES,
-            { src: 'bootstrap/dist/css/bootstrap.min.css', inject: true },
-            { src: 'mdi/css/materialdesignicons.min.css', inject: true },
-            { src: 'mdi/fonts/materialdesignicons-webfont.eot', inject: this.FONTS_DEST },
-            { src: 'mdi/fonts/materialdesignicons-webfont.svg', inject: this.FONTS_DEST },
-            { src: 'mdi/fonts/materialdesignicons-webfont.ttf', inject: this.FONTS_DEST },
-            { src: 'mdi/fonts/materialdesignicons-webfont.woff', inject: this.FONTS_DEST },
-            { src: 'mdi/fonts/materialdesignicons-webfont.woff2', inject: this.FONTS_DEST },
+            //{ src: 'bootstrap/dist/css/bootstrap.min.css', inject: true },
+            //{ src: 'mdi/css/materialdesignicons.min.css', inject: true },
+            //{ src: 'mdi/fonts/materialdesignicons-webfont.eot', inject: this.FONTS_DEST },
+            //{ src: 'mdi/fonts/materialdesignicons-webfont.svg', inject: this.FONTS_DEST },
+            //{ src: 'mdi/fonts/materialdesignicons-webfont.ttf', inject: this.FONTS_DEST },
+            //{ src: 'mdi/fonts/materialdesignicons-webfont.woff', inject: this.FONTS_DEST },
+            //{ src: 'mdi/fonts/materialdesignicons-webfont.woff2', inject: this.FONTS_DEST },
             //jquery is needed by bootstrap (dropdown) -> must be injected
-            { src: 'jquery/dist/jquery.min.js', inject: 'libs' },
-            { src: 'bootstrap/dist/js/bootstrap.min.js', inject: 'libs' },
+            //{ src: 'jquery/dist/jquery.min.js', inject: 'libs' },
+            //{ src: 'bootstrap/dist/js/bootstrap.min.js', inject: 'libs' },
             //{ src: 'moment/min/moment.min.js', inject: 'libs' }
             // Nicht nötig für abcjs. abcjs wird via <script> in index.html gelesen
             //{ src: `${this.PROJECT_ROOT}/${this.APP_DEST}/lib/abcjs_editor_2.3-min.js`, inject: 'libs' }
         ];
+        */
 
-        // Nicht nötig für abcjs. abcjs wird via <script> in index.html gelesen
+        // Nicht nötig für abcjs. abcjs wird via <script> hard-codiert in index.html gelesen und
+        // im Build (durch build.assets.dev resp. build.assets.prod) zusammen mit dem lib-Verzeichnis in die dist-Umgebung kopiert.
         // Add `local` third-party libraries to be injected/bundled.
         //this.APP_ASSETS = [
         //  ...this.APP_ASSETS,
