@@ -1,6 +1,6 @@
 {
   "name": "eTuneBook2",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "eTuneBook 2",
   "repository": "https://github.com/tinuF/eTuneBook2",
   "scripts": {
@@ -33,6 +33,7 @@
   "author": "Martin Fleischmann <tinuF>",
   "license": "MIT",
   "devDependencies": {
+    "angular2-service-worker": "0.1.13",
     "async": "^1.4.2",
     "autoprefixer": "^6.3.6",
     "browser-sync": "^2.11.2",

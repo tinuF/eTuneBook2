@@ -12,11 +12,13 @@ loadTasks(PROJECT_TASKS_DIR);
 // --------------
 // Build dev.
 gulp.task('build.dev', (done: any) =>
-  runSequence('clean.dev',
+  runSequence(//'clean.dev',
 //              'tslint',
 //              'css-lint',
               'build.assets.dev',
-              'copy.npm-deps',
+              'copy.npm-js-deps',
+              'copy.npm-css-deps',
+              'copy.npm-fonts-deps',
               'build.html_css',
               'build.js.dev',
               'build.index.dev',
@@ -46,13 +48,16 @@ gulp.task('build.prod', (done: any) =>
 //              'tslint',
 //              'css-lint',
               'build.assets.prod',
-              'copy.npm-deps',
+              'copy.npm-js-deps',
+              'copy.npm-css-deps',
+              'copy.npm-fonts-deps',
               'build.html_css',
               'copy.js.prod',
               'build.js.prod',
               'build.bundles',
               'build.bundles.app',
               'build.index.prod',
+              'generate.manifest',
               done));
 
 // --------------

@@ -1,41 +1,54 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, Renderer, ChangeDetectorRef } from '@angular/core';
 
 import * as moment from 'moment';
 
 import { TuneBookService, TuneBook, AbcExportSettings } from '../business/index';
+import { SpinnerComponent } from '../shared/nav/spinner.component';
 
 @Component({
-  moduleId: module.id,
-  selector: 'etb-abc',
-  templateUrl: 'abc.component.html',
-  styleUrls: ['abc.component.css'],
+    moduleId: module.id,
+    selector: 'etb-abc',
+    templateUrl: 'abc.component.html',
+    directives: [SpinnerComponent],
+    styleUrls: ['abc.component.css'],
 })
-export class AbcComponent implements OnInit {
-    @Input() tuneBook: TuneBook;
+export class AbcComponent implements OnInit, AfterViewInit {
+    tuneBook: TuneBook;
+    isRendering: boolean;
+    @ViewChild('saveTuneBookToFile') saveTuneBookToFile: ElementRef;
     abcExportSettings: AbcExportSettings;
     exportedTuneBook: string;
 
-    constructor(public tuneBookService: TuneBookService) {
+    constructor(public tuneBookService: TuneBookService, public renderer: Renderer, private cdr: ChangeDetectorRef) {
 
     }
 
     ngOnInit() {
+        this.isRendering = true;
+        this.tuneBookService.isRendering();
         this.abcExportSettings = this.tuneBookService.getAbcExportSettings();
         this.tuneBook = this.tuneBookService.getCurrentTuneBook();
-        this.exportTuneBook(false);
+        this.exportTuneBook();
+    }
+
+    ngAfterViewInit() {
+        this.isRendering = false;
+        //setTimeout(() => this.cdr.reattach());
+        this.tuneBookService.isRendered();
+        console.log('abc:ngAfterViewInit called');
     }
 
 
-    exportTuneBook(startDownload:boolean) {
+    exportTuneBook() {
         let date = moment(new Date());
         this.tuneBook.version = date.format('YYYY-MM-DDTHH:mm');
         this.exportedTuneBook = this.tuneBookService.writeAbc(this.abcExportSettings);
 
         // Generieren Object URL zum exportierten Tunebook (fuer Backup des Abc-Codes in File)
-        this.saveTuneBookAsFile(this.exportedTuneBook, startDownload);
+        this.saveTuneBookAsFile(this.exportedTuneBook);
     }
 
-    saveTuneBookAsFile(exportedTuneBookAsText:string, startDownload:boolean) {
+    saveTuneBookAsFile(exportedTuneBookAsText: string) {
         //let exportedTuneBookAsBlob = new Blob([exportedTuneBookAsText], {type:'text/plain'});
         //let exportedTuneBookAsBlob = new Blob([exportedTuneBookAsText], {type:'text/plain;charset=ISO-8859-1'});
         //let exportedTuneBookAsBlob = new Blob([exportedTuneBookAsText], {encoding:'UTF-8', type:'text/plain;charset=UTF-8'});
@@ -46,16 +59,11 @@ export class AbcComponent implements OnInit {
 
         let fileNameToSaveAs = 'My TuneBook';
 
-        let downloadLink = <HTMLLinkElement>document.getElementById('saveTuneBookToFile');
-        downloadLink.href = this.createObjectURL(exportedTuneBookAsBlob);
-        downloadLink.title = fileNameToSaveAs;
-
-        if (startDownload) {
-            downloadLink.click();
-        }
+        this.renderer.setElementProperty(this.saveTuneBookToFile.nativeElement, 'href', this.createObjectURL(exportedTuneBookAsBlob));
+        this.renderer.setElementProperty(this.saveTuneBookToFile.nativeElement, 'title', fileNameToSaveAs);
     }
 
-    createObjectURL(file:any) {
+    createObjectURL(file: any) {
         if (window.URL && window.URL.createObjectURL) {
             return window.URL.createObjectURL(file);
         } else {
@@ -65,42 +73,41 @@ export class AbcComponent implements OnInit {
 
     toggleFingeringAbc() {
         this.abcExportSettings.fingering = !this.abcExportSettings.fingering;
-        this.exportTuneBook(false);
+        this.exportTuneBook();
     };
 
     toggleTuneSetAbc() {
         this.abcExportSettings.tuneSet = !this.abcExportSettings.tuneSet;
-        this.exportTuneBook(false);
+        this.exportTuneBook();
     };
 
     togglePlaylistAbc() {
         this.abcExportSettings.playlist = !this.abcExportSettings.playlist;
-        this.exportTuneBook(false);
+        this.exportTuneBook();
     };
 
     togglePlayDateAbc() {
         this.abcExportSettings.playDate = !this.abcExportSettings.playDate;
-        this.exportTuneBook(false);
+        this.exportTuneBook();
     };
 
     toggleColorAbc() {
         this.abcExportSettings.color = !this.abcExportSettings.color;
-        this.exportTuneBook(false);
+        this.exportTuneBook();
     };
-    
+
     toggleAnnotationAbc() {
         this.abcExportSettings.annotation = !this.abcExportSettings.annotation;
-        this.exportTuneBook(false);
+        this.exportTuneBook();
     };
 
     toggleSiteAbc() {
         this.abcExportSettings.website = !this.abcExportSettings.website;
-        this.exportTuneBook(false);
+        this.exportTuneBook();
     };
 
     toggleTubeAbc() {
         this.abcExportSettings.video = !this.abcExportSettings.video;
-        this.exportTuneBook(false);
+        this.exportTuneBook();
     }
-
 }

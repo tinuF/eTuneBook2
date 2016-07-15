@@ -1,5 +1,9 @@
 <!DOCTYPE html>
+<% if (ENV === 'dev') { %>
 <html lang="en">
+<% } else if (ENV === 'prod') { %>
+<html lang="en" manifest="manifest.appcache">
+<% } %>
 
 <head>
   <base href="<%= APP_BASE %>">
@@ -50,7 +54,7 @@
   <!-- endinject -->
 
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
-  <script src="lib/jquery.min.js"></script>
+  <script src="lib/js/jquery.min.js"></script>
   <script src="lib/abcjs_editor_2.3-min.js"></script>
   <script src="lib/js/bootstrap.min.js"></script>
   <!--

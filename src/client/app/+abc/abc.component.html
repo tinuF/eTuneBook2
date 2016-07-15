@@ -3,8 +3,7 @@
     <div class="col-sm-11">
         <div class="card col-sm-10">
             <div class="card-block">
-                <a class='btn btn-secondary btn-sm' id="saveTuneBookToFile" href="" title="Export to Local File System">Export to Local Drive</a>
-              
+                <a class='btn btn-secondary btn-sm' #saveTuneBookToFile id="saveTuneBookToFile" download='My TuneBook' href="" title="Export to File System">Export</a>
             </div>
             <div class="card-block">
                 <label class="abc-toggle">
@@ -41,7 +40,10 @@
                 </label>
             </div>
             <div class="card-block">
-                <pre id="tuneBookExported">{{exportedTuneBook}}</pre>
+                <div [ngSwitch]="isRendering">
+                    <pre id="tuneBookExported" *ngSwitchCase="false">{{exportedTuneBook}}</pre>
+                    <etb-spinner *ngSwitchCase="true" [isRunning]="isRendering"></etb-spinner>
+                </div>
             </div>
         </div>
     </div>
