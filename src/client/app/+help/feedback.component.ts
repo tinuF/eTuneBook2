@@ -14,6 +14,6 @@ import { InfoMenuComponent } from '../+help/info-menu.component';
 })
 export class FeedbackComponent {
     constructor() {
-
+        //console.log('feedback:constructor called');
     }
 }

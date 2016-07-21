@@ -14,20 +14,20 @@ export class TuneColorizerComponent {
     constructor(public tuneBookService: TuneBookService) {
     }
 
-    changeRed($event) {
-        this.tune.color.red = parseInt($event.target.value);
+    changeRed(event: Event) {
+        this.tune.color.red = parseInt((<any>event.target).value);
         this.tune.color.convertRGBtoHex();
         this.tuneBookService.storeTuneBookAbc();
     }
 
-    changeGreen($event) {
-        this.tune.color.green = parseInt($event.target.value);
+    changeGreen(event: Event) {
+        this.tune.color.green = parseInt((<any>event.target).value);
         this.tune.color.convertRGBtoHex();
         this.tuneBookService.storeTuneBookAbc();
     }
 
-    changeBlue($event) {
-        this.tune.color.blue = parseInt($event.target.value);
+    changeBlue(event: Event) {
+        this.tune.color.blue = parseInt((<any>event.target).value);
         this.tune.color.convertRGBtoHex();
         this.tuneBookService.storeTuneBookAbc();
     }

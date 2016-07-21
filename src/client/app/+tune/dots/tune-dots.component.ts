@@ -48,7 +48,6 @@ export class TuneDotsComponent implements OnInit, OnChanges, OnDestroy {
         //Render Abc
         setTimeout(() => {
             let output = 'DotsForTune' + this.tune.id;
-            let tunebookString = this.skipFingering(this.tune.pure);
             let parserParams = {};
             let engraverParams = {
                 scale: 1.0,
@@ -61,13 +60,13 @@ export class TuneDotsComponent implements OnInit, OnChanges, OnDestroy {
                 */
                 editable: false,
                 add_classes: true,
-                listener: null
+                listener: <any> null
             };
             let renderParams = {
             };
 
 
-            this.tuneObjectArray = ABCJS.renderAbc(output, tunebookString, parserParams, engraverParams, renderParams);
+            this.tuneObjectArray = ABCJS.renderAbc(output, this.tune.pure, parserParams, engraverParams, renderParams);
 
             //jQuery('.title.meta-top').css('fill', 'red');
             jQuery(this.elementRef.nativeElement).find('.chord').css('font-size', '0.7em');
@@ -77,15 +76,5 @@ export class TuneDotsComponent implements OnInit, OnChanges, OnDestroy {
             jQuery(this.elementRef.nativeElement).find('.meta-bottom').css('font-size', '0.7em');
 
         }, 0);
-    }
-
-    skipFingering(tuneAbc) {
-        //Todo: skipFingering
-        /*
-        if (!$scope.fingeringAbcIncl) {
-            tuneAbc = tuneAbc.replace(eTBk.PATTERN_FINGER, '');
-        }
-        */
-        return tuneAbc;
     }
 }

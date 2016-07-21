@@ -13,7 +13,7 @@ export class TuneListMenuComponent implements OnInit {
     sorting: string;
 
     constructor(public tuneBookService: TuneBookService) {
-        console.log('tune-list-menu:constructor called');
+        //console.log('tune-list-menu:constructor called');
     }
 
     ngOnInit() {

@@ -32,7 +32,7 @@ export class PlaylistTuneDotsComponent implements OnInit, OnDestroy {
                 if (action === ACTION.TOGGLE_SHOW_PLAYLIST_DOTS) {
                     this.toggleDots();
                 } else if (action === ACTION.CHANGE_NUMBER_OF_BARS_OF_PLAYLIST_DOTS) {
-                    this.changeNumberOfBars()
+                    this.changeNumberOfBars();
                 }
             });
     }
@@ -85,7 +85,7 @@ export class PlaylistTuneDotsComponent implements OnInit, OnDestroy {
 
     isRendered(): boolean {
         let rendered = false;
-        if (this.tuneObjectArray != null && this.tuneObjectArray.length > 0) {
+        if (this.tuneObjectArray !== null && this.tuneObjectArray !== undefined && this.tuneObjectArray.length > 0) {
             rendered = true;
         }
         return rendered;
@@ -95,13 +95,12 @@ export class PlaylistTuneDotsComponent implements OnInit, OnDestroy {
         this.numberOfBarsRendered = this.numberOfBars;
         setTimeout(() => {
             let abc: string;
-            if (this.numberOfBars == '*') {
+            if (this.numberOfBars === '*') {
                 abc = this.tune.pure;
             } else {
                 abc = this.tuneBookService.getSampleAbc(this.tune.id, 1, parseInt(this.numberOfBars));
             }
             let output = 'DotsForTune' + this.tune.id;
-            let tunebookString = this.skipFingering(abc);
             let parserParams = {};
             let engraverParams = {
                 scale: 1.0,
@@ -114,14 +113,14 @@ export class PlaylistTuneDotsComponent implements OnInit, OnDestroy {
                 */
                 editable: false,
                 add_classes: true,
-                listener: null
+                listener: <any>null
             };
             let renderParams = {
             };
 
 
 
-            this.tuneObjectArray = ABCJS.renderAbc(output, tunebookString, parserParams, engraverParams, renderParams);
+            this.tuneObjectArray = ABCJS.renderAbc(output, abc, parserParams, engraverParams, renderParams);
 
             jQuery('.meta-top').css('display', 'none');
             jQuery('.meta-bottom').css('display', 'none');
@@ -131,15 +130,5 @@ export class PlaylistTuneDotsComponent implements OnInit, OnDestroy {
             jQuery('text.annotation').css('font-size', '0.6em');
 
         }, 0);
-    }
-
-    skipFingering(tuneAbc) {
-        //Todo: skipFingering
-        /*
-        if (!$scope.fingeringAbcIncl) {
-            tuneAbc = tuneAbc.replace(eTBk.PATTERN_FINGER, '');
-        }
-        */
-        return tuneAbc;
     }
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import  {ROUTER_DIRECTIVES } from '@angular/router';
+import {ROUTER_DIRECTIVES } from '@angular/router';
 
 @Component({
   moduleId: module.id,
@@ -9,6 +9,6 @@ import  {ROUTER_DIRECTIVES } from '@angular/router';
 })
 export class InfoMenuComponent {
   constructor() {
-    
+    //console.log('info-menu:constructor called');
   }
 }

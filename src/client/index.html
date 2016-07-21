@@ -39,31 +39,11 @@
   <meta name="msapplication-TileImage" content="img/ico/ms-icon-144x144.png">
   <meta name="theme-color" content="#ffffff">
 
-
-  <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
-  <!--
-    <link rel="canonical" href="http://www.example.com/">
-    -->
-
-  <link href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en"
-    rel="stylesheet">
   <link href="lib/css/bootstrap.min.css" rel="stylesheet">
   <link href="lib/css/materialdesignicons.min.css" rel="stylesheet">
 
   <!-- inject:css -->
   <!-- endinject -->
-
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
-  <script src="lib/js/jquery.min.js"></script>
-  <script src="lib/abcjs_editor_2.3-min.js"></script>
-  <script src="lib/js/bootstrap.min.js"></script>
-  <!--
-  <script>
-  System.registerDynamic('ABCJS', [], false, function(require, exports, module) {
-    module.exports = window.ABCJS;
-  });
-  </script>
-  -->
 
   <style>
     body {
@@ -76,6 +56,21 @@
 </head>
 
 <body>
+
+  <!-- Achtung: mdi ersetzt font-awesome. font-awesome bringt aber zB. pull-right und pull-left mit
+  nicht in bootstrap. pull-right und pull-left wurde deshalb nach main.css migriert.   
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+  -->
+  <script src="lib/js/jquery.min.js"></script>
+  <script src="lib/abcjs_editor_2.3-min.js"></script>
+  <script src="lib/js/bootstrap.min.js"></script>
+  <!--
+  <script>
+  System.registerDynamic('ABCJS', [], false, function(require, exports, module) {
+    module.exports = window.ABCJS;
+  });
+  </script>
+  -->
 
   <etb-app>Loading...</etb-app>
 
@@ -106,7 +101,7 @@
   System.import('<%= BOOTSTRAP_MODULE %>')
     .catch(function (e) {
       console.error(e,
-        'Report this error at https://github.com/mgechev/angular2-seed/issues');
+        'Report this error at info@etunebook.ch');
     });
   </script>
         <% } %>

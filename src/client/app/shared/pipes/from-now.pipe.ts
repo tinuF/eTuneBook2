@@ -7,9 +7,9 @@ import * as moment from 'moment';
 })
 export class FromNowPipe implements PipeTransform {
   transform(date: Date): string {
-    let result = "";
+    let result = '';
 
-    if (date != null) {
+    if (date !== null) {
       result = moment(date).fromNow();
     }
 

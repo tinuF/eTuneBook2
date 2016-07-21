@@ -15,7 +15,7 @@ export class TuneSet {
         // Get TuneSetPosition from a TuneSet by position
 
         for (var z = 0; z < this.tuneSetPositions.length; z++) {
-            if (this.tuneSetPositions[z].position == position) {
+            if (this.tuneSetPositions[z].position === position) {
                 return this.tuneSetPositions[z];
             }
         }
@@ -26,7 +26,7 @@ export class TuneSet {
         // Extract First TuneSetPosition from a TuneSet.
 
         for (var z = 0; z < this.tuneSetPositions.length; z++) {
-            if (this.tuneSetPositions[z].position == 1) {
+            if (this.tuneSetPositions[z].position === 1) {
                 return this.tuneSetPositions[z];
             }
         }
@@ -39,7 +39,7 @@ export class TuneSet {
         let movingTuneSetPosition: TuneSetPosition;
 
         for (var z = 0; z < this.tuneSetPositions.length; z++) {
-            if (this.tuneSetPositions[z].position == oldPosition) {
+            if (this.tuneSetPositions[z].position === oldPosition) {
                 this.tuneSetPositions[z].position = newPosition;
                 movingTuneSetPosition = this.tuneSetPositions[z];
             }
@@ -50,7 +50,7 @@ export class TuneSet {
             // moved down
             for (var y = 0; y < this.tuneSetPositions.length; y++) {
                 if (this.tuneSetPositions[y].position >= newPosition && this.tuneSetPositions[y].position < oldPosition) {
-                    if (this.tuneSetPositions[y] != movingTuneSetPosition) {
+                    if (this.tuneSetPositions[y] !== movingTuneSetPosition) {
                         this.tuneSetPositions[y].position++;
                     }
                 }
@@ -60,7 +60,7 @@ export class TuneSet {
             // moved up
             for (var y = 0; y < this.tuneSetPositions.length; y++) {
                 if (this.tuneSetPositions[y].position <= newPosition && this.tuneSetPositions[y].position > oldPosition) {
-                    if (this.tuneSetPositions[y] != movingTuneSetPosition) {
+                    if (this.tuneSetPositions[y] !== movingTuneSetPosition) {
                         this.tuneSetPositions[y].position--;
                     }
                 }
@@ -73,7 +73,7 @@ export class TuneSet {
         });
     }
 
-    addPlayDate(newDate:Date) {
+    addPlayDate(newDate: Date) {
         for (var i = 0; i < this.tuneSetPositions.length; i++) {
             this.tuneSetPositions[i].tune.addPlayDate(newDate);
         }
@@ -82,30 +82,30 @@ export class TuneSet {
     getLastPlayDate(): Date {
         let lastPlayDate: Date;
         for (var i = 0; i < this.tuneSetPositions.length; i++) {
-            if (lastPlayDate == undefined || this.tuneSetPositions[i].tune.lastPlayed > lastPlayDate) {
+            if (lastPlayDate === undefined || this.tuneSetPositions[i].tune.lastPlayed > lastPlayDate) {
                 lastPlayDate = this.tuneSetPositions[i].tune.lastPlayed;
             }
         }
         return lastPlayDate;
     }
 
-    deleteTune(tuneId:number) {
-        let removedTuneSetPosition:TuneSetPosition;
-        
+    deleteTune(tuneId: number) {
+        let removedTuneSetPosition: TuneSetPosition;
+
         removedTuneSetPosition = this.deleteTuneSetPositionByTuneId(tuneId);
 
         if (this.tuneSetPositions.length > 0) {
             // TuneSet still has TuneSetPositions
             // Adjust Positions of remaining TuneSetPositions: Only necessary for tunes that come after the removed tune
             this.adjustPositonAfterRemovedTuneSetPosition(removedTuneSetPosition);
-        }        
+        }
     }
-    
+
     deleteTuneSetPosition(position: number): TuneSetPosition {
         let tuneSetPosition: TuneSetPosition = null;
 
         for (let z = 0; z < this.tuneSetPositions.length; z++) {
-            if (this.tuneSetPositions[z].position == position) {
+            if (this.tuneSetPositions[z].position === position) {
                 tuneSetPosition = this.tuneSetPositions[z];
                 // Remove TuneSetPosition from TuneSet
                 // TuneSetPosition will be deleted later by Garbage Collector
@@ -114,12 +114,12 @@ export class TuneSet {
         }
         return tuneSetPosition;
     }
-    
+
     deleteTuneSetPositionByTuneId(tuneId: number): TuneSetPosition {
         let tuneSetPosition: TuneSetPosition = null;
 
         for (var z = 0; z < this.tuneSetPositions.length; z++) {
-            if (this.tuneSetPositions[z].tune.id == tuneId) {
+            if (this.tuneSetPositions[z].tune.id === tuneId) {
                 tuneSetPosition = this.tuneSetPositions[z];
                 // Remove TuneSetPosition from TuneSet
                 // TuneSetPosition will be deleted later by Garbage Collector

@@ -27,13 +27,11 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit() {
+        // TuneBook laden. Das TuneBook ist immer vorhanden.
+        // -Zuletzt gespeichertes TuneBook aus localstorage
+        // -Wenn localstorage leer, dann wird ein neues TuneBook gemacht und in localstorage gespeichert
         this.tuneBook = this.tuneBookService.getCurrentTuneBook();
         this.filterSettings = this.tuneBookService.getCurrentFilterSettings();
-
-        if (this.tuneBook === null) {
-            // Init TuneBook
-            this.tuneBook = this.tuneBookService.initializeTuneBook();
-        }
 
         // this.isRendering macht nichts auf Ebene app
         // wenn diese Stelle jedoch entfernt wird, dann funktioniert der spinner nicht mehr.
@@ -41,7 +39,7 @@ export class AppComponent implements OnInit {
         this.isRendering = true;
         this.modusActionSubscription = this.tuneBookService.modusActionObservable.subscribe(
             (action) => {
-                console.log('app:modusActionSubscription called: ' + action);
+                //console.log('app:modusActionSubscription called: ' + action);
 
                 if (action === ACTION.IS_RENDERING) {
 
@@ -61,30 +59,21 @@ export class AppComponent implements OnInit {
         this.router.navigate(['/tunes']);
     }
 
-    readTuneBookFromLocalDrive($event) {
-        var files = $event.target.files; // FileList object
+    readTuneBookFromLocalDrive(event: Event) {
+        let files: FileList = <FileList>(<any>event.target).files; // FileList object
 
         // files is a FileList of File objects
-        for (var i = 0, f; f = files[i]; i++) {
-            var fileName = encodeURI(f.name);
-            //Get file extension from fileName
-            var ext = fileName.replace(/^.*?\.([a-zA-Z0-9]+)$/, '$1');
+        for (let i = 0, f: File; f = files[i]; i++) {
+            let fileName = encodeURI(f.name);
+            let reader = new FileReader();
 
-            if (ext !== 'abc' && ext !== 'ABC' && ext !== 'txt' && ext !== 'TXT') {
-                alert('eTuneBook only accepts files with extension .abc or .txt');
+            reader.onload = () => {
+                let abc = reader.result;
+                this.getTuneBookFromImportedFile(abc, fileName);
+            };
 
-            } else {
-                // Only process abc files
-                var reader = new FileReader();
-
-                reader.onload = () => {
-                    var abc = reader.result;
-                    this.getTuneBookFromImportedFile(abc, fileName);
-                };
-
-                // Read the File
-                reader.readAsText(f, 'ISO-8859-1');
-            }
+            // Read the File
+            reader.readAsText(f, 'ISO-8859-1');
         }
     }
 
@@ -106,14 +95,14 @@ export class AppComponent implements OnInit {
         this.router.navigate(['/book']);
     }
 
-    search(event) {
-        let searchText = event.target.value.trim().toLowerCase();
+    search(keyboardEvent: KeyboardEvent) {
+        let searchText = (<HTMLInputElement>(<Event>keyboardEvent).target).value.trim().toLowerCase();
         this.filterSettings.setTitle(searchText);
         this.tuneBookService.applyFilter();
     }
 
     initializeTuneBook() {
-        this.tuneBook = this.tuneBookService.initializeTuneBook();
+        this.tuneBook = this.tuneBookService.initializeTuneBookAndBroadcast();
         this.router.navigate(['/tunes', this.tuneBook.tuneSets[0].tuneSetPositions[0].tune.id, 'abc']);
     }
 

@@ -23,7 +23,7 @@ export class TuneListComponent implements OnInit, OnDestroy, AfterViewInit {
     selectedId: number;
 
     constructor(public tuneBookService: TuneBookService, private cdr: ChangeDetectorRef) {
-        console.log('tune-list:constructor called');
+        //console.log('tune-list:constructor called');
     }
 
     ngOnInit() {
@@ -39,7 +39,7 @@ export class TuneListComponent implements OnInit, OnDestroy, AfterViewInit {
 
         this.filterActionSubscription = this.tuneBookService.filterActionObservable.subscribe(
             (action) => {
-                console.log('tune-list:filterActionSubscription called: ' + action);
+                //console.log('tune-list:filterActionSubscription called: ' + action);
 
                 if (action === ACTION.APPLY_FILTER) {
                     this.tunes = this.tuneBookService.getTunesFiltered();
@@ -48,7 +48,7 @@ export class TuneListComponent implements OnInit, OnDestroy, AfterViewInit {
 
         this.modelActionSubscription = this.tuneBookService.modelActionObservable.subscribe(
             (action) => {
-                console.log('tune-list:modelActionSubscription called: ' + action);
+                //console.log('tune-list:modelActionSubscription called: ' + action);
 
                 if (action === ACTION.IMPORT_TUNEBOOK ||
                     action === ACTION.LOAD_EXAMPLE_TUNEBOOK ||
@@ -99,7 +99,7 @@ export class TuneListComponent implements OnInit, OnDestroy, AfterViewInit {
         this.isRendering = false;
         //setTimeout(() => this.cdr.reattach());
         this.tuneBookService.isRendered();
-        console.log('tune-list:ngAfterViewInit called');
+        //console.log('tune-list:ngAfterViewInit called');
     }
 
     isSelected(tune: Tune) {

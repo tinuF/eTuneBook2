@@ -12,6 +12,6 @@ import { InfoMenuComponent } from '../+help/index';
 })
 export class ChangeLogComponent {
     constructor() {
-
+        //console.log('changelog:constructor called');
     }
 }

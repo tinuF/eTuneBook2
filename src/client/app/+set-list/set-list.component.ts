@@ -48,9 +48,9 @@ export class SetListComponent implements OnInit, AfterViewInit, OnDestroy {
         this.isRendering = false;
         //setTimeout(() => this.cdr.reattach());
         this.tuneBookService.isRendered();
-        console.log('set-list:ngAfterViewInit called');
+        //console.log('set-list:ngAfterViewInit called');
     }
-    
+
     ngOnDestroy() {
         this.filterActionSubscription.unsubscribe();
     }

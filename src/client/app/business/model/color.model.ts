@@ -11,7 +11,7 @@ export class Color {
         this.blue = blue;
         this.hex = hex;
 
-        if (this.hex == null) {
+        if (this.hex === null) {
             this.convertRGBtoHex();
         } else {
             let component = this.convertHexToRGB(this.hex);
@@ -24,7 +24,7 @@ export class Color {
     }
 
     getRGB() {
-        return "rgb(" + this.red + "," + this.green + "," + this.blue + ")";
+        return 'rgb(' + this.red + ',' + this.green + ',' + this.blue + ')';
     }
 
     getHexValue() {
@@ -33,19 +33,19 @@ export class Color {
 
     convertComponentToHex(c: number) {
         //see http://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
-        var hex = c.toString(16);
-        return hex.length == 1 ? "0" + hex : hex;
+        let hex = c.toString(16);
+        return hex.length === 1 ? '0' + hex : hex;
     }
 
     convertRGBtoHex() {
         //see http://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
-        this.hex = "#" + this.convertComponentToHex(this.red) + this.convertComponentToHex(this.green)
+        this.hex = '#' + this.convertComponentToHex(this.red) + this.convertComponentToHex(this.green)
             + this.convertComponentToHex(this.blue);
     }
 
     convertHexToRGB(hex: string) {
         //see http://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
-        var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
         return result ? {
             r: parseInt(result[1], 16),
             g: parseInt(result[2], 16),

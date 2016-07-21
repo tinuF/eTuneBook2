@@ -42,7 +42,7 @@ export class PlayListPositionMenuComponent implements OnInit {
 
         previousPosition--;
 
-        if (previousPosition == 0) {
+        if (previousPosition === 0) {
             previousPosition = this.tuneBookService.getPlaylistPositions(this.playlistPosition.playlistId).length;
         }
 

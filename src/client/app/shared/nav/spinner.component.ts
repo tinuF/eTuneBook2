@@ -12,6 +12,6 @@ export class SpinnerComponent  {
     @Input() isRunning: boolean;
 
     constructor() {
-         console.log('spinner:constructor called');
+         //console.log('spinner:constructor called');
     }
 }

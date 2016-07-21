@@ -60,7 +60,7 @@ export class SampleDotsComponent {
                 paddingleft: 0,
                 editable: false,
                 add_classes: true,
-                listener: null
+                listener: <any>null
             };
             let renderParams = {
                 startingTune: 0
@@ -73,7 +73,7 @@ export class SampleDotsComponent {
 
     isRendered(): boolean {
         let rendered = false;
-        if (this.tuneObjectArray != null && this.tuneObjectArray.length > 0) {
+        if (this.tuneObjectArray !== null && this.tuneObjectArray !== undefined && this.tuneObjectArray.length > 0) {
             rendered = true;
         }
         return rendered;

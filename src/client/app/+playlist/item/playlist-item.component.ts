@@ -23,7 +23,6 @@ export class PlayListItemComponent implements OnInit, OnDestroy {
     modusActionSubscription: Subscription;
     modelActionSubscription: Subscription;
     positions: Array<number>;
-    selectedPlaylistId: number;
 
     constructor(public tuneBookService: TuneBookService, public renderer: Renderer) {
 
@@ -78,18 +77,14 @@ export class PlayListItemComponent implements OnInit, OnDestroy {
         this.positions = this.tuneBookService.getPlaylistPositionsAsNumbers(this.playlistPosition.playlistId);
     }
 
-    setPosition(e) {
+    setPosition(event: Event) {
         let oldPosition: number = this.playlistPosition.position;
-        let newPosition: number = parseInt(e.target.value);
+        let newPosition: number = parseInt((<any>event.target).value);
 
-        if (oldPosition != newPosition) {
+        if (oldPosition !== newPosition) {
             this.tuneBookService.movePlaylistPosition(this.playlistPosition.playlistId, oldPosition, newPosition);
             this.tuneBookService.storeTuneBookAbc();
         }
-    }
-
-    setSelectedPlaylistId(e) {
-        this.selectedPlaylistId = e.target.value;
     }
 
     sendPlaylistPositionToCopier() {

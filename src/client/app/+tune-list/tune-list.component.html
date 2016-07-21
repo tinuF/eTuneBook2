@@ -3,12 +3,8 @@
         <div class="col-xs-1 ">
             <etb-tune-list-menu [tunes]="tunes"></etb-tune-list-menu>
         </div>
-        <div class="col-xs-11">
-            <div class="card-deck-wrapper">
-                <div class="card-deck">
-                    <etb-tune-list-item [tune]="tune" *ngFor="let tune of tunes"></etb-tune-list-item>
-                </div>
-            </div>
+        <div class="col-xs-11 ">
+            <etb-tune-list-item [tune]="tune" *ngFor="let tune of tunes"></etb-tune-list-item>
         </div>
     </div>
 

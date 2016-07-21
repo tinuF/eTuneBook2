@@ -21,7 +21,7 @@ export class Playlist {
 
     getPlaylistPosition(position: number): PlaylistPosition {
         for (let i = 0; i < this.playlistPositions.length; i++) {
-            if (position == this.playlistPositions[i].position) {
+            if (position === this.playlistPositions[i].position) {
                 return this.playlistPositions[i];
             }
         }
@@ -30,7 +30,7 @@ export class Playlist {
 
     getPlaylistPositionByTuneSetId(tuneSetId: number): PlaylistPosition {
         for (let i = 0; i < this.playlistPositions.length; i++) {
-            if (tuneSetId == this.playlistPositions[i].tuneSet.id) {
+            if (tuneSetId === this.playlistPositions[i].tuneSet.id) {
                 return this.playlistPositions[i];
             }
         }
@@ -52,7 +52,7 @@ export class Playlist {
 
         //Change moving Playlist-Position
         for (let z = 0; z < this.playlistPositions.length; z++) {
-            if (this.playlistPositions[z].position == oldPosition) {
+            if (this.playlistPositions[z].position === oldPosition) {
                 this.playlistPositions[z].position = newPosition;
                 movingPlaylistPosition = this.playlistPositions[z];
             }
@@ -63,7 +63,7 @@ export class Playlist {
             // moved down
             for (let y = 0; y < this.playlistPositions.length; y++) {
                 if (this.playlistPositions[y].position >= newPosition && this.playlistPositions[y].position < oldPosition) {
-                    if (this.playlistPositions[y] != movingPlaylistPosition) {
+                    if (this.playlistPositions[y] !== movingPlaylistPosition) {
                         this.playlistPositions[y].position++;
                     }
                 }
@@ -73,7 +73,7 @@ export class Playlist {
             // moved up
             for (let y = 0; y < this.playlistPositions.length; y++) {
                 if (this.playlistPositions[y].position <= newPosition && this.playlistPositions[y].position > oldPosition) {
-                    if (this.playlistPositions[y] != movingPlaylistPosition) {
+                    if (this.playlistPositions[y] !== movingPlaylistPosition) {
                         this.playlistPositions[y].position--;
                     }
                 }
@@ -94,7 +94,7 @@ export class Playlist {
 
             playlistPosition.deleteTune(tuneId);
 
-            if (playlistPosition.setTuneSetPositionPlayInfos.length == 0) {
+            if (playlistPosition.setTuneSetPositionPlayInfos.length === 0) {
                 // Empty PlaylistPosition
                 this.deletePlaylistPosition(playlistPosition.position);
             }
@@ -105,11 +105,11 @@ export class Playlist {
         let removedPlaylistPosition: PlaylistPosition;
 
         for (let z = 0; z < this.playlistPositions.length; z++) {
-            if (this.playlistPositions[z].position == removedPosition) {
+            if (this.playlistPositions[z].position === removedPosition) {
                 removedPlaylistPosition = this.playlistPositions[z];
                 // Delete playlistPosition from playlist
                 this.playlistPositions.splice(z, 1);
-                
+
                 // Remove all TuneSetPositionPlayInfos from the removed PlaylistPosition
                 removedPlaylistPosition.tuneSetPositionPlayInfos = [];
             }
@@ -117,7 +117,8 @@ export class Playlist {
 
         if (this.playlistPositions.length > 0) {
             // playlist still has playlistPositions
-            // Adjust Positions of remaining playlistPositions: Only necessary for playlistPositions that come after the removed playlistPosition
+            // Adjust Positions of remaining playlistPositions: 
+            // Only necessary for playlistPositions that come after the removed playlistPosition
 
             this.adjustPositonAfterRemovedPlaylistPosition(removedPlaylistPosition);
         }

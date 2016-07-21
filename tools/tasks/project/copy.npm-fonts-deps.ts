@@ -1,6 +1,6 @@
 import * as gulp from 'gulp';
 import {join} from 'path';
-import {NPM_BASE, APP_DEST} from '../../config';
+import {APP_DEST} from '../../config';
 
 /**
  * Copies font NPM dependencies from /node-modules to dist/dev/lib/fonts or dist/prod/lib/fonts

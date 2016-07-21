@@ -87,13 +87,12 @@ export class SetListMenuComponent implements OnInit {
     }
 
     addSelectedSetsToSelectedPlaylist() {
-        if (this.selectedPlaylist != null) {
-            this.tuneBookService.addPlaylistPositions(this.selectedPlaylist.id, this.filterSettings.setIds);
-        } else {
+        if (this.selectedPlaylist === undefined) {
+            //TODO: More elegant
             alert('No Playlist selected!');
+            //TODO: Stay on Modal
+        } else {
+            this.tuneBookService.addPlaylistPositions(this.selectedPlaylist.id, this.filterSettings.setIds);
         }
-
     }
 }
-
-

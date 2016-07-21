@@ -28,10 +28,16 @@ export class PlayListPositionCopierComponent implements OnInit {
     }
 
     copyPlaylistPosition() {
-        this.tuneBookService.copyPlaylistPositionToOtherPlaylist(this.playlistPosition.playlistId,
-            this.playlistPosition.position, this.selectedPlaylist.id);
-        this.tuneBookService.storeTuneBookAbc();
-        this.router.navigate(['/playlist', this.selectedPlaylist.id ]);
+        if (this.selectedPlaylist === undefined) {
+            //TODO: More elegant
+            alert('No Playlist selected!');
+            //TODO: Stay on Modal
+        } else {
+            this.tuneBookService.copyPlaylistPositionToOtherPlaylist(this.playlistPosition.playlistId,
+                this.playlistPosition.position, this.selectedPlaylist.id);
+            this.tuneBookService.storeTuneBookAbc();
+            this.router.navigate(['/playlist', this.selectedPlaylist.id]);
+        }
     };
 }
 

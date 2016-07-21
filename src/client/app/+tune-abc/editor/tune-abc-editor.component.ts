@@ -54,9 +54,9 @@ export class TuneAbcEditorComponent implements OnInit {
         }, 0);
     }
 
-    doneEditing(event) {
+    doneEditing(focusEvent: FocusEvent) {
         //Move Value of Textarea to View-Model
-        this.tune.pure = event.target.value;
+        this.tune.pure = (<any>focusEvent.target).value;
 
         if (!this.tune.pure) {
             // Delete all TuneSetPositions with that tune

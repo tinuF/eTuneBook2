@@ -35,7 +35,7 @@ export class AbcComponent implements OnInit, AfterViewInit {
         this.isRendering = false;
         //setTimeout(() => this.cdr.reattach());
         this.tuneBookService.isRendered();
-        console.log('abc:ngAfterViewInit called');
+        //console.log('abc:ngAfterViewInit called');
     }
 
 

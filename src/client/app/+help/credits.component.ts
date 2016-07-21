@@ -13,6 +13,6 @@ import { InfoMenuComponent } from '../+help/info-menu.component';
 })
 export class CreditsComponent {
     constructor() {
-
+        //console.log('credits:constructor called');
     }
 }

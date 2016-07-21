@@ -32,7 +32,7 @@ export class PlaylistPosition {
         for (let z = 0; z < this.tuneSetPositionPlayInfos.length; z++) {
             tuneSetPositionPlayInfo = this.tuneSetPositionPlayInfos[z];
 
-            if (tuneSetPositionPlayInfo.tuneSetPosition.tune.id == tuneId) {
+            if (tuneSetPositionPlayInfo.tuneSetPosition.tune.id === tuneId) {
                 // Remove TuneSetPositionPlayInfo from PlaylistPosition
                 // TuneSetPositionPlayInfo will be deleted later by Garbage Collector
                 this.tuneSetPositionPlayInfos.splice(z, 1);

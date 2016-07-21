@@ -13,6 +13,6 @@ import { InfoMenuComponent } from '../+help/info-menu.component';
 })
 export class WelcomeComponent {
     constructor() {
-
+        //console.log('welcome:constructor called');
     }
 }

@@ -123,7 +123,9 @@ export function writeTuneAbc(tune: Tune, tuneSetPositions: Array<TuneSetPosition
     return tuneAbc;
 }
 
-export function writeTuneAbcWithEtbkDirectives(tune: Tune, tuneSetPositions: Array<TuneSetPosition>, targetLine: string, abcOption: AbcExportSettings) {
+export function writeTuneAbcWithEtbkDirectives(
+    tune: Tune, tuneSetPositions: Array<TuneSetPosition>, targetLine: string, abcOption: AbcExportSettings) {
+
     let tuneSplits: Array<string> = [];
     let newAbc = '';
     tuneSplits = tune.pure.split('\n');
@@ -173,7 +175,7 @@ export function writeTuneAbcWithEtbkDirectives(tune: Tune, tuneSetPositions: Arr
                 }
 
                 if (abcOption.annotation) {
-                    if (tune.annotation != '') {
+                    if (tune.annotation !== '') {
                         directive = '%%etbk:annot ' + tune.annotation;
                         newAbc = newAbc + directive;
                         newAbc = newAbc + '\n';
@@ -181,7 +183,7 @@ export function writeTuneAbcWithEtbkDirectives(tune: Tune, tuneSetPositions: Arr
                 }
 
                 if (abcOption.color) {
-                    if (tune.color.getHexValue() != systemProperties.DEFAULT_COLOR) {
+                    if (tune.color.getHexValue() !== systemProperties.DEFAULT_COLOR) {
                         directive = '%%etbk:color ' + tune.color.getHexValue();
                         newAbc = newAbc + directive;
                         newAbc = newAbc + '\n';
@@ -190,7 +192,7 @@ export function writeTuneAbcWithEtbkDirectives(tune: Tune, tuneSetPositions: Arr
 
                 if (abcOption.playDate) {
 
-                    if (tune.lastPlayed != null) {
+                    if (tune.lastPlayed !== null) {
                         directive = _getPlayDatesDirective(tune);
                         newAbc = newAbc + directive;
                         newAbc = newAbc + '\n';

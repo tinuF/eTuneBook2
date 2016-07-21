@@ -47,7 +47,7 @@ export class PlaylistListComponent implements OnInit, AfterViewInit, OnDestroy {
         this.isRendering = false;
         //setTimeout(() => this.cdr.reattach());
         this.tuneBookService.isRendered();
-        console.log('playlist-list:ngAfterViewInit called');
+        //console.log('playlist-list:ngAfterViewInit called');
     }
 
     ngOnDestroy() {

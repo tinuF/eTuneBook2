@@ -37,13 +37,11 @@ export class TuneBookService {
     systemProperties: any;
 
     constructor(public http: Http) {
-        console.log('TuneBookService:constructor start');
+        //console.log('TuneBookService:constructor start');
 
         this.systemProperties = getSystemProperties();
-        this.tuneBook = this.getCurrentTuneBook();
+        this.tuneBook = this.buildTuneBookOnPageInit();
         this.abcExportSettings = new AbcExportSettings();
-
-        this.initializeFilter();    //TODO: initializeFilter() wird schon in getCurrentTuneBook() aufgerufen!
 
         this.modelActionSubject = new BehaviorSubject('constructor');
         this.modelActionObservable = this.modelActionSubject.asObservable();
@@ -58,7 +56,7 @@ export class TuneBookService {
 
         this.playlistSettings = new PlaylistSettings();
 
-        console.log('TuneBookService:constructor end');
+        //console.log('TuneBookService:constructor end');
     }
 
     setCurrentTuneBook(abc: string) {
@@ -67,13 +65,6 @@ export class TuneBookService {
     }
 
     getCurrentTuneBook() {
-        //==null checks ===null and ===undefined
-        //===undefined when called from constructor
-        //undefined: noch nicht zugewiesen (nur deklariert)
-        //null: zugewiesen mit null
-        if (this.tuneBook == null) {
-            return this.getTuneBookFromLocalStorage();
-        }
         return this.tuneBook;
     }
 
@@ -127,7 +118,7 @@ export class TuneBookService {
     }
 
     initializeFilter() {
-        if (this.filterSettings == null) {
+        if (this.filterSettings === undefined) {
             this.filterSettings = new FilterSettings();
 
         } else {
@@ -137,14 +128,18 @@ export class TuneBookService {
         this.setTunesFiltered();
     }
 
-    getTuneBookFromLocalStorage() {
+    buildTuneBookOnPageInit() {
         // Retrieve eTuneBook Abc from localStorage
-        let abc = JSON.parse(localStorage.getItem(this.systemProperties.STORAGE_ID_TUNEBOOK) || '[]');
+        //let abc = JSON.parse(localStorage.getItem(this.systemProperties.STORAGE_ID_TUNEBOOK) || '[]');
+        let abc: string = localStorage.getItem(this.systemProperties.STORAGE_ID_TUNEBOOK);
 
-        if (abc == undefined || abc == '') {
-            this.tuneBook = null;
+        //if (abc == undefined || abc == '') {
+        if (abc === null) {
+            //this.tuneBook = null;
+            // Initialize and store TuneBook Abc and convert to model 
+            this.initializeTuneBook();
         } else {
-            //Convert eTuneBook Abc to eTuneBook-Model
+            //Convert stored TuneBook Abc to model
             this.setCurrentTuneBook(abc);
         }
         return this.tuneBook;
@@ -152,7 +147,7 @@ export class TuneBookService {
 
     getTuneBookFromImportedFile(abc: string, fileName: string) {
         this.setCurrentTuneBook(abc);
-        if (this.tuneBook.name == '') {
+        if (this.tuneBook.name === '') {
             this.tuneBook.name = fileName;
         }
         this.storeTuneBookAbc();
@@ -179,11 +174,12 @@ export class TuneBookService {
         // Generate TuneBook Abc from the current TuneBook and store it in localStorage
         setTimeout(() => {
             try {
-                let tuneBookAbc: string = JSON.stringify(this.writeAbc(new AbcExportSettings()));
+                //let tuneBookAbc: string = JSON.stringify(this.writeAbc(new AbcExportSettings()));
+                let tuneBookAbc: string = this.writeAbc(new AbcExportSettings());
                 //this.checkTuneBookAbcConsistency(tuneBookAbc);
                 localStorage.setItem(this.systemProperties.STORAGE_ID_TUNEBOOK, tuneBookAbc);
                 this.tuneBookAbcBackUp = tuneBookAbc;
-                console.log('TuneBook consistent and saved');
+                //console.log('TuneBook consistent and saved');
 
             } catch (e) {
                 alert(e.toString());
@@ -193,18 +189,21 @@ export class TuneBookService {
                 }
 
                 // Reload from tuneBookAbcSave
-                this.tuneBook = new TuneBook(JSON.parse(this.tuneBookAbcBackUp));
+                //this.tuneBook = new TuneBook(JSON.parse(this.tuneBookAbcBackUp));
+                this.tuneBook = new TuneBook(this.tuneBookAbcBackUp);
                 alert('Last action ignored. TuneBook reloaded');
 
             }
         }, 1000);
     }
 
+/*
     checkTuneBookAbcConsistency(tuneBookAbc: string) {
-        let tuneBook = new TuneBook(JSON.parse(tuneBookAbc));
+        //let tuneBook = new TuneBook(JSON.parse(tuneBookAbc));
+        let tuneBook = new TuneBook(tuneBookAbc);
     }
-
-    isQuotaExceeded(e) {
+*/
+    isQuotaExceeded(e: any) {
         let quotaExceeded = false;
         if (e) {
             if (e.code) {
@@ -272,8 +271,9 @@ export class TuneBookService {
     initializeTuneAndTuneSet(): TuneSet {
         let newTuneSet: TuneSet;
 
-        if (this.getCurrentTuneBook() == null) {
-            this.tuneBook = this.initializeTuneBook();
+        if (this.getCurrentTuneBook() === null) {
+            //TODO: Kommt wahrscheinlich gar nie vor
+            this.tuneBook = this.initializeTuneBookAndBroadcast();
             newTuneSet = this.tuneBook.tuneSets[0];
         } else {
             newTuneSet = this.getCurrentTuneBook().initializeTuneAndTuneSet();
@@ -316,9 +316,13 @@ export class TuneBookService {
     initializeTuneBook() {
         this.setCurrentTuneBook(this.getAbcforNewTuneBook());
         this.storeTuneBookAbc();
-        this.broadCastModelAction(ACTION.INITIALIZE_TUNEBOOK);
         //TODO: Check if necessary and refactor
         //this.tuneBook.tuneSets[0].tuneSetPositions[0].tune.id = 1;
+    }
+
+    initializeTuneBookAndBroadcast(): TuneBook {
+        this.initializeTuneBook();
+        this.broadCastModelAction(ACTION.INITIALIZE_TUNEBOOK);
         return this.tuneBook;
     }
     /*
@@ -400,7 +404,7 @@ export class TuneBookService {
     getRandomTuneSetId() {
         let tuneSet: TuneSet;
         let tuneSetIndex = getRandomArrayIndex(this.tuneSetsFiltered);
-        if (this.tuneSetsFiltered.length == tuneSetIndex) {
+        if (this.tuneSetsFiltered.length === tuneSetIndex) {
             tuneSetIndex = tuneSetIndex - 1;
         }
         tuneSet = this.tuneSetsFiltered[tuneSetIndex];
@@ -410,7 +414,7 @@ export class TuneBookService {
     getRandomTuneId() {
         let tune: Tune;
         let tuneIndex = getRandomArrayIndex(this.tunesFiltered);
-        if (this.tunesFiltered.length == tuneIndex) {
+        if (this.tunesFiltered.length === tuneIndex) {
             tuneIndex = tuneIndex - 1;
         }
         tune = this.tunesFiltered[tuneIndex];
@@ -475,13 +479,12 @@ export class TuneBookService {
     }
 
     setTunesFiltered() {
+        // Assumes that this.tuneBook !== null and !== undefined
         // filterTuneSets bringt ganze TuneSets, auch wenn nur ein Tune matched.
         // Deshalb nachgelagert die nicht matchenden Tunes erneut rausfiltern.
-        if (this.getCurrentTuneBook() != null) {
-            this.tuneSetsFiltered = filterTuneSets(this.getCurrentTuneBook(), this.getCurrentFilterSettings());
-            this.tunesFiltered = filterTunes(extractTunes(this.tuneSetsFiltered), this.getCurrentFilterSettings());
-        }
-        console.log('TuneBookService:setTunesFiltered called');
+        this.tuneSetsFiltered = filterTuneSets(this.getCurrentTuneBook(), this.getCurrentFilterSettings());
+        this.tunesFiltered = filterTunes(extractTunes(this.tuneSetsFiltered), this.getCurrentFilterSettings());
+        //console.log('TuneBookService:setTunesFiltered called');
     }
 
     getTunesFiltered() {

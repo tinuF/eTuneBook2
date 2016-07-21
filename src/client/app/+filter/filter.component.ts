@@ -11,19 +11,19 @@ import { TuneBookService, TuneBook, getSystemProperties, FilterSettings } from '
 export class FilterComponent implements OnInit {
     tuneBook: TuneBook;
     filterSettings: FilterSettings;
-    systemProperties;
+    systemProperties: any;
     currentFilter: string;
     filterActive: boolean;
-    type;
-    types;
-    key;
-    keys;
-    event;
-    events;
-    band;
-    bands;
-    color;
-    colors;
+    type: string;
+    types: string[];
+    key: string;
+    keys: string[];
+    event: string;
+    events: string[];
+    band: string;
+    bands: string[];
+    color: string;
+    colors: string[];
 
     constructor(public tuneBookService: TuneBookService) {
         this.systemProperties = getSystemProperties();
@@ -40,45 +40,45 @@ export class FilterComponent implements OnInit {
         this.setSelectedBand(this.filterSettings.band);
     }
 
-    setSelectedType(type) {
+    setSelectedType(type: string) {
         for (var i = 0; i < this.types.length; i++) {
-            if (this.types[i] == type) {
+            if (this.types[i] === type) {
                 // Setzen neuer Filter
                 this.type = this.types[i];
             }
         }
     }
 
-    setSelectedKey(key) {
+    setSelectedKey(key: string) {
         for (var i = 0; i < this.keys.length; i++) {
-            if (this.keys[i] == key) {
+            if (this.keys[i] === key) {
                 // Setzen neuer Filter
                 this.key = this.keys[i];
             }
         }
     }
 
-    setSelectedEvent(event) {
+    setSelectedEvent(event: string) {
         for (var i = 0; i < this.events.length; i++) {
-            if (this.events[i] == event) {
+            if (this.events[i] === event) {
                 // Setzen neuer Filter
                 this.event = this.events[i];
             }
         }
     }
 
-    setSelectedBand(band) {
+    setSelectedBand(band: string) {
         for (var i = 0; i < this.bands.length; i++) {
-            if (this.bands[i] == band) {
+            if (this.bands[i] === band) {
                 // Setzen neuer Filter
                 this.band = this.bands[i];
             }
         }
     }
 
-    setSelectedColor(color) {
+    setSelectedColor(color: string) {
         for (var i = 0; i < this.colors.length; i++) {
-            if (this.colors[i] == color) {
+            if (this.colors[i] === color) {
                 // Setzen neuer Filter
                 this.color = this.colors[i];
             }
@@ -113,33 +113,33 @@ export class FilterComponent implements OnInit {
         this.setBands();
     }
 
-    setType(e) {
-        this.type = e.target.value;
+    setType(e: Event) {
+        this.type = (<any>e.target).value;
         this.filterSettings.setType(this.type);
         this.applyFilter();
     }
 
-    setKey(e) {
-        this.key = e.target.value;
+    setKey(e: Event) {
+        this.key = (<any>e.target).value;
         this.filterSettings.setKey(this.key);
         this.applyFilter();
     }
 
-    setColor(e) {
-        this.color = e.target.value;
+    setColor(e: Event) {
+        this.color = (<any>e.target).value;
         //e.target.style.background = this.color;
         this.filterSettings.setColor(this.color);
         this.applyFilter();
     }
 
-    setEvent(e) {
-        this.event = e.target.value;
+    setEvent(e: Event) {
+        this.event = (<any>e.target).value;
         this.filterSettings.setEvent(this.event);
         this.applyFilter();
     }
 
-    setBand(e) {
-        this.band = e.target.value;
+    setBand(e: Event) {
+        this.band = (<any>e.target).value;
         this.filterSettings.setBand(this.band);
         this.applyFilter();
     }

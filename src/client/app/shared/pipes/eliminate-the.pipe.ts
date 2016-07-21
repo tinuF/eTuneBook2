@@ -7,8 +7,8 @@ export class EliminateThePipe implements PipeTransform {
     transform(txt: string): string {
         let theSplits: Array<string> = [];
 
-        if (txt != 'undefined' && txt != null) {
-            theSplits = txt.split(",");
+        if (txt !== 'undefined' && txt !== null) {
+            theSplits = txt.split(',');
         }
 
         return theSplits[0];

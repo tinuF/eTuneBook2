@@ -1,12 +1,12 @@
 .card {
-  /*margin-right: 20px;*/
-  width: 22rem;
+    margin: 1.25rem;
+    padding: 0;
+    min-width: 360px;
+    max-width: 360px;
+    background: #F2EBDC;
 }
 
 a {
-  /*
-  color: darkolivegreen;
-  */
   color: darkcyan;
 }
 

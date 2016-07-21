@@ -40,7 +40,7 @@ export class TuneSetPositionPlayInfo {
 
   moveUpPartPlayInfo(partPlayInfo: PartPlayInfo) {
     let index = this.partPlayInfos.indexOf(partPlayInfo);
-    if (index == 0) {
+    if (index === 0) {
       // First Position. Can't move up. Do nothing.
     } else {
       // Remove PartPlayInfo from old place
@@ -52,7 +52,7 @@ export class TuneSetPositionPlayInfo {
 
   moveDownPartPlayInfo(partPlayInfo: PartPlayInfo) {
     let index = this.partPlayInfos.indexOf(partPlayInfo);
-    if (index == this.partPlayInfos.length) {
+    if (index === this.partPlayInfos.length) {
       // Last Position. Can't move down. Do nothing.
     } else {
       // Remove PartPlayInfo from old place
@@ -65,8 +65,8 @@ export class TuneSetPositionPlayInfo {
   isDefault() {
     let isDefault = true;
 
-    if (this.repeat != this.tuneSetPosition.repeat ||
-      this.annotation != this.tuneSetPosition.annotation ||
+    if (this.repeat !== this.tuneSetPosition.repeat ||
+      this.annotation !== this.tuneSetPosition.annotation ||
       this.partPlayInfos.length > 0) {
       isDefault = false;
     }

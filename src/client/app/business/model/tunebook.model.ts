@@ -52,7 +52,7 @@ export class TuneBook {
     getTuneById(tuneId: number) {
         for (let i = 0; i < this.tuneSets.length; i++) {
             for (let z = 0; z < this.tuneSets[i].tuneSetPositions.length; z++) {
-                if (tuneId == this.tuneSets[i].tuneSetPositions[z].tune.id) {
+                if (tuneId === this.tuneSets[i].tuneSetPositions[z].tune.id) {
                     return this.tuneSets[i].tuneSetPositions[z].tune;
                 }
             }
@@ -62,7 +62,7 @@ export class TuneBook {
 
     getTuneSetById(tuneSetId: number) {
         for (let i = 0; i < this.tuneSets.length; i++) {
-            if (tuneSetId == this.tuneSets[i].id) {
+            if (tuneSetId === this.tuneSets[i].id) {
                 return this.tuneSets[i];
             }
         }
@@ -71,7 +71,7 @@ export class TuneBook {
 
     getPlaylistById(playlistId: number) {
         for (let i = 0; i < this.playlists.length; i++) {
-            if (playlistId == this.playlists[i].id) {
+            if (playlistId === this.playlists[i].id) {
                 return this.playlists[i];
             }
         }
@@ -99,7 +99,7 @@ export class TuneBook {
 
         for (let i = 0; i < this.tuneSets.length; i++) {
             for (let z = 0; z < this.tuneSets[i].tuneSetPositions.length; z++) {
-                if (tuneId == this.tuneSets[i].tuneSetPositions[z].tune.id) {
+                if (tuneId === this.tuneSets[i].tuneSetPositions[z].tune.id) {
                     tuneSets.push(this.tuneSets[i]);
                 }
             }
@@ -117,10 +117,10 @@ export class TuneBook {
         for (let i = 0; i < tuneSets.length; i++) {
             for (let z = 0; z < this.playlists.length; z++) {
                 for (let y = 0; y < this.playlists[z].playlistPositions.length; y++) {
-                    if (this.playlists[z].playlistPositions[y].tuneSet == tuneSets[i]) {
+                    if (this.playlists[z].playlistPositions[y].tuneSet === tuneSets[i]) {
                         playlistSelected = false;
                         for (let w = 0; w < playlists.length; w++) {
-                            if (playlists[w] == this.playlists[z]) {
+                            if (playlists[w] === this.playlists[z]) {
                                 playlistSelected = true;
                             }
                         }
@@ -145,7 +145,7 @@ export class TuneBook {
             playlistAdded = false;
 
             for (let z = 0; z < playlist.playlistPositions.length && !playlistAdded; z++) {
-                if (playlist.playlistPositions[z].tuneSet.id == tuneSetId) {
+                if (playlist.playlistPositions[z].tuneSet.id === tuneSetId) {
                     playlists.push(playlist);
                     playlistAdded = true;
                 }
@@ -163,7 +163,7 @@ export class TuneBook {
             playlist = this.playlists[i];
 
             for (let z = 0; z < playlist.playlistPositions.length; z++) {
-                if (playlist.playlistPositions[z].tuneSet.id == tuneSetId) {
+                if (playlist.playlistPositions[z].tuneSet.id === tuneSetId) {
                     playlistPositions.push(playlist.playlistPositions[z]);
                 }
             }
@@ -208,7 +208,7 @@ export class TuneBook {
 
         for (let i = 0; i < this.tuneSets.length; i++) {
             for (let z = 0; z < this.tuneSets[i].tuneSetPositions.length; z++) {
-                if (tuneId == this.tuneSets[i].tuneSetPositions[z].tune.id) {
+                if (tuneId === this.tuneSets[i].tuneSetPositions[z].tune.id) {
                     tuneSetPositions.push(this.tuneSets[i].tuneSetPositions[z]);
                 }
             }
@@ -267,11 +267,13 @@ export class TuneBook {
         }
     }
 
-    copyPlaylistPositionAndTuneSetPlayInfos(playlistPositionOriginal: PlaylistPosition, targetPlaylist: Playlist, targetPlaylistPositionNr: number) {
+    copyPlaylistPositionAndTuneSetPlayInfos(playlistPositionOriginal: PlaylistPosition, targetPlaylist: Playlist,
+        targetPlaylistPositionNr: number) {
         let playlistPositionCopy: PlaylistPosition;
 
         // Generate PlaylistPosition
-        playlistPositionCopy = new PlaylistPosition(targetPlaylist.id, targetPlaylistPositionNr, playlistPositionOriginal.tuneSet, playlistPositionOriginal.name, playlistPositionOriginal.annotation);
+        playlistPositionCopy = new PlaylistPosition(targetPlaylist.id, targetPlaylistPositionNr,
+            playlistPositionOriginal.tuneSet, playlistPositionOriginal.name, playlistPositionOriginal.annotation);
 
         // Add PlaylistPosition to Playlist
         targetPlaylist.addPlaylistPosition(playlistPositionCopy);
@@ -292,7 +294,9 @@ export class TuneBook {
             partPlayInfosCopy = this.copyPartPlayInfos(tuneSetPositionPlayInfoOriginal);
 
             // Generate tuneSetPositionPlayInfo
-            tuneSetPositionPlayInfoCopy = new TuneSetPositionPlayInfo(playlistPositionCopy, tuneSetPositionPlayInfoOriginal.tuneSetPosition, tuneSetPositionPlayInfoOriginal.repeat, partPlayInfosCopy, tuneSetPositionPlayInfoOriginal.annotation);
+            tuneSetPositionPlayInfoCopy = new TuneSetPositionPlayInfo(
+                playlistPositionCopy, tuneSetPositionPlayInfoOriginal.tuneSetPosition, tuneSetPositionPlayInfoOriginal.repeat,
+                partPlayInfosCopy, tuneSetPositionPlayInfoOriginal.annotation);
 
             // Copy TuneSetPositionPlayInfos
             playlistPositionCopy.addTuneSetPositionPlayInfo(tuneSetPositionPlayInfoCopy);
@@ -344,12 +348,12 @@ export class TuneBook {
         let removedPosition: number = sourcePosition;
 
         for (let z = 0; z < sourceTuneSet.tuneSetPositions.length; z++) {
-            if (sourceTuneSet.tuneSetPositions[z].position == sourcePosition) {
+            if (sourceTuneSet.tuneSetPositions[z].position === sourcePosition) {
                 sourceTuneSetPosition = sourceTuneSet.tuneSetPositions[z];
             }
         }
 
-        if (targetTuneSetId == null) {
+        if (targetTuneSetId === null) {
             // Copy or Move TuneSetPosition to a new Set
             this.initializeTuneSetByTune(sourceTuneSetPosition.tune);
 
@@ -359,17 +363,17 @@ export class TuneBook {
 
 
         // Handle Source TuneSet
-        if (moveOrCopy == 'move') {
+        if (moveOrCopy === 'move') {
 
             // Remove TuneSetPosition from Source TuneSet
             for (let z = 0; z < sourceTuneSet.tuneSetPositions.length; z++) {
-                if (sourceTuneSet.tuneSetPositions[z].position == sourcePosition) {
+                if (sourceTuneSet.tuneSetPositions[z].position === sourcePosition) {
                     // Delete TuneSetPosition from TuneSet
                     sourceTuneSet.tuneSetPositions.splice(z, 1);
                 }
             }
 
-            if (sourceTuneSet.tuneSetPositions.length == 0) {
+            if (sourceTuneSet.tuneSetPositions.length === 0) {
                 // Empty TuneSet
                 // Remove TuneSet from the List
                 this.tuneSets.splice(this.tuneSets.indexOf(sourceTuneSet), 1);
@@ -394,27 +398,28 @@ export class TuneBook {
         }
 
         // Handle Target TuneSet
-        if (targetTuneSetId != null) {
+        if (targetTuneSetId !== null) {
             let newPosition = 0;
             newPosition = targetPosition;
 
-            if (beforeOrAfter == 'after') {
+            if (beforeOrAfter === 'after') {
                 newPosition++;
             }
 
             let targetTuneSetPosition: TuneSetPosition;
 
-            if (moveOrCopy == 'move') {
+            if (moveOrCopy === 'move') {
                 // Set new TuneSetId and Position on TuneSetPosition
                 // copy by reference
                 targetTuneSetPosition = sourceTuneSetPosition;
                 targetTuneSetPosition.tuneSetId = targetTuneSetId;
                 targetTuneSetPosition.position = newPosition;
 
-            } else if (moveOrCopy == 'copy') {
+            } else if (moveOrCopy === 'copy') {
                 // Set new TuneSetId and Position on TuneSetPosition
                 // copy by value (primitive types), copy by reference (objects) -> tune is shared
-                targetTuneSetPosition = new TuneSetPosition(targetTuneSetId, sourceTuneSetPosition.tune, newPosition, sourceTuneSetPosition.repeat, sourceTuneSetPosition.annotation);
+                targetTuneSetPosition = new TuneSetPosition(targetTuneSetId,
+                    sourceTuneSetPosition.tune, newPosition, sourceTuneSetPosition.repeat, sourceTuneSetPosition.annotation);
             }
 
             // Add TuneSetPosition to TuneSet (only if source tuneSet ist different from target tuneSet)
@@ -428,7 +433,7 @@ export class TuneBook {
 
                 let currentPosition = 0;
 
-                if (targetTuneSet.tuneSetPositions[y] == targetTuneSetPosition) {
+                if (targetTuneSet.tuneSetPositions[y] === targetTuneSetPosition) {
                     // TuneSetPosition which was moved: Already Done
 
                 } else {
@@ -451,7 +456,7 @@ export class TuneBook {
     moveTuneSetPosition(sourceTuneSetId: number, sourcePosition: number,
         targetTuneSetId: number, targetPosition: number, beforeOrAfter: string, moveOrCopy: string): boolean {
 
-        if (targetTuneSetId == null || sourceTuneSetId !== targetTuneSetId) {
+        if (targetTuneSetId === null || sourceTuneSetId !== targetTuneSetId) {
             return this.moveTuneSetPositionTwoSetsInvolved(sourceTuneSetId, sourcePosition,
                 targetTuneSetId, targetPosition, beforeOrAfter, moveOrCopy);
         } else {
@@ -517,7 +522,7 @@ export class TuneBook {
         //let playlist = this.getPlaylistById(playlistId);
 
         for (let z = 0; z < this.playlists.length; z++) {
-            if (this.playlists[z].id == playlistId) {
+            if (this.playlists[z].id === playlistId) {
                 // Delete all playlistPositions
                 // nicht nötig, da beim Export die Playlist der Trigger ist
 
@@ -538,13 +543,13 @@ export class TuneBook {
         tuneSet = this.getTuneSetById(tuneSetId);
         tuneSetPositionRemoved = tuneSet.deleteTuneSetPosition(position);
 
-        if (this.getTuneSetsByTuneId(tuneSetPositionRemoved.tune.id).length == 0) {
+        if (this.getTuneSetsByTuneId(tuneSetPositionRemoved.tune.id).length === 0) {
             //A Tune always has to be within a set. Since the last TuneSetPosition was deleted,
             //a new Set has to be created
             this.initializeTuneSetByTune(tuneSetPositionRemoved.tune);
         }
 
-        if (tuneSet.tuneSetPositions.length == 0) {
+        if (tuneSet.tuneSetPositions.length === 0) {
             // Empty TuneSet
             // Remove TuneSet from the List
             this.tuneSets.splice(this.tuneSets.indexOf(tuneSet), 1);
@@ -586,9 +591,11 @@ export class TuneBook {
 
         // Für ein Set, dass in einer Playlist nicht von seinen Default-Werten abweicht, existiert kein TuneSetPositionPlayInfo im Abc-File.
         // Die Applikation braucht aber auch Default-TuneSetPositionPlayInfos. Diese werden in dieser Methode generiert.
-        // Ausserdem werden seit eTuneBook V2 in dieser Methode die für eine PlaylistPosition relevanten TuneSetPositionPlayInfos angehängt. 
+        // Ausserdem werden seit eTuneBook V2 in dieser Methode 
+        // die für eine PlaylistPosition relevanten TuneSetPositionPlayInfos angehängt. 
         // Hinweis: 
-        // -Die Default-Werte (repeat und annotation auf der TuneSetPosition) können seit eTuneBook V2 nicht mehr auf der TuneSetPosition editiert werden. 
+        // -Die Default-Werte (repeat und annotation auf der TuneSetPosition) können seit eTuneBook V2 
+        // nicht mehr auf der TuneSetPosition editiert werden. 
         // -Aus Gründen den Rückwärts-Kompatibiltät wurde der Mechanismus der Default-Werte im Modell jedoch belassen.
         // -Vorteil dieses Systems: Es braucht nicht für jede TuneSetPositionPlayInfo eine Zeile im ABC-File.
 
@@ -604,10 +611,11 @@ export class TuneBook {
             tuneSetPosition = tuneSet.tuneSetPositions[z];
             tuneSetPositionPlayInfo = this.getTuneSetPositionPlayInfo(playlistPosition, tuneSetPosition);
 
-            if (tuneSetPositionPlayInfo == undefined) {
+            if (tuneSetPositionPlayInfo === undefined) {
                 // Default-PlayInfos
                 partPlayInfos = [];
-                tuneSetPositionPlayInfo = new TuneSetPositionPlayInfo(playlistPosition, tuneSetPosition, tuneSetPosition.repeat, partPlayInfos, tuneSetPosition.annotation);
+                tuneSetPositionPlayInfo = new TuneSetPositionPlayInfo(playlistPosition, tuneSetPosition,
+                    tuneSetPosition.repeat, partPlayInfos, tuneSetPosition.annotation);
                 this.tuneSetPositionPlayInfos.push(tuneSetPositionPlayInfo);
             }
 
@@ -636,7 +644,7 @@ export class TuneBook {
 
         for (let i = 0; i < tuneSets.length; i++) {
             for (let y = 0; y < playlist.playlistPositions.length; y++) {
-                if (playlist.playlistPositions[y].tuneSet == tuneSets[i]) {
+                if (playlist.playlistPositions[y].tuneSet === tuneSets[i]) {
                     playlistPositions.push(playlist.playlistPositions[y]);
                 }
             }
@@ -648,7 +656,7 @@ export class TuneBook {
     addVideo(tuneId: number, videoSource: string, videoCode: string, videoDescription: string) {
         let tune: Tune = this.getTuneById(tuneId);
 
-        if (tune != null) {
+        if (tune !== null) {
             return tune.addVideo(videoSource, videoCode, videoDescription);
         }
         return null;
@@ -657,7 +665,7 @@ export class TuneBook {
     addWebsite(tuneId: number, url: string) {
         let tune: Tune = this.getTuneById(tuneId);
 
-        if (tune != null) {
+        if (tune !== null) {
             return tune.addWebsite(url);
         }
         return null;
@@ -666,7 +674,7 @@ export class TuneBook {
     getVideoById(tuneId: number, videoSource: string, videoCode: string) {
         let tune = this.getTuneById(tuneId);
 
-        if (tune != null) {
+        if (tune !== null) {
             return tune.getVideoById(videoSource, videoCode);
         }
         return null;
@@ -675,7 +683,7 @@ export class TuneBook {
     deleteVideo(tuneId: number, videoSource: string, videoCode: string) {
         let tune: Tune = this.getTuneById(tuneId);
 
-        if (tune != null) {
+        if (tune !== null) {
             tune.deleteVideo(videoSource, videoCode);
         }
     }
@@ -683,7 +691,7 @@ export class TuneBook {
     deleteWebsite(tuneId: number, url: string) {
         let tune: Tune = this.getTuneById(tuneId);
 
-        if (tune != null) {
+        if (tune !== null) {
             tune.deleteWebsite(url);
         }
     }
@@ -707,7 +715,7 @@ export class TuneBook {
 
             tuneSet.deleteTune(tuneId);
 
-            if (tuneSet.tuneSetPositions.length == 0) {
+            if (tuneSet.tuneSetPositions.length === 0) {
                 // Empty TuneSet
                 this.deleteTuneSet(tuneSet);
             }
@@ -763,8 +771,8 @@ export class TuneBook {
         let tuneSetPositionPlayInfo: TuneSetPositionPlayInfo;
 
         for (let z = 0; z < this.tuneSetPositionPlayInfos.length; z++) {
-            if (this.tuneSetPositionPlayInfos[z].playlistPosition == playlistPosition
-                && this.tuneSetPositionPlayInfos[z].tuneSetPosition == tuneSetPosition) {
+            if (this.tuneSetPositionPlayInfos[z].playlistPosition === playlistPosition
+                && this.tuneSetPositionPlayInfos[z].tuneSetPosition === tuneSetPosition) {
                 tuneSetPositionPlayInfo = this.tuneSetPositionPlayInfos[z];
             }
         }
@@ -838,7 +846,7 @@ export class TuneBook {
                 addToTypeFilter = true;
 
                 for (let z = 0; z < types.length; z++) {
-                    if (types[z] == this.tuneSets[i].tuneSetPositions[c].tune.type) {
+                    if (types[z] === this.tuneSets[i].tuneSetPositions[c].tune.type) {
                         addToTypeFilter = false;
                     }
                 }
@@ -864,7 +872,7 @@ export class TuneBook {
                 addToKeyFilter = true;
 
                 for (let z = 0; z < keys.length; z++) {
-                    if (keys[z] == this.tuneSets[i].tuneSetPositions[c].tune.key) {
+                    if (keys[z] === this.tuneSets[i].tuneSetPositions[c].tune.key) {
                         addToKeyFilter = false;
                     }
                 }
@@ -889,12 +897,12 @@ export class TuneBook {
             addToEventFilter = true;
 
             for (let z = 0; z < events.length; z++) {
-                if (events[z] == this.playlists[i].event) {
+                if (events[z] === this.playlists[i].event) {
                     addToEventFilter = false;
                 }
             }
 
-            if (this.playlists[i].event != 'undefined' && this.playlists[i].event != '' && addToEventFilter) {
+            if (this.playlists[i].event !== 'undefined' && this.playlists[i].event !== '' && addToEventFilter) {
                 events.push(this.playlists[i].event);
             }
 
@@ -914,12 +922,12 @@ export class TuneBook {
             addToBandFilter = true;
 
             for (let z = 0; z < bands.length; z++) {
-                if (bands[z] == this.playlists[i].band) {
+                if (bands[z] === this.playlists[i].band) {
                     addToBandFilter = false;
                 }
             }
 
-            if (this.playlists[i].band != 'undefined' && this.playlists[i].band != '' && addToBandFilter) {
+            if (this.playlists[i].band !== 'undefined' && this.playlists[i].band !== '' && addToBandFilter) {
                 bands.push(this.playlists[i].band);
             }
         }
@@ -939,7 +947,7 @@ export class TuneBook {
                 addToColorFilter = true;
 
                 for (let z = 0; z < colors.length; z++) {
-                    if (colors[z] == this.tuneSets[i].tuneSetPositions[c].tune.color.getHexValue()) {
+                    if (colors[z] === this.tuneSets[i].tuneSetPositions[c].tune.color.getHexValue()) {
                         addToColorFilter = false;
                     }
                 }

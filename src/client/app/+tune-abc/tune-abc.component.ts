@@ -21,7 +21,7 @@ export class TuneAbcComponent implements OnInit, OnDestroy {
     routerSubscription: Subscription;
 
     constructor(public tuneBookService: TuneBookService, public router: Router, public route: ActivatedRoute) {
-        console.log('tune-abc:constructor called');
+        //console.log('tune-abc:constructor called');
     }
 
     ngOnInit() {

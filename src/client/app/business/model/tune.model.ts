@@ -57,16 +57,16 @@ export class Tune {
 
             if (beginOfLine.length > 1) {
 
-                if (beginOfLine == 'R:') {
+                if (beginOfLine === 'R:') {
                     this.type = getAbcValueOfTuneLine(tuneSplits[i], 'R:', 'undefined').toLowerCase();
 
-                } else if (beginOfLine == 'K:') {
+                } else if (beginOfLine === 'K:') {
                     this.key = getAbcValueOfTuneLine(tuneSplits[i], 'K:', 'undefined');
 
-                } else if (beginOfLine == 'H:') {
+                } else if (beginOfLine === 'H:') {
                     let tuneModificationString = getAbcValueOfTuneLine(tuneSplits[i], 'Modified ', 'undefined');
 
-                    if (tuneModificationString != 'undefined') {
+                    if (tuneModificationString !== 'undefined') {
                         tuneModificationString = tuneModificationString + 'T22:00';
                         this.lastModified = moment(tuneModificationString, 'YYYY-MM-DDTHH:mm').toDate();
                     }
@@ -78,26 +78,27 @@ export class Tune {
 
             if (beginOfLine.length > 1) {
 
-                if (beginOfLine == '%%etbk:tnset') {
+                if (beginOfLine === '%%etbk:tnset') {
                     isStandardAbc = false;
 
-                } else if (beginOfLine == '%%etbk:video') {
+                } else if (beginOfLine === '%%etbk:video') {
                     this.videos.push(this.importVideo(getAbcValueOfTuneLine(tuneSplits[i], '%%etbk:video ', '')));
                     isStandardAbc = false;
 
-                } else if (beginOfLine == '%%etbk:wsite') {
+                } else if (beginOfLine === '%%etbk:wsite') {
                     this.websites.push(new Website(getAbcValueOfTuneLine(tuneSplits[i], '%%etbk:wsite ', '')));
                     isStandardAbc = false;
 
-                } else if (beginOfLine == '%%etbk:annot') {
+                } else if (beginOfLine === '%%etbk:annot') {
                     this.annotation = getAbcValueOfTuneLine(tuneSplits[i], '%%etbk:annot ', '');
                     isStandardAbc = false;
 
-                } else if (beginOfLine == '%%etbk:color') {
-                    this.color = new Color(null, null, null, getAbcValueOfTuneLine(tuneSplits[i], '%%etbk:color ', this.systemProperties.DEFAULT_COLOR));
+                } else if (beginOfLine === '%%etbk:color') {
+                    this.color = new Color(null, null, null,
+                        getAbcValueOfTuneLine(tuneSplits[i], '%%etbk:color ', this.systemProperties.DEFAULT_COLOR));
                     isStandardAbc = false;
 
-                } else if (beginOfLine == '%%etbk:pldat') {
+                } else if (beginOfLine === '%%etbk:pldat') {
                     let playDatesString = getAbcValueOfTuneLine(tuneSplits[i], '%%etbk:pldat ', '');
                     this.setPlayDates(this.getPlayDates(playDatesString));
                     isStandardAbc = false;
@@ -143,23 +144,23 @@ export class Tune {
                 // Abc-Standard
                 beginOfLine = tuneSplits[i].substring(0, 2);
 
-                if (beginOfLine == 'X:') {
+                if (beginOfLine === 'X:') {
                     isHeaderLine = true;
                     isNeeded = true;
-                } else if (beginOfLine == 'M:') {
+                } else if (beginOfLine === 'M:') {
                     isHeaderLine = true;
                     isNeeded = true;
-                } else if (beginOfLine == 'L:') {
+                } else if (beginOfLine === 'L:') {
                     isHeaderLine = true;
                     isNeeded = true;
-                } else if (beginOfLine == 'K:') {
+                } else if (beginOfLine === 'K:') {
                     isHeaderLine = true;
                     isNeeded = true;
-                } else if (beginOfLine == 'T:') {
+                } else if (beginOfLine === 'T:') {
                     isHeaderLine = true;
 
                     // TODO: titles have to be included -> talk to Paul for options
-                    if (titleCount == 0) {
+                    if (titleCount === 0) {
                         // Only print first title
                         simulateTitle = true;
                         isNeeded = true;
@@ -192,7 +193,7 @@ export class Tune {
                                 isNeeded = false;
                                 barLength = barSplit.length;
 
-                                if (barLength == 0) {
+                                if (barLength === 0) {
                                     // -Takt-Strich am Beginn der Linie (es hat vorher keine anderen Zeichen), oder
                                     // -Takt-Strich am Ende der Linie
                                     // -Doppel-Taktstrich (kein Zeichen zwischen den Takt-Strichen)
@@ -217,7 +218,7 @@ export class Tune {
                                     if (startFromBar <= totBarCount && totBarCount < startFromBar + numberOfBars) {
                                         isNeeded = true;
 
-                                        if (totBarCount == startFromBar + numberOfBars - 1) {
+                                        if (totBarCount === startFromBar + numberOfBars - 1) {
                                             isLastBar = true;
                                         }
                                     } else {
@@ -258,7 +259,7 @@ export class Tune {
 
     setLastPlayed() {
         // TODO: Sort playDates
-        if (this.playDates.length == 0) {
+        if (this.playDates.length === 0) {
             return this.lastPlayed = null;
         } else {
             return this.lastPlayed = this.playDates[0].date;
@@ -293,7 +294,7 @@ export class Tune {
         let remove = false;
 
         for (let i = 0; i < this.websites.length; i++) {
-            if (url == this.websites[i].url) {
+            if (url === this.websites[i].url) {
                 index = i;
                 remove = true;
             }
@@ -307,7 +308,7 @@ export class Tune {
     getVideoById(videoSource: string, videoCode: string): Video {
 
         for (let i = 0; i < this.videos.length; i++) {
-            if (videoSource == this.videos[i].source && videoCode == this.videos[i].code) {
+            if (videoSource === this.videos[i].source && videoCode === this.videos[i].code) {
                 return this.videos[i];
             }
         }
@@ -320,7 +321,7 @@ export class Tune {
         let remove = false;
 
         for (let i = 0; i < this.videos.length; i++) {
-            if (videoSource == this.videos[i].source && videoCode == this.videos[i].code) {
+            if (videoSource === this.videos[i].source && videoCode === this.videos[i].code) {
                 index = i;
                 remove = true;
             }
@@ -365,7 +366,7 @@ export class Tune {
     }
 
     addPlayDate(newDate: Date) {
-        if (this.lastPlayed != null && moment(this.lastPlayed).diff(newDate, 'minutes') == 0) {
+        if (this.lastPlayed !== null && moment(this.lastPlayed).diff(newDate, 'minutes') === 0) {
             // Power-Clicker
             // Do nothing
 

@@ -129,11 +129,11 @@ export function filterTuneSets(tuneBook: TuneBook, filterSettings: FilterSetting
             playlists = tuneBook.getPlaylistsByTuneSetId(tuneBook.tuneSets[i].id);
 
             for (let y = 0; y < playlists.length; y++) {
-                if (filterSettings.event == playlists[y].event) {
+                if (filterSettings.event === playlists[y].event) {
                     eventMatch = true;
                 }
 
-                if (filterSettings.band == playlists[y].band) {
+                if (filterSettings.band === playlists[y].band) {
                     bandMatch = true;
                 }
             }
@@ -147,15 +147,15 @@ export function filterTuneSets(tuneBook: TuneBook, filterSettings: FilterSetting
                     titleMatch = true;
                 }
 
-                if (!keyMatch && tuneBook.tuneSets[i].tuneSetPositions[z].tune.key == filterSettings.key) {
+                if (!keyMatch && tuneBook.tuneSets[i].tuneSetPositions[z].tune.key === filterSettings.key) {
                     keyMatch = true;
                 }
 
-                if (!typeMatch && tuneBook.tuneSets[i].tuneSetPositions[z].tune.type == filterSettings.type) {
+                if (!typeMatch && tuneBook.tuneSets[i].tuneSetPositions[z].tune.type === filterSettings.type) {
                     typeMatch = true;
                 }
 
-                if (!colorMatch && tuneBook.tuneSets[i].tuneSetPositions[z].tune.color.getHexValue() == filterSettings.color) {
+                if (!colorMatch && tuneBook.tuneSets[i].tuneSetPositions[z].tune.color.getHexValue() === filterSettings.color) {
                     colorMatch = true;
                 }
             }
@@ -180,7 +180,7 @@ export function extractTunes(tuneSets: Array<TuneSet>): Array<Tune> {
             addToTunes = true;
 
             for (let y = 0; y < tunes.length; y++) {
-                if (tunes[y].id == tuneSets[i].tuneSetPositions[z].tune.id) {
+                if (tunes[y].id === tuneSets[i].tuneSetPositions[z].tune.id) {
                     addToTunes = false;
                 }
             }
@@ -209,7 +209,7 @@ export function filterPlaylists(playlists: Array<Playlist>, filterSettings: Filt
 
         if (filterSettings.applyPlaylistIds && filterSettings.playlistIds.length > 0) {
             for (let j = 0; j < filterSettings.playlistIds.length; j++) {
-                if (!playlistIdMatch && playlists[z].id == filterSettings.playlistIds[j]) {
+                if (!playlistIdMatch && playlists[z].id === filterSettings.playlistIds[j]) {
                     playlistIdMatch = true;
                 }
             }
@@ -221,7 +221,7 @@ export function filterPlaylists(playlists: Array<Playlist>, filterSettings: Filt
             for (let y = 0; y < playlists[z].playlistPositions.length; y++) {
 
                 for (let a = 0; a < tuneSetsFiltered.length; a++) {
-                    if (!tuneSetMatch && playlists[z].playlistPositions[y].tuneSet.id == tuneSetsFiltered[a].id) {
+                    if (!tuneSetMatch && playlists[z].playlistPositions[y].tuneSet.id === tuneSetsFiltered[a].id) {
                         tuneSetMatch = true;
                     }
                 }
