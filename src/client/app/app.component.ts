@@ -1,5 +1,5 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { Router, ROUTER_DIRECTIVES } from '@angular/router';
+import { Component, OnInit, ChangeDetectorRef, ApplicationRef } from '@angular/core';
+import { Router, ROUTER_DIRECTIVES, NavigationEnd } from '@angular/router';
 
 import { Subscription } from 'rxjs/Subscription';
 
@@ -22,7 +22,20 @@ export class AppComponent implements OnInit {
     modusActionSubscription: Subscription;
     isRendering: boolean;
 
-    constructor(public tuneBookService: TuneBookService, public router: Router, private cdr: ChangeDetectorRef) {
+    constructor(public tuneBookService: TuneBookService, public router: Router, private cdr: ChangeDetectorRef,
+        private appRef: ApplicationRef) {
+
+        // Temporary fix: Back Button does not work on iOS (angular 2.0.0-rc.4, router 3.0.0-beta.2)
+        // https://github.com/angular/angular/issues/9565    
+        if (this.isMac()) {
+            router.events.subscribe(ev => {
+                if (ev instanceof NavigationEnd) {
+                    setTimeout(() => {
+                        appRef.zone.run(() => appRef.tick());
+                    }, 500);
+                }
+            });
+        }
 
     }
 
@@ -118,5 +131,12 @@ export class AppComponent implements OnInit {
 
     exportTuneBook() {
         this.router.navigate(['/abc']);
+    }
+
+    isMac() {
+        if (navigator.userAgent.indexOf('Mac') > -1) {
+            return true;
+        }
+        return false;
     }
 }
