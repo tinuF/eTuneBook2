@@ -60,7 +60,7 @@ export class TuneDotsComponent implements OnInit, OnChanges, OnDestroy {
                 */
                 editable: false,
                 add_classes: true,
-                listener: <any> null
+                listener: <any>null
             };
             let renderParams = {
             };
@@ -74,6 +74,14 @@ export class TuneDotsComponent implements OnInit, OnChanges, OnDestroy {
             jQuery(this.elementRef.nativeElement).find('text.annotation').css('font-size', '0.6em');
             //jQuery('.meta-bottom').css('display', 'none');
             jQuery(this.elementRef.nativeElement).find('.meta-bottom').css('font-size', '0.7em');
+
+            let midiOutput = 'MidiForTune' + this.tune.id;
+
+            ABCJS.renderMidi(midiOutput, this.tune.pure, {}, { generateDownload: true }, {});
+            jQuery(this.elementRef.nativeElement).find('a').addClass('btn')
+            .addClass('btn-secondary').addClass('btn-sm').addClass('nav-link').prop('title', 'download midi')
+            .html('<i class="mdi mdi-download">midi</i>');
+
 
         }, 0);
     }

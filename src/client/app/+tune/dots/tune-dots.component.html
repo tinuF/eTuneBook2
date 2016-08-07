@@ -1,2 +1,3 @@
  <etb-tune-dots-menu (transposeUp)="renderAbc()" (transposeDown)="renderAbc()" [tune]="tune" *ngIf="editModus"></etb-tune-dots-menu>
  <div id="DotsForTune{{tune.id}}" class="renderTheDots"></div>
+ <div id="MidiForTune{{tune.id}}" class="renderMIDI" [hidden]="!editModus"></div>
