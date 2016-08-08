@@ -25,7 +25,6 @@ export class TuneDotsComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     ngOnInit() {
-        this.renderAbc();
         this.editModus = this.tuneBookService.isEditModus();
         this.modusActionSubscription = this.tuneBookService.modusActionObservable.subscribe(
             (action) => {
@@ -37,6 +36,9 @@ export class TuneDotsComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     ngOnChanges() {
+        //ngOnChanges wird durchlaufen
+        //-bei Instanzierung (vor ngOnInit)
+        //-bei Wechsel des Tunes im Randomizer
         this.renderAbc();
     }
 
@@ -78,7 +80,7 @@ export class TuneDotsComponent implements OnInit, OnChanges, OnDestroy {
             let midiOutput = 'MidiForTune' + this.tune.id;
 
             ABCJS.renderMidi(midiOutput, this.tune.pure, {}, { generateDownload: true }, {});
-            jQuery(this.elementRef.nativeElement).find('a').addClass('btn')
+            jQuery(this.elementRef.nativeElement).find('.renderMIDI').find('a').addClass('btn')
             .addClass('btn-secondary').addClass('btn-sm').addClass('nav-link').prop('title', 'download midi')
             .html('<i class="mdi mdi-download">midi</i>');
 

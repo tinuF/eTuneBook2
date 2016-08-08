@@ -346,7 +346,12 @@ FileETag None
 # Options +SymLinksIfOwnerMatch
   Options +FollowSymlinks
   RewriteEngine On
-# RewriteBase /
+# Needed for Angular2 PathLocationStrategy 
+  RewriteBase /
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_URI} !.*\.(css|js|html|png|jpg|jpeg|gif|txt)
+  RewriteRule (.*) index.html [L]
 </IfModule>
 
 
