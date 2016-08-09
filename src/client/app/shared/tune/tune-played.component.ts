@@ -1,14 +1,16 @@
 import { Component, Input } from '@angular/core';
 
+import {TimeAgoPipe} from 'angular2-moment';
+
 import { TuneBookService, Tune } from '../../business/index';
-import { FromNowPipe } from '../pipes/index';
+//import { FromNowPipe } from '../pipes/index';
 
 @Component({
     moduleId: module.id,
     selector: 'etb-tune-played',
     templateUrl: 'tune-played.component.html',
     styleUrls: ['tune-played.component.css'],
-    pipes: [FromNowPipe]
+    pipes: [TimeAgoPipe]
 })
 export class TunePlayedComponent {
     @Input() tune: Tune;
@@ -18,9 +20,7 @@ export class TunePlayedComponent {
     }
 
     justPlayedTheTune() {
-        var now = new Date();
-        this.tuneBookService.addTunePlayDate(this.tune, now);
-        this.tuneBookService.storeTuneBookAbc();
+        this.tuneBookService.addTunePlayDate(this.tune);
     }
 }
 

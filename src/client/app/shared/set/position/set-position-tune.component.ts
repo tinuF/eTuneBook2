@@ -44,9 +44,7 @@ export class SetpositionTuneComponent implements OnInit, OnDestroy {
     }
 
     justPlayedTheTune() {
-        var now = new Date();
-        this.tuneBookService.addTunePlayDate(this.tune, now);
-        this.tuneBookService.storeTuneBookAbc();
+        this.tuneBookService.addTunePlayDate(this.tune);
     }
 
     handleDragStart(dragEvent: DragEvent) {

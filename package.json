@@ -1,6 +1,6 @@
 {
   "name": "eTuneBook2",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "eTuneBook 2",
   "repository": "https://github.com/tinuF/eTuneBook2",
   "scripts": {
@@ -119,9 +119,10 @@
     "@angular/platform-browser": "2.0.0-rc.4",
     "@angular/platform-browser-dynamic": "2.0.0-rc.4",
     "@angular/router": "3.0.0-beta.2",
+    "angular2-moment": "^0.8.2",
     "bootstrap": "4.0.0-alpha.2",
-    "es6-module-loader": "^0.17.8",
     "core-js": "^2.4.0",
+    "es6-module-loader": "^0.17.8",
     "jquery": "2.2.2",
     "mdi": "1.5.54",
     "moment": "2.12.0",

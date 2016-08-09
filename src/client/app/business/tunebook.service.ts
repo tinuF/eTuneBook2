@@ -301,8 +301,10 @@ export class TuneBookService {
         return tune.getTuneAbcId();
     }
 
-    addTunePlayDate(tune: Tune, newDate: Date) {
+    addTunePlayDate(tune: Tune) {
+        let newDate: Date = new Date();
         tune.addPlayDate(newDate);
+        this.storeTuneBookAbc();
     }
 
     addTuneSetPlayDate(tuneSet: TuneSet, newDate: Date) {
