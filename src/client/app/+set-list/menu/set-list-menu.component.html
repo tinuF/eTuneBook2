@@ -1,27 +1,31 @@
 <div class="setlistMenu1 btn-group hidden-print">
-    <etb-edit-btn></etb-edit-btn>
+  <etb-edit-btn></etb-edit-btn>
 </div>
 
 <div class="setlistMenu2 btn-group hidden-print">
-    <a class="btn btn-secondary btn-sm" title="Random Sort" (click)="sortRandom()">
-		<i class="mdi mdi-shuffle"></i>
-	</a>
-	
-	<a class="btn btn-secondary btn-sm" title="Playdate Sort" (click)="sortPlaydate()">
-		<i class="mdi mdi-history"></i>
-	</a>
-    
-    <a class="btn btn-secondary btn-sm" title="Numeric Sort" (click)="sortId()">
-		<i class="mdi mdi-sort-numeric"></i>
-	</a>
-	
-	<a class="btn btn-secondary btn-sm" title="Only checked Sets" [class.active]="applySetIds" (click)="filterSets()">
-		<i class="mdi mdi-check"></i>
-	</a>
-	
-	<a class="btn btn-secondary btn-sm" title="Add to Playlist" data-toggle="modal" data-target=".bd-example-modal-lg">
-		<i class="mdi mdi-playlist-plus"></i>
-	</a>
+  <a class="btn btn-secondary btn-sm" title="Random Sort" (click)="sortRandom()" [class.active]="sorting==='random'">
+    <i class="mdi mdi-shuffle"></i>
+  </a>
+
+  <a class="btn btn-secondary btn-sm" title="Playdate Sort" (click)="sortPlaydate()" [class.active]="sorting==='playDate'">
+    <i class="mdi mdi-history"></i>
+    <i *ngIf="sorting==='playDate' && ascending" class="mdi mdi-sort-ascending"></i>
+		<i *ngIf="sorting==='playDate' && !ascending" class="mdi mdi-sort-descending"></i>
+  </a>
+
+  <a class="btn btn-secondary btn-sm" title="Numeric Sort" (click)="sortId()" [class.active]="sorting==='id'">
+    <i class="mdi mdi-sort-numeric"></i>
+    <i *ngIf="sorting==='id' && ascending" class="mdi mdi-sort-ascending"></i>
+		<i *ngIf="sorting==='id' && !ascending" class="mdi mdi-sort-descending"></i>
+  </a>
+
+  <a class="btn btn-secondary btn-sm" title="Only checked Sets" [class.active]="applySetIds" (click)="filterSets()">
+    <i class="mdi mdi-check"></i>
+  </a>
+
+  <a class="btn btn-secondary btn-sm" title="Add to Playlist" data-toggle="modal" data-target=".bd-example-modal-lg">
+    <i class="mdi mdi-playlist-plus"></i>
+  </a>
 </div>
 
 <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">

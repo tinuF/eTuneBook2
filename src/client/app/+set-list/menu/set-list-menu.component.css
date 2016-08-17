@@ -13,10 +13,18 @@
     z-index: 1020;
     width: 40px;
  }
- a.active {
-	background-color: lightblue;
-  	color: white;
+ 
+ .active {
+     background-color: #FFF5E0;
  }
+
+ .active > i{
+     background-color: FFF5E0;
+ }
+
+ :hover > i{
+     background-color: lightgray;
+}
 
 
 

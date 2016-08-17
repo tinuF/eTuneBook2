@@ -1,9 +1,17 @@
 <nav class="navbar navbar-light navbar-fixed-top bg-faded" role="navigation">
     <!--
-    <a class="navbar-brand hidden-sm-down pull-right" href="#/info/introduction" title="eTuneBook"><img src="../../favicon.ico" class="img-responsive" width="24" height="24" alt="eTuneBook">
+    <a class="navbar-brand hidden-sm-down pull-right" [routerLink]="['/welcome']" title="eTuneBook"><img src="img/ico/favicon.ico" class="img-responsive" width="32" height="32" alt="eTuneBook">
     </a>
     -->
-    <a class="navbar-brand hidden-sm-down pull-xs-right" [routerLink]="['/welcome']" title="eTuneBook">eTuneBook</a>
+    <!--
+    <a class="navbar-brand hidden-md-down col-xs-1 pull-xs-right" [routerLink]="['/welcome']" [class.active]="router.url==='/welcome'||router.url==='/changelog'||router.url==='/credits'||router.url==='/feedback'"
+        title="eTuneBook">eTuneBook</a>
+-->
+    <a class="navbar-brand col-xs-1 pull-xs-right" title="Info" [routerLink]="[ '/welcome'] " [class.active]="router.url==='/welcome'||router.url==='/changelog'||router.url==='/credits'||router.url==='/feedback' "
+        [class.disabled]="router.url==='/welcome'||router.url==='/changelog'||router.url==='/credits'||router.url==='/feedback' ">
+        <span>eTb</span>
+    </a>
+
     <ul class="nav navbar-nav">
         <li class="nav-item dropdown col-xs-1">
             <a class="nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -25,55 +33,62 @@
         </li>
 
         <li class="nav-item col-xs-1">
-            <a class="nav-link" [routerLink]="['/tunes']" title="Load Tunes">
+            <a class="nav-link" [routerLink]="['/tunes']" title="Load Tunes" [class.active]="router.url==='/tunes'" [class.disabled]="router.url==='/tunes'">
                 <span class="hidden-sm-down">Tunes</span>
                 <i class="mdi mdi-music-note hidden-md-up"></i>
             </a>
         </li>
 
         <li class="nav-item col-xs-1">
-            <a class="nav-link" [routerLink]="['/sets']" title="Load Sets">
+            <a class="nav-link" [routerLink]="['/sets']" title="Load Sets" [class.active]="router.url==='/sets'" [class.disabled]="router.url==='/sets'">
                 <span class="hidden-sm-down">Sets</span>
                 <i class="mdi mdi-format-list-bulleted hidden-md-up"></i>
             </a>
         </li>
 
         <li class="nav-item col-xs-1">
-            <a class="nav-link" [routerLink]="['/playlists']" title="Load Playlists">
+            <a class="nav-link" [routerLink]="['/playlists']" title="Load Playlists" [class.active]="router.url==='/playlists'" [class.disabled]="router.url==='/playlists'">
                 <span class="hidden-sm-down">Playlists</span>
                 <i class="mdi mdi-play-circle-outline hidden-md-up"></i>
             </a>
         </li>
 
-        <form class="form-inline navbar-form pull-xs-right col-xs-5" role="search">
-            <input type="text" class="form-control" placeholder="Search" [value]="filterSettings.title" (keyup)="search($event)">
+        <li class="nav-item col-xs-1">
+            <a class="nav-link" title="Tune Randomizer" (click)="randomize()">
+                <i class="mdi mdi-shuffle-variant"></i>
+            </a>
+        </li>
+
+        <li class="nav-item col-xs-1">
+            <a class="nav-link" title="Filter" [routerLink]="['/filter']" [class.active]="router.url==='/filter'" [class.disabled]="router.url==='/filter' ">
+                <span class="hidden-sm-down ">Filter</span>
+                <i class="mdi mdi-filter hidden-md-up "></i>
+            </a>
+        </li>
+
+
+
+        <form class="form-inline navbar-form col-md-2 col-sm-2 col-xs-2" role="search ">
+            <input type="text " class="form-control " placeholder="Search " [value]="filterSettings.title " (keyup)="search($event) ">
         </form>
     </ul>
 </nav>
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-xs-5">
+<div class="container-fluid ">
+    <div class="row ">
+        <div class="col-xs-5 ">
             <etb-book-title></etb-book-title>
         </div>
-        <div class="col-xs-7">
+        <div class="col-xs-7 ">
             <etb-filter-text></etb-filter-text>
         </div>
     </div>
 
-    <div class="row">
+    <div class="row ">
         <etb-side-nav></etb-side-nav>
         <etb-social-nav></etb-social-nav>
-        <!--
-        <div *ngIf="isRendering">router loading...</div>
-        
-        -->
-        <!--
-        <etb-spinner [isRunning]="isRendering"></etb-spinner>
-        -->
         <router-outlet></router-outlet>
-
     </div>
 </div>
 
-<input class="input-file hidden-print" id="fileInput" type="file" (change)="readTuneBookFromLocalDrive($event)" #importer>
+<input class="input-file hidden-print " id="fileInput " type="file " (change)="readTuneBookFromLocalDrive($event)" #importer>

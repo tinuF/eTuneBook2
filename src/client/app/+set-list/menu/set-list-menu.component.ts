@@ -13,6 +13,7 @@ import { EditButtonComponent } from '../../shared/modus/edit-btn.component';
 export class SetListMenuComponent implements OnInit {
     @Input() sets: Array<TuneSet>;
     sorting: string;
+    ascending: boolean;
     filterSettings: FilterSettings;
     playlists: Array<Playlist>;
     selectedPlaylist: Playlist;
@@ -28,52 +29,58 @@ export class SetListMenuComponent implements OnInit {
 
         this.playlists = this.tuneBookService.getPlaylists();
         //Sets sind bereits mit SetId aufsteigend sortiert
-        this.sorting = 'idAsc';
+        this.sorting = 'id';
+        this.ascending = true;
         //console.log('set-list-menu:ngOnInit called');
 
     }
 
     sortPlaydate() {
-
-        if (this.sorting !== 'playdateAsc') {
-            //sort tuneSet playdate ascending  
-            this.sets.sort(function (a: TuneSet, b: TuneSet) {
-                return (a.getLastPlayDate() > b.getLastPlayDate()) ? 1 : (a.getLastPlayDate() < b.getLastPlayDate()) ? -1 : 0;
-            });
-            this.sorting = 'playdateAsc';
-
-        } else if (this.sorting !== 'playdateDesc') {
+        if (!(this.sorting === 'playDate') || this.ascending) {
             //sort tuneSet playdate descending  
             this.sets.sort(function (a: TuneSet, b: TuneSet) {
                 return (a.getLastPlayDate() > b.getLastPlayDate()) ? -1 : (a.getLastPlayDate() < b.getLastPlayDate()) ? 1 : 0;
             });
-            this.sorting = 'playdateDesc';
+            this.sorting = 'playDate';
+            this.ascending = false;
+        } else {
+            //sort tuneSet playdate ascending  
+            this.sets.sort(function (a: TuneSet, b: TuneSet) {
+                return (a.getLastPlayDate() > b.getLastPlayDate()) ? 1 : (a.getLastPlayDate() < b.getLastPlayDate()) ? -1 : 0;
+            });
+            this.sorting = 'playDate';
+            this.ascending = true;
         }
 
+        window.scrollTo(0, 0);
     }
 
     sortRandom() {
         this.sets = this.tuneBookService.shuffleTuneSetList();
         this.sorting = 'random';
+
+        window.scrollTo(0, 0);
     }
 
     sortId() {
-
-        if (this.sorting !== 'idAsc') {
+        if (!(this.sorting === 'id') || !this.ascending) {
             //sort tuneSet id ascending  
             this.sets.sort(function (a: TuneSet, b: TuneSet) {
                 return a.id - b.id;
             });
-            this.sorting = 'idAsc';
+            this.sorting = 'id';
+            this.ascending = true;
 
-        } else if (this.sorting !== 'idDesc') {
+        } else if (!(this.sorting === 'id') || this.ascending) {
             //sort tuneSet id descending  
             this.sets.sort(function (a: TuneSet, b: TuneSet) {
                 return b.id - a.id;
             });
-            this.sorting = 'idDesc';
+            this.sorting = 'id';
+            this.ascending = false;
         }
 
+        window.scrollTo(0, 0);
     }
 
     filterSets() {

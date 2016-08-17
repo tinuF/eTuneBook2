@@ -1,21 +1,29 @@
 <div class="tunelistMenu btn-group hidden-print">
-    <a class="btn btn-secondary btn-sm" title="Random Sort" (click)="sortRandom()">
+	<a class="btn btn-secondary btn-sm" title="Random Sort" (click)="sortRandom()" [class.active]="sorting==='random'">
 		<i class="mdi mdi-shuffle"></i>
 	</a>
-	
-	<a class="btn btn-secondary btn-sm" title="Alphabetic Sort" (click)="sortTitle()">
+
+	<a class="btn btn-secondary btn-sm" title="Alphabetic Sort" (click)="sortTitle()" [class.active]="sorting==='title'">
 		<i class="mdi mdi-sort-alphabetical"></i>
+		<i *ngIf="sorting==='title' && ascending" class="mdi mdi-sort-ascending"></i>
+		<i *ngIf="sorting==='title' && !ascending" class="mdi mdi-sort-descending"></i>
 	</a>
-    
-    <a class="btn btn-secondary btn-sm" title="Numeric Sort" (click)="sortId()">
+
+	<a class="btn btn-secondary btn-sm" title="Numeric Sort" (click)="sortId()" [class.active]="sorting==='id'">
 		<i class="mdi mdi-sort-numeric"></i>
+		<i *ngIf="sorting==='id' && ascending" class="mdi mdi-sort-ascending"></i>
+		<i *ngIf="sorting==='id' && !ascending" class="mdi mdi-sort-descending"></i>
 	</a>
-	
-	<a class="btn btn-secondary btn-sm" title="Playdate Sort" (click)="sortPlaydate()">
+
+	<a class="btn btn-secondary btn-sm" title="Playdate Sort" (click)="sortPlaydate()" [class.active]="sorting==='playDate'">
 		<i class="mdi mdi-history"></i>
+		<i *ngIf="sorting==='playDate' && ascending" class="mdi mdi-sort-ascending"></i>
+		<i *ngIf="sorting==='playDate' && !ascending" class="mdi mdi-sort-descending"></i>
 	</a>
-    
-    <a class="btn btn-secondary btn-sm" title="Frequency Sort" (click)="sortFrequency()">
+
+	<a class="btn btn-secondary btn-sm" title="Frequency Sort" (click)="sortFrequency()" [class.active]="sorting==='frequency'">
 		<i class="mdi mdi-heart"></i>
+		<i *ngIf="sorting==='frequency' && ascending" class="mdi mdi-sort-ascending"></i>
+		<i *ngIf="sorting==='frequency' && !ascending" class="mdi mdi-sort-descending"></i>
 	</a>
 </div>

@@ -84,3 +84,26 @@
     top: 3px;
     left: -3px
 }
+
+.active > span{
+     background-color: #FFF5E0;
+}
+
+.active > i{
+     background-color: #FFF5E0;
+}
+
+a.disabled {
+   pointer-events: none;
+   cursor: default;
+}
+
+/*
+.active > i:hover{
+     background-color: lightgray;
+}
+
+.active > span:hover{
+     background-color: lightgray;
+}
+*/

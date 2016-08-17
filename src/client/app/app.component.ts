@@ -133,6 +133,11 @@ export class AppComponent implements OnInit {
         this.router.navigate(['/abc']);
     }
 
+    randomize() {
+        let randomTuneId: number = this.tuneBookService.getRandomTuneId();
+        this.router.navigate(['/tunes', randomTuneId]);
+    }
+
     isMac() {
         if (navigator.userAgent.indexOf('Mac') > -1) {
             return true;
