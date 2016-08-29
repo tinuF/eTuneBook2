@@ -1,7 +1,7 @@
 .side-nav {
 	position: fixed;
 	left: 1px;
-	top: 360px;
+	bottom: 1px;
     /*background-color: #F5F5F5;*/
     z-index: 1020;
     /*height: 50px;*/

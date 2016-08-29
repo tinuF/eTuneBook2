@@ -68,7 +68,7 @@
 
 
 
-        <form class="form-inline navbar-form col-md-2 col-sm-2 col-xs-2" role="search ">
+        <form class="form-inline navbar-form col-xs-1" role="search ">
             <input type="text " class="form-control " placeholder="Search " [value]="filterSettings.title " (keyup)="search($event) ">
         </form>
     </ul>
@@ -91,4 +91,4 @@
     </div>
 </div>
 
-<input class="input-file hidden-print " id="fileInput " type="file " (change)="readTuneBookFromLocalDrive($event)" #importer>
+<input class="input-file hidden-print" id="fileInput" type="file" (change)="readTuneBookFromLocalDrive($event)" #importer>
