@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ROUTER_DIRECTIVES } from '@angular/router';
 
 import { TuneBookService, TuneSet, Playlist, PlaylistPosition } from '../../../business/index';
 
@@ -7,7 +6,6 @@ import { TuneBookService, TuneSet, Playlist, PlaylistPosition } from '../../../b
     moduleId: module.id,
     selector: 'etb-set-playlist-list-item',
     templateUrl: 'set-playlist-list-item.component.html',
-    directives: [ROUTER_DIRECTIVES],
     styleUrls: ['set-playlist-list-item.component.css']
 })
 export class SetPlaylistListItemComponent implements OnInit {

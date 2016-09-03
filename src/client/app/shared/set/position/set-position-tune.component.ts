@@ -1,20 +1,14 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
-import { ROUTER_DIRECTIVES } from '@angular/router';
 
 import { Subscription } from 'rxjs/Subscription';
 
 import { TuneBookService, Tune, TuneSetPosition, ACTION } from '../../../business/index';
-import { EliminateThePipe } from '../../../shared/pipes/index';
-import { SampleDotsComponent } from '../../../shared/dots/sample-dots.component';
-import { TunePlayedComponent} from '../../../shared/tune/index';
 
 @Component({
     moduleId: module.id,
     selector: 'etb-set-position-tune',
     templateUrl: 'set-position-tune.component.html',
-    directives: [ROUTER_DIRECTIVES, SampleDotsComponent, TunePlayedComponent],
     styleUrls: ['set-position-tune.component.css'],
-    pipes: [EliminateThePipe]
 })
 export class SetpositionTuneComponent implements OnInit, OnDestroy {
     @Input() tune: Tune;

@@ -1,29 +1,19 @@
-import { APP_BASE_HREF } from '@angular/common';
-import { disableDeprecatedForms, provideForms } from '@angular/forms';
-//import { enableProdMode, provide, SystemJsComponentResolver, ComponentResolver } from '@angular/core';
-import { enableProdMode, provide } from '@angular/core';
-import { bootstrap } from '@angular/platform-browser-dynamic';
-import { APP_ROUTER_PROVIDERS } from './app.routes';
-import { HTTP_PROVIDERS } from '@angular/http';
-//import { RuntimeCompiler } from '@angular/compiler';
+/**
+ * Bootstraps the application and makes the ROUTER_PROVIDERS and the APP_BASE_HREF available to it.
+ * @see https://angular.io/docs/ts/latest/api/platform-browser-dynamic/index/bootstrap-function.html
+ */
 
-import { AppComponent } from './app.component';
+import { enableProdMode } from '@angular/core';
+// The browser platform with a compiler
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
-if ('<%= ENV %>' === 'prod') { enableProdMode(); }
+// The app module
+import { AppModule } from './app.module';
 
-bootstrap(AppComponent, [
-  disableDeprecatedForms(),
-  provideForms(),
-  APP_ROUTER_PROVIDERS,
-  // Needed for lazy-loading Routes. Does not work with production build using https://github.com/systemjs/builder
-  //{
-    //provide: ComponentResolver,
-    //useFactory: (r) => new SystemJsComponentResolver(r),
-    //deps: [RuntimeCompiler]
-  //},
-  HTTP_PROVIDERS,
-  provide(APP_BASE_HREF, { useValue: '<%= APP_BASE %>' })
-]);
+if ('<%= ENV %>' === 'prod') {  enableProdMode(); }
+
+// Compile and launch the module
+platformBrowserDynamic().bootstrapModule(AppModule);
 
 // In order to start the Service Worker located at "./worker.js"
 // uncomment this line. More about Service Workers here

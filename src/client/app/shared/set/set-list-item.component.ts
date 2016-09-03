@@ -3,15 +3,11 @@ import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
 import { TuneBookService, TuneSet, TuneSetPosition, ACTION, FilterSettings } from '../../business/index';
-import { SampleDotsComponent } from '../dots/sample-dots.component';
-import { SetPositionComponent } from './position/set-position.component';
-import { SetPlaylistListComponent } from './playlist-list/set-playlist-list.component';
 
 @Component({
     moduleId: module.id,
     selector: 'etb-set-list-item',
     templateUrl: 'set-list-item.component.html',
-    directives: [SampleDotsComponent, SetPositionComponent, SetPlaylistListComponent],
     styleUrls: ['set-list-item.component.css']
 })
 export class SetListItemComponent implements OnInit, OnDestroy {

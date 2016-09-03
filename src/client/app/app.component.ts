@@ -4,8 +4,6 @@ import { Router, ROUTER_DIRECTIVES, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 
 import { TuneBookService, TuneBook, Playlist, TuneSet, FilterSettings, ACTION} from './business/index';
-import { FilterTextComponent, SideNavigationComponent, SocialNavigationComponent,
-    BookTitleComponent, SpinnerComponent } from './shared/index';
 
 @Component({
     moduleId: module.id,
@@ -13,8 +11,6 @@ import { FilterTextComponent, SideNavigationComponent, SocialNavigationComponent
     providers: [TuneBookService],
     templateUrl: 'app.component.html',
     styleUrls: ['app.component.css'],
-    directives: [ROUTER_DIRECTIVES, FilterTextComponent, BookTitleComponent,
-        SideNavigationComponent, SocialNavigationComponent, SpinnerComponent]
 })
 export class AppComponent implements OnInit {
     tuneBook: TuneBook;

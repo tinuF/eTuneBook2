@@ -3,13 +3,11 @@ import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
 import { TuneBookService, TuneSet, Playlist, ACTION } from '../../../business/index';
-import { SetPlaylistListItemComponent } from '../playlist-list/set-playlist-list-item.component';
 
 @Component({
     moduleId: module.id,
     selector: 'etb-set-playlist-list',
     templateUrl: 'set-playlist-list.component.html',
-    directives: [SetPlaylistListItemComponent],
     styleUrls: ['set-playlist-list.component.css']
 })
 export class SetPlaylistListComponent implements OnInit, OnDestroy {
