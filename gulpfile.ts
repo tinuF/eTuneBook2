@@ -55,10 +55,12 @@ gulp.task('build.prod', (done: any) =>
     'copy.npm-css-deps',
     'copy.npm-fonts-deps',
     'build.html_css',
-    'copy.js.prod',
+    'copy.prod',
+    'compile.ahead.prod',
     'build.js.prod',
     'build.bundles',
     'build.bundles.app',
+    'minify.bundles',
     'build.index.prod',
     'generate.manifest',
     done));

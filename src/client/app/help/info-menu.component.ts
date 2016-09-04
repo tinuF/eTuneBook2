@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   moduleId: module.id,
@@ -7,7 +8,7 @@ import { Component } from '@angular/core';
   styleUrls: ['info-menu.component.css']
 })
 export class InfoMenuComponent {
-  constructor() {
+  constructor(public router: Router) {
     //console.log('info-menu:constructor called');
   }
 }

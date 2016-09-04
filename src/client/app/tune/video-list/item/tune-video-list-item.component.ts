@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, Input, ViewChild, ElementRef, Renderer } from '@angular/core';
-import {DomSanitizationService, SafeResourceUrl} from '@angular/platform-browser';
+import { DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 
 import { Subscription }   from 'rxjs/Subscription';
 
@@ -20,7 +20,7 @@ export class TuneVideoListItemComponent implements OnInit, OnDestroy {
     editModus: boolean;
     modusActionSubscription: Subscription;
 
-    constructor(public tuneBookService: TuneBookService, public renderer: Renderer, public sanitationService: DomSanitizationService) {
+    constructor(public tuneBookService: TuneBookService, public renderer: Renderer, public sanitationService: DomSanitizer) {
 
     }
 
