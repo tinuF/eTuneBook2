@@ -58,8 +58,8 @@ export class SetListItemComponent implements OnInit, OnDestroy {
         });
     }
 
-    toggleSetSelection(e) {
-        if (e.target.checked) {
+    toggleSetSelection(e:Event) {
+        if ((<any>e.target).checked) {
             this.filterSettings.addSetId(this.set.id);
         } else {
             this.filterSettings.removeSetId(this.set.id);

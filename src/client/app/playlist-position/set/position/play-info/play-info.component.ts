@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, ViewChild, ElementRef, Renderer } from '@angular/core';
 
 import { Subscription }   from 'rxjs/Subscription';
 
@@ -12,10 +12,11 @@ import { TuneBookService, TuneSetPositionPlayInfo, PartPlayInfo, ACTION } from '
 })
 export class PlayInfoComponent implements OnInit, OnDestroy {
     @Input() tuneSetPositionPlayInfo: TuneSetPositionPlayInfo;
+    @ViewChild('inputTuneSetPositionAnnotation') inputTuneSetPositionAnnotation: ElementRef;
     editModus: boolean;
     modusActionSubscription: Subscription;
 
-    constructor(public tuneBookService: TuneBookService) {
+    constructor(public tuneBookService: TuneBookService, public renderer: Renderer) {
 
     }
 
@@ -34,34 +35,16 @@ export class PlayInfoComponent implements OnInit, OnDestroy {
         this.modusActionSubscription.unsubscribe();
     }
 
-    handleKeyDownOnTuneSetPositionRepeat(event) {
-        var keycode = (event.keyCode ? event.keyCode : event.which);
+    handleKeyDownOnTuneSetPositionAnnotation(keyboardEvent: KeyboardEvent) {
+        var keycode = (keyboardEvent.keyCode ? keyboardEvent.keyCode : keyboardEvent.which);
 
         if (keycode === 13) { // ENTER
-            event.target.blur();
-            event.preventDefault();
-            this.handleBlurOnTuneSetPositionRepeat(event);
-        }
-    }
-
-    handleBlurOnTuneSetPositionRepeat(focusEvent: FocusEvent) {
-        this.tuneSetPositionPlayInfo.repeat = (<HTMLInputElement>focusEvent.target).value;
-        this.tuneBookService.storeTuneBookAbc();
-    }
-
-    handleKeyDownOnTuneSetPositionAnnotation(event) {
-        var keycode = (event.keyCode ? event.keyCode : event.which);
-
-        if (keycode === 13) { // ENTER
-            event.target.blur();
-            event.preventDefault();
-            this.handleBlurOnTuneSetPositionAnnotation(event);
+            this.renderer.invokeElementMethod(this.inputTuneSetPositionAnnotation.nativeElement, 'blur', []);
         }
     }
 
     handleBlurOnTuneSetPositionAnnotation(focusEvent: FocusEvent) {
-        this.tuneSetPositionPlayInfo.annotation = (<HTMLInputElement>focusEvent.target).value;
-        this.tuneBookService.storeTuneBookAbc();
+       this.tuneBookService.storeTuneBookAbc();
     }
 
     addPartPlayInfo() {

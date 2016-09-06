@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ROUTER_DIRECTIVES } from '@angular/router';
 
 import { TuneBookService, Playlist, FilterSettings } from '../../business/index';
 
@@ -33,8 +32,8 @@ export class PlaylistListItemComponent implements OnInit {
         }
     }
 
-    togglePlaylistSelection(e) {
-        if (e.target.checked) {
+    togglePlaylistSelection(e:Event) {
+        if ((<any>e.target).checked) {
             this.filterSettings.addPlaylistId(this.playlist.id);
 
         } else {

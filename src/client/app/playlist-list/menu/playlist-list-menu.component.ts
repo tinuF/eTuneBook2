@@ -20,7 +20,7 @@ export class PlaylistListMenuComponent implements OnInit {
         this.filterSettings = this.tuneBookService.getCurrentFilterSettings();
     }
 
-    filterPlaylists(e) {
+    filterPlaylists() {
         this.filterSettings.togglePlaylistIdFilter();
         this.tuneBookService.applyFilter();
     }

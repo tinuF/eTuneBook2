@@ -12,7 +12,7 @@
     (dragend)="handleDragEnd($event)" 
     [style.background-color]="tune.color.hex">
     
-    <a class="btn btn-sm btn-secondary pull-xl-right" (click)="deleteTuneSetPosition($event)" title="Remove Tune from Set" *ngIf="editModus"><i class="mdi mdi-delete"></i></a>
+    <a class="btn btn-sm btn-secondary pull-xl-right" (click)="deleteTuneSetPosition()" title="Remove Tune from Set" *ngIf="editModus"><i class="mdi mdi-delete"></i></a>
         
     <p >
         <a [routerLink]="['/tunes', tune.id]">{{tune.title | eliminateThe}}</a>

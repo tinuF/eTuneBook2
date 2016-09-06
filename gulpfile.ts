@@ -56,10 +56,31 @@ gulp.task('build.prod', (done: any) =>
     'copy.npm-fonts-deps',
     'build.html_css',
     'copy.prod',
-    'compile.ahead.prod',
     'build.js.prod',
     'build.bundles',
     'build.bundles.app',
+    'minify.bundles',
+    'build.index.prod',
+    'generate.manifest',
+    done));
+
+
+// Build prod.
+gulp.task('build.prod.exp', (done: any) =>
+  runSequence('clean.prod',
+    //              'tslint',
+    //              'css-lint',
+    'build.assets.prod',
+    'copy.htaccess',
+    'copy.npm-js-deps',
+    'copy.npm-css-deps',
+    'copy.npm-fonts-deps',
+    'build.html_css',
+    'copy.prod',
+    'compile.ahead.prod',
+    'build.js.prod.exp',
+    'build.bundles',
+    'build.bundles.app.exp',
     'minify.bundles',
     'build.index.prod',
     'generate.manifest',
@@ -143,4 +164,4 @@ gulp.task('clean.once', (done: any) => {
     util.log('Skipping clean on rebuild');
     done();
   }
-})
+});

@@ -132,7 +132,7 @@ export class SetpositionTuneComponent implements OnInit, OnDestroy {
         return tuneSetTunePosition;
     }
 
-    deleteTuneSetPosition(e) {
+    deleteTuneSetPosition() {
         this.tuneBookService.deleteTuneSetPosition(this.tuneSetPosition.tuneSetId, this.tuneSetPosition.position);
     }
 }
