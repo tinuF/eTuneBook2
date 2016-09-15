@@ -7,7 +7,7 @@ import 'rxjs/add/operator/map';
 import * as moment from 'moment';
 
 import { TuneBook, Tune, TuneSet, Playlist, Video, Website } from './model/index';
-import { AbcExportSettings, FilterSettings, PlaylistSettings } from './settings/index';
+import { AbcExportSettings, FilterSettings, PlaylistSettings, SortSettings } from './settings/index';
 import { tuneUp, tuneDown, getRandomArrayIndex, shuffleArray } from './util/index';
 import { filterTunes, filterTuneSets, extractTunes, filterPlaylists } from './filter/index';
 import { getSystemProperties } from './system.properties';
@@ -22,6 +22,7 @@ export class TuneBookService {
     tuneSetsFiltered: Array<TuneSet>;
     abcExportSettings: AbcExportSettings;
     filterSettings: FilterSettings;
+    sortSettings: SortSettings;
     playlistSettings: PlaylistSettings;
     editModus: boolean;
 
@@ -55,6 +56,7 @@ export class TuneBookService {
         this.editModus = false;
 
         this.playlistSettings = new PlaylistSettings();
+        this.sortSettings = new SortSettings();
 
         //console.log('TuneBookService:constructor end');
     }
@@ -82,6 +84,10 @@ export class TuneBookService {
 
     getCurrentFilterSettings() {
         return this.filterSettings;
+    }
+
+    getCurrentSortSettings() {
+        return this.sortSettings;
     }
 
     getCurrentPlaylistSettings() {

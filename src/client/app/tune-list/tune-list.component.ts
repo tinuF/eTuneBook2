@@ -1,4 +1,5 @@
-import { Component, OnInit, OnDestroy, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit, ChangeDetectorRef, ElementRef } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
 
 import { Subscription } from 'rxjs/Subscription';
 
@@ -16,9 +17,9 @@ export class TuneListComponent implements OnInit, OnDestroy, AfterViewInit {
     filterActionSubscription: Subscription;
     modelActionSubscription: Subscription;
     routerSubscription: Subscription;
-    selectedId: number;
 
-    constructor(public tuneBookService: TuneBookService, private cdr: ChangeDetectorRef) {
+    constructor(public tuneBookService: TuneBookService, public router: Router,
+        private cdr: ChangeDetectorRef, public elementRef: ElementRef) {
         //console.log('tune-list:constructor called');
     }
 
@@ -53,6 +54,24 @@ export class TuneListComponent implements OnInit, OnDestroy, AfterViewInit {
                     this.tunes = this.tuneBookService.getTunesFiltered();
                 }
             });
+
+        //Needed in order to scroll to the anchor (fragment)
+        //See https://github.com/angular/angular/issues/6595
+        //funktioniert nicht
+        /*
+                this.router.events.subscribe(s => {
+                    if (s instanceof NavigationEnd) {
+                        const tree = this.router.parseUrl(this.router.url);
+                        if (tree.fragment) {
+                            // you can use DomAdapter
+                            const element = document.querySelector('#tune' + tree.fragment);
+                            if (element) {
+                                element.scrollIntoView(element);
+                            }
+                        }
+                    }
+                });
+        */
         //console.log('tune-list:ngOnInit called');
     }
     /*
@@ -95,13 +114,24 @@ export class TuneListComponent implements OnInit, OnDestroy, AfterViewInit {
         this.isRendering = false;
         //setTimeout(() => this.cdr.reattach());
         this.tuneBookService.isRendered();
+
+        setTimeout(() => {
+            const tree = this.router.parseUrl(this.router.url);
+            if (tree.fragment) {
+                // you can use DomAdapter
+                const element = document.querySelector('#tune' + tree.fragment);
+                if (element) {
+                    //element.scrollIntoView();
+                    const elementRect = element.getBoundingClientRect();
+                    const absoluteElementTop = elementRect.top + window.pageYOffset;
+                    const middle = absoluteElementTop - (window.innerHeight / 2);
+                    window.scrollTo(0, middle);
+                }
+            }
+        }, 0);
+
         //console.log('tune-list:ngAfterViewInit called');
     }
-
-    isSelected(tune: Tune) {
-        return tune.id === this.selectedId;
-    }
-
 }
 
 

@@ -4,7 +4,7 @@
 			<etb-set-list-menu [sets]="sets"></etb-set-list-menu>
 		</div>
 		<div class="col-xs-11">
-			<etb-set-list-item [set]="set" [showFilterCheckbox]="true" *ngFor="let set of sets"></etb-set-list-item>
+			<etb-set-list-item [set]="set" [showFilterCheckbox]="true" [showNavigationToSetListButton]="false" *ngFor="let set of sets"></etb-set-list-item>
 		</div>
 	</div>
 	<etb-spinner *ngSwitchCase="true" [isRunning]="isRendering"></etb-spinner>

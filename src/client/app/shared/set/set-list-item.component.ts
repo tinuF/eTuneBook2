@@ -13,6 +13,7 @@ import { TuneBookService, TuneSet, TuneSetPosition, ACTION, FilterSettings } fro
 export class SetListItemComponent implements OnInit, OnDestroy {
     @Input() set: TuneSet;
     @Input() showFilterCheckbox: boolean;
+    @Input() showNavigationToSetListButton: boolean;
     filterSettings: FilterSettings;
     editModus: boolean;
     modusActionSubscription: Subscription;

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { TuneBookService, TuneSet, Playlist, FilterSettings } from '../../business/index';
+import { TuneBookService, TuneSet, Playlist, FilterSettings, SortSettings } from '../../business/index';
 
 @Component({
     moduleId: module.id,
@@ -10,9 +10,8 @@ import { TuneBookService, TuneSet, Playlist, FilterSettings } from '../../busine
 })
 export class SetListMenuComponent implements OnInit {
     @Input() sets: Array<TuneSet>;
-    sorting: string;
-    ascending: boolean;
     filterSettings: FilterSettings;
+    sortSettings: SortSettings;
     playlists: Array<Playlist>;
     selectedPlaylist: Playlist;
     applySetIds: boolean;
@@ -26,28 +25,27 @@ export class SetListMenuComponent implements OnInit {
         this.applySetIds = this.filterSettings.applySetIds;
 
         this.playlists = this.tuneBookService.getPlaylists();
-        //Sets sind bereits mit SetId aufsteigend sortiert
-        this.sorting = 'id';
-        this.ascending = true;
+
+        this.sortSettings = this.tuneBookService.getCurrentSortSettings();
         //console.log('set-list-menu:ngOnInit called');
 
     }
 
     sortPlaydate() {
-        if (!(this.sorting === 'playDate') || this.ascending) {
+        if (!(this.sortSettings.tuneSetListSort === 'playDate') || this.sortSettings.tuneSetListAscending) {
             //sort tuneSet playdate descending  
             this.sets.sort(function (a: TuneSet, b: TuneSet) {
                 return (a.getLastPlayDate() > b.getLastPlayDate()) ? -1 : (a.getLastPlayDate() < b.getLastPlayDate()) ? 1 : 0;
             });
-            this.sorting = 'playDate';
-            this.ascending = false;
+            this.sortSettings.tuneSetListSort = 'playDate';
+            this.sortSettings.tuneSetListAscending = false;
         } else {
             //sort tuneSet playdate ascending  
             this.sets.sort(function (a: TuneSet, b: TuneSet) {
                 return (a.getLastPlayDate() > b.getLastPlayDate()) ? 1 : (a.getLastPlayDate() < b.getLastPlayDate()) ? -1 : 0;
             });
-            this.sorting = 'playDate';
-            this.ascending = true;
+            this.sortSettings.tuneSetListSort = 'playDate';
+            this.sortSettings.tuneSetListAscending = true;
         }
 
         window.scrollTo(0, 0);
@@ -55,27 +53,27 @@ export class SetListMenuComponent implements OnInit {
 
     sortRandom() {
         this.sets = this.tuneBookService.shuffleTuneSetList();
-        this.sorting = 'random';
+        this.sortSettings.tuneSetListSort = 'random';
 
         window.scrollTo(0, 0);
     }
 
     sortId() {
-        if (!(this.sorting === 'id') || !this.ascending) {
+        if (!(this.sortSettings.tuneSetListSort === 'id') || !this.sortSettings.tuneSetListAscending) {
             //sort tuneSet id ascending  
             this.sets.sort(function (a: TuneSet, b: TuneSet) {
                 return a.id - b.id;
             });
-            this.sorting = 'id';
-            this.ascending = true;
+            this.sortSettings.tuneSetListSort = 'id';
+            this.sortSettings.tuneSetListAscending = true;
 
-        } else if (!(this.sorting === 'id') || this.ascending) {
+        } else if (!(this.sortSettings.tuneSetListSort === 'id') || this.sortSettings.tuneSetListAscending) {
             //sort tuneSet id descending  
             this.sets.sort(function (a: TuneSet, b: TuneSet) {
                 return b.id - a.id;
             });
-            this.sorting = 'id';
-            this.ascending = false;
+            this.sortSettings.tuneSetListSort = 'id';
+            this.sortSettings.tuneSetListAscending = false;
         }
 
         window.scrollTo(0, 0);

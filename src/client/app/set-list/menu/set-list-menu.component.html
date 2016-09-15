@@ -3,20 +3,20 @@
 </div>
 
 <div class="setlistMenu2 btn-group hidden-print">
-  <a class="btn btn-secondary btn-sm" title="Random Sort" (click)="sortRandom()" [class.active]="sorting==='random'">
+  <a class="btn btn-secondary btn-sm" title="Random Sort" (click)="sortRandom()" [class.active]="sortSettings.tuneSetListSort==='random'">
     <i class="mdi mdi-shuffle"></i>
   </a>
 
-  <a class="btn btn-secondary btn-sm" title="Playdate Sort" (click)="sortPlaydate()" [class.active]="sorting==='playDate'">
+  <a class="btn btn-secondary btn-sm" title="Playdate Sort" (click)="sortPlaydate()" [class.active]="sortSettings.tuneSetListSort==='playDate'">
     <i class="mdi mdi-history"></i>
-    <i *ngIf="sorting==='playDate' && ascending" class="mdi mdi-sort-ascending"></i>
-		<i *ngIf="sorting==='playDate' && !ascending" class="mdi mdi-sort-descending"></i>
+    <i *ngIf="sortSettings.tuneSetListSort==='playDate' && sortSettings.tuneSetListAscending" class="mdi mdi-sort-ascending"></i>
+		<i *ngIf="sortSettings.tuneSetListSort==='playDate' && !sortSettings.tuneSetListAscending" class="mdi mdi-sort-descending"></i>
   </a>
 
-  <a class="btn btn-secondary btn-sm" title="Numeric Sort" (click)="sortId()" [class.active]="sorting==='id'">
+  <a class="btn btn-secondary btn-sm" title="Numeric Sort" (click)="sortId()" [class.active]="sortSettings.tuneSetListSort==='id'">
     <i class="mdi mdi-sort-numeric"></i>
-    <i *ngIf="sorting==='id' && ascending" class="mdi mdi-sort-ascending"></i>
-		<i *ngIf="sorting==='id' && !ascending" class="mdi mdi-sort-descending"></i>
+    <i *ngIf="sortSettings.tuneSetListSort==='id' && sortSettings.tuneSetListAscending" class="mdi mdi-sort-ascending"></i>
+		<i *ngIf="sortSettings.tuneSetListSort==='id' && !sortSettings.tuneSetListAscending" class="mdi mdi-sort-descending"></i>
   </a>
 
   <a class="btn btn-secondary btn-sm" title="Only checked Sets" [class.active]="applySetIds" (click)="filterSets()">

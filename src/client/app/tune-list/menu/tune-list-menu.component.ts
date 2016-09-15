@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { TuneBookService, Tune } from '../../business/index';
+import { TuneBookService, Tune, SortSettings } from '../../business/index';
 
 @Component({
     moduleId: module.id,
@@ -10,21 +10,24 @@ import { TuneBookService, Tune } from '../../business/index';
 })
 export class TuneListMenuComponent implements OnInit {
     @Input() tunes: Array<Tune>;
-    sorting: string;
-    ascending: boolean;
+    sortSettings: SortSettings;
 
     constructor(public tuneBookService: TuneBookService) {
         //console.log('tune-list-menu:constructor called');
     }
 
     ngOnInit() {
+        this.sortSettings = this.tuneBookService.getCurrentSortSettings();
         //Tunes werden mit den Sets eingelesen (SetId aufsteigend)
         //Deshalb hier aufsteigend nach TuneId sortieren
-        this.sortId();
+        if (this.sortSettings.tuneListSort === '') {
+            this.sortId();
+        }
+
     }
 
     sortTitle() {
-        if (!(this.sorting === 'title') || !this.ascending) {
+        if (!(this.sortSettings.tuneListSort === 'title') || !this.sortSettings.tuneListAscending) {
             //sort tune title ascending  
             this.tunes.sort(function (a: Tune, b: Tune) {
                 let titleA = a.title.toLowerCase(), titleB = b.title.toLowerCase();
@@ -37,8 +40,8 @@ export class TuneListMenuComponent implements OnInit {
                 }
                 return 0; //default return value (no sorting)
             });
-            this.sorting = 'title';
-            this.ascending = true;
+            this.sortSettings.tuneListSort = 'title';
+            this.sortSettings.tuneListAscending = true;
 
         } else {
             //sort tune title descending  
@@ -53,8 +56,8 @@ export class TuneListMenuComponent implements OnInit {
                 }
                 return 0; //default return value (no sorting)
             });
-            this.sorting = 'title';
-            this.ascending = false;
+            this.sortSettings.tuneListSort = 'title';
+            this.sortSettings.tuneListAscending = false;
 
         }
 
@@ -62,20 +65,20 @@ export class TuneListMenuComponent implements OnInit {
     }
 
     sortPlaydate() {
-        if (!(this.sorting === 'playDate') || this.ascending) {
+        if (!(this.sortSettings.tuneListSort === 'playDate') || this.sortSettings.tuneListAscending) {
             //sort tune playdate descending  
             this.tunes.sort(function (a: Tune, b: Tune) {
                 return (a.lastPlayed > b.lastPlayed) ? -1 : (a.lastPlayed < b.lastPlayed) ? 1 : 0;
             });
-            this.sorting = 'playDate';
-            this.ascending = false;
+            this.sortSettings.tuneListSort = 'playDate';
+            this.sortSettings.tuneListAscending = false;
         } else {
             //sort tune playdate ascending  
             this.tunes.sort(function (a: Tune, b: Tune) {
                 return (a.lastPlayed > b.lastPlayed) ? 1 : (a.lastPlayed < b.lastPlayed) ? -1 : 0;
             });
-            this.sorting = 'playDate';
-            this.ascending = true;
+            this.sortSettings.tuneListSort = 'playDate';
+            this.sortSettings.tuneListAscending = true;
         }
 
         window.scrollTo(0, 0);
@@ -83,46 +86,46 @@ export class TuneListMenuComponent implements OnInit {
 
     sortRandom() {
         this.tunes = this.tuneBookService.shuffleTuneList();
-        this.sorting = 'random';
+        this.sortSettings.tuneListSort = 'random';
 
         window.scrollTo(0, 0);
     }
 
     sortFrequency() {
-        if (!(this.sorting === 'frequency') || this.ascending) {
+        if (!(this.sortSettings.tuneListSort === 'frequency') || this.sortSettings.tuneListAscending) {
             //sort tune playdate descending  
             this.tunes.sort(function (a: Tune, b: Tune) {
                 return b.frequencyPlayed - a.frequencyPlayed;
             });
-            this.sorting = 'frequency';
-            this.ascending = false;
+            this.sortSettings.tuneListSort = 'frequency';
+            this.sortSettings.tuneListAscending = false;
         } else {
             //sort tune frequency ascending  
             this.tunes.sort(function (a: Tune, b: Tune) {
                 return a.frequencyPlayed - b.frequencyPlayed;
             });
-            this.sorting = 'frequency';
-            this.ascending = true;
+            this.sortSettings.tuneListSort = 'frequency';
+            this.sortSettings.tuneListAscending = true;
         }
 
         window.scrollTo(0, 0);
     }
 
     sortId() {
-        if (!(this.sorting === 'id') || !this.ascending) {
+        if (!(this.sortSettings.tuneListSort === 'id') || !this.sortSettings.tuneListAscending) {
             //sort tune Id ascending  
             this.tunes.sort(function (a: Tune, b: Tune) {
                 return a.id - b.id;
             });
-            this.sorting = 'id';
-            this.ascending = true;
+            this.sortSettings.tuneListSort = 'id';
+            this.sortSettings.tuneListAscending = true;
         } else {
             //sort tune Id descending  
             this.tunes.sort(function (a: Tune, b: Tune) {
                 return b.id - a.id;
             });
-            this.sorting = 'id';
-            this.ascending = false;
+            this.sortSettings.tuneListSort = 'id';
+            this.sortSettings.tuneListAscending = false;
         }
 
         window.scrollTo(0, 0);

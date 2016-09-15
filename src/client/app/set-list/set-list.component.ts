@@ -1,4 +1,5 @@
 import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Subscription } from 'rxjs/Subscription';
 
@@ -15,7 +16,7 @@ export class SetListComponent implements OnInit, AfterViewInit, OnDestroy {
     filterActionSubscription: Subscription;
     isRendering: boolean;
 
-    constructor(public tuneBookService: TuneBookService) {
+    constructor(public tuneBookService: TuneBookService, public router: Router) {
         //console.log('set-list:constructor called');
     }
 
@@ -44,6 +45,22 @@ export class SetListComponent implements OnInit, AfterViewInit, OnDestroy {
         this.isRendering = false;
         //setTimeout(() => this.cdr.reattach());
         this.tuneBookService.isRendered();
+
+        setTimeout(() => {
+            const tree = this.router.parseUrl(this.router.url);
+            if (tree.fragment) {
+                // you can use DomAdapter
+                const element = document.querySelector('#set' + tree.fragment);
+                if (element) {
+                    //element.scrollIntoView();
+                    const elementRect = element.getBoundingClientRect();
+                    const absoluteElementTop = elementRect.top + window.pageYOffset;
+                    const middle = absoluteElementTop - (window.innerHeight / 2);
+                    window.scrollTo(0, middle);
+                }
+            }
+        }, 0);
+
         //console.log('set-list:ngAfterViewInit called');
     }
 

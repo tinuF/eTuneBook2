@@ -6,6 +6,15 @@
     <div class="col-xs-11">
         <div class="card col-lg-8" [style.background-color]="tune.color.hex">
             <div class="card-block">
+                <!--
+                <a class="btn btn-sm btn-secondary" [routerLink]="['/tunes']" fragment="{{tune.id}}" title="Show Tune on Tune List"><i class="mdi mdi-view-list"></i></a>
+                <small class="text-muted">Tune {{tune.id}}</small>
+                -->
+                <!--
+                <a class="btn btn-sm btn-secondary" [routerLink]="['/tunes']" fragment="{{tune.id}}" title="Show Tune on Tune List"><small class="text-muted">Tune {{tune.id}}</small></a>
+                -->
+                <a class="btn btn-sm btn-secondary" [routerLink]="['/tunes']" fragment="{{tune.id}}" title="Show Tune on Tune List"><i class="mdi mdi-arrow-left"></i></a>
+                <small class="text-muted">Tune {{tune.id}}</small>
                 <etb-tune-played *ngIf="!editModus" class="pull-right" [tune]="tune"></etb-tune-played>
                 <etb-tune-dots [tune]="tune"></etb-tune-dots>
             </div>          

@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { Subscription } from 'rxjs/Subscription';
 
-import { TuneBookService, Tune, ACTION} from '../business/index';
+import { TuneBookService, Tune, ACTION } from '../business/index';
 
 @Component({
     moduleId: module.id,
@@ -37,6 +37,8 @@ export class TuneComponent implements OnInit, OnDestroy {
                 let id = +params['id'];
                 this.tune = this.tuneBookService.getTune(id);
             });
+
+        window.scrollTo(0, 0);
     }
 
     ngOnDestroy() {

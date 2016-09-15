@@ -3,27 +3,27 @@
 		<i class="mdi mdi-shuffle"></i>
 	</a>
 
-	<a class="btn btn-secondary btn-sm" title="Alphabetic Sort" (click)="sortTitle()" [class.active]="sorting==='title'">
+	<a class="btn btn-secondary btn-sm" title="Alphabetic Sort" (click)="sortTitle()" [class.active]="sortSettings.tuneListSort==='title'">
 		<i class="mdi mdi-sort-alphabetical"></i>
-		<i *ngIf="sorting==='title' && ascending" class="mdi mdi-sort-ascending"></i>
-		<i *ngIf="sorting==='title' && !ascending" class="mdi mdi-sort-descending"></i>
+		<i *ngIf="sortSettings.tuneListSort==='title' && sortSettings.tuneListAscending" class="mdi mdi-sort-ascending"></i>
+		<i *ngIf="sortSettings.tuneListSort==='title' && !sortSettings.tuneListAscending" class="mdi mdi-sort-descending"></i>
 	</a>
 
-	<a class="btn btn-secondary btn-sm" title="Numeric Sort" (click)="sortId()" [class.active]="sorting==='id'">
+	<a class="btn btn-secondary btn-sm" title="Numeric Sort" (click)="sortId()" [class.active]="sortSettings.tuneListSort==='id'">
 		<i class="mdi mdi-sort-numeric"></i>
-		<i *ngIf="sorting==='id' && ascending" class="mdi mdi-sort-ascending"></i>
-		<i *ngIf="sorting==='id' && !ascending" class="mdi mdi-sort-descending"></i>
+		<i *ngIf="sortSettings.tuneListSort==='id' && sortSettings.tuneListAscending" class="mdi mdi-sort-ascending"></i>
+		<i *ngIf="sortSettings.tuneListSort==='id' && !sortSettings.tuneListAscending" class="mdi mdi-sort-descending"></i>
 	</a>
 
-	<a class="btn btn-secondary btn-sm" title="Playdate Sort" (click)="sortPlaydate()" [class.active]="sorting==='playDate'">
+	<a class="btn btn-secondary btn-sm" title="Playdate Sort" (click)="sortPlaydate()" [class.active]="sortSettings.tuneListSort==='playDate'">
 		<i class="mdi mdi-history"></i>
-		<i *ngIf="sorting==='playDate' && ascending" class="mdi mdi-sort-ascending"></i>
-		<i *ngIf="sorting==='playDate' && !ascending" class="mdi mdi-sort-descending"></i>
+		<i *ngIf="sortSettings.tuneListSort==='playDate' && sortSettings.tuneListAscending" class="mdi mdi-sort-ascending"></i>
+		<i *ngIf="sortSettings.tuneListSort==='playDate' && !sortSettings.tuneListAscending" class="mdi mdi-sort-descending"></i>
 	</a>
 
-	<a class="btn btn-secondary btn-sm" title="Frequency Sort" (click)="sortFrequency()" [class.active]="sorting==='frequency'">
+	<a class="btn btn-secondary btn-sm" title="Frequency Sort" (click)="sortFrequency()" [class.active]="sortSettings.tuneListSort==='frequency'">
 		<i class="mdi mdi-heart"></i>
-		<i *ngIf="sorting==='frequency' && ascending" class="mdi mdi-sort-ascending"></i>
-		<i *ngIf="sorting==='frequency' && !ascending" class="mdi mdi-sort-descending"></i>
+		<i *ngIf="sortSettings.tuneListSort==='frequency' && sortSettings.tuneListAscending" class="mdi mdi-sort-ascending"></i>
+		<i *ngIf="sortSettings.tuneListSort==='frequency' && !sortSettings.tuneListAscending" class="mdi mdi-sort-descending"></i>
 	</a>
 </div>

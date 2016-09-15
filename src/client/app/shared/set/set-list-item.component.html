@@ -4,7 +4,8 @@
             <input type="checkbox" [checked]="selected" (change)="toggleSetSelection($event)">
             <span class="c-indicator"></span>
         </label>
-        <small class="text-muted">Set {{set.id}}</small>
+        <a class="btn btn-sm btn-secondary"  *ngIf="showNavigationToSetListButton" [routerLink]="['/sets']" fragment="{{set.id}}" title="Show Set on Set List"><i class="mdi mdi-arrow-left"></i></a>
+        <a class="hidden" id="set{{set.id}}"></a><small class="text-muted">Set {{set.id}}</small>
         <a class='pull-lg-right' (click)="justPlayedTheSet()" title="Just Played The Set" *ngIf="!editModus"><i class="mdi mdi-play-circle-outline"></i></a>
     </div>
     <div class="card-block">
