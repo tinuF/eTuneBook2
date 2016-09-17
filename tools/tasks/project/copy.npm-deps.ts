@@ -1,6 +1,6 @@
 import * as gulp from 'gulp';
 import {join} from 'path';
-import {APP_DEST} from '../../config';
+import Config from '../../config';
 
 /**
  * Copies all NPM dependencies from /node-modules to dist/dev/lib or dist/prod/lib
@@ -21,5 +21,5 @@ export = () => {
   ];
 
   return gulp.src(src)
-    .pipe(gulp.dest(join(APP_DEST, 'lib/')));
+    .pipe(gulp.dest(join(Config.APP_DEST, 'lib/')));
 };

@@ -1,6 +1,6 @@
 import * as gulp from 'gulp';
 import { join } from 'path';
-import {APP_SRC, APP_DEST} from '../../config';
+import Config from '../../config';
 
 /**
  * Copies .htaccess  /client to dist/dev/client or dist/prod/client
@@ -8,6 +8,6 @@ import {APP_SRC, APP_DEST} from '../../config';
  */
 
 export = () => {
-  return gulp.src(join(APP_SRC, '.htaccess'))
-    .pipe(gulp.dest(APP_DEST));
+  return gulp.src(join(Config.APP_SRC, '.htaccess'))
+    .pipe(gulp.dest(Config.APP_DEST));
 };

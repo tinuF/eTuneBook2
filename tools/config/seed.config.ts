@@ -1,4 +1,5 @@
 import { join } from 'path';
+import * as slash from 'slash';
 import { argv } from 'yargs';
 
 import { Environments, InjectableDependency } from './seed.config.interfaces';
@@ -83,7 +84,7 @@ export class SeedConfig {
    * The base path of node modules.
    * @type {string}
    */
-  NPM_BASE = join(this.APP_BASE, 'node_modules/');
+  NPM_BASE = slash(join(this.APP_BASE, 'node_modules/'));
 
   /**
    * The flag for the hot-loader option of the application.
@@ -135,8 +136,9 @@ export class SeedConfig {
 
   BOOTSTRAP_PROD_MODULE = `${this.BOOTSTRAP_DIR}/` + 'main';
 
+  NG_FACTORY_FILE = 'main-prod';
 
-  BOOTSTRAP_FACTORY_PROD_MODULE = `${this.BOOTSTRAP_DIR}/` + 'main-prod';
+  BOOTSTRAP_FACTORY_PROD_MODULE = `${this.BOOTSTRAP_DIR}/${this.NG_FACTORY_FILE}`;
   /**
    * The default title of the application as used in the `<title>` tag of the
    * `index.html`.
@@ -276,7 +278,7 @@ export class SeedConfig {
     { src: 'zone.js/dist/zone.js', inject: 'libs' },
     { src: 'core-js/client/shim.min.js', inject: 'shims' },
     { src: 'systemjs/dist/system.src.js', inject: 'shims', env: ENVIRONMENTS.DEVELOPMENT },
-    { src: 'rxjs/bundles/Rx.umd.min.js', inject: 'libs', env: ENVIRONMENTS.DEVELOPMENT },
+    { src: 'rxjs/bundles/Rx.min.js', inject: 'libs', env: ENVIRONMENTS.DEVELOPMENT },
   ];
 
   /**
@@ -309,7 +311,7 @@ export class SeedConfig {
    * The configuration of SystemJS for the `dev` environment.
    * @type {any}
    */
-  protected SYSTEM_CONFIG_DEV: any = {
+  SYSTEM_CONFIG_DEV: any = {
     defaultJSExtensions: true,
     packageConfigPaths: [
       `/node_modules/*/package.json`,

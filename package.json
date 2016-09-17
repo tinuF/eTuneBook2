@@ -1,6 +1,6 @@
 {
   "name": "eTuneBook2",
-  "version": "2.0.10",
+  "version": "2.0.11",
   "description": "eTuneBook 2",
   "repository": "https://github.com/tinuF/eTuneBook2",
   "scripts": {
@@ -35,8 +35,8 @@
   "license": "MIT",
   "devDependencies": {
     "angular2-service-worker": "0.1.13",
-    "@angular/compiler-cli": "^0.6.0",
-    "@angular/platform-server": "^2.0.0-rc.6",
+    "@angular/compiler-cli": "^0.6.1",
+    "@angular/platform-server": "^2.0.0",
     "@angular/tsc-wrapped": "^0.3.0",
     "async": "^2.0.0",
     "autoprefixer": "^6.3.7",
@@ -45,7 +45,7 @@
     "colorguard": "^1.2.0",
     "compression": "^1.6.2",
     "connect": "^3.4.1",
-    "connect-history-api-fallback": "^1.2.0",
+    "connect-history-api-fallback": "^1.3.0",
     "connect-livereload": "^0.5.4",
     "cssnano": "^3.7.3",
     "deep-extend": "^0.4.1",
@@ -114,24 +114,24 @@
     "yargs": "^4.8.0"
   },
   "dependencies": {
-    "@angular/common": "2.0.0-rc.6",
-    "@angular/compiler": "2.0.0-rc.6",
-    "@angular/core": "2.0.0-rc.6",
-    "@angular/forms": "2.0.0-rc.6",
-    "@angular/http": "2.0.0-rc.6",
-    "@angular/platform-browser": "2.0.0-rc.6",
-    "@angular/platform-browser-dynamic": "2.0.0-rc.6",
-    "@angular/router": "3.0.0-rc.2",
+    "@angular/common": "2.0.0",
+    "@angular/compiler": "2.0.0",
+    "@angular/core": "2.0.0",
+    "@angular/forms": "2.0.0",
+    "@angular/http": "2.0.0",
+    "@angular/platform-browser": "2.0.0",
+    "@angular/platform-browser-dynamic": "2.0.0",
+    "@angular/router": "3.0.0",
     "angular2-moment": "1.0.0-beta.1",
     "bootstrap": "4.0.0-alpha.2",
     "core-js": "^2.4.0",
-    "es6-module-loader": "^0.17.8",
+    "es-module-loader": "^1.0.0",
     "reflect-metadata": "^0.1.8",
     "jquery": "2.2.2",
-    "mdi": "1.5.54",
+    "mdi": "1.7.22",
     "moment": "2.12.0",
-    "rxjs": "5.0.0-beta.11",
+    "rxjs": "5.0.0-beta.12",
     "systemjs": "0.19.27",
-    "zone.js": "^0.6.17"
+    "zone.js": "^0.6.21"
   }
 }
