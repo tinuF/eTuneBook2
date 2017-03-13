@@ -1,5 +1,5 @@
 <div 
-    class="card col-xl-12" 
+    class="card m-1" 
     [draggable]="editModus"
     [class.move]="editModus"
     [class.drag-start]="dragStart"
@@ -12,15 +12,13 @@
     (dragend)="handleDragEnd($event)" 
     [style.background-color]="tune.color.hex">
     
-    <a class="btn btn-sm btn-secondary pull-xl-right" (click)="deleteTuneSetPosition()" title="Remove Tune from Set" *ngIf="editModus"><i class="mdi mdi-delete"></i></a>
-        
-    <p >
-        <a [routerLink]="['/tunes', tune.id]">{{tune.title | eliminateThe}}</a>
-        
-    </p>
-    <small class="text-muted">{{tune.type}} in {{tune.key}}</small>
-    <etb-sampledots [tune]="tune"></etb-sampledots>
-    <etb-tune-played class="pull-xl-right"[tune]="tune" *ngIf="!editModus"></etb-tune-played>
+    <div class="row m-1">
+        <a [routerLink]="['/tunes', tune.id]">{{tune.title | eliminateThe}}</a> 
+        <a class="btn btn-sm btn-secondary ml-auto" (click)="deleteTuneSetPosition()" title="Remove Tune from Set" *ngIf="editModus"><i class="mdi mdi-delete"></i></a>   
+    </div>
+    <div class="row m-1">
+        <small class="text-muted">{{tune.type}} in {{tune.key}}</small>
+        <etb-sampledots [tune]="tune"></etb-sampledots>
+        <etb-tune-played class="ml-auto"[tune]="tune" *ngIf="!editModus"></etb-tune-played>
+    </div>
 </div>
-
-

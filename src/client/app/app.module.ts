@@ -28,6 +28,9 @@ import { TuneModule } from './tune/tune.module';
 import { TuneAbcModule } from './tune-abc/tune-abc.module';
 import { TuneListModule } from './tune-list/tune-list.module';
 
+import { RouteReuseStrategy } from '@angular/router';
+import { CustomReuseStrategy } from './shared/router/custom-reuse-strategy';
+
 
 
 @NgModule({
@@ -54,6 +57,10 @@ import { TuneListModule } from './tune-list/tune-list.module';
     {
       provide: APP_BASE_HREF,
       useValue: '<%= APP_BASE %>'
+    },
+    {
+      provide: RouteReuseStrategy,
+      useClass: CustomReuseStrategy
     },
     TuneBookService
   ],

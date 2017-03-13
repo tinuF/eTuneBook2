@@ -1,9 +1,9 @@
 <div [ngSwitch]="isRendering">
 	<div *ngSwitchCase="false" class="row">
-		<div class="col-xs-1 ">
+		<div class="col-1 ">
 			<etb-set-list-menu [sets]="sets"></etb-set-list-menu>
 		</div>
-		<div class="col-xs-11">
+		<div class="card-deck col-11">
 			<etb-set-list-item [set]="set" [showFilterCheckbox]="true" [showNavigationToSetListButton]="false" *ngFor="let set of sets"></etb-set-list-item>
 		</div>
 	</div>

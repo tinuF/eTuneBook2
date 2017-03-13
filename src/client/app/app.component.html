@@ -1,4 +1,8 @@
-<nav class="navbar navbar-light navbar-fixed-top bg-faded" role="navigation">
+<nav class="navbar navbar-toggleable-xl navbar-light fixed-top bg-faded" role="navigation">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
     <!--
     <a class="navbar-brand hidden-sm-down pull-right" [routerLink]="['/welcome']" title="eTuneBook"><img src="img/ico/favicon.ico" class="img-responsive" width="32" height="32" alt="eTuneBook">
     </a>
@@ -7,71 +11,74 @@
     <a class="navbar-brand hidden-md-down col-xs-1 pull-xs-right" [routerLink]="['/welcome']" [class.active]="router.url==='/welcome'||router.url==='/changelog'||router.url==='/credits'||router.url==='/feedback'"
         title="eTuneBook">eTuneBook</a>
 -->
-    <a class="navbar-brand col-xs-1 pull-xs-right" title="Info" [routerLink]="[ '/welcome'] " [class.active]="router.url==='/welcome'||router.url==='/changelog'||router.url==='/credits'||router.url==='/feedback' "
+    
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav">
+            <li class="nav-item dropdown mr-3">
+                <a class="nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <span class="hidden-sm-down">File</span>
+                    <i class="mdi mdi-dots-vertical hidden-md-up" title="Open Menu"></i>
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" (click)="initializeTuneBook()">New Book</a>
+                    <a class="dropdown-item" (click)="newTune()">New Tune</a>
+                    <a class="dropdown-item" (click)="newPlaylist()">New Playlist</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" (click)="importer.click()">Import Book</a>
+                    <a class="dropdown-item" (click)="loadBxplTuneBook()">Load Example Book from Server</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" (click)="editTuneBook()">Edit Book Title</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" (click)="exportTuneBook()">Export Book</a>
+                </div>
+            </li>
+
+            <li class="nav-item mr-3">
+                <a class="nav-link" [routerLink]="['/tunes']" title="Load Tunes" [class.active]="router.url==='/tunes'" [class.disabled]="router.url==='/tunes'">
+                    <span class="hidden-sm-down">Tunes</span>
+                    <i class="mdi mdi-music-note hidden-md-up"></i>
+                </a>
+            </li>
+
+            <li class="nav-item mr-3">
+                <a class="nav-link" [routerLink]="['/sets']" title="Load Sets" [class.active]="router.url==='/sets'" [class.disabled]="router.url==='/sets'">
+                    <span class="hidden-sm-down">Sets</span>
+                    <i class="mdi mdi-format-list-bulleted hidden-md-up"></i>
+                </a>
+            </li>
+
+            <li class="nav-item mr-3">
+                <a class="nav-link" [routerLink]="['/playlists']" title="Load Playlists" [class.active]="router.url==='/playlists'" [class.disabled]="router.url==='/playlists'">
+                    <span class="hidden-sm-down">Playlists</span>
+                    <i class="mdi mdi-play-circle-outline hidden-md-up"></i>
+                </a>
+            </li>
+
+            <li class="nav-item mr-3">
+                <a class="nav-link" title="Filter" [routerLink]="['/filter']" [class.active]="router.url==='/filter'" [class.disabled]="router.url==='/filter' ">
+                    <span class="hidden-sm-down ">Filter</span>
+                    <i class="mdi mdi-filter hidden-md-up "></i>
+                </a>
+            </li>
+
+            <form class="form-inline" role="search ">
+                <input type="text " class="form-control " placeholder="Search " [value]="filterSettings.title " (keyup)="search($event) ">
+            </form>
+
+            <li class="nav-item mr-3">
+                <a class="nav-link" title="Tune Randomizer" (click)="randomize()">
+                    <i class="mdi mdi-shuffle-variant"></i>
+                </a>
+            </li>
+
+        </ul>
+    </div>
+
+    <a class="navbar-brand ml-auto" title="Info" [routerLink]="[ '/welcome'] " [class.active]="router.url==='/welcome'||router.url==='/changelog'||router.url==='/credits'||router.url==='/feedback' "
         [class.disabled]="router.url==='/welcome'||router.url==='/changelog'||router.url==='/credits'||router.url==='/feedback' ">
         <span>eTb</span>
     </a>
 
-    <ul class="nav navbar-nav">
-        <li class="nav-item dropdown col-xs-1">
-            <a class="nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                <span class="hidden-sm-down">File</span>
-                <i class="mdi mdi-dots-vertical hidden-md-up" title="Open Menu"></i>
-            </a>
-            <div class="dropdown-menu">
-                <a class="dropdown-item" (click)="initializeTuneBook()">New Book</a>
-                <a class="dropdown-item" (click)="newTune()">New Tune</a>
-                <a class="dropdown-item" (click)="newPlaylist()">New Playlist</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" (click)="importer.click()">Import Book</a>
-                <a class="dropdown-item" (click)="loadBxplTuneBook()">Load Example Book from Server</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" (click)="editTuneBook()">Edit Book Title</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" (click)="exportTuneBook()">Export Book</a>
-            </div>
-        </li>
-
-        <li class="nav-item col-xs-1">
-            <a class="nav-link" [routerLink]="['/tunes']" title="Load Tunes" [class.active]="router.url==='/tunes'" [class.disabled]="router.url==='/tunes'">
-                <span class="hidden-sm-down">Tunes</span>
-                <i class="mdi mdi-music-note hidden-md-up"></i>
-            </a>
-        </li>
-
-        <li class="nav-item col-xs-1">
-            <a class="nav-link" [routerLink]="['/sets']" title="Load Sets" [class.active]="router.url==='/sets'" [class.disabled]="router.url==='/sets'">
-                <span class="hidden-sm-down">Sets</span>
-                <i class="mdi mdi-format-list-bulleted hidden-md-up"></i>
-            </a>
-        </li>
-
-        <li class="nav-item col-xs-1">
-            <a class="nav-link" [routerLink]="['/playlists']" title="Load Playlists" [class.active]="router.url==='/playlists'" [class.disabled]="router.url==='/playlists'">
-                <span class="hidden-sm-down">Playlists</span>
-                <i class="mdi mdi-play-circle-outline hidden-md-up"></i>
-            </a>
-        </li>
-
-        <li class="nav-item col-xs-1">
-            <a class="nav-link" title="Tune Randomizer" (click)="randomize()">
-                <i class="mdi mdi-shuffle-variant"></i>
-            </a>
-        </li>
-
-        <li class="nav-item col-xs-1">
-            <a class="nav-link" title="Filter" [routerLink]="['/filter']" [class.active]="router.url==='/filter'" [class.disabled]="router.url==='/filter' ">
-                <span class="hidden-sm-down ">Filter</span>
-                <i class="mdi mdi-filter hidden-md-up "></i>
-            </a>
-        </li>
-
-
-
-        <form class="form-inline navbar-form col-xs-1" role="search ">
-            <input type="text " class="form-control " placeholder="Search " [value]="filterSettings.title " (keyup)="search($event) ">
-        </form>
-    </ul>
 </nav>
 
 <div class="container-fluid ">

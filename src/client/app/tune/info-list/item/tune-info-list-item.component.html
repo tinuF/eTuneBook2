@@ -1,7 +1,7 @@
-<div class="card col-lg-4">
+<div class="card">
     <small class="pull-left text-muted">Link</small>
     <div class="card-block" *ngIf="editModus">
-        <a class="btn btn-sm btn-secondary pull-right"  (click)="deleteInfo()" title="Delete Info"><i class="mdi mdi-delete"></i></a>
+        <a class="btn btn-sm btn-secondary float-right"  (click)="deleteInfo()" title="Delete Info"><i class="mdi mdi-delete"></i></a>
     </div>
     <div class="card-block" *ngIf="!editModus">
         <a class="btn btn-sm btn-secondary"  href="{{website.url}}" target="_blank">{{website.url}}</a>

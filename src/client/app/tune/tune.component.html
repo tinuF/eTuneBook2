@@ -1,10 +1,10 @@
 <div class="row">
-    <div class="col-xs-1 ">
+    <div class="col-1 ">
         <etb-tune-menu [tune]="tune"></etb-tune-menu>
     </div>
 
-    <div class="col-xs-11">
-        <div class="card col-lg-8" [style.background-color]="tune.color.hex">
+    <div class="col-11 card-deck">
+        <div class="card" [style.background-color]="tune.color.hex">
             <div class="card-block">
                 <!--
                 <a class="btn btn-sm btn-secondary" [routerLink]="['/tunes']" fragment="{{tune.id}}" title="Show Tune on Tune List"><i class="mdi mdi-view-list"></i></a>

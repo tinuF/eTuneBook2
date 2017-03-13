@@ -1,14 +1,16 @@
-<div class="card col-lg-4">
-    <small class="pull-left text-muted">Video</small>
+<div class="card"> 
     <div class="card-block">
-        <a class="btn btn-sm btn-secondary pull-right" *ngIf="editModus" (click)="deleteVideo()" title="Delete Video">
-            <i class="mdi mdi-delete"></i></a>
-
+        <small class="float-left text-muted">Video</small>
+        <a class="btn btn-sm btn-secondary float-right" *ngIf="editModus" (click)="deleteVideo()" title="Delete Video">
+            <i class="mdi mdi-delete"></i>
+        </a>
     </div>
+
     <div class="card-block">
         <iframe class="youtube-player" type="text/html" [src]="videoUrl" frameborder="0"></iframe>
         <small  *ngIf="!editModus">{{video.description}}</small>
     </div>
+    
     <div class="card-footer" *ngIf="editModus">
         <div class="form-group row video-code-form" >
             <label for="VideoCode" class="col-sm-4 form-control-label">Youtube Key</label>

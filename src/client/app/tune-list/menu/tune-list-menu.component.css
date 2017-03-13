@@ -1,11 +1,9 @@
 .tunelistMenu {
 	position: fixed;
 	left: 1px;
-	top: 160px;
-    /*background-color: #F5F5F5;*/
+	top: 140px;
     z-index: 1020;
-    /*height: 50px;*/
-    width: 40px;
+    width: 30px;
     background-color: lightgray;
  }
 

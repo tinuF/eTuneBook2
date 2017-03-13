@@ -43,7 +43,20 @@ export class ProjectConfig extends SeedConfig {
         //];
 
         // moment in import statements
-        (<any>this.SYSTEM_CONFIG_DEV.paths)['moment'] = '/node_modules/moment/moment.js';
+        //(<any>this.SYSTEM_CONFIG_DEV.paths)['moment'] = '/node_modules/moment/moment.js';
+        this.SYSTEM_CONFIG_DEV.paths['moment'] =
+            `${this.APP_BASE}node_modules/moment/moment.js`;
+            this.SYSTEM_BUILDER_CONFIG.packages['moment'] = {
+                main: 'moment.js',
+                defaultExtension: 'js'
+            };
+
+        this.SYSTEM_CONFIG_DEV.paths['angular2-moment'] =
+            `${this.APP_BASE}node_modules/angular2-moment/index.js`;
+            this.SYSTEM_BUILDER_CONFIG.packages['angular2-moment'] = {
+                main: 'index.js',
+                defaultExtension: 'js'
+            };
 
         // jquery in import statements
         (<any>this.SYSTEM_CONFIG_DEV.paths)['jquery'] = '/node_modules/jquery/dist/jquery.min.js';

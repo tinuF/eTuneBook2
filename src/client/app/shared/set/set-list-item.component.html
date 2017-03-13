@@ -1,12 +1,13 @@
-<div class="card col-lg-4">
+<div class="card m-3">
     <div class="card-block">
-        <label class="c-input c-checkbox" *ngIf="showFilterCheckbox">
+        <label class="c-input c-checkbox mr-2" *ngIf="showFilterCheckbox">
             <input type="checkbox" [checked]="selected" (change)="toggleSetSelection($event)">
             <span class="c-indicator"></span>
         </label>
         <a class="btn btn-sm btn-secondary"  *ngIf="showNavigationToSetListButton" [routerLink]="['/sets']" fragment="{{set.id}}" title="Show Set on Set List"><i class="mdi mdi-arrow-left"></i></a>
         <a class="hidden" id="set{{set.id}}"></a><small class="text-muted">Set {{set.id}}</small>
-        <a class='pull-lg-right' (click)="justPlayedTheSet()" title="Just Played The Set" *ngIf="!editModus"><i class="mdi mdi-play-circle-outline"></i></a>
+        <a class='float-right' (click)="justPlayedTheSet()" title="Just Played The Set" *ngIf="!editModus"><i class="mdi mdi-play-circle-outline"></i></a>
+     
     </div>
     <div class="card-block">
         <etb-set-position [position]="position" *ngFor="let position of set.tuneSetPositions"></etb-set-position>

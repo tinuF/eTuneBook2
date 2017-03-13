@@ -1,16 +1,23 @@
-<div class="card col-lg-4" [style.background-color]="tune.color.hex">
+<div class="card m-3" [style.background-color]="tune.color.hex">
     <div class="card-header" [style.background-color]="tune.color.hex">
-        <small class="pull-xs-right text-muted">Tune {{tune.id}}</small>
-        <h5 class="card-title"><a id="tune{{tune.id}}" [routerLink]="['/tunes', tune.id]">{{tune.title | eliminateThe}}</a></h5>
-        <small class="text-muted">{{tune.type}} in {{tune.key}}</small>
-        <!--  todo: number bricht in allen mobilen browsern. nur die desktop versionen funktionieren.
+
+        <div class="row m-1">
+            <h5 class="card-title">
+                <a id="tune{{tune.id}}" [routerLink]="['/tunes', tune.id]">{{tune.title | eliminateThe}}</a>
+            </h5>
+            <small class="ml-auto text-muted">Tune {{tune.id}}</small>
+        </div>
+        <div class="row m-1">
+            <small class="text-muted">{{tune.type}} in {{tune.key}}</small>
+            <!--  todo: number bricht in allen mobilen browsern. nur die desktop versionen funktionieren.
         <small class="pull-xs-right text-muted">Freq {{tune.frequencyPlayed | number}}</small>
         -->
-        <small class="pull-xs-right text-muted">Freq {{tune.frequencyPlayed}}</small>
+            <small class="ml-auto text-muted">Freq {{tune.frequencyPlayed}}</small>
+        </div>
     </div>
 
     <div class="card-block" [style.background-color]="tune.color.hex">
         <etb-sampledots [tune]="tune"></etb-sampledots>
-        <etb-tune-played class="pull-xs-right" [tune]="tune"></etb-tune-played>
+        <etb-tune-played class="float-right" [tune]="tune"></etb-tune-played>
     </div>
 </div>

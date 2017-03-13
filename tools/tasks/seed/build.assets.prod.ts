@@ -4,7 +4,6 @@ import { join } from 'path';
 import Config from '../../config';
 
 // TODO There should be more elegant to prevent empty directories from copying
-let es: any = require('event-stream');
 var onlyDirs = function (es: any) {
   return es.map(function (file: any, cb: any) {
     if (file.stat.isFile()) {
@@ -20,13 +19,16 @@ var onlyDirs = function (es: any) {
  * `dist/prod` directory.
  */
 export = () => {
+  let es: any = require('event-stream');
   return gulp.src([
     join(Config.APP_SRC, '**'),
+    join(Config.NPM_BASE, '@angular', 'service-worker', 'bundles', 'worker-basic.min.js'),
     '!' + join(Config.APP_SRC, 'tsconfig.json'),
     '!' + join(Config.APP_SRC, '**', '*.ts'),
     '!' + join(Config.APP_SRC, '**', '*.css'),
     '!' + join(Config.APP_SRC, '**', '*.html'),
     '!' + join(Config.APP_SRC, '**', '*.scss'),
+    '!' + join(Config.APP_SRC, '**', '*.sass'),
     '!' + join(Config.ASSETS_SRC, '**', '*.js')
   ].concat(Config.TEMP_FILES.map((p) => { return '!' + p; })))
     .pipe(onlyDirs(es))
