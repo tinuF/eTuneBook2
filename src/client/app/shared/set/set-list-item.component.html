@@ -4,7 +4,9 @@
             <input type="checkbox" [checked]="selected" (change)="toggleSetSelection($event)">
             <span class="c-indicator"></span>
         </label>
+        <!-- wurde ersetzt durch das Speichern der Scroll-Position pro Route auf App-Ebene
         <a class="btn btn-sm btn-secondary"  *ngIf="showNavigationToSetListButton" [routerLink]="['/sets']" fragment="{{set.id}}" title="Show Set on Set List"><i class="mdi mdi-arrow-left"></i></a>
+        -->
         <a class="hidden" id="set{{set.id}}"></a><small class="text-muted">Set {{set.id}}</small>
         <a class='float-right' (click)="justPlayedTheSet()" title="Just Played The Set" *ngIf="!editModus"><i class="mdi mdi-play-circle-outline"></i></a>
      

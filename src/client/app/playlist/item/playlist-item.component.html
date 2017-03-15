@@ -1,46 +1,36 @@
-<div class="card playlistPosition col-sm-10">
-    <div class="row col-sm-12">
-        <div class="col-sm-2">
-            <a title="Play Infos" 
-            [routerLink]="['/playlist', playlistPosition.playlistId, 'position', playlistPosition.position]">
+<div class="card mx-3 mb-4">
+    <div class="row m-2">
+        <div class="col-2">
+            <a title="Play Infos" [routerLink]="['/playlist', playlistPosition.playlistId, 'position', playlistPosition.position]">
                 <small *ngIf="!editModus">{{playlistPosition.position}}</small>
             </a>
-            <select *ngIf="editModus" class="form-control" id="positionChooser" 
-            [(ngModel)]="playlistPosition.position" 
-            (change)="setPosition($event)">
+            <select *ngIf="editModus"  id="positionChooser" [ngModel]="playlistPosition.position" (change)="setPosition($event)">
                 <option *ngFor="let p of positions" [value]="p">{{p}}</option>
             </select>
         </div>
 
-        <div class="col-sm-4">
-            <a title="Play Infos" 
-            [routerLink]="['/playlist', playlistPosition.playlistId, 'position', playlistPosition.position]">
+        <div class="col-7">
+            <a title="Play Infos" [routerLink]="['/playlist', playlistPosition.playlistId, 'position', playlistPosition.position]">
                 <small *ngIf="!editModus">{{playlistPosition.name | eliminateThe}}</small>
             </a>
-            <input #inputPlaylistPositionName class="form-control form-control-sm" *ngIf="editModus" 
-            [(ngModel)]="playlistPosition.name" 
-            (keydown)="handleKeyDownOnPlaylistPositionName($event)"
-            (blur)="handleBlurOnPlaylistPositionName($event)">
+            <input #inputPlaylistPositionName class="form-control form-control-sm" *ngIf="editModus" [(ngModel)]="playlistPosition.name"
+                (keydown)="handleKeyDownOnPlaylistPositionName($event)" (blur)="handleBlurOnPlaylistPositionName($event)">
         </div>
 
-        <a *ngIf="!editModus" class='pull-sm-right' 
-        (click)="justPlayedTheSet()" title="Just Played The Set"><i class="mdi mdi-play-circle-outline"></i></a>
+        <a *ngIf="!editModus" class='col-3' (click)="justPlayedTheSet()" title="Just Played The Set"><i class="mdi mdi-play-circle-outline"></i></a>
 
-        <div class="pull-sm-right  btn-toolbar playlistPositionMenu hidden-print" role="toolbar" *ngIf="editModus">
+        <div class="col  btn-toolbar playlistPositionMenu hidden-print" role="toolbar" *ngIf="editModus">
             <div class="btn-group" role="group">
-                <a class="btn btn-secondary btn-sm"  title="Copy Playlist Position" 
-                (click)="sendPlaylistPositionToCopier()" data-toggle="modal" data-target=".copyPlaylistPosition">
-                <i class="mdi mdi-content-copy"></i></a>
-                
-                <a class="btn btn-sm btn-secondary" 
-                (click)="deletePlaylistPosition()" title="Delete Playlist Position"><i class="mdi mdi-delete"></i></a>
+                <a class="btn btn-secondary btn-sm" title="Copy Playlist Position" (click)="sendPlaylistPositionToCopier()" data-toggle="modal"
+                    data-target=".copyPlaylistPosition">
+                    <i class="mdi mdi-content-copy"></i></a>
+
+                <a class="btn btn-sm btn-secondary" (click)="deletePlaylistPosition()" title="Delete Playlist Position"><i class="mdi mdi-delete"></i></a>
             </div>
         </div>
 
     </div>
-    <div class="row col-sm-12" 
-    *ngFor="let tuneSetPositionPlayInfo of playlistPosition.tuneSetPositionPlayInfos">
-        <etb-playlist-item-set-position [tuneSetPositionPlayInfo]="tuneSetPositionPlayInfo">
-            </etb-playlist-item-set-position>
-    </div>
+
+    <etb-playlist-item-set-position [tuneSetPositionPlayInfo]="tuneSetPositionPlayInfo" *ngFor="let tuneSetPositionPlayInfo of playlistPosition.tuneSetPositionPlayInfos">
+    </etb-playlist-item-set-position>
 </div>

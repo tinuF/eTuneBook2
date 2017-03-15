@@ -46,6 +46,7 @@ export class SetListComponent implements OnInit, AfterViewInit, OnDestroy {
         //setTimeout(() => this.cdr.reattach());
         this.tuneBookService.isRendered();
 
+        /* Ersetzt durch Speicherung der Scroll-Position pro Route auf App-Ebene 
         setTimeout(() => {
             const tree = this.router.parseUrl(this.router.url);
             if (tree.fragment) {
@@ -60,6 +61,7 @@ export class SetListComponent implements OnInit, AfterViewInit, OnDestroy {
                 }
             }
         }, 0);
+        */
 
         //console.log('set-list:ngAfterViewInit called');
     }

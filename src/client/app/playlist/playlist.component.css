@@ -1,7 +1,10 @@
 .card {
     margin: 5px;
     padding: 5px;
+    
     min-width: 900px;
+    max-width: 900px;
+    
     background: #FFF5E0;
 }
 

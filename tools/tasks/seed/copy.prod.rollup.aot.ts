@@ -16,7 +16,8 @@ export = () => {
     ])
     // import in dev mode: import * as moment from 'moment';
     // import for rollup:  import moment from 'moment';
-    // .pipe(replace('import * as moment from \'moment\';', 'import moment from \'moment\';'))
+    .pipe(replace('import * as moment from \'moment\';', 'import moment from \'moment\';'))
+    .pipe(replace('import * as jQuery from \'jquery\';', 'import jQuery from \'jquery\';'))
     // .pipe(replace('import * as uuid from \'node-uuid\';', 'import uuid from \'node-uuid\';'))
     .pipe(gulp.dest(Config.TMP_DIR));
 };

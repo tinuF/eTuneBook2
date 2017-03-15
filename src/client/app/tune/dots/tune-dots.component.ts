@@ -79,7 +79,7 @@ export class TuneDotsComponent implements OnInit, OnChanges, OnDestroy {
 
             ABCJS.renderMidi(midiOutput, this.tune.pure, {}, { generateDownload: true }, {});
             jQuery(this.elementRef.nativeElement).find('.renderMIDI').find('a').addClass('btn')
-            .addClass('btn-secondary').addClass('btn-sm').addClass('nav-link').prop('title', 'download midi')
+            .addClass('btn-secondary').addClass('btn-sm').prop('title', 'download midi')
             .html('<i class="mdi mdi-download">midi</i>');
 
 

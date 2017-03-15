@@ -8,7 +8,7 @@
   background: #F2EBDC;
 }
 
-a {
+a,i {
 	cursor: pointer;
 	color: darkcyan;
 }

@@ -1,19 +1,18 @@
 <div class="row">
-    <div class="col-xs-1 ">
+    <div class="col-1 ">
         <etb-playlist-position-menu [playlistPosition]="playlistPosition"></etb-playlist-position-menu>
     </div>
 
-    <div class="col-xs-11">
-        <div class="card col-xs-9">
-            <div class="card-block">
-                <p class="col-xs-4"> <a [routerLink]="['/playlist', playlist.id]">{{playlist.name}}</a></p>
-                <p class="col-xs-4"> {{playlist.band}} </p>
-                <p class="col-xs-3"> {{playlist.event}} </p>
+    <div class="col-11">
+        <div class="card">
+            <div class="row px-4 pt-2">
+                <p class="col-4"> <a [routerLink]="['/playlist', playlist.id]">{{playlist.name}}</a></p>
+                <p class="col-4"> {{playlist.band}} </p>
+                <p class="col-3"> {{playlist.event}} </p>
             </div>
-            <div class="card-block">
                 <etb-playlist-position-set 
                 [playlistPosition]="playlistPosition"></etb-playlist-position-set>
-            </div>
+            
         </div>
     </div>
 </div>

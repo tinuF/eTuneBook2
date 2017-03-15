@@ -1,6 +1,4 @@
 .card {
-    margin: 1.25rem;
-    padding: 5px;
     background: #F2EBDC;
 }
 
@@ -13,7 +11,7 @@
     margin-left: 15px;
 }
 
-a {
+a,i {
 	cursor: pointer;
 	color: darkcyan;
 }

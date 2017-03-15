@@ -1,10 +1,11 @@
-import { Component, OnInit, ChangeDetectorRef, ApplicationRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef, ApplicationRef } from '@angular/core';
 //import { Router, NavigationEnd } from '@angular/router';
-import { Router } from '@angular/router';
+import { Router, NavigationStart, NavigationEnd } from '@angular/router';
 
 import { Subscription } from 'rxjs/Subscription';
+import 'rxjs/add/operator/pairwise';
 
-import { TuneBookService, TuneBook, Playlist, TuneSet, FilterSettings, ACTION} from './business/index';
+import { TuneBookService, TuneBook, Playlist, TuneSet, FilterSettings, ACTION } from './business/index';
 
 @Component({
     moduleId: module.id,
@@ -13,11 +14,13 @@ import { TuneBookService, TuneBook, Playlist, TuneSet, FilterSettings, ACTION} f
     templateUrl: 'app.component.html',
     styleUrls: ['app.component.css'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
     tuneBook: TuneBook;
     filterSettings: FilterSettings;
     modusActionSubscription: Subscription;
     isRendering: boolean;
+    routeScrollPositions: { [url: string]: number }[] = [];
+    navigationSubscriptions: Subscription[] = [];
 
     constructor(public tuneBookService: TuneBookService, public router: Router, private cdr: ChangeDetectorRef,
         private appRef: ApplicationRef) {
@@ -64,6 +67,29 @@ export class AppComponent implements OnInit {
                     setTimeout(() => this.cdr.reattach());
                 }
             });
+        //Scroll-Problematik, siehe https://github.com/angular/angular/issues/10929
+        this.navigationSubscriptions.push(
+            // save or restore scroll position on route change
+            this.router.events.pairwise().subscribe(([prevRouteEvent, currRouteEvent]) => {
+                if (prevRouteEvent instanceof NavigationEnd && currRouteEvent instanceof NavigationStart) {
+                    // url path without parameters
+                    let urlPath = (prevRouteEvent.urlAfterRedirects || prevRouteEvent.url).split(';', 1)[0];
+                    this.routeScrollPositions[urlPath] = window.pageYOffset;
+                }
+                if (currRouteEvent instanceof NavigationEnd) {
+                    // in some cases it need timeout
+                    setTimeout(() => {
+                        // url path without parameters
+                        let urlPath = (currRouteEvent.urlAfterRedirects || currRouteEvent.url).split(';', 1)[0];
+                        window.scrollTo(0, this.routeScrollPositions[urlPath] || 0);
+                    }, 0);
+                }
+            })
+        );
+    }
+
+    ngOnDestroy() {
+        this.navigationSubscriptions.forEach(subscription => subscription.unsubscribe());
     }
 
     loadBxplTuneBook() {

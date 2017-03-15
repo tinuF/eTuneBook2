@@ -13,8 +13,8 @@
     
     <div class="card-footer" *ngIf="editModus">
         <div class="form-group row video-code-form" >
-            <label for="VideoCode" class="col-sm-4 form-control-label">Youtube Key</label>
-            <div class="col-sm-8">
+            <label for="VideoCode" class="col-4 form-control-label">Youtube Key</label>
+            <div class="col-8">
                 <input #inputVideoCode id="VideoCode" class="form-control form-control-sm" 
                 [(ngModel)]="video.code" 
                 (keydown)="handleKeyDownOnVideoCode($event)"
@@ -22,8 +22,8 @@
             </div>
         </div>
         <div class="form-group row video-description-form" *ngIf="editModus">
-            <label for="VideoDescription" class="col-sm-4 form-control-label">Description</label>
-            <div class="col-sm-8">
+            <label for="VideoDescription" class="col-4 form-control-label">Description</label>
+            <div class="col-8">
                 <input #inputVideoDescription id="VideoDescription" class="form-control form-control-sm" 
                 *ngIf="editModus" [(ngModel)]="video.description" 
                 (keydown)="handleKeyDownOnVideoDescription($event)"

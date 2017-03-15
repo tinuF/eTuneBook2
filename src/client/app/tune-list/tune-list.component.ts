@@ -115,6 +115,7 @@ export class TuneListComponent implements OnInit, OnDestroy, AfterViewInit {
         //setTimeout(() => this.cdr.reattach());
         this.tuneBookService.isRendered();
 
+        /* wurde ersetzt durch das Speichern der Scroll-Position pro Route auf App-Ebene
         setTimeout(() => {
             const tree = this.router.parseUrl(this.router.url);
             if (tree.fragment) {
@@ -129,6 +130,7 @@ export class TuneListComponent implements OnInit, OnDestroy, AfterViewInit {
                 }
             }
         }, 0);
+        */
 
         //console.log('tune-list:ngAfterViewInit called');
     }

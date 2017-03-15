@@ -1,9 +1,9 @@
-<div class="playlistMenu1 btn-group hidden-print">
+<div class="playlistMenu1 hidden-print">
     <etb-edit-btn></etb-edit-btn>
 </div>
 
 <div class="playlistMenu2 hidden-print">
-    <div class="btn-group hidden-print">
+    <div class=" hidden-print">
         <a class='btn btn-secondary btn-sm' (click)="forward()" title="Next">
             <i class="mdi mdi-skip-next"></i>
         </a>
@@ -16,7 +16,7 @@
             <i class="mdi mdi-music-note"></i>
         </a>
     </div>
-    <select title="number of bars" class="form-control" id="numberOfBarChooser" 
+    <select title="number of bars" class="select" id="numberOfBarChooser" 
     [ngModel]="numberOfBars" 
     (ngModelChange)="changeNumberOfBars($event)">
         <option *ngFor="let n of numberOfBarOptions" [ngValue]="n">{{n}}</option>

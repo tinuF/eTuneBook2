@@ -1,11 +1,11 @@
 <div class="card" *ngIf="tuneSetPositionPlayInfo.annotation || editModus">
   <div class="row">
-    <div class="col-sm-11 ">
+    <div class="col-11 ">
       <small *ngIf="!editModus">{{tuneSetPositionPlayInfo.annotation}}</small>
       <input class="form-control form-control-sm" #inputTuneSetPositionAnnotation *ngIf="editModus" [(ngModel)]="tuneSetPositionPlayInfo.annotation"
         (keydown)="handleKeyDownOnTuneSetPositionAnnotation($event)" (blur)="handleBlurOnTuneSetPositionAnnotation($event)">
     </div>
-    <div class="col-sm-1 btn-toolbar hidden-print" role="toolbar" *ngIf="editModus && tuneSetPositionPlayInfo.partPlayInfos.length == 0">
+    <div class="col-1 btn-toolbar hidden-print" role="toolbar" *ngIf="editModus && tuneSetPositionPlayInfo.partPlayInfos.length == 0">
       <div class="btn-group" role="group">
         <a class="btn btn-secondary btn-sm" (click)="addPartPlayInfo()" title="Add Part"><small>+</small></a>
       </div>
