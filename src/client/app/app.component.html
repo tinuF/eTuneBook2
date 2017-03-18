@@ -11,7 +11,7 @@
     <a class="navbar-brand hidden-md-down col-xs-1 pull-xs-right" [routerLink]="['/welcome']" [class.active]="router.url==='/welcome'||router.url==='/changelog'||router.url==='/credits'||router.url==='/feedback'"
         title="eTuneBook">eTuneBook</a>
 -->
-     <a class="navbar-brand mr-3" title="eTuneBook" [routerLink]="[ '/welcome'] " [class.active]="router.url==='/welcome'||router.url==='/changelog'||router.url==='/credits'||router.url==='/feedback' "
+    <a class="navbar-brand mr-3" title="eTuneBook" [routerLink]="[ '/welcome'] " [class.active]="router.url==='/welcome'||router.url==='/changelog'||router.url==='/credits'||router.url==='/feedback' "
         [class.disabled]="router.url==='/welcome'||router.url==='/changelog'||router.url==='/credits'||router.url==='/feedback' ">
         <!--
         <img src="img/ico/favicon.ico" class="img-responsive" width="32" height="32" alt="eTuneBook">
@@ -27,11 +27,11 @@
                     <i class="mdi mdi-dots-vertical hidden-md-up" title="Open Menu"></i>
                 </a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" (click)="initializeTuneBook()">New Book</a>
                     <a class="dropdown-item" (click)="newTune()">New Tune</a>
                     <a class="dropdown-item" (click)="newPlaylist()">New Playlist</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" (click)="importer.click()">Import Book</a>
+                    <a class="dropdown-item" (click)="confirmNewTuneBook = true">New Book</a>
+                    <a class="dropdown-item" (click)="confirmImportTuneBook = true">Import Book</a>
                     <a class="dropdown-item" (click)="loadBxplTuneBook()">Load Example Book from Server</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" (click)="editTuneBook()">Edit Book Title</a>
@@ -97,3 +97,19 @@
 </div>
 
 <input class="input-file hidden-print" id="fileInput" type="file" (change)="readTuneBookFromLocalDrive($event)" #importer>
+
+<etb-dialog 
+    (confirmed)="initializeTuneBook()" 
+    (cancelled)="confirmNewTuneBook = false" 
+    [(visible)]="confirmNewTuneBook">
+    <div etb-dialog-header>New TuneBook</div>
+    <div etb-dialog-body>Your current TuneBook will be lost! Do you really want to proceed?</div>
+</etb-dialog>
+
+<etb-dialog 
+    (confirmed)="importer.click()" 
+    (cancelled)="confirmImportTuneBook = false" 
+    [(visible)]="confirmImportTuneBook">
+    <div etb-dialog-header>Import TuneBook</div>
+    <div etb-dialog-body>Your current TuneBook will be lost! Do you really want to proceed?</div>
+</etb-dialog>

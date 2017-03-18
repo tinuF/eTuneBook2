@@ -21,6 +21,8 @@ export class AppComponent implements OnInit, OnDestroy {
     isRendering: boolean;
     routeScrollPositions: { [url: string]: number }[] = [];
     navigationSubscriptions: Subscription[] = [];
+    confirmNewTuneBook: boolean;
+    confirmImportTuneBook: boolean;
 
     constructor(public tuneBookService: TuneBookService, public router: Router, private cdr: ChangeDetectorRef,
         private appRef: ApplicationRef) {
@@ -86,6 +88,9 @@ export class AppComponent implements OnInit, OnDestroy {
                 }
             })
         );
+
+        this.confirmNewTuneBook = false;
+        this.confirmImportTuneBook = false;
     }
 
     ngOnDestroy() {

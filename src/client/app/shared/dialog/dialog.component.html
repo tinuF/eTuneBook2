@@ -1,0 +1,25 @@
+<!-- Animation mit späterem Angular-Release erneut testen
+<div [@dialog] *ngIf="visible" class="dialog">
+-->
+<div *ngIf="visible" class="dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">
+                <ng-content select="[etb-dialog-header]"></ng-content>
+            </h5>
+            <button (click)="cancelClicked()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        <div class="modal-body">
+            <p>
+                <ng-content select="[etb-dialog-body]"></ng-content>
+            </p>
+        </div>
+        <div class="modal-footer">
+            <button (click)="okClicked()" type="button" class="btn ">Ok</button>
+            <button (click)="cancelClicked()" type="button" class="btn ">Cancel</button>
+        </div>
+    </div>
+</div>
+<div *ngIf="visible" class="overlay" (click)="close()"></div>

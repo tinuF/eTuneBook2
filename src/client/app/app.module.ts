@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+//import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { APP_BASE_HREF } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
@@ -15,6 +16,7 @@ import { routes } from './app.routes';
 import { TuneBookService } from './business/index';
 
 import { SpinnerModule } from './shared/spinner/spinner.module';
+import { DialogModule } from './shared/dialog/dialog.module';
 
 import { AbcModule } from './abc/abc.module';
 import { BookModule } from './book/book.module';
@@ -36,9 +38,11 @@ import { CustomReuseStrategy } from './shared/router/custom-reuse-strategy';
 @NgModule({
   imports: [
     BrowserModule,
+    //BrowserAnimationsModule,
     HttpModule,
     RouterModule.forRoot(routes),
     SpinnerModule,
+    DialogModule,
     AbcModule,
     BookModule,
     FilterModule,

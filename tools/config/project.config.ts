@@ -57,7 +57,14 @@ export class ProjectConfig extends SeedConfig {
                 main: 'index.js',
                 defaultExtension: 'js'
             };
-
+        /** funktioniert nicht
+        this.SYSTEM_CONFIG_DEV.paths['@angular/platform-browser/animations'] =
+            `${this.APP_BASE}node_modules/@angular/platform-browser/bundles/platform-browser-animations.umd.min.js`;
+            this.SYSTEM_BUILDER_CONFIG.packages['@angular/platform-browser/bundles'] = {
+                main: 'platform-browser-animations.umd.min.js',
+                defaultExtension: 'js'
+            };
+        */
         // jquery in import statements
         (<any>this.SYSTEM_CONFIG_DEV.paths)['jquery'] = '/node_modules/jquery/dist/jquery.min.js';
 
