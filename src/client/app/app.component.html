@@ -32,7 +32,7 @@
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" (click)="confirmNewTuneBook = true">New Book</a>
                     <a class="dropdown-item" (click)="confirmImportTuneBook = true">Import Book</a>
-                    <a class="dropdown-item" (click)="loadBxplTuneBook()">Load Example Book from Server</a>
+                    <a class="dropdown-item" (click)="confirmExampleTuneBook = true">Load Example Book from Server</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" (click)="editTuneBook()">Edit Book Title</a>
                     <div class="dropdown-divider"></div>
@@ -102,7 +102,7 @@
     (confirmed)="initializeTuneBook()" 
     (cancelled)="confirmNewTuneBook = false" 
     [(visible)]="confirmNewTuneBook">
-    <div etb-dialog-header>New TuneBook</div>
+    <div etb-dialog-header>New Book</div>
     <div etb-dialog-body>Your current TuneBook will be lost! Do you really want to proceed?</div>
 </etb-dialog>
 
@@ -110,6 +110,14 @@
     (confirmed)="importer.click()" 
     (cancelled)="confirmImportTuneBook = false" 
     [(visible)]="confirmImportTuneBook">
-    <div etb-dialog-header>Import TuneBook</div>
+    <div etb-dialog-header>Import Book</div>
+    <div etb-dialog-body>Your current TuneBook will be lost! Do you really want to proceed?</div>
+</etb-dialog>
+
+<etb-dialog 
+    (confirmed)="loadBxplTuneBook()" 
+    (cancelled)="confirmExampleTuneBook = false" 
+    [(visible)]="confirmExampleTuneBook">
+    <div etb-dialog-header>Load Example Book from Server</div>
     <div etb-dialog-body>Your current TuneBook will be lost! Do you really want to proceed?</div>
 </etb-dialog>

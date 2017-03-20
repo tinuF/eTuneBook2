@@ -32,7 +32,7 @@
                         <a class="btn btn-secondary btn-sm" 
                         (click)="copyPlaylist()" title="Copy Playlist"><i class="mdi mdi-content-copy"></i></a>
                         <a class="btn btn-sm btn-secondary" 
-                        (click)="deletePlaylist()" title="Delete Playlist"><i class="mdi mdi-delete"></i></a>
+                        (click)="confirmDeletePlaylist = true" title="Delete Playlist"><i class="mdi mdi-delete"></i></a>
                     </div>
                 </div>
             </div>
@@ -45,3 +45,11 @@
     </div>
 </div>
 <etb-playlist-position-copier [playlistPosition]="playlistPositionToBeCopied"></etb-playlist-position-copier>
+
+<etb-dialog 
+    (confirmed)="deletePlaylist()" 
+    (cancelled)="confirmDeletePlaylist = false" 
+    [(visible)]="confirmDeletePlaylist">
+    <div etb-dialog-header>Delete Playlist</div>
+    <div etb-dialog-body>Do you really want to delete this playlist?</div>
+</etb-dialog>

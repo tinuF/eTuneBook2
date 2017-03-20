@@ -14,6 +14,7 @@ import { TuneBookService, TuneSet, ACTION } from '../business/index';
 export class SetListComponent implements OnInit, AfterViewInit, OnDestroy {
     sets: Array<TuneSet>;
     filterActionSubscription: Subscription;
+    modelActionSubscription: Subscription;
     isRendering: boolean;
 
     constructor(public tuneBookService: TuneBookService, public router: Router) {
@@ -35,6 +36,19 @@ export class SetListComponent implements OnInit, AfterViewInit, OnDestroy {
             (action) => {
                 //console.log('set-list:filterActionSubscription called: ' + action);
                 if (action === ACTION.APPLY_FILTER) {
+                    this.sets = this.tuneBookService.getTuneSetsFiltered();
+                }
+            });
+
+        this.modelActionSubscription = this.tuneBookService.modelActionObservable.subscribe(
+            (action) => {
+                //console.log('tune-list:modelActionSubscription called: ' + action);
+
+                if (action === ACTION.IMPORT_TUNEBOOK ||
+                    action === ACTION.LOAD_EXAMPLE_TUNEBOOK ||
+                    action === ACTION.INITIALIZE_TUNEBOOK ||
+                    action === ACTION.DELETE_TUNE) {
+
                     this.sets = this.tuneBookService.getTuneSetsFiltered();
                 }
             });

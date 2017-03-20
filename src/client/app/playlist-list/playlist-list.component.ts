@@ -13,6 +13,7 @@ import { TuneBookService, Playlist, ACTION } from '../business/index';
 export class PlaylistListComponent implements OnInit, AfterViewInit, OnDestroy {
     playlists: Array<Playlist>;
     filterActionSubscription: Subscription;
+    modelActionSubscription: Subscription;
     isRendering: boolean;
 
     constructor(public tuneBookService: TuneBookService) {
@@ -34,6 +35,19 @@ export class PlaylistListComponent implements OnInit, AfterViewInit, OnDestroy {
             (action) => {
                 //console.log('playlist-list:filterActionSubscription called: ' + action);
                 if (action === ACTION.APPLY_FILTER) {
+                    this.playlists = this.tuneBookService.getPlaylistsFiltered();
+                }
+            });
+
+        this.modelActionSubscription = this.tuneBookService.modelActionObservable.subscribe(
+            (action) => {
+                //console.log('tune-list:modelActionSubscription called: ' + action);
+
+                if (action === ACTION.IMPORT_TUNEBOOK ||
+                    action === ACTION.LOAD_EXAMPLE_TUNEBOOK ||
+                    action === ACTION.INITIALIZE_TUNEBOOK ||
+                    action === ACTION.DELETE_PLAYLIST) {
+
                     this.playlists = this.tuneBookService.getPlaylistsFiltered();
                 }
             });

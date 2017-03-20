@@ -14,7 +14,7 @@
     
     <div class="row m-1">
         <a [routerLink]="['/tunes', tune.id]">{{tune.title | eliminateThe}}</a> 
-        <a class="btn btn-sm btn-secondary ml-auto" (click)="deleteTuneSetPosition()" title="Remove Tune from Set" *ngIf="editModus"><i class="mdi mdi-delete"></i></a>   
+        <a class="btn btn-sm btn-secondary ml-auto" (click)="confirmDeleteTuneSetPosition = true" title="Remove Tune from Set" *ngIf="editModus"><i class="mdi mdi-delete"></i></a>   
     </div>
     <div class="row m-1">
         <small class="text-muted">{{tune.type}} in {{tune.key}}</small>
@@ -22,3 +22,11 @@
         <etb-tune-played class="ml-auto"[tune]="tune" *ngIf="!editModus"></etb-tune-played>
     </div>
 </div>
+
+<etb-dialog 
+    (confirmed)="deleteTuneSetPosition()" 
+    (cancelled)="confirmDeleteTuneSetPosition = false" 
+    [(visible)]="confirmDeleteTuneSetPosition">
+    <div etb-dialog-header>Remove Tune from Set</div>
+    <div etb-dialog-body>Do you really want to remove this tune from the set?</div>
+</etb-dialog>

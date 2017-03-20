@@ -112,7 +112,7 @@ export class PlaylistComponent implements OnInit, OnDestroy {
 
     deletePlaylist() {
         this.tuneBookService.deletePlaylist(this.playlist.id);
-        this.router.navigate(['/playlistList']);
+        this.router.navigate(['/playlists']);
     }
 }
 

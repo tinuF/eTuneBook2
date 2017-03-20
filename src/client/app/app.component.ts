@@ -23,6 +23,7 @@ export class AppComponent implements OnInit, OnDestroy {
     navigationSubscriptions: Subscription[] = [];
     confirmNewTuneBook: boolean;
     confirmImportTuneBook: boolean;
+    confirmExampleTuneBook: boolean;
 
     constructor(public tuneBookService: TuneBookService, public router: Router, private cdr: ChangeDetectorRef,
         private appRef: ApplicationRef) {
@@ -91,6 +92,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
         this.confirmNewTuneBook = false;
         this.confirmImportTuneBook = false;
+        this.confirmExampleTuneBook = false;
     }
 
     ngOnDestroy() {

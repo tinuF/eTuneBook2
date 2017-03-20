@@ -393,6 +393,7 @@ export class TuneBookService {
     deletePlaylist(playlistId: number) {
         this.getCurrentTuneBook().deletePlaylist(playlistId);
         this.storeTuneBookAbc();
+        this.broadCastModelAction(ACTION.DELETE_PLAYLIST);
     }
 
     copyPlaylist(playlistId: number): number {

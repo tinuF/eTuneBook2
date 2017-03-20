@@ -1,7 +1,7 @@
 <div class="card"> 
     <div class="card-block">
         <small class="float-left text-muted">Video</small>
-        <a class="btn btn-sm btn-secondary float-right" *ngIf="editModus" (click)="deleteVideo()" title="Delete Video">
+        <a class="btn btn-sm btn-secondary float-right" *ngIf="editModus" (click)="confirmDeleteVideo = true" title="Delete Video">
             <i class="mdi mdi-delete"></i>
         </a>
     </div>
@@ -32,3 +32,11 @@
         </div>
     </div>
 </div>
+
+<etb-dialog 
+    (confirmed)="deleteVideo()" 
+    (cancelled)="confirmDeleteVideo = false" 
+    [(visible)]="confirmDeleteVideo">
+    <div etb-dialog-header>Delete Video</div>
+    <div etb-dialog-body>Do you really want to delete this video?</div>
+</etb-dialog>

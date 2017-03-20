@@ -1,7 +1,7 @@
 <div class="card m-3">
     <div class="card-block">
         <small class="pull-left text-muted">Link</small>
-        <a class="btn btn-sm btn-secondary float-right" *ngIf="editModus" (click)="deleteInfo()" title="Delete Info"><i class="mdi mdi-delete"></i></a>
+        <a class="btn btn-sm btn-secondary float-right" *ngIf="editModus" (click)="confirmDeleteInfo = true" title="Delete Info"><i class="mdi mdi-delete"></i></a>
     </div>
     <div class="card-block" *ngIf="!editModus">
         <a class="btn btn-sm btn-secondary"  href="{{website.url}}" target="_blank">{{website.url}}</a>
@@ -16,3 +16,11 @@
         </div>
     </div>
 </div>
+
+<etb-dialog 
+    (confirmed)="deleteInfo()" 
+    (cancelled)="confirmDeleteInfo = false" 
+    [(visible)]="confirmDeleteInfo">
+    <div etb-dialog-header>Delete Link</div>
+    <div etb-dialog-body>Do you really want to delete this link?</div>
+</etb-dialog>

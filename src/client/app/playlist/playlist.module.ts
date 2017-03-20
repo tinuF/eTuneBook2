@@ -7,6 +7,7 @@ import { PlayListPositionCopierModule } from '../shared/playlist/playlist-positi
 import { EditButtonModule } from '../shared/modus/edit-btn.module';
 import { EliminateTheModule } from '../shared/pipes/eliminate-the.module';
 import { TunePlayedModule } from '../shared/tune/tune-played.module';
+import { DialogModule } from '../shared/dialog/dialog.module';
 
 import { PlaylistComponent } from './playlist.component';
 import { PlayListItemComponent } from './item/playlist-item.component';
@@ -22,7 +23,8 @@ import { PlayListMenuComponent } from './menu/playlist-menu.component';
     EditButtonModule,
     PlayListPositionCopierModule,
     EliminateTheModule,
-    TunePlayedModule
+    TunePlayedModule,
+    DialogModule
   ],
   declarations: [
     PlaylistComponent,

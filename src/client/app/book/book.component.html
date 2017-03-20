@@ -1,24 +1,33 @@
 <div class="row">
-	<div class="col-xs-1 "></div>
-	<div class="col-xs-11">
-		<div class="card col-xs-8">
-  			<div class="card-block">
-				<div class="col-xs-3 "><small>Title:</small></div>
-    			<input #inputTuneBookName class="form-control form-control-xs " [(ngModel)]="tuneBook.name" 
+	<div class="col-1 "></div>
+	<div class="col-11">
+		<div class="card">
+  			<div class="card-header">
+                <h5 class="card-title">Book</h5>
+            </div>
+			  <div class="form-group row pt-2 px-2">
+				<label for="name-input" class="col-2 col-form-label">Title</label>
+				<div class="col-10">
+    			<input #inputTuneBookName  id="name-input" class="form-control" [(ngModel)]="tuneBook.name" 
                     (keydown)="handleKeyDownOnTuneBookName($event)"
                     (blur)="handleBlurOnTuneBookName($event)">
+				</div>
 			</div>	
-			<div class="card-block">
-				<div class="col-xs-3 "><small>Version:</small></div>
-    			<input #inputTuneBookVersion class="form-control form-control-xs " [(ngModel)]="tuneBook.version" 
+			<div class="form-group row px-2">
+				<label for="version-input" class="col-2 col-form-label">Version</label>
+    			<div class="col-10">
+				<input #inputTuneBookVersion id="version-input" class="form-control" [(ngModel)]="tuneBook.version" 
                     (keydown)="handleKeyDownOnTuneBookVersion($event)"
                     (blur)="handleBlurOnTuneBookVersion($event)">
+    			</div>
 			</div>
-			<div class="card-block">
-    			<div class="col-xs-3 "><small>Description:</small></div>
-				<input #inputTuneBookDescription class="form-control form-control-xs" [(ngModel)]="tuneBook.description" 
+			<div class="form-group row px-2">
+    			<label for="description-input" class="col-2 col-form-label">Description</label>
+				<div class="col-10">
+				<input #inputTuneBookDescription id="description-input" class="form-control" [(ngModel)]="tuneBook.description" 
                     (keydown)="handleKeyDownOnTuneBookDescription($event)"
                     (blur)="handleBlurOnTuneBookDescription($event)">
+				</div>
   			</div>
 		</div>
 	</div>

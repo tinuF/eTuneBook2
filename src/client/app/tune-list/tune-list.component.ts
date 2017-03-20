@@ -49,7 +49,8 @@ export class TuneListComponent implements OnInit, OnDestroy, AfterViewInit {
 
                 if (action === ACTION.IMPORT_TUNEBOOK ||
                     action === ACTION.LOAD_EXAMPLE_TUNEBOOK ||
-                    action === ACTION.INITIALIZE_TUNEBOOK) {
+                    action === ACTION.INITIALIZE_TUNEBOOK ||
+                    action === ACTION.DELETE_TUNE) {
 
                     this.tunes = this.tuneBookService.getTunesFiltered();
                 }

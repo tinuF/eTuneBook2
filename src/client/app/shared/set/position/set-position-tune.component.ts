@@ -17,6 +17,7 @@ export class SetpositionTuneComponent implements OnInit, OnDestroy {
     modusActionSubscription: Subscription;
     dragStart: boolean;
     dragOver: boolean;
+    confirmDeleteTuneSetPosition: boolean;
 
     constructor(public tuneBookService: TuneBookService) {
 
@@ -24,6 +25,8 @@ export class SetpositionTuneComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.editModus = this.tuneBookService.isEditModus();
+        this.confirmDeleteTuneSetPosition = false;
+
         this.modusActionSubscription = this.tuneBookService.modusActionObservable.subscribe(
             (action) => {
                 //console.log('set-position-tune:modusActionSubscription called: ' + action);

@@ -25,7 +25,7 @@
                     data-target=".copyPlaylistPosition">
                     <i class="mdi mdi-content-copy"></i></a>
 
-                <a class="btn btn-sm btn-secondary" (click)="deletePlaylistPosition()" title="Delete Playlist Position"><i class="mdi mdi-delete"></i></a>
+                <a class="btn btn-sm btn-secondary" (click)="confirmDeletePlaylistPosition = true" title="Delete Playlist Position"><i class="mdi mdi-delete"></i></a>
             </div>
         </div>
 
@@ -34,3 +34,11 @@
     <etb-playlist-item-set-position [tuneSetPositionPlayInfo]="tuneSetPositionPlayInfo" *ngFor="let tuneSetPositionPlayInfo of playlistPosition.tuneSetPositionPlayInfos">
     </etb-playlist-item-set-position>
 </div>
+
+<etb-dialog 
+    (confirmed)="deletePlaylistPosition()" 
+    (cancelled)="confirmDeletePlaylistPosition = false" 
+    [(visible)]="confirmDeletePlaylistPosition">
+    <div etb-dialog-header>Remove Set from Playlist</div>
+    <div etb-dialog-body>Do you really want to remove this set from the playlist?</div>
+</etb-dialog>

@@ -11,6 +11,7 @@ import { SetPlaylistListComponent } from './playlist-list/set-playlist-list.comp
 import { SetPlaylistListItemComponent } from './playlist-list/set-playlist-list-item.component';
 import { SetPositionComponent } from './position/set-position.component';
 import { SetpositionTuneComponent } from './position/set-position-tune.component';
+import { DialogModule } from '../dialog/dialog.module';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { SetpositionTuneComponent } from './position/set-position-tune.component
     RouterModule,
     SampleDotsModule,
     TunePlayedModule,
-    EliminateTheModule
+    EliminateTheModule,
+    DialogModule
   ],
   declarations: [
     SetListItemComponent,

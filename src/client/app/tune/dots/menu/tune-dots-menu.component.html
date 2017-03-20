@@ -16,7 +16,7 @@
     <a class="btn btn-secondary btn-sm" title="New Link"  (click)="newWebsite()"><i class="mdi mdi-link"></i></a>
 </div>
 
-<a class="btn btn-sm btn-secondary pull-right" (click)="deleteTune()" title="Delete Tune"><i class="mdi mdi-delete"></i></a>
+<a class="btn btn-sm btn-secondary pull-right" (click)="confirmDeleteTune = true" title="Delete Tune"><i class="mdi mdi-delete"></i></a>
 
 <div class="modal fade colorizer" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-md">
@@ -33,3 +33,11 @@
         </div>
     </div>
 </div>
+
+<etb-dialog 
+    (confirmed)="deleteTune()" 
+    (cancelled)="confirmDeleteTune = false" 
+    [(visible)]="confirmDeleteTune">
+    <div etb-dialog-header>Delete Tune</div>
+    <div etb-dialog-body>Do you really want to delete this tune?</div>
+</etb-dialog>

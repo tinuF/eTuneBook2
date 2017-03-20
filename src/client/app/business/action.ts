@@ -11,6 +11,7 @@ export const ACTION = {
     'DELETE_TUNE':'deleteTune',
     'DELETE_TUNESETPOSITION': 'deleteTuneSetPosition',
     'DELETE_PLAYLISTPOSITION': 'deletePlaylistPosition',
+    'DELETE_PLAYLIST': 'deletePlaylist',
     'ADD_SETS_TO_PLAYLIST':'addPlaylistPositions',
     'APPLY_FILTER':'applyFilter',
     'TOGGLE_EDIT_MODUS':'toggleEditModus',

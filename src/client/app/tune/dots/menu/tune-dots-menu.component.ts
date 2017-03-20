@@ -13,6 +13,7 @@ export class TuneDotsMenuComponent {
     @Input() tune: Tune;
     @Output() transposeUp: EventEmitter<any> = new EventEmitter();
     @Output() transposeDown: EventEmitter<any> = new EventEmitter();
+    confirmDeleteTune: boolean = false;
 
     constructor(public tuneBookService: TuneBookService, public router: Router) {
 
@@ -20,7 +21,7 @@ export class TuneDotsMenuComponent {
 
     deleteTune() {
         this.tuneBookService.deleteTune(this.tune.id);
-        this.router.navigate(['/Tunelist']);
+        this.router.navigate(['/tunes']);
     }
 
     tuneUp() {

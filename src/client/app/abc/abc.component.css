@@ -1,13 +1,9 @@
 .card {
-    margin: 5px;
-    padding: 5px;
-    background: lightcyan;
+    max-width: 70rem;
 }
 
 
-.card-block, .card-header, .card-footer {
-  background: lightcyan
-}
+
 
 a {
 	cursor: pointer;

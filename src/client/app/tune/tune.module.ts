@@ -8,6 +8,7 @@ import { SetListItemModule } from '../shared/set/set-list-item.module';
 import { TunePlayedModule } from '../shared/tune/tune-played.module';
 import { TuneColorizerModule } from '../shared/tune/tune-colorizer.module';
 import { TuneTransposerModule } from '../shared/tune/tune-transposer.module';
+import { DialogModule } from '../shared/dialog/dialog.module';
 
 import { TuneComponent } from './tune.component';
 import { TuneDotsComponent } from './dots/tune-dots.component';
@@ -29,7 +30,8 @@ import { TuneVideoListItemComponent } from './video-list/item/tune-video-list-it
     SetListItemModule,
     TunePlayedModule,
     TuneColorizerModule,
-    TuneTransposerModule
+    TuneTransposerModule,
+    DialogModule
   ],
   declarations: [
     TuneComponent,

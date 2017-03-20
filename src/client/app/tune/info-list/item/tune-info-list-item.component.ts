@@ -17,6 +17,7 @@ export class TuneInfoListItemComponent implements OnInit, OnDestroy {
     videoUrl: string;
     editModus: boolean;
     modusActionSubscription: Subscription;
+    confirmDeleteInfo: boolean;
 
     constructor(public tuneBookService: TuneBookService, public renderer: Renderer) {
 
@@ -24,6 +25,7 @@ export class TuneInfoListItemComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.editModus = this.tuneBookService.isEditModus();
+        this.confirmDeleteInfo = false;
         this.modusActionSubscription = this.tuneBookService.modusActionObservable.subscribe(
             (action) => {
                 //console.log('tune-info-list-item:actionSubscription called: ' + action);

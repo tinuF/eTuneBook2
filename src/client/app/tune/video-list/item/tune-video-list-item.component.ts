@@ -19,6 +19,7 @@ export class TuneVideoListItemComponent implements OnInit, OnDestroy {
     videoUrl: SafeResourceUrl;
     editModus: boolean;
     modusActionSubscription: Subscription;
+    confirmDeleteVideo: boolean;
 
     constructor(public tuneBookService: TuneBookService, public renderer: Renderer, public sanitationService: DomSanitizer) {
 
@@ -27,6 +28,7 @@ export class TuneVideoListItemComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.setVideoUrl();
         this.editModus = this.tuneBookService.isEditModus();
+        this.confirmDeleteVideo = false;
 
         this.modusActionSubscription = this.tuneBookService.modusActionObservable.subscribe(
             (action) => {
