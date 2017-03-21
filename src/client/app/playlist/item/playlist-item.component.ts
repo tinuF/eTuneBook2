@@ -18,6 +18,7 @@ export class PlayListItemComponent implements OnInit, OnDestroy {
     modusActionSubscription: Subscription;
     modelActionSubscription: Subscription;
     positions: Array<number>;
+    confirmDeletePlaylistPosition: boolean;
 
     constructor(public tuneBookService: TuneBookService, public renderer: Renderer) {
 
@@ -27,6 +28,7 @@ export class PlayListItemComponent implements OnInit, OnDestroy {
         this.sortSetPosition();
         this.setPositions();
         this.editModus = this.tuneBookService.isEditModus();
+        this.confirmDeletePlaylistPosition = false;
 
         this.modusActionSubscription = this.tuneBookService.modusActionObservable.subscribe(
             (action) => {

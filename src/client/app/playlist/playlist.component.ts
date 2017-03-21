@@ -20,6 +20,7 @@ export class PlaylistComponent implements OnInit, OnDestroy {
     editModus: boolean;
     modusActionSubscription: Subscription;
     routerSubscription: Subscription;
+    confirmDeletePlaylist: boolean;
 
     constructor(public tuneBookService: TuneBookService, public router: Router, public route: ActivatedRoute, public renderer: Renderer) {
 
@@ -27,6 +28,7 @@ export class PlaylistComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.editModus = this.tuneBookService.isEditModus();
+        this.confirmDeletePlaylist = false;
         this.modusActionSubscription = this.tuneBookService.modusActionObservable.subscribe(
             (action) => {
                 //console.log('playlist:modusActionSubscription called: ' + action);

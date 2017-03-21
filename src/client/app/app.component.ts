@@ -19,7 +19,7 @@ export class AppComponent implements OnInit, OnDestroy {
     filterSettings: FilterSettings;
     modusActionSubscription: Subscription;
     isRendering: boolean;
-    routeScrollPositions: { [url: string]: number }[] = [];
+    routeScrollPositions: { [url: string]: number } = {};
     navigationSubscriptions: Subscription[] = [];
     confirmNewTuneBook: boolean;
     confirmImportTuneBook: boolean;
@@ -76,14 +76,14 @@ export class AppComponent implements OnInit, OnDestroy {
             this.router.events.pairwise().subscribe(([prevRouteEvent, currRouteEvent]) => {
                 if (prevRouteEvent instanceof NavigationEnd && currRouteEvent instanceof NavigationStart) {
                     // url path without parameters
-                    let urlPath = (prevRouteEvent.urlAfterRedirects || prevRouteEvent.url).split(';', 1)[0];
+                    let urlPath: string = (prevRouteEvent.urlAfterRedirects || prevRouteEvent.url).split(';', 1)[0];
                     this.routeScrollPositions[urlPath] = window.pageYOffset;
                 }
                 if (currRouteEvent instanceof NavigationEnd) {
                     // in some cases it need timeout
                     setTimeout(() => {
                         // url path without parameters
-                        let urlPath = (currRouteEvent.urlAfterRedirects || currRouteEvent.url).split(';', 1)[0];
+                        let urlPath: string = (currRouteEvent.urlAfterRedirects || currRouteEvent.url).split(';', 1)[0];
                         window.scrollTo(0, this.routeScrollPositions[urlPath] || 0);
                     }, 0);
                 }
