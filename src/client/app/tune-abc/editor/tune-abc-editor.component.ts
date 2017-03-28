@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 import * as jQuery from 'jquery';
 
-import { TuneBookService, Tune } from '../../business/index';
+import { TuneBookService, Tune, ACTION } from '../../business/index';
 
 @Component({
     moduleId: module.id,
@@ -74,7 +74,7 @@ export class TuneAbcEditorComponent implements OnInit {
         }
 
         // Put TuneBook to localStorage
-        this.tuneBookService.storeTuneBookAbc();
+        this.tuneBookService.storeTuneBookAbcAndBroadCastAction(ACTION.EDIT_ABC);
     };
 
     renderAbc() {

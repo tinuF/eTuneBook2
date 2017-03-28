@@ -5,6 +5,7 @@ export const ACTION = {
     'EDIT_TUNEBOOK_NAME':'handleBlurOnTuneBookName',
     'EDIT_TUNEBOOK_VERSION':'handleBlurOnTuneBookVersion',
     'EDIT_TUNEBOOK_DESCRIPTION':'handleBlurOnTuneBookDescription',
+    'EDIT_ABC':'doneEditing',
     'ADD_TUNESET':'addTuneSet',
     'ADD_VIDEO':'addVideo',
     'ADD_WEBSITE':'addWebsite',
